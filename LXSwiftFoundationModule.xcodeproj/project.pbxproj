@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,8 @@
 		7607A096251B21040071B9AD /* LXSwiftBasics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A095251B21040071B9AD /* LXSwiftBasics.swift */; };
 		7607A098251B26F30071B9AD /* LXCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A097251B26F30071B9AD /* LXCompatible.swift */; };
 		7607A09A251B2C8D0071B9AD /* LXSwift+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A099251B2C8D0071B9AD /* LXSwift+String.swift */; };
+		7607A09C251B5A850071B9AD /* LXSwift+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A09B251B5A850071B9AD /* LXSwift+Image.swift */; };
+		7607A09E251B5CF80071B9AD /* LXSwift+Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A09D251B5CF80071B9AD /* LXSwift+Device.swift */; };
 		7B566DDA1A33A0ADA6224DD1 /* Pods_LXSwiftFoundationModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F715AA7BA9B925B133355970 /* Pods_LXSwiftFoundationModule.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +36,8 @@
 		7607A095251B21040071B9AD /* LXSwiftBasics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXSwiftBasics.swift; sourceTree = "<group>"; };
 		7607A097251B26F30071B9AD /* LXCompatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXCompatible.swift; sourceTree = "<group>"; };
 		7607A099251B2C8D0071B9AD /* LXSwift+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LXSwift+String.swift"; sourceTree = "<group>"; };
+		7607A09B251B5A850071B9AD /* LXSwift+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LXSwift+Image.swift"; sourceTree = "<group>"; };
+		7607A09D251B5CF80071B9AD /* LXSwift+Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LXSwift+Device.swift"; sourceTree = "<group>"; };
 		8DFBEB594E654C05D56544BE /* Pods-LXSwiftFoundationModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXSwiftFoundationModule.release.xcconfig"; path = "Target Support Files/Pods-LXSwiftFoundationModule/Pods-LXSwiftFoundationModule.release.xcconfig"; sourceTree = "<group>"; };
 		F715AA7BA9B925B133355970 /* Pods_LXSwiftFoundationModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LXSwiftFoundationModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -56,7 +60,6 @@
 				6348DD709E89FD4FC09A35D6 /* Pods-LXSwiftFoundationModule.debug.xcconfig */,
 				8DFBEB594E654C05D56544BE /* Pods-LXSwiftFoundationModule.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -108,6 +111,8 @@
 				7607A095251B21040071B9AD /* LXSwiftBasics.swift */,
 				7607A097251B26F30071B9AD /* LXCompatible.swift */,
 				7607A099251B2C8D0071B9AD /* LXSwift+String.swift */,
+				7607A09B251B5A850071B9AD /* LXSwift+Image.swift */,
+				7607A09D251B5CF80071B9AD /* LXSwift+Device.swift */,
 			);
 			path = LXSwiftFoundation;
 			sourceTree = "<group>";
@@ -228,8 +233,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7607A09C251B5A850071B9AD /* LXSwift+Image.swift in Sources */,
 				7607A098251B26F30071B9AD /* LXCompatible.swift in Sources */,
 				7607A096251B21040071B9AD /* LXSwiftBasics.swift in Sources */,
+				7607A09E251B5CF80071B9AD /* LXSwift+Device.swift in Sources */,
 				7607A09A251B2C8D0071B9AD /* LXSwift+String.swift in Sources */,
 				7607A083251B1C0B0071B9AD /* ViewController.swift in Sources */,
 				7607A07F251B1C0B0071B9AD /* AppDelegate.swift in Sources */,

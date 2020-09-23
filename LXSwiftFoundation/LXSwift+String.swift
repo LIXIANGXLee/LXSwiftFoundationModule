@@ -21,7 +21,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     ///   let str = "abc" ，subString(with: 0..<2)  result is "ab"
     /// - Return: substring
     public func subString(with r: Range<Int>) -> String {
-         let string = base as! String
+        let string = base as! String
         if r.lowerBound < r.upperBound && r.upperBound <= string.count && r.lowerBound >= 0 {
             return string[r]
         }else{

@@ -23,6 +23,11 @@ class ViewController: UIViewController {
 
         print("\(str.lx.md5)")
 
+        
+        print("===\(UIDevice.lx.isPad)")
+        
+        print("===\(UIDevice.lx.isPhone)")
+
     }
 
 
