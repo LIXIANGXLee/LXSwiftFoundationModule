@@ -13,9 +13,15 @@
 		7607A086251B1C0B0071B9AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7607A084251B1C0B0071B9AD /* Main.storyboard */; };
 		7607A088251B1C0D0071B9AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7607A087251B1C0D0071B9AD /* Assets.xcassets */; };
 		7607A08B251B1C0D0071B9AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7607A089251B1C0D0071B9AD /* LaunchScreen.storyboard */; };
+		7607A094251B1CB70071B9AD /* LXSwiftFoundation.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 7607A092251B1CB70071B9AD /* LXSwiftFoundation.podspec */; };
+		7607A096251B21040071B9AD /* LXSwiftBasics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A095251B21040071B9AD /* LXSwiftBasics.swift */; };
+		7607A098251B26F30071B9AD /* LXCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A097251B26F30071B9AD /* LXCompatible.swift */; };
+		7607A09A251B2C8D0071B9AD /* LXSwift+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A099251B2C8D0071B9AD /* LXSwift+String.swift */; };
+		7B566DDA1A33A0ADA6224DD1 /* Pods_LXSwiftFoundationModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F715AA7BA9B925B133355970 /* Pods_LXSwiftFoundationModule.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6348DD709E89FD4FC09A35D6 /* Pods-LXSwiftFoundationModule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXSwiftFoundationModule.debug.xcconfig"; path = "Target Support Files/Pods-LXSwiftFoundationModule/Pods-LXSwiftFoundationModule.debug.xcconfig"; sourceTree = "<group>"; };
 		7607A07B251B1C0B0071B9AD /* LXSwiftFoundationModule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LXSwiftFoundationModule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7607A07E251B1C0B0071B9AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7607A080251B1C0B0071B9AD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +30,12 @@
 		7607A087251B1C0D0071B9AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7607A08A251B1C0D0071B9AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7607A08C251B1C0D0071B9AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7607A092251B1CB70071B9AD /* LXSwiftFoundation.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LXSwiftFoundation.podspec; sourceTree = "<group>"; };
+		7607A095251B21040071B9AD /* LXSwiftBasics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXSwiftBasics.swift; sourceTree = "<group>"; };
+		7607A097251B26F30071B9AD /* LXCompatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXCompatible.swift; sourceTree = "<group>"; };
+		7607A099251B2C8D0071B9AD /* LXSwift+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LXSwift+String.swift"; sourceTree = "<group>"; };
+		8DFBEB594E654C05D56544BE /* Pods-LXSwiftFoundationModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXSwiftFoundationModule.release.xcconfig"; path = "Target Support Files/Pods-LXSwiftFoundationModule/Pods-LXSwiftFoundationModule.release.xcconfig"; sourceTree = "<group>"; };
+		F715AA7BA9B925B133355970 /* Pods_LXSwiftFoundationModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LXSwiftFoundationModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +43,40 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B566DDA1A33A0ADA6224DD1 /* Pods_LXSwiftFoundationModule.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A068DD0C1A2DCA35F1C9B63 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6348DD709E89FD4FC09A35D6 /* Pods-LXSwiftFoundationModule.debug.xcconfig */,
+				8DFBEB594E654C05D56544BE /* Pods-LXSwiftFoundationModule.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		3BECA5F2D192B9B3965465CA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F715AA7BA9B925B133355970 /* Pods_LXSwiftFoundationModule.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7607A072251B1C0B0071B9AD = {
 			isa = PBXGroup;
 			children = (
+				7607A093251B1CB70071B9AD /* LXSwiftFoundation */,
+				7607A092251B1CB70071B9AD /* LXSwiftFoundation.podspec */,
 				7607A07D251B1C0B0071B9AD /* LXSwiftFoundationModule */,
 				7607A07C251B1C0B0071B9AD /* Products */,
+				0A068DD0C1A2DCA35F1C9B63 /* Pods */,
+				3BECA5F2D192B9B3965465CA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +102,16 @@
 			path = LXSwiftFoundationModule;
 			sourceTree = "<group>";
 		};
+		7607A093251B1CB70071B9AD /* LXSwiftFoundation */ = {
+			isa = PBXGroup;
+			children = (
+				7607A095251B21040071B9AD /* LXSwiftBasics.swift */,
+				7607A097251B26F30071B9AD /* LXCompatible.swift */,
+				7607A099251B2C8D0071B9AD /* LXSwift+String.swift */,
+			);
+			path = LXSwiftFoundation;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +119,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7607A08F251B1C0D0071B9AD /* Build configuration list for PBXNativeTarget "LXSwiftFoundationModule" */;
 			buildPhases = (
+				E27ACB9A338C4D6D1DDAEFE2 /* [CP] Check Pods Manifest.lock */,
 				7607A077251B1C0B0071B9AD /* Sources */,
 				7607A078251B1C0B0071B9AD /* Frameworks */,
 				7607A079251B1C0B0071B9AD /* Resources */,
+				F6F95B7AAAF5298C74F6CF84 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -126,6 +173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7607A08B251B1C0D0071B9AD /* LaunchScreen.storyboard in Resources */,
+				7607A094251B1CB70071B9AD /* LXSwiftFoundation.podspec in Resources */,
 				7607A088251B1C0D0071B9AD /* Assets.xcassets in Resources */,
 				7607A086251B1C0B0071B9AD /* Main.storyboard in Resources */,
 			);
@@ -133,11 +181,56 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		E27ACB9A338C4D6D1DDAEFE2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LXSwiftFoundationModule-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F6F95B7AAAF5298C74F6CF84 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LXSwiftFoundationModule/Pods-LXSwiftFoundationModule-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LXSwiftFoundationModule/Pods-LXSwiftFoundationModule-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LXSwiftFoundationModule/Pods-LXSwiftFoundationModule-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7607A077251B1C0B0071B9AD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7607A098251B26F30071B9AD /* LXCompatible.swift in Sources */,
+				7607A096251B21040071B9AD /* LXSwiftBasics.swift in Sources */,
+				7607A09A251B2C8D0071B9AD /* LXSwift+String.swift in Sources */,
 				7607A083251B1C0B0071B9AD /* ViewController.swift in Sources */,
 				7607A07F251B1C0B0071B9AD /* AppDelegate.swift in Sources */,
 				7607A081251B1C0B0071B9AD /* SceneDelegate.swift in Sources */,
@@ -282,6 +375,7 @@
 		};
 		7607A090251B1C0D0071B9AD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6348DD709E89FD4FC09A35D6 /* Pods-LXSwiftFoundationModule.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -299,6 +393,7 @@
 		};
 		7607A091251B1C0D0071B9AD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8DFBEB594E654C05D56544BE /* Pods-LXSwiftFoundationModule.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

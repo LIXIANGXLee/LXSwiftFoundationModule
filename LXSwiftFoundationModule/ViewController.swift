@@ -12,9 +12,24 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
+        
+        let str = "dfhv"
+        
+        
+        print("\(str.lx.subString(with: 3..<3))")
+        print("\(str.lx.substring(from: 4))")
+        print("\(str.lx.substring(to: 0))")
+
+        print("\(str.lx.md5)")
+
     }
 
 
 }
 
+extension String {
+  
+    func qq()  {
+    }
+}
