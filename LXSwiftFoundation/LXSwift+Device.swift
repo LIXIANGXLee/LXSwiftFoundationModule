@@ -1,6 +1,6 @@
 //
 //  LXSwift+Device.swift
-//  LXSwiftFoundationModule
+//  LXSwiftFoundation
 //
 //  Created by XL on 2020/9/23.
 //  Copyright © 2020 李响. All rights reserved.
@@ -9,7 +9,6 @@
 import UIKit
 
 extension UIDevice: LXCompatible { }
-
 
 //MARK: -  Extending methods  for UIDevice is ipad or iphone
 extension LXSwiftBasics where Base: UIDevice {
