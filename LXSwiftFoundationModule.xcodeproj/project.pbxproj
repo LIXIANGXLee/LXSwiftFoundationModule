@@ -47,7 +47,7 @@
 		7607A0D6251C715C0071B9AD /* LXSwiftModalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A0D5251C715C0071B9AD /* LXSwiftModalController.swift */; };
 		7607A0D8251C716A0071B9AD /* LXSwiftConvenienceBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A0D7251C716A0071B9AD /* LXSwiftConvenienceBundle.swift */; };
 		7607A0DA251C71720071B9AD /* LXSwiftCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A0D9251C71720071B9AD /* LXSwiftCollectionView.swift */; };
-		7607A0DC251C71850071B9AD /* LXSwftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A0DB251C71850071B9AD /* LXSwftApp.swift */; };
+		7607A0DC251C71850071B9AD /* LXSwiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A0DB251C71850071B9AD /* LXSwiftApp.swift */; };
 		7607A0DE251C72620071B9AD /* LXSwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A0DD251C72620071B9AD /* LXSwiftViewController.swift */; };
 		7B566DDA1A33A0ADA6224DD1 /* Pods_LXSwiftFoundationModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F715AA7BA9B925B133355970 /* Pods_LXSwiftFoundationModule.framework */; };
 /* End PBXBuildFile section */
@@ -96,7 +96,7 @@
 		7607A0D5251C715C0071B9AD /* LXSwiftModalController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftModalController.swift; sourceTree = "<group>"; };
 		7607A0D7251C716A0071B9AD /* LXSwiftConvenienceBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftConvenienceBundle.swift; sourceTree = "<group>"; };
 		7607A0D9251C71720071B9AD /* LXSwiftCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftCollectionView.swift; sourceTree = "<group>"; };
-		7607A0DB251C71850071B9AD /* LXSwftApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwftApp.swift; sourceTree = "<group>"; };
+		7607A0DB251C71850071B9AD /* LXSwiftApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftApp.swift; sourceTree = "<group>"; };
 		7607A0DD251C72620071B9AD /* LXSwiftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftViewController.swift; sourceTree = "<group>"; };
 		8DFBEB594E654C05D56544BE /* Pods-LXSwiftFoundationModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXSwiftFoundationModule.release.xcconfig"; path = "Target Support Files/Pods-LXSwiftFoundationModule/Pods-LXSwiftFoundationModule.release.xcconfig"; sourceTree = "<group>"; };
 		F715AA7BA9B925B133355970 /* Pods_LXSwiftFoundationModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LXSwiftFoundationModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,7 +172,7 @@
 				7607A0C3251C70B30071B9AD /* LXSwiftTextView.swift */,
 				7607A097251B26F30071B9AD /* LXCompatible.swift */,
 				7607A099251B2C8D0071B9AD /* LXSwift+String.swift */,
-				7607A0DB251C71850071B9AD /* LXSwftApp.swift */,
+				7607A0DB251C71850071B9AD /* LXSwiftApp.swift */,
 				7607A09B251B5A850071B9AD /* LXSwift+Image.swift */,
 				7607A09D251B5CF80071B9AD /* LXSwift+Device.swift */,
 				7607A09F251B61220071B9AD /* LXSwift+Bundle.swift */,
@@ -324,7 +324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7607A09C251B5A850071B9AD /* LXSwift+Image.swift in Sources */,
-				7607A0DC251C71850071B9AD /* LXSwftApp.swift in Sources */,
+				7607A0DC251C71850071B9AD /* LXSwiftApp.swift in Sources */,
 				7607A098251B26F30071B9AD /* LXCompatible.swift in Sources */,
 				7607A0CA251C70FA0071B9AD /* LXSwiftWebViewController.swift in Sources */,
 				7607A0BC251C63430071B9AD /* LXSwift+View.swift in Sources */,

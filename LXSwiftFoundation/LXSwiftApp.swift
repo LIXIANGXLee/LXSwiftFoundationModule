@@ -11,13 +11,13 @@ import UIKit
 // MARK: - LXSwftApp 常用的全局变量
 
 /// 定义一下app经常用到的全局常量
-public struct LXSwftApp {
+public struct LXSwiftApp {
 
    //根据高度来判断是否是带刘海的手机,也可以通过safaAreaInserts来判断
-    public static let isIPhoneX    = (LXSwftApp.screenH == CGFloat(812) || LXSwftApp.screenH == CGFloat(896)) ? true : false
-    public static var isIphone5    = LXSwftApp.screenW == 320
-    public static var isIphone6    = LXSwftApp.screenW == 375
-    public static var isIphone6p   = LXSwftApp.screenW == 414
+    public static let isIPhoneX = (LXSwiftApp.screenH == CGFloat(812) || LXSwiftApp.screenH == CGFloat(896)) ? true : false
+    public static var isIphone5 = LXSwiftApp.screenW == 320
+    public static var isIphone6 = LXSwiftApp.screenW == 375
+    public static var isIphone6p = LXSwiftApp.screenW == 414
     //bounds
     public static let bounds = UIScreen.main.bounds
     //app屏幕宽度
@@ -31,11 +31,11 @@ public struct LXSwftApp {
     //状态栏高度
     public static let statusbarH = isIPhoneX ? CGFloat(44.0) : CGFloat(20.0)
     //tabBar 的刘海高度
-    public static let touchBarH  = isIPhoneX ? CGFloat(34.0) : CGFloat(0.0)
+    public static let touchBarH = isIPhoneX ? CGFloat(34.0) : CGFloat(0.0)
      // 系统版本号
     public static let version = UIDevice.current.systemVersion
     //屏幕相比iPhone6的宽度比例
-    public static let scale = LXSwftApp.screenW / CGFloat(375.0)
+    public static let scale = LXSwiftApp.screenW / CGFloat(375.0)
     
    
 }
