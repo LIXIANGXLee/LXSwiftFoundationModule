@@ -24,6 +24,7 @@
 		7607A0A4251C3C9E0071B9AD /* LXSwift+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A0A3251C3C9E0071B9AD /* LXSwift+Date.swift */; };
 		7607A0A6251C47380071B9AD /* LXSwiftTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A0A5251C47380071B9AD /* LXSwiftTool.swift */; };
 		7607A0A8251C47880071B9AD /* LXSwift+Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A0A7251C47880071B9AD /* LXSwift+Dictionary.swift */; };
+		7607A0AA251C4FC10071B9AD /* LXSwift+FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A0A9251C4FC10071B9AD /* LXSwift+FileManager.swift */; };
 		7B566DDA1A33A0ADA6224DD1 /* Pods_LXSwiftFoundationModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F715AA7BA9B925B133355970 /* Pods_LXSwiftFoundationModule.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +49,7 @@
 		7607A0A3251C3C9E0071B9AD /* LXSwift+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LXSwift+Date.swift"; sourceTree = "<group>"; };
 		7607A0A5251C47380071B9AD /* LXSwiftTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXSwiftTool.swift; sourceTree = "<group>"; };
 		7607A0A7251C47880071B9AD /* LXSwift+Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LXSwift+Dictionary.swift"; sourceTree = "<group>"; };
+		7607A0A9251C4FC10071B9AD /* LXSwift+FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LXSwift+FileManager.swift"; sourceTree = "<group>"; };
 		8DFBEB594E654C05D56544BE /* Pods-LXSwiftFoundationModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXSwiftFoundationModule.release.xcconfig"; path = "Target Support Files/Pods-LXSwiftFoundationModule/Pods-LXSwiftFoundationModule.release.xcconfig"; sourceTree = "<group>"; };
 		F715AA7BA9B925B133355970 /* Pods_LXSwiftFoundationModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LXSwiftFoundationModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -128,6 +130,7 @@
 				7607A0A3251C3C9E0071B9AD /* LXSwift+Date.swift */,
 				7607A0A5251C47380071B9AD /* LXSwiftTool.swift */,
 				7607A0A7251C47880071B9AD /* LXSwift+Dictionary.swift */,
+				7607A0A9251C4FC10071B9AD /* LXSwift+FileManager.swift */,
 			);
 			path = LXSwiftFoundation;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 				7607A09A251B2C8D0071B9AD /* LXSwift+String.swift in Sources */,
 				7607A0A0251B61220071B9AD /* LXSwift+Bundle.swift in Sources */,
 				7607A083251B1C0B0071B9AD /* ViewController.swift in Sources */,
+				7607A0AA251C4FC10071B9AD /* LXSwift+FileManager.swift in Sources */,
 				7607A0A6251C47380071B9AD /* LXSwiftTool.swift in Sources */,
 				7607A07F251B1C0B0071B9AD /* AppDelegate.swift in Sources */,
 				7607A0A8251C47880071B9AD /* LXSwift+Dictionary.swift in Sources */,
