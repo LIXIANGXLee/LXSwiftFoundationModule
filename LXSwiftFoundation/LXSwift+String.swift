@@ -160,14 +160,22 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
 
 //MARK: -  Extending properties for String and NSString tool
 extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
+     
+    /// date  transform  string
+    public func stringTranformDate(_ ymd: String = "yyyy-MM-dd HH:mm:ss") -> Date? {
+         let string = base as! String
+         let fmt = DateFormatter()
+         fmt.dateFormat = ymd
+         return fmt.date(from: string)
+    }
     
       /// Methods of converting Chinese characters to Pinyin
      public var transformToPinYin: String{
-           let string = base as! String
-           let mutableString = NSMutableString(string: string)
-           CFStringTransform(mutableString, nil, kCFStringTransformToLatin, false)
-           CFStringTransform(mutableString, nil, kCFStringTransformStripDiacritics, false)
-           return String(mutableString).replacingOccurrences(of: " ", with: "")
+         let string = base as! String
+         let mutableString = NSMutableString(string: string)
+         CFStringTransform(mutableString, nil, kCFStringTransformToLatin, false)
+         CFStringTransform(mutableString, nil,  kCFStringTransformStripDiacritics, false)
+         return String(mutableString).replacingOccurrences(of: " ", with: "")
       }
 
        /// The extended calculation attribute displays the corresponding g m KB B format according to the file size

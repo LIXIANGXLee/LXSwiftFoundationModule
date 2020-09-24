@@ -20,6 +20,8 @@
 		7607A09C251B5A850071B9AD /* LXSwift+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A09B251B5A850071B9AD /* LXSwift+Image.swift */; };
 		7607A09E251B5CF80071B9AD /* LXSwift+Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A09D251B5CF80071B9AD /* LXSwift+Device.swift */; };
 		7607A0A0251B61220071B9AD /* LXSwift+Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A09F251B61220071B9AD /* LXSwift+Bundle.swift */; };
+		7607A0A2251C32CD0071B9AD /* LXSwift+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A0A1251C32CD0071B9AD /* LXSwift+Data.swift */; };
+		7607A0A4251C3C9E0071B9AD /* LXSwift+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A0A3251C3C9E0071B9AD /* LXSwift+Date.swift */; };
 		7B566DDA1A33A0ADA6224DD1 /* Pods_LXSwiftFoundationModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F715AA7BA9B925B133355970 /* Pods_LXSwiftFoundationModule.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +42,8 @@
 		7607A09B251B5A850071B9AD /* LXSwift+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LXSwift+Image.swift"; sourceTree = "<group>"; };
 		7607A09D251B5CF80071B9AD /* LXSwift+Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LXSwift+Device.swift"; sourceTree = "<group>"; };
 		7607A09F251B61220071B9AD /* LXSwift+Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LXSwift+Bundle.swift"; sourceTree = "<group>"; };
+		7607A0A1251C32CD0071B9AD /* LXSwift+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LXSwift+Data.swift"; sourceTree = "<group>"; };
+		7607A0A3251C3C9E0071B9AD /* LXSwift+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LXSwift+Date.swift"; sourceTree = "<group>"; };
 		8DFBEB594E654C05D56544BE /* Pods-LXSwiftFoundationModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXSwiftFoundationModule.release.xcconfig"; path = "Target Support Files/Pods-LXSwiftFoundationModule/Pods-LXSwiftFoundationModule.release.xcconfig"; sourceTree = "<group>"; };
 		F715AA7BA9B925B133355970 /* Pods_LXSwiftFoundationModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LXSwiftFoundationModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -116,6 +120,8 @@
 				7607A09B251B5A850071B9AD /* LXSwift+Image.swift */,
 				7607A09D251B5CF80071B9AD /* LXSwift+Device.swift */,
 				7607A09F251B61220071B9AD /* LXSwift+Bundle.swift */,
+				7607A0A1251C32CD0071B9AD /* LXSwift+Data.swift */,
+				7607A0A3251C3C9E0071B9AD /* LXSwift+Date.swift */,
 			);
 			path = LXSwiftFoundation;
 			sourceTree = "<group>";
@@ -244,7 +250,9 @@
 				7607A0A0251B61220071B9AD /* LXSwift+Bundle.swift in Sources */,
 				7607A083251B1C0B0071B9AD /* ViewController.swift in Sources */,
 				7607A07F251B1C0B0071B9AD /* AppDelegate.swift in Sources */,
+				7607A0A4251C3C9E0071B9AD /* LXSwift+Date.swift in Sources */,
 				7607A081251B1C0B0071B9AD /* SceneDelegate.swift in Sources */,
+				7607A0A2251C32CD0071B9AD /* LXSwift+Data.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

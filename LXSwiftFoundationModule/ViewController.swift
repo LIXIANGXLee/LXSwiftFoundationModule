@@ -22,12 +22,21 @@ class ViewController: UIViewController {
         print("\(str.lx.substring(to: 0))")
 
         print("\(str.lx.md5)")
-
-        
         print("===\(UIDevice.lx.isPad)")
-        
         print("===\(UIDevice.lx.isPhone)")
+        print("===\(Bundle.lx.bundleVersion ?? "")")
 
+        
+        let imageData = UIImage(named: "guide-open")?.pngData() as? NSData
+    
+        
+        
+        print("==-=-=-=-=-=\(Date().lx.dateTranformString())")
+        
+        print("==-=-=-=-=-=\(Date().lx.dateTranformString().lx.stringTranformDate())")
+
+        
+        
     }
 
 
