@@ -29,8 +29,14 @@ extension LXSwiftBasics where Base == Date {
         return (selfCmps,dateComps)
     }
     
-    /// is year
-      public func isThisYear() -> Bool {
+    
+}
+
+//MARK: -  Extending properties  for NSData
+extension LXSwiftBasics where Base == Date {
+    
+    /// is this year
+    public var isThisYear: Bool {
         let unit: Set<Calendar.Component> = [.year]
         let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(), unit: unit)
         let result = nowComps.year == selfCmps.year
@@ -38,7 +44,7 @@ extension LXSwiftBasics where Base == Date {
     }
     
     ///isYesterday
-    public func isYesterday() -> Bool {
+    public var isYesterday: Bool {
          let unit: Set<Calendar.Component> = [.day,.month,.year]
          let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(), unit: unit)
          let count = nowComps.day! - selfCmps.day!
@@ -49,7 +55,7 @@ extension LXSwiftBasics where Base == Date {
     
     
     /// is today
-    public func isToday() -> Bool{
+    public var isToday: Bool{
         let unit: Set<Calendar.Component> = [.day,.month,.year]
         let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(), unit: unit)
         return (selfCmps.year == nowComps.year) &&
@@ -58,7 +64,7 @@ extension LXSwiftBasics where Base == Date {
     }
     
     /// An hour ago
-    public func isAnHourAgo() -> Bool{
+    public var isAnHourAgo: Bool{
           let unit: Set<Calendar.Component> = [.hour,.day,.month,.year]
           let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(), unit: unit)
           return (selfCmps.year == nowComps.year) &&
@@ -68,7 +74,7 @@ extension LXSwiftBasics where Base == Date {
       }
     
     /// An minute ago
-    public func isJust() -> Bool{
+    public var isJust: Bool{
          let unit: Set<Calendar.Component> = [.minute,.hour,.day,.month,.year]
          let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(), unit: unit)
          return (selfCmps.year == nowComps.year) &&
@@ -79,7 +85,7 @@ extension LXSwiftBasics where Base == Date {
      }
     
     ///get stamp with Interval
-    public func timeInterval() -> TimeInterval {
+    public var timeInterval: TimeInterval {
         return Date().timeIntervalSince1970 * 1000
     }
     
