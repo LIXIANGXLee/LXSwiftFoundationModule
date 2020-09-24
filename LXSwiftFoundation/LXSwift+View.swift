@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UIView: LXCompatible { }
+extension UIView: LXSwiftCompatible { }
 
 //MARK: -  Extending properties for UIView
 extension LXSwiftBasics where Base: UIView {

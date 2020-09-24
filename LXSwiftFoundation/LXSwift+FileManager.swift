@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension FileManager: LXCompatible { }
+extension FileManager: LXSwiftCompatible { }
 
 //MARK: -  Extending properties for Date
 extension LXSwiftBasics where Base: FileManager {

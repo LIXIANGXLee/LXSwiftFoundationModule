@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UIDevice: LXCompatible { }
+extension UIDevice: LXSwiftCompatible { }
 
 //MARK: -  Extending methods  for UIDevice is ipad or iphone
 extension LXSwiftBasics where Base: UIDevice {

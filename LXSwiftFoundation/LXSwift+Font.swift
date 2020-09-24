@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UIFont: LXCompatible { }
+extension UIFont: LXSwiftCompatible { }
 
 //MARK: -  Extending properties for UIFont
 extension LXSwiftBasics where Base: UIFont {

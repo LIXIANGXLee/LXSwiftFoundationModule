@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension Dictionary: LXCompatible { }
+extension Dictionary: LXSwiftCompatible { }
 
     /// overload operators +
     /// dic + dic

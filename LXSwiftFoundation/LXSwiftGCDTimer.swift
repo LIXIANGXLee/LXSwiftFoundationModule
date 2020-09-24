@@ -11,7 +11,7 @@ import UIKit
 public typealias LXSwiftTaskCallBack = (() -> Void)
 
 // MARK: - 定时器（GCD）
-public struct LXSwiftGCDTimer: LXCompatible {
+public struct LXSwiftGCDTimer: LXSwiftCompatible {
     
     ///定时器集合
     fileprivate static var timers = [String:DispatchSourceTimer]()

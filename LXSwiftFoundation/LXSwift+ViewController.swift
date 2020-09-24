@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UIViewController: LXCompatible { }
+extension UIViewController: LXSwiftCompatible { }
 
 //MARK: -  Extending properties for UIViewController
 extension LXSwiftBasics where Base: UIViewController {

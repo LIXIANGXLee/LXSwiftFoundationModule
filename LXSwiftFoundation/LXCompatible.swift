@@ -9,10 +9,10 @@
 import UIKit
 
 /// Define protocol
-public protocol LXCompatible {}
+public protocol LXSwiftCompatible {}
 
 /// Extend calculation properties for protocol
-public extension LXCompatible {
+public extension LXSwiftCompatible {
     
     /// In order to solve the problem of method in mutating struct, the static calculation property set is extended
     static var lx: LXSwiftBasics<Self>.Type {
@@ -28,3 +28,9 @@ public extension LXCompatible {
     }
     
 }
+
+/// Define protocol
+public protocol LXSwiftUICompatible {
+    var swiftModel: Any? { get set }
+}
+

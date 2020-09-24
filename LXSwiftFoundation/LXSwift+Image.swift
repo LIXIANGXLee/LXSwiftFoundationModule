@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 
 /// String and NSString compliance
-extension UIImage: LXCompatible { }
+extension UIImage: LXSwiftCompatible { }
 
 //MARK: -  Extending methods and properties for UIImage
 extension LXSwiftBasics where Base: UIImage {

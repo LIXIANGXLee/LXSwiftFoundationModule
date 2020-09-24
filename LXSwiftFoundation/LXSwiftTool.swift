@@ -8,7 +8,7 @@
 
 import UIKit
 
-public struct LXSwiftTool: LXCompatible { }
+public struct LXSwiftTool: LXSwiftCompatible { }
 
 //MARK: -  Extending methods for Date
 

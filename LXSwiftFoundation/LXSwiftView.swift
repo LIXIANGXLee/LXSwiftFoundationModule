@@ -19,7 +19,9 @@ public enum LXSwiftUserInterfaceStyle {
 
 }
 
-open class LXSwiftView: UIView {
+open class LXSwiftView: UIView,LXSwiftUICompatible {
+   
+   public var swiftModel: Any?
 
    public override init(frame: CGRect) {
         super.init(frame: frame)

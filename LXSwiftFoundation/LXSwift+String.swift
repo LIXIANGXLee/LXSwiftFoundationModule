@@ -10,7 +10,7 @@ import UIKit
 import CommonCrypto
 
 /// String and NSString compliance
-extension String: LXCompatible { }
+extension String: LXSwiftCompatible { }
 
 //MARK: -  Extending methods and properties for String and NSString interception
 extension LXSwiftBasics where Base: ExpressibleByStringLiteral {

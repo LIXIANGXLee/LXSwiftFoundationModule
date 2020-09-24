@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension Bundle: LXCompatible { }
+extension Bundle: LXSwiftCompatible { }
 
 //MARK: -  Extending methods  for Bundle
 extension LXSwiftBasics where Base: Bundle {

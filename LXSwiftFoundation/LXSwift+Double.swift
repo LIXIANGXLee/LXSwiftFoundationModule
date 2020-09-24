@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension Double: LXCompatible { }
+extension Double: LXSwiftCompatible { }
 
 //MARK: -  Extending methods for Double
 extension LXSwiftBasics where Base == Double {

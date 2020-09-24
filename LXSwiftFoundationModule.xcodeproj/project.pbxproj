@@ -49,6 +49,9 @@
 		7607A0DA251C71720071B9AD /* LXSwiftCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A0D9251C71720071B9AD /* LXSwiftCollectionView.swift */; };
 		7607A0DC251C71850071B9AD /* LXSwiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A0DB251C71850071B9AD /* LXSwiftApp.swift */; };
 		7607A0DE251C72620071B9AD /* LXSwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A0DD251C72620071B9AD /* LXSwiftViewController.swift */; };
+		7607A0E0251C904C0071B9AD /* LXSwiftButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A0DF251C904C0071B9AD /* LXSwiftButton.swift */; };
+		7607A0E2251C91CA0071B9AD /* LXSwiftLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A0E1251C91CA0071B9AD /* LXSwiftLabel.swift */; };
+		7607A0E4251C91F20071B9AD /* LXSwiftImgView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A0E3251C91F20071B9AD /* LXSwiftImgView.swift */; };
 		7B566DDA1A33A0ADA6224DD1 /* Pods_LXSwiftFoundationModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F715AA7BA9B925B133355970 /* Pods_LXSwiftFoundationModule.framework */; };
 /* End PBXBuildFile section */
 
@@ -98,6 +101,9 @@
 		7607A0D9251C71720071B9AD /* LXSwiftCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftCollectionView.swift; sourceTree = "<group>"; };
 		7607A0DB251C71850071B9AD /* LXSwiftApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftApp.swift; sourceTree = "<group>"; };
 		7607A0DD251C72620071B9AD /* LXSwiftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftViewController.swift; sourceTree = "<group>"; };
+		7607A0DF251C904C0071B9AD /* LXSwiftButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXSwiftButton.swift; sourceTree = "<group>"; };
+		7607A0E1251C91CA0071B9AD /* LXSwiftLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXSwiftLabel.swift; sourceTree = "<group>"; };
+		7607A0E3251C91F20071B9AD /* LXSwiftImgView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXSwiftImgView.swift; sourceTree = "<group>"; };
 		8DFBEB594E654C05D56544BE /* Pods-LXSwiftFoundationModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXSwiftFoundationModule.release.xcconfig"; path = "Target Support Files/Pods-LXSwiftFoundationModule/Pods-LXSwiftFoundationModule.release.xcconfig"; sourceTree = "<group>"; };
 		F715AA7BA9B925B133355970 /* Pods_LXSwiftFoundationModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LXSwiftFoundationModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -203,6 +209,9 @@
 				7607A0BF251C67BE0071B9AD /* LXSwift+Font.swift */,
 				7607A0C1251C6CDB0071B9AD /* LXSwift+DispatchQueue.swift */,
 				7607A0DD251C72620071B9AD /* LXSwiftViewController.swift */,
+				7607A0DF251C904C0071B9AD /* LXSwiftButton.swift */,
+				7607A0E1251C91CA0071B9AD /* LXSwiftLabel.swift */,
+				7607A0E3251C91F20071B9AD /* LXSwiftImgView.swift */,
 			);
 			path = LXSwiftFoundation;
 			sourceTree = "<group>";
@@ -351,10 +360,13 @@
 				7607A0D6251C715C0071B9AD /* LXSwiftModalController.swift in Sources */,
 				7607A0B0251C59330071B9AD /* LXSwift+Double.swift in Sources */,
 				7607A0A6251C47380071B9AD /* LXSwiftTool.swift in Sources */,
+				7607A0E4251C91F20071B9AD /* LXSwiftImgView.swift in Sources */,
 				7607A07F251B1C0B0071B9AD /* AppDelegate.swift in Sources */,
 				7607A0A8251C47880071B9AD /* LXSwift+Dictionary.swift in Sources */,
+				7607A0E2251C91CA0071B9AD /* LXSwiftLabel.swift in Sources */,
 				7607A0A4251C3C9E0071B9AD /* LXSwift+Date.swift in Sources */,
 				7607A081251B1C0B0071B9AD /* SceneDelegate.swift in Sources */,
+				7607A0E0251C904C0071B9AD /* LXSwiftButton.swift in Sources */,
 				7607A0AC251C50710071B9AD /* LXSwiftGCDTimer.swift in Sources */,
 				7607A0DA251C71720071B9AD /* LXSwiftCollectionView.swift in Sources */,
 				7607A0C2251C6CDB0071B9AD /* LXSwift+DispatchQueue.swift in Sources */,

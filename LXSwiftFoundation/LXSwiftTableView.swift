@@ -8,7 +8,8 @@
 
 import UIKit
 
-open class LXSwiftTableView: UITableView {
+open class LXSwiftTableView: UITableView ,LXSwiftUICompatible{
+    public var swiftModel: Any?
 
     override public init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -39,7 +40,9 @@ extension LXSwiftTableView: LXViewSetup {
 
 
 //MARK: - LXTableViewCell
-open class LXSwiftTableViewCell: UITableViewCell {
+open class LXSwiftTableViewCell: UITableViewCell, LXSwiftUICompatible {
+    public var swiftModel: Any?
+    
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()

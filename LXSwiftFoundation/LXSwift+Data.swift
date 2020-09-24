@@ -19,8 +19,8 @@ public enum LXSwiftImageDataType {
     case Unknown, PNG, JPEG, GIF
 }
 
-extension Data: LXCompatible { }
-extension NSData: LXCompatible { }
+extension Data: LXSwiftCompatible { }
+extension NSData: LXSwiftCompatible { }
 
 //MARK: -  Extending properties  for Data
 extension LXSwiftBasics where Base == Data {

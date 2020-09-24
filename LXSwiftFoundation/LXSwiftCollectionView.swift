@@ -8,8 +8,9 @@
 
 import UIKit
 
-open class LXSwiftCollectionView: UICollectionView {
-
+open class LXSwiftCollectionView: UICollectionView, LXSwiftUICompatible {
+   
+    public var swiftModel: Any?
     public override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
         backgroundColor = UIColor.white
@@ -34,7 +35,9 @@ extension LXSwiftCollectionView: LXViewSetup {
 
 }
 
-open class LXSwiftCollectionViewCell: UICollectionViewCell {
+open class LXSwiftCollectionViewCell: UICollectionViewCell, LXSwiftUICompatible {
+    public var swiftModel: Any?
+    
     public override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()

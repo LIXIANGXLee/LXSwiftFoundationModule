@@ -11,7 +11,7 @@ import AVFoundation
 import Photos
 
 // MARK: - Privacy
-public struct LXSwiftPrivacyManager: LXCompatible { }
+public struct LXSwiftPrivacyManager: LXSwiftCompatible { }
 
 
 //MARK: -  Extending methods for Privacy

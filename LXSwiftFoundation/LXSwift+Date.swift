@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension Date: LXCompatible { }
+extension Date: LXSwiftCompatible { }
 
 //MARK: -  Extending methods for Date
 extension LXSwiftBasics where Base == Date {

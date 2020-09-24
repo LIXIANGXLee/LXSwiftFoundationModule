@@ -7,7 +7,9 @@
 
 import UIKit
 
-open class LXSwiftViewController: UIViewController {
+open class LXSwiftViewController: UIViewController,LXSwiftUICompatible {
+    public var swiftModel: Any?
+    
     open override func viewDidLoad() {
         super.viewDidLoad()
     }
