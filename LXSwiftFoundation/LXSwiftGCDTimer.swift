@@ -8,7 +8,7 @@
 
 import UIKit
 
-public typealias TaskCallBack = (() -> Void)
+public typealias LXSwiftTaskCallBack = (() -> Void)
 
 // MARK: - 定时器（GCD）
 public struct LXSwiftGCDTimer: LXCompatible {
@@ -28,7 +28,7 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
        ///   - identified: save identified
        public static func startDelay(_ timer: TimeInterval,
                                     identified: String?,
-                                    task: TaskCallBack?) {
+                                    task: LXSwiftTaskCallBack?) {
            start(with: timer,  timeInterval: 1,  repeats: false,  identified: identified,  task: task)
        }
        
@@ -38,7 +38,7 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
        ///   - identified: save identified
        public static func startDelayRepeats(_ timer: TimeInterval,
                                            identified: String?,
-                                           task: TaskCallBack?) {
+                                           task: LXSwiftTaskCallBack?) {
            start(with: timer, timeInterval: 1,  repeats: false,identified: identified,  task: task)
        }
        
@@ -68,7 +68,7 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
                               timeInterval: TimeInterval = 1,
                               repeats: Bool = true,
                               identified: String?,
-                              task: TaskCallBack?){
+                              task: LXSwiftTaskCallBack?){
        
              guard let iden = identified, startTimer >= 0, timeInterval >= 0, task != nil else { return }
          
