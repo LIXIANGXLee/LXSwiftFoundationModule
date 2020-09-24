@@ -40,7 +40,7 @@ extension Dictionary: LXCompatible { }
     }
 
 
-//MARK: -  Extending methods for Date
+//MARK: -  Extending properties for Date
 extension LXSwiftBasics where Base == Dictionary<String, Any> {
 
     /// Dictionary to json String

@@ -3,72 +3,174 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0BD0B62FF6BE13B7E6184F33AA096984 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		3AE77B1806B489CDCDCCD56BA523F1F7 /* LXSwiftFoundation-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 014381204BD9674F9A74B9059C35751F /* LXSwiftFoundation-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4E13B6E43113A52C3C7D6C9D51F61B4C /* LXSwift+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = D567E8A3EC35BB6B4416BE7CBEFDBA43 /* LXSwift+String.swift */; };
-		52B2451E306844BFDB4F4A66B2C65E94 /* Pods-LXSwiftFoundationModule-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CC8D351C709683C611A900D82D108E2E /* Pods-LXSwiftFoundationModule-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B9330DE33211563FA07EAAA02A0B420D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		D21EA675009B2D0DFDE81450AFD35DF3 /* Pods-LXSwiftFoundationModule-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E093E81AA39BD512D225DADBDD07811 /* Pods-LXSwiftFoundationModule-dummy.m */; };
-		DF3BCEDD6F9E93B80C332347B3B1E2AA /* LXSwiftBasics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B56CABBF6F4529BE973D886E61824C3 /* LXSwiftBasics.swift */; };
-		E96D3A2C8F5227F6E15E23737D887C1F /* LXCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D335A86CDA75F7F138216E438488FED /* LXCompatible.swift */; };
-		ED85C6BF72E76F4BB5122308CE65B482 /* LXSwiftFoundation-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 07658C1C11EC7805254CAE7A64391A6B /* LXSwiftFoundation-dummy.m */; };
+		02B3C9859DBD03A42961DEDBD46D6D56 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDCB65B3DDB68CB2801794AC6AD13094 /* Foundation.framework */; };
+		066841AA36022AE62774E04C6DF65403 /* LXSwift+ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA5A03F2EF9FFE3363C409D133264FC /* LXSwift+ViewController.swift */; };
+		0DBD887E3741A672E6BB1964091EA3B2 /* LXSwiftRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC83656B81C0997B50F850432904C187 /* LXSwiftRouter.swift */; };
+		16140C6C04C563126113789F8C5D0F32 /* LXSwift+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7F3B567212760DE3F4415B84AD7DE5 /* LXSwift+Data.swift */; };
+		18C88C147C20A8236895300CAD3623ED /* LXSwift+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFDE9ACB3FA0CB877652AFC81CA6171 /* LXSwift+Font.swift */; };
+		1CC5982CEBB83C023170F21AAE138E6E /* LXSwift+DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4B189FD8BED4E389EA6C9C1119F4A3 /* LXSwift+DispatchQueue.swift */; };
+		3314EF489ED47EF7695A3EA18A5C6ABA /* LXSwiftWordRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59390753E1ADB4E613C5172A38C0ED8D /* LXSwiftWordRegex.swift */; };
+		37A215676B7AFDE7F5468B097D3B188C /* Pods-LXSwiftFoundationModule-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E093E81AA39BD512D225DADBDD07811 /* Pods-LXSwiftFoundationModule-dummy.m */; };
+		382955A53AC964FDF85F042B730B8780 /* LXSwiftCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69734883152671A7657CB117D7AA5BE3 /* LXSwiftCollectionView.swift */; };
+		3910B3E2365CAFEC299FCAF6954952B7 /* LXFitManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 210710B83846B0CA28FD57365AC8809C /* LXFitManager.framework */; };
+		394E8C7896C2F4155F22BBF431F8FFCA /* LXSwiftTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB70E43CBE4A7D2F101143C9AFAA40 /* LXSwiftTool.swift */; };
+		3B481946615989E5891C4D9CE4078663 /* LXSwiftTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86475FEFBC24674146F6A9CE6A331FB5 /* LXSwiftTableView.swift */; };
+		3FE294980AC6738E7B89861E2E30C24B /* LXSwiftWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC5715C6C38D37E66DC89BA6FCC2574 /* LXSwiftWebViewController.swift */; };
+		418995E9B1619CEF088D6BD8FBF10296 /* LXSwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B10328CFE179EEDED818B23CA7ADA /* LXSwiftViewController.swift */; };
+		503E0D9395CDED204FE2CD03D8956C3B /* LXSwiftWordTextLable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F01429849725F0BF5504BCB3CDAA7E0 /* LXSwiftWordTextLable.swift */; };
+		511E1DC670F0659F8DD135D321B36087 /* LXSwift+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E84602E0D84C1795B53E6AFFA3A84F2 /* LXSwift+View.swift */; };
+		53F3E390F35CF8D7CCD87F99E8CF3FDF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDCB65B3DDB68CB2801794AC6AD13094 /* Foundation.framework */; };
+		58976DFCF01FF104336E43A083FAC4D6 /* LXSwiftFoundation-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 92D76B45C3E2B0592D27B9E09047337F /* LXSwiftFoundation-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5988D41036CEB8F36682CBDBFE062264 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDCB65B3DDB68CB2801794AC6AD13094 /* Foundation.framework */; };
+		642EF1012E8077F4074A7C3091531AB0 /* LXSwift+FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305C92BDFA117058C18E1D3A2D29FAA2 /* LXSwift+FileManager.swift */; };
+		6514C7FA85B847E6250D6BCB658737C8 /* LXSwiftPrivacyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179392A377CCFC6298FFE0F3778F2880 /* LXSwiftPrivacyManager.swift */; };
+		657ABD90D7D695C31519399FC5ABD2CE /* LXSwift+Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23072063EE6752C5F367FC96FD519B45 /* LXSwift+Bundle.swift */; };
+		6734DF223A9F8240CD5D607F7BE046E3 /* LXSwftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F17E24056FE2886B0593AF0C47A36D3 /* LXSwftApp.swift */; };
+		6A9E90B193871FBE0EA114546B442FA4 /* LXSwift+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77CCC7071C28AE2F96AC9C1F64BE2FA /* LXSwift+Double.swift */; };
+		6CD51402824EC82372B4ECD9BA3707C8 /* LXSwiftBasics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31132E8FA2E93C6EA4866A6744AA8C /* LXSwiftBasics.swift */; };
+		7A04CDF981D068D83B1B34A7728A7468 /* LXFitManager-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 05FD14158262C9770469178DB5ADACE5 /* LXFitManager-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		81E412CA80962E29537A176D3D3285C9 /* LXSwiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291BBF2C55403EC44C481B45540D42AB /* LXSwiftView.swift */; };
+		84E0756369A4DEF73EBAC5DFB704E920 /* LXSwift+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455ECFF51CACFC0B5EBDBE7DA16BBB56 /* LXSwift+Image.swift */; };
+		85B293C8863E506A640254F3F6009304 /* LXSwiftModalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A759518A3AC974531D2B82EB50CAD1 /* LXSwiftModalController.swift */; };
+		85F0556270E9BB5952373B6C84A31383 /* LXSwiftScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4A485D8E007A69173F4547FA83DE26 /* LXSwiftScrollView.swift */; };
+		8F9B9360C4F90D81689B96FF603BEB3A /* LXSwift+Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71620E6198F6B631AC074BF125A3A14E /* LXSwift+Device.swift */; };
+		9A9660A81048A19AAA4966A09B024F12 /* LXSwiftFoundation-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F487C3C1DFA1E1B74F259D56304234C5 /* LXSwiftFoundation-dummy.m */; };
+		A093DCCE4A412A20834EEAFD56FF24B3 /* LXFitManager-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D71F0A043311BA8E159F6CBD00F5FD /* LXFitManager-dummy.m */; };
+		A5A1E849E7BFD3C2CA39D3938760DD79 /* LXCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39D70035999BDD7D35FFDE798381E1C /* LXCompatible.swift */; };
+		A84A502929E973FA2B3BFC561520DDDB /* LXFit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64C08C4BA5EC19BAD61DCC7ECCBF345 /* LXFit.swift */; };
+		B9DF500D2E3695489550A79E616A0F99 /* LXSwiftConvenienceBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02F449524EB802845295AC0D8F82A4D /* LXSwiftConvenienceBundle.swift */; };
+		C1596EA50730D99976BB1CB5B5484C87 /* LXSwift+Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075E2256CB5F5A782E874EB629FF0F7D /* LXSwift+Control.swift */; };
+		C3BD5C711E9958CB0D2F51DF47CF0593 /* LXSwiftTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBAE263EBF97DF2717D2E9539DA97B3 /* LXSwiftTextView.swift */; };
+		C628522D02F656EC6F6CC8DB47429590 /* LXSwift+Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CDCC57838D19525707FEC1A127AEFB /* LXSwift+Dictionary.swift */; };
+		E2421F1B81C8DCF0D698761185E352C1 /* LXSwift+Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517F5FA279A338B9FA75EC0E8D999070 /* LXSwift+Button.swift */; };
+		EE22C505D7AD5A6BF90DB2E4D02B4BE3 /* LXSwiftGCDTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26485D14C463DDD9779391020853483 /* LXSwiftGCDTimer.swift */; };
+		F3C76A8809A24CFD7862F1B44048A598 /* LXSwift+Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB951357C8DAB328CB6323C06D3C91A /* LXSwift+Label.swift */; };
+		F615ED0F36BB1E24F8D4A2BA73185797 /* LXSwift+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B9C5DC55C9C32E793A4836FBB1F54 /* LXSwift+Date.swift */; };
+		F82DA5AB49CAA86C063149A0A1A4B8BA /* Pods-LXSwiftFoundationModule-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CC8D351C709683C611A900D82D108E2E /* Pods-LXSwiftFoundationModule-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FACAC30763283779F0E45246F68693E9 /* LXSwift+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8590851F156C06209A9E158DEF5DEA4E /* LXSwift+String.swift */; };
+		FB75050D761812395AF6079B3F233B7F /* LXSwift+ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D610245E27E94248F47AD941D5320A13 /* LXSwift+ScrollView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		E1E22C35CA8E80CA63DD832C094C3997 /* PBXContainerItemProxy */ = {
+		077070A2DFB548D294A75B2DEE6826FF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8ED050C8B9768109B203E0B9CBBCAEC1;
+			remoteInfo = LXFitManager;
+		};
+		DA3E05D9040551D7F3DDA34E325370AC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = FCE36F87F66E141B068D3EF29E6130E1;
 			remoteInfo = LXSwiftFoundation;
 		};
+		EE6198D907F22219659AA743000C7E6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8ED050C8B9768109B203E0B9CBBCAEC1;
+			remoteInfo = LXFitManager;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		014381204BD9674F9A74B9059C35751F /* LXSwiftFoundation-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LXSwiftFoundation-umbrella.h"; sourceTree = "<group>"; };
-		07658C1C11EC7805254CAE7A64391A6B /* LXSwiftFoundation-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LXSwiftFoundation-dummy.m"; sourceTree = "<group>"; };
-		23597D70CAC0861B0E291037042EB2AD /* LXSwiftFoundation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LXSwiftFoundation.release.xcconfig; sourceTree = "<group>"; };
-		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		05FD14158262C9770469178DB5ADACE5 /* LXFitManager-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LXFitManager-umbrella.h"; sourceTree = "<group>"; };
+		075E2256CB5F5A782E874EB629FF0F7D /* LXSwift+Control.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Control.swift"; path = "LXSwiftFoundation/LXSwift+Control.swift"; sourceTree = "<group>"; };
+		14115143B473E6662478E072806D6FEC /* LXSwiftFoundation.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = LXSwiftFoundation.modulemap; sourceTree = "<group>"; };
+		179392A377CCFC6298FFE0F3778F2880 /* LXSwiftPrivacyManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftPrivacyManager.swift; path = LXSwiftFoundation/LXSwiftPrivacyManager.swift; sourceTree = "<group>"; };
+		1B31132E8FA2E93C6EA4866A6744AA8C /* LXSwiftBasics.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftBasics.swift; path = LXSwiftFoundation/LXSwiftBasics.swift; sourceTree = "<group>"; };
+		1DAB7583C51D5788F458687C1A9562DB /* LXSwiftFoundation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LXSwiftFoundation.debug.xcconfig; sourceTree = "<group>"; };
+		210710B83846B0CA28FD57365AC8809C /* LXFitManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LXFitManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		21F4D39098C1452CE1C8E979B1AD9E7D /* LXFitManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LXFitManager.debug.xcconfig; sourceTree = "<group>"; };
+		23072063EE6752C5F367FC96FD519B45 /* LXSwift+Bundle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Bundle.swift"; path = "LXSwiftFoundation/LXSwift+Bundle.swift"; sourceTree = "<group>"; };
+		291BBF2C55403EC44C481B45540D42AB /* LXSwiftView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftView.swift; path = LXSwiftFoundation/LXSwiftView.swift; sourceTree = "<group>"; };
+		305C92BDFA117058C18E1D3A2D29FAA2 /* LXSwift+FileManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+FileManager.swift"; path = "LXSwiftFoundation/LXSwift+FileManager.swift"; sourceTree = "<group>"; };
 		3507C175AA59B9EDEC77084089B77AB7 /* Pods-LXSwiftFoundationModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LXSwiftFoundationModule.release.xcconfig"; sourceTree = "<group>"; };
-		3B56CABBF6F4529BE973D886E61824C3 /* LXSwiftBasics.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftBasics.swift; path = LXSwiftFoundation/LXSwiftBasics.swift; sourceTree = "<group>"; };
-		422EBB4CD48D708D1044FF2F69B5608F /* LXSwiftFoundation.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = LXSwiftFoundation.modulemap; sourceTree = "<group>"; };
+		3888DD53BBE7B7DFC0D5D8540E57BE76 /* LXFitManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = LXFitManager.framework; path = LXFitManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3AB951357C8DAB328CB6323C06D3C91A /* LXSwift+Label.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Label.swift"; path = "LXSwiftFoundation/LXSwift+Label.swift"; sourceTree = "<group>"; };
+		3C7F3B567212760DE3F4415B84AD7DE5 /* LXSwift+Data.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Data.swift"; path = "LXSwiftFoundation/LXSwift+Data.swift"; sourceTree = "<group>"; };
+		455ECFF51CACFC0B5EBDBE7DA16BBB56 /* LXSwift+Image.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Image.swift"; path = "LXSwiftFoundation/LXSwift+Image.swift"; sourceTree = "<group>"; };
+		4B4A485D8E007A69173F4547FA83DE26 /* LXSwiftScrollView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftScrollView.swift; path = LXSwiftFoundation/LXSwiftScrollView.swift; sourceTree = "<group>"; };
+		517F5FA279A338B9FA75EC0E8D999070 /* LXSwift+Button.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Button.swift"; path = "LXSwiftFoundation/LXSwift+Button.swift"; sourceTree = "<group>"; };
+		554BD54E9D0D1EEB3B1D023FC8DD939D /* LXFitManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LXFitManager.release.xcconfig; sourceTree = "<group>"; };
 		565AF50605AEE3050EBC6D6904C667C5 /* Pods-LXSwiftFoundationModule-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LXSwiftFoundationModule-frameworks.sh"; sourceTree = "<group>"; };
+		59390753E1ADB4E613C5172A38C0ED8D /* LXSwiftWordRegex.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftWordRegex.swift; path = LXSwiftFoundation/LXSwiftWordRegex.swift; sourceTree = "<group>"; };
 		5ABF905D8979282D27B90282940F1C4B /* Pods-LXSwiftFoundationModule-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-LXSwiftFoundationModule-acknowledgements.markdown"; sourceTree = "<group>"; };
+		62C6F9E5D7ABE22272EABD527E977EC7 /* LXSwiftFoundation.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = LXSwiftFoundation.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		64A759518A3AC974531D2B82EB50CAD1 /* LXSwiftModalController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftModalController.swift; path = LXSwiftFoundation/LXSwiftModalController.swift; sourceTree = "<group>"; };
+		69734883152671A7657CB117D7AA5BE3 /* LXSwiftCollectionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftCollectionView.swift; path = LXSwiftFoundation/LXSwiftCollectionView.swift; sourceTree = "<group>"; };
 		6BCE8F0DD975B49DEFC8EA29EA561C35 /* Pods-LXSwiftFoundationModule-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LXSwiftFoundationModule-Info.plist"; sourceTree = "<group>"; };
-		6D335A86CDA75F7F138216E438488FED /* LXCompatible.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXCompatible.swift; path = LXSwiftFoundation/LXCompatible.swift; sourceTree = "<group>"; };
+		6E84602E0D84C1795B53E6AFFA3A84F2 /* LXSwift+View.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+View.swift"; path = "LXSwiftFoundation/LXSwift+View.swift"; sourceTree = "<group>"; };
+		6F01429849725F0BF5504BCB3CDAA7E0 /* LXSwiftWordTextLable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftWordTextLable.swift; path = LXSwiftFoundation/LXSwiftWordTextLable.swift; sourceTree = "<group>"; };
+		6F17E24056FE2886B0593AF0C47A36D3 /* LXSwftApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwftApp.swift; path = LXSwiftFoundation/LXSwftApp.swift; sourceTree = "<group>"; };
+		71620E6198F6B631AC074BF125A3A14E /* LXSwift+Device.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Device.swift"; path = "LXSwiftFoundation/LXSwift+Device.swift"; sourceTree = "<group>"; };
+		78D71F0A043311BA8E159F6CBD00F5FD /* LXFitManager-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LXFitManager-dummy.m"; sourceTree = "<group>"; };
+		8590851F156C06209A9E158DEF5DEA4E /* LXSwift+String.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+String.swift"; path = "LXSwiftFoundation/LXSwift+String.swift"; sourceTree = "<group>"; };
+		86475FEFBC24674146F6A9CE6A331FB5 /* LXSwiftTableView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftTableView.swift; path = LXSwiftFoundation/LXSwiftTableView.swift; sourceTree = "<group>"; };
+		8C4B10328CFE179EEDED818B23CA7ADA /* LXSwiftViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftViewController.swift; path = LXSwiftFoundation/LXSwiftViewController.swift; sourceTree = "<group>"; };
 		8CD7ECCC3DAC82DD0213A08F6748B8FE /* Pods-LXSwiftFoundationModule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LXSwiftFoundationModule.debug.xcconfig"; sourceTree = "<group>"; };
+		8DA5A03F2EF9FFE3363C409D133264FC /* LXSwift+ViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+ViewController.swift"; path = "LXSwiftFoundation/LXSwift+ViewController.swift"; sourceTree = "<group>"; };
 		8EC4B08554BC62C2BA2A4AD00B71FDE7 /* Pods-LXSwiftFoundationModule.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-LXSwiftFoundationModule.modulemap"; sourceTree = "<group>"; };
+		912B9C5DC55C9C32E793A4836FBB1F54 /* LXSwift+Date.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Date.swift"; path = "LXSwiftFoundation/LXSwift+Date.swift"; sourceTree = "<group>"; };
 		91A4F3DDA382BE2E8A7F55E69898FCF0 /* LXSwiftFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = LXSwiftFoundation.framework; path = LXSwiftFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		92D76B45C3E2B0592D27B9E09047337F /* LXSwiftFoundation-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LXSwiftFoundation-umbrella.h"; sourceTree = "<group>"; };
+		94BB5187802F41280BBD7C5E4056C873 /* LXSwiftFoundation-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "LXSwiftFoundation-Info.plist"; sourceTree = "<group>"; };
 		95B87A18FADBB01ED13D95D7605BB474 /* Pods-LXSwiftFoundationModule-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LXSwiftFoundationModule-acknowledgements.plist"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9E093E81AA39BD512D225DADBDD07811 /* Pods-LXSwiftFoundationModule-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-LXSwiftFoundationModule-dummy.m"; sourceTree = "<group>"; };
+		A4D5A9C54148E7154E587B42BD9E4F04 /* LXFitManager-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "LXFitManager-Info.plist"; sourceTree = "<group>"; };
+		A64C08C4BA5EC19BAD61DCC7ECCBF345 /* LXFit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXFit.swift; path = LXFitManager/LXFit.swift; sourceTree = "<group>"; };
 		AB520CD132149910E44FA2B2654DBA13 /* Pods_LXSwiftFoundationModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_LXSwiftFoundationModule.framework; path = "Pods-LXSwiftFoundationModule.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4FB9036AA758BD38BC1E3549CA62036 /* LXSwiftFoundation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LXSwiftFoundation.release.xcconfig; sourceTree = "<group>"; };
+		B77CCC7071C28AE2F96AC9C1F64BE2FA /* LXSwift+Double.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Double.swift"; path = "LXSwiftFoundation/LXSwift+Double.swift"; sourceTree = "<group>"; };
+		BAFDE9ACB3FA0CB877652AFC81CA6171 /* LXSwift+Font.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Font.swift"; path = "LXSwiftFoundation/LXSwift+Font.swift"; sourceTree = "<group>"; };
+		BEBAE263EBF97DF2717D2E9539DA97B3 /* LXSwiftTextView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftTextView.swift; path = LXSwiftFoundation/LXSwiftTextView.swift; sourceTree = "<group>"; };
+		C02F449524EB802845295AC0D8F82A4D /* LXSwiftConvenienceBundle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftConvenienceBundle.swift; path = LXSwiftFoundation/LXSwiftConvenienceBundle.swift; sourceTree = "<group>"; };
+		C26485D14C463DDD9779391020853483 /* LXSwiftGCDTimer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftGCDTimer.swift; path = LXSwiftFoundation/LXSwiftGCDTimer.swift; sourceTree = "<group>"; };
+		C2CDCC57838D19525707FEC1A127AEFB /* LXSwift+Dictionary.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Dictionary.swift"; path = "LXSwiftFoundation/LXSwift+Dictionary.swift"; sourceTree = "<group>"; };
+		C3701F325F140A94653A88E8CC348D25 /* LXFitManager.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = LXFitManager.modulemap; sourceTree = "<group>"; };
 		CC8D351C709683C611A900D82D108E2E /* Pods-LXSwiftFoundationModule-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-LXSwiftFoundationModule-umbrella.h"; sourceTree = "<group>"; };
-		CD69E61EEACC5FAE9B7B56B4D6F44CBF /* LXSwiftFoundation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LXSwiftFoundation.debug.xcconfig; sourceTree = "<group>"; };
-		D22F76DC60AB7B6138CC3572B0760D49 /* LXSwiftFoundation-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LXSwiftFoundation-prefix.pch"; sourceTree = "<group>"; };
-		D567E8A3EC35BB6B4416BE7CBEFDBA43 /* LXSwift+String.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+String.swift"; path = "LXSwiftFoundation/LXSwift+String.swift"; sourceTree = "<group>"; };
-		EA0D2B7969A7AFF5DD9A2597F8AF1ACD /* LXSwiftFoundation.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = LXSwiftFoundation.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		F1A05E1EE221018A42A7DD2E254C8EAA /* LXSwiftFoundation-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "LXSwiftFoundation-Info.plist"; sourceTree = "<group>"; };
+		CDCB65B3DDB68CB2801794AC6AD13094 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		CE4B189FD8BED4E389EA6C9C1119F4A3 /* LXSwift+DispatchQueue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+DispatchQueue.swift"; path = "LXSwiftFoundation/LXSwift+DispatchQueue.swift"; sourceTree = "<group>"; };
+		CEFB70E43CBE4A7D2F101143C9AFAA40 /* LXSwiftTool.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftTool.swift; path = LXSwiftFoundation/LXSwiftTool.swift; sourceTree = "<group>"; };
+		D321B0FA50185CBF8C57634E23894110 /* LXSwiftFoundation-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LXSwiftFoundation-prefix.pch"; sourceTree = "<group>"; };
+		D610245E27E94248F47AD941D5320A13 /* LXSwift+ScrollView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+ScrollView.swift"; path = "LXSwiftFoundation/LXSwift+ScrollView.swift"; sourceTree = "<group>"; };
+		E39D70035999BDD7D35FFDE798381E1C /* LXCompatible.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXCompatible.swift; path = LXSwiftFoundation/LXCompatible.swift; sourceTree = "<group>"; };
+		EC83656B81C0997B50F850432904C187 /* LXSwiftRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftRouter.swift; path = LXSwiftFoundation/LXSwiftRouter.swift; sourceTree = "<group>"; };
+		EFC5715C6C38D37E66DC89BA6FCC2574 /* LXSwiftWebViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftWebViewController.swift; path = LXSwiftFoundation/LXSwiftWebViewController.swift; sourceTree = "<group>"; };
+		F487C3C1DFA1E1B74F259D56304234C5 /* LXSwiftFoundation-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LXSwiftFoundation-dummy.m"; sourceTree = "<group>"; };
+		F4A987A6133CF8DC118F3F55754600A3 /* LXFitManager-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LXFitManager-prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		2FCCD7138A89C266C2D9FB7E25409BDC /* Frameworks */ = {
+		ACDCB173581A7FF2B97DE796CE56ED49 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0BD0B62FF6BE13B7E6184F33AA096984 /* Foundation.framework in Frameworks */,
+				53F3E390F35CF8D7CCD87F99E8CF3FDF /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EF3B89D1B073151C315E433067AEBCEA /* Frameworks */ = {
+		CF47E6DDC2D21E0130B608A56794F562 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B9330DE33211563FA07EAAA02A0B420D /* Foundation.framework in Frameworks */,
+				5988D41036CEB8F36682CBDBFE062264 /* Foundation.framework in Frameworks */,
+				3910B3E2365CAFEC299FCAF6954952B7 /* LXFitManager.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F33DDB25B1A5CA2A30C6F9996001D505 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02B3C9859DBD03A42961DEDBD46D6D56 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,40 +185,140 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		1A8FEED26135D01B4C38FC3459FDB523 /* Support Files */ = {
+		0F76CE583899BBA7985B97DDB194FA3F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				422EBB4CD48D708D1044FF2F69B5608F /* LXSwiftFoundation.modulemap */,
-				07658C1C11EC7805254CAE7A64391A6B /* LXSwiftFoundation-dummy.m */,
-				F1A05E1EE221018A42A7DD2E254C8EAA /* LXSwiftFoundation-Info.plist */,
-				D22F76DC60AB7B6138CC3572B0760D49 /* LXSwiftFoundation-prefix.pch */,
-				014381204BD9674F9A74B9059C35751F /* LXSwiftFoundation-umbrella.h */,
-				CD69E61EEACC5FAE9B7B56B4D6F44CBF /* LXSwiftFoundation.debug.xcconfig */,
-				23597D70CAC0861B0E291037042EB2AD /* LXSwiftFoundation.release.xcconfig */,
+				1F49BE8C377F68AC74F8ECC9D8384A85 /* LXFitManager */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		1F49BE8C377F68AC74F8ECC9D8384A85 /* LXFitManager */ = {
+			isa = PBXGroup;
+			children = (
+				A64C08C4BA5EC19BAD61DCC7ECCBF345 /* LXFit.swift */,
+				2C092B1CFA547B65B0AD9BAF46FAA01D /* Support Files */,
+			);
+			name = LXFitManager;
+			path = LXFitManager;
+			sourceTree = "<group>";
+		};
+		2C092B1CFA547B65B0AD9BAF46FAA01D /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				C3701F325F140A94653A88E8CC348D25 /* LXFitManager.modulemap */,
+				78D71F0A043311BA8E159F6CBD00F5FD /* LXFitManager-dummy.m */,
+				A4D5A9C54148E7154E587B42BD9E4F04 /* LXFitManager-Info.plist */,
+				F4A987A6133CF8DC118F3F55754600A3 /* LXFitManager-prefix.pch */,
+				05FD14158262C9770469178DB5ADACE5 /* LXFitManager-umbrella.h */,
+				21F4D39098C1452CE1C8E979B1AD9E7D /* LXFitManager.debug.xcconfig */,
+				554BD54E9D0D1EEB3B1D023FC8DD939D /* LXFitManager.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/LXFitManager";
+			sourceTree = "<group>";
+		};
+		3835EB91D80FEC3B189D964BA087C0C8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				210710B83846B0CA28FD57365AC8809C /* LXFitManager.framework */,
+				75039B10CF01DA53521ED8C7F0DA4EF2 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		41BFEC26756E43FCAC98FECABCDE9DDD /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				14115143B473E6662478E072806D6FEC /* LXSwiftFoundation.modulemap */,
+				F487C3C1DFA1E1B74F259D56304234C5 /* LXSwiftFoundation-dummy.m */,
+				94BB5187802F41280BBD7C5E4056C873 /* LXSwiftFoundation-Info.plist */,
+				D321B0FA50185CBF8C57634E23894110 /* LXSwiftFoundation-prefix.pch */,
+				92D76B45C3E2B0592D27B9E09047337F /* LXSwiftFoundation-umbrella.h */,
+				1DAB7583C51D5788F458687C1A9562DB /* LXSwiftFoundation.debug.xcconfig */,
+				B4FB9036AA758BD38BC1E3549CA62036 /* LXSwiftFoundation.release.xcconfig */,
 			);
 			name = "Support Files";
 			path = "Pods/Target Support Files/LXSwiftFoundation";
 			sourceTree = "<group>";
 		};
-		8C431DEF0F989A78DFF361DEED5D3572 /* LXSwiftFoundation */ = {
+		53DC091ABF66FA49CC24B3F5623E2B65 /* LXSwiftFoundation */ = {
 			isa = PBXGroup;
 			children = (
-				6D335A86CDA75F7F138216E438488FED /* LXCompatible.swift */,
-				D567E8A3EC35BB6B4416BE7CBEFDBA43 /* LXSwift+String.swift */,
-				3B56CABBF6F4529BE973D886E61824C3 /* LXSwiftBasics.swift */,
-				E589B4EEAA61029AE5A55727A49A0EF8 /* Pod */,
-				1A8FEED26135D01B4C38FC3459FDB523 /* Support Files */,
+				E39D70035999BDD7D35FFDE798381E1C /* LXCompatible.swift */,
+				6F17E24056FE2886B0593AF0C47A36D3 /* LXSwftApp.swift */,
+				23072063EE6752C5F367FC96FD519B45 /* LXSwift+Bundle.swift */,
+				517F5FA279A338B9FA75EC0E8D999070 /* LXSwift+Button.swift */,
+				075E2256CB5F5A782E874EB629FF0F7D /* LXSwift+Control.swift */,
+				3C7F3B567212760DE3F4415B84AD7DE5 /* LXSwift+Data.swift */,
+				912B9C5DC55C9C32E793A4836FBB1F54 /* LXSwift+Date.swift */,
+				71620E6198F6B631AC074BF125A3A14E /* LXSwift+Device.swift */,
+				C2CDCC57838D19525707FEC1A127AEFB /* LXSwift+Dictionary.swift */,
+				CE4B189FD8BED4E389EA6C9C1119F4A3 /* LXSwift+DispatchQueue.swift */,
+				B77CCC7071C28AE2F96AC9C1F64BE2FA /* LXSwift+Double.swift */,
+				305C92BDFA117058C18E1D3A2D29FAA2 /* LXSwift+FileManager.swift */,
+				BAFDE9ACB3FA0CB877652AFC81CA6171 /* LXSwift+Font.swift */,
+				455ECFF51CACFC0B5EBDBE7DA16BBB56 /* LXSwift+Image.swift */,
+				3AB951357C8DAB328CB6323C06D3C91A /* LXSwift+Label.swift */,
+				D610245E27E94248F47AD941D5320A13 /* LXSwift+ScrollView.swift */,
+				8590851F156C06209A9E158DEF5DEA4E /* LXSwift+String.swift */,
+				6E84602E0D84C1795B53E6AFFA3A84F2 /* LXSwift+View.swift */,
+				8DA5A03F2EF9FFE3363C409D133264FC /* LXSwift+ViewController.swift */,
+				1B31132E8FA2E93C6EA4866A6744AA8C /* LXSwiftBasics.swift */,
+				69734883152671A7657CB117D7AA5BE3 /* LXSwiftCollectionView.swift */,
+				C02F449524EB802845295AC0D8F82A4D /* LXSwiftConvenienceBundle.swift */,
+				C26485D14C463DDD9779391020853483 /* LXSwiftGCDTimer.swift */,
+				64A759518A3AC974531D2B82EB50CAD1 /* LXSwiftModalController.swift */,
+				179392A377CCFC6298FFE0F3778F2880 /* LXSwiftPrivacyManager.swift */,
+				EC83656B81C0997B50F850432904C187 /* LXSwiftRouter.swift */,
+				4B4A485D8E007A69173F4547FA83DE26 /* LXSwiftScrollView.swift */,
+				86475FEFBC24674146F6A9CE6A331FB5 /* LXSwiftTableView.swift */,
+				BEBAE263EBF97DF2717D2E9539DA97B3 /* LXSwiftTextView.swift */,
+				CEFB70E43CBE4A7D2F101143C9AFAA40 /* LXSwiftTool.swift */,
+				291BBF2C55403EC44C481B45540D42AB /* LXSwiftView.swift */,
+				8C4B10328CFE179EEDED818B23CA7ADA /* LXSwiftViewController.swift */,
+				EFC5715C6C38D37E66DC89BA6FCC2574 /* LXSwiftWebViewController.swift */,
+				59390753E1ADB4E613C5172A38C0ED8D /* LXSwiftWordRegex.swift */,
+				6F01429849725F0BF5504BCB3CDAA7E0 /* LXSwiftWordTextLable.swift */,
+				7AAFD27AF93BD4530A3E56A6BD67689A /* Pod */,
+				41BFEC26756E43FCAC98FECABCDE9DDD /* Support Files */,
 			);
 			name = LXSwiftFoundation;
 			path = ..;
 			sourceTree = "<group>";
 		};
-		A19FD66E19852C8FC4E977B39F96EC56 /* Development Pods */ = {
+		75039B10CF01DA53521ED8C7F0DA4EF2 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				8C431DEF0F989A78DFF361DEED5D3572 /* LXSwiftFoundation */,
+				CDCB65B3DDB68CB2801794AC6AD13094 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		7AAFD27AF93BD4530A3E56A6BD67689A /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				62C6F9E5D7ABE22272EABD527E977EC7 /* LXSwiftFoundation.podspec */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		95C6C9D8AAA125CA67B23F7FB03304FE /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				53DC091ABF66FA49CC24B3F5623E2B65 /* LXSwiftFoundation */,
 			);
 			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		990E95A867AC01105F96CA7D3A8D3961 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3888DD53BBE7B7DFC0D5D8540E57BE76 /* LXFitManager.framework */,
+				91A4F3DDA382BE2E8A7F55E69898FCF0 /* LXSwiftFoundation.framework */,
+				AB520CD132149910E44FA2B2654DBA13 /* Pods_LXSwiftFoundationModule.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		B83A515E260A098A27A54DBB7AE886BF /* Pods-LXSwiftFoundationModule */ = {
@@ -136,85 +338,80 @@
 			path = "Target Support Files/Pods-LXSwiftFoundationModule";
 			sourceTree = "<group>";
 		};
-		C0834CEBB1379A84116EF29F93051C60 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				A19FD66E19852C8FC4E977B39F96EC56 /* Development Pods */,
-				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				FC96FEBF45D94AFEA0DD736B58197306 /* Products */,
+				95C6C9D8AAA125CA67B23F7FB03304FE /* Development Pods */,
+				3835EB91D80FEC3B189D964BA087C0C8 /* Frameworks */,
+				0F76CE583899BBA7985B97DDB194FA3F /* Pods */,
+				990E95A867AC01105F96CA7D3A8D3961 /* Products */,
 				054E0774F8CED695C3B274BD2A45FB41 /* Targets Support Files */,
 			);
-			sourceTree = "<group>";
-		};
-		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				C0834CEBB1379A84116EF29F93051C60 /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		E589B4EEAA61029AE5A55727A49A0EF8 /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				EA0D2B7969A7AFF5DD9A2597F8AF1ACD /* LXSwiftFoundation.podspec */,
-			);
-			name = Pod;
-			sourceTree = "<group>";
-		};
-		FC96FEBF45D94AFEA0DD736B58197306 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				91A4F3DDA382BE2E8A7F55E69898FCF0 /* LXSwiftFoundation.framework */,
-				AB520CD132149910E44FA2B2654DBA13 /* Pods_LXSwiftFoundationModule.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		71756A73F5BA87CDB2602F23D7700E50 /* Headers */ = {
+		2C54F21FBB067638F2CD44B1DB27DF29 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AE77B1806B489CDCDCCD56BA523F1F7 /* LXSwiftFoundation-umbrella.h in Headers */,
+				7A04CDF981D068D83B1B34A7728A7468 /* LXFitManager-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DA3D77EA5C535AFDA9E5E6D47C9267E3 /* Headers */ = {
+		8F82ECD3115EDFAFE1997713F9DD3D51 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52B2451E306844BFDB4F4A66B2C65E94 /* Pods-LXSwiftFoundationModule-umbrella.h in Headers */,
+				58976DFCF01FF104336E43A083FAC4D6 /* LXSwiftFoundation-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F01EE7BF682D8B295E51B22E2453FAB2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F82DA5AB49CAA86C063149A0A1A4B8BA /* Pods-LXSwiftFoundationModule-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		9974FD8A5CE45E42ED1084F2140697BC /* Pods-LXSwiftFoundationModule */ = {
+		8ED050C8B9768109B203E0B9CBBCAEC1 /* LXFitManager */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B20564E3B8D8D62D600B80B1B26D81DF /* Build configuration list for PBXNativeTarget "Pods-LXSwiftFoundationModule" */;
+			buildConfigurationList = D7C608FA4F1008FEDFB3817895DC353F /* Build configuration list for PBXNativeTarget "LXFitManager" */;
 			buildPhases = (
-				DA3D77EA5C535AFDA9E5E6D47C9267E3 /* Headers */,
-				4D80BEEC2FA656FBBC1101EB2DE522DF /* Sources */,
-				2FCCD7138A89C266C2D9FB7E25409BDC /* Frameworks */,
-				DCF430BF30455DA22A5147CA2300A2A7 /* Resources */,
+				2C54F21FBB067638F2CD44B1DB27DF29 /* Headers */,
+				E40D88CB64F52E8A0A969D7A65F8EC48 /* Sources */,
+				ACDCB173581A7FF2B97DE796CE56ED49 /* Frameworks */,
+				05C3FDD118C4BDA453242FCF75C10954 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				13D5D09629CD3170C2954FF0486053B8 /* PBXTargetDependency */,
+			);
+			name = LXFitManager;
+			productName = LXFitManager;
+			productReference = 3888DD53BBE7B7DFC0D5D8540E57BE76 /* LXFitManager.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		9974FD8A5CE45E42ED1084F2140697BC /* Pods-LXSwiftFoundationModule */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E1023CD03F2CECB1AD5F989D39526978 /* Build configuration list for PBXNativeTarget "Pods-LXSwiftFoundationModule" */;
+			buildPhases = (
+				F01EE7BF682D8B295E51B22E2453FAB2 /* Headers */,
+				DE8ABBA516BBC39C7BCE30FEADD2EF41 /* Sources */,
+				F33DDB25B1A5CA2A30C6F9996001D505 /* Frameworks */,
+				0D3D062FF37DC564A5A9F24B1754EF5E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				38CA66DD5C359240C3CCA4ECF76553C4 /* PBXTargetDependency */,
+				68A735B952EE06E0BDD55CA42042D6FB /* PBXTargetDependency */,
 			);
 			name = "Pods-LXSwiftFoundationModule";
 			productName = "Pods-LXSwiftFoundationModule";
@@ -223,16 +420,17 @@
 		};
 		FCE36F87F66E141B068D3EF29E6130E1 /* LXSwiftFoundation */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9A20C26C6E173C06080379FAB8D44C1D /* Build configuration list for PBXNativeTarget "LXSwiftFoundation" */;
+			buildConfigurationList = 96DABE3F71A8491A522F9068383AD0F4 /* Build configuration list for PBXNativeTarget "LXSwiftFoundation" */;
 			buildPhases = (
-				71756A73F5BA87CDB2602F23D7700E50 /* Headers */,
-				82CE39B2559C423EDE5CFB3D4DF0EB60 /* Sources */,
-				EF3B89D1B073151C315E433067AEBCEA /* Frameworks */,
-				BAD713C816DCCCFE2451342EF0C5B988 /* Resources */,
+				8F82ECD3115EDFAFE1997713F9DD3D51 /* Headers */,
+				162D2F83D4829CEB6C037CCBB3DABB74 /* Sources */,
+				CF47E6DDC2D21E0130B608A56794F562 /* Frameworks */,
+				1914B35E5FA9523EB7D64664C7B38116 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				62DC0DCB94B9B8369D7A22C0EBCA3177 /* PBXTargetDependency */,
 			);
 			name = LXSwiftFoundation;
 			productName = LXSwiftFoundation;
@@ -249,7 +447,7 @@
 				LastUpgradeCheck = 1100;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -257,10 +455,11 @@
 				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = FC96FEBF45D94AFEA0DD736B58197306 /* Products */;
+			productRefGroup = 990E95A867AC01105F96CA7D3A8D3961 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				8ED050C8B9768109B203E0B9CBBCAEC1 /* LXFitManager */,
 				FCE36F87F66E141B068D3EF29E6130E1 /* LXSwiftFoundation */,
 				9974FD8A5CE45E42ED1084F2140697BC /* Pods-LXSwiftFoundationModule */,
 			);
@@ -268,14 +467,21 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		BAD713C816DCCCFE2451342EF0C5B988 /* Resources */ = {
+		05C3FDD118C4BDA453242FCF75C10954 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DCF430BF30455DA22A5147CA2300A2A7 /* Resources */ = {
+		0D3D062FF37DC564A5A9F24B1754EF5E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1914B35E5FA9523EB7D64664C7B38116 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -285,40 +491,93 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		4D80BEEC2FA656FBBC1101EB2DE522DF /* Sources */ = {
+		162D2F83D4829CEB6C037CCBB3DABB74 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D21EA675009B2D0DFDE81450AFD35DF3 /* Pods-LXSwiftFoundationModule-dummy.m in Sources */,
+				A5A1E849E7BFD3C2CA39D3938760DD79 /* LXCompatible.swift in Sources */,
+				6734DF223A9F8240CD5D607F7BE046E3 /* LXSwftApp.swift in Sources */,
+				657ABD90D7D695C31519399FC5ABD2CE /* LXSwift+Bundle.swift in Sources */,
+				E2421F1B81C8DCF0D698761185E352C1 /* LXSwift+Button.swift in Sources */,
+				C1596EA50730D99976BB1CB5B5484C87 /* LXSwift+Control.swift in Sources */,
+				16140C6C04C563126113789F8C5D0F32 /* LXSwift+Data.swift in Sources */,
+				F615ED0F36BB1E24F8D4A2BA73185797 /* LXSwift+Date.swift in Sources */,
+				8F9B9360C4F90D81689B96FF603BEB3A /* LXSwift+Device.swift in Sources */,
+				C628522D02F656EC6F6CC8DB47429590 /* LXSwift+Dictionary.swift in Sources */,
+				1CC5982CEBB83C023170F21AAE138E6E /* LXSwift+DispatchQueue.swift in Sources */,
+				6A9E90B193871FBE0EA114546B442FA4 /* LXSwift+Double.swift in Sources */,
+				642EF1012E8077F4074A7C3091531AB0 /* LXSwift+FileManager.swift in Sources */,
+				18C88C147C20A8236895300CAD3623ED /* LXSwift+Font.swift in Sources */,
+				84E0756369A4DEF73EBAC5DFB704E920 /* LXSwift+Image.swift in Sources */,
+				F3C76A8809A24CFD7862F1B44048A598 /* LXSwift+Label.swift in Sources */,
+				FB75050D761812395AF6079B3F233B7F /* LXSwift+ScrollView.swift in Sources */,
+				FACAC30763283779F0E45246F68693E9 /* LXSwift+String.swift in Sources */,
+				511E1DC670F0659F8DD135D321B36087 /* LXSwift+View.swift in Sources */,
+				066841AA36022AE62774E04C6DF65403 /* LXSwift+ViewController.swift in Sources */,
+				6CD51402824EC82372B4ECD9BA3707C8 /* LXSwiftBasics.swift in Sources */,
+				382955A53AC964FDF85F042B730B8780 /* LXSwiftCollectionView.swift in Sources */,
+				B9DF500D2E3695489550A79E616A0F99 /* LXSwiftConvenienceBundle.swift in Sources */,
+				9A9660A81048A19AAA4966A09B024F12 /* LXSwiftFoundation-dummy.m in Sources */,
+				EE22C505D7AD5A6BF90DB2E4D02B4BE3 /* LXSwiftGCDTimer.swift in Sources */,
+				85B293C8863E506A640254F3F6009304 /* LXSwiftModalController.swift in Sources */,
+				6514C7FA85B847E6250D6BCB658737C8 /* LXSwiftPrivacyManager.swift in Sources */,
+				0DBD887E3741A672E6BB1964091EA3B2 /* LXSwiftRouter.swift in Sources */,
+				85F0556270E9BB5952373B6C84A31383 /* LXSwiftScrollView.swift in Sources */,
+				3B481946615989E5891C4D9CE4078663 /* LXSwiftTableView.swift in Sources */,
+				C3BD5C711E9958CB0D2F51DF47CF0593 /* LXSwiftTextView.swift in Sources */,
+				394E8C7896C2F4155F22BBF431F8FFCA /* LXSwiftTool.swift in Sources */,
+				81E412CA80962E29537A176D3D3285C9 /* LXSwiftView.swift in Sources */,
+				418995E9B1619CEF088D6BD8FBF10296 /* LXSwiftViewController.swift in Sources */,
+				3FE294980AC6738E7B89861E2E30C24B /* LXSwiftWebViewController.swift in Sources */,
+				3314EF489ED47EF7695A3EA18A5C6ABA /* LXSwiftWordRegex.swift in Sources */,
+				503E0D9395CDED204FE2CD03D8956C3B /* LXSwiftWordTextLable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		82CE39B2559C423EDE5CFB3D4DF0EB60 /* Sources */ = {
+		DE8ABBA516BBC39C7BCE30FEADD2EF41 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E96D3A2C8F5227F6E15E23737D887C1F /* LXCompatible.swift in Sources */,
-				4E13B6E43113A52C3C7D6C9D51F61B4C /* LXSwift+String.swift in Sources */,
-				DF3BCEDD6F9E93B80C332347B3B1E2AA /* LXSwiftBasics.swift in Sources */,
-				ED85C6BF72E76F4BB5122308CE65B482 /* LXSwiftFoundation-dummy.m in Sources */,
+				37A215676B7AFDE7F5468B097D3B188C /* Pods-LXSwiftFoundationModule-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E40D88CB64F52E8A0A969D7A65F8EC48 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A84A502929E973FA2B3BFC561520DDDB /* LXFit.swift in Sources */,
+				A093DCCE4A412A20834EEAFD56FF24B3 /* LXFitManager-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		13D5D09629CD3170C2954FF0486053B8 /* PBXTargetDependency */ = {
+		38CA66DD5C359240C3CCA4ECF76553C4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LXFitManager;
+			target = 8ED050C8B9768109B203E0B9CBBCAEC1 /* LXFitManager */;
+			targetProxy = EE6198D907F22219659AA743000C7E6A /* PBXContainerItemProxy */;
+		};
+		62DC0DCB94B9B8369D7A22C0EBCA3177 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LXFitManager;
+			target = 8ED050C8B9768109B203E0B9CBBCAEC1 /* LXFitManager */;
+			targetProxy = 077070A2DFB548D294A75B2DEE6826FF /* PBXContainerItemProxy */;
+		};
+		68A735B952EE06E0BDD55CA42042D6FB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = LXSwiftFoundation;
 			target = FCE36F87F66E141B068D3EF29E6130E1 /* LXSwiftFoundation */;
-			targetProxy = E1E22C35CA8E80CA63DD832C094C3997 /* PBXContainerItemProxy */;
+			targetProxy = DA3E05D9040551D7F3DDA34E325370AC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		5071ED137DD633762BA30A09CBD96890 /* Debug */ = {
+		6735A38265BA7FB321183745B02E5EE2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CD69E61EEACC5FAE9B7B56B4D6F44CBF /* LXSwiftFoundation.debug.xcconfig */;
+			baseConfigurationReference = B4FB9036AA758BD38BC1E3549CA62036 /* LXSwiftFoundation.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -332,7 +591,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/LXSwiftFoundation/LXSwiftFoundation-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/LXSwiftFoundation/LXSwiftFoundation-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -346,10 +605,11 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 		6C61D818ACD3C2C116FED6A9C67E91B4 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -475,9 +735,80 @@
 			};
 			name = Release;
 		};
-		9D8A7506318E6E6F5AEEF41B9CD39EF0 /* Release */ = {
+		91E20801A9F266959AC9309911BEC745 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 23597D70CAC0861B0E291037042EB2AD /* LXSwiftFoundation.release.xcconfig */;
+			baseConfigurationReference = 21F4D39098C1452CE1C8E979B1AD9E7D /* LXFitManager.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/LXFitManager/LXFitManager-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/LXFitManager/LXFitManager-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/LXFitManager/LXFitManager.modulemap";
+				PRODUCT_MODULE_NAME = LXFitManager;
+				PRODUCT_NAME = LXFitManager;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		9A9C48F9F29226D0A62D7C85A928B3ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 554BD54E9D0D1EEB3B1D023FC8DD939D /* LXFitManager.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/LXFitManager/LXFitManager-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/LXFitManager/LXFitManager-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/LXFitManager/LXFitManager.modulemap";
+				PRODUCT_MODULE_NAME = LXFitManager;
+				PRODUCT_NAME = LXFitManager;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		9E750748D41CA45A9D7D4A730BEFDEB2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1DAB7583C51D5788F458687C1A9562DB /* LXSwiftFoundation.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -491,7 +822,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/LXSwiftFoundation/LXSwiftFoundation-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/LXSwiftFoundation/LXSwiftFoundation-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -505,51 +836,12 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		B5716F32C7C5A7AC0691D1017D9CA970 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8CD7ECCC3DAC82DD0213A08F6748B8FE /* Pods-LXSwiftFoundationModule.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-LXSwiftFoundationModule/Pods-LXSwiftFoundationModule-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-LXSwiftFoundationModule/Pods-LXSwiftFoundationModule.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		F1E29235D26600E426F8795EAB97B69D /* Release */ = {
+		E28D46D15815AC58C4C4C8D1398B3033 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3507C175AA59B9EDEC77084089B77AB7 /* Pods-LXSwiftFoundationModule.release.xcconfig */;
 			buildSettings = {
@@ -588,6 +880,44 @@
 			};
 			name = Release;
 		};
+		F914703E3412C07D92480E216AEEC353 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8CD7ECCC3DAC82DD0213A08F6748B8FE /* Pods-LXSwiftFoundationModule.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-LXSwiftFoundationModule/Pods-LXSwiftFoundationModule-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-LXSwiftFoundationModule/Pods-LXSwiftFoundationModule.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -600,20 +930,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9A20C26C6E173C06080379FAB8D44C1D /* Build configuration list for PBXNativeTarget "LXSwiftFoundation" */ = {
+		96DABE3F71A8491A522F9068383AD0F4 /* Build configuration list for PBXNativeTarget "LXSwiftFoundation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5071ED137DD633762BA30A09CBD96890 /* Debug */,
-				9D8A7506318E6E6F5AEEF41B9CD39EF0 /* Release */,
+				9E750748D41CA45A9D7D4A730BEFDEB2 /* Debug */,
+				6735A38265BA7FB321183745B02E5EE2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B20564E3B8D8D62D600B80B1B26D81DF /* Build configuration list for PBXNativeTarget "Pods-LXSwiftFoundationModule" */ = {
+		D7C608FA4F1008FEDFB3817895DC353F /* Build configuration list for PBXNativeTarget "LXFitManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B5716F32C7C5A7AC0691D1017D9CA970 /* Debug */,
-				F1E29235D26600E426F8795EAB97B69D /* Release */,
+				91E20801A9F266959AC9309911BEC745 /* Debug */,
+				9A9C48F9F29226D0A62D7C85A928B3ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E1023CD03F2CECB1AD5F989D39526978 /* Build configuration list for PBXNativeTarget "Pods-LXSwiftFoundationModule" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F914703E3412C07D92480E216AEEC353 /* Debug */,
+				E28D46D15815AC58C4C4C8D1398B3033 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -9,7 +9,7 @@
     "lixiang": "1367015013@qq.com"
   },
   "platforms": {
-    "ios": "9.0"
+    "ios": "9.2"
   },
   "swift_versions": "5.0",
   "source": {
@@ -17,5 +17,10 @@
     "tag": "1.0.0"
   },
   "source_files": "LXSwiftFoundation/*.swift",
+  "dependencies": {
+    "LXFitManager": [
+
+    ]
+  },
   "swift_version": "5.0"
 }

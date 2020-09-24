@@ -47,15 +47,26 @@ extension LXSwiftBasics where Base == LXSwiftTool {
     }
     
     /// call tel
-       public static func openTel(with number: String?) {
-           guard let number = number,
-               let url = URL(string: "tel:" + number) else{ return }
-           if UIApplication.shared.canOpenURL(url) {
-               if #available(iOS 10.0, *) {
-                   UIApplication.shared.open(url, options: [:], completionHandler: nil)
-               } else {
-                   UIApplication.shared.openURL(url)
-               }
+    public static func openTel(with number: String?) {
+       guard let number = number,
+           let url = URL(string: "tel:" + number) else{ return }
+       if UIApplication.shared.canOpenURL(url) {
+           if #available(iOS 10.0, *) {
+               UIApplication.shared.open(url, options: [:], completionHandler: nil)
+           } else {
+               UIApplication.shared.openURL(url)
            }
-       }
+        }
+     }
+   
+    
+    ///  Generating a random number of an interval
+    static func randomIntNumber(lower: Int = 0,upper: Int = Int(UInt32.max)) -> Int {
+        return lower + Int(arc4random_uniform(UInt32(upper - lower)))
+    }
+    
+    ///  Generating a random number of an interval
+    static func randomIntNumber(range: Range<Int>) -> Int {
+        return randomIntNumber(lower: range.lowerBound, upper: range.upperBound)
+    }
 }

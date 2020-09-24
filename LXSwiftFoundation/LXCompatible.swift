@@ -27,5 +27,4 @@ public extension LXCompatible {
         get { LXSwiftBasics<Self>(self)}
     }
     
-    
 }

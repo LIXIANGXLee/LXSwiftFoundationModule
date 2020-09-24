@@ -27,17 +27,11 @@ class ViewController: UIViewController {
         print("===\(Bundle.lx.bundleVersion ?? "")")
 
         
-        let imageData = UIImage(named: "guide-open")?.pngData() as? NSData
-    
-        
-        
-        print("==-=-=-=-=-=\(Date().lx.dateTranformString())")
-        
-        print("==-=-=-=-=-=\(Date().lx.dateTranformString().lx.stringTranformDate())")
-
+       
         
         
     }
+ 
 
 
 }

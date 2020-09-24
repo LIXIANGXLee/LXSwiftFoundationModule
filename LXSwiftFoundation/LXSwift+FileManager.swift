@@ -10,8 +10,8 @@ import UIKit
 
 extension FileManager: LXCompatible { }
 
-//MARK: -  Extending methods for Date
-extension LXSwiftBasics where Base == Dictionary<String, Any> {
+//MARK: -  Extending properties for Date
+extension LXSwiftBasics where Base: FileManager {
     
     /// Caches
     public static var cachesURL: URL? {
