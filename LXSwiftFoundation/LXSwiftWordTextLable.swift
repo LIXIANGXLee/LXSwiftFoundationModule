@@ -51,7 +51,7 @@ open class LXSwiftWordTextLable: UIView {
         textView.isEditable = false
         textView.isScrollEnabled = false
         textView.isUserInteractionEnabled = false
-        textView.textContainerInset = UIEdgeInsets(top: 0, left: LXFit.fitInt(5), bottom: 0, right: LXFit.fitInt(-5))
+        textView.textContainerInset = UIEdgeInsets(top: 0, left: LXFit.fitFloat(5), bottom: 0, right: LXFit.fitFloat(-5))
         textView.backgroundColor = UIColor.clear
         return textView
     }()

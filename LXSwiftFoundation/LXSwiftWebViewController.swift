@@ -216,8 +216,8 @@ extension LXSwiftWebViewController {
         //布局 约束
         spinner.centerXAnchor.constraint(equalTo: webView.centerXAnchor).isActive = true
         spinner.centerYAnchor.constraint(equalTo: webView.centerYAnchor).isActive = true
-        spinner.widthAnchor.constraint(equalToConstant: LXFit.fitInt(60)).isActive = true
-        spinner.heightAnchor.constraint(equalToConstant: LXFit.fitInt(60)).isActive = true
+        spinner.widthAnchor.constraint(equalToConstant: LXFit.fitFloat(60)).isActive = true
+        spinner.heightAnchor.constraint(equalToConstant: LXFit.fitFloat(60)).isActive = true
         
         
         //进度条
@@ -227,7 +227,7 @@ extension LXSwiftWebViewController {
         
         progressView.centerXAnchor.constraint(equalTo: webView.centerXAnchor).isActive = true
         progressView.widthAnchor.constraint(equalTo: webView.widthAnchor).isActive = true
-        progressView.heightAnchor.constraint(equalToConstant: LXFit.fitInt(2)).isActive = true
+        progressView.heightAnchor.constraint(equalToConstant: LXFit.fitFloat(2)).isActive = true
         
     }
     

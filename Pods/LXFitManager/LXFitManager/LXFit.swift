@@ -28,7 +28,7 @@ extension UIFont {
 
 // MARK: - 屏幕尺寸 扩展的分类
 extension LXFit {
-    public static func fitInt(_ value: Int) -> CGFloat { value|~| }
+    public static func fitInt(_ value: Int) -> Int { value|~| }
     public static func fitFloat(_ value: CGFloat) -> CGFloat { return value|~| }
     public static func fitDouble(_ value: CGFloat) -> Double { return Double(value|~|) }
     public static func fitFoint(_ value: CGPoint) -> CGPoint { value|~| }
@@ -65,8 +65,8 @@ public postfix func |~| (font: UIFont) -> UIFont {
     return font.withSize(font.pointSize|~|)
 }
 
-public postfix func |~| (value: Int) -> CGFloat {
-    return CGFloat(value)|~|
+public postfix func |~| (value: Int) -> Int {
+    return Int(CGFloat(value)|~|)
 }
 
 public postfix func |~| (value: Float) -> CGFloat {

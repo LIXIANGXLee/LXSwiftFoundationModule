@@ -1,5 +1,5 @@
 PODS:
-  - LXFitManager (1.1.0)
+  - LXFitManager (1.2.0)
   - LXSwiftFoundation (1.0.0):
     - LXFitManager
 
@@ -15,8 +15,8 @@ EXTERNAL SOURCES:
     :path: "./"
 
 SPEC CHECKSUMS:
-  LXFitManager: d76fa8e60a899fccf87c66fe33e19479e1d64906
-  LXSwiftFoundation: 743db91db61756d84be69ffd00dc6ddacedeb4eb
+  LXFitManager: d8f6fa68d6379552ec58e55eb2acfb1a663fc6fe
+  LXSwiftFoundation: 9d8dc05e657365ecb8e02f72aea8be42847a0b9e
 
 PODFILE CHECKSUM: e17d281e29e7c377c8363d1f1adfa138259cbab3
 

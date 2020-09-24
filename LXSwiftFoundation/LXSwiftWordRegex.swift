@@ -89,7 +89,7 @@ extension LXSwiftWordRegex {
                     
                     let attachment = NSTextAttachment()
                     attachment.image = UIImage(named: capturedStrings)
-                    attachment.bounds = CGRect(x: 0, y: LXFit.fitInt(-3), width: wordRegexType.font.fitFont.lineHeight, height: wordRegexType.font.fitFont.lineHeight)
+                    attachment.bounds = CGRect(x: 0, y: LXFit.fitFloat(-3), width: wordRegexType.font.fitFont.lineHeight, height: wordRegexType.font.fitFont.lineHeight)
                     let imageAttr = NSAttributedString(attachment: attachment)
                     attributedStr.replaceCharacters(in: range, with: imageAttr)
                     attributedStr.addAttribute(NSAttributedString.Key(rawValue: imageLinkConst), value: capturedStrings, range: range)

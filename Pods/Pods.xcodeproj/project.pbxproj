@@ -575,9 +575,45 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		6735A38265BA7FB321183745B02E5EE2 /* Release */ = {
+		05EC4039861CE4913C111D7610506C50 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B4FB9036AA758BD38BC1E3549CA62036 /* LXSwiftFoundation.release.xcconfig */;
+			baseConfigurationReference = 554BD54E9D0D1EEB3B1D023FC8DD939D /* LXFitManager.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/LXFitManager/LXFitManager-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/LXFitManager/LXFitManager-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/LXFitManager/LXFitManager.modulemap";
+				PRODUCT_MODULE_NAME = LXFitManager;
+				PRODUCT_NAME = LXFitManager;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		2D4DDDCE7E0B0FDF787CF46538CB69E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1DAB7583C51D5788F458687C1A9562DB /* LXSwiftFoundation.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -591,7 +627,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/LXSwiftFoundation/LXSwiftFoundation-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/LXSwiftFoundation/LXSwiftFoundation-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -605,11 +641,10 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 		6C61D818ACD3C2C116FED6A9C67E91B4 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -735,7 +770,7 @@
 			};
 			name = Release;
 		};
-		91E20801A9F266959AC9309911BEC745 /* Debug */ = {
+		A07C282BF690398AC9B7F96BE9ACEEB6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 21F4D39098C1452CE1C8E979B1AD9E7D /* LXFitManager.debug.xcconfig */;
 			buildSettings = {
@@ -751,7 +786,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/LXFitManager/LXFitManager-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/LXFitManager/LXFitManager-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -770,45 +805,9 @@
 			};
 			name = Debug;
 		};
-		9A9C48F9F29226D0A62D7C85A928B3ED /* Release */ = {
+		B5D476D3719A3E7B2A3AB2C64E9DF809 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 554BD54E9D0D1EEB3B1D023FC8DD939D /* LXFitManager.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/LXFitManager/LXFitManager-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/LXFitManager/LXFitManager-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/LXFitManager/LXFitManager.modulemap";
-				PRODUCT_MODULE_NAME = LXFitManager;
-				PRODUCT_NAME = LXFitManager;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		9E750748D41CA45A9D7D4A730BEFDEB2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1DAB7583C51D5788F458687C1A9562DB /* LXSwiftFoundation.debug.xcconfig */;
+			baseConfigurationReference = B4FB9036AA758BD38BC1E3549CA62036 /* LXSwiftFoundation.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -822,7 +821,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/LXSwiftFoundation/LXSwiftFoundation-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/LXSwiftFoundation/LXSwiftFoundation-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -836,10 +835,11 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 		E28D46D15815AC58C4C4C8D1398B3033 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -933,8 +933,8 @@
 		96DABE3F71A8491A522F9068383AD0F4 /* Build configuration list for PBXNativeTarget "LXSwiftFoundation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9E750748D41CA45A9D7D4A730BEFDEB2 /* Debug */,
-				6735A38265BA7FB321183745B02E5EE2 /* Release */,
+				2D4DDDCE7E0B0FDF787CF46538CB69E9 /* Debug */,
+				B5D476D3719A3E7B2A3AB2C64E9DF809 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -942,8 +942,8 @@
 		D7C608FA4F1008FEDFB3817895DC353F /* Build configuration list for PBXNativeTarget "LXFitManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				91E20801A9F266959AC9309911BEC745 /* Debug */,
-				9A9C48F9F29226D0A62D7C85A928B3ED /* Release */,
+				A07C282BF690398AC9B7F96BE9ACEEB6 /* Debug */,
+				05EC4039861CE4913C111D7610506C50 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
