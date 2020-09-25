@@ -15,7 +15,7 @@ public typealias LXSwiftCallInfoBack = (([String: Any?]?) -> Any?)
 public typealias LXSwiftCallBack = ((Any?) -> Void)
 
 public struct LXSwiftRouter {
-    
+
     /// 信号量
     private static let semaphore = DispatchSemaphore(value: 1)
 
