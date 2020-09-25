@@ -11,6 +11,9 @@ import UIKit
 open class LXSwiftTableView: UITableView ,LXSwiftUICompatible{
     public var swiftModel: Any?
 
+    /// 是否支持 多个事件传递
+    public var isSopportRecognizeSimultaneous = false
+    
     override public init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         
@@ -30,6 +33,17 @@ open class LXSwiftTableView: UITableView ,LXSwiftUICompatible{
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+
+//MARK: - UIGestureRecognizerDelegate
+extension LXSwiftTableView: UIGestureRecognizerDelegate {
+  
+    /// 多个事件传递 共存
+     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+         return isSopportRecognizeSimultaneous
+     }
+    
 }
 
 extension LXSwiftTableView: LXViewSetup {
