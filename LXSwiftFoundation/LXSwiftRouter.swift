@@ -1,6 +1,6 @@
 //
 //  LXRouter.swift
-//  LXFoundationManager
+//  LXSwiftFoundation
 //
 //  Created by XL on 2020/4/28.
 //  Copyright © 2020 李响. All rights reserved.

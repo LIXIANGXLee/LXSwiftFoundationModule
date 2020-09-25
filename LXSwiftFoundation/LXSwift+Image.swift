@@ -12,6 +12,43 @@ import AVFoundation
 /// String and NSString compliance
 extension UIImage: LXSwiftCompatible { }
 
+//MARK: -  Extending methods for UIImage dark
+extension LXSwiftBasics where Base: UIImage {
+    
+    ///  light or dark is changed
+    ///
+    /// - Parameters:
+    ///   - light: light image
+    ///   - dark:  dark image
+      public static func image(lightStr: String, darkStr: String) -> UIImage {
+       
+           let light = UIImage(named: lightStr)
+           let dark = UIImage(named: lightStr)
+
+       if light != nil && dark != nil {
+               return image(light: light!, dark: dark!)
+           }else {
+               return light ?? dark ?? UIImage()
+           }
+      }
+
+      ///  light or dark is changed
+      ///
+      /// - Parameters:
+      ///   - light: light image
+      ///   - dark:  dark image
+      public static func image(light: UIImage, dark: UIImage) -> UIImage {
+           if #available(iOS 13.0, *) {
+               guard let config = light.configuration else { return light }
+               let lightImage = light.withConfiguration(config.withTraitCollection(UITraitCollection.init(userInterfaceStyle: UIUserInterfaceStyle.light)))
+               lightImage.imageAsset?.register(dark, with: config.withTraitCollection(UITraitCollection.init(userInterfaceStyle: UIUserInterfaceStyle.dark)))
+               return lightImage.imageAsset?.image(with: UITraitCollection.current) ?? light
+           } else {
+               return light
+           }
+       }
+}
+
 //MARK: -  Extending methods and properties for UIImage
 extension LXSwiftBasics where Base: UIImage {
 

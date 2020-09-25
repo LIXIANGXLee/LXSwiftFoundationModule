@@ -1,6 +1,6 @@
 //
 //  LXSwift+Label.swift
-//  LXSwiftFoundationModule
+//  LXSwiftFoundation
 //
 //  Created by XL on 2020/9/24.
 //  Copyright © 2020 李响. All rights reserved.
@@ -10,7 +10,8 @@ import UIKit
 
 //MARK: -  Extending properties for UILabel
 extension LXSwiftBasics where Base: UILabel {
-   /// w
+   
+    /// w
     public var bestWidth: CGFloat {
         return base.sizeThatFits(CGSize.zero).width
     }

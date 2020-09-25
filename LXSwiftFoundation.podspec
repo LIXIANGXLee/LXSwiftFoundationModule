@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "LXSwiftFoundation"
-  spec.version      = "3.1.0"
+  spec.version      = "3.2.0"
   spec.summary      = "LXSwiftFoundation."
 
   
@@ -35,7 +35,7 @@ Pod::Spec.new do |spec|
 
     spec.source = { :git => "https://github.com/LIXIANGXLee/LXSwiftFoundationModule.git", :tag => "#{spec.version}" }
     
-    spec.source_files  = "LXSwiftFoundation/*.swift"
+    spec.source_files  = "LXSwiftFoundation/*.swift","LXSwiftFoundation/*.{h,m}"
     spec.dependency 'LXFitManager'
 
   end

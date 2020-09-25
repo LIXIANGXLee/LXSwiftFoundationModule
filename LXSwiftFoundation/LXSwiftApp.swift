@@ -1,6 +1,6 @@
 //
 //  LXSwftApp.swift
-//  LXFoundationManager
+//  LXSwiftFoundation
 //
 //  Created by Mac on 2020/4/22.
 //  Copyright © 2020 李响. All rights reserved.

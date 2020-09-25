@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04E627E0251E3A490033BBA5 /* LXSwift+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E627DF251E3A490033BBA5 /* LXSwift+Color.swift */; };
+		04E627E2251E48FE0033BBA5 /* LXSwift+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E627E1251E48FE0033BBA5 /* LXSwift+Int.swift */; };
+		04E627E4251E4A9F0033BBA5 /* LXSwiftUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E627E3251E4A9F0033BBA5 /* LXSwiftUtil.swift */; };
+		04E627F1251E4F210033BBA5 /* LXObjcSuport.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E627F0251E4F200033BBA5 /* LXObjcSuport.m */; };
 		7607A07F251B1C0B0071B9AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A07E251B1C0B0071B9AD /* AppDelegate.swift */; };
 		7607A081251B1C0B0071B9AD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A080251B1C0B0071B9AD /* SceneDelegate.swift */; };
 		7607A083251B1C0B0071B9AD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A082251B1C0B0071B9AD /* ViewController.swift */; };
@@ -56,6 +60,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04E627DF251E3A490033BBA5 /* LXSwift+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LXSwift+Color.swift"; sourceTree = "<group>"; };
+		04E627E1251E48FE0033BBA5 /* LXSwift+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LXSwift+Int.swift"; sourceTree = "<group>"; };
+		04E627E3251E4A9F0033BBA5 /* LXSwiftUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXSwiftUtil.swift; sourceTree = "<group>"; };
+		04E627EF251E4F200033BBA5 /* LXObjcSuport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXObjcSuport.h; sourceTree = "<group>"; };
+		04E627F0251E4F200033BBA5 /* LXObjcSuport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXObjcSuport.m; sourceTree = "<group>"; };
+		04E627F2251E55120033BBA5 /* LXSwiftFoundationModule-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LXSwiftFoundationModule-Bridging-Header.h"; sourceTree = "<group>"; };
 		6348DD709E89FD4FC09A35D6 /* Pods-LXSwiftFoundationModule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXSwiftFoundationModule.debug.xcconfig"; path = "Target Support Files/Pods-LXSwiftFoundationModule/Pods-LXSwiftFoundationModule.debug.xcconfig"; sourceTree = "<group>"; };
 		7607A07B251B1C0B0071B9AD /* LXSwiftFoundationModule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LXSwiftFoundationModule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7607A07E251B1C0B0071B9AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -160,6 +170,7 @@
 		7607A07D251B1C0B0071B9AD /* LXSwiftFoundationModule */ = {
 			isa = PBXGroup;
 			children = (
+				04E627F2251E55120033BBA5 /* LXSwiftFoundationModule-Bridging-Header.h */,
 				7607A07E251B1C0B0071B9AD /* AppDelegate.swift */,
 				7607A080251B1C0B0071B9AD /* SceneDelegate.swift */,
 				7607A082251B1C0B0071B9AD /* ViewController.swift */,
@@ -184,6 +195,8 @@
 				7607A09F251B61220071B9AD /* LXSwift+Bundle.swift */,
 				7607A0A1251C32CD0071B9AD /* LXSwift+Data.swift */,
 				7607A0A3251C3C9E0071B9AD /* LXSwift+Date.swift */,
+				04E627EF251E4F200033BBA5 /* LXObjcSuport.h */,
+				04E627F0251E4F200033BBA5 /* LXObjcSuport.m */,
 				7607A0A5251C47380071B9AD /* LXSwiftTool.swift */,
 				7607A0D9251C71720071B9AD /* LXSwiftCollectionView.swift */,
 				7607A0D7251C716A0071B9AD /* LXSwiftConvenienceBundle.swift */,
@@ -212,6 +225,9 @@
 				7607A0DF251C904C0071B9AD /* LXSwiftButton.swift */,
 				7607A0E1251C91CA0071B9AD /* LXSwiftLabel.swift */,
 				7607A0E3251C91F20071B9AD /* LXSwiftImgView.swift */,
+				04E627DF251E3A490033BBA5 /* LXSwift+Color.swift */,
+				04E627E1251E48FE0033BBA5 /* LXSwift+Int.swift */,
+				04E627E3251E4A9F0033BBA5 /* LXSwiftUtil.swift */,
 			);
 			path = LXSwiftFoundation;
 			sourceTree = "<group>";
@@ -250,6 +266,7 @@
 				TargetAttributes = {
 					7607A07A251B1C0B0071B9AD = {
 						CreatedOnToolsVersion = 11.4;
+						LastSwiftMigration = 1150;
 					};
 				};
 			};
@@ -337,8 +354,10 @@
 				7607A098251B26F30071B9AD /* LXCompatible.swift in Sources */,
 				7607A0CA251C70FA0071B9AD /* LXSwiftWebViewController.swift in Sources */,
 				7607A0BC251C63430071B9AD /* LXSwift+View.swift in Sources */,
+				04E627F1251E4F210033BBA5 /* LXObjcSuport.m in Sources */,
 				7607A096251B21040071B9AD /* LXSwiftBasics.swift in Sources */,
 				7607A0CD251C71050071B9AD /* LXSwiftWordRegex.swift in Sources */,
+				04E627E4251E4A9F0033BBA5 /* LXSwiftUtil.swift in Sources */,
 				7607A0B8251C61030071B9AD /* LXSwift+Button.swift in Sources */,
 				7607A0B6251C60650071B9AD /* LXSwift+Label.swift in Sources */,
 				7607A0BE251C66B00071B9AD /* LXSwift+ScrollView.swift in Sources */,
@@ -350,6 +369,7 @@
 				7607A0B4251C5AC20071B9AD /* LXSwift+Control.swift in Sources */,
 				7607A0D8251C716A0071B9AD /* LXSwiftConvenienceBundle.swift in Sources */,
 				7607A0D2251C71420071B9AD /* LXSwiftScrollView.swift in Sources */,
+				04E627E2251E48FE0033BBA5 /* LXSwift+Int.swift in Sources */,
 				7607A0A0251B61220071B9AD /* LXSwift+Bundle.swift in Sources */,
 				7607A0DE251C72620071B9AD /* LXSwiftViewController.swift in Sources */,
 				7607A083251B1C0B0071B9AD /* ViewController.swift in Sources */,
@@ -371,6 +391,7 @@
 				7607A0DA251C71720071B9AD /* LXSwiftCollectionView.swift in Sources */,
 				7607A0C2251C6CDB0071B9AD /* LXSwift+DispatchQueue.swift in Sources */,
 				7607A0C4251C70B30071B9AD /* LXSwiftTextView.swift in Sources */,
+				04E627E0251E3A490033BBA5 /* LXSwift+Color.swift in Sources */,
 				7607A0AE251C53D70071B9AD /* LXSwiftPrivacyManager.swift in Sources */,
 				7607A0A2251C32CD0071B9AD /* LXSwift+Data.swift in Sources */,
 			);
@@ -517,6 +538,7 @@
 			baseConfigurationReference = 6348DD709E89FD4FC09A35D6 /* Pods-LXSwiftFoundationModule.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = LXSwiftFoundationModule/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -525,6 +547,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = XLee.LXSwiftFoundationModule;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "LXSwiftFoundationModule/LXSwiftFoundationModule-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -535,6 +559,7 @@
 			baseConfigurationReference = 8DFBEB594E654C05D56544BE /* Pods-LXSwiftFoundationModule.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = LXSwiftFoundationModule/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -543,6 +568,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = XLee.LXSwiftFoundationModule;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "LXSwiftFoundationModule/LXSwiftFoundationModule-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

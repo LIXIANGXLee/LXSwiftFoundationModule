@@ -1,6 +1,6 @@
 {
   "name": "LXSwiftFoundation",
-  "version": "2.0.0",
+  "version": "3.2.0",
   "summary": "LXSwiftFoundation.",
   "description": "LXSwiftFoundation 为系统类或结构扩展",
   "homepage": "https://github.com/LIXIANGXLee/LXSwiftFoundationModule",
@@ -14,9 +14,12 @@
   "swift_versions": "5.0",
   "source": {
     "git": "https://github.com/LIXIANGXLee/LXSwiftFoundationModule.git",
-    "tag": "2.0.0"
+    "tag": "3.2.0"
   },
-  "source_files": "LXSwiftFoundation/*.swift",
+  "source_files": [
+    "LXSwiftFoundation/*.swift",
+    "LXSwiftFoundation/*.{h,m}"
+  ],
   "dependencies": {
     "LXFitManager": [
 

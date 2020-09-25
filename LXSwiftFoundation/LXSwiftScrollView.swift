@@ -1,6 +1,6 @@
 //
 //  LXScrollView.swift
-//  LXFitManager
+//  LXSwiftFoundation
 //
 //  Created by Mac on 2020/6/17.
 //

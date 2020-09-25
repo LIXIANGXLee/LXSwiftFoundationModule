@@ -1,6 +1,6 @@
 //
 //  LXModalController.swift
-//  LXFoundationManager
+//  LXSwiftFoundation
 //
 //  Created by Mac on 2020/4/28.
 //  Copyright © 2020 李响. All rights reserved.

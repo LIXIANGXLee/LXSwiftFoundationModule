@@ -30,6 +30,60 @@ extension LXSwiftBasics where Base: UIDevice {
              return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone
         }
     }
+    
+   /// 判断是否是模拟器
+    public var isSimulator: Bool {
+       return base.model.range(of: "Simulator") != nil
+    }
+   
+    /// 判断设备是否能够打电话
+    public static var canMakePhoneCalls: Bool {
+       return UIApplication.shared.canOpenURL(URL(string: "tel://")!)
+    }
+   
+    /// 获取系统启动时间
+    public static var systemUptime: Date {
+       let time = ProcessInfo.processInfo.systemUptime
+       return Date(timeIntervalSinceNow: 0 - time)
+    }
+    
+    //Disk Space
+    public static var diskSpace: Int64 {
+        guard let attrs = try? FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory()), let space = attrs[FileAttributeKey.systemSize] as? Int64 else {
+            return -1
+        }
+        return space
+    }
+    
+    /// 磁盘剩余可用空间
+    public static var diskSpaceFree: Int64 {
+        guard let attrs = try? FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory()), let space = attrs[FileAttributeKey.systemFreeSize] as? Int64 else {
+            return -1
+        }
+        return space
+    }
+
+    /// 磁盘使用空间
+    public static var diskSpaceUsed: Int64 {
+        let total   = diskSpace
+        let free    = diskSpaceFree
+        if total <= 0 || free <= 0 {
+            return -1
+        }
+        let used = total - free
+        if used <= 0 {
+            return -1
+        }else{
+            return used
+        }
+    }
+
+    
+    /// 获取内存总大小
+    var memoryTotal: UInt64 {
+        return ProcessInfo.processInfo.physicalMemory
+    }
+    
 }
 
 

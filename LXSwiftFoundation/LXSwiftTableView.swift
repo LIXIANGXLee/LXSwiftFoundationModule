@@ -1,6 +1,6 @@
 //
 //  LXTableView.swift
-//  LXFoundationManager
+//  LXSwiftFoundation
 //
 //  Created by Mac on 2020/4/23.
 //  Copyright © 2020 李响. All rights reserved.
@@ -18,8 +18,8 @@ open class LXSwiftTableView: UITableView ,LXSwiftUICompatible{
         super.init(frame: frame, style: style)
         
         //避免没有数据的cell出现线条
-        tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 0.001))
-        tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 0.001))
+        tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: LXSwiftApp.screenW, height: 0.001))
+        tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width:  LXSwiftApp.screenW, height: 0.001))
         if #available(iOS 11.0, *) {
            contentInsetAdjustmentBehavior = .never
         }else {

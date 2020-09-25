@@ -1,6 +1,6 @@
 //
 //  LXUIViewController.swift
-//  LXColorManager
+//  LXSwiftFoundation
 //
 //  Created by Mac on 2020/5/24.
 //

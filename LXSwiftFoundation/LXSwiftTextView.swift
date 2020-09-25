@@ -1,6 +1,6 @@
 //
 //  LXTextView.swift
-//  LXFoundationManager
+//  LXSwiftFoundation
 //
 //  Created by XL on 2020/4/24.
 //  Copyright © 2020 李响. All rights reserved.

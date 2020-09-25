@@ -217,15 +217,148 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
      }
 }
 
+
+//MARK: -  Extending methods for String and NSString md5
+extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
+        
+    ///验证字符串是否和 pattern 这个正则表达式
+    public func isSuit(pattern: String) -> Bool {
+        let string = base as! String
+        return string.verification(pattern: pattern)
+    }
+    
+    //判断是否是合法的车牌号
+    //"^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4,5}[A-Z0-9挂学警港澳]{1}"
+    public func isValidCarid() -> Bool {
+        let string = base as! String
+        let pattern = "^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4,5}[A-Z0-9挂学警港澳]{1}$"
+        return string.verification(pattern: pattern)
+    }
+    
+    /// 是否包含特殊字符
+    ///
+    /// - Returns: 结果
+    public func isContainSpecialChar() -> Bool {
+        let string = base as! String
+        let emojiPattern = "[\\$\\(\\)\\*\\+\\[\\]\\?\\^\\{\\|]"
+        return string.verification(pattern: emojiPattern)
+    }
+    
+    ///验证是否合法email
+    public func isValidEmail() -> Bool {
+        let string = base as! String
+        let emailPattern = "^(\\w)+(\\.\\w+)*@(\\w)+((\\.\\w{1,}){1,3})$"
+        return string.verification(pattern: emailPattern)
+    }
+    
+    ///验证是否是合法的网址
+    public func isValidUrl() -> Bool {
+        let string = base as! String
+        let urlPattern = "^http(s)?://"
+        return string.verification(pattern: urlPattern)
+    }
+    
+    ///验证是否合法手机号
+    public func isValidPhoneNumber() -> Bool {
+        let string = base as! String
+        let phonePattern = "^1\\d{10}$"
+        return string.verification(pattern: phonePattern)
+    }
+    
+    ///验证是否合法身份证号
+    public func isValidIDCard() -> Bool {
+        let string = base as! String
+        let iaCardPattern = "(^[1-9]\\d{5}(18|19|([23]\\d))\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx]$)|(^[1-9]\\d{5}\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{2}$)"
+        return string.verification(pattern: iaCardPattern)
+    }
+    
+    ///验证是否是合法的IP
+    public func isValidIP() -> Bool {
+        let string = base as! String
+        let ipPattern = "^((2[0-4]\\d|25[0-5]|[01]?\\d\\d?).){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)$"
+        return string.verification(pattern: ipPattern)
+    }
+    
+    ///验证是否全是汉字
+    public func isChinese() -> Bool {
+        let string = base as! String
+        let chinesePattern = "^[\\u0391-\\uFFE5]+$"
+        return string.verification(pattern: chinesePattern)
+    }
+    
+    ///验证是合法的纯数字
+    public func isNumber() -> Bool {
+        let string = base as! String
+        let numberPattern = "^[0-9]+(.[0-9]+)?$"
+        return string.verification(pattern: numberPattern)
+    }
+    
+    ///验证是正整数
+    public func isInteger() -> Bool {
+        let string = base as! String
+        let numberPattern = "^[0-9]+$"
+        return string.verification(pattern: numberPattern)
+    }
+    
+    /// 判断是否是标准的小数(两位小数)
+    public func isStandardDecimal() -> Bool {
+        let string = base as! String
+        let decimalPattern = "^[0-9]+(\\.[0-9]{2})$"
+        return string.verification(pattern: decimalPattern)
+    }
+    
+    /// 判断是否是标准的密码
+    public func isValidPasswd() -> Bool {
+        let string = base as! String
+        let passwdPattern = "^[a-zA-Z0-9]{6,18}$"
+        return string.verification(pattern: passwdPattern)
+    }
+    
+    /// 验证是否包含空格或者空行
+    public func isContainBlank() -> Bool {
+        let string = base as! String
+        let blank = "[\\s]"
+        return string.verification(pattern: blank)
+    }
+    
+    
+    /// 返回字符串中包含数字的范围,可以是一个或者多个,没有数字则返回空数组
+    public func numberRanges() -> [NSRange] {
+        let string = base as! String
+        guard let results = string.lx.matching(pattern: "[0-9]+(.[0-9]+)?") else {
+            return []
+        }
+        var ranges = [NSRange]()
+        for item in results {
+            ranges.append(item.range)
+        }
+        return ranges
+    }
+    
+    ///获取匹配结果的数组
+    public func matching(pattern: String,
+                          options: NSRegularExpression.Options = .caseInsensitive) -> [NSTextCheckingResult]? {
+        let string = base as! String
+        let regex = try? NSRegularExpression(pattern: pattern, options: [])
+        let results = regex?.matches(in: string, options: NSRegularExpression.MatchingOptions.init(rawValue: 0), range: NSMakeRange(0, string.count))
+        return results
+    }
+}
+
 ///internal extension
-internal extension String {
+ extension String {
     
     ///internal String interception
-     subscript (_ r: Range<Int>) -> String {
+    internal subscript (_ r: Range<Int>) -> String {
         get {
             let startIndex = index(self.startIndex, offsetBy: r.lowerBound)
             let endIndex = index(self.startIndex, offsetBy: r.upperBound)
             return  String(self[startIndex..<endIndex])
         }
     }
+        
+     //验证字符串匹配结果是否符合要求, 返回Bool值
+    internal func verification(pattern: String) -> Bool {
+        return (self.lx.matching(pattern: pattern)?.count ?? -1) > 0
+     }
 }

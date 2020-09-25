@@ -13,7 +13,7 @@ extension Date: LXSwiftCompatible { }
 //MARK: -  Extending methods for Date
 extension LXSwiftBasics where Base == Date {
     
-    /// date transform string
+    /// date transform string yyyy-MM-dd HH:mm:ss
     public func dateTranformString(with ymd: String = "yyyy-MM-dd HH:mm:ss") -> String {
         let fmt = DateFormatter()
         fmt.dateFormat = ymd
