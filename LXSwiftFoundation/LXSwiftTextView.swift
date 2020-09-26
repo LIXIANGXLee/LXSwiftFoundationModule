@@ -9,14 +9,15 @@
 import UIKit
 import LXFitManager
 
-///回调
-public typealias LXSwiftTextCallBack = (String) -> Void
 
 // MARK: - TextView 文案处理类
 open class LXSwiftTextView: UITextView {
+    
+    ///回调
+    public typealias TextCallBack = (String) -> Void
 
     ///输入字符串回调
-    public var textCallBack: LXSwiftTextCallBack?
+    public var textCallBack: LXSwiftTextView.TextCallBack?
     
     ///默认文案
     public var placehoder: String = "" {
@@ -58,6 +59,16 @@ open class LXSwiftTextView: UITextView {
     }
 }
 
+// MARK: - public
+extension LXSwiftTextView {
+
+    /// public method call back
+    public func setHandle(_ textCallBack: LXSwiftTextView.TextCallBack?) {
+        self.textCallBack = textCallBack
+    }
+}
+
+// MARK: - private
 extension LXSwiftTextView {
     
     fileprivate func setUI() {

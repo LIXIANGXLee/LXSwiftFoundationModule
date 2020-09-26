@@ -8,14 +8,15 @@
 
 import UIKit
 
-public typealias LXSwiftTaskCallBack = (() -> Void)
 
-// MARK: - 定时器（GCD）
+// MARK: - timer（GCD）
 public struct LXSwiftGCDTimer: LXSwiftCompatible {
-    
-    ///定时器集合
+   
+    public typealias TaskCallBack = (() -> Void)
+
+    ///Timer set
     fileprivate static var timers = [String:DispatchSourceTimer]()
-    /// 信号量
+    /// DispatchSemaphore
     fileprivate static let semaphore = DispatchSemaphore(value: 1)
 
 }
@@ -28,7 +29,7 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
        ///   - identified: save identified
        public static func startDelay(_ timer: TimeInterval,
                                     identified: String?,
-                                    task: LXSwiftTaskCallBack?) {
+                                    task: LXSwiftGCDTimer.TaskCallBack?) {
            start(with: timer,  timeInterval: 1,  repeats: false,  identified: identified,  task: task)
        }
        
@@ -38,7 +39,7 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
        ///   - identified: save identified
        public static func startDelayRepeats(_ timer: TimeInterval,
                                            identified: String?,
-                                           task: LXSwiftTaskCallBack?) {
+                                           task: LXSwiftGCDTimer.TaskCallBack?) {
            start(with: timer, timeInterval: 1,  repeats: false,identified: identified,  task: task)
        }
        
@@ -68,7 +69,7 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
                               timeInterval: TimeInterval = 1,
                               repeats: Bool = true,
                               identified: String?,
-                              task: LXSwiftTaskCallBack?){
+                              task: LXSwiftGCDTimer.TaskCallBack?){
        
              guard let iden = identified, startTimer >= 0, timeInterval >= 0, task != nil else { return }
          
@@ -86,7 +87,7 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
                        timer.cancel()
                    }
               })
-             //开启定时器
+             //start timer
              timer.resume()
        }
        

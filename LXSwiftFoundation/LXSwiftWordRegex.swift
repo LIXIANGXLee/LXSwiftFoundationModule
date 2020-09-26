@@ -9,13 +9,11 @@
 import UIKit
 import LXFitManager
 
-public let textLinkConst = "textLinkConst__"
-public let imageLinkConst = "imageLinkConst__"
 
 
 // MARK: public LXWordRegexType 超链接类型
 public struct LXSwiftWordRegexType {
-   
+
     /// 指定初始化起
     public init(_ link: String,
                 color: UIColor = UIColor.orange,
@@ -42,7 +40,10 @@ public struct LXSwiftWordRegexType {
 
 // MARK: public
 public class LXSwiftWordRegex {
-    
+     
+    public static let textLinkConst = "textLinkConst__"
+    public static let imageLinkConst = "imageLinkConst__"
+
     ///超链接匹配
     public static let httpRegex = "http(s)?://([a-zA-Z|\\d]+\\.)+[a-zA-Z|\\d]+(/[a-zA-Z|\\d|\\-|\\+|_./?%&=]*)?"
     ///电话号匹配
@@ -91,13 +92,13 @@ extension LXSwiftWordRegex {
                     attachment.bounds = CGRect(x: 0, y: LXFit.fitFloat(-3), width: wordRegexType.font.fitFont.lineHeight, height: wordRegexType.font.fitFont.lineHeight)
                     let imageAttr = NSAttributedString(attachment: attachment)
                     attributedStr.replaceCharacters(in: range, with: imageAttr)
-                    attributedStr.addAttribute(NSAttributedString.Key(rawValue: imageLinkConst), value: capturedStrings, range: range)
+                    attributedStr.addAttribute(NSAttributedString.Key(rawValue: LXSwiftWordRegex.imageLinkConst), value: capturedStrings, range: range)
                 }
             }else {
                 // 匹配超链接
                 text.lx.enumerateStringsMatchedByRegex(regex: wordRegexType.link) { (captureCount, capturedStrings, range) in
                     attributedStr.addAttributes([NSAttributedString.Key.foregroundColor : wordRegexType.color,NSAttributedString.Key.font: wordRegexType.font.fitFont], range: range)
-                 attributedStr.addAttribute(NSAttributedString.Key(rawValue: textLinkConst), value: capturedStrings, range: range)
+                 attributedStr.addAttribute(NSAttributedString.Key(rawValue: LXSwiftWordRegex.textLinkConst), value: capturedStrings, range: range)
               }
            }
         }

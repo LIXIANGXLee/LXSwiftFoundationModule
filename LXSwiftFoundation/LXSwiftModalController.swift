@@ -8,14 +8,13 @@
 
 import UIKit
 
-// MARK: - 可继承
+// MARK: - public
 open class LXSwiftModalController: UIViewController {
 
-    /// 重写构造方法
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
-        //设置模态状态
+        //modal
         modalTransitionStyle = .crossDissolve
         modalPresentationStyle = .overCurrentContext
     }
@@ -30,25 +29,25 @@ open class LXSwiftModalController: UIViewController {
         view.addSubview(contentView)
 
 
-        //self.view点击事件
+        //self.view
         view.addGestureRecognizer(tapGesture)
         
-        //contentView点击事件
+        //contentView
         contentView.addGestureRecognizer(contentGesture)
         
     }
     
-     /// 白色弹窗的view的点击事件
+     /// content view action click
       open lazy var contentGesture: UITapGestureRecognizer = {
           return  UITapGestureRecognizer(target: self, action: #selector(contentViewTaped(tap:)))
       }()
     
-    /// 全屏点击事件监听
+    /// allscreen UITapGestureRecognizer
       open lazy var tapGesture: UITapGestureRecognizer = {
           return UITapGestureRecognizer(target: self, action: #selector(backgroundViewTap))
       }()
     
-    /// 懒加载内容的view,
+    /// content view
       open lazy var contentView: UIView = {
            let contentView = UIView()
            contentView.backgroundColor = UIColor.white
@@ -57,15 +56,15 @@ open class LXSwiftModalController: UIViewController {
    
 }
 
-// MARK: - 外部调用 扩展
+// MARK: - public
 extension LXSwiftModalController {
     
-    /// 点击灰色背景, 隐藏modal控制器
+    /// dismiss modal
     @objc open func backgroundViewTap() {
         self.lx.dismissViewController()
     }
 
-     /// 点击白色背景 触发事件
+     /// write bgviw action
     @objc open func contentViewTaped(tap: UITapGestureRecognizer) { }
     
 }

@@ -11,13 +11,13 @@
 
 
 /**
- 比较版本号大小C语言实现算法
+version campare
 
- @param v1 第一个版本号
- @param v2 第二个版本号
- @return 0:相等,-1:第一个小,1:第二个小
- */
-int _compareVersion(const char *v1, const char *v2) {
+@param v1 one version
+@param v2 two version
+@return 0:eque,-1:one small,1:two small
+*/
+int _compareVersionInSwift(const char *v1, const char *v2) {
     assert(v1);
     assert(v2);
     

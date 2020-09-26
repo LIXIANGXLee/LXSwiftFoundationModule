@@ -16,12 +16,6 @@ private let linkBgTag = 12344321
     @objc optional func lxWordTextLable(_ textView: LXSwiftWordTextLable, longPress text: String)
 }
 
-// MARK: - 模型类
-struct TextLink {
-    var text: String
-    var rang: NSRange
-    var rects: [CGRect]
-}
 
 public struct LXSwiftWordTextLableConfig {
     
@@ -36,12 +30,18 @@ public struct LXSwiftWordTextLableConfig {
 
 // MARK: - 文本类
 open class LXSwiftWordTextLable: UIView {
+    // MARK: - 模型类
+    internal struct TextLink { 
+        var text: String
+        var rang: NSRange
+        var rects: [CGRect]
+    }
     
     // MARK: private 属性
     //代理属性
     public weak var delegate: LXWordTextLableDelegate?
     //存储TextLink的数组
-    private lazy var links: [TextLink] = [TextLink]()
+    private lazy var links = [LXSwiftWordTextLable.TextLink]()
      //配置信息
     private var config: LXSwiftWordTextLableConfig
     
@@ -89,7 +89,7 @@ open class LXSwiftWordTextLable: UIView {
             textView.attributedText = attr
 
             attr.enumerateAttributes(in: NSRange(location: 0, length: attr.length), options: NSAttributedString.EnumerationOptions(rawValue: 0)) { (objct, range, stop) in
-                guard let textM = objct[NSAttributedString.Key(textLinkConst)] as? String else {return}
+                guard let textM = objct[NSAttributedString.Key(LXSwiftWordRegex.textLinkConst)] as? String else {return}
                 textView.selectedRange = range
                 guard let r = textView.selectedTextRange else { return }
                 let rselectionRects = textView.selectionRects(for: r)
@@ -99,7 +99,7 @@ open class LXSwiftWordTextLable: UIView {
                     if selectionRect.rect.width == 0 || selectionRect.rect.height == 0 { continue }
                     rects.append(selectionRect.rect)
                 }
-                links.append(TextLink(text: textM, rang: range, rects: rects))
+                links.append(LXSwiftWordTextLable.TextLink(text: textM, rang: range, rects: rects))
             }
         }
     }
@@ -157,7 +157,7 @@ extension LXSwiftWordTextLable {
     }
     
     /// 根据点击点获取链接
-    private func linkWithPoint(point: CGPoint) -> TextLink? {
+    private func linkWithPoint(point: CGPoint) -> LXSwiftWordTextLable.TextLink? {
         for link in links {
             for rect in link.rects {
                 if rect.contains(point) {
@@ -169,7 +169,7 @@ extension LXSwiftWordTextLable {
     }
     
     ///显示点击的背景
-    private func showLinkBackground(link: TextLink) {
+    private func showLinkBackground(link: LXSwiftWordTextLable.TextLink) {
         for rect in link.rects {
             let bgView = UIView(frame: rect)
             bgView.tag = linkBgTag

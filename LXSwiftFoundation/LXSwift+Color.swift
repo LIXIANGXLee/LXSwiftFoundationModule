@@ -64,22 +64,22 @@ extension LXSwiftBasics where Base: UIColor {
     }
     
     
-     /// 类方法 （随即颜色）
+     ///random Color
     public static func randomColor() -> UIColor {
         
         return UIColor(r: CGFloat(Int.lx.randomInt(lower: 0, upper: 256)), g: CGFloat(Int.lx.randomInt(lower: 0, upper: 256)), b: CGFloat(Int.lx.randomInt(lower: 0, upper: 256)))
     }
     
-     /// 类方法 （颜色差值）
-     /// firstColor 第一个颜色
-     /// seccondColor 第二个颜色
+     /// color difference
+     /// firstColor
+     /// seccondColor
     public static func getRGBDelta(_ firstColor : UIColor, _ seccondColor : UIColor) -> (CGFloat, CGFloat,  CGFloat) {
         let firstRGB = firstColor.lx.getRGB()
         let secondRGB = seccondColor.lx.getRGB()
         return (firstRGB.0 - secondRGB.0, firstRGB.1 - secondRGB.1, firstRGB.2 - secondRGB.2)
     }
     
-      /// 类方法 （颜色RGB值）
+      ///  r g b 
       public func getRGB() -> (CGFloat, CGFloat, CGFloat) {
         guard let cmps = base.cgColor.components else {
             fatalError("保证普通颜色是RGB方式传入")

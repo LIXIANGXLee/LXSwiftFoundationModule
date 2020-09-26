@@ -16,7 +16,7 @@ extension LXSwiftBasics where Base: UIScrollView {
    public var snapshotLongImage: UIImage? {
        var image: UIImage? = nil
        
-       //保存一下原偏移量 和 frame
+       //save origin contentOfffSet 和 frame
        let savedContentOffset = base.contentOffset
        let savedFrame = base.frame
        
@@ -31,7 +31,6 @@ extension LXSwiftBasics where Base: UIScrollView {
        image = UIGraphicsGetImageFromCurrentImageContext()
        UIGraphicsEndImageContext()
        
-       //原偏移量 和 frame
        base.contentOffset = savedContentOffset
        base.frame = savedFrame
        return image

@@ -44,17 +44,5 @@ extension LXSwiftBasics where Base == LXSwiftTool {
             let propertyList = try? PropertyListSerialization.propertyList(from: data, options: .init(rawValue: 0), format: nil) else { return nil }
         return propertyList as? Dictionary<String, Any>
     }
-    
-    /// call tel
-    public static func openTel(with number: String?) {
-       guard let number = number,
-           let url = URL(string: "tel:" + number) else{ return }
-       if UIApplication.shared.canOpenURL(url) {
-           if #available(iOS 10.0, *) {
-               UIApplication.shared.open(url, options: [:], completionHandler: nil)
-           } else {
-               UIApplication.shared.openURL(url)
-           }
-        }
-     }
+   
 }

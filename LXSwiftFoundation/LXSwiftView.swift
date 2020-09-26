@@ -48,7 +48,7 @@ open class LXSwiftView: UIView,LXSwiftUICompatible {
            }
        }
        
-       /// 切换深色模式 浅色模式 需要做的修改
+       /// call  after dark and light change
        open func setUIDidChange(_ style: LXSwiftUserInterfaceStyle) { }
 }
 

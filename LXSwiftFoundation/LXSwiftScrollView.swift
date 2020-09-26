@@ -10,7 +10,7 @@ import UIKit
 open class LXSwiftScrollView: UIScrollView,LXSwiftUICompatible {
     public var swiftModel: Any?
    
-    /// 是否支持 多个事件传递
+    /// Do you support multiple event delivery
     public var isSopportRecognizeSimultaneous = false
 
     public override init(frame: CGRect) {
@@ -33,7 +33,7 @@ open class LXSwiftScrollView: UIScrollView,LXSwiftUICompatible {
 //MARK: - UIGestureRecognizerDelegate
 extension LXSwiftScrollView: UIGestureRecognizerDelegate {
   
-    /// 多个事件传递 共存
+    ///Do you support multiple event delivery delegate
      public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
          return isSopportRecognizeSimultaneous
      }

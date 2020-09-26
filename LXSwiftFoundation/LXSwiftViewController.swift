@@ -29,6 +29,6 @@ open class LXSwiftViewController: UIViewController,LXSwiftUICompatible {
         }
     }
     
-    /// 切换深色模式 浅色模式 (切换暗黑模式修改) 需要做的修改
+    /// call  after dark and light change
     open func setUIDidChange(_ style: LXSwiftUserInterfaceStyle) { }
 }

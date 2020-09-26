@@ -8,32 +8,33 @@
 
 import UIKit
 
-/// regist 回调函数
-public typealias LXSwiftCallInfoBack = (([String: Any?]?) -> Any?)
-
-/// open 回调函数
-public typealias LXSwiftCallBack = ((Any?) -> Void)
-
+//MARK: - router struct
 public struct LXSwiftRouter {
+    
+    /// regist call back method
+    public typealias CallInfoBack = (([String: Any?]?) -> Any?)
 
-    /// 信号量
+    /// open  call back method
+    public typealias CallBack = ((Any?) -> Void)
+
+    /// DispatchSemaphore
     private static let semaphore = DispatchSemaphore(value: 1)
 
-    ///路由集合
-    private static var routers = [String : LXSwiftCallInfoBack]()
+    ///router array
+    private static var routers = [String : LXSwiftRouter.CallInfoBack]()
   
 }
 
-// MARK: - 外部调用 扩展
+// MARK: - public
 extension LXSwiftRouter {
     
-    ///注册路由
+    ///register router
     ///
     /// - Parameters:
-    ///   - urlStr:  url 类型的名字。例如："http://home/bus"
-    ///   - callInfoBack:  回调函数
+    ///   - urlStr:  url name, for example："http://home/bus"
+    ///   - callInfoBack:  call back method
     public static func regist(with urlStr: String?,
-                              callInfoBack: LXSwiftCallInfoBack?)
+                              callInfoBack: LXSwiftRouter.CallInfoBack?)
     {
         guard let url = urlStr,
             url.hasPrefix("http://"),
@@ -45,14 +46,14 @@ extension LXSwiftRouter {
         self.semaphore.signal()
     }
     
-    ///触发事件
+    /// trigger event
     ///
     /// - Parameters:
-    ///   - urlStr:  url 类型的名字。例如："http://home/bus"
-    ///   - paras:   回调函数参数
+    ///   - urlStr:  url  url name, for example："http://home/bus"
+    ///   - paras:   call back method
     public static func open(with urlStr: String?,
                             paras:[String:Any?]? = nil,
-                            callBack: LXSwiftCallBack? = nil)
+                            callBack: LXSwiftRouter.CallBack? = nil)
     {
         guard let url = urlStr,
             url.hasPrefix("http://") else { return  }
@@ -65,8 +66,8 @@ extension LXSwiftRouter {
     
     ///
     /// - Parameters:
-    ///   - eventName:  url 类型的名字。例如："http://home/bus"
-    ///   - return 返回值
+    ///   - eventName: url  url name, for example："http://home/bus"
+    ///   - return result
     public static func  object(for urlStr: String?) -> Any? {
         guard let url = urlStr,
             url.hasPrefix("http://") else { return nil }
@@ -74,12 +75,12 @@ extension LXSwiftRouter {
         return routers[url]?(nil)
     }
     
-    ///移出路由
+    ///remove router
     ///
     /// - Parameters:
-    ///   - urlStr:  url 类型的名字。例如："http://home/bus"
+    ///   - urlStr: url  url name, for example："http://home/bus"
     @discardableResult
-    public static func remove(with urlStr: String?) -> LXSwiftCallInfoBack? {
+    public static func remove(with urlStr: String?) -> LXSwiftRouter.CallInfoBack? {
         guard let url = urlStr,
             url.hasPrefix("http://") else { return nil }
         
@@ -89,7 +90,7 @@ extension LXSwiftRouter {
         return callInfoBack
     }
     
-    ///销毁路由 （清空所有注册的路由）
+    ///deregister
     public static func deregister() {
         routers.removeAll()
     }
