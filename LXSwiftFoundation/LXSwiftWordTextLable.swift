@@ -9,7 +9,7 @@
 import UIKit
 import LXFitManager
 
-///用来区分背景色的唯一标识
+///A unique identifier used to distinguish the background color
 private let linkBgTag = 12344321
 @objc public protocol LXWordTextLableDelegate: AnyObject {
     @objc optional func lxWordTextLable(_ textView: LXSwiftWordTextLable, didSelect text: String)
@@ -28,24 +28,18 @@ public struct LXSwiftWordTextLableConfig {
     }
 }
 
-// MARK: - 文本类
+// MARK: - LXSwiftWordTextLable
 open class LXSwiftWordTextLable: UIView {
-    // MARK: - 模型类
-    internal struct TextLink { 
+    internal struct TextLink {
         var text: String
         var rang: NSRange
         var rects: [CGRect]
     }
     
-    // MARK: private 属性
-    //代理属性
     public weak var delegate: LXWordTextLableDelegate?
-    //存储TextLink的数组
     private lazy var links = [LXSwiftWordTextLable.TextLink]()
-     //配置信息
     private var config: LXSwiftWordTextLableConfig
     
-    //文本展示
     fileprivate lazy var textView: UITextView = {
         let textView = UITextView()
         textView.isEditable = false
@@ -56,23 +50,19 @@ open class LXSwiftWordTextLable: UIView {
         return textView
     }()
     
-     //单机
     fileprivate lazy var tagGesture: UITapGestureRecognizer = {
         let tagGesture = UITapGestureRecognizer(target: self, action: #selector(gestureTag(gesture:)))
         tagGesture.numberOfTouchesRequired = 1
         return tagGesture
     }()
     
-    //长按
     fileprivate lazy var longGesture: UILongPressGestureRecognizer = {
         let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(gestureLong(gesture:)))
         longGesture.minimumPressDuration = 0.8
         return longGesture
     }()
     
-    // MARK: public
-    
-    ///外部调用 观察存储属性 设置尺寸   注意 ⚠️ 请在  attributedText 之前设置viewFrame尺寸
+    ///External call to observe the storage property setting size note ⚠️ Please set viewframe size before attributedtext
     public var viewFrame: CGRect? {
         didSet {
             guard let frame = viewFrame else { return }
@@ -81,8 +71,8 @@ open class LXSwiftWordTextLable: UIView {
         }
     }
     
-    ///外部调用 观察存储属性  注意 ⚠️ 请先设置 viewFrame尺寸 在设置 attributedText
-   public var attributedText: NSAttributedString? {
+     ///External call to observe storage properties ⚠️ Please set viewframe size before setting attributedtext
+     public var attributedText: NSAttributedString? {
         didSet {
            guard let attr = self.attributedText else { return }
             
@@ -104,7 +94,7 @@ open class LXSwiftWordTextLable: UIView {
         }
     }
     
-      // MARK: system 函数
+      // MARK: system method
     public init(config: LXSwiftWordTextLableConfig = LXSwiftWordTextLableConfig())
     {
         self.config = config
@@ -121,10 +111,9 @@ open class LXSwiftWordTextLable: UIView {
 }
 
 
-// MARK: private 函数
+// MARK: private method
 extension LXSwiftWordTextLable {
     
-    ///长按响应
     @objc private func gestureLong(gesture: UIGestureRecognizer) {
                 
         if gesture.state ==  UIGestureRecognizer.State.began {
@@ -132,14 +121,14 @@ extension LXSwiftWordTextLable {
         }
     }
     
-    /// 点击链接响应
+    /// Click on link response
     @objc private func gestureTag(gesture: UITapGestureRecognizer) {
         
-        //预防连点击
+        //Prevention of even click
         gesture.view?.isUserInteractionEnabled = false
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
             gesture.view?.isUserInteractionEnabled = true
-            //延迟后移除背景
+            //Remove background after delay
             self.removeAllLinkBackground()
         }
         
@@ -147,16 +136,16 @@ extension LXSwiftWordTextLable {
             let point = gesture.location(in: gesture.view)
             let link = linkWithPoint(point: point)
             if let l = link {
-                //设置选中链接背景
+                //Set selected link background
                 showLinkBackground(link: l)
-                //点击链接 通知外界
+                //Click the link to inform the outside world
                 delegate?.lxWordTextLable?(self, didSelect: l.text)
             }
         }
  
     }
     
-    /// 根据点击点获取链接
+    /// Get links based on click points
     private func linkWithPoint(point: CGPoint) -> LXSwiftWordTextLable.TextLink? {
         for link in links {
             for rect in link.rects {
@@ -168,7 +157,7 @@ extension LXSwiftWordTextLable {
         return nil
     }
     
-    ///显示点击的背景
+    ///Displays the background of the click
     private func showLinkBackground(link: LXSwiftWordTextLable.TextLink) {
         for rect in link.rects {
             let bgView = UIView(frame: rect)
@@ -179,7 +168,7 @@ extension LXSwiftWordTextLable {
         }
     }
     
-    /// 几秒后移除点击显示的背景
+    /// After a few seconds, remove the background from the click display
    @objc fileprivate func removeAllLinkBackground() {
         for view in subviews {
             if view.tag == linkBgTag {

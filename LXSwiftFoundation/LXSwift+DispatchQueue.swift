@@ -8,11 +8,11 @@
 
 import UIKit
 
-/// 任务回调函数
+/// Task callback function
 public typealias LXSwiftCallTask = () -> Void
 
 extension DispatchQueue: LXSwiftCompatible {
-    /// 全局集合
+    /// Global collection
     internal static var onceTracker = Set<String>()
     
 }
@@ -20,9 +20,9 @@ extension DispatchQueue: LXSwiftCompatible {
 //MARK: -  Extending method for UIFont
 extension LXSwiftBasics where Base: DispatchQueue {
     
-    ///双重否定,防止出现并发访问情况
+    ///Double negation to prevent concurrent access
     ///
-    /// - Parameter token: 用于判断是否唯一的字符串
+    /// - Parameter token: A string used to determine whether it is unique
     public func once(token: String, closure:() -> Void) {
         
         if DispatchQueue.onceTracker.contains(token) == false {
@@ -40,24 +40,23 @@ extension LXSwiftBasics where Base: DispatchQueue {
 extension LXSwiftBasics where Base: DispatchQueue {
     ///异步任务
     ///
-    /// - Parameter task: 异步回调函数
+    /// - Parameter task: Asynchronous callback function
     public static func async(_ task: @escaping LXSwiftCallTask) {
         _async(task)
     }
     
-    ///异步任务
+    ///Asynchronous task
     ///
-    /// - Parameter task: 异步回调函数
-    /// - Parameter mainTask: 主线程回调函数
+    /// - Parameter task: Asynchronous callback function
+    /// - Parameter mainTask: Main thread callback function
     public static func async(_ task: @escaping LXSwiftCallTask,
                              _ mainTask: @escaping LXSwiftCallTask) {
         _async(task, mainTask)
     }
     
-    ///异步任务
-    ///
-    /// - Parameter seconds: 需要延时的时间
-    /// - Parameter block: 异步回调函数
+    ///Asynchronous task
+    ///- parameter seconds: time to delay
+    ///- parameter block: asynchronous callback function
     @discardableResult
     public func delay(_ seconds: Double,
                              _ block: @escaping LXSwiftCallTask) -> DispatchWorkItem {
@@ -67,21 +66,19 @@ extension LXSwiftBasics where Base: DispatchQueue {
         return item
     }
     
-    ///异步任务
-    ///
-    /// - Parameter seconds: 需要延时的时间
-    /// - Parameter task: 异步回调函数
+    ///Asynchronous task
+    ///- parameter seconds: time to delay
+    ///- parameter task: asynchronous callback function
     @discardableResult
     public func asyncDelay(_ seconds: Double,
                                   _ task: @escaping LXSwiftCallTask) -> DispatchWorkItem {
         return _asyncDelay(seconds, task)
     }
-    ///异步任务
-    ///
-    /// - Parameter seconds: 需要延时的时间
-    /// - Parameter task: 异步回调函数
-    /// - Parameter mainTask: 异步回调函数
-
+    
+    ///Asynchronous task
+    ///- parameter seconds: time to delay
+    ///- parameter task: asynchronous callback function
+    ///- parameter maintask: asynchronous callback function
     @discardableResult
     public func asyncDelay(_ seconds: Double,
                                   _ task: @escaping LXSwiftCallTask,
@@ -89,7 +86,7 @@ extension LXSwiftBasics where Base: DispatchQueue {
         return _asyncDelay(seconds, task, mainTask)
     }
     
-    ///异步任务  私有方法
+    ///Asynchronous task private method
     private static func _async(_ task: @escaping LXSwiftCallTask,
                                _ mainTask: LXSwiftCallTask? = nil) {
         let item = DispatchWorkItem(block: task)
@@ -99,7 +96,7 @@ extension LXSwiftBasics where Base: DispatchQueue {
         }
     }
     
-    ///异步延时任务 私有方法
+    ///Private method of asynchronous delay task
     private func _asyncDelay(_ seconds: Double,
                                     _ task: @escaping LXSwiftCallTask,
                                     _ mainTask: LXSwiftCallTask? = nil) -> DispatchWorkItem {

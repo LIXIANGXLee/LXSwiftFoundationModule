@@ -10,16 +10,14 @@ import UIKit
 import LXFitManager
 
 
-// MARK: - TextView 文案处理类
+// MARK: - TextView class
 open class LXSwiftTextView: UITextView {
     
-    ///回调
     public typealias TextCallBack = (String) -> Void
 
-    ///输入字符串回调
     public var textCallBack: LXSwiftTextView.TextCallBack?
     
-    ///默认文案
+    ///Default copy
     public var placehoder: String = "" {
         didSet {
             placehoderLabel.text = placehoder
@@ -27,14 +25,14 @@ open class LXSwiftTextView: UITextView {
         }
     }
     
-    ///默认文案颜色
+    ///Default copy color
     public var placehoderColor: UIColor = UIColor.lightGray {
         didSet {
             placehoderLabel.textColor = placehoderColor
         }
     }
 
-    ///显示文案的label
+    ///Label showing copywriting
     fileprivate var placehoderLabel: UILabel!
     override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
@@ -44,11 +42,12 @@ open class LXSwiftTextView: UITextView {
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    //销毁
+    
+    ///Destruction
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    //布局
+
     open override func layoutSubviews() {
         super.layoutSubviews()
         let labelX = LXFit.fitInt(5)

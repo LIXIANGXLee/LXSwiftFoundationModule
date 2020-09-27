@@ -11,10 +11,9 @@ import LXFitManager
 
 
 
-// MARK: public LXWordRegexType 超链接类型
+// MARK: public LXWordRegexType Hyperlink type
 public struct LXSwiftWordRegexType {
 
-    /// 指定初始化起
     public init(_ link: String,
                 color: UIColor = UIColor.orange,
                 font: UIFont = UIFont.systemFont(ofSize: 15),
@@ -25,14 +24,14 @@ public struct LXSwiftWordRegexType {
         self.isExpression = isExpression
     }
     
-    ///超链接匹配字符串
+    ///Hyperlink matching string
     public var link: String
-    ///超链接字符串颜色
+    ///Hyperlink string color
     public var color: UIColor = UIColor.orange
-    ///超链接字符串字体大小
+    ///Hyperlink string font size
     public var font: UIFont = UIFont.systemFont(ofSize: 15)
     
-    ///是否为表情 匹配 true 为表情匹配 false 超链接、电话匹配
+    ///Whether to match for expression true for expression match false for hyperlink, phone match
     public var isExpression: Bool = false
    
 }
@@ -44,14 +43,14 @@ public class LXSwiftWordRegex {
     public static let textLinkConst = "textLinkConst__"
     public static let imageLinkConst = "imageLinkConst__"
 
-    ///超链接匹配
+    ///Hyperlink matching string
     public static let httpRegex = "http(s)?://([a-zA-Z|\\d]+\\.)+[a-zA-Z|\\d]+(/[a-zA-Z|\\d|\\-|\\+|_./?%&=]*)?"
-    ///电话号匹配
+    ///Phone number matching
     public static let phoneRegex = "\\d{3,4}[- ]?\\d{7,8}"
-    ///表情匹配
+    ///Expression matching
     public static let expressionRegex = "\\[.*?\\]"
     
-    ///默认参数
+    ///Default parameters
     public static let wordRegexTypes = [
         LXSwiftWordRegexType(httpRegex, isExpression: false),
         LXSwiftWordRegexType(phoneRegex, isExpression: false),
@@ -63,28 +62,27 @@ public class LXSwiftWordRegex {
 // MARK: public method
 extension LXSwiftWordRegex {
     
-    ///字符串匹配
+    ///String matching
     ///
     /// - Parameters:
-    ///   - text: 文本内容
-    ///   - textColor: 文本内容颜色
-    ///   - textFont: 文本内容字体大小
-    ///   - wordRegexTypes: 超链接文本配置信息
+    ///- Text: text content
+    ///- textcolor: text content color
+    ///- textfont: text content font size
+    ///- wordregextypes: hyperlink text configuration information
     public class func regex(of text: String,
                             textColor: UIColor = UIColor.black,
                             textFont: UIFont = UIFont.systemFont(ofSize: 15),
                             wordRegexTypes : [LXSwiftWordRegexType] = wordRegexTypes)
         -> NSAttributedString? {
         
-        /// 文本校验
        if text.count <= 0 { return nil }
        let attributes = [NSAttributedString.Key.font: textFont, NSAttributedString.Key.foregroundColor: textColor]
        let attributedStr = NSMutableAttributedString(string: text, attributes:attributes)
         
-        // 开始文本匹配
+        // Start text matching
         for wordRegexType in wordRegexTypes {
             
-            if wordRegexType.isExpression { // 表情匹配
+            if wordRegexType.isExpression { // Expression matching
                 text.lx.enumerateStringsMatchedByRegex(regex: wordRegexType.link) { (captureCount, capturedStrings, range) in
                     
                     let attachment = NSTextAttachment()
@@ -95,7 +93,7 @@ extension LXSwiftWordRegex {
                     attributedStr.addAttribute(NSAttributedString.Key(rawValue: LXSwiftWordRegex.imageLinkConst), value: capturedStrings, range: range)
                 }
             }else {
-                // 匹配超链接
+                // Match hyperlinks
                 text.lx.enumerateStringsMatchedByRegex(regex: wordRegexType.link) { (captureCount, capturedStrings, range) in
                     attributedStr.addAttributes([NSAttributedString.Key.foregroundColor : wordRegexType.color,NSAttributedString.Key.font: wordRegexType.font.fitFont], range: range)
                  attributedStr.addAttribute(NSAttributedString.Key(rawValue: LXSwiftWordRegex.textLinkConst), value: capturedStrings, range: range)
