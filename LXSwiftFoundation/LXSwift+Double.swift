@@ -20,4 +20,5 @@ extension LXSwiftBasics where Base == Double {
         let divisor = pow(10.0, Double(places))
         return (base * divisor).rounded() / divisor
     }
+
 }

@@ -13,9 +13,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let str = "dfhv"
         
- 
+        let v = LXSwiftButton(frame: CGRect(x: 100, y: 100, width: 200, height: 200))
+        v.layer.cornerRadius = 30
+        v.clipsToBounds = true
+        view.addSubview(v)
+        v.lx.setGradientLayer(with: [UIColor.lx.color(hex: "333333")!.cgColor, UIColor.lx.color(hex: "FFFFFF")!.cgColor])
+
+        
+        let str = "dfhv"
         
         print("\(str.lx.subString(with: 3..<3))")
         print("\(str.lx.substring(from: 4))")
@@ -26,9 +32,12 @@ class ViewController: UIViewController {
         print("===\(UIDevice.lx.isPhone)")
         print("===\(Bundle.lx.bundleVersion ?? "")")
 
-        
+        print("-=-=-=\(NSNumber(value: 2).lx.numberFormatter(with: .halfEven, minDigits: 1, maxDigits: 2))")
        
         
+        let n = NSNumber(value: 2.0)
+        
+        n.lx.numberFormatter(with: <#T##NumberFormatter.RoundingMode#>, minDigits: <#T##Int#>, maxDigits: <#T##Int#>)
         
     }
  
