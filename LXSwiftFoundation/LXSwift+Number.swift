@@ -39,6 +39,6 @@ extension NSNumber {
         formate.minimumFractionDigits = minDigits
         formate.maximumFractionDigits = maxDigits
         formate.roundingMode = mode
-        return formate.string(from: base)
+        return formate.string(from: self)
     }
 }

@@ -32,13 +32,9 @@ class ViewController: UIViewController {
         print("===\(UIDevice.lx.isPhone)")
         print("===\(Bundle.lx.bundleVersion ?? "")")
 
-        print("-=-=-=\(NSNumber(value: 2).lx.numberFormatter(with: .halfEven, minDigits: 1, maxDigits: 2))")
+        print("-=-=-=\(NSNumber(value: 2).lx.numberFormatter())")
        
-        
-        let n = NSNumber(value: 2.0)
-        
-        n.lx.numberFormatter(with: <#T##NumberFormatter.RoundingMode#>, minDigits: <#T##Int#>, maxDigits: <#T##Int#>)
-        
+     
     }
  
 
