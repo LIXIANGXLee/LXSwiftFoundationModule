@@ -12,6 +12,8 @@ open class LXSwiftViewController: UIViewController,LXSwiftUICompatible {
     
     open override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor.white
+
     }
     
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

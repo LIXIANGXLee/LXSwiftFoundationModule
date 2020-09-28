@@ -14,13 +14,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         
-        let v = LXSwiftButton(frame: CGRect(x: 100, y: 100, width: 200, height: 200))
-        v.layer.cornerRadius = 30
-        v.clipsToBounds = true
-        view.addSubview(v)
-        v.lx.setGradientLayer(with: [UIColor.lx.color(hex: "333333")!.cgColor, UIColor.lx.color(hex: "FFFFFF")!.cgColor])
-
-        
+//        let v = LXSwiftButton(frame: CGRect(x: 100, y: 100, width: 200, height: 200))
+//        v.layer.cornerRadius = 30
+//        v.clipsToBounds = true
+//        view.addSubview(v)
+//        v.lx.setGradientLayer(with: [UIColor.lx.color(hex: "333333")!.cgColor, UIColor.lx.color(hex: "FFFFFF")!.cgColor])
+//
+//
         let str = "dfhv"
         
         print("\(str.lx.subString(with: 3..<3))")
@@ -35,6 +35,20 @@ class ViewController: UIViewController {
         print("-=-=-=\(NSNumber(value: 2).lx.numberFormatter())")
        
      
+        
+        var field = LXSwiftTextField()
+        field.frame = CGRect(x: 20, y: 100, width: 300, height: 40)
+        field.backgroundColor = UIColor.red
+//        field.lx.maxLength = 4
+        
+//        field.placeholder  = "fdfdsagr"
+        view.addSubview(field)
+        
+        field.lx.set(with: "fdfdsfggdgfdvcdbf")
+        
+        field.textRectInsert = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        
+       print("-=-=--=-=-=\( "0000".lx.containsEmoji)")
     }
  
 

@@ -89,4 +89,43 @@ extension LXSwiftBasics where Base == Date {
         return Date().timeIntervalSince1970 * 1000
     }
     
+    public var year: Int {
+        return NSCalendar.current.component(.year, from: base)
+    }
+    public var month: Int {
+        return NSCalendar.current.component(.month, from: base)
+    }
+    public var day: Int {
+        return NSCalendar.current.component(.day, from: base)
+    }
+    public var hour: Int {
+        return NSCalendar.current.component(.hour, from: base)
+    }
+    public var minute: Int {
+        return NSCalendar.current.component(.minute, from: base)
+    }
+    public var second: Int {
+        return NSCalendar.current.component(.second, from: base)
+    }
+    public var nanosecond: Int {
+        return NSCalendar.current.component(.nanosecond, from: base)
+    }
+    public var weekday: Int {
+        return NSCalendar.current.component(.weekday, from: base)
+    }
+    public var weekOfMonth: Int {
+        return NSCalendar.current.component(.weekOfMonth, from: base)
+    }
+    public var weekOfYear: Int {
+        return NSCalendar.current.component(.weekOfYear, from: base)
+    }
+    public var quarter: Int {
+        return NSCalendar.current.component(.quarter, from: base)
+    }
+    
+    public var isLeapYear: Bool {
+        let year = self.year
+        return ((year % 400 == 0) || ((year % 100 != 0) && (year % 4 == 0)))
+    }
+
 }

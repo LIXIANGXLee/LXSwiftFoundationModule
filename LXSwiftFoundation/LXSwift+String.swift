@@ -60,7 +60,26 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         let string = base as! String
         return string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     }
-
+    
+    /// is contain Emoji expression
+    public var containsEmoji: Bool {
+        let string = base as! String
+        for scalar in string.unicodeScalars {
+            switch scalar.value {
+            case
+            0x00A0...0x00AF,
+            0x2030...0x204F,
+            0x2120...0x213F,
+            0x2190...0x21AF,
+            0x2310...0x329F,
+            0x1F000...0x1F9CF:
+                return true
+            default:
+                continue
+            }
+        }
+        return false
+    }
 }
 
 
@@ -112,7 +131,13 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     public func contains(_ string: String) -> Bool {
         let string = base as! String
         return string.range(of: string) != nil
-      }
+    }
+    
+    /// Whether the specified special characters are included
+    func contains(characters: CharacterSet) -> Bool {
+        let string = base as! String
+        return string.rangeOfCharacter(from: characters) != nil
+    }
       
       /// base is json
      public var isValidJSON: Bool {

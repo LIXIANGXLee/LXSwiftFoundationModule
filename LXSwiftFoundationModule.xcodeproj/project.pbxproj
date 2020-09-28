@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		04037E252520E83900FAAE37 /* LXSwift+Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04037E242520E83900FAAE37 /* LXSwift+Number.swift */; };
+		0483CD2825221CA80079FCEC /* LXSwiftTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0483CD2725221CA80079FCEC /* LXSwiftTextField.swift */; };
+		0483CD2A25221D7D0079FCEC /* LXSwift+TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0483CD2925221D7D0079FCEC /* LXSwift+TextField.swift */; };
 		04E627E0251E3A490033BBA5 /* LXSwift+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E627DF251E3A490033BBA5 /* LXSwift+Color.swift */; };
 		04E627E2251E48FE0033BBA5 /* LXSwift+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E627E1251E48FE0033BBA5 /* LXSwift+Int.swift */; };
 		04E627E4251E4A9F0033BBA5 /* LXSwiftUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E627E3251E4A9F0033BBA5 /* LXSwiftUtil.swift */; };
@@ -62,6 +64,8 @@
 
 /* Begin PBXFileReference section */
 		04037E242520E83900FAAE37 /* LXSwift+Number.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LXSwift+Number.swift"; sourceTree = "<group>"; };
+		0483CD2725221CA80079FCEC /* LXSwiftTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXSwiftTextField.swift; sourceTree = "<group>"; };
+		0483CD2925221D7D0079FCEC /* LXSwift+TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LXSwift+TextField.swift"; sourceTree = "<group>"; };
 		04E627DF251E3A490033BBA5 /* LXSwift+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LXSwift+Color.swift"; sourceTree = "<group>"; };
 		04E627E1251E48FE0033BBA5 /* LXSwift+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LXSwift+Int.swift"; sourceTree = "<group>"; };
 		04E627E3251E4A9F0033BBA5 /* LXSwiftUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXSwiftUtil.swift; sourceTree = "<group>"; };
@@ -231,6 +235,8 @@
 				04E627DF251E3A490033BBA5 /* LXSwift+Color.swift */,
 				04E627E1251E48FE0033BBA5 /* LXSwift+Int.swift */,
 				04E627E3251E4A9F0033BBA5 /* LXSwiftUtil.swift */,
+				0483CD2725221CA80079FCEC /* LXSwiftTextField.swift */,
+				0483CD2925221D7D0079FCEC /* LXSwift+TextField.swift */,
 			);
 			path = LXSwiftFoundation;
 			sourceTree = "<group>";
@@ -391,8 +397,10 @@
 				7607A0A4251C3C9E0071B9AD /* LXSwift+Date.swift in Sources */,
 				7607A081251B1C0B0071B9AD /* SceneDelegate.swift in Sources */,
 				7607A0E0251C904C0071B9AD /* LXSwiftButton.swift in Sources */,
+				0483CD2A25221D7D0079FCEC /* LXSwift+TextField.swift in Sources */,
 				7607A0AC251C50710071B9AD /* LXSwiftGCDTimer.swift in Sources */,
 				7607A0DA251C71720071B9AD /* LXSwiftCollectionView.swift in Sources */,
+				0483CD2825221CA80079FCEC /* LXSwiftTextField.swift in Sources */,
 				7607A0C2251C6CDB0071B9AD /* LXSwift+DispatchQueue.swift in Sources */,
 				7607A0C4251C70B30071B9AD /* LXSwiftTextView.swift in Sources */,
 				04E627E0251E3A490033BBA5 /* LXSwift+Color.swift in Sources */,
