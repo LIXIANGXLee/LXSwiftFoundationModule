@@ -11,7 +11,7 @@ import UIKit
 extension NSNumber: LXSwiftCompatible { }
 
 //MARK: -  Extending methods for NSNumber
-extension LXSwiftBasics where Base == NSNumber {
+extension LXSwiftBasics where Base: NSNumber {
       
     /// minDigits: How many decimal places should be reserved with  rounding 
     ///maxDigits:Keep a few decimal places
