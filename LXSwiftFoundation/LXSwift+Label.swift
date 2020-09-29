@@ -30,7 +30,6 @@ extension LXSwiftBasics where Base: UILabel {
        public func set(font: UIFont, textColor: UIColor, alignment: NSTextAlignment? = nil) {
            base.font = font
            base.textColor = textColor
-           //当对齐方式不为空时候,重置对齐方式
            guard let alignment = alignment else { return }
            base.textAlignment = alignment
        }
