@@ -8,9 +8,8 @@
 
 import UIKit
 
-// MARK: - LXSwftApp 常用的全局变量
-
-/// 定义一下app经常用到的全局常量
+// MARK: - LXSwftApp const
+/// define app const
 public struct LXSwiftApp {
 
     public static let isIPhoneX = (LXSwiftApp.screenH == CGFloat(812) || LXSwiftApp.screenH == CGFloat(896)) ? true : false

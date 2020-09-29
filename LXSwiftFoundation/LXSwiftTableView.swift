@@ -17,7 +17,7 @@ open class LXSwiftTableView: UITableView ,LXSwiftUICompatible{
     override public init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         
-        //避免没有数据的cell出现线条
+        ///cell
         tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: LXSwiftApp.screenW, height: 0.001))
         tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width:  LXSwiftApp.screenW, height: 0.001))
         if #available(iOS 11.0, *) {
@@ -25,6 +25,7 @@ open class LXSwiftTableView: UITableView ,LXSwiftUICompatible{
         }else {
            translatesAutoresizingMaskIntoConstraints = false
         }
+        
         setupUI()
         setupViewModel()
 

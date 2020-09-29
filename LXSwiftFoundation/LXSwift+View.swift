@@ -24,7 +24,7 @@ extension LXSwiftBasics where Base: UIView {
     
        /// image
        public var snapshotImageAfterScreenUpdates: UIImage? {
-        UIGraphicsBeginImageContextWithOptions(base.bounds.size, base.isOpaque, 0)
+            UIGraphicsBeginImageContextWithOptions(base.bounds.size, base.isOpaque, 0)
            base.drawHierarchy(in: base.bounds, afterScreenUpdates: true)
            let snap = UIGraphicsGetImageFromCurrentImageContext()
            UIGraphicsEndImageContext()

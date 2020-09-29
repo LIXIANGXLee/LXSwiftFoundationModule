@@ -97,7 +97,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         let mulPara = NSMutableParagraphStyle()
         mulPara.lineSpacing = lineSpace
         let attrString = NSAttributedString(string: string, attributes: [NSAttributedString.Key.font: font, NSAttributedString.Key.paragraphStyle: mulPara])
-        return attrString.boundingRect(with: CGSize(width: width, height: 0), options: .usesLineFragmentOrigin, context: nil).size
+        return attrString.boundingRect(with: CGSize(width: width, height: CGFloat(MAXFLOAT)), options: .usesLineFragmentOrigin, context: nil).size
     }
     
     ///Get the font width  according to the font
@@ -105,7 +105,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     /// - Parameters:
     ///   - font: font size
     public func width(font: UIFont) -> CGFloat {
-        let size = self.size(font: font, width: CGFloat(MAXFLOAT))
+        let size = self.size(font: font, width: LXSwiftApp.screenW)
         return size.width
     }
     

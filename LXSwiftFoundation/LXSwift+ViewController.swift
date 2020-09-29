@@ -25,9 +25,9 @@ extension LXSwiftBasics where Base: UIViewController {
               aboveController = aboveController?.presentedViewController
           }
           return aboveController
-      }
+       }
     
-    /// dismiss
+       /// dismiss
        public func dismissViewController() {
            if base.navigationController != nil {
                base.navigationController?.dismiss(animated: true, completion: nil)

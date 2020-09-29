@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		04037E252520E83900FAAE37 /* LXSwift+Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04037E242520E83900FAAE37 /* LXSwift+Number.swift */; };
+		047C08F425237F020039806B /* LXSwift+NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047C08F325237F020039806B /* LXSwift+NSAttributedString.swift */; };
 		0483CD2825221CA80079FCEC /* LXSwiftTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0483CD2725221CA80079FCEC /* LXSwiftTextField.swift */; };
 		0483CD2A25221D7D0079FCEC /* LXSwift+TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0483CD2925221D7D0079FCEC /* LXSwift+TextField.swift */; };
 		04E627E0251E3A490033BBA5 /* LXSwift+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E627DF251E3A490033BBA5 /* LXSwift+Color.swift */; };
@@ -65,6 +66,7 @@
 
 /* Begin PBXFileReference section */
 		04037E242520E83900FAAE37 /* LXSwift+Number.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LXSwift+Number.swift"; sourceTree = "<group>"; };
+		047C08F325237F020039806B /* LXSwift+NSAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LXSwift+NSAttributedString.swift"; sourceTree = "<group>"; };
 		0483CD2725221CA80079FCEC /* LXSwiftTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXSwiftTextField.swift; sourceTree = "<group>"; };
 		0483CD2925221D7D0079FCEC /* LXSwift+TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LXSwift+TextField.swift"; sourceTree = "<group>"; };
 		04E627DF251E3A490033BBA5 /* LXSwift+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LXSwift+Color.swift"; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				0483CD2725221CA80079FCEC /* LXSwiftTextField.swift */,
 				0483CD2925221D7D0079FCEC /* LXSwift+TextField.swift */,
 				76191A812522CE96001D6633 /* LXSwift+TextView.swift */,
+				047C08F325237F020039806B /* LXSwift+NSAttributedString.swift */,
 			);
 			path = LXSwiftFoundation;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 				04E627E2251E48FE0033BBA5 /* LXSwift+Int.swift in Sources */,
 				7607A0A0251B61220071B9AD /* LXSwift+Bundle.swift in Sources */,
 				7607A0DE251C72620071B9AD /* LXSwiftViewController.swift in Sources */,
+				047C08F425237F020039806B /* LXSwift+NSAttributedString.swift in Sources */,
 				7607A083251B1C0B0071B9AD /* ViewController.swift in Sources */,
 				7607A0C8251C70ED0071B9AD /* LXSwiftView.swift in Sources */,
 				7607A0AA251C4FC10071B9AD /* LXSwift+FileManager.swift in Sources */,

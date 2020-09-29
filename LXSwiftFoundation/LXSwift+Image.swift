@@ -49,7 +49,72 @@ extension LXSwiftBasics where Base: UIImage {
        }
 }
 
-//MARK: -  Extending methods and properties for UIImage
+
+//MARK: -  Extending methods and properties for UIImage cut
+extension LXSwiftBasics where Base: UIImage {
+    /// interception roundCorners  with image
+    ///
+    /// - Parameters:
+    ///   - roundCorners: left right top bottom
+    ///   - cornerRadi: size
+    public func roundImage(by roundCorners: UIRectCorner = .allCorners,cornerRadi: CGFloat) -> UIImage? {
+        return roundImage(roundCorners: roundCorners, cornerRadii: CGSize(width: cornerRadi, height: cornerRadi))
+    }
+ 
+    /// interception roundCorners  with image
+    ///
+    /// - Parameters:
+    ///   - roundCorners: left right top bottom
+    ///   - cornerRadi: size
+    public func roundImage(roundCorners: UIRectCorner = UIRectCorner.allCorners, cornerRadii: CGSize) -> UIImage? {
+        
+        let imageRect = CGRect(origin: CGPoint.zero, size: base.size)
+        UIGraphicsBeginImageContextWithOptions(base.size, false, base.scale)
+        defer { UIGraphicsEndImageContext() }
+        let context = UIGraphicsGetCurrentContext()
+        guard context != nil else { return nil }
+        context?.setShouldAntialias(true)
+        let bezierPath = UIBezierPath(roundedRect: imageRect,
+                                      byRoundingCorners: roundCorners,
+                                      cornerRadii: cornerRadii)
+        bezierPath.close()
+        bezierPath.addClip()
+        base.draw(in: imageRect)
+        return UIGraphicsGetImageFromCurrentImageContext()
+    }
+    
+    /// division more image
+      ///
+      /// - Parameters:
+      ///   - row:  row count
+      ///   - col: col count
+     public func imageCut(with row:Int, col:Int) -> [UIImage] {
+          
+          guard  let imageRef = base.cgImage else {return [UIImage()]}
+          var images : [UIImage] = [UIImage]()
+          for i in 0..<row {
+              for j in 0..<col {
+                  guard let subImageRef = imageRef.cropping(to: CGRect(x: CGFloat(j * imageRef.width / col), y: CGFloat(i * imageRef.height / row), width: CGFloat(imageRef.width / col), height: CGFloat(imageRef.height / row))) else {return [UIImage()]}
+                  images.append(UIImage(cgImage: subImageRef))
+              }
+          }
+          return images
+      }
+    
+     /// circle image
+      public var imageWithCircle: UIImage {
+         UIGraphicsBeginImageContextWithOptions(base.size, false, 0.0)
+         let circlePath = UIBezierPath(ovalIn: CGRect(origin: CGPoint.zero, size: base.size))
+         circlePath.addClip()
+         base.draw(at: CGPoint.zero)
+         guard let image = UIGraphicsGetImageFromCurrentImageContext() else {return base}
+         UIGraphicsEndImageContext()
+         return image
+    }
+    
+}
+
+//MARK: -  Extending methods and properties for UIImage init
 extension LXSwiftBasics where Base: UIImage {
 
       /// create image return newImage
@@ -67,58 +132,13 @@ extension LXSwiftBasics where Base: UIImage {
           return img
       }
       
-         /// interception roundCorners  with image
-         ///
-         /// - Parameters:
-         ///   - roundCorners: left right top bottom
-         ///   - cornerRadi: size
-         public func roundImage(by roundCorners: UIRectCorner = .allCorners,
-                             cornerRadi: CGFloat) -> UIImage? {
-             return roundImage(roundCorners: roundCorners, cornerRadii: CGSize(width: cornerRadi, height: cornerRadi))
-         }
-      
-         /// interception roundCorners  with image
-         ///
-         /// - Parameters:
-         ///   - roundCorners: left right top bottom
-         ///   - cornerRadi: size
-         public func roundImage(roundCorners: UIRectCorner = UIRectCorner.allCorners, cornerRadii: CGSize) -> UIImage? {
-             
-             let imageRect = CGRect(origin: CGPoint.zero, size: base.size)
-             UIGraphicsBeginImageContextWithOptions(base.size, false, base.scale)
-             defer { UIGraphicsEndImageContext() }
-             let context = UIGraphicsGetCurrentContext()
-             guard context != nil else { return nil }
-             context?.setShouldAntialias(true)
-             let bezierPath = UIBezierPath(roundedRect: imageRect,
-                                           byRoundingCorners: roundCorners,
-                                           cornerRadii: cornerRadii)
-             bezierPath.close()
-             bezierPath.addClip()
-             base.draw(in: imageRect)
-             return UIGraphicsGetImageFromCurrentImageContext()
-         }
-      
-       /// circle image
-       ///
-       /// - Parameters:
-       ///   - image: image
-     public static func imageWithCircle(image: UIImage) -> UIImage {
-          UIGraphicsBeginImageContextWithOptions(image.size, false, 0.0)
-          let circlePath = UIBezierPath(ovalIn: CGRect(origin: CGPoint.zero, size: image.size))
-          circlePath.addClip()
-          image.draw(at: CGPoint.zero)
-          guard let img = UIGraphicsGetImageFromCurrentImageContext() else {return image}
-          UIGraphicsEndImageContext()
-          return img
-      }
-      
+        
       
       /// video image
       ///
       /// - Parameters:
       ///   - videoUrl: video Url
-     public static func imageWithVideoPath(videoUrl: URL?) -> UIImage?{
+     public static func image(with videoUrl: URL?) -> UIImage?{
           guard let videoUrl = videoUrl else { return nil }
           
           let asset = AVURLAsset(url: videoUrl, options: nil)
@@ -136,7 +156,7 @@ extension LXSwiftBasics where Base: UIImage {
       /// - Parameters:
       ///   - bgImage: bg image
       ///   - waterImage: water image
-     public static func imageWithBgImage(bgImage: UIImage?, waterImage: UIImage?) -> UIImage?{
+     public static func image(with bgImage: UIImage?, waterImage: UIImage?) -> UIImage?{
           guard let bgImage = bgImage,let waterImage = waterImage else { return nil }
           UIGraphicsBeginImageContextWithOptions(bgImage.size, false, 0.0)
           bgImage.draw(in: CGRect(origin: CGPoint.zero, size: bgImage.size))
@@ -147,25 +167,7 @@ extension LXSwiftBasics where Base: UIImage {
       }
       
       
-      /// division more image
-      ///
-      /// - Parameters:
-      ///   - image: image
-      ///   - row:  row count
-      ///   - col: col count
-     public static func imageWithCutImage(image: UIImage, row:Int, col:Int) -> [UIImage] {
-          
-          guard  let imageRef = image.cgImage else {return [UIImage()]}
-          var images : [UIImage] = [UIImage]()
-          for i in 0..<row {
-              for j in 0..<col {
-                  guard let subImageRef = imageRef.cropping(to: CGRect(x: CGFloat(j * imageRef.width / col), y: CGFloat(i * imageRef.height / row), width: CGFloat(imageRef.width / col), height: CGFloat(imageRef.height / row))) else {return [UIImage()]}
-                  images.append(UIImage(cgImage: subImageRef))
-              }
-          }
-          return images
-      }
-    
+      
         /// add border for image
         ///
         /// - Parameters:
@@ -173,8 +175,8 @@ extension LXSwiftBasics where Base: UIImage {
         ///   - borderWidth: size
         ///   - borderColor: size
         /// - Returns: border image
-        public func withBorder(radius: CGFloat, borderWidth: CGFloat, borderColor: UIColor) -> UIImage {
-            return withRound(radius: radius, corners: .allCorners, borderWidth: borderWidth, borderColor: borderColor)
+        public func setBorder(radius: CGFloat, borderWidth: CGFloat, borderColor: UIColor) -> UIImage {
+            return setRound(radius: radius, corners: .allCorners, borderWidth: borderWidth, borderColor: borderColor)
         }
         
         /// Cut image, cut or add border according to radius, corner, border, etc
@@ -185,7 +187,7 @@ extension LXSwiftBasics where Base: UIImage {
         ///   - borderWidth: size
         ///   - borderColor: size
         /// - Returns: new image
-        public func withRound(radius: CGFloat,
+        public func setRound(radius: CGFloat,
                        corners: UIRectCorner = .allCorners,
                        borderWidth: CGFloat = 0,
                        borderColor: UIColor = UIColor.white) -> UIImage {
@@ -338,4 +340,75 @@ extension LXSwiftBasics where Base: UIImage {
             
             return UIImage(cgImage: targetCGImage)
         }
+    
+}
+
+//MARK: -  Extending methods and properties for UIImage async
+extension LXSwiftBasics where Base: UIImage {
+    
+    /// async create image return newImage
+    ///
+    /// - Parameters:
+    ///   - color: color
+    ///   - size: size
+    public static func async_image(of color: UIColor, size: CGSize, complete: @escaping (UIImage?) -> ()) {
+            DispatchQueue.global().async{
+               let async_image = self.image(of: color, size: size)
+               DispatchQueue.main.async(execute: {
+                   complete(async_image)
+            })
+        }
+    }
+    
+     /// async interception roundCorners  with image
+     ///
+     /// - Parameters:
+     ///   - roundCorners: left right top bottom
+     ///   - cornerRadi: size
+    public func async_roundImage(by roundCorners: UIRectCorner = .allCorners, cornerRadi: CGFloat, complete: @escaping (UIImage?) -> ()) {
+          DispatchQueue.global().async{
+            let async_image = self.roundImage(roundCorners: roundCorners, cornerRadii: CGSize(width: cornerRadi, height: cornerRadi))
+             DispatchQueue.main.async(execute: {
+                 complete(async_image)
+             })
+         }
+    }
+    
+    /// async scale return image
+    ///
+    /// - Parameter scale: (0~1)
+    /// - Returns: newimage
+    public func async_zoomTo(by size: CGSize, contentMode: UIView.ContentMode = .scaleAspectFill, complete: @escaping (UIImage?) -> ()) {
+          DispatchQueue.global().async{
+            let async_image = self.zoomTo(size: size, mode: contentMode)
+             DispatchQueue.main.async(execute: {
+                 complete(async_image)
+             })
+         }
+    }
+    
+    /// async circle image
+    public func async_imageWithCircle(complete: @escaping (UIImage?) -> ()) {
+          DispatchQueue.global().async{
+            let async_image = self.imageWithCircle
+             DispatchQueue.main.async(execute: {
+                 complete(async_image)
+             })
+         }
+    }
+    
+
+    /// async video image
+    ///
+    /// - Parameters:
+    ///   - videoUrl: video Url
+    public static func async_image(with videoUrl: URL?, complete: @escaping (UIImage?) -> ()) {
+          DispatchQueue.global().async{
+            let async_image = self.image(with: videoUrl)
+             DispatchQueue.main.async(execute: {
+                 complete(async_image)
+             })
+         }
+    }
+
 }

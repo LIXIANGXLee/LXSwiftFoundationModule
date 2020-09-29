@@ -25,9 +25,11 @@ extension LXSwiftBasics where Base : LXSwiftTextView {
         base.setNeedsLayout()
     }
     
-     /// set placeholder and color
+     /// call updateUI  after set text or NSAttributedString
+     ///After calling this method, if you want to call the callback function setHandle, please call after setHandle settings.
      public func updateUI() {
          base.textDidChange()
+         base.textCallBack?(base.text)
      }
     
      /// remove observer

@@ -21,19 +21,19 @@ class ViewController: UIViewController {
 //        v.lx.setGradientLayer(with: [UIColor.lx.color(hex: "333333")!.cgColor, UIColor.lx.color(hex: "FFFFFF")!.cgColor])
 //
 //
-        let str = "dfhv"
-        
-        print("\(str.lx.subString(with: 3..<3))")
-        print("\(str.lx.substring(from: 4))")
-        print("\(str.lx.substring(to: 0))")
-
-        print("\(str.lx.md5)")
-        print("===\(UIDevice.lx.isPad)")
-        print("===\(UIDevice.lx.isPhone)")
-        print("===\(Bundle.lx.bundleVersion ?? "")")
-
-        print("-=-=-=\(NSNumber(value: 2).lx.numberFormatter())")
-       
+//        let str = "dfhv"
+//
+//        print("\(str.lx.subString(with: 3..<3))")
+//        print("\(str.lx.substring(from: 4))")
+//        print("\(str.lx.substring(to: 0))")
+//
+//        print("\(str.lx.md5)")
+//        print("===\(UIDevice.lx.isPad)")
+//        print("===\(UIDevice.lx.isPhone)")
+//        print("===\(Bundle.lx.bundleVersion ?? "")")
+//
+//        print("-=-=-=\(NSNumber(value: 2).lx.numberFormatter())")
+//
      
         
         var field = LXSwiftTextView()
@@ -48,14 +48,16 @@ class ViewController: UIViewController {
         
         field.text = "dsfhsdkhgkasdjkfjdsafjkdsjvdsjf dsjhvfdvdf"
         
-        field.lx.updateUI()
 
         field.lx.setHandle { (text) in
             print("-=-=-=-=\(text)")
         }
+        
+        field.lx.updateUI()
+
 //        field.textRectInsert = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         
-       print("-=-=--=-=-=\( "0000".lx.containsEmoji)")
+//       print("-=-=--=-=-=\( "0000".lx.containsEmoji)")
     }
  
 

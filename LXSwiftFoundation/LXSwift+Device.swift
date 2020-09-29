@@ -31,12 +31,12 @@ extension LXSwiftBasics where Base: UIDevice {
         }
     }
     
-   /// 判断是否是模拟器
+   /// is Simulator
     public var isSimulator: Bool {
        return base.model.range(of: "Simulator") != nil
     }
    
-    /// 判断设备是否能够打电话
+    ///is can call tel
     public static var canMakePhoneCalls: Bool {
        return UIApplication.shared.canOpenURL(URL(string: "tel://")!)
     }
