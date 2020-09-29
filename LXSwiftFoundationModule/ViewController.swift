@@ -36,17 +36,24 @@ class ViewController: UIViewController {
        
      
         
-        var field = LXSwiftTextField()
+        var field = LXSwiftTextView()
         field.frame = CGRect(x: 20, y: 100, width: 300, height: 40)
         field.backgroundColor = UIColor.red
-//        field.lx.maxLength = 4
+        field.lx.maxLength = 4
         
 //        field.placeholder  = "fdfdsagr"
         view.addSubview(field)
         
         field.lx.set(with: "fdfdsfggdgfdvcdbf")
         
-        field.textRectInsert = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        field.text = "dsfhsdkhgkasdjkfjdsafjkdsjvdsjf dsjhvfdvdf"
+        
+        field.lx.updateUI()
+
+        field.lx.setHandle { (text) in
+            print("-=-=-=-=\(text)")
+        }
+//        field.textRectInsert = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         
        print("-=-=--=-=-=\( "0000".lx.containsEmoji)")
     }

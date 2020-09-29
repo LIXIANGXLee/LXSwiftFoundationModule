@@ -69,7 +69,7 @@ extension LXSwiftTextField {
      
      /// action
      @objc internal func textFieldTextChange(notification: Notification) {
-        if let maxLength = self.lx.maxLength {
+          if let maxLength = self.lx.maxLength {
               if (text?.count ?? 0) > maxLength {
                 text = text?.lx.substring(to: maxLength)
               }

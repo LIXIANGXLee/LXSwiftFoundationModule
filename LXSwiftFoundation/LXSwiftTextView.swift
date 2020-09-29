@@ -14,29 +14,21 @@ import LXFitManager
 open class LXSwiftTextView: UITextView {
     
     public typealias TextCallBack = (String) -> Void
-
     public var textCallBack: LXSwiftTextView.TextCallBack?
     
-    ///Default copy
-    public var placehoder: String = "" {
-        didSet {
-            placehoderLabel.text = placehoder
-            setNeedsLayout()
-        }
-    }
-    
-    ///Default copy color
-    public var placehoderColor: UIColor = UIColor.lightGray {
-        didSet {
-            placehoderLabel.textColor = placehoderColor
-        }
-    }
-
     ///Label showing copywriting
-    fileprivate var placehoderLabel: UILabel!
+    internal var placehoderLabel: UILabel!
     override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
-        setUI()
+        placehoderLabel = UILabel()
+        placehoderLabel.numberOfLines = 0
+        placehoderLabel.backgroundColor = UIColor.clear
+        addSubview(placehoderLabel)
+      
+        /// call after placehoderLabel
+        font = UIFont.systemFont(ofSize: 14).fitFont
+
+        NotificationCenter.default.addObserver(self, selector: #selector(textDidChange), name: UITextView.textDidChangeNotification, object: self)
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -44,48 +36,8 @@ open class LXSwiftTextView: UITextView {
     }
     
     ///Destruction
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-
-    open override func layoutSubviews() {
-        super.layoutSubviews()
-        let labelX = LXFit.fitInt(5)
-        let labelY = LXFit.fitInt(8)
-        
-        let size = self.placehoder.lx.size(font: placehoderLabel.font, width: self.frame.width - CGFloat(labelX * 2))
-        placehoderLabel.frame = CGRect(origin: CGPoint(x: labelX, y: labelY), size: size)
-    }
-}
-
-// MARK: - public
-extension LXSwiftTextView {
-
-    /// public method call back
-    public func setHandle(_ textCallBack: LXSwiftTextView.TextCallBack?) {
-        self.textCallBack = textCallBack
-    }
-}
-
-// MARK: - private
-extension LXSwiftTextView {
-    
-    fileprivate func setUI() {
-        
-        placehoderLabel = UILabel()
-        placehoderLabel.font = UIFont.systemFont(ofSize: 14).fitFont
-        placehoderLabel.numberOfLines = 0
-        placehoderLabel.backgroundColor = UIColor.clear
-        addSubview(placehoderLabel)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(textDidChange), name: UITextView.textDidChangeNotification, object: self)
-    }
-    
-    @objc fileprivate func textDidChange() {
-        placehoderLabel.isHidden = self.hasText
-        textCallBack?(self.text)
-    }
-    
+    deinit { NotificationCenter.default.removeObserver(self) }
+   
     open override var font: UIFont? {
         didSet {
             guard let f = font else { return }
@@ -94,16 +46,41 @@ extension LXSwiftTextView {
         }
     }
     
-    open override var text: String! {
-        didSet {
-            textDidChange()
-        }
+    open override func layoutSubviews() {
+        super.layoutSubviews()
+        let labelX = LXFit.fitInt(5)
+        let labelY = LXFit.fitInt(8)
+        
+        let size =  self.placehoderLabel.text?.lx.size(font: placehoderLabel.font, width: self.frame.width - CGFloat(labelX * 2))
+        placehoderLabel.frame = CGRect(origin: CGPoint(x: labelX, y: labelY), size: size ?? CGSize.zero)
     }
+}
+
+// MARK: - private
+ 
+private var maxTextLengthKey: Void?
+extension LXSwiftTextView {
     
-    open override var attributedText: NSAttributedString! {
-        didSet {
-            textDidChange()
+    /// can save maxTextLength
+    internal var maxTextLength: Int? {
+       set {
+          objc_setAssociatedObject(self, &maxTextLengthKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
+        }
+        get {
+            return objc_getAssociatedObject(self, &maxTextLengthKey) as? Int
+        }
+     }
+    
+    /// 事件监听
+    @objc internal func textDidChange() {
+       placehoderLabel.isHidden = self.hasText
+       
+        if let maxLength = self.maxTextLength, (text?.count ?? 0) > maxLength{
+              text = text?.lx.substring(to: maxLength)
+        }else{
+              textCallBack?(self.text)
         }
     }
+        
 }
 
