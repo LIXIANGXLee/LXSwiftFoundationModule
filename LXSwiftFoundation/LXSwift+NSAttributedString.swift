@@ -49,7 +49,7 @@ extension LXSwiftBasics where Base : NSMutableAttributedString {
     
     /// Set font information
     @discardableResult
-    public func setFont(_ font: UIFont?, range: NSRange? = nil) -> NSMutableAttributedString {
+    public func set(with font: UIFont?, range: NSRange? = nil) -> NSMutableAttributedString {
         let range = range ?? NSMakeRange(0, base.length)
         setAttribute(.font, value: font, range: range)
         return base
@@ -57,8 +57,8 @@ extension LXSwiftBasics where Base : NSMutableAttributedString {
     
     /// Set font color information
     @discardableResult
-    public func setTextColor(_ color: UIColor?, range: NSRange? = nil) -> NSMutableAttributedString {
-        guard let color = color else { return base}
+    public func set(with textColor: UIColor?, range: NSRange? = nil) -> NSMutableAttributedString {
+        guard let color = textColor else { return base}
         let range = range ?? NSMakeRange(0, base.length)
         setAttribute(.foregroundColor, value: color, range: range)
         return base
@@ -66,7 +66,7 @@ extension LXSwiftBasics where Base : NSMutableAttributedString {
     
     /// The background color of the font
     @discardableResult
-    public func setBackgroundColor(_ backgroundColor: UIColor?, range: NSRange? = nil) -> NSMutableAttributedString {
+    public func setBackgroundColor(with backgroundColor: UIColor?, range: NSRange? = nil) -> NSMutableAttributedString {
         guard let backgroundColor = backgroundColor else { return base}
         let range = range ?? NSMakeRange(0, base.length)
         setAttribute(.backgroundColor, value: backgroundColor, range: range)

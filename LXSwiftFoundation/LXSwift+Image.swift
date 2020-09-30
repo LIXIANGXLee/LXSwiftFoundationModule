@@ -131,9 +131,7 @@ extension LXSwiftBasics where Base: UIImage {
           UIGraphicsEndImageContext()
           return img
       }
-      
-        
-      
+            
       /// video image
       ///
       /// - Parameters:
@@ -165,9 +163,7 @@ extension LXSwiftBasics where Base: UIImage {
           UIGraphicsEndImageContext()
           return resultingImage
       }
-      
-      
-      
+            
         /// add border for image
         ///
         /// - Parameters:
@@ -226,7 +222,6 @@ extension LXSwiftBasics where Base: UIImage {
             guard let targetImage = image else { return UIImage() }
             return targetImage
         }
-        
         
         /// scale return image
         ///
@@ -335,9 +330,7 @@ extension LXSwiftBasics where Base: UIImage {
             let colorSpace = CGColorSpaceCreateDeviceGray()
             let context = CGContext(data: nil, width: Int(width), height: Int(height), bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: CGImageAlphaInfo.none.rawValue)
             context?.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
-            
             guard let targetCGImage = context?.makeImage() else { return nil }
-            
             return UIImage(cgImage: targetCGImage)
         }
     
