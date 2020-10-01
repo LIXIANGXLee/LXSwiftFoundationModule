@@ -34,6 +34,7 @@ class ViewController: UIViewController {
 //
 //        print("-=-=-=\(NSNumber(value: 2).lx.numberFormatter())")
 //
+  
      
         
         var field = LXSwiftTextView()
@@ -58,6 +59,16 @@ class ViewController: UIViewController {
 //        field.textRectInsert = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         
 //       print("-=-=--=-=-=\( "0000".lx.containsEmoji)")
+        
+        
+             
+             let imgview = UIImageView(frame: CGRect(x: 200, y: 200, width: 300, height: 200))
+            imgview.contentMode = .scaleAspectFit
+            imgview.image =  field.lx.snapShotImage
+
+             view.addSubview(imgview)
+             
+        
     }
  
 

@@ -7,39 +7,60 @@
 //
 
 import UIKit
+import WebKit
 
 extension UIView: LXSwiftCompatible { }
 
 //MARK: -  Extending properties for UIView
 extension LXSwiftBasics where Base: UIView {
     
-       /// presented root
-       public var aboveView: UIView? {
-          var aboveController = UIApplication.shared.delegate?.window??.rootViewController
-          while aboveController?.presentedViewController != nil {
-              aboveController = aboveController?.presentedViewController
-          }
-        return aboveController?.view
-      }
-    
-       /// image
-       public var snapshotImageAfterScreenUpdates: UIImage? {
-            UIGraphicsBeginImageContextWithOptions(base.bounds.size, base.isOpaque, 0)
-           base.drawHierarchy(in: base.bounds, afterScreenUpdates: true)
-           let snap = UIGraphicsGetImageFromCurrentImageContext()
-           UIGraphicsEndImageContext()
-           return snap
+    /// presented root
+    public var aboveView: UIView? {
+       var aboveController = UIApplication.shared.delegate?.window??.rootViewController
+       while aboveController?.presentedViewController != nil {
+           aboveController = aboveController?.presentedViewController
        }
+       return aboveController?.view
+   }
+
+   /// snapShot image
+   public var snapShotImage: UIImage? {
        
-      /// image
-       public var snapshotImage: UIImage? {
-           UIGraphicsBeginImageContextWithOptions(base.bounds.size, base.isOpaque, 0)
-           base.layer.render(in: UIGraphicsGetCurrentContext()!)
-           let snap = UIGraphicsGetImageFromCurrentImageContext()
-           UIGraphicsEndImageContext()
-           return snap
-       }
+        UIGraphicsBeginImageContextWithOptions(base.bounds.size, base.isOpaque, 0)
+        if isContainsWKWebView() {
+            base.drawHierarchy(in: base.bounds, afterScreenUpdates: true)
+        }else{
+            base.layer.render(in: UIGraphicsGetCurrentContext()!)
+        }
     
+        let snapImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return snapImage
+   }
+
+    
+    /// chromium source - snapshot_manager, fix wkwebview screenshot bug.
+    public func isContainsWKWebView() -> Bool {
+        if base.isKind(of: WKWebView.self) {
+            return true
+        }
+        for subView in base.subviews {
+            if (subView.lx.isContainsWKWebView()) {
+                return true
+            }
+        }
+        return false
+    }
+
+   /// async  snapShot image
+    public func async_snapShotImage(complete: @escaping (UIImage?) -> ()) {
+        DispatchQueue.global().async{
+            let async_image = self.snapShotImage
+            DispatchQueue.main.async(execute: {
+                complete(async_image)
+            })
+        }
+     }
 }
 
 //MARK: -  Extending methods for UILabel

@@ -13,7 +13,7 @@ extension LXSwiftBasics where Base: UIScrollView {
     
     
     /// interception UIScrollView long image
-   public var snapshotLongImage: UIImage? {
+   public var snapShotLongImage: UIImage? {
        var image: UIImage? = nil
        
        //save origin contentOfffSet 和 frame
@@ -23,10 +23,8 @@ extension LXSwiftBasics where Base: UIScrollView {
        base.contentOffset = .zero
        base.frame = CGRect(x: 0, y: 0,width: base.contentSize.width,height: base.contentSize.height)
        UIGraphicsBeginImageContextWithOptions(base.frame.size,false,0)
-       guard let context = UIGraphicsGetCurrentContext() else {
-           return nil
-       }
-       
+       guard let context = UIGraphicsGetCurrentContext() else { return nil }
+
        base.layer.render(in: context)
        image = UIGraphicsGetImageFromCurrentImageContext()
        UIGraphicsEndImageContext()
@@ -35,11 +33,22 @@ extension LXSwiftBasics where Base: UIScrollView {
        base.frame = savedFrame
        return image
    }
+    
+    /// asyncinterception UIScrollView long image
+    public func async_snapShotLongImage(complete: @escaping (UIImage?) -> ()) {
+        DispatchQueue.global().async{
+            let async_image = self.snapShotLongImage
+            DispatchQueue.main.async(execute: {
+                complete(async_image)
+            })
+        }
+    }
 }
 
 //MARK: -  Extending methods for UIScrollView
 extension LXSwiftBasics where Base: UIScrollView {
-    ///  Scroll content to top
+   
+       ///  Scroll content to top
        public func scrollToTop(animated: Bool = true) {
            var off = base.contentOffset
            off.y = 0 - base.contentInset.top

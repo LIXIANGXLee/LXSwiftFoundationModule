@@ -52,43 +52,103 @@ extension LXSwiftBasics where Base: UIImage {
 
 //MARK: -  Extending methods and properties for UIImage cut
 extension LXSwiftBasics where Base: UIImage {
-    /// interception roundCorners  with image
-    ///
-    /// - Parameters:
-    ///   - roundCorners: left right top bottom
-    ///   - cornerRadi: size
-    public func roundImage(by roundCorners: UIRectCorner = .allCorners,cornerRadi: CGFloat) -> UIImage? {
-        return roundImage(roundCorners: roundCorners, cornerRadii: CGSize(width: cornerRadi, height: cornerRadi))
+    
+     /// circle image
+    public var imageWithCircle: UIImage? {
+        return roundImage(cornerRadii: base.size)
     }
- 
+    
     /// interception roundCorners  with image
     ///
     /// - Parameters:
     ///   - roundCorners: left right top bottom
     ///   - cornerRadi: size
-    public func roundImage(roundCorners: UIRectCorner = UIRectCorner.allCorners, cornerRadii: CGSize) -> UIImage? {
+    public func roundImage(byRoundCorners roundCorners: UIRectCorner = .allCorners,cornerRadi: CGFloat) -> UIImage? {
+        return roundImage(withRoundCorners: roundCorners, cornerRadii: CGSize(width: cornerRadi, height: cornerRadi))
+    }
+    
+    
+     /// add border for image
+     ///
+     /// - Parameters:
+     ///   - borderWidth: size
+     ///   - borderColor: size
+     /// - Returns: border image
+     public func roundImage(withBorderWidth borderWidth: CGFloat, borderColor: UIColor) -> UIImage? {
+         return roundImage(withBorderWidth: borderWidth, borderColor: borderColor, cornerRadii: base.size.width)
+     }
+
+    
+    ///The drawing method cuts the picture into the round corner and adds the border
+    ///-cornerRadii -- border cornerRadii size
+    ///-Borderwidth -- border size
+    ///-Bordercolor -- border color
+    public func roundImage(withBorderWidth borderWidth: CGFloat,borderColor color: UIColor,cornerRadii: CGFloat,roundCorners: UIRectCorner = UIRectCorner.allCorners) -> UIImage? {
+        let imageSize = CGSize(width: base.size.width + borderWidth * 2 , height: base.size.height + borderWidth * 2)
+        UIGraphicsBeginImageContext(imageSize)
+
+        let path = UIBezierPath(ovalIn: CGRect(x: 0,
+                                             y: 0,
+                                             width: imageSize.width,
+                                             height: imageSize.height))
+        
+       color.set()
+       path.fill()
+        
+       let clipPath = UIBezierPath(roundedRect: CGRect(x: borderWidth, y: borderWidth,  width: base.size.width,  height: base.size.height),byRoundingCorners: roundCorners,cornerRadii: CGSize(width: cornerRadii, height: cornerRadii))
+       clipPath.addClip()
+       base.draw(at: CGPoint(x: borderWidth, y: borderWidth))
+       let newImage = UIGraphicsGetImageFromCurrentImageContext()
+       UIGraphicsEndImageContext()
+       return  newImage
+    }
+    
+    /// interception roundCorners  with image
+    ///
+    /// - Parameters:
+    ///   - roundCorners: left right top bottom
+    ///   - cornerRadi: size
+    public func roundImage(withRoundCorners roundCorners: UIRectCorner = UIRectCorner.allCorners, cornerRadii: CGSize) -> UIImage? {
         
         let imageRect = CGRect(origin: CGPoint.zero, size: base.size)
         UIGraphicsBeginImageContextWithOptions(base.size, false, base.scale)
-        defer { UIGraphicsEndImageContext() }
-        let context = UIGraphicsGetCurrentContext()
-        guard context != nil else { return nil }
-        context?.setShouldAntialias(true)
+        
+        if let context = UIGraphicsGetCurrentContext() {
+            context.setShouldAntialias(true)
+        }
         let bezierPath = UIBezierPath(roundedRect: imageRect,
                                       byRoundingCorners: roundCorners,
                                       cornerRadii: cornerRadii)
-        bezierPath.close()
         bezierPath.addClip()
         base.draw(in: imageRect)
-        return UIGraphicsGetImageFromCurrentImageContext()
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
+    }
+        
+
+     ///Frame screenshot (capture any part of the picture)
+     /// -ImageView
+     ///-BGView -- screenshot background
+     ///-Parameter completed: asynchronous completion callback (main thread callback)
+    public func imageShot(byFrame frame: CGRect?) -> UIImage? {
+        
+        UIGraphicsBeginImageContextWithOptions(base.size, false, 0.0)
+        let path = UIBezierPath(rect: frame!)
+        path.addClip()
+        base.draw(at: CGPoint.zero)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
     }
     
-    /// division more image
+      /// division more image
       ///
       /// - Parameters:
       ///   - row:  row count
       ///   - col: col count
-     public func imageCut(with row:Int, col:Int) -> [UIImage] {
+     public func imageCut(withRow row:Int, col:Int) -> [UIImage] {
           
           guard  let imageRef = base.cgImage else {return [UIImage()]}
           var images : [UIImage] = [UIImage]()
@@ -100,18 +160,7 @@ extension LXSwiftBasics where Base: UIImage {
           }
           return images
       }
-    
-     /// circle image
-      public var imageWithCircle: UIImage {
-         UIGraphicsBeginImageContextWithOptions(base.size, false, 0.0)
-         let circlePath = UIBezierPath(ovalIn: CGRect(origin: CGPoint.zero, size: base.size))
-         circlePath.addClip()
-         base.draw(at: CGPoint.zero)
-         guard let image = UIGraphicsGetImageFromCurrentImageContext() else {return base}
-         UIGraphicsEndImageContext()
-         return image
-    }
-    
+
 }
 
 //MARK: -  Extending methods and properties for UIImage init
@@ -122,7 +171,7 @@ extension LXSwiftBasics where Base: UIImage {
       /// - Parameters:
       ///   - color: color
       ///   - size: size
-    public static func image(of color: UIColor, size: CGSize) -> UIImage? {
+    public static func image(WithColor color: UIColor, size: CGSize = CGSize(width: 10, height: 10)) -> UIImage? {
           UIGraphicsBeginImageContextWithOptions(size, false, 1.0)
           let context = UIGraphicsGetCurrentContext()
           context?.setFillColor(color.cgColor)
@@ -131,12 +180,49 @@ extension LXSwiftBasics where Base: UIImage {
           UIGraphicsEndImageContext()
           return img
       }
+    
+    ///Image filter processing
+    ///- Image -- transfer picture
+    ///- filter -- input filter
+    public func imageFilter(withFilterName filterName: String) -> UIImage? {
+        let inputImage = CIImage(image: base)
+        let filter = CIFilter(name: filterName)
+        filter?.setValue(inputImage, forKey: kCIInputImageKey)
+        let outputImage =  filter?.outputImage!
+        let context: CIContext = CIContext(options: nil)
+        let cgImage = context.createCGImage(outputImage!, from: (outputImage?.extent)!)
+        let newImage = UIImage(cgImage: cgImage!)
+        return newImage
+    }
+
+    
+     /// add water for image
+     ///
+     ///   - Parameters:
+     ///   - images: bg image
+     ///   - imageRect: [imageRect]
+     public func imageCompose(withImages images:[UIImage], imageRect: [CGRect]) -> UIImage? {
+         let imageRef = base.cgImage
+         let w: CGFloat = CGFloat((imageRef?.width)!)
+         let h: CGFloat = CGFloat((imageRef?.height)!)
+         UIGraphicsBeginImageContext(CGSize(width: w, height: h))
+         base.draw(in: CGRect(x: 0, y: 0, width: w, height: h))
+         for i in 0..<images.count {
+            images[i].draw(in: CGRect(x: imageRect[i].origin.x,
+                                      y: imageRect[i].origin.y,
+                                      width: imageRect[i].size.width,
+                                      height:imageRect[i].size.height))
+         }
+         let resultImg = UIGraphicsGetImageFromCurrentImageContext()
+         UIGraphicsEndImageContext()
+         return resultImg
+    }
             
       /// video image
       ///
       /// - Parameters:
       ///   - videoUrl: video Url
-     public static func image(with videoUrl: URL?) -> UIImage?{
+     public static func image(withVideoUrl videoUrl: URL?) -> UIImage?{
           guard let videoUrl = videoUrl else { return nil }
           
           let asset = AVURLAsset(url: videoUrl, options: nil)
@@ -147,82 +233,9 @@ extension LXSwiftBasics where Base: UIImage {
           let shotImage = UIImage(cgImage: image)
           return shotImage;
       }
+    
+            
       
-      
-      /// add water for image
-      ///
-      /// - Parameters:
-      ///   - bgImage: bg image
-      ///   - waterImage: water image
-     public static func image(with bgImage: UIImage?, waterImage: UIImage?) -> UIImage?{
-          guard let bgImage = bgImage,let waterImage = waterImage else { return nil }
-          UIGraphicsBeginImageContextWithOptions(bgImage.size, false, 0.0)
-          bgImage.draw(in: CGRect(origin: CGPoint.zero, size: bgImage.size))
-          waterImage.draw(in: CGRect(x: 0, y:  bgImage.size.height-waterImage.size.height, width: waterImage.size.width, height: waterImage.size.height),blendMode: .overlay,alpha: 0.5)
-          let resultingImage = UIGraphicsGetImageFromCurrentImageContext()
-          UIGraphicsEndImageContext()
-          return resultingImage
-      }
-            
-        /// add border for image
-        ///
-        /// - Parameters:
-        ///   - radius: size
-        ///   - borderWidth: size
-        ///   - borderColor: size
-        /// - Returns: border image
-        public func setBorder(radius: CGFloat, borderWidth: CGFloat, borderColor: UIColor) -> UIImage {
-            return setRound(radius: radius, corners: .allCorners, borderWidth: borderWidth, borderColor: borderColor)
-        }
-        
-        /// Cut image, cut or add border according to radius, corner, border, etc
-        ///
-        /// - Parameters:
-        ///   - radius: size
-        ///   - corners:  left right top bottom
-        ///   - borderWidth: size
-        ///   - borderColor: size
-        /// - Returns: new image
-        public func setRound(radius: CGFloat,
-                       corners: UIRectCorner = .allCorners,
-                       borderWidth: CGFloat = 0,
-                       borderColor: UIColor = UIColor.white) -> UIImage {
-            let rect = CGRect(origin: CGPoint.zero, size: base.size)
-            UIGraphicsBeginImageContextWithOptions(rect.size, false, base.scale)
-            let context = UIGraphicsGetCurrentContext()
-            context?.scaleBy(x: 1, y: -1)
-            context?.translateBy(x: 0, y: -rect.size.height)
-            
-            let minSize = min(base.size.width, base.size.height)
-            if borderWidth < minSize / 2 {
-                let rectInsert = rect.insetBy(dx: borderWidth, dy: borderWidth)
-                let bezierPath = UIBezierPath(roundedRect: rectInsert, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: borderWidth))
-                bezierPath.close()
-                context?.saveGState()
-                bezierPath.addClip()
-                context?.addPath(bezierPath.cgPath)
-                context?.draw(base.cgImage!, in: rect)
-                context?.restoreGState()
-            }
-            
-            //border
-            if borderWidth > 0 && borderWidth < minSize / 2 {
-                let strokeRect = rect
-                let bezierPath = UIBezierPath(roundedRect: strokeRect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: borderWidth))
-                bezierPath.close()
-                bezierPath.addClip()
-                bezierPath.lineWidth = borderWidth
-                context?.addPath(bezierPath.cgPath)
-                context?.setStrokeColor(borderColor.cgColor)
-                context?.strokePath()
-            }
-            
-            let image = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            guard let targetImage = image else { return UIImage() }
-            return targetImage
-        }
-        
         /// scale return image
         ///
         /// - Parameter scale: (0~1)
@@ -244,7 +257,7 @@ extension LXSwiftBasics where Base: UIImage {
                     mode contentMode: UIView.ContentMode = .scaleAspectFill) -> UIImage {
             let targetRect = CGRect(origin: CGPoint(x: 0, y: 0), size: size)
             UIGraphicsBeginImageContextWithOptions(targetRect.size, true, UIScreen.main.scale)
-            let ctx = UIGraphicsGetCurrentContext() //获取上下文
+            let ctx = UIGraphicsGetCurrentContext()
             let bezier = UIBezierPath(roundedRect: targetRect, cornerRadius: 0)
             bezier.addClip()
             ctx?.addPath(bezier.cgPath)
@@ -344,9 +357,9 @@ extension LXSwiftBasics where Base: UIImage {
     /// - Parameters:
     ///   - color: color
     ///   - size: size
-    public static func async_image(of color: UIColor, size: CGSize, complete: @escaping (UIImage?) -> ()) {
+    public static func async_image(of color: UIColor, size: CGSize = CGSize(width: 10, height: 10), complete: @escaping (UIImage?) -> ()) {
             DispatchQueue.global().async{
-               let async_image = self.image(of: color, size: size)
+               let async_image = self.image(WithColor: color, size: size)
                DispatchQueue.main.async(execute: {
                    complete(async_image)
             })
@@ -360,25 +373,13 @@ extension LXSwiftBasics where Base: UIImage {
      ///   - cornerRadi: size
     public func async_roundImage(by roundCorners: UIRectCorner = .allCorners, cornerRadi: CGFloat, complete: @escaping (UIImage?) -> ()) {
           DispatchQueue.global().async{
-            let async_image = self.roundImage(roundCorners: roundCorners, cornerRadii: CGSize(width: cornerRadi, height: cornerRadi))
+            let async_image = self.roundImage(byRoundCorners: roundCorners, cornerRadi: cornerRadi)
              DispatchQueue.main.async(execute: {
                  complete(async_image)
              })
          }
     }
-    
-    /// async scale return image
-    ///
-    /// - Parameter scale: (0~1)
-    /// - Returns: newimage
-    public func async_zoomTo(by size: CGSize, contentMode: UIView.ContentMode = .scaleAspectFill, complete: @escaping (UIImage?) -> ()) {
-          DispatchQueue.global().async{
-            let async_image = self.zoomTo(size: size, mode: contentMode)
-             DispatchQueue.main.async(execute: {
-                 complete(async_image)
-             })
-         }
-    }
+
     
     /// async circle image
     public func async_imageWithCircle(complete: @escaping (UIImage?) -> ()) {
@@ -390,18 +391,101 @@ extension LXSwiftBasics where Base: UIImage {
          }
     }
     
-
+   
+    
     /// async video image
     ///
     /// - Parameters:
     ///   - videoUrl: video Url
     public static func async_image(with videoUrl: URL?, complete: @escaping (UIImage?) -> ()) {
           DispatchQueue.global().async{
-            let async_image = self.image(with: videoUrl)
+            let async_image = self.image(withVideoUrl: videoUrl)
+             DispatchQueue.main.async(execute: {
+                 complete(async_image)
+             })
+         }
+    }
+    
+    /// async The drawing method cuts the picture into the round corner and adds the border
+    ///-cornerRadii -- border cornerRadii size
+    ///-Borderwidth -- border size
+    ///-Bordercolor -- border color
+    public func async_image(with borderWidth: CGFloat,borderColor color: UIColor,cornerRadii: CGFloat,roundCorners: UIRectCorner = UIRectCorner.allCorners, complete: @escaping (UIImage?) -> ()) {
+          DispatchQueue.global().async{
+            let async_image = self.roundImage(withBorderWidth: borderWidth, borderColor: color, cornerRadii: cornerRadii,roundCorners: roundCorners)
              DispatchQueue.main.async(execute: {
                  complete(async_image)
              })
          }
     }
 
+
+    /// image scale size,  compress
+    ///
+    /// - Parameter size: curent
+    /// - Parameter contentMode: model
+    /// - Returns: image
+    public func async_zoomTo(size: CGSize, contentMode: UIView.ContentMode = .scaleAspectFill, complete: @escaping (UIImage?) -> ()) {
+        DispatchQueue.global().async{
+           let async_image = self.zoomTo(size: size, mode: contentMode)
+            DispatchQueue.main.async(execute: {
+                complete(async_image)
+            })
+        }
+    }
+        
+   ///  async add water for image
+   ///
+   ///   - Parameters:
+   ///   - images: bg image
+   ///   - imageRect: [imageRect]
+   public func async_imageCompose(with images:[UIImage], imageRect: [CGRect], complete: @escaping (UIImage?) -> ()) {
+       DispatchQueue.global().async{
+          let async_image = self.imageCompose(withImages: images, imageRect: imageRect)
+           DispatchQueue.main.async(execute: {
+               complete(async_image)
+           })
+       }
+       
+   }
+   
+   
+   /// division more image
+   ///
+   /// - Parameters:
+   ///   - row:  row count
+   ///   - col: col count
+   public func async_imageCut(with row:Int, col:Int, complete: @escaping ([UIImage?]?) -> ()){
+          DispatchQueue.global().async{
+             let async_images = self.imageCut(withRow: row, col: col)
+              DispatchQueue.main.async(execute: {
+                  complete(async_images)
+              })
+          }
+   }
+
+  ///Frame screenshot (capture any part of the picture)
+  /// -ImageView
+  ///-BGView -- screenshot background
+  ///-Parameter completed: asynchronous completion callback (main thread callback)
+   public func async_imageShot(byFrame frame: CGRect?, complete: @escaping (UIImage?) -> ()){
+          DispatchQueue.global().async{
+             let async_images = self.imageShot(byFrame: frame)
+              DispatchQueue.main.async(execute: {
+                  complete(async_images)
+              })
+          }
+   }
+    
+    ///  async Image filter processing
+    ///- Image -- transfer picture
+    ///- filter -- input filter
+    public func async_imageFilter(withFilterName filterName: String,completed:@escaping (UIImage?) -> ()) -> Void {
+        DispatchQueue.global().async{
+            let newImage = self.imageFilter(withFilterName: filterName)
+            DispatchQueue.main.async(execute: {
+                completed(newImage)
+            })
+        }
+    }
 }

@@ -20,13 +20,9 @@ extension LXSwiftBasics where Base: UIColor {
      ///   - lightHex:Color of light mode (hexadecimal)
      ///   - darkHex:  Color of dark mode (hexadecimal)
      ///   - alpha: alpha
-     public  static func color(lightHex: String,
-                         darkHex: String,
-                         alpha: CGFloat = 1.0)
-           -> UIColor {
+     public  static func color(lightHex: String,  darkHex: String,alpha: CGFloat = 1.0) -> UIColor {
            let light = UIColor(lightHex, alpha) ?? UIColor.black
            let dark =  UIColor(darkHex, alpha) ?? UIColor.white
-               
            return color(lightColor: light, darkColor: dark)
        }
 
