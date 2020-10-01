@@ -62,12 +62,16 @@ class ViewController: UIViewController {
         
         
              
-             let imgview = UIImageView(frame: CGRect(x: 200, y: 200, width: 300, height: 200))
+             let imgview = LXSwiftImgView(frame: CGRect(x: 200, y: 200, width: 300, height: 200))
             imgview.contentMode = .scaleAspectFit
             imgview.image =  field.lx.snapShotImage
 
+             imgview.isUserInteractionEnabled = true
              view.addSubview(imgview)
              
+        imgview.setHandle { (imgview) in
+            print("====\(imgview)")
+        }
         
     }
  
