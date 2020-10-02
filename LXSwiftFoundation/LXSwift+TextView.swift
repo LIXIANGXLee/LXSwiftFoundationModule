@@ -25,6 +25,12 @@ extension LXSwiftBasics where Base : LXSwiftTextView {
         base.setNeedsLayout()
     }
     
+     /// set font and textColor
+     public func set(withFont font: UIFont,textColor: UIColor) {
+         base.font = font
+         base.textColor = textColor
+     }
+    
      /// call updateUI  after set text or NSAttributedString
      ///After calling this method, if you want to call the callback function setHandle, please call after setHandle settings.
      public func updateUI() {
@@ -34,7 +40,7 @@ extension LXSwiftBasics where Base : LXSwiftTextView {
     
      /// remove observer
      public func removeObserver() {
-        NotificationCenter.default.removeObserver(base)
+         NotificationCenter.default.removeObserver(base)
      }
     
     /// 配置文本可输入最长文本长度

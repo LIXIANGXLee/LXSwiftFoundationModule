@@ -40,10 +40,16 @@ extension LXSwiftBasics where Base : LXSwiftTextField {
     }
     
     /// set placeholder and color
-    public func set(with placeholder: String?,color: UIColor = UIColor.lx.color(hex: "999999")!) {
+    public func set(withPlaceholder placeholder: String?,color: UIColor = UIColor.lx.color(hex: "999999")!) {
         guard let placeholder = placeholder else {  return  }
         let att = NSMutableAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor : color])
         base.attributedPlaceholder = att
+    }
+    
+    /// set font and textColor
+    public func set(withFont font: UIFont,textColor: UIColor) {
+        base.font = font
+        base.textColor = textColor
     }
     
     /// remove observer

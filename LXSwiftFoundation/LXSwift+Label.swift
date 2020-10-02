@@ -27,7 +27,7 @@ extension LXSwiftBasics where Base: UILabel {
        ///- Font: set font
        ///- textcolor: set text color
        ///- alignment: set the text alignment method
-       public func set(font: UIFont, textColor: UIColor, alignment: NSTextAlignment? = nil) {
+       public func set(withFont font: UIFont, textColor: UIColor, alignment: NSTextAlignment? = nil) {
            base.font = font
            base.textColor = textColor
            guard let alignment = alignment else { return }

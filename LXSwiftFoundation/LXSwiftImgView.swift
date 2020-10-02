@@ -10,7 +10,7 @@ import UIKit
 
 open class LXSwiftImgView: UIImageView, LXSwiftUICompatible {
        /// call back
-    public typealias ImgViewCallBack = ((_ imgView: LXSwiftImgView) -> ())
+    public typealias ImgViewCallBack = ((_ imgView: LXSwiftImgView?) -> ())
     public var swiftModel: Any?
     public var imgViewCallBack: LXSwiftImgView.ImgViewCallBack?
 
@@ -40,7 +40,7 @@ extension LXSwiftImgView {
     
     ///action call
     @objc private func swiftImgViewAction(_ gesture: UIGestureRecognizer) {
-        guard let imgVIew = gesture.view as? LXSwiftImgView else { return }
-        self.imgViewCallBack?(imgVIew)
+        self.imgViewCallBack?(gesture.view as? LXSwiftImgView)
     }
+    
 }

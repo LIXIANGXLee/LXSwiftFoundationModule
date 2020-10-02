@@ -68,11 +68,16 @@ class ViewController: UIViewController {
 
              imgview.isUserInteractionEnabled = true
              view.addSubview(imgview)
-             
-        imgview.setHandle { (imgview) in
-            print("====\(imgview)")
-        }
         
+            imgview.lx.addGesture { (view) in
+                print("======\(view)")
+            }
+        
+//            imgview.setHandle { (imgview) in
+//                print("====\(imgview)")
+//            }
+//
+  
     }
  
 

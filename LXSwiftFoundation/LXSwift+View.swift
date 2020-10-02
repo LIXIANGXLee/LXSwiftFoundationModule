@@ -54,7 +54,7 @@ extension LXSwiftBasics where Base: UIView {
 
    /// async  snapShot image
     public func async_snapShotImage(complete: @escaping (UIImage?) -> ()) {
-        DispatchQueue.global().async{
+         DispatchQueue.global().async{
             let async_image = self.snapShotImage
             DispatchQueue.main.async(execute: {
                 complete(async_image)
@@ -63,7 +63,7 @@ extension LXSwiftBasics where Base: UIView {
      }
 }
 
-//MARK: -  Extending methods for UILabel
+//MARK: -  Extending methods for UIView
 extension LXSwiftBasics where Base: UIView {
     ///  view set Gradient
     ///
@@ -136,3 +136,35 @@ extension LXSwiftBasics where Base: UIView {
 
 }
 
+
+//MARK: -  Extending methods for UIView
+extension LXSwiftBasics where Base: UIView {
+    
+    /// add gesture
+    public func addGesture(_ callBack: @escaping ((UIView?) -> ())) {
+        base.callBack = callBack
+        let gesture = UITapGestureRecognizer(target: base, action: #selector(base.gestureTap(_:)))
+        base.addGestureRecognizer(gesture)
+    }
+    
+}
+
+
+private var viewCallBackKey: Void?
+extension UIView {
+    
+    /// can save callback
+    internal var callBack: ((UIView?) -> ())? {
+       set {
+          objc_setAssociatedObject(self, &viewCallBackKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
+        get {
+           return objc_getAssociatedObject(self, &viewCallBackKey) as? ((UIView?) -> ())
+        }
+    }
+    
+    @objc internal func gestureTap(_ gesture: UIGestureRecognizer) {
+        self.callBack?(gesture.view)
+    }
+    
+}
