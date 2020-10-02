@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import LXSwiftFoundation
 
 class ViewController: UIViewController {
 
@@ -62,21 +63,26 @@ class ViewController: UIViewController {
         
         
              
-             let imgview = LXSwiftImgView(frame: CGRect(x: 200, y: 200, width: 300, height: 200))
-            imgview.contentMode = .scaleAspectFit
-            imgview.image =  field.lx.snapShotImage
-
+             let imgview = LXSwiftButtonView(frame: CGRect(x: 10, y: 200, width: 300, height: 200))
+             imgview.contentMode = .scaleAspectFit
+             imgview.backgroundColor = UIColor.blue
              imgview.isUserInteractionEnabled = true
              view.addSubview(imgview)
         
-            imgview.lx.addGesture { (view) in
-                print("======\(view)")
-            }
+             imgview.lx.set(title: "haha", image: UIImage(named: "0gO3")!)
         
-//            imgview.setHandle { (imgview) in
-//                print("====\(imgview)")
-//            }
-//
+
+             imgview.lx.set(titleCallBack: { (rect) -> (CGRect) in
+                return CGRect(x: (rect.width - 40) * 0.5, y: 10, width: 40, height: 40)
+            }) { (rect) -> (CGRect) in
+                return CGRect(x: 0, y: 60, width: rect.width, height: 40)
+
+            }
+               
+            imgview.lx.setHandle { (button) in
+                  print("====\(button)")
+
+            }
   
     }
  

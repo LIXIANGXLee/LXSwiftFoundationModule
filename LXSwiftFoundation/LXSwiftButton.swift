@@ -27,11 +27,6 @@ open class LXSwiftButton: UIButton, LXSwiftUICompatible {
 /// private
 extension LXSwiftButton {
     
-    /// set handle for method call back 
-    public func setHandle(_ buttonCallBack: LXSwiftButton.ButtonCallBack?) {
-        self.buttonCallBack = buttonCallBack
-    }
-    
     ///action call
     @objc private func swiftButtonAction(_ button: LXSwiftButton) {
         self.buttonCallBack?(button)

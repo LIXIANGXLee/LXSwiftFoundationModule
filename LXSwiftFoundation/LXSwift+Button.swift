@@ -45,3 +45,14 @@ extension LXSwiftBasics where Base: UIButton {
         if let image = image { base.setImage(image, for: state) }
     }
 }
+
+//MARK: -  Extending properties for UIButton
+extension LXSwiftBasics where Base: LXSwiftButton {
+   
+    /// set handle for method call back
+    public func setHandle(_ buttonCallBack: LXSwiftButton.ButtonCallBack?) {
+        base.buttonCallBack = buttonCallBack
+    }
+}
+
+
