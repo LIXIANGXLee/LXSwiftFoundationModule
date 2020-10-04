@@ -16,7 +16,7 @@ open class LXSwiftTableView: UITableView ,LXSwiftUICompatible{
     
     override public init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
-        
+        backgroundColor = UIColor.white
         ///cell
         tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: LXSwiftApp.screenW, height: 0.001))
         tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width:  LXSwiftApp.screenW, height: 0.001))

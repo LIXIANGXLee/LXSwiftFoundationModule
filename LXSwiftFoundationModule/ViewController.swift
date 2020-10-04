@@ -10,7 +10,7 @@ import UIKit
 import LXSwiftFoundation
 
 class ViewController: UIViewController {
-
+    var  objc : LXObjcThreadActive! = nil
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,8 +61,13 @@ class ViewController: UIViewController {
         
 //       print("-=-=--=-=-=\( "0000".lx.containsEmoji)")
         
-        
+        objc =  LXObjcThreadActive()
              
+//        objc.start()
+//        objc.start()
+//        objc.start()
+//        objc.start()
+
              let imgview = LXSwiftButtonView(frame: CGRect(x: 10, y: 200, width: 300, height: 200))
              imgview.contentMode = .scaleAspectFit
              imgview.backgroundColor = UIColor.blue
@@ -84,9 +89,27 @@ class ViewController: UIViewController {
 
             }
   
+        
+        var stack = LXSwiftStack<Int>()
+        
+        
+        stack.push(10)
+        print("=---=\(stack.isEmpty())")
+        print("=---=\(stack.size())")
+
+        print("=---=\(stack.pop() ?? 0)")
+        
+        
     }
  
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        objc.executeTask {
+            print("-=-=-=-=-=-=-=-=")
+        }
+    }
+    
 
 }
 

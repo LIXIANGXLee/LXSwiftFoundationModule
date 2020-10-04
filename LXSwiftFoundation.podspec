@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "LXSwiftFoundation"
-  spec.version      = "3.2.8"
+  spec.version      = "3.2.10"
   spec.summary      = "LXSwiftFoundation."
 
   

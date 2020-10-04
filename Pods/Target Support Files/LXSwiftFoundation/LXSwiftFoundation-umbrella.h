@@ -10,7 +10,9 @@
 #endif
 #endif
 
+#import "LXObjcProxy.h"
 #import "LXObjcSuport.h"
+#import "LXObjcThreadActive.h"
 
 FOUNDATION_EXPORT double LXSwiftFoundationVersionNumber;
 FOUNDATION_EXPORT const unsigned char LXSwiftFoundationVersionString[];

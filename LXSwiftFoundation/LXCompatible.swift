@@ -9,7 +9,7 @@
 import UIKit
 
 /// Define protocol
-public protocol LXSwiftCompatible {}
+public protocol LXSwiftCompatible { }
 
 /// Extend calculation properties for protocol
 public extension LXSwiftCompatible {

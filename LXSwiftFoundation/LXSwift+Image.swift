@@ -195,6 +195,22 @@ extension LXSwiftBasics where Base: UIImage {
         return newImage
     }
 
+
+   
+     ///Erase pictures with gestures
+     ///-ImageView
+     ///-BGView -- screenshot background
+     ///-Parameter completed: asynchronous completion callback (main thread callback)
+    public static func clearImage(withView view: UIView?, rect: CGRect) -> UIImage? {
+        if view == nil { return nil  }
+        UIGraphicsBeginImageContextWithOptions((view?.bounds.size)!, false, 0.0)
+        let imageCtx = UIGraphicsGetCurrentContext()
+        view?.layer.render(in: imageCtx!)
+        imageCtx!.clear(rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
+    }
     
      /// add water for image
      ///
@@ -488,4 +504,20 @@ extension LXSwiftBasics where Base: UIImage {
             })
         }
     }
+    
+    
+     /// async Erase pictures with gestures
+     /// 
+     ///-ImageView
+     ///-BGView -- screenshot background
+     ///-Parameter completed: asynchronous completion callback (main thread callback)
+    public static func async_clearImage(withView view: UIView?, rect: CGRect, complete: @escaping (UIImage?) -> ()) {
+          DispatchQueue.global().async{
+            let async_image = self.clearImage(withView: view, rect: rect)
+             DispatchQueue.main.async(execute: {
+                 complete(async_image)
+             })
+         }
+    }
+    
 }

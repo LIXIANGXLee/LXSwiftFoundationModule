@@ -25,6 +25,7 @@ open class LXSwiftView: UIView,LXSwiftUICompatible {
 
    public override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = UIColor.white
         setupUI()
         setupViewModel()
     

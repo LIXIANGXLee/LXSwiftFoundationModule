@@ -15,6 +15,8 @@ open class LXSwiftScrollView: UIScrollView,LXSwiftUICompatible {
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
+           backgroundColor = UIColor.white
+
            if #available(iOS 11.0, *) {
               contentInsetAdjustmentBehavior = .never
            }else {
