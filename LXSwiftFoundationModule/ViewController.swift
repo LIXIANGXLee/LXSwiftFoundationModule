@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import LXSwiftFoundation
+//import LXSwiftFoundation
 
 class ViewController: UIViewController {
     var  objc : LXObjcThreadActive! = nil
@@ -63,32 +63,35 @@ class ViewController: UIViewController {
         
         objc =  LXObjcThreadActive()
              
-//        objc.start()
-//        objc.start()
-//        objc.start()
-//        objc.start()
+        objc.start()
+        objc.start()
+        objc.start()
+        objc.start()
 
-             let imgview = LXSwiftButtonView(frame: CGRect(x: 10, y: 200, width: 300, height: 200))
-             imgview.contentMode = .scaleAspectFit
+             let imgview = UIImageView(frame: CGRect(x: 10, y: 200, width: 300, height: 200))
+//             imgview.contentMode = .scaleAspectFit
              imgview.backgroundColor = UIColor.blue
              imgview.isUserInteractionEnabled = true
              view.addSubview(imgview)
         
-             imgview.lx.set(title: "haha", image: UIImage(named: "0gO3")!)
-        
-
-             imgview.lx.set(titleCallBack: { (rect) -> (CGRect) in
-                return CGRect(x: (rect.width - 40) * 0.5, y: 10, width: 40, height: 40)
-            }) { (rect) -> (CGRect) in
-                return CGRect(x: 0, y: 60, width: rect.width, height: 40)
-
-            }
-               
-            imgview.lx.setHandle { (button) in
-                  print("====\(button)")
-
-            }
-  
+//             imgview.lx.set(title: "haha", image: UIImage(named: "0gO3")!)
+//
+//
+//             imgview.lx.set(titleCallBack: { (rect) -> (CGRect) in
+//                return CGRect(x: (rect.width - 40) * 0.5, y: 10, width: 40, height: 40)
+//            }) { (rect) -> (CGRect) in
+//                return CGRect(x: 0, y: 60, width: rect.width, height: 40)
+//
+//            }
+//
+//            imgview.lx.setHandle { (button) in
+//                  print("====\(button)")
+//
+//            }
+        imgview.lx.addGesture { (view) in
+            
+            print("-=-=-=-=-=-=-=-=-")
+        }
         
         var stack = LXSwiftStack<Int>()
         
@@ -100,14 +103,18 @@ class ViewController: UIViewController {
         print("=---=\(stack.pop() ?? 0)")
         
         
+       
+        
+        
     }
  
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        objc.executeTask {
-            print("-=-=-=-=-=-=-=-=")
-        }
+
+        let vc = TestViewController()
+        self.present(vc, animated: true, completion: nil)
+        
     }
     
 

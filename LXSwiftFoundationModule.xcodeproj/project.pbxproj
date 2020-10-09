@@ -14,6 +14,60 @@
 		7607A088251B1C0D0071B9AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7607A087251B1C0D0071B9AD /* Assets.xcassets */; };
 		7607A08B251B1C0D0071B9AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7607A089251B1C0D0071B9AD /* LaunchScreen.storyboard */; };
 		7607A094251B1CB70071B9AD /* LXSwiftFoundation.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 7607A092251B1CB70071B9AD /* LXSwiftFoundation.podspec */; };
+		763271542530660D00B3C69E /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763271532530660D00B3C69E /* TestViewController.swift */; };
+		7632715A2530C1F300B3C69E /* UIView+ObjcPerformance.m in Sources */ = {isa = PBXBuildFile; fileRef = 763271592530C1F300B3C69E /* UIView+ObjcPerformance.m */; };
+		76AF521925300EDC0063538A /* LXSwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51E225300EDC0063538A /* LXSwiftViewController.swift */; };
+		76AF521A25300EDC0063538A /* LXSwiftStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51E325300EDC0063538A /* LXSwiftStack.swift */; };
+		76AF521B25300EDC0063538A /* LXSwift+Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51E425300EDC0063538A /* LXSwift+Dictionary.swift */; };
+		76AF521C25300EDC0063538A /* LXSwiftWordTextLable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51E525300EDC0063538A /* LXSwiftWordTextLable.swift */; };
+		76AF521D25300EDC0063538A /* LXObjcSuport.m in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51E625300EDC0063538A /* LXObjcSuport.m */; };
+		76AF521E25300EDC0063538A /* LXCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51E725300EDC0063538A /* LXCompatible.swift */; };
+		76AF521F25300EDC0063538A /* LXSwift+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51E825300EDC0063538A /* LXSwift+Color.swift */; };
+		76AF522025300EDC0063538A /* LXSwift+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51E925300EDC0063538A /* LXSwift+Int.swift */; };
+		76AF522125300EDC0063538A /* LXSwiftButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51EA25300EDC0063538A /* LXSwiftButton.swift */; };
+		76AF522225300EDC0063538A /* LXSwift+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51EB25300EDC0063538A /* LXSwift+View.swift */; };
+		76AF522325300EDC0063538A /* LXSwift+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51EC25300EDC0063538A /* LXSwift+Date.swift */; };
+		76AF522425300EDC0063538A /* LXSwift+FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51ED25300EDC0063538A /* LXSwift+FileManager.swift */; };
+		76AF522525300EDC0063538A /* LXSwift+TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51EE25300EDC0063538A /* LXSwift+TextView.swift */; };
+		76AF522625300EDC0063538A /* LXSwift+TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51EF25300EDC0063538A /* LXSwift+TextField.swift */; };
+		76AF522725300EDC0063538A /* LXSwift+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51F025300EDC0063538A /* LXSwift+Data.swift */; };
+		76AF522825300EDC0063538A /* LXSwiftModalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51F125300EDC0063538A /* LXSwiftModalController.swift */; };
+		76AF522925300EDC0063538A /* LXSwift+ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51F225300EDC0063538A /* LXSwift+ScrollView.swift */; };
+		76AF522A25300EDC0063538A /* LXSwiftScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51F325300EDC0063538A /* LXSwiftScrollView.swift */; };
+		76AF522B25300EDC0063538A /* LXSwiftLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51F525300EDC0063538A /* LXSwiftLabel.swift */; };
+		76AF522C25300EDC0063538A /* LXSwiftBasics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51F625300EDC0063538A /* LXSwiftBasics.swift */; };
+		76AF522D25300EDC0063538A /* LXSwiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51F725300EDC0063538A /* LXSwiftView.swift */; };
+		76AF522E25300EDC0063538A /* LXSwiftImgView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51F825300EDC0063538A /* LXSwiftImgView.swift */; };
+		76AF522F25300EDC0063538A /* LXSwiftCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51F925300EDC0063538A /* LXSwiftCollectionView.swift */; };
+		76AF523025300EDC0063538A /* LXObjcThreadActive.m in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51FA25300EDC0063538A /* LXObjcThreadActive.m */; };
+		76AF523125300EDC0063538A /* LXSwiftTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51FB25300EDC0063538A /* LXSwiftTableView.swift */; };
+		76AF523225300EDC0063538A /* LXSwiftRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51FC25300EDC0063538A /* LXSwiftRouter.swift */; };
+		76AF523325300EDC0063538A /* LXSwiftWordRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51FD25300EDC0063538A /* LXSwiftWordRegex.swift */; };
+		76AF523425300EDC0063538A /* LXSwiftButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51FE25300EDC0063538A /* LXSwiftButtonView.swift */; };
+		76AF523525300EDC0063538A /* LXSwiftTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51FF25300EDC0063538A /* LXSwiftTextField.swift */; };
+		76AF523625300EDC0063538A /* LXSwift+ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF520025300EDC0063538A /* LXSwift+ViewController.swift */; };
+		76AF523725300EDC0063538A /* LXSwiftTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF520125300EDC0063538A /* LXSwiftTool.swift */; };
+		76AF523825300EDC0063538A /* LXSwiftTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF520225300EDC0063538A /* LXSwiftTextView.swift */; };
+		76AF523925300EDC0063538A /* LXSwift+Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF520325300EDC0063538A /* LXSwift+Number.swift */; };
+		76AF523A25300EDC0063538A /* LXSwiftWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF520425300EDC0063538A /* LXSwiftWebViewController.swift */; };
+		76AF523B25300EDC0063538A /* LXSwift+DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF520525300EDC0063538A /* LXSwift+DispatchQueue.swift */; };
+		76AF523C25300EDC0063538A /* LXSwiftQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF520725300EDC0063538A /* LXSwiftQueue.swift */; };
+		76AF523D25300EDC0063538A /* LXSwift+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF520825300EDC0063538A /* LXSwift+Image.swift */; };
+		76AF523E25300EDC0063538A /* LXSwift+Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF520925300EDC0063538A /* LXSwift+Control.swift */; };
+		76AF523F25300EDC0063538A /* LXSwiftUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF520A25300EDC0063538A /* LXSwiftUtil.swift */; };
+		76AF524025300EDC0063538A /* LXSwiftGCDTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF520B25300EDC0063538A /* LXSwiftGCDTimer.swift */; };
+		76AF524125300EDC0063538A /* LXObjcProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 76AF520C25300EDC0063538A /* LXObjcProxy.m */; };
+		76AF524225300EDC0063538A /* LXSwiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF520D25300EDC0063538A /* LXSwiftApp.swift */; };
+		76AF524325300EDC0063538A /* LXSwift+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF520E25300EDC0063538A /* LXSwift+String.swift */; };
+		76AF524425300EDC0063538A /* LXSwiftPrivacyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF520F25300EDC0063538A /* LXSwiftPrivacyManager.swift */; };
+		76AF524525300EDC0063538A /* LXSwift+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF521025300EDC0063538A /* LXSwift+Font.swift */; };
+		76AF524625300EDC0063538A /* LXSwift+Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF521125300EDC0063538A /* LXSwift+Device.swift */; };
+		76AF524725300EDC0063538A /* LXSwift+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF521225300EDC0063538A /* LXSwift+Double.swift */; };
+		76AF524825300EDC0063538A /* LXSwift+Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF521425300EDC0063538A /* LXSwift+Bundle.swift */; };
+		76AF524925300EDC0063538A /* LXSwift+Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF521525300EDC0063538A /* LXSwift+Button.swift */; };
+		76AF524A25300EDC0063538A /* LXSwiftConvenienceBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF521625300EDC0063538A /* LXSwiftConvenienceBundle.swift */; };
+		76AF524B25300EDC0063538A /* LXSwift+Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF521725300EDC0063538A /* LXSwift+Label.swift */; };
+		76AF524C25300EDC0063538A /* LXSwift+NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF521825300EDC0063538A /* LXSwift+NSAttributedString.swift */; };
 		7B566DDA1A33A0ADA6224DD1 /* Pods_LXSwiftFoundationModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F715AA7BA9B925B133355970 /* Pods_LXSwiftFoundationModule.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +83,64 @@
 		7607A08A251B1C0D0071B9AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7607A08C251B1C0D0071B9AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7607A092251B1CB70071B9AD /* LXSwiftFoundation.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LXSwiftFoundation.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		763271532530660D00B3C69E /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		763271582530C1F300B3C69E /* UIView+ObjcPerformance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+ObjcPerformance.h"; sourceTree = "<group>"; };
+		763271592530C1F300B3C69E /* UIView+ObjcPerformance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+ObjcPerformance.m"; sourceTree = "<group>"; };
+		76AF51E225300EDC0063538A /* LXSwiftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftViewController.swift; sourceTree = "<group>"; };
+		76AF51E325300EDC0063538A /* LXSwiftStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftStack.swift; sourceTree = "<group>"; };
+		76AF51E425300EDC0063538A /* LXSwift+Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LXSwift+Dictionary.swift"; sourceTree = "<group>"; };
+		76AF51E525300EDC0063538A /* LXSwiftWordTextLable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftWordTextLable.swift; sourceTree = "<group>"; };
+		76AF51E625300EDC0063538A /* LXObjcSuport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXObjcSuport.m; sourceTree = "<group>"; };
+		76AF51E725300EDC0063538A /* LXCompatible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXCompatible.swift; sourceTree = "<group>"; };
+		76AF51E825300EDC0063538A /* LXSwift+Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LXSwift+Color.swift"; sourceTree = "<group>"; };
+		76AF51E925300EDC0063538A /* LXSwift+Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LXSwift+Int.swift"; sourceTree = "<group>"; };
+		76AF51EA25300EDC0063538A /* LXSwiftButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftButton.swift; sourceTree = "<group>"; };
+		76AF51EB25300EDC0063538A /* LXSwift+View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LXSwift+View.swift"; sourceTree = "<group>"; };
+		76AF51EC25300EDC0063538A /* LXSwift+Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LXSwift+Date.swift"; sourceTree = "<group>"; };
+		76AF51ED25300EDC0063538A /* LXSwift+FileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LXSwift+FileManager.swift"; sourceTree = "<group>"; };
+		76AF51EE25300EDC0063538A /* LXSwift+TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LXSwift+TextView.swift"; sourceTree = "<group>"; };
+		76AF51EF25300EDC0063538A /* LXSwift+TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LXSwift+TextField.swift"; sourceTree = "<group>"; };
+		76AF51F025300EDC0063538A /* LXSwift+Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LXSwift+Data.swift"; sourceTree = "<group>"; };
+		76AF51F125300EDC0063538A /* LXSwiftModalController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftModalController.swift; sourceTree = "<group>"; };
+		76AF51F225300EDC0063538A /* LXSwift+ScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LXSwift+ScrollView.swift"; sourceTree = "<group>"; };
+		76AF51F325300EDC0063538A /* LXSwiftScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftScrollView.swift; sourceTree = "<group>"; };
+		76AF51F425300EDC0063538A /* LXObjcProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXObjcProxy.h; sourceTree = "<group>"; };
+		76AF51F525300EDC0063538A /* LXSwiftLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftLabel.swift; sourceTree = "<group>"; };
+		76AF51F625300EDC0063538A /* LXSwiftBasics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftBasics.swift; sourceTree = "<group>"; };
+		76AF51F725300EDC0063538A /* LXSwiftView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftView.swift; sourceTree = "<group>"; };
+		76AF51F825300EDC0063538A /* LXSwiftImgView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftImgView.swift; sourceTree = "<group>"; };
+		76AF51F925300EDC0063538A /* LXSwiftCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftCollectionView.swift; sourceTree = "<group>"; };
+		76AF51FA25300EDC0063538A /* LXObjcThreadActive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXObjcThreadActive.m; sourceTree = "<group>"; };
+		76AF51FB25300EDC0063538A /* LXSwiftTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftTableView.swift; sourceTree = "<group>"; };
+		76AF51FC25300EDC0063538A /* LXSwiftRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftRouter.swift; sourceTree = "<group>"; };
+		76AF51FD25300EDC0063538A /* LXSwiftWordRegex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftWordRegex.swift; sourceTree = "<group>"; };
+		76AF51FE25300EDC0063538A /* LXSwiftButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftButtonView.swift; sourceTree = "<group>"; };
+		76AF51FF25300EDC0063538A /* LXSwiftTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftTextField.swift; sourceTree = "<group>"; };
+		76AF520025300EDC0063538A /* LXSwift+ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LXSwift+ViewController.swift"; sourceTree = "<group>"; };
+		76AF520125300EDC0063538A /* LXSwiftTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftTool.swift; sourceTree = "<group>"; };
+		76AF520225300EDC0063538A /* LXSwiftTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftTextView.swift; sourceTree = "<group>"; };
+		76AF520325300EDC0063538A /* LXSwift+Number.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LXSwift+Number.swift"; sourceTree = "<group>"; };
+		76AF520425300EDC0063538A /* LXSwiftWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftWebViewController.swift; sourceTree = "<group>"; };
+		76AF520525300EDC0063538A /* LXSwift+DispatchQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LXSwift+DispatchQueue.swift"; sourceTree = "<group>"; };
+		76AF520625300EDC0063538A /* LXObjcSuport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXObjcSuport.h; sourceTree = "<group>"; };
+		76AF520725300EDC0063538A /* LXSwiftQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftQueue.swift; sourceTree = "<group>"; };
+		76AF520825300EDC0063538A /* LXSwift+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LXSwift+Image.swift"; sourceTree = "<group>"; };
+		76AF520925300EDC0063538A /* LXSwift+Control.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LXSwift+Control.swift"; sourceTree = "<group>"; };
+		76AF520A25300EDC0063538A /* LXSwiftUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftUtil.swift; sourceTree = "<group>"; };
+		76AF520B25300EDC0063538A /* LXSwiftGCDTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftGCDTimer.swift; sourceTree = "<group>"; };
+		76AF520C25300EDC0063538A /* LXObjcProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXObjcProxy.m; sourceTree = "<group>"; };
+		76AF520D25300EDC0063538A /* LXSwiftApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftApp.swift; sourceTree = "<group>"; };
+		76AF520E25300EDC0063538A /* LXSwift+String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LXSwift+String.swift"; sourceTree = "<group>"; };
+		76AF520F25300EDC0063538A /* LXSwiftPrivacyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftPrivacyManager.swift; sourceTree = "<group>"; };
+		76AF521025300EDC0063538A /* LXSwift+Font.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LXSwift+Font.swift"; sourceTree = "<group>"; };
+		76AF521125300EDC0063538A /* LXSwift+Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LXSwift+Device.swift"; sourceTree = "<group>"; };
+		76AF521225300EDC0063538A /* LXSwift+Double.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LXSwift+Double.swift"; sourceTree = "<group>"; };
+		76AF521325300EDC0063538A /* LXObjcThreadActive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXObjcThreadActive.h; sourceTree = "<group>"; };
+		76AF521425300EDC0063538A /* LXSwift+Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LXSwift+Bundle.swift"; sourceTree = "<group>"; };
+		76AF521525300EDC0063538A /* LXSwift+Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LXSwift+Button.swift"; sourceTree = "<group>"; };
+		76AF521625300EDC0063538A /* LXSwiftConvenienceBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftConvenienceBundle.swift; sourceTree = "<group>"; };
+		76AF521725300EDC0063538A /* LXSwift+Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LXSwift+Label.swift"; sourceTree = "<group>"; };
+		76AF521825300EDC0063538A /* LXSwift+NSAttributedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LXSwift+NSAttributedString.swift"; sourceTree = "<group>"; };
 		8DFBEB594E654C05D56544BE /* Pods-LXSwiftFoundationModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXSwiftFoundationModule.release.xcconfig"; path = "Target Support Files/Pods-LXSwiftFoundationModule/Pods-LXSwiftFoundationModule.release.xcconfig"; sourceTree = "<group>"; };
 		F715AA7BA9B925B133355970 /* Pods_LXSwiftFoundationModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LXSwiftFoundationModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -65,6 +177,7 @@
 		7607A072251B1C0B0071B9AD = {
 			isa = PBXGroup;
 			children = (
+				76AF51E125300EDC0063538A /* LXSwiftFoundation */,
 				7607A092251B1CB70071B9AD /* LXSwiftFoundation.podspec */,
 				7607A07D251B1C0B0071B9AD /* LXSwiftFoundationModule */,
 				7607A07C251B1C0B0071B9AD /* Products */,
@@ -92,8 +205,73 @@
 				7607A087251B1C0D0071B9AD /* Assets.xcassets */,
 				7607A089251B1C0D0071B9AD /* LaunchScreen.storyboard */,
 				7607A08C251B1C0D0071B9AD /* Info.plist */,
+				763271532530660D00B3C69E /* TestViewController.swift */,
 			);
 			path = LXSwiftFoundationModule;
+			sourceTree = "<group>";
+		};
+		76AF51E125300EDC0063538A /* LXSwiftFoundation */ = {
+			isa = PBXGroup;
+			children = (
+				76AF51E725300EDC0063538A /* LXCompatible.swift */,
+				76AF51F425300EDC0063538A /* LXObjcProxy.h */,
+				76AF520C25300EDC0063538A /* LXObjcProxy.m */,
+				76AF520625300EDC0063538A /* LXObjcSuport.h */,
+				76AF51E625300EDC0063538A /* LXObjcSuport.m */,
+				76AF521325300EDC0063538A /* LXObjcThreadActive.h */,
+				76AF51FA25300EDC0063538A /* LXObjcThreadActive.m */,
+				76AF521425300EDC0063538A /* LXSwift+Bundle.swift */,
+				76AF521525300EDC0063538A /* LXSwift+Button.swift */,
+				76AF51E825300EDC0063538A /* LXSwift+Color.swift */,
+				76AF520925300EDC0063538A /* LXSwift+Control.swift */,
+				76AF51F025300EDC0063538A /* LXSwift+Data.swift */,
+				76AF51EC25300EDC0063538A /* LXSwift+Date.swift */,
+				76AF521125300EDC0063538A /* LXSwift+Device.swift */,
+				76AF51E425300EDC0063538A /* LXSwift+Dictionary.swift */,
+				76AF520525300EDC0063538A /* LXSwift+DispatchQueue.swift */,
+				76AF521225300EDC0063538A /* LXSwift+Double.swift */,
+				76AF51ED25300EDC0063538A /* LXSwift+FileManager.swift */,
+				76AF521025300EDC0063538A /* LXSwift+Font.swift */,
+				76AF520825300EDC0063538A /* LXSwift+Image.swift */,
+				76AF51E925300EDC0063538A /* LXSwift+Int.swift */,
+				76AF521725300EDC0063538A /* LXSwift+Label.swift */,
+				76AF521825300EDC0063538A /* LXSwift+NSAttributedString.swift */,
+				76AF520325300EDC0063538A /* LXSwift+Number.swift */,
+				76AF51F225300EDC0063538A /* LXSwift+ScrollView.swift */,
+				76AF520E25300EDC0063538A /* LXSwift+String.swift */,
+				76AF51EF25300EDC0063538A /* LXSwift+TextField.swift */,
+				76AF51EE25300EDC0063538A /* LXSwift+TextView.swift */,
+				76AF51EB25300EDC0063538A /* LXSwift+View.swift */,
+				76AF520025300EDC0063538A /* LXSwift+ViewController.swift */,
+				76AF520D25300EDC0063538A /* LXSwiftApp.swift */,
+				76AF51F625300EDC0063538A /* LXSwiftBasics.swift */,
+				76AF51EA25300EDC0063538A /* LXSwiftButton.swift */,
+				76AF51FE25300EDC0063538A /* LXSwiftButtonView.swift */,
+				76AF51F925300EDC0063538A /* LXSwiftCollectionView.swift */,
+				76AF521625300EDC0063538A /* LXSwiftConvenienceBundle.swift */,
+				76AF520B25300EDC0063538A /* LXSwiftGCDTimer.swift */,
+				76AF51F825300EDC0063538A /* LXSwiftImgView.swift */,
+				76AF51F525300EDC0063538A /* LXSwiftLabel.swift */,
+				76AF51F125300EDC0063538A /* LXSwiftModalController.swift */,
+				76AF520F25300EDC0063538A /* LXSwiftPrivacyManager.swift */,
+				76AF520725300EDC0063538A /* LXSwiftQueue.swift */,
+				76AF51FC25300EDC0063538A /* LXSwiftRouter.swift */,
+				76AF51F325300EDC0063538A /* LXSwiftScrollView.swift */,
+				76AF51E325300EDC0063538A /* LXSwiftStack.swift */,
+				76AF51FB25300EDC0063538A /* LXSwiftTableView.swift */,
+				76AF51FF25300EDC0063538A /* LXSwiftTextField.swift */,
+				76AF520225300EDC0063538A /* LXSwiftTextView.swift */,
+				76AF520125300EDC0063538A /* LXSwiftTool.swift */,
+				76AF520A25300EDC0063538A /* LXSwiftUtil.swift */,
+				76AF51F725300EDC0063538A /* LXSwiftView.swift */,
+				76AF51E225300EDC0063538A /* LXSwiftViewController.swift */,
+				76AF520425300EDC0063538A /* LXSwiftWebViewController.swift */,
+				76AF51FD25300EDC0063538A /* LXSwiftWordRegex.swift */,
+				76AF51E525300EDC0063538A /* LXSwiftWordTextLable.swift */,
+				763271582530C1F300B3C69E /* UIView+ObjcPerformance.h */,
+				763271592530C1F300B3C69E /* UIView+ObjcPerformance.m */,
+			);
+			path = LXSwiftFoundation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -107,7 +285,7 @@
 				7607A077251B1C0B0071B9AD /* Sources */,
 				7607A078251B1C0B0071B9AD /* Frameworks */,
 				7607A079251B1C0B0071B9AD /* Resources */,
-				F6F95B7AAAF5298C74F6CF84 /* [CP] Embed Pods Frameworks */,
+				1564BB8FD8AA709F7E280F48 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -167,6 +345,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1564BB8FD8AA709F7E280F48 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LXSwiftFoundationModule/Pods-LXSwiftFoundationModule-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LXSwiftFoundationModule/Pods-LXSwiftFoundationModule-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LXSwiftFoundationModule/Pods-LXSwiftFoundationModule-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		E27ACB9A338C4D6D1DDAEFE2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -189,23 +384,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F6F95B7AAAF5298C74F6CF84 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LXSwiftFoundationModule/Pods-LXSwiftFoundationModule-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LXSwiftFoundationModule/Pods-LXSwiftFoundationModule-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LXSwiftFoundationModule/Pods-LXSwiftFoundationModule-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -213,9 +391,63 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76AF522D25300EDC0063538A /* LXSwiftView.swift in Sources */,
+				763271542530660D00B3C69E /* TestViewController.swift in Sources */,
+				76AF524425300EDC0063538A /* LXSwiftPrivacyManager.swift in Sources */,
+				76AF522825300EDC0063538A /* LXSwiftModalController.swift in Sources */,
+				76AF522925300EDC0063538A /* LXSwift+ScrollView.swift in Sources */,
+				76AF524C25300EDC0063538A /* LXSwift+NSAttributedString.swift in Sources */,
+				76AF524725300EDC0063538A /* LXSwift+Double.swift in Sources */,
+				76AF523725300EDC0063538A /* LXSwiftTool.swift in Sources */,
+				76AF524B25300EDC0063538A /* LXSwift+Label.swift in Sources */,
+				76AF522425300EDC0063538A /* LXSwift+FileManager.swift in Sources */,
+				76AF521D25300EDC0063538A /* LXObjcSuport.m in Sources */,
+				76AF522B25300EDC0063538A /* LXSwiftLabel.swift in Sources */,
+				76AF523225300EDC0063538A /* LXSwiftRouter.swift in Sources */,
+				76AF523E25300EDC0063538A /* LXSwift+Control.swift in Sources */,
+				76AF522625300EDC0063538A /* LXSwift+TextField.swift in Sources */,
+				76AF522025300EDC0063538A /* LXSwift+Int.swift in Sources */,
+				76AF524025300EDC0063538A /* LXSwiftGCDTimer.swift in Sources */,
+				76AF524825300EDC0063538A /* LXSwift+Bundle.swift in Sources */,
 				7607A083251B1C0B0071B9AD /* ViewController.swift in Sources */,
+				76AF521A25300EDC0063538A /* LXSwiftStack.swift in Sources */,
+				76AF523925300EDC0063538A /* LXSwift+Number.swift in Sources */,
+				76AF523525300EDC0063538A /* LXSwiftTextField.swift in Sources */,
+				76AF524925300EDC0063538A /* LXSwift+Button.swift in Sources */,
+				76AF524225300EDC0063538A /* LXSwiftApp.swift in Sources */,
+				76AF521F25300EDC0063538A /* LXSwift+Color.swift in Sources */,
+				76AF522725300EDC0063538A /* LXSwift+Data.swift in Sources */,
+				76AF523325300EDC0063538A /* LXSwiftWordRegex.swift in Sources */,
 				7607A07F251B1C0B0071B9AD /* AppDelegate.swift in Sources */,
+				76AF524125300EDC0063538A /* LXObjcProxy.m in Sources */,
+				76AF524A25300EDC0063538A /* LXSwiftConvenienceBundle.swift in Sources */,
+				76AF523A25300EDC0063538A /* LXSwiftWebViewController.swift in Sources */,
+				7632715A2530C1F300B3C69E /* UIView+ObjcPerformance.m in Sources */,
+				76AF523025300EDC0063538A /* LXObjcThreadActive.m in Sources */,
+				76AF521B25300EDC0063538A /* LXSwift+Dictionary.swift in Sources */,
+				76AF523425300EDC0063538A /* LXSwiftButtonView.swift in Sources */,
+				76AF521E25300EDC0063538A /* LXCompatible.swift in Sources */,
+				76AF522225300EDC0063538A /* LXSwift+View.swift in Sources */,
+				76AF523C25300EDC0063538A /* LXSwiftQueue.swift in Sources */,
+				76AF523825300EDC0063538A /* LXSwiftTextView.swift in Sources */,
+				76AF524325300EDC0063538A /* LXSwift+String.swift in Sources */,
+				76AF524525300EDC0063538A /* LXSwift+Font.swift in Sources */,
+				76AF523B25300EDC0063538A /* LXSwift+DispatchQueue.swift in Sources */,
+				76AF521C25300EDC0063538A /* LXSwiftWordTextLable.swift in Sources */,
+				76AF523F25300EDC0063538A /* LXSwiftUtil.swift in Sources */,
+				76AF521925300EDC0063538A /* LXSwiftViewController.swift in Sources */,
+				76AF523D25300EDC0063538A /* LXSwift+Image.swift in Sources */,
+				76AF522F25300EDC0063538A /* LXSwiftCollectionView.swift in Sources */,
+				76AF522325300EDC0063538A /* LXSwift+Date.swift in Sources */,
+				76AF522525300EDC0063538A /* LXSwift+TextView.swift in Sources */,
+				76AF523625300EDC0063538A /* LXSwift+ViewController.swift in Sources */,
+				76AF522C25300EDC0063538A /* LXSwiftBasics.swift in Sources */,
+				76AF522A25300EDC0063538A /* LXSwiftScrollView.swift in Sources */,
 				7607A081251B1C0B0071B9AD /* SceneDelegate.swift in Sources */,
+				76AF523125300EDC0063538A /* LXSwiftTableView.swift in Sources */,
+				76AF524625300EDC0063538A /* LXSwift+Device.swift in Sources */,
+				76AF522125300EDC0063538A /* LXSwiftButton.swift in Sources */,
+				76AF522E25300EDC0063538A /* LXSwiftImgView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

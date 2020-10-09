@@ -141,10 +141,12 @@ extension LXSwiftBasics where Base: UIView {
 extension LXSwiftBasics where Base: UIView {
     
     /// add gesture
-    public func addGesture(_ callBack: @escaping ((UIView?) -> ())) {
+    @discardableResult
+    public func addGesture(_ callBack: @escaping ((UIView?) -> ())) -> UITapGestureRecognizer {
         base.callBack = callBack
         let gesture = UITapGestureRecognizer(target: base, action: #selector(base.gestureTap(_:)))
         base.addGestureRecognizer(gesture)
+        return gesture
     }
     
 }

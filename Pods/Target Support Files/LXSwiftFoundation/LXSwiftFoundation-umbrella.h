@@ -13,6 +13,7 @@
 #import "LXObjcProxy.h"
 #import "LXObjcSuport.h"
 #import "LXObjcThreadActive.h"
+#import "UIView+ObjcPerformance.h"
 
 FOUNDATION_EXPORT double LXSwiftFoundationVersionNumber;
 FOUNDATION_EXPORT const unsigned char LXSwiftFoundationVersionString[];

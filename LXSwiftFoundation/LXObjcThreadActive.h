@@ -14,6 +14,11 @@ typedef void (^LXObjcThreadActiveTask)(void);
 @interface LXObjcThreadActive : NSObject
 
 /**
+ start thread
+*/
+- (void)start;
+
+/**
  Execute a task in the current child thread
  */
 - (void)executeTask:(LXObjcThreadActiveTask)task;

@@ -10,16 +10,18 @@
 #import "LXObjcProxy.h"
 
 /** LXThread **/
-@interface LXObjcThread : NSThread
-@end
-@implementation LXObjcThread
-- (void)dealloc{
-    NSLog(@"%s", __func__);
-}
-@end
+//@interface LXObjcThread : NSThread
+//@end
+//@implementation LXObjcThread
+//- (void)dealloc{
+//    NSLog(@"%s", __func__);
+//}
+//@end
 
 @interface LXObjcThreadActive()
-@property (strong, nonatomic) LXObjcThread *innerThread;
+@property (strong, nonatomic) NSThread *innerThread;
+@property (assign, nonatomic) BOOL isStart;
+
 @end
 
 @implementation LXObjcThreadActive
@@ -29,23 +31,25 @@
     if (self = [super init]) {
         if (@available(iOS 10.0, *)) {
             __weak typeof(self)weakSelf = self;
-            self.innerThread = [[LXObjcThread alloc] initWithBlock:^{
+            self.innerThread = [[NSThread alloc] initWithBlock:^{
                 [weakSelf __saveThread];
             }];
             
         } else {
-            self.innerThread = [[LXObjcThread alloc]initWithTarget:[LXObjcProxy proxyWithTarget:self] selector:@selector(__saveThread) object:nil];
+            self.innerThread = [[NSThread alloc]initWithTarget:[LXObjcProxy proxyWithTarget:self] selector:@selector(__saveThread) object:nil];
         }
         
-        [self.innerThread start];
+        [self start];
+
     }
     return self;
 }
 
 - (void)start{
     if (!self.innerThread) return;
-    
-    if (!self.innerThread.isExecuting) {
+   
+    if (!self.innerThread.isExecuting && !self.isStart) {
+         self.isStart = true;
          [self.innerThread start];
     }
 }
@@ -81,6 +85,7 @@
 - (void)__stop{
     CFRunLoopStop(CFRunLoopGetCurrent());
     self.innerThread = nil;
+    self.isStart = false;
 }
 
 - (void)__executeTask:(LXObjcThreadActiveTask)task{
