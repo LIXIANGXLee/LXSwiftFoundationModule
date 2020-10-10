@@ -1,16 +1,16 @@
 //
-//  UIView+ObjcPerformance.m
+//  UIView+LXObjcPerformance.m
 //  LXSwiftFoundationModule
 //
 //  Created by XL on 2020/10/10.
 //  Copyright © 2020 李响. All rights reserved.
 //
 
-#import "UIView+ObjcPerformance.h"
+#import "UIView+LXObjcPerformance.h"
 #import <objc/runtime.h>
 #import "LXObjcProxy.h"
 
-@implementation UIView (ObjcPerformance)
+@implementation UIView (LXObjcPerformance)
 
 // Global observer object
 static  CFRunLoopObserverRef currentObserver;
@@ -66,7 +66,7 @@ static  CFRunLoopObserverRef currentObserver;
 -(void)removeRunLoopObserver {
     
     CFRunLoopRef runloop = CFRunLoopGetCurrent();
-    if (runloop) {
+    if (runloop && currentObserver) {
         CFRunLoopRemoveObserver(runloop, currentObserver, kCFRunLoopCommonModes);
     }
     [self removeTimer];

@@ -4,4 +4,4 @@
 
 #import "LXObjcSuport.h"
 #import "LXObjcThreadActive.h"
-#import "UIView+ObjcPerformance.h"
+#import "UIView+LXObjcPerformance.h"

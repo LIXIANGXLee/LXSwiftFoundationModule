@@ -1,5 +1,5 @@
 //
-//  UIView+ObjcPerformance.h
+//  UIView+LXObjcPerformance.h
 //  LXSwiftFoundationModule
 //
 //  Created by XL on 2020/10/10.
@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^ObjcRunloopBlock)(void);
 
-@interface UIView (ObjcPerformance)
+@interface UIView (LXObjcPerformance)
 
 //The current page displays the maximum number of pictures with tableviewcell max count or uicollectionviewcell max count
 @property(nonatomic,assign)int maxTaskPerformedCount;

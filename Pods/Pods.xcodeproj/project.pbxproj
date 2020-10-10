@@ -7,74 +7,74 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		01FD55AF225CBFA63F5B103B3833CF98 /* LXSwiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC284B5A9714AE3B8E4201F6A261A892 /* LXSwiftView.swift */; };
 		02B3C9859DBD03A42961DEDBD46D6D56 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDCB65B3DDB68CB2801794AC6AD13094 /* Foundation.framework */; };
-		0EE4FB0938576FC1D88A9DDEC0FA16B2 /* LXSwiftScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303A12883AD6C9DD1340D20656E32043 /* LXSwiftScrollView.swift */; };
-		0F7867534020CC1D3B2B3E3E3F2EBFA0 /* LXSwiftGCDTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF8DEEF6455D282F807685FFB488174 /* LXSwiftGCDTimer.swift */; };
-		1C2FDB256D337B6D5C46E0A70A66513C /* LXSwift+Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4997B2D1170D995502ACB5ED6F593D7E /* LXSwift+Label.swift */; };
-		1D35C40F1C79369325EB8EC079CEF8CE /* LXSwift+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD88421563E978E5CF7DD2BE97ED98EA /* LXSwift+Image.swift */; };
-		1EAAEA8CD87069B28313E450D35727FA /* LXSwiftModalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92FBBFAC0F86A06C5ABA93B9B8D935F /* LXSwiftModalController.swift */; };
-		2687E995F5CA425E755A25275453C294 /* LXSwift+NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3934A23ADD359E6FB05453E43CFF17A3 /* LXSwift+NSAttributedString.swift */; };
-		28E55A21CC1656CEF6D1E7B02F02C3A0 /* LXSwiftFoundation-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A517FA88A0C6EEC5C351A0E4ECC40EE /* LXSwiftFoundation-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2F4B875EA795DB3002582EDBFB4D9825 /* LXSwiftCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA935D9F3708C97AB3B9C359B9CE58E /* LXSwiftCollectionView.swift */; };
-		30A1CC640D74A0E67047BC906B010B9B /* LXObjcProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1783E7AEE48DCC4B19D332106708D4B6 /* LXObjcProxy.m */; };
-		31D4D7927BB2706D50998F01D6974AAD /* LXSwiftBasics.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A981757744DF5D6520890B8234DFF8 /* LXSwiftBasics.swift */; };
-		3682988F619CACE5AF59AFAC42E6E96F /* LXSwiftWordTextLable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049366FA521371C7F8DB17DA1DCED97 /* LXSwiftWordTextLable.swift */; };
+		036C702F9707C878348633BBD977B89F /* LXObjcSuport.m in Sources */ = {isa = PBXBuildFile; fileRef = D416ED75B80D56BCE4576779FF234823 /* LXObjcSuport.m */; };
+		0E8A44340E709A6F477C61B5F7F94E3A /* LXSwift+Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434DCF0BE16FB54523E46B4310551288 /* LXSwift+Label.swift */; };
+		13A6EB115482D738FC0B2C187CEE9F88 /* LXSwiftCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E729346E40DA3EC306CB0162F85CA703 /* LXSwiftCollectionView.swift */; };
+		226304A5CC6D18A89FE9691850F81454 /* LXCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5236D090633E819AE50BFF1A863A6591 /* LXCompatible.swift */; };
+		2B099D567941C2C6E6448D3DD0157014 /* UIView+LXObjcPerformance.h in Headers */ = {isa = PBXBuildFile; fileRef = CCF43199A351950953EE8F2471CC0B0C /* UIView+LXObjcPerformance.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C70070DD587E2A4D1BD4891B4187F6D /* LXObjcProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1ADB275EC1FA50D4885D0531326709 /* LXObjcProxy.m */; };
+		313A4FF414485FD64770F383E7268677 /* LXSwiftFoundation-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BEE124D42378770ECAB2062C9ACBE8 /* LXSwiftFoundation-dummy.m */; };
+		32C4C9903802A603A20DC0C6FB1DC7DE /* LXSwift+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB878398ECAEC3BD33716DE15F44377 /* LXSwift+Int.swift */; };
+		331647A3B4163D38FC376C975375C310 /* LXSwiftTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FDFDB3BF3A3E8C771D45351E221B7 /* LXSwiftTableView.swift */; };
+		3739455333939AF2244769E48F45333E /* LXSwiftUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EF3AB425122557A93789069EDA1AE3 /* LXSwiftUtil.swift */; };
 		37A215676B7AFDE7F5468B097D3B188C /* Pods-LXSwiftFoundationModule-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E093E81AA39BD512D225DADBDD07811 /* Pods-LXSwiftFoundationModule-dummy.m */; };
-		392AE87EBA0BF98C29967B53EEC85991 /* LXSwift+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6327F06228B02CE7D82637EE631A2B1C /* LXSwift+Color.swift */; };
-		3E10353F91B4FE21BE064339B4A352E2 /* UIView+ObjcPerformance.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9F23741C6AB1439ED16FCDF1883D29 /* UIView+ObjcPerformance.m */; };
-		3E9B351A39473EA852CCEADAC2D85E58 /* LXSwift+Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEFF3E105148D0054F4D6D6F065E342 /* LXSwift+Number.swift */; };
-		410F43413AF04623839DC260099D6EB9 /* LXObjcSuport.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A0BB333CD78E8EE8A553796E18E8F6 /* LXObjcSuport.m */; };
-		412F016CC7BFE77D6C3B195C6A1AE40B /* LXSwift+TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0605FB6B936972F4421B4A87E7E0 /* LXSwift+TextView.swift */; };
-		4720AC361CE6200B33CE12BE11F24377 /* LXSwiftTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B354B8D8E39A6B41DD12102D55D15A32 /* LXSwiftTextField.swift */; };
-		5392035158BE8AB36E37665D931F87A7 /* LXSwift+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9AB7850E98789FAD1F96F68D49073B /* LXSwift+Double.swift */; };
+		3C155B0993A4FEF410B37604B6AEA624 /* LXSwiftBasics.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF81F838096B1AE2684925CA182FC41 /* LXSwiftBasics.swift */; };
+		3C59E03E932022EC09D1D22D8078F76B /* LXSwift+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB288FEF95670206B7834621680BC975 /* LXSwift+String.swift */; };
+		421D6CE490A4BADEBF7D7D61B3D88D28 /* LXSwiftWordRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54993ECCBE5426483B8FF9059F5FA89 /* LXSwiftWordRegex.swift */; };
+		431F797F44274ECDBE1D9966A2EF59C4 /* LXSwift+DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F0BE350D4BAE91403E4B350A27D776 /* LXSwift+DispatchQueue.swift */; };
+		46A6DD155947C53B464689E0B05DB92E /* LXSwiftScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF71BE0F9DF4C64A9BE718561DCBAFC /* LXSwiftScrollView.swift */; };
+		46D45352676BFEED2487F8ED38F30DFF /* LXSwift+Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FE9B729435E251DD6CEFA02AF09222 /* LXSwift+Bundle.swift */; };
+		48B9E33B630637945D8118564B8541FE /* LXSwift+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D78596D6559730564ADCFBB1518F9E /* LXSwift+Color.swift */; };
+		4C28E2CB5345D0BFE11E867E19B2D7F8 /* LXObjcThreadActive.m in Sources */ = {isa = PBXBuildFile; fileRef = FF1B7CC73636F457B54A2D3504B18021 /* LXObjcThreadActive.m */; };
+		4D7CE1D1A287C5CFA0751E226CA94DCF /* LXSwiftFoundation-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FF8B38EEC2D7D7160B2BB11844266BE /* LXSwiftFoundation-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53F3E390F35CF8D7CCD87F99E8CF3FDF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDCB65B3DDB68CB2801794AC6AD13094 /* Foundation.framework */; };
-		59E472AF9FE71A61917C8BDC5C8416E6 /* LXObjcSuport.h in Headers */ = {isa = PBXBuildFile; fileRef = 7974B82AF774453006DA86B56E16BFC0 /* LXObjcSuport.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		609219573DC0888968F3E69F4528E654 /* LXSwiftQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B375924CACEE0EF352454FDE4B90CD99 /* LXSwiftQueue.swift */; };
-		629B1B6603DAF7F51212D4FF49B69D09 /* LXSwift+DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128F160D2B5279712247D6E252CC033F /* LXSwift+DispatchQueue.swift */; };
-		68CC50DC1EC166D735FC4F75042A51AC /* LXSwiftTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E511AB053857FFA840AA1CACD223A269 /* LXSwiftTableView.swift */; };
-		6A437A070EE675515C15F8E0ED545952 /* LXSwift+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83B1F9ABA4A036909F5C37C144BACAE /* LXSwift+Data.swift */; };
-		709C1E685543247ED00004466A09720C /* LXSwiftConvenienceBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73F34CF748311D27E01DE7599D70A3C /* LXSwiftConvenienceBundle.swift */; };
-		77E04B75DEC6128AA64C349F83696B50 /* LXObjcThreadActive.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EB5DF340E1F274C71815F3AD466C688 /* LXObjcThreadActive.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		784C6DD558AC9C20635AD0DB5EE91B03 /* LXSwift+Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FB32981D73C5D6079696CB39F5A337 /* LXSwift+Button.swift */; };
-		7939F091219C49E3CE9BD781EF675B00 /* LXSwiftPrivacyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2A98E95FAB80CE453A1E6D72FC61D2 /* LXSwiftPrivacyManager.swift */; };
+		54DCE514EE641172BBE2195D2E60F9DD /* LXSwiftStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF853F88D996339FC5A78BD56056D88C /* LXSwiftStack.swift */; };
+		596C45675F8B4BF3D285C8E008A6539C /* LXSwift+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2296A552EB53AFB3E25BD75CED9D1D0 /* LXSwift+Date.swift */; };
+		5CC5A570FA8030BF4C7558CAE3AD4D73 /* LXSwift+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D785D14B63A588F5DB18BDF002EFC5CD /* LXSwift+View.swift */; };
+		604D6C8160E4B1C4994F6D69B7BA160C /* LXSwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4EF40B3B9DBD2DC06A031AA37135BB /* LXSwiftViewController.swift */; };
+		6C1B5C27162B58F8C65401A9D191A70C /* LXSwift+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D7C109D56575EF13C6A6468303DDA6 /* LXSwift+Double.swift */; };
+		6DCF512F138B0C7C831C41A641DB0492 /* LXSwiftButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619C45D30A0A7F138CA5D01820B1D912 /* LXSwiftButtonView.swift */; };
+		704512206F6521EE15E816F062972183 /* LXSwiftWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB45CE277884DAA96A85CAA7C5C38718 /* LXSwiftWebViewController.swift */; };
+		7619FEA225AB4306A0E1D2ED8456E843 /* LXSwift+Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB2B0C1C2E472F66CF1F2BF33FBF49C /* LXSwift+Control.swift */; };
+		76ED8573041E7BD31FD544059EF56D29 /* LXSwift+Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D6305FBFCEE2201D4DF53531153DF8 /* LXSwift+Device.swift */; };
+		7753C38C377088E335EF8769C942BEB4 /* UIView+LXObjcPerformance.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FFB6FF3997AECF911D275C3C4FFE51 /* UIView+LXObjcPerformance.m */; };
 		79952D63B7C9D1BEE740CD2930195FED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDCB65B3DDB68CB2801794AC6AD13094 /* Foundation.framework */; };
-		79EA5F9FD22188DD260455E03939EE61 /* LXObjcProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 397261008D0892AE13E934271B2FEA7C /* LXObjcProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A04CDF981D068D83B1B34A7728A7468 /* LXFitManager-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 05FD14158262C9770469178DB5ADACE5 /* LXFitManager-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7B4BDDA9C43FF69132139A71443C5B3A /* LXSwiftTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A54A119CF304A1963208241C6C76A7F /* LXSwiftTool.swift */; };
+		7BE994A9D3B27E9F27F452DC75BB2AA9 /* LXSwiftTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD9E547DF7D6AC3C034C9023B75668F /* LXSwiftTool.swift */; };
 		7CC595D23B415468C15652DA1DC3E13D /* LXFitManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 210710B83846B0CA28FD57365AC8809C /* LXFitManager.framework */; };
-		7DAA97D5E17883DAA0DEA481E7827ACE /* LXSwiftFoundation-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1753F4373F546001CDEF9A26899571F5 /* LXSwiftFoundation-dummy.m */; };
-		842EEC48E980344FB99A1C89E971751F /* LXSwiftWordRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5726EBE4603C8E63176F5FB849AFB4FE /* LXSwiftWordRegex.swift */; };
-		9438D3BE49B655FD432DB9E3D7853260 /* LXSwift+TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17912DFDD312AAB2D1319DE37BAD431B /* LXSwift+TextField.swift */; };
-		99E0AD08FE817BCA655EB0D1639B8DCC /* LXSwift+Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8E58AE17B8DFFD2ACC136AEF03AE6F /* LXSwift+Dictionary.swift */; };
-		9CDDAD6A2E7125E87707B92AE30D7E1B /* LXSwift+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970415C5D972AEA11BB8D8EF15E99E66 /* LXSwift+Font.swift */; };
+		7D089377B40FE4342FD3C5511623D96A /* LXSwift+Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E8499A709AE541C278E0FFF85A13F1 /* LXSwift+Number.swift */; };
+		7D8B51BAC37F99745A5B15C4DB00F0EB /* LXSwiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8068B55D75721BB491B2B32E5C317303 /* LXSwiftApp.swift */; };
+		8252945BA919964784614F40EFDF7A2E /* LXSwiftButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B457E32134E536C1619299D755A42FEF /* LXSwiftButton.swift */; };
+		909637B4BEE358EF8C6E63280336B0BD /* LXSwiftTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF0F25EB0678DF2ED57FE8B65461532 /* LXSwiftTextView.swift */; };
+		956C2D8BE126BE47E1B5046AB9948F9E /* LXSwift+NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217FAAF885D8BA839064CDAA24DE1EBF /* LXSwift+NSAttributedString.swift */; };
 		A093DCCE4A412A20834EEAFD56FF24B3 /* LXFitManager-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D71F0A043311BA8E159F6CBD00F5FD /* LXFitManager-dummy.m */; };
-		A79BB3335BB3EAF55AD49331545FC5B1 /* LXSwift+ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202264C83B019677E4AD906FA2887BAB /* LXSwift+ViewController.swift */; };
+		A683BBDBB165BE95F8073C9C7B344BF4 /* LXSwift+Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CEC44953B75D98F5D8A60DCFB80BEB /* LXSwift+Dictionary.swift */; };
 		A84A502929E973FA2B3BFC561520DDDB /* LXFit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64C08C4BA5EC19BAD61DCC7ECCBF345 /* LXFit.swift */; };
-		B2003C85289DF4F27A3B64C4B5341707 /* LXSwiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13368D9D4586F494E84BC1AC11CED453 /* LXSwiftApp.swift */; };
-		B47D7FC57760997C9990CA9D346DA25A /* LXSwift+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61483AA9954A9130B09344FD110F29C /* LXSwift+Date.swift */; };
-		B57494FB9FB1BDE55F06F529A3067FD5 /* LXSwift+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADC9989ADA494ED95FB94D72E3B8B8C /* LXSwift+Int.swift */; };
-		B6F96EE8DB9F7E73B3651721428261D8 /* LXSwiftUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46060181FD1B89668695F561A81C0DA /* LXSwiftUtil.swift */; };
-		B8C0374437F1AA7F863DD3C3FA876C9E /* LXSwiftButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5EC67D32E909EED43DF5B0EFB6A49B /* LXSwiftButton.swift */; };
-		BA0788EBFA1A9DC389AC411D79AE977F /* LXSwiftImgView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2139BB133E046CA2504D1352733F85C /* LXSwiftImgView.swift */; };
-		BA771AC3FEBB4951EFEAEC277799657E /* LXSwift+ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DFFDA5CE6AE956F8AA8CA4C3C44889 /* LXSwift+ScrollView.swift */; };
-		C1220B9C341E406DE8F7315BC1CFF32D /* LXSwiftWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A153771287AC9CBB3FDA5C7FE689437 /* LXSwiftWebViewController.swift */; };
-		C78AE5348ED7FCE8AFB7AB2917534600 /* LXSwiftButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF48B810EC13CD94261C45116918854D /* LXSwiftButtonView.swift */; };
-		C7BF36800DFDB67CDB0B42100C2376AD /* LXSwift+Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = F164FFE469A00288D379CB8A1802AFA6 /* LXSwift+Control.swift */; };
-		CA44AEABEEA4BE42BAAF37C683B5815F /* LXSwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329578420DF75B7B13CACBEAF9C13410 /* LXSwiftViewController.swift */; };
-		CB1D49335E98CDC0EBB5FE55053ADB2E /* LXCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD381BE2C2DB31815187654ED308E2F /* LXCompatible.swift */; };
-		CD79E2112081AA0B3C44AC3E2E87D60A /* UIView+ObjcPerformance.h in Headers */ = {isa = PBXBuildFile; fileRef = 8382C6538D262BDFBAAB2FB88A90F88C /* UIView+ObjcPerformance.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CE2B838292FF52C65DE634CE88EB4844 /* LXSwiftRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD969D012E235EF2AABEC360D03C003E /* LXSwiftRouter.swift */; };
-		D440FAC5859A11A5110F76B15845F11C /* LXSwiftLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062DE03F166427105F6D80D289E38ABE /* LXSwiftLabel.swift */; };
-		DAA9ABDEBB24E17CF375DBEAE8A08F3A /* LXSwift+Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C3BAC3E3C4FA992B6CE052885D238F /* LXSwift+Device.swift */; };
-		E14C47A1E875721289E452A2A045459A /* LXSwiftTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94210BD534B34BC51199789A84C9F48C /* LXSwiftTextView.swift */; };
-		E2F09AFDE2E6C769AB517C7251180995 /* LXSwift+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048A9D0D65BFA862B58666DDF32B755C /* LXSwift+String.swift */; };
-		E3B7ECC3AD1720293803BCACD3AC7997 /* LXSwift+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E8D5FAF93312877A3FEE5BE1BE7F25 /* LXSwift+View.swift */; };
-		E6666C7424610C7139744D73C709EE54 /* LXSwift+FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB01D636E6031FAC7B012CD2DE4846B /* LXSwift+FileManager.swift */; };
+		AAE5626D00BBBBFAC0D58E8551B99B8B /* LXObjcProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 2BE137CE7488DDE657044BE1182DBD7D /* LXObjcProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AD4770C25A5AF7E8FD6B53CD0F3F69C8 /* LXSwift+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1D3886B02EDE511F68B8FE66386B24 /* LXSwift+Data.swift */; };
+		AE6341814710DA6E3675B8E8E7433A68 /* LXSwift+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B455F3C89BB7404FAB296CDD0F6B59 /* LXSwift+Image.swift */; };
+		AE9DF53917D270A77A72FF2FBFEF5797 /* LXObjcSuport.h in Headers */ = {isa = PBXBuildFile; fileRef = 233C9FB4993184C05FE1950DEDDA6367 /* LXObjcSuport.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B199A6BAD305F2F6CA76D1127CCE0803 /* LXSwiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA488A1D463D1FC3A33ABD8A4F4BA3AD /* LXSwiftView.swift */; };
+		B42C811BF3131B50AAF087670D72552A /* LXSwiftLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D6528ABAF12E606D29F82F8D682A18 /* LXSwiftLabel.swift */; };
+		B9FF3A3AFAF1CC82BB2A5F22F28D9A54 /* LXSwiftImgView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691B3D283127F27711998B041516702F /* LXSwiftImgView.swift */; };
+		BC1477FEF60C1CFAE6AF6CE71B522182 /* LXSwiftGCDTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E3883540A4BFC10EA0473E5A500C67 /* LXSwiftGCDTimer.swift */; };
+		BE94593618E4D8F59AB75E5704D1D013 /* LXSwiftModalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9893F6F8FDAF02CD774B23155277C6 /* LXSwiftModalController.swift */; };
+		BF92A698A84A1B0FAC37CD834C306E9C /* LXSwiftQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6763548C43FE9F0F6E0AC06D5599D068 /* LXSwiftQueue.swift */; };
+		C3E065946C705F69A2734B6AC9EF9859 /* LXSwift+TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C6F2EFA461551446C72DB06945105D /* LXSwift+TextField.swift */; };
+		C407D851D1B762C773B57E96E4C044F4 /* LXSwift+TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA65D523DA0D56DE8A723609B1DE1C99 /* LXSwift+TextView.swift */; };
+		C5768E6F20B614966EBA3B49A5338E8B /* LXSwiftConvenienceBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94D867630450FD560612339F70D134F /* LXSwiftConvenienceBundle.swift */; };
+		C5988520A9D2D559DC0E57948031E9FB /* LXSwiftTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E38BAA59BF75C552C36D9483144C2F9 /* LXSwiftTextField.swift */; };
+		D3A512E057994BDD2EEF71C033D3105A /* LXSwift+ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09D5FB182720033F919BAEA77A88238 /* LXSwift+ScrollView.swift */; };
+		D562CD3C34ECC356BB60FD49AF7E1201 /* LXObjcThreadActive.h in Headers */ = {isa = PBXBuildFile; fileRef = D99B47D6A03BEBFAADE31706EDBF7835 /* LXObjcThreadActive.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DFD18CF860A5442D54A5BA9BAC3F9906 /* LXSwift+Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11DE12A8C6C1540B9E8281EB860FF4D /* LXSwift+Button.swift */; };
+		E0938C8C3F25A74335E9D02FF557E3EA /* LXSwiftPrivacyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945502A35C3427714E5F32B78006D2D0 /* LXSwiftPrivacyManager.swift */; };
+		E4E2420E7B82E48FE5BDD54BF770A4E7 /* LXSwiftWordTextLable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220494C8F064D378CC8149B65F46F73C /* LXSwiftWordTextLable.swift */; };
+		E94838AC66B0ED35F48A79FAED4A4330 /* LXSwiftRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE1080AFADE95BC736FF88724302613 /* LXSwiftRouter.swift */; };
+		F7167BB6FABCFDB26BBF62DED1C91AED /* LXSwift+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20674A2F7B735690746E866101D796A9 /* LXSwift+Font.swift */; };
 		F82DA5AB49CAA86C063149A0A1A4B8BA /* Pods-LXSwiftFoundationModule-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CC8D351C709683C611A900D82D108E2E /* Pods-LXSwiftFoundationModule-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F9FCE8453029832ECA611465944749BE /* LXSwiftStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784FC60AA9B37BF68667B6ADBA63CAE7 /* LXSwiftStack.swift */; };
-		FB2A9D2BC8E184F66036E96468FD5B5B /* LXObjcThreadActive.m in Sources */ = {isa = PBXBuildFile; fileRef = A274709C8A8125B78F3A7E515027572C /* LXObjcThreadActive.m */; };
-		FEFF7271B399A283407545A45119BFA6 /* LXSwift+Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257B30A5065CC7881FBD1C58156D02AE /* LXSwift+Bundle.swift */; };
+		F91C47E223653DFD513E414E8146B261 /* LXSwift+ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B541BB0B205C12552DA6AE83D53351 /* LXSwift+ViewController.swift */; };
+		F9E9D0EA0A5CBAAF9C2E10987283780C /* LXSwift+FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A46BF3BA8694410DCF99925F3F3C5E5 /* LXSwift+FileManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,95 +102,95 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		048A9D0D65BFA862B58666DDF32B755C /* LXSwift+String.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+String.swift"; path = "LXSwiftFoundation/LXSwift+String.swift"; sourceTree = "<group>"; };
-		04C3BAC3E3C4FA992B6CE052885D238F /* LXSwift+Device.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Device.swift"; path = "LXSwiftFoundation/LXSwift+Device.swift"; sourceTree = "<group>"; };
+		04E3883540A4BFC10EA0473E5A500C67 /* LXSwiftGCDTimer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftGCDTimer.swift; path = LXSwiftFoundation/LXSwiftGCDTimer.swift; sourceTree = "<group>"; };
 		05FD14158262C9770469178DB5ADACE5 /* LXFitManager-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LXFitManager-umbrella.h"; sourceTree = "<group>"; };
-		062DE03F166427105F6D80D289E38ABE /* LXSwiftLabel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftLabel.swift; path = LXSwiftFoundation/LXSwiftLabel.swift; sourceTree = "<group>"; };
-		128F160D2B5279712247D6E252CC033F /* LXSwift+DispatchQueue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+DispatchQueue.swift"; path = "LXSwiftFoundation/LXSwift+DispatchQueue.swift"; sourceTree = "<group>"; };
-		13368D9D4586F494E84BC1AC11CED453 /* LXSwiftApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftApp.swift; path = LXSwiftFoundation/LXSwiftApp.swift; sourceTree = "<group>"; };
-		1753F4373F546001CDEF9A26899571F5 /* LXSwiftFoundation-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LXSwiftFoundation-dummy.m"; sourceTree = "<group>"; };
-		1783E7AEE48DCC4B19D332106708D4B6 /* LXObjcProxy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LXObjcProxy.m; path = LXSwiftFoundation/LXObjcProxy.m; sourceTree = "<group>"; };
-		17912DFDD312AAB2D1319DE37BAD431B /* LXSwift+TextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+TextField.swift"; path = "LXSwiftFoundation/LXSwift+TextField.swift"; sourceTree = "<group>"; };
-		1A153771287AC9CBB3FDA5C7FE689437 /* LXSwiftWebViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftWebViewController.swift; path = LXSwiftFoundation/LXSwiftWebViewController.swift; sourceTree = "<group>"; };
-		1EB5DF340E1F274C71815F3AD466C688 /* LXObjcThreadActive.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LXObjcThreadActive.h; path = LXSwiftFoundation/LXObjcThreadActive.h; sourceTree = "<group>"; };
-		202264C83B019677E4AD906FA2887BAB /* LXSwift+ViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+ViewController.swift"; path = "LXSwiftFoundation/LXSwift+ViewController.swift"; sourceTree = "<group>"; };
+		070FDFDB3BF3A3E8C771D45351E221B7 /* LXSwiftTableView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftTableView.swift; path = LXSwiftFoundation/LXSwiftTableView.swift; sourceTree = "<group>"; };
+		10B455F3C89BB7404FAB296CDD0F6B59 /* LXSwift+Image.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Image.swift"; path = "LXSwiftFoundation/LXSwift+Image.swift"; sourceTree = "<group>"; };
+		20674A2F7B735690746E866101D796A9 /* LXSwift+Font.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Font.swift"; path = "LXSwiftFoundation/LXSwift+Font.swift"; sourceTree = "<group>"; };
 		210710B83846B0CA28FD57365AC8809C /* LXFitManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LXFitManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		217FAAF885D8BA839064CDAA24DE1EBF /* LXSwift+NSAttributedString.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+NSAttributedString.swift"; path = "LXSwiftFoundation/LXSwift+NSAttributedString.swift"; sourceTree = "<group>"; };
 		21F4D39098C1452CE1C8E979B1AD9E7D /* LXFitManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LXFitManager.debug.xcconfig; sourceTree = "<group>"; };
-		22C9455A91AFECC5AE0FB8CE8D8C6BEF /* LXSwiftFoundation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LXSwiftFoundation.release.xcconfig; sourceTree = "<group>"; };
-		257B30A5065CC7881FBD1C58156D02AE /* LXSwift+Bundle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Bundle.swift"; path = "LXSwiftFoundation/LXSwift+Bundle.swift"; sourceTree = "<group>"; };
-		25E8D5FAF93312877A3FEE5BE1BE7F25 /* LXSwift+View.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+View.swift"; path = "LXSwiftFoundation/LXSwift+View.swift"; sourceTree = "<group>"; };
-		2AB01D636E6031FAC7B012CD2DE4846B /* LXSwift+FileManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+FileManager.swift"; path = "LXSwiftFoundation/LXSwift+FileManager.swift"; sourceTree = "<group>"; };
-		2D242D356A4576D85843905D5AA724B0 /* LXSwiftFoundation-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "LXSwiftFoundation-Info.plist"; sourceTree = "<group>"; };
-		2EF8DEEF6455D282F807685FFB488174 /* LXSwiftGCDTimer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftGCDTimer.swift; path = LXSwiftFoundation/LXSwiftGCDTimer.swift; sourceTree = "<group>"; };
-		303A12883AD6C9DD1340D20656E32043 /* LXSwiftScrollView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftScrollView.swift; path = LXSwiftFoundation/LXSwiftScrollView.swift; sourceTree = "<group>"; };
-		329578420DF75B7B13CACBEAF9C13410 /* LXSwiftViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftViewController.swift; path = LXSwiftFoundation/LXSwiftViewController.swift; sourceTree = "<group>"; };
+		220494C8F064D378CC8149B65F46F73C /* LXSwiftWordTextLable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftWordTextLable.swift; path = LXSwiftFoundation/LXSwiftWordTextLable.swift; sourceTree = "<group>"; };
+		233C9FB4993184C05FE1950DEDDA6367 /* LXObjcSuport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LXObjcSuport.h; path = LXSwiftFoundation/LXObjcSuport.h; sourceTree = "<group>"; };
+		2479C60F06AA39D62C8FE84FBA9A952B /* LXSwiftFoundation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LXSwiftFoundation.debug.xcconfig; sourceTree = "<group>"; };
+		27FFB6FF3997AECF911D275C3C4FFE51 /* UIView+LXObjcPerformance.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+LXObjcPerformance.m"; path = "LXSwiftFoundation/UIView+LXObjcPerformance.m"; sourceTree = "<group>"; };
+		29B541BB0B205C12552DA6AE83D53351 /* LXSwift+ViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+ViewController.swift"; path = "LXSwiftFoundation/LXSwift+ViewController.swift"; sourceTree = "<group>"; };
+		2AB878398ECAEC3BD33716DE15F44377 /* LXSwift+Int.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Int.swift"; path = "LXSwiftFoundation/LXSwift+Int.swift"; sourceTree = "<group>"; };
+		2BE137CE7488DDE657044BE1182DBD7D /* LXObjcProxy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LXObjcProxy.h; path = LXSwiftFoundation/LXObjcProxy.h; sourceTree = "<group>"; };
 		3507C175AA59B9EDEC77084089B77AB7 /* Pods-LXSwiftFoundationModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LXSwiftFoundationModule.release.xcconfig"; sourceTree = "<group>"; };
 		3888DD53BBE7B7DFC0D5D8540E57BE76 /* LXFitManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = LXFitManager.framework; path = LXFitManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3934A23ADD359E6FB05453E43CFF17A3 /* LXSwift+NSAttributedString.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+NSAttributedString.swift"; path = "LXSwiftFoundation/LXSwift+NSAttributedString.swift"; sourceTree = "<group>"; };
-		397261008D0892AE13E934271B2FEA7C /* LXObjcProxy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LXObjcProxy.h; path = LXSwiftFoundation/LXObjcProxy.h; sourceTree = "<group>"; };
-		3B9AB7850E98789FAD1F96F68D49073B /* LXSwift+Double.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Double.swift"; path = "LXSwiftFoundation/LXSwift+Double.swift"; sourceTree = "<group>"; };
-		4328B01F21F929065A5BE8D15C64622A /* LXSwiftFoundation-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LXSwiftFoundation-prefix.pch"; sourceTree = "<group>"; };
-		436C0605FB6B936972F4421B4A87E7E0 /* LXSwift+TextView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+TextView.swift"; path = "LXSwiftFoundation/LXSwift+TextView.swift"; sourceTree = "<group>"; };
-		4997B2D1170D995502ACB5ED6F593D7E /* LXSwift+Label.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Label.swift"; path = "LXSwiftFoundation/LXSwift+Label.swift"; sourceTree = "<group>"; };
-		4A54A119CF304A1963208241C6C76A7F /* LXSwiftTool.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftTool.swift; path = LXSwiftFoundation/LXSwiftTool.swift; sourceTree = "<group>"; };
+		38FC60E9B3ED26FC7313584E02DBF7A3 /* LXSwiftFoundation.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = LXSwiftFoundation.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		3FF8B38EEC2D7D7160B2BB11844266BE /* LXSwiftFoundation-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LXSwiftFoundation-umbrella.h"; sourceTree = "<group>"; };
+		434DCF0BE16FB54523E46B4310551288 /* LXSwift+Label.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Label.swift"; path = "LXSwiftFoundation/LXSwift+Label.swift"; sourceTree = "<group>"; };
+		47D78596D6559730564ADCFBB1518F9E /* LXSwift+Color.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Color.swift"; path = "LXSwiftFoundation/LXSwift+Color.swift"; sourceTree = "<group>"; };
+		5236D090633E819AE50BFF1A863A6591 /* LXCompatible.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXCompatible.swift; path = LXSwiftFoundation/LXCompatible.swift; sourceTree = "<group>"; };
+		54426088F93AB258A84FA7C35BE2343E /* LXSwiftFoundation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LXSwiftFoundation.release.xcconfig; sourceTree = "<group>"; };
 		554BD54E9D0D1EEB3B1D023FC8DD939D /* LXFitManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LXFitManager.release.xcconfig; sourceTree = "<group>"; };
 		565AF50605AEE3050EBC6D6904C667C5 /* Pods-LXSwiftFoundationModule-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LXSwiftFoundationModule-frameworks.sh"; sourceTree = "<group>"; };
-		5726EBE4603C8E63176F5FB849AFB4FE /* LXSwiftWordRegex.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftWordRegex.swift; path = LXSwiftFoundation/LXSwiftWordRegex.swift; sourceTree = "<group>"; };
+		59C6F2EFA461551446C72DB06945105D /* LXSwift+TextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+TextField.swift"; path = "LXSwiftFoundation/LXSwift+TextField.swift"; sourceTree = "<group>"; };
 		5ABF905D8979282D27B90282940F1C4B /* Pods-LXSwiftFoundationModule-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-LXSwiftFoundationModule-acknowledgements.markdown"; sourceTree = "<group>"; };
-		5EEFF3E105148D0054F4D6D6F065E342 /* LXSwift+Number.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Number.swift"; path = "LXSwiftFoundation/LXSwift+Number.swift"; sourceTree = "<group>"; };
-		60618F367ABC2F20D048B3328EAF9CDE /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
-		6327F06228B02CE7D82637EE631A2B1C /* LXSwift+Color.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Color.swift"; path = "LXSwiftFoundation/LXSwift+Color.swift"; sourceTree = "<group>"; };
-		6A2A98E95FAB80CE453A1E6D72FC61D2 /* LXSwiftPrivacyManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftPrivacyManager.swift; path = LXSwiftFoundation/LXSwiftPrivacyManager.swift; sourceTree = "<group>"; };
+		60E8499A709AE541C278E0FFF85A13F1 /* LXSwift+Number.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Number.swift"; path = "LXSwiftFoundation/LXSwift+Number.swift"; sourceTree = "<group>"; };
+		619C45D30A0A7F138CA5D01820B1D912 /* LXSwiftButtonView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftButtonView.swift; path = LXSwiftFoundation/LXSwiftButtonView.swift; sourceTree = "<group>"; };
+		6763548C43FE9F0F6E0AC06D5599D068 /* LXSwiftQueue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftQueue.swift; path = LXSwiftFoundation/LXSwiftQueue.swift; sourceTree = "<group>"; };
+		691B3D283127F27711998B041516702F /* LXSwiftImgView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftImgView.swift; path = LXSwiftFoundation/LXSwiftImgView.swift; sourceTree = "<group>"; };
 		6BCE8F0DD975B49DEFC8EA29EA561C35 /* Pods-LXSwiftFoundationModule-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LXSwiftFoundationModule-Info.plist"; sourceTree = "<group>"; };
-		6F8E58AE17B8DFFD2ACC136AEF03AE6F /* LXSwift+Dictionary.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Dictionary.swift"; path = "LXSwiftFoundation/LXSwift+Dictionary.swift"; sourceTree = "<group>"; };
-		72580366D3C587F663BC1F4B9F98BF09 /* LXSwiftFoundation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LXSwiftFoundation.debug.xcconfig; sourceTree = "<group>"; };
-		784FC60AA9B37BF68667B6ADBA63CAE7 /* LXSwiftStack.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftStack.swift; path = LXSwiftFoundation/LXSwiftStack.swift; sourceTree = "<group>"; };
+		6CD9E547DF7D6AC3C034C9023B75668F /* LXSwiftTool.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftTool.swift; path = LXSwiftFoundation/LXSwiftTool.swift; sourceTree = "<group>"; };
+		6E38BAA59BF75C552C36D9483144C2F9 /* LXSwiftTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftTextField.swift; path = LXSwiftFoundation/LXSwiftTextField.swift; sourceTree = "<group>"; };
 		78D71F0A043311BA8E159F6CBD00F5FD /* LXFitManager-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LXFitManager-dummy.m"; sourceTree = "<group>"; };
-		7974B82AF774453006DA86B56E16BFC0 /* LXObjcSuport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LXObjcSuport.h; path = LXSwiftFoundation/LXObjcSuport.h; sourceTree = "<group>"; };
-		7A517FA88A0C6EEC5C351A0E4ECC40EE /* LXSwiftFoundation-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LXSwiftFoundation-umbrella.h"; sourceTree = "<group>"; };
-		82FB32981D73C5D6079696CB39F5A337 /* LXSwift+Button.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Button.swift"; path = "LXSwiftFoundation/LXSwift+Button.swift"; sourceTree = "<group>"; };
-		8382C6538D262BDFBAAB2FB88A90F88C /* UIView+ObjcPerformance.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+ObjcPerformance.h"; path = "LXSwiftFoundation/UIView+ObjcPerformance.h"; sourceTree = "<group>"; };
-		87A0BB333CD78E8EE8A553796E18E8F6 /* LXObjcSuport.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LXObjcSuport.m; path = LXSwiftFoundation/LXObjcSuport.m; sourceTree = "<group>"; };
-		8AA935D9F3708C97AB3B9C359B9CE58E /* LXSwiftCollectionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftCollectionView.swift; path = LXSwiftFoundation/LXSwiftCollectionView.swift; sourceTree = "<group>"; };
+		7A46BF3BA8694410DCF99925F3F3C5E5 /* LXSwift+FileManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+FileManager.swift"; path = "LXSwiftFoundation/LXSwift+FileManager.swift"; sourceTree = "<group>"; };
+		7D9893F6F8FDAF02CD774B23155277C6 /* LXSwiftModalController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftModalController.swift; path = LXSwiftFoundation/LXSwiftModalController.swift; sourceTree = "<group>"; };
+		8068B55D75721BB491B2B32E5C317303 /* LXSwiftApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftApp.swift; path = LXSwiftFoundation/LXSwiftApp.swift; sourceTree = "<group>"; };
+		830FF3B6B2BBB9F13A78C8B533FF52F3 /* LXSwiftFoundation-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LXSwiftFoundation-prefix.pch"; sourceTree = "<group>"; };
+		87D6528ABAF12E606D29F82F8D682A18 /* LXSwiftLabel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftLabel.swift; path = LXSwiftFoundation/LXSwiftLabel.swift; sourceTree = "<group>"; };
 		8CD7ECCC3DAC82DD0213A08F6748B8FE /* Pods-LXSwiftFoundationModule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LXSwiftFoundationModule.debug.xcconfig"; sourceTree = "<group>"; };
+		8E4EF40B3B9DBD2DC06A031AA37135BB /* LXSwiftViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftViewController.swift; path = LXSwiftFoundation/LXSwiftViewController.swift; sourceTree = "<group>"; };
 		8EC4B08554BC62C2BA2A4AD00B71FDE7 /* Pods-LXSwiftFoundationModule.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-LXSwiftFoundationModule.modulemap"; sourceTree = "<group>"; };
+		8F1ADB275EC1FA50D4885D0531326709 /* LXObjcProxy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LXObjcProxy.m; path = LXSwiftFoundation/LXObjcProxy.m; sourceTree = "<group>"; };
+		90BEE124D42378770ECAB2062C9ACBE8 /* LXSwiftFoundation-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LXSwiftFoundation-dummy.m"; sourceTree = "<group>"; };
 		91A4F3DDA382BE2E8A7F55E69898FCF0 /* LXSwiftFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = LXSwiftFoundation.framework; path = LXSwiftFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		94210BD534B34BC51199789A84C9F48C /* LXSwiftTextView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftTextView.swift; path = LXSwiftFoundation/LXSwiftTextView.swift; sourceTree = "<group>"; };
+		945502A35C3427714E5F32B78006D2D0 /* LXSwiftPrivacyManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftPrivacyManager.swift; path = LXSwiftFoundation/LXSwiftPrivacyManager.swift; sourceTree = "<group>"; };
 		95B87A18FADBB01ED13D95D7605BB474 /* Pods-LXSwiftFoundationModule-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LXSwiftFoundationModule-acknowledgements.plist"; sourceTree = "<group>"; };
-		970415C5D972AEA11BB8D8EF15E99E66 /* LXSwift+Font.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Font.swift"; path = "LXSwiftFoundation/LXSwift+Font.swift"; sourceTree = "<group>"; };
-		9C9F23741C6AB1439ED16FCDF1883D29 /* UIView+ObjcPerformance.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+ObjcPerformance.m"; path = "LXSwiftFoundation/UIView+ObjcPerformance.m"; sourceTree = "<group>"; };
+		9A9AED921AFD3292BCECD17E2973EAB6 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		9AF71BE0F9DF4C64A9BE718561DCBAFC /* LXSwiftScrollView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftScrollView.swift; path = LXSwiftFoundation/LXSwiftScrollView.swift; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9DD381BE2C2DB31815187654ED308E2F /* LXCompatible.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXCompatible.swift; path = LXSwiftFoundation/LXCompatible.swift; sourceTree = "<group>"; };
 		9E093E81AA39BD512D225DADBDD07811 /* Pods-LXSwiftFoundationModule-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-LXSwiftFoundationModule-dummy.m"; sourceTree = "<group>"; };
-		A274709C8A8125B78F3A7E515027572C /* LXObjcThreadActive.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LXObjcThreadActive.m; path = LXSwiftFoundation/LXObjcThreadActive.m; sourceTree = "<group>"; };
-		A46060181FD1B89668695F561A81C0DA /* LXSwiftUtil.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftUtil.swift; path = LXSwiftFoundation/LXSwiftUtil.swift; sourceTree = "<group>"; };
+		A09D5FB182720033F919BAEA77A88238 /* LXSwift+ScrollView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+ScrollView.swift"; path = "LXSwiftFoundation/LXSwift+ScrollView.swift"; sourceTree = "<group>"; };
 		A4D5A9C54148E7154E587B42BD9E4F04 /* LXFitManager-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "LXFitManager-Info.plist"; sourceTree = "<group>"; };
 		A64C08C4BA5EC19BAD61DCC7ECCBF345 /* LXFit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXFit.swift; path = LXFitManager/LXFit.swift; sourceTree = "<group>"; };
-		A83B1F9ABA4A036909F5C37C144BACAE /* LXSwift+Data.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Data.swift"; path = "LXSwiftFoundation/LXSwift+Data.swift"; sourceTree = "<group>"; };
+		A9D980C0A6C951B184337B2601CF2586 /* LXSwiftFoundation-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "LXSwiftFoundation-Info.plist"; sourceTree = "<group>"; };
 		AB520CD132149910E44FA2B2654DBA13 /* Pods_LXSwiftFoundationModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_LXSwiftFoundationModule.framework; path = "Pods-LXSwiftFoundationModule.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		AD969D012E235EF2AABEC360D03C003E /* LXSwiftRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftRouter.swift; path = LXSwiftFoundation/LXSwiftRouter.swift; sourceTree = "<group>"; };
-		AF48B810EC13CD94261C45116918854D /* LXSwiftButtonView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftButtonView.swift; path = LXSwiftFoundation/LXSwiftButtonView.swift; sourceTree = "<group>"; };
-		B2139BB133E046CA2504D1352733F85C /* LXSwiftImgView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftImgView.swift; path = LXSwiftFoundation/LXSwiftImgView.swift; sourceTree = "<group>"; };
-		B354B8D8E39A6B41DD12102D55D15A32 /* LXSwiftTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftTextField.swift; path = LXSwiftFoundation/LXSwiftTextField.swift; sourceTree = "<group>"; };
-		B375924CACEE0EF352454FDE4B90CD99 /* LXSwiftQueue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftQueue.swift; path = LXSwiftFoundation/LXSwiftQueue.swift; sourceTree = "<group>"; };
-		B73F34CF748311D27E01DE7599D70A3C /* LXSwiftConvenienceBundle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftConvenienceBundle.swift; path = LXSwiftFoundation/LXSwiftConvenienceBundle.swift; sourceTree = "<group>"; };
-		BC284B5A9714AE3B8E4201F6A261A892 /* LXSwiftView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftView.swift; path = LXSwiftFoundation/LXSwiftView.swift; sourceTree = "<group>"; };
-		BE5EC67D32E909EED43DF5B0EFB6A49B /* LXSwiftButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftButton.swift; path = LXSwiftFoundation/LXSwiftButton.swift; sourceTree = "<group>"; };
+		AF853F88D996339FC5A78BD56056D88C /* LXSwiftStack.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftStack.swift; path = LXSwiftFoundation/LXSwiftStack.swift; sourceTree = "<group>"; };
+		B457E32134E536C1619299D755A42FEF /* LXSwiftButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftButton.swift; path = LXSwiftFoundation/LXSwiftButton.swift; sourceTree = "<group>"; };
+		BA488A1D463D1FC3A33ABD8A4F4BA3AD /* LXSwiftView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftView.swift; path = LXSwiftFoundation/LXSwiftView.swift; sourceTree = "<group>"; };
+		BB288FEF95670206B7834621680BC975 /* LXSwift+String.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+String.swift"; path = "LXSwiftFoundation/LXSwift+String.swift"; sourceTree = "<group>"; };
 		C3701F325F140A94653A88E8CC348D25 /* LXFitManager.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = LXFitManager.modulemap; sourceTree = "<group>"; };
-		C82797732A11898D7ABE6948BD6B4D3A /* LXSwiftFoundation.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = LXSwiftFoundation.modulemap; sourceTree = "<group>"; };
-		CADC9989ADA494ED95FB94D72E3B8B8C /* LXSwift+Int.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Int.swift"; path = "LXSwiftFoundation/LXSwift+Int.swift"; sourceTree = "<group>"; };
-		CBE36F936FE0E63BC64DA88E0DB84EF2 /* LXSwiftFoundation.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = LXSwiftFoundation.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		C4D6305FBFCEE2201D4DF53531153DF8 /* LXSwift+Device.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Device.swift"; path = "LXSwiftFoundation/LXSwift+Device.swift"; sourceTree = "<group>"; };
+		C54993ECCBE5426483B8FF9059F5FA89 /* LXSwiftWordRegex.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftWordRegex.swift; path = LXSwiftFoundation/LXSwiftWordRegex.swift; sourceTree = "<group>"; };
+		CB45CE277884DAA96A85CAA7C5C38718 /* LXSwiftWebViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftWebViewController.swift; path = LXSwiftFoundation/LXSwiftWebViewController.swift; sourceTree = "<group>"; };
 		CC8D351C709683C611A900D82D108E2E /* Pods-LXSwiftFoundationModule-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-LXSwiftFoundationModule-umbrella.h"; sourceTree = "<group>"; };
-		CD88421563E978E5CF7DD2BE97ED98EA /* LXSwift+Image.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Image.swift"; path = "LXSwiftFoundation/LXSwift+Image.swift"; sourceTree = "<group>"; };
+		CCF0F25EB0678DF2ED57FE8B65461532 /* LXSwiftTextView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftTextView.swift; path = LXSwiftFoundation/LXSwiftTextView.swift; sourceTree = "<group>"; };
+		CCF43199A351950953EE8F2471CC0B0C /* UIView+LXObjcPerformance.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+LXObjcPerformance.h"; path = "LXSwiftFoundation/UIView+LXObjcPerformance.h"; sourceTree = "<group>"; };
 		CDCB65B3DDB68CB2801794AC6AD13094 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		D049366FA521371C7F8DB17DA1DCED97 /* LXSwiftWordTextLable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftWordTextLable.swift; path = LXSwiftFoundation/LXSwiftWordTextLable.swift; sourceTree = "<group>"; };
-		E1A981757744DF5D6520890B8234DFF8 /* LXSwiftBasics.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftBasics.swift; path = LXSwiftFoundation/LXSwiftBasics.swift; sourceTree = "<group>"; };
-		E2DFFDA5CE6AE956F8AA8CA4C3C44889 /* LXSwift+ScrollView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+ScrollView.swift"; path = "LXSwiftFoundation/LXSwift+ScrollView.swift"; sourceTree = "<group>"; };
-		E511AB053857FFA840AA1CACD223A269 /* LXSwiftTableView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftTableView.swift; path = LXSwiftFoundation/LXSwiftTableView.swift; sourceTree = "<group>"; };
-		E61483AA9954A9130B09344FD110F29C /* LXSwift+Date.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Date.swift"; path = "LXSwiftFoundation/LXSwift+Date.swift"; sourceTree = "<group>"; };
-		E92FBBFAC0F86A06C5ABA93B9B8D935F /* LXSwiftModalController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftModalController.swift; path = LXSwiftFoundation/LXSwiftModalController.swift; sourceTree = "<group>"; };
-		F164FFE469A00288D379CB8A1802AFA6 /* LXSwift+Control.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Control.swift"; path = "LXSwiftFoundation/LXSwift+Control.swift"; sourceTree = "<group>"; };
+		D2296A552EB53AFB3E25BD75CED9D1D0 /* LXSwift+Date.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Date.swift"; path = "LXSwiftFoundation/LXSwift+Date.swift"; sourceTree = "<group>"; };
+		D416ED75B80D56BCE4576779FF234823 /* LXObjcSuport.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LXObjcSuport.m; path = LXSwiftFoundation/LXObjcSuport.m; sourceTree = "<group>"; };
+		D785D14B63A588F5DB18BDF002EFC5CD /* LXSwift+View.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+View.swift"; path = "LXSwiftFoundation/LXSwift+View.swift"; sourceTree = "<group>"; };
+		D94D867630450FD560612339F70D134F /* LXSwiftConvenienceBundle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftConvenienceBundle.swift; path = LXSwiftFoundation/LXSwiftConvenienceBundle.swift; sourceTree = "<group>"; };
+		D99B47D6A03BEBFAADE31706EDBF7835 /* LXObjcThreadActive.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LXObjcThreadActive.h; path = LXSwiftFoundation/LXObjcThreadActive.h; sourceTree = "<group>"; };
+		D9CEC44953B75D98F5D8A60DCFB80BEB /* LXSwift+Dictionary.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Dictionary.swift"; path = "LXSwiftFoundation/LXSwift+Dictionary.swift"; sourceTree = "<group>"; };
+		DAB2B0C1C2E472F66CF1F2BF33FBF49C /* LXSwift+Control.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Control.swift"; path = "LXSwiftFoundation/LXSwift+Control.swift"; sourceTree = "<group>"; };
+		DE1D3886B02EDE511F68B8FE66386B24 /* LXSwift+Data.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Data.swift"; path = "LXSwiftFoundation/LXSwift+Data.swift"; sourceTree = "<group>"; };
+		DEE1080AFADE95BC736FF88724302613 /* LXSwiftRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftRouter.swift; path = LXSwiftFoundation/LXSwiftRouter.swift; sourceTree = "<group>"; };
+		E11DE12A8C6C1540B9E8281EB860FF4D /* LXSwift+Button.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Button.swift"; path = "LXSwiftFoundation/LXSwift+Button.swift"; sourceTree = "<group>"; };
+		E729346E40DA3EC306CB0162F85CA703 /* LXSwiftCollectionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftCollectionView.swift; path = LXSwiftFoundation/LXSwiftCollectionView.swift; sourceTree = "<group>"; };
+		E8F0BE350D4BAE91403E4B350A27D776 /* LXSwift+DispatchQueue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+DispatchQueue.swift"; path = "LXSwiftFoundation/LXSwift+DispatchQueue.swift"; sourceTree = "<group>"; };
+		EAF81F838096B1AE2684925CA182FC41 /* LXSwiftBasics.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftBasics.swift; path = LXSwiftFoundation/LXSwiftBasics.swift; sourceTree = "<group>"; };
+		F0EF3AB425122557A93789069EDA1AE3 /* LXSwiftUtil.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftUtil.swift; path = LXSwiftFoundation/LXSwiftUtil.swift; sourceTree = "<group>"; };
 		F4A987A6133CF8DC118F3F55754600A3 /* LXFitManager-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LXFitManager-prefix.pch"; sourceTree = "<group>"; };
+		F6D7C109D56575EF13C6A6468303DDA6 /* LXSwift+Double.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Double.swift"; path = "LXSwiftFoundation/LXSwift+Double.swift"; sourceTree = "<group>"; };
+		F6F2848A280A5EFCFD1D81024D41CBD6 /* LXSwiftFoundation.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = LXSwiftFoundation.modulemap; sourceTree = "<group>"; };
+		F9FE9B729435E251DD6CEFA02AF09222 /* LXSwift+Bundle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Bundle.swift"; path = "LXSwiftFoundation/LXSwift+Bundle.swift"; sourceTree = "<group>"; };
+		FA65D523DA0D56DE8A723609B1DE1C99 /* LXSwift+TextView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+TextView.swift"; path = "LXSwiftFoundation/LXSwift+TextView.swift"; sourceTree = "<group>"; };
+		FF1B7CC73636F457B54A2D3504B18021 /* LXObjcThreadActive.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LXObjcThreadActive.m; path = LXSwiftFoundation/LXObjcThreadActive.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,73 +238,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		186C4611D2669E00D5D561528EBADB59 /* LXSwiftFoundation */ = {
-			isa = PBXGroup;
-			children = (
-				9DD381BE2C2DB31815187654ED308E2F /* LXCompatible.swift */,
-				397261008D0892AE13E934271B2FEA7C /* LXObjcProxy.h */,
-				1783E7AEE48DCC4B19D332106708D4B6 /* LXObjcProxy.m */,
-				7974B82AF774453006DA86B56E16BFC0 /* LXObjcSuport.h */,
-				87A0BB333CD78E8EE8A553796E18E8F6 /* LXObjcSuport.m */,
-				1EB5DF340E1F274C71815F3AD466C688 /* LXObjcThreadActive.h */,
-				A274709C8A8125B78F3A7E515027572C /* LXObjcThreadActive.m */,
-				257B30A5065CC7881FBD1C58156D02AE /* LXSwift+Bundle.swift */,
-				82FB32981D73C5D6079696CB39F5A337 /* LXSwift+Button.swift */,
-				6327F06228B02CE7D82637EE631A2B1C /* LXSwift+Color.swift */,
-				F164FFE469A00288D379CB8A1802AFA6 /* LXSwift+Control.swift */,
-				A83B1F9ABA4A036909F5C37C144BACAE /* LXSwift+Data.swift */,
-				E61483AA9954A9130B09344FD110F29C /* LXSwift+Date.swift */,
-				04C3BAC3E3C4FA992B6CE052885D238F /* LXSwift+Device.swift */,
-				6F8E58AE17B8DFFD2ACC136AEF03AE6F /* LXSwift+Dictionary.swift */,
-				128F160D2B5279712247D6E252CC033F /* LXSwift+DispatchQueue.swift */,
-				3B9AB7850E98789FAD1F96F68D49073B /* LXSwift+Double.swift */,
-				2AB01D636E6031FAC7B012CD2DE4846B /* LXSwift+FileManager.swift */,
-				970415C5D972AEA11BB8D8EF15E99E66 /* LXSwift+Font.swift */,
-				CD88421563E978E5CF7DD2BE97ED98EA /* LXSwift+Image.swift */,
-				CADC9989ADA494ED95FB94D72E3B8B8C /* LXSwift+Int.swift */,
-				4997B2D1170D995502ACB5ED6F593D7E /* LXSwift+Label.swift */,
-				3934A23ADD359E6FB05453E43CFF17A3 /* LXSwift+NSAttributedString.swift */,
-				5EEFF3E105148D0054F4D6D6F065E342 /* LXSwift+Number.swift */,
-				E2DFFDA5CE6AE956F8AA8CA4C3C44889 /* LXSwift+ScrollView.swift */,
-				048A9D0D65BFA862B58666DDF32B755C /* LXSwift+String.swift */,
-				17912DFDD312AAB2D1319DE37BAD431B /* LXSwift+TextField.swift */,
-				436C0605FB6B936972F4421B4A87E7E0 /* LXSwift+TextView.swift */,
-				25E8D5FAF93312877A3FEE5BE1BE7F25 /* LXSwift+View.swift */,
-				202264C83B019677E4AD906FA2887BAB /* LXSwift+ViewController.swift */,
-				13368D9D4586F494E84BC1AC11CED453 /* LXSwiftApp.swift */,
-				E1A981757744DF5D6520890B8234DFF8 /* LXSwiftBasics.swift */,
-				BE5EC67D32E909EED43DF5B0EFB6A49B /* LXSwiftButton.swift */,
-				AF48B810EC13CD94261C45116918854D /* LXSwiftButtonView.swift */,
-				8AA935D9F3708C97AB3B9C359B9CE58E /* LXSwiftCollectionView.swift */,
-				B73F34CF748311D27E01DE7599D70A3C /* LXSwiftConvenienceBundle.swift */,
-				2EF8DEEF6455D282F807685FFB488174 /* LXSwiftGCDTimer.swift */,
-				B2139BB133E046CA2504D1352733F85C /* LXSwiftImgView.swift */,
-				062DE03F166427105F6D80D289E38ABE /* LXSwiftLabel.swift */,
-				E92FBBFAC0F86A06C5ABA93B9B8D935F /* LXSwiftModalController.swift */,
-				6A2A98E95FAB80CE453A1E6D72FC61D2 /* LXSwiftPrivacyManager.swift */,
-				B375924CACEE0EF352454FDE4B90CD99 /* LXSwiftQueue.swift */,
-				AD969D012E235EF2AABEC360D03C003E /* LXSwiftRouter.swift */,
-				303A12883AD6C9DD1340D20656E32043 /* LXSwiftScrollView.swift */,
-				784FC60AA9B37BF68667B6ADBA63CAE7 /* LXSwiftStack.swift */,
-				E511AB053857FFA840AA1CACD223A269 /* LXSwiftTableView.swift */,
-				B354B8D8E39A6B41DD12102D55D15A32 /* LXSwiftTextField.swift */,
-				94210BD534B34BC51199789A84C9F48C /* LXSwiftTextView.swift */,
-				4A54A119CF304A1963208241C6C76A7F /* LXSwiftTool.swift */,
-				A46060181FD1B89668695F561A81C0DA /* LXSwiftUtil.swift */,
-				BC284B5A9714AE3B8E4201F6A261A892 /* LXSwiftView.swift */,
-				329578420DF75B7B13CACBEAF9C13410 /* LXSwiftViewController.swift */,
-				1A153771287AC9CBB3FDA5C7FE689437 /* LXSwiftWebViewController.swift */,
-				5726EBE4603C8E63176F5FB849AFB4FE /* LXSwiftWordRegex.swift */,
-				D049366FA521371C7F8DB17DA1DCED97 /* LXSwiftWordTextLable.swift */,
-				8382C6538D262BDFBAAB2FB88A90F88C /* UIView+ObjcPerformance.h */,
-				9C9F23741C6AB1439ED16FCDF1883D29 /* UIView+ObjcPerformance.m */,
-				DE8EE2AB9BF58545FC3D2DB795D2BBE4 /* Pod */,
-				985AFE2AA2242DE8D65B0D0614639CF1 /* Support Files */,
-			);
-			name = LXSwiftFoundation;
-			path = ..;
-			sourceTree = "<group>";
-		};
 		1F49BE8C377F68AC74F8ECC9D8384A85 /* LXFitManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -339,6 +272,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		41E92EDBC35AC4714BD2EB064EA52478 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				F6F2848A280A5EFCFD1D81024D41CBD6 /* LXSwiftFoundation.modulemap */,
+				90BEE124D42378770ECAB2062C9ACBE8 /* LXSwiftFoundation-dummy.m */,
+				A9D980C0A6C951B184337B2601CF2586 /* LXSwiftFoundation-Info.plist */,
+				830FF3B6B2BBB9F13A78C8B533FF52F3 /* LXSwiftFoundation-prefix.pch */,
+				3FF8B38EEC2D7D7160B2BB11844266BE /* LXSwiftFoundation-umbrella.h */,
+				2479C60F06AA39D62C8FE84FBA9A952B /* LXSwiftFoundation.debug.xcconfig */,
+				54426088F93AB258A84FA7C35BE2343E /* LXSwiftFoundation.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "Pods/Target Support Files/LXSwiftFoundation";
+			sourceTree = "<group>";
+		};
 		75039B10CF01DA53521ED8C7F0DA4EF2 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -347,19 +295,71 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		985AFE2AA2242DE8D65B0D0614639CF1 /* Support Files */ = {
+		803FC3296DE2B006FB6933D84359D846 /* LXSwiftFoundation */ = {
 			isa = PBXGroup;
 			children = (
-				C82797732A11898D7ABE6948BD6B4D3A /* LXSwiftFoundation.modulemap */,
-				1753F4373F546001CDEF9A26899571F5 /* LXSwiftFoundation-dummy.m */,
-				2D242D356A4576D85843905D5AA724B0 /* LXSwiftFoundation-Info.plist */,
-				4328B01F21F929065A5BE8D15C64622A /* LXSwiftFoundation-prefix.pch */,
-				7A517FA88A0C6EEC5C351A0E4ECC40EE /* LXSwiftFoundation-umbrella.h */,
-				72580366D3C587F663BC1F4B9F98BF09 /* LXSwiftFoundation.debug.xcconfig */,
-				22C9455A91AFECC5AE0FB8CE8D8C6BEF /* LXSwiftFoundation.release.xcconfig */,
+				5236D090633E819AE50BFF1A863A6591 /* LXCompatible.swift */,
+				2BE137CE7488DDE657044BE1182DBD7D /* LXObjcProxy.h */,
+				8F1ADB275EC1FA50D4885D0531326709 /* LXObjcProxy.m */,
+				233C9FB4993184C05FE1950DEDDA6367 /* LXObjcSuport.h */,
+				D416ED75B80D56BCE4576779FF234823 /* LXObjcSuport.m */,
+				D99B47D6A03BEBFAADE31706EDBF7835 /* LXObjcThreadActive.h */,
+				FF1B7CC73636F457B54A2D3504B18021 /* LXObjcThreadActive.m */,
+				F9FE9B729435E251DD6CEFA02AF09222 /* LXSwift+Bundle.swift */,
+				E11DE12A8C6C1540B9E8281EB860FF4D /* LXSwift+Button.swift */,
+				47D78596D6559730564ADCFBB1518F9E /* LXSwift+Color.swift */,
+				DAB2B0C1C2E472F66CF1F2BF33FBF49C /* LXSwift+Control.swift */,
+				DE1D3886B02EDE511F68B8FE66386B24 /* LXSwift+Data.swift */,
+				D2296A552EB53AFB3E25BD75CED9D1D0 /* LXSwift+Date.swift */,
+				C4D6305FBFCEE2201D4DF53531153DF8 /* LXSwift+Device.swift */,
+				D9CEC44953B75D98F5D8A60DCFB80BEB /* LXSwift+Dictionary.swift */,
+				E8F0BE350D4BAE91403E4B350A27D776 /* LXSwift+DispatchQueue.swift */,
+				F6D7C109D56575EF13C6A6468303DDA6 /* LXSwift+Double.swift */,
+				7A46BF3BA8694410DCF99925F3F3C5E5 /* LXSwift+FileManager.swift */,
+				20674A2F7B735690746E866101D796A9 /* LXSwift+Font.swift */,
+				10B455F3C89BB7404FAB296CDD0F6B59 /* LXSwift+Image.swift */,
+				2AB878398ECAEC3BD33716DE15F44377 /* LXSwift+Int.swift */,
+				434DCF0BE16FB54523E46B4310551288 /* LXSwift+Label.swift */,
+				217FAAF885D8BA839064CDAA24DE1EBF /* LXSwift+NSAttributedString.swift */,
+				60E8499A709AE541C278E0FFF85A13F1 /* LXSwift+Number.swift */,
+				A09D5FB182720033F919BAEA77A88238 /* LXSwift+ScrollView.swift */,
+				BB288FEF95670206B7834621680BC975 /* LXSwift+String.swift */,
+				59C6F2EFA461551446C72DB06945105D /* LXSwift+TextField.swift */,
+				FA65D523DA0D56DE8A723609B1DE1C99 /* LXSwift+TextView.swift */,
+				D785D14B63A588F5DB18BDF002EFC5CD /* LXSwift+View.swift */,
+				29B541BB0B205C12552DA6AE83D53351 /* LXSwift+ViewController.swift */,
+				8068B55D75721BB491B2B32E5C317303 /* LXSwiftApp.swift */,
+				EAF81F838096B1AE2684925CA182FC41 /* LXSwiftBasics.swift */,
+				B457E32134E536C1619299D755A42FEF /* LXSwiftButton.swift */,
+				619C45D30A0A7F138CA5D01820B1D912 /* LXSwiftButtonView.swift */,
+				E729346E40DA3EC306CB0162F85CA703 /* LXSwiftCollectionView.swift */,
+				D94D867630450FD560612339F70D134F /* LXSwiftConvenienceBundle.swift */,
+				04E3883540A4BFC10EA0473E5A500C67 /* LXSwiftGCDTimer.swift */,
+				691B3D283127F27711998B041516702F /* LXSwiftImgView.swift */,
+				87D6528ABAF12E606D29F82F8D682A18 /* LXSwiftLabel.swift */,
+				7D9893F6F8FDAF02CD774B23155277C6 /* LXSwiftModalController.swift */,
+				945502A35C3427714E5F32B78006D2D0 /* LXSwiftPrivacyManager.swift */,
+				6763548C43FE9F0F6E0AC06D5599D068 /* LXSwiftQueue.swift */,
+				DEE1080AFADE95BC736FF88724302613 /* LXSwiftRouter.swift */,
+				9AF71BE0F9DF4C64A9BE718561DCBAFC /* LXSwiftScrollView.swift */,
+				AF853F88D996339FC5A78BD56056D88C /* LXSwiftStack.swift */,
+				070FDFDB3BF3A3E8C771D45351E221B7 /* LXSwiftTableView.swift */,
+				6E38BAA59BF75C552C36D9483144C2F9 /* LXSwiftTextField.swift */,
+				CCF0F25EB0678DF2ED57FE8B65461532 /* LXSwiftTextView.swift */,
+				6CD9E547DF7D6AC3C034C9023B75668F /* LXSwiftTool.swift */,
+				F0EF3AB425122557A93789069EDA1AE3 /* LXSwiftUtil.swift */,
+				BA488A1D463D1FC3A33ABD8A4F4BA3AD /* LXSwiftView.swift */,
+				8E4EF40B3B9DBD2DC06A031AA37135BB /* LXSwiftViewController.swift */,
+				CB45CE277884DAA96A85CAA7C5C38718 /* LXSwiftWebViewController.swift */,
+				C54993ECCBE5426483B8FF9059F5FA89 /* LXSwiftWordRegex.swift */,
+				220494C8F064D378CC8149B65F46F73C /* LXSwiftWordTextLable.swift */,
+				CCF43199A351950953EE8F2471CC0B0C /* UIView+LXObjcPerformance.h */,
+				27FFB6FF3997AECF911D275C3C4FFE51 /* UIView+LXObjcPerformance.m */,
+				C39E3E920082473C5A4CDFC8927B44BE /* Pod */,
+				41E92EDBC35AC4714BD2EB064EA52478 /* Support Files */,
 			);
-			name = "Support Files";
-			path = "Pods/Target Support Files/LXSwiftFoundation";
+			name = LXSwiftFoundation;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		990E95A867AC01105F96CA7D3A8D3961 /* Products */ = {
@@ -375,7 +375,7 @@
 		B346C92BDF26BDC6A8490D4B970FEEE7 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				186C4611D2669E00D5D561528EBADB59 /* LXSwiftFoundation */,
+				803FC3296DE2B006FB6933D84359D846 /* LXSwiftFoundation */,
 			);
 			name = "Development Pods";
 			sourceTree = "<group>";
@@ -397,6 +397,15 @@
 			path = "Target Support Files/Pods-LXSwiftFoundationModule";
 			sourceTree = "<group>";
 		};
+		C39E3E920082473C5A4CDFC8927B44BE /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				38FC60E9B3ED26FC7313584E02DBF7A3 /* LXSwiftFoundation.podspec */,
+				9A9AED921AFD3292BCECD17E2973EAB6 /* README.md */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
@@ -407,15 +416,6 @@
 				990E95A867AC01105F96CA7D3A8D3961 /* Products */,
 				054E0774F8CED695C3B274BD2A45FB41 /* Targets Support Files */,
 			);
-			sourceTree = "<group>";
-		};
-		DE8EE2AB9BF58545FC3D2DB795D2BBE4 /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				CBE36F936FE0E63BC64DA88E0DB84EF2 /* LXSwiftFoundation.podspec */,
-				60618F367ABC2F20D048B3328EAF9CDE /* README.md */,
-			);
-			name = Pod;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -429,15 +429,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CC44BC597141EE5864B4DCD6C19A7DC9 /* Headers */ = {
+		DE3DA711109493F1E27D7DC570F791AE /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79EA5F9FD22188DD260455E03939EE61 /* LXObjcProxy.h in Headers */,
-				59E472AF9FE71A61917C8BDC5C8416E6 /* LXObjcSuport.h in Headers */,
-				77E04B75DEC6128AA64C349F83696B50 /* LXObjcThreadActive.h in Headers */,
-				28E55A21CC1656CEF6D1E7B02F02C3A0 /* LXSwiftFoundation-umbrella.h in Headers */,
-				CD79E2112081AA0B3C44AC3E2E87D60A /* UIView+ObjcPerformance.h in Headers */,
+				AAE5626D00BBBBFAC0D58E8551B99B8B /* LXObjcProxy.h in Headers */,
+				AE9DF53917D270A77A72FF2FBFEF5797 /* LXObjcSuport.h in Headers */,
+				D562CD3C34ECC356BB60FD49AF7E1201 /* LXObjcThreadActive.h in Headers */,
+				4D7CE1D1A287C5CFA0751E226CA94DCF /* LXSwiftFoundation-umbrella.h in Headers */,
+				2B099D567941C2C6E6448D3DD0157014 /* UIView+LXObjcPerformance.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,8 +494,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 151CCB366246D6EC641A14C03CC78F77 /* Build configuration list for PBXNativeTarget "LXSwiftFoundation" */;
 			buildPhases = (
-				CC44BC597141EE5864B4DCD6C19A7DC9 /* Headers */,
-				8EE24230EA18F74C898E04370EEE64CD /* Sources */,
+				DE3DA711109493F1E27D7DC570F791AE /* Headers */,
+				6CCE3BFD04D0D3A6B638168B3395D491 /* Sources */,
 				5E70D6D0430E5686120987220D4F53C1 /* Frameworks */,
 				BA971064B07ED569E9DCD28133129A0D /* Resources */,
 			);
@@ -563,64 +563,64 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		8EE24230EA18F74C898E04370EEE64CD /* Sources */ = {
+		6CCE3BFD04D0D3A6B638168B3395D491 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB1D49335E98CDC0EBB5FE55053ADB2E /* LXCompatible.swift in Sources */,
-				30A1CC640D74A0E67047BC906B010B9B /* LXObjcProxy.m in Sources */,
-				410F43413AF04623839DC260099D6EB9 /* LXObjcSuport.m in Sources */,
-				FB2A9D2BC8E184F66036E96468FD5B5B /* LXObjcThreadActive.m in Sources */,
-				FEFF7271B399A283407545A45119BFA6 /* LXSwift+Bundle.swift in Sources */,
-				784C6DD558AC9C20635AD0DB5EE91B03 /* LXSwift+Button.swift in Sources */,
-				392AE87EBA0BF98C29967B53EEC85991 /* LXSwift+Color.swift in Sources */,
-				C7BF36800DFDB67CDB0B42100C2376AD /* LXSwift+Control.swift in Sources */,
-				6A437A070EE675515C15F8E0ED545952 /* LXSwift+Data.swift in Sources */,
-				B47D7FC57760997C9990CA9D346DA25A /* LXSwift+Date.swift in Sources */,
-				DAA9ABDEBB24E17CF375DBEAE8A08F3A /* LXSwift+Device.swift in Sources */,
-				99E0AD08FE817BCA655EB0D1639B8DCC /* LXSwift+Dictionary.swift in Sources */,
-				629B1B6603DAF7F51212D4FF49B69D09 /* LXSwift+DispatchQueue.swift in Sources */,
-				5392035158BE8AB36E37665D931F87A7 /* LXSwift+Double.swift in Sources */,
-				E6666C7424610C7139744D73C709EE54 /* LXSwift+FileManager.swift in Sources */,
-				9CDDAD6A2E7125E87707B92AE30D7E1B /* LXSwift+Font.swift in Sources */,
-				1D35C40F1C79369325EB8EC079CEF8CE /* LXSwift+Image.swift in Sources */,
-				B57494FB9FB1BDE55F06F529A3067FD5 /* LXSwift+Int.swift in Sources */,
-				1C2FDB256D337B6D5C46E0A70A66513C /* LXSwift+Label.swift in Sources */,
-				2687E995F5CA425E755A25275453C294 /* LXSwift+NSAttributedString.swift in Sources */,
-				3E9B351A39473EA852CCEADAC2D85E58 /* LXSwift+Number.swift in Sources */,
-				BA771AC3FEBB4951EFEAEC277799657E /* LXSwift+ScrollView.swift in Sources */,
-				E2F09AFDE2E6C769AB517C7251180995 /* LXSwift+String.swift in Sources */,
-				9438D3BE49B655FD432DB9E3D7853260 /* LXSwift+TextField.swift in Sources */,
-				412F016CC7BFE77D6C3B195C6A1AE40B /* LXSwift+TextView.swift in Sources */,
-				E3B7ECC3AD1720293803BCACD3AC7997 /* LXSwift+View.swift in Sources */,
-				A79BB3335BB3EAF55AD49331545FC5B1 /* LXSwift+ViewController.swift in Sources */,
-				B2003C85289DF4F27A3B64C4B5341707 /* LXSwiftApp.swift in Sources */,
-				31D4D7927BB2706D50998F01D6974AAD /* LXSwiftBasics.swift in Sources */,
-				B8C0374437F1AA7F863DD3C3FA876C9E /* LXSwiftButton.swift in Sources */,
-				C78AE5348ED7FCE8AFB7AB2917534600 /* LXSwiftButtonView.swift in Sources */,
-				2F4B875EA795DB3002582EDBFB4D9825 /* LXSwiftCollectionView.swift in Sources */,
-				709C1E685543247ED00004466A09720C /* LXSwiftConvenienceBundle.swift in Sources */,
-				7DAA97D5E17883DAA0DEA481E7827ACE /* LXSwiftFoundation-dummy.m in Sources */,
-				0F7867534020CC1D3B2B3E3E3F2EBFA0 /* LXSwiftGCDTimer.swift in Sources */,
-				BA0788EBFA1A9DC389AC411D79AE977F /* LXSwiftImgView.swift in Sources */,
-				D440FAC5859A11A5110F76B15845F11C /* LXSwiftLabel.swift in Sources */,
-				1EAAEA8CD87069B28313E450D35727FA /* LXSwiftModalController.swift in Sources */,
-				7939F091219C49E3CE9BD781EF675B00 /* LXSwiftPrivacyManager.swift in Sources */,
-				609219573DC0888968F3E69F4528E654 /* LXSwiftQueue.swift in Sources */,
-				CE2B838292FF52C65DE634CE88EB4844 /* LXSwiftRouter.swift in Sources */,
-				0EE4FB0938576FC1D88A9DDEC0FA16B2 /* LXSwiftScrollView.swift in Sources */,
-				F9FCE8453029832ECA611465944749BE /* LXSwiftStack.swift in Sources */,
-				68CC50DC1EC166D735FC4F75042A51AC /* LXSwiftTableView.swift in Sources */,
-				4720AC361CE6200B33CE12BE11F24377 /* LXSwiftTextField.swift in Sources */,
-				E14C47A1E875721289E452A2A045459A /* LXSwiftTextView.swift in Sources */,
-				7B4BDDA9C43FF69132139A71443C5B3A /* LXSwiftTool.swift in Sources */,
-				B6F96EE8DB9F7E73B3651721428261D8 /* LXSwiftUtil.swift in Sources */,
-				01FD55AF225CBFA63F5B103B3833CF98 /* LXSwiftView.swift in Sources */,
-				CA44AEABEEA4BE42BAAF37C683B5815F /* LXSwiftViewController.swift in Sources */,
-				C1220B9C341E406DE8F7315BC1CFF32D /* LXSwiftWebViewController.swift in Sources */,
-				842EEC48E980344FB99A1C89E971751F /* LXSwiftWordRegex.swift in Sources */,
-				3682988F619CACE5AF59AFAC42E6E96F /* LXSwiftWordTextLable.swift in Sources */,
-				3E10353F91B4FE21BE064339B4A352E2 /* UIView+ObjcPerformance.m in Sources */,
+				226304A5CC6D18A89FE9691850F81454 /* LXCompatible.swift in Sources */,
+				2C70070DD587E2A4D1BD4891B4187F6D /* LXObjcProxy.m in Sources */,
+				036C702F9707C878348633BBD977B89F /* LXObjcSuport.m in Sources */,
+				4C28E2CB5345D0BFE11E867E19B2D7F8 /* LXObjcThreadActive.m in Sources */,
+				46D45352676BFEED2487F8ED38F30DFF /* LXSwift+Bundle.swift in Sources */,
+				DFD18CF860A5442D54A5BA9BAC3F9906 /* LXSwift+Button.swift in Sources */,
+				48B9E33B630637945D8118564B8541FE /* LXSwift+Color.swift in Sources */,
+				7619FEA225AB4306A0E1D2ED8456E843 /* LXSwift+Control.swift in Sources */,
+				AD4770C25A5AF7E8FD6B53CD0F3F69C8 /* LXSwift+Data.swift in Sources */,
+				596C45675F8B4BF3D285C8E008A6539C /* LXSwift+Date.swift in Sources */,
+				76ED8573041E7BD31FD544059EF56D29 /* LXSwift+Device.swift in Sources */,
+				A683BBDBB165BE95F8073C9C7B344BF4 /* LXSwift+Dictionary.swift in Sources */,
+				431F797F44274ECDBE1D9966A2EF59C4 /* LXSwift+DispatchQueue.swift in Sources */,
+				6C1B5C27162B58F8C65401A9D191A70C /* LXSwift+Double.swift in Sources */,
+				F9E9D0EA0A5CBAAF9C2E10987283780C /* LXSwift+FileManager.swift in Sources */,
+				F7167BB6FABCFDB26BBF62DED1C91AED /* LXSwift+Font.swift in Sources */,
+				AE6341814710DA6E3675B8E8E7433A68 /* LXSwift+Image.swift in Sources */,
+				32C4C9903802A603A20DC0C6FB1DC7DE /* LXSwift+Int.swift in Sources */,
+				0E8A44340E709A6F477C61B5F7F94E3A /* LXSwift+Label.swift in Sources */,
+				956C2D8BE126BE47E1B5046AB9948F9E /* LXSwift+NSAttributedString.swift in Sources */,
+				7D089377B40FE4342FD3C5511623D96A /* LXSwift+Number.swift in Sources */,
+				D3A512E057994BDD2EEF71C033D3105A /* LXSwift+ScrollView.swift in Sources */,
+				3C59E03E932022EC09D1D22D8078F76B /* LXSwift+String.swift in Sources */,
+				C3E065946C705F69A2734B6AC9EF9859 /* LXSwift+TextField.swift in Sources */,
+				C407D851D1B762C773B57E96E4C044F4 /* LXSwift+TextView.swift in Sources */,
+				5CC5A570FA8030BF4C7558CAE3AD4D73 /* LXSwift+View.swift in Sources */,
+				F91C47E223653DFD513E414E8146B261 /* LXSwift+ViewController.swift in Sources */,
+				7D8B51BAC37F99745A5B15C4DB00F0EB /* LXSwiftApp.swift in Sources */,
+				3C155B0993A4FEF410B37604B6AEA624 /* LXSwiftBasics.swift in Sources */,
+				8252945BA919964784614F40EFDF7A2E /* LXSwiftButton.swift in Sources */,
+				6DCF512F138B0C7C831C41A641DB0492 /* LXSwiftButtonView.swift in Sources */,
+				13A6EB115482D738FC0B2C187CEE9F88 /* LXSwiftCollectionView.swift in Sources */,
+				C5768E6F20B614966EBA3B49A5338E8B /* LXSwiftConvenienceBundle.swift in Sources */,
+				313A4FF414485FD64770F383E7268677 /* LXSwiftFoundation-dummy.m in Sources */,
+				BC1477FEF60C1CFAE6AF6CE71B522182 /* LXSwiftGCDTimer.swift in Sources */,
+				B9FF3A3AFAF1CC82BB2A5F22F28D9A54 /* LXSwiftImgView.swift in Sources */,
+				B42C811BF3131B50AAF087670D72552A /* LXSwiftLabel.swift in Sources */,
+				BE94593618E4D8F59AB75E5704D1D013 /* LXSwiftModalController.swift in Sources */,
+				E0938C8C3F25A74335E9D02FF557E3EA /* LXSwiftPrivacyManager.swift in Sources */,
+				BF92A698A84A1B0FAC37CD834C306E9C /* LXSwiftQueue.swift in Sources */,
+				E94838AC66B0ED35F48A79FAED4A4330 /* LXSwiftRouter.swift in Sources */,
+				46A6DD155947C53B464689E0B05DB92E /* LXSwiftScrollView.swift in Sources */,
+				54DCE514EE641172BBE2195D2E60F9DD /* LXSwiftStack.swift in Sources */,
+				331647A3B4163D38FC376C975375C310 /* LXSwiftTableView.swift in Sources */,
+				C5988520A9D2D559DC0E57948031E9FB /* LXSwiftTextField.swift in Sources */,
+				909637B4BEE358EF8C6E63280336B0BD /* LXSwiftTextView.swift in Sources */,
+				7BE994A9D3B27E9F27F452DC75BB2AA9 /* LXSwiftTool.swift in Sources */,
+				3739455333939AF2244769E48F45333E /* LXSwiftUtil.swift in Sources */,
+				B199A6BAD305F2F6CA76D1127CCE0803 /* LXSwiftView.swift in Sources */,
+				604D6C8160E4B1C4994F6D69B7BA160C /* LXSwiftViewController.swift in Sources */,
+				704512206F6521EE15E816F062972183 /* LXSwiftWebViewController.swift in Sources */,
+				421D6CE490A4BADEBF7D7D61B3D88D28 /* LXSwiftWordRegex.swift in Sources */,
+				E4E2420E7B82E48FE5BDD54BF770A4E7 /* LXSwiftWordTextLable.swift in Sources */,
+				7753C38C377088E335EF8769C942BEB4 /* UIView+LXObjcPerformance.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -827,7 +827,7 @@
 		};
 		89A134B8641E8009EA2515D0DCDB1B0D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 72580366D3C587F663BC1F4B9F98BF09 /* LXSwiftFoundation.debug.xcconfig */;
+			baseConfigurationReference = 2479C60F06AA39D62C8FE84FBA9A952B /* LXSwiftFoundation.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -897,7 +897,7 @@
 		};
 		B5DC82F7DFC1310534E810518BCE4D29 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 22C9455A91AFECC5AE0FB8CE8D8C6BEF /* LXSwiftFoundation.release.xcconfig */;
+			baseConfigurationReference = 54426088F93AB258A84FA7C35BE2343E /* LXSwiftFoundation.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";

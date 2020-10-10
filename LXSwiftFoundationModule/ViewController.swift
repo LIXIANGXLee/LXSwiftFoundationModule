@@ -68,7 +68,7 @@ class ViewController: UIViewController {
         objc.start()
         objc.start()
 
-             let imgview = UIImageView(frame: CGRect(x: 10, y: 200, width: 300, height: 200))
+             let imgview = UIImageView(frame: CGRect(x: 10, y: 200, width: 300, height: 300))
 //             imgview.contentMode = .scaleAspectFit
              imgview.backgroundColor = UIColor.blue
              imgview.isUserInteractionEnabled = true
@@ -103,9 +103,8 @@ class ViewController: UIViewController {
         print("=---=\(stack.pop() ?? 0)")
         
         
-       
         
-        
+     
     }
  
 
