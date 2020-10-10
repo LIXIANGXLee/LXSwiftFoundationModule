@@ -33,9 +33,23 @@ class TestViewController: UIViewController {
             print("=======\(qrcodeStr)")
 
         }
+
+        let s =  UISwitch(frame: CGRect(x: 200, y: 300, width: 100, height: 100))
+          
+        s.lx.setHandle { (isOn) in
+            print("=======\(isOn)")
+        }
         
+        s.lx.setHandle { (isOn) in
+                 print("====------===\(isOn)")
+             }
+//          s.addTarget(self, action: #selector(swichAction(_:)), for: .touchUpInside)
+          view.addSubview(s)
     }
-    
+//
+//    @objc private func swichAction(_ s: UISwitch) {
+//        print("========\(s.isOn)")
+//    }
     deinit {
         print("=TestViewController=deinit===")
     }

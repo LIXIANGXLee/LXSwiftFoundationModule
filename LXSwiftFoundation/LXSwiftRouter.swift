@@ -38,7 +38,6 @@ extension LXSwiftRouter {
     {
         guard let url = urlStr,
             url.hasPrefix("http://"),
-            routers.keys.contains(url),
             let callBack = callInfoBack  else { return  }
         
         self.semaphore.wait()
@@ -92,6 +91,9 @@ extension LXSwiftRouter {
     
     ///deregister
     public static func deregister() {
+        self.semaphore.wait()
         routers.removeAll()
+        self.semaphore.signal()
     }
+    
 }

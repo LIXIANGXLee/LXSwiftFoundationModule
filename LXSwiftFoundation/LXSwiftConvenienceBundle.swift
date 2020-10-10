@@ -12,9 +12,9 @@ import UIKit
 /*
  从bundle中加载图片 文件 资源
  for example:
- fileprivate class LXConvenienceBundlePath {}
+ fileprivate class LXSwiftConvenienceBundlePath {}
  extension UIImage {
-    static let convenienceBundle = LXConvenienceBundle(bundlePath: Bundle(for: LXConvenienceBundlePath.self).bundlePath, bundleName: "Login.bundle", path: nil)
+    static let convenienceBundle = LXSwiftConvenienceBundle(bundlePath: Bundle(for: LXSwiftConvenienceBundlePath.self).bundlePath, bundleName: "Login.bundle", path: nil)
  
      static func named(_ imageNamed: String?) -> UIImage? {
          guard let imageNamed = imageNamed else { return nil }

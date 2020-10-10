@@ -12,7 +12,7 @@ open class LXSwiftButton: UIButton, LXSwiftUICompatible {
     /// call back
     public typealias ButtonCallBack = ((_ buton: LXSwiftButton) -> ())
     public var swiftModel: Any?
-    public var buttonCallBack: LXSwiftButton.ButtonCallBack?
+    internal var buttonCallBack: LXSwiftButton.ButtonCallBack?
     
     public override init(frame: CGRect) {
         super.init(frame: frame)

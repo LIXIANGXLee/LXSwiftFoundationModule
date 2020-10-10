@@ -25,7 +25,7 @@ extension LXSwiftBasics where Base: UIImage {
            let light = UIImage(named: lightStr)
            let dark = UIImage(named: lightStr)
 
-       if light != nil && dark != nil {
+           if light != nil && dark != nil {
                return image(light: light!, dark: dark!)
            }else {
                return light ?? dark ?? UIImage()

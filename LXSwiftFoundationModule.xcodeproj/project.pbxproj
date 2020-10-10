@@ -16,6 +16,7 @@
 		7607A094251B1CB70071B9AD /* LXSwiftFoundation.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 7607A092251B1CB70071B9AD /* LXSwiftFoundation.podspec */; };
 		763271542530660D00B3C69E /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763271532530660D00B3C69E /* TestViewController.swift */; };
 		764750D32531AA8D004310C0 /* UIView+LXObjcPerformance.m in Sources */ = {isa = PBXBuildFile; fileRef = 764750D22531AA8D004310C0 /* UIView+LXObjcPerformance.m */; };
+		764750FE25321264004310C0 /* LXSwift+Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764750FD25321264004310C0 /* LXSwift+Switch.swift */; };
 		76AF521925300EDC0063538A /* LXSwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51E225300EDC0063538A /* LXSwiftViewController.swift */; };
 		76AF521A25300EDC0063538A /* LXSwiftStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51E325300EDC0063538A /* LXSwiftStack.swift */; };
 		76AF521B25300EDC0063538A /* LXSwift+Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF51E425300EDC0063538A /* LXSwift+Dictionary.swift */; };
@@ -86,6 +87,7 @@
 		763271532530660D00B3C69E /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		764750D12531AA8D004310C0 /* UIView+LXObjcPerformance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+LXObjcPerformance.h"; sourceTree = "<group>"; };
 		764750D22531AA8D004310C0 /* UIView+LXObjcPerformance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+LXObjcPerformance.m"; sourceTree = "<group>"; };
+		764750FD25321264004310C0 /* LXSwift+Switch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LXSwift+Switch.swift"; sourceTree = "<group>"; };
 		76AF51E225300EDC0063538A /* LXSwiftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftViewController.swift; sourceTree = "<group>"; };
 		76AF51E325300EDC0063538A /* LXSwiftStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXSwiftStack.swift; sourceTree = "<group>"; };
 		76AF51E425300EDC0063538A /* LXSwift+Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LXSwift+Dictionary.swift"; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				76AF51E525300EDC0063538A /* LXSwiftWordTextLable.swift */,
 				764750D12531AA8D004310C0 /* UIView+LXObjcPerformance.h */,
 				764750D22531AA8D004310C0 /* UIView+LXObjcPerformance.m */,
+				764750FD25321264004310C0 /* LXSwift+Switch.swift */,
 			);
 			path = LXSwiftFoundation;
 			sourceTree = "<group>";
@@ -444,6 +447,7 @@
 				76AF522A25300EDC0063538A /* LXSwiftScrollView.swift in Sources */,
 				7607A081251B1C0B0071B9AD /* SceneDelegate.swift in Sources */,
 				76AF523125300EDC0063538A /* LXSwiftTableView.swift in Sources */,
+				764750FE25321264004310C0 /* LXSwift+Switch.swift in Sources */,
 				76AF524625300EDC0063538A /* LXSwift+Device.swift in Sources */,
 				764750D32531AA8D004310C0 /* UIView+LXObjcPerformance.m in Sources */,
 				76AF522125300EDC0063538A /* LXSwiftButton.swift in Sources */,
