@@ -142,8 +142,8 @@ extension LXSwiftBasics where Base: UIView {
     
     /// add gesture
     @discardableResult
-    public func addGesture(_ callBack: @escaping ((UIView?) -> ())) -> UITapGestureRecognizer {
-        base.callBack = callBack
+    public func addGesture(_ viewCallBack: @escaping ((UIView?) -> ())) -> UITapGestureRecognizer {
+        base.viewCallBack = viewCallBack
         let gesture = UITapGestureRecognizer(target: base, action: #selector(base.gestureTap(_:)))
         base.addGestureRecognizer(gesture)
         return gesture
@@ -156,7 +156,7 @@ private var viewCallBackKey: Void?
 extension UIView {
     
     /// can save callback
-    internal var callBack: ((UIView?) -> ())? {
+    internal var viewCallBack: ((UIView?) -> ())? {
        set {
           objc_setAssociatedObject(self, &viewCallBackKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
@@ -166,7 +166,7 @@ extension UIView {
     }
     
     @objc internal func gestureTap(_ gesture: UIGestureRecognizer) {
-        self.callBack?(gesture.view)
+        self.viewCallBack?(gesture.view)
     }
     
 }

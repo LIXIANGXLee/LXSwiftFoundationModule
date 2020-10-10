@@ -12,7 +12,7 @@ open class LXSwiftImgView: UIImageView, LXSwiftUICompatible {
        /// call back
     public typealias ImgViewCallBack = ((_ imgView: LXSwiftImgView?) -> ())
     public var swiftModel: Any?
-    public var imgViewCallBack: LXSwiftImgView.ImgViewCallBack?
+    internal var imgViewCallBack: LXSwiftImgView.ImgViewCallBack?
 
     /// 是否允许交互
     public var isInteractionEnabled: Bool = false {
@@ -33,14 +33,20 @@ open class LXSwiftImgView: UIImageView, LXSwiftUICompatible {
 /// private
 extension LXSwiftImgView {
     
-    /// set handle for method call back
-    public func setHandle(_ imgViewCallBack: LXSwiftImgView.ImgViewCallBack?) {
-        self.imgViewCallBack = imgViewCallBack
-    }
-    
     ///action call
     @objc private func swiftImgViewAction(_ gesture: UIGestureRecognizer) {
         self.imgViewCallBack?(gesture.view as? LXSwiftImgView)
     }
+    
+}
+
+
+//MARK: -  Extending properties and methods for UISwitch
+extension LXSwiftBasics where Base : LXSwiftImgView {
+
+    /// set handle for method call back
+       public func setHandle(_ imgViewCallBack: LXSwiftImgView.ImgViewCallBack?) {
+           base.imgViewCallBack = imgViewCallBack
+       }
     
 }
