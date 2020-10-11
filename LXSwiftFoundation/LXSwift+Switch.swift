@@ -20,13 +20,13 @@ extension LXSwiftBasics where Base : UISwitch {
 private var switchCallBackKey: Void?
 extension UISwitch: LXSwiftPropertyCompatible {
     internal typealias Element = Bool
-    internal var swiftCallBack: ((Bool?) -> ())? {
+    internal var swiftCallBack: SwiftCallBack? {
         set {
-         objc_setAssociatedObject(self, &switchCallBackKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
-       }
-       get {
-          return objc_getAssociatedObject(self, &switchCallBackKey)  as? ((Bool?) -> ())
-       }
+             objc_setAssociatedObject(self, &switchCallBackKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
+         get {
+              return objc_getAssociatedObject(self, &switchCallBackKey)  as? SwiftCallBack
+         }
     }
     
     @objc internal func swiftSwitchAction(_ event: UISwitch) {

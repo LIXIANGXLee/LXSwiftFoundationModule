@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import LXSwiftFoundation
+//import LXSwiftFoundation
 
 class ViewController: UIViewController {
     var  objc : LXObjcThreadActive! = nil
@@ -20,7 +20,7 @@ class ViewController: UIViewController {
              view.addSubview(imgview)
         
         imgview.lx.setHandle { (button) in
-            print("=======\(button)")
+//            print("=======\(button)")
         }
     }
  
