@@ -1,6 +1,6 @@
 PODS:
   - LXFitManager (1.2.0)
-  - LXSwiftFoundation (3.3.0):
+  - LXSwiftFoundation (3.4.1):
     - LXFitManager
 
 DEPENDENCIES:
@@ -16,7 +16,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   LXFitManager: d8f6fa68d6379552ec58e55eb2acfb1a663fc6fe
-  LXSwiftFoundation: 1d838edd07e07afd90f6856130f7f85a7b506f34
+  LXSwiftFoundation: 15f00bc692f3c995475bb5729e2afe8a0f8c907f
 
 PODFILE CHECKSUM: e17d281e29e7c377c8363d1f1adfa138259cbab3
 

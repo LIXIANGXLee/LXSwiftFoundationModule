@@ -12,25 +12,25 @@ import UIKit
 extension LXSwiftBasics where Base : UISwitch {
 
     public func setHandle(switchCallBack: ((_ isOn: Bool?) -> ())?){
-        base.switchCallBack = switchCallBack
+        base.swiftCallBack = switchCallBack
         base.addTarget(base, action: #selector(base.swiftSwitchAction(_:)), for: .touchUpInside)
     }   
 }
 
 private var switchCallBackKey: Void?
-extension UISwitch {
-       /// can save callback
-    internal var switchCallBack: ((_ isOn: Bool?) -> ())? {
-       set {
-          objc_setAssociatedObject(self, &switchCallBackKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
-        }
-        get {
-           return objc_getAssociatedObject(self, &switchCallBackKey)  as? ((_ isOn:Bool?) -> ())
-        }
-   }
+extension UISwitch: LXSwiftPropertyCompatible {
+    internal typealias Element = Bool
+    internal var swiftCallBack: ((Bool?) -> ())? {
+        set {
+         objc_setAssociatedObject(self, &switchCallBackKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
+       }
+       get {
+          return objc_getAssociatedObject(self, &switchCallBackKey)  as? ((Bool?) -> ())
+       }
+    }
     
     @objc internal func swiftSwitchAction(_ event: UISwitch) {
-        self.switchCallBack?(event.isOn)
+        self.swiftCallBack?(event.isOn)
     }
    
 }

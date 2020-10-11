@@ -34,3 +34,8 @@ public protocol LXSwiftUICompatible {
     var swiftModel: Any? { get set }
 }
 
+/// Define Property protocol
+internal protocol LXSwiftPropertyCompatible {
+    associatedtype Element
+    var swiftCallBack: ((Element?) -> ())?  { get set }
+}

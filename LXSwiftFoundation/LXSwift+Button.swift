@@ -50,26 +50,26 @@ extension LXSwiftBasics where Base: UIButton {
 //MARK: -  Extending properties and methods for UIButton
 extension LXSwiftBasics where Base : UIButton {
 
-    public func setHandle(buttonCallBack: ((_ button: UIButton) -> ())?){
-        base.buttonCallBack = buttonCallBack
+    public func setHandle(buttonCallBack: ((_ button: UIButton?) -> ())?){
+        base.swiftCallBack = buttonCallBack
         base.addTarget(base, action: #selector(base.swiftButtonAction(_:)), for: .touchUpInside)
     }
 }
 
 private var buttonCallBackKey: Void?
-extension UIButton {
-       /// can save callback
-    internal var buttonCallBack: ((UIButton) -> ())? {
-       set {
+extension UIButton: LXSwiftPropertyCompatible {
+    internal typealias Element = UIButton
+    internal var swiftCallBack: ((UIButton?) -> ())? {
+        set {
           objc_setAssociatedObject(self, &buttonCallBackKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
         get {
-           return objc_getAssociatedObject(self, &buttonCallBackKey)  as? ((UIButton) -> ())
+           return objc_getAssociatedObject(self, &buttonCallBackKey)  as? ((UIButton?) -> ())
         }
-   }
+    }
     
     @objc internal func swiftButtonAction(_ button: UIButton) {
-        self.buttonCallBack?(button)
+        self.swiftCallBack?(button)
     }
    
 }

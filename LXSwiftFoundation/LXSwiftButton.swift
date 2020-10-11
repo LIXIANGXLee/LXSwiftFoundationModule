@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class LXSwiftButton: UIButton, LXSwiftUICompatible {
+open class LXSwiftButton: UIButton, LXSwiftUICompatible {    
     public var swiftModel: Any?
     
 }
