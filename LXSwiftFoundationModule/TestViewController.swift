@@ -22,23 +22,12 @@ class TestViewController: UIViewController {
          imgview.isUserInteractionEnabled = true
          view.addSubview(imgview)
          
-        
-         let image =  LXSwiftTool.lx.getQrCodeImage(with: "https://www.baidu.com/s?wd=swift%20CGContextRelease&rsv_spt=1&rsv_iqid=0x8f032f8b000029de&issp=1&f=8&rsv_bp=1&rsv_idx=2&ie=utf-8&rqlang=cn&tn=baiduhome_pg&rsv_enter=0&rsv_dl=tb&oq=swift%2520%2526lt%253BG%2526lt%253BontextRelease&rsv_btype=t&rsv_t=c595FCEh4bwLc9B6vfUjo%2BCEdG6h3OLYpbQV%2BdeOoGXLjHRTc3VkJT1slUN7UNBrSQnG&rsv_sug3=10&rsv_pq=a0dbcb9c00007b4f&prefixsug=swift%2520%2526lt%253BG%2526lt%253BontextRelease&rsp=5&rsv_sug9=es_0_1&rsv_sug4=798&rsv_sug=9")
-           
-            imgview.image = image
-        
-       
-        
-        
-        if let qrcodeStr = LXSwiftTool.lx.getQrCodeString(with: image) {
-            print("=======\(qrcodeStr)")
 
-        }
 
-        let s =  UISwitch(frame: CGRect(x: 200, y: 300, width: 100, height: 100))
-          
-        s.lx.setHandle { (isOn) in
-//            print("=======\(isOn)")
+        let s =  UISlider(frame: CGRect(x: 100, y: 200, width: 300, height: 200))
+        
+        s.lx.setHandle { (value) in
+            print("=======\(value)")
         }
 
 //          s.addTarget(self, action: #selector(swichAction(_:)), for: .touchUpInside)
