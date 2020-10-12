@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//import LXSwiftFoundation
+import LXSwiftFoundation
 
 class TestViewController: UIViewController {
 
@@ -24,8 +24,8 @@ class TestViewController: UIViewController {
          
 
 
-        let s =  UISlider(frame: CGRect(x: 100, y: 200, width: 300, height: 200))
-        
+        let s =  UISegmentedControl(items: ["hahah","fdfdf"])
+        s.frame = CGRect(x: 100, y: 200, width: 300, height: 200)
         s.lx.setHandle { (value) in
             print("=======\(value)")
         }
@@ -37,6 +37,8 @@ class TestViewController: UIViewController {
 //    @objc private func swichAction(_ s: UISwitch) {
 //        print("========\(s.isOn)")
 //    }
+    
+    
     deinit {
         print("=TestViewController=deinit===")
     }
