@@ -33,7 +33,7 @@ static  CFRunLoopObserverRef currentObserver;
 
 #pragma mark - Add task
 -(NSMutableArray *)tasks{
-
+    
     NSMutableArray * taskArr = objc_getAssociatedObject(self, @selector(tasks));
     if (!taskArr) {
         taskArr = [NSMutableArray array];
@@ -47,7 +47,7 @@ static  CFRunLoopObserverRef currentObserver;
 
 /// - Using this method, uitableview and uicollectionview performance can be optimized add Observer
 -(void)addRunLoopObserverOfPerformance{
-       
+    
     CFRunLoopRef runloop = CFRunLoopGetCurrent();
     CFRunLoopObserverContext context = {
         0,
@@ -59,7 +59,7 @@ static  CFRunLoopObserverRef currentObserver;
     currentObserver =  CFRunLoopObserverCreate(NULL, kCFRunLoopBeforeWaiting, YES, 0, &CallBack, &context);
     CFRunLoopAddObserver(runloop, currentObserver, kCFRunLoopCommonModes);
     CFRelease(currentObserver);
-  
+    
 }
 
 /// remove Observer
@@ -73,7 +73,7 @@ static  CFRunLoopObserverRef currentObserver;
 }
 
 -(void)addTask:(ObjcRunloopBlock)task{
-
+    
     /// 创建定时器
     if (self.timer == nil) {
         self.timer = [NSTimer scheduledTimerWithTimeInterval:0.001 target:[LXObjcProxy proxyWithTarget:self] selector:@selector(repeats) userInfo:nil repeats:YES];
@@ -86,7 +86,7 @@ static  CFRunLoopObserverRef currentObserver;
     if (self.tasks.count > maxTaskCount) {
         [self.tasks removeObjectAtIndex:0];
     }
-
+    
 }
 
 /// observer call back

@@ -10,7 +10,7 @@ import UIKit
 
 open class LXSwiftTableView: UITableView ,LXSwiftUICompatible{
     public var swiftModel: Any?
-
+    
     ///Do you support multiple event delivery
     public var isSopportRecognizeSimultaneous = false
     
@@ -21,14 +21,14 @@ open class LXSwiftTableView: UITableView ,LXSwiftUICompatible{
         tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: LXSwiftApp.screenW, height: 0.001))
         tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width:  LXSwiftApp.screenW, height: 0.001))
         if #available(iOS 11.0, *) {
-           contentInsetAdjustmentBehavior = .never
+            contentInsetAdjustmentBehavior = .never
         }else {
-           translatesAutoresizingMaskIntoConstraints = false
+            translatesAutoresizingMaskIntoConstraints = false
         }
         
         setupUI()
         setupViewModel()
-
+        
     }
     
     required public init?(coder: NSCoder) {
@@ -39,18 +39,18 @@ open class LXSwiftTableView: UITableView ,LXSwiftUICompatible{
 
 //MARK: - UIGestureRecognizerDelegate
 extension LXSwiftTableView: UIGestureRecognizerDelegate {
-  
+    
     /// Do you support multiple event delivery delegate
-     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-         return isSopportRecognizeSimultaneous
-     }
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return isSopportRecognizeSimultaneous
+    }
     
 }
 
 extension LXSwiftTableView: LXViewSetup {
-   open func setupUI() { }
-   open func setupViewModel() {}
-
+    open func setupUI() { }
+    open func setupViewModel() {}
+    
 }
 
 

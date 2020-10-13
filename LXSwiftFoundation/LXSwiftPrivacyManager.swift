@@ -46,7 +46,7 @@ extension LXSwiftBasics where Base == LXSwiftPrivacyManager {
         }
         return true
     }
-        
+    
     /// is support Location
     public static var isSupportLocation: Bool {
         

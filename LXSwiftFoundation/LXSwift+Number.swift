@@ -12,7 +12,7 @@ extension NSNumber: LXSwiftCompatible { }
 
 //MARK: -  Extending methods for NSNumber
 extension LXSwiftBasics where Base: NSNumber {
-      
+    
     /// minDigits: How many decimal places should be reserved with  rounding 
     ///maxDigits:Keep a few decimal places
     public  func numberFormatter(with mode: NumberFormatter.RoundingMode = .halfEven, minDigits: Int = 0, maxDigits:Int = 0) -> String? {

@@ -25,32 +25,32 @@ extension NSData: LXSwiftCompatible { }
 //MARK: -  Extending properties  for Data
 extension LXSwiftBasics where Base == Data {
     
-     /// Data transform utf8 string
-     public var utf8String: String? {
+    /// Data transform utf8 string
+    public var utf8String: String? {
         return String(data: base, encoding: .utf8)
-     }
+    }
     
 }
 
 //MARK: -  Extending properties  for NSData
 extension LXSwiftBasics where Base == NSData {
-       
-     /// return image type
-     public var imageType: LXSwiftImageDataType {
-          var buffer = [UInt8](repeating: 0, count: 8)
-          base.getBytes(&buffer, length: 8)
-          var type: LXSwiftImageDataType = .Unknown
-          if buffer == pngHeader {
-              type = .PNG
-          } else if buffer[0] == jpgHeaderSOI[0] &&
-              buffer[1] == jpgHeaderSOI[1] &&
-              buffer[2] == jpgHeaderIF[0] {
-              type = .JPEG
-          } else if buffer[0] == gifHeader[0] &&
-              buffer[1] == gifHeader[1] &&
-              buffer[2] == gifHeader[2] {
-              type = .GIF
-          }
-          return type
-      }
+    
+    /// return image type
+    public var imageType: LXSwiftImageDataType {
+        var buffer = [UInt8](repeating: 0, count: 8)
+        base.getBytes(&buffer, length: 8)
+        var type: LXSwiftImageDataType = .Unknown
+        if buffer == pngHeader {
+            type = .PNG
+        } else if buffer[0] == jpgHeaderSOI[0] &&
+            buffer[1] == jpgHeaderSOI[1] &&
+            buffer[2] == jpgHeaderIF[0] {
+            type = .JPEG
+        } else if buffer[0] == gifHeader[0] &&
+            buffer[1] == gifHeader[1] &&
+            buffer[2] == gifHeader[2] {
+            type = .GIF
+        }
+        return type
+    }
 }

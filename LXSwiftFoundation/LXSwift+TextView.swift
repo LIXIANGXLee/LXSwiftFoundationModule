@@ -11,7 +11,7 @@ import UIKit
 
 //MARK: -  Extending properties and methods for LXSwiftTextView
 extension LXSwiftBasics where Base : LXSwiftTextView {
-
+    
     /// public method call back
     public func setHandle(_ textCallBack: LXSwiftTextView.TextCallBack?) {
         base.textCallBack = textCallBack
@@ -25,30 +25,30 @@ extension LXSwiftBasics where Base : LXSwiftTextView {
         base.setNeedsLayout()
     }
     
-     /// set font and textColor
-     public func set(withFont font: UIFont,textColor: UIColor) {
-         base.font = font
-         base.textColor = textColor
-     }
+    /// set font and textColor
+    public func set(withFont font: UIFont,textColor: UIColor) {
+        base.font = font
+        base.textColor = textColor
+    }
     
-     /// call updateUI  after set text or NSAttributedString
-     ///After calling this method, if you want to call the callback function setHandle, please call after setHandle settings.
-     public func updateUI() {
-         base.textDidChange()
-         base.textCallBack?(base.text)
-     }
+    /// call updateUI  after set text or NSAttributedString
+    ///After calling this method, if you want to call the callback function setHandle, please call after setHandle settings.
+    public func updateUI() {
+        base.textDidChange()
+        base.textCallBack?(base.text)
+    }
     
-     /// remove observer
-     public func removeObserver() {
-         NotificationCenter.default.removeObserver(base)
-     }
+    /// remove observer
+    public func removeObserver() {
+        NotificationCenter.default.removeObserver(base)
+    }
     
     /// 配置文本可输入最长文本长度
     public var maxLength: Int? {
         get{ return base.maxTextLength }
         set{
-           guard let newValue = newValue, newValue > 0 else { return }
-           base.maxTextLength = newValue
-         }
-     }
+            guard let newValue = newValue, newValue > 0 else { return }
+            base.maxTextLength = newValue
+        }
+    }
 }

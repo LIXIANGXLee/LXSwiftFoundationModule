@@ -11,7 +11,7 @@ import UIKit
 
 //MARK: -  Extending properties and methods for NSAttributedString
 extension LXSwiftBasics where Base : NSAttributedString {
-   
+    
     ///Get the font size based on the font size and width
     public func size(width: CGFloat) -> CGSize {
         let rect = base.boundingRect(with: CGSize(width: width, height: 0), options: .usesLineFragmentOrigin, context: nil)
@@ -26,7 +26,7 @@ extension LXSwiftBasics where Base : NSAttributedString {
     /// Gets the width of the text based on the font and width
     public var width: CGFloat {
         return size(width: LXSwiftApp.screenW).width
-     }
+    }
     
     /// Gets NSAttributedString Property dictionary for
     public var attributes: [NSAttributedString.Key: Any] {
@@ -37,7 +37,7 @@ extension LXSwiftBasics where Base : NSAttributedString {
 
 //MARK: -  Extending properties and methods for NSMutableAttributedString
 extension LXSwiftBasics where Base : NSMutableAttributedString {
-   
+    
     internal func setAttribute(_ attribute: NSAttributedString.Key, value: Any?, range: NSRange) {
         guard let value = value else { return }
         base.addAttribute(attribute, value: value, range: range)

@@ -20,7 +20,6 @@ public extension LXSwiftCompatible {
         get { LXSwiftBasics<Self>.self }
     }
     
-    
     /// In order to solve the problem of method in mutating struct, the instance calculation property set is extended
     var lx: LXSwiftBasics<Self> {
         set { }
@@ -31,11 +30,13 @@ public extension LXSwiftCompatible {
 
 /// Define protocol
 public protocol LXSwiftUICompatible {
+    
     var swiftModel: Any? { get set }
 }
 
 /// Define Property protocol
 internal protocol LXSwiftPropertyCompatible {
+    
     associatedtype Element
     typealias SwiftCallBack = ((Element?) -> ())
     var swiftCallBack: SwiftCallBack?  { get set }

@@ -71,19 +71,19 @@ open class LXSwiftWordTextLable: UIView {
         }
     }
     
-     ///External call to observe storage properties ⚠️ Please set viewframe size before setting attributedtext
-     public var attributedText: NSAttributedString? {
+    ///External call to observe storage properties ⚠️ Please set viewframe size before setting attributedtext
+    public var attributedText: NSAttributedString? {
         didSet {
-           guard let attr = self.attributedText else { return }
+            guard let attr = self.attributedText else { return }
             
             textView.attributedText = attr
-
+            
             attr.enumerateAttributes(in: NSRange(location: 0, length: attr.length), options: NSAttributedString.EnumerationOptions(rawValue: 0)) { (objct, range, stop) in
                 guard let textM = objct[NSAttributedString.Key(LXSwiftWordRegex.textLinkConst)] as? String else {return}
                 textView.selectedRange = range
                 guard let r = textView.selectedTextRange else { return }
                 let rselectionRects = textView.selectionRects(for: r)
-
+                
                 var rects: [CGRect] = [CGRect]()
                 for selectionRect in rselectionRects{
                     if selectionRect.rect.width == 0 || selectionRect.rect.height == 0 { continue }
@@ -94,7 +94,7 @@ open class LXSwiftWordTextLable: UIView {
         }
     }
     
-      // MARK: system method
+    // MARK: system method
     public init(config: LXSwiftWordTextLableConfig = LXSwiftWordTextLableConfig())
     {
         self.config = config
@@ -115,7 +115,7 @@ open class LXSwiftWordTextLable: UIView {
 extension LXSwiftWordTextLable {
     
     @objc private func gestureLong(gesture: UIGestureRecognizer) {
-                
+        
         if gesture.state ==  UIGestureRecognizer.State.began {
             delegate?.lxWordTextLable?(self, longPress: self.attributedText?.string ?? "")
         }
@@ -142,7 +142,7 @@ extension LXSwiftWordTextLable {
                 delegate?.lxWordTextLable?(self, didSelect: l.text)
             }
         }
- 
+        
     }
     
     /// Get links based on click points
@@ -169,7 +169,7 @@ extension LXSwiftWordTextLable {
     }
     
     /// After a few seconds, remove the background from the click display
-   @objc fileprivate func removeAllLinkBackground() {
+    @objc fileprivate func removeAllLinkBackground() {
         for view in subviews {
             if view.tag == linkBgTag {
                 view.removeFromSuperview()

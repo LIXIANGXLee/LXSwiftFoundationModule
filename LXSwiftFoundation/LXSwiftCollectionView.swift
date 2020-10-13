@@ -13,7 +13,7 @@ open class LXSwiftCollectionView: UICollectionView, LXSwiftUICompatible {
     
     /// 是否支持 多个事件传递
     public var isSopportRecognizeSimultaneous = false
-
+    
     public override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
         backgroundColor = UIColor.white
@@ -34,18 +34,18 @@ open class LXSwiftCollectionView: UICollectionView, LXSwiftUICompatible {
 
 //MARK: - UIGestureRecognizerDelegate
 extension LXSwiftCollectionView: UIGestureRecognizerDelegate {
-  
+    
     /// 多个事件传递 共存
-     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-         return isSopportRecognizeSimultaneous
-     }
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return isSopportRecognizeSimultaneous
+    }
     
 }
 
 extension LXSwiftCollectionView: LXViewSetup {
-   open func setupUI() { }
-   open func setupViewModel() {}
-
+    open func setupUI() { }
+    open func setupViewModel() {}
+    
 }
 
 open class LXSwiftCollectionViewCell: UICollectionViewCell, LXSwiftUICompatible {
@@ -55,7 +55,7 @@ open class LXSwiftCollectionViewCell: UICollectionViewCell, LXSwiftUICompatible 
         super.init(frame: frame)
         setupUI()
         setupViewModel()
-
+        
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -66,5 +66,5 @@ open class LXSwiftCollectionViewCell: UICollectionViewCell, LXSwiftUICompatible 
 extension LXSwiftCollectionViewCell: LXViewSetup {
     open func setupUI() {}
     open func setupViewModel() {}
-
+    
 }

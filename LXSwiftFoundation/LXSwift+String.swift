@@ -14,7 +14,7 @@ extension String: LXSwiftCompatible { }
 
 //MARK: -  Extending methods and properties for String and NSString interception
 extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
-  
+    
     /// Extend String interception
     ///
     /// - Parameter r: 0..<2 string range
@@ -138,84 +138,84 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         let string = base as! String
         return string.rangeOfCharacter(from: characters) != nil
     }
-      
-      /// base is json
-     public var isValidJSON: Bool {
-          return jsonObject != nil
-      }
-      
-      ///Convert to JSON object type
-     public var jsonObject: Any? {
-          let string = base as! String
-          return try? JSONSerialization.jsonObject(with: string.data(using: .utf8) ?? Data(), options: .allowFragments)
-      }
-      
-      /// Encode to JSON string
-     public var jsonStringEncode: String? {
-          let string = base as! String
-          if !JSONSerialization.isValidJSONObject(string) { return nil }
-          guard let jsonData = try? JSONSerialization.data(withJSONObject: string, options: .init(rawValue: 0)),
-              let json = String(data: jsonData, encoding: .utf8) else {
-                  return nil  }
-          return json
-      }
+    
+    /// base is json
+    public var isValidJSON: Bool {
+        return jsonObject != nil
+    }
+    
+    ///Convert to JSON object type
+    public var jsonObject: Any? {
+        let string = base as! String
+        return try? JSONSerialization.jsonObject(with: string.data(using: .utf8) ?? Data(), options: .allowFragments)
+    }
+    
+    /// Encode to JSON string
+    public var jsonStringEncode: String? {
+        let string = base as! String
+        if !JSONSerialization.isValidJSONObject(string) { return nil }
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: string, options: .init(rawValue: 0)),
+            let json = String(data: jsonData, encoding: .utf8) else {
+                return nil  }
+        return json
+    }
 }
 
 
 //MARK: -  String matching (hyperlink, phone number, emoticon) 😊 Etc.)
 extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     ///string matching
-     ///
-     /// - Parameters:
-     ///   - regex: want to  string matching
-     ///   - usingBlock: callBack
-     public func enumerateStringsMatchedByRegex(regex: String, usingBlock: (_ captureCount: Int, _ capturedStrings: String, _ range: NSRange) -> ()) {
-         // regex is not nil
-         if regex.count <= 0 { return }
-         let string = base as! String
-
+    ///
+    /// - Parameters:
+    ///   - regex: want to  string matching
+    ///   - usingBlock: callBack
+    public func enumerateStringsMatchedByRegex(regex: String, usingBlock: (_ captureCount: Int, _ capturedStrings: String, _ range: NSRange) -> ()) {
+        // regex is not nil
+        if regex.count <= 0 { return }
+        let string = base as! String
+        
         guard let regex = try? NSRegularExpression(pattern: regex.lx.trim, options: []) else { return }
-         let results = regex.matches(in: string, options: [], range: NSRange(location: 0, length: string.count))
-         //can matching more string
-         for result in results.reversed() {
-             usingBlock(results.count,string[result.range.location..<(result.range.location + result.range.length)], result.range)
-         }
-     }
+        let results = regex.matches(in: string, options: [], range: NSRange(location: 0, length: string.count))
+        //can matching more string
+        for result in results.reversed() {
+            usingBlock(results.count,string[result.range.location..<(result.range.location + result.range.length)], result.range)
+        }
+    }
 }
 
 //MARK: -  Extending properties for String and NSString tool
 extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
-     
+    
     /// date  transform  string
     public func stringTranformDate(_ ymd: String = "yyyy-MM-dd HH:mm:ss") -> Date? {
-         let string = base as! String
-         let fmt = DateFormatter()
-         fmt.dateFormat = ymd
-         return fmt.date(from: string)
+        let string = base as! String
+        let fmt = DateFormatter()
+        fmt.dateFormat = ymd
+        return fmt.date(from: string)
     }
     
-      /// Methods of converting Chinese characters to Pinyin
-     public var transformToPinYin: String{
-         let string = base as! String
-         let mutableString = NSMutableString(string: string)
-         CFStringTransform(mutableString, nil, kCFStringTransformToLatin, false)
-         CFStringTransform(mutableString, nil,  kCFStringTransformStripDiacritics, false)
-         return String(mutableString).replacingOccurrences(of: " ", with: "")
-      }
-
-       /// The extended calculation attribute displays the corresponding g m KB B format according to the file size
-     public var fileSize: String {
-         let string = base as! String
-         guard let size = Int(string) else {  return "" }
-         if size >= 1024*1024*1024 {
+    /// Methods of converting Chinese characters to Pinyin
+    public var transformToPinYin: String{
+        let string = base as! String
+        let mutableString = NSMutableString(string: string)
+        CFStringTransform(mutableString, nil, kCFStringTransformToLatin, false)
+        CFStringTransform(mutableString, nil,  kCFStringTransformStripDiacritics, false)
+        return String(mutableString).replacingOccurrences(of: " ", with: "")
+    }
+    
+    /// The extended calculation attribute displays the corresponding g m KB B format according to the file size
+    public var fileSize: String {
+        let string = base as! String
+        guard let size = Int(string) else {  return "" }
+        if size >= 1024*1024*1024 {
             return String(format: "%.2fG", CGFloat(size) / CGFloat(1024*1024*1024))
-         }else if size >= 1024*1024 {
-             return String(format: "%.2fM", CGFloat(size) / CGFloat(1024*1024))
-         }else if size >= 1024 {
+        }else if size >= 1024*1024 {
+            return String(format: "%.2fM", CGFloat(size) / CGFloat(1024*1024))
+        }else if size >= 1024 {
             return String(format: "%.2fKB", CGFloat(size) / CGFloat(1024))
-         }else if size > 0 {
+        }else if size > 0 {
             return String(format: "%dB", size)
-         }else {
+        }else {
             return ""
         }
     }
@@ -231,21 +231,21 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         var digest = [UInt8](repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))
         #if swift(>=5.0)
         _ = data.withUnsafeBytes { (bytes: UnsafeRawBufferPointer) in
-           return CC_MD5(bytes.baseAddress, CC_LONG(data.count), &digest)
+            return CC_MD5(bytes.baseAddress, CC_LONG(data.count), &digest)
         }
         #else
         _ = data.withUnsafeBytes { bytes in
-           return CC_MD5(bytes, CC_LONG(data.count), &digest)
+            return CC_MD5(bytes, CC_LONG(data.count), &digest)
         }
         #endif
         return digest.reduce(into: "") { $0 += String(format: "%02x", $1) }
-     }
+    }
 }
 
 
 //MARK: -  Extending methods for String and NSString md5
 extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
-        
+    
     ///验证字符串是否和 pattern 这个正则表达式
     public func isSuit(pattern: String) -> Bool {
         let string = base as! String
@@ -362,7 +362,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     
     ///获取匹配结果的数组
     public func matching(pattern: String,
-                          options: NSRegularExpression.Options = .caseInsensitive) -> [NSTextCheckingResult]? {
+                         options: NSRegularExpression.Options = .caseInsensitive) -> [NSTextCheckingResult]? {
         let string = base as! String
         let regex = try? NSRegularExpression(pattern: pattern, options: [])
         let results = regex?.matches(in: string, options: NSRegularExpression.MatchingOptions.init(rawValue: 0), range: NSMakeRange(0, string.count))
@@ -371,7 +371,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
 }
 
 ///internal extension
- extension String {
+extension String {
     
     ///internal String interception
     internal subscript (_ r: Range<Int>) -> String {
@@ -381,9 +381,9 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
             return  String(self[startIndex..<endIndex])
         }
     }
-        
-     //验证字符串匹配结果是否符合要求, 返回Bool值
+    
+    //验证字符串匹配结果是否符合要求, 返回Bool值
     internal func verification(pattern: String) -> Bool {
         return (self.lx.matching(pattern: pattern)?.count ?? -1) > 0
-     }
+    }
 }

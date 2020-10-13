@@ -47,20 +47,20 @@ extension LXSwiftStack {
         return list
     }
     
-     ///Number of stack elements
-     public func size() -> Int {
+    ///Number of stack elements
+    public func size() -> Int {
         lock.lock()
         let count = list.count
         lock.unlock()
         return count
-     }
+    }
     
-      ///Is the stack element empty
-      public func isEmpty() -> Bool {
+    ///Is the stack element empty
+    public func isEmpty() -> Bool {
         lock.lock()
         let isisEmpty = list.isEmpty
         lock.unlock()
         return isisEmpty
-     }
+    }
     
 }

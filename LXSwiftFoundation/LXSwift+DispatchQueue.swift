@@ -59,10 +59,10 @@ extension LXSwiftBasics where Base: DispatchQueue {
     ///- parameter block: asynchronous callback function
     @discardableResult
     public func delay(_ seconds: Double,
-                             _ block: @escaping LXSwiftCallTask) -> DispatchWorkItem {
+                      _ block: @escaping LXSwiftCallTask) -> DispatchWorkItem {
         let item = DispatchWorkItem(block: block)
         base.asyncAfter(deadline: DispatchTime.now() + seconds,
-                                      execute: item)
+                        execute: item)
         return item
     }
     
@@ -71,7 +71,7 @@ extension LXSwiftBasics where Base: DispatchQueue {
     ///- parameter task: asynchronous callback function
     @discardableResult
     public func asyncDelay(_ seconds: Double,
-                                  _ task: @escaping LXSwiftCallTask) -> DispatchWorkItem {
+                           _ task: @escaping LXSwiftCallTask) -> DispatchWorkItem {
         return _asyncDelay(seconds, task)
     }
     
@@ -81,8 +81,8 @@ extension LXSwiftBasics where Base: DispatchQueue {
     ///- parameter maintask: asynchronous callback function
     @discardableResult
     public func asyncDelay(_ seconds: Double,
-                                  _ task: @escaping LXSwiftCallTask,
-                                  _ mainTask: @escaping LXSwiftCallTask) -> DispatchWorkItem {
+                           _ task: @escaping LXSwiftCallTask,
+                           _ mainTask: @escaping LXSwiftCallTask) -> DispatchWorkItem {
         return _asyncDelay(seconds, task, mainTask)
     }
     
@@ -98,11 +98,11 @@ extension LXSwiftBasics where Base: DispatchQueue {
     
     ///Private method of asynchronous delay task
     private func _asyncDelay(_ seconds: Double,
-                                    _ task: @escaping LXSwiftCallTask,
-                                    _ mainTask: LXSwiftCallTask? = nil) -> DispatchWorkItem {
+                             _ task: @escaping LXSwiftCallTask,
+                             _ mainTask: LXSwiftCallTask? = nil) -> DispatchWorkItem {
         let item = DispatchWorkItem(block: task)
         base.asyncAfter(deadline: DispatchTime.now() + seconds,
-                                          execute: item)
+                        execute: item)
         if let main = mainTask {
             item.notify(queue: DispatchQueue.main, execute: main)
         }

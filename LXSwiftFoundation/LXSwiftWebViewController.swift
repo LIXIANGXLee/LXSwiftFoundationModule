@@ -13,14 +13,14 @@ import WebKit
 import LXFitManager
 
 public struct LXSwiftMethodT {
-   public var method: String
-   public var handel: (Any) -> ()
+    public var method: String
+    public var handel: (Any) -> ()
 }
 
 // MARK: - Solving circular references
 open class LXSwiftWeakScriptMessageDelegate:NSObject, WKScriptMessageHandler {
-     fileprivate weak var delegate: WKScriptMessageHandler?
-     init(_ delegate: WKScriptMessageHandler) {
+    fileprivate weak var delegate: WKScriptMessageHandler?
+    init(_ delegate: WKScriptMessageHandler) {
         self.delegate = delegate
         super.init()
     }
@@ -48,7 +48,7 @@ open class LXSwiftWebViewController: UIViewController {
         //是否支持javaScript
         config.preferences.javaScriptEnabled = true
         config.allowsAirPlayForMediaPlayback = true
-
+        
         webView = WKWebView(frame: .zero, configuration: config)
         webView.allowsBackForwardNavigationGestures = true
         webView.uiDelegate = self
@@ -63,7 +63,7 @@ open class LXSwiftWebViewController: UIViewController {
     
     override open func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         setUI()
         addObserver()
         
@@ -84,10 +84,10 @@ open class LXSwiftWebViewController: UIViewController {
 
 extension LXSwiftWebViewController {
     
-   /// load webview
-   ///
-   /// - Parameters:
-   ///   - string: url
+    /// load webview
+    ///
+    /// - Parameters:
+    ///   - string: url
     open func load(with string: String) {
         if let url = URL(string: string){
             webView.load(URLRequest(url: url))
@@ -164,27 +164,27 @@ extension LXSwiftWebViewController {
             var results = [HTTPCookie]()
             for cookie in cookies{
                 if cookie.name == string{
-                   self.webView.configuration.websiteDataStore.httpCookieStore.delete(cookie)
+                    self.webView.configuration.websiteDataStore.httpCookieStore.delete(cookie)
                 }else{
                     results.append(cookie)
                 }
             }
-             handle(results)
+            handle(results)
         }
     }
     
     ///remove
-     public func clearBrowserCache(handle: ((String) -> ())?) {
-         let dataSouce = WKWebsiteDataStore.default()
-          dataSouce.fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { (records) in
-             for record in records {
-                 WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record]) {
-                     handle?("清除成功\(record)")
-                 }
-             }
-         }
-     }
-     
+    public func clearBrowserCache(handle: ((String) -> ())?) {
+        let dataSouce = WKWebsiteDataStore.default()
+        dataSouce.fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { (records) in
+            for record in records {
+                WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record]) {
+                    handle?("清除成功\(record)")
+                }
+            }
+        }
+    }
+    
 }
 
 // MARK: - WKScriptMessageHandler
@@ -200,7 +200,7 @@ extension LXSwiftWebViewController: WKScriptMessageHandler {
 
 // MARK: -  UI
 extension LXSwiftWebViewController {
-
+    
     fileprivate func setUI() {
         spinner = UIActivityIndicatorView()
         spinner.translatesAutoresizingMaskIntoConstraints = false
@@ -228,7 +228,7 @@ extension LXSwiftWebViewController {
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.title), options: .new, context: nil)
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.url), options: .new, context: nil)
-
+        
     }
     
     ///Get the value of loading progress in real time
@@ -258,7 +258,7 @@ extension LXSwiftWebViewController: WKNavigationDelegate{
     
     ///Decide whether to load the website in the current WebView (for example, when the load contains a dynamic URL) - mainly based on the first-class information of the request
     open func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-      
+        
         //        For example, all Google pages will be opened in an external browser, and the rest will be opened in the WebView of this app
         //        if let url = navigationAction.request.url{
         //            if url.host == "www.google.com"{
@@ -287,7 +287,7 @@ extension LXSwiftWebViewController: WKNavigationDelegate{
         spinner.stopAnimating()
         spinner.removeFromSuperview()
         progressView.removeFromSuperview()
-
+        
         //Inject JS code
         handleJS()
     }

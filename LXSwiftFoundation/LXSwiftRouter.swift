@@ -13,16 +13,16 @@ public struct LXSwiftRouter {
     
     /// regist call back method
     public typealias CallInfoBack = (([String: Any?]?) -> Any?)
-
+    
     /// open  call back method
     public typealias CallBack = ((Any?) -> Void)
-
+    
     /// DispatchSemaphore
     private static let semaphore = DispatchSemaphore(value: 1)
-
+    
     ///router array
     private static var routers = [String : LXSwiftRouter.CallInfoBack]()
-  
+    
 }
 
 // MARK: - public

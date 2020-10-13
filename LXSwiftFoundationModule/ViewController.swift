@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//import LXSwiftFoundation
+import LXSwiftFoundation
 
 class ViewController: UIViewController {
     var  objc : LXObjcThreadActive! = nil
@@ -15,13 +15,14 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
 
-             let imgview = UIButton(frame: CGRect(x: 10, y: 200, width: 300, height: 300))
-             imgview.backgroundColor = UIColor.blue
-             view.addSubview(imgview)
-        
+         let imgview = UIButton(frame: CGRect(x: 10, y: 200, width: 300, height: 300))
+         imgview.backgroundColor = UIColor.blue
+         view.addSubview(imgview)
+    
         imgview.lx.setHandle { (button) in
-//            print("=======\(button)")
+            print("=======\(button)")
         }
+              
     }
  
 

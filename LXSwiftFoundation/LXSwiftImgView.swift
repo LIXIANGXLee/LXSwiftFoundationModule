@@ -9,14 +9,18 @@
 import UIKit
 
 open class LXSwiftImgView: UIImageView, LXSwiftUICompatible {
-       /// call back
+    /// call back
     public typealias ImgViewCallBack = ((_ imgView: LXSwiftImgView?) -> ())
     public var swiftModel: Any?
     internal var imgViewCallBack: LXSwiftImgView.ImgViewCallBack?
-
+    
     /// 是否允许交互
     public var isInteractionEnabled: Bool = false {
         didSet { isUserInteractionEnabled = isInteractionEnabled }
+    }
+    
+    public convenience init() {
+        self.init(frame: CGRect.zero)
     }
     
     public override init(frame: CGRect) {
@@ -43,10 +47,10 @@ extension LXSwiftImgView {
 
 //MARK: -  Extending properties and methods for UISwitch
 extension LXSwiftBasics where Base : LXSwiftImgView {
-
+    
     /// set handle for method call back
-       public func setHandle(_ imgViewCallBack: LXSwiftImgView.ImgViewCallBack?) {
-           base.imgViewCallBack = imgViewCallBack
-       }
+    public func setHandle(_ imgViewCallBack: LXSwiftImgView.ImgViewCallBack?) {
+        base.imgViewCallBack = imgViewCallBack
+    }
     
 }

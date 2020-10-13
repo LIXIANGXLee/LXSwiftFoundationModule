@@ -16,28 +16,28 @@ extension LXSwiftBasics where Base: UIView {
     
     /// presented root
     public var aboveView: UIView? {
-       var aboveController = UIApplication.shared.delegate?.window??.rootViewController
-       while aboveController?.presentedViewController != nil {
-           aboveController = aboveController?.presentedViewController
-       }
-       return aboveController?.view
-   }
-
-   /// snapShot image
-   public var snapShotImage: UIImage? {
-       
+        var aboveController = UIApplication.shared.delegate?.window??.rootViewController
+        while aboveController?.presentedViewController != nil {
+            aboveController = aboveController?.presentedViewController
+        }
+        return aboveController?.view
+    }
+    
+    /// snapShot image
+    public var snapShotImage: UIImage? {
+        
         UIGraphicsBeginImageContextWithOptions(base.bounds.size, base.isOpaque, 0)
         if isContainsWKWebView() {
             base.drawHierarchy(in: base.bounds, afterScreenUpdates: true)
         }else{
             base.layer.render(in: UIGraphicsGetCurrentContext()!)
         }
-    
+        
         let snapImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return snapImage
-   }
-
+    }
+    
     
     /// chromium source - snapshot_manager, fix wkwebview screenshot bug.
     public func isContainsWKWebView() -> Bool {
@@ -51,16 +51,16 @@ extension LXSwiftBasics where Base: UIView {
         }
         return false
     }
-
-   /// async  snapShot image
+    
+    /// async  snapShot image
     public func async_snapShotImage(complete: @escaping (UIImage?) -> ()) {
-         DispatchQueue.global().async{
+        DispatchQueue.global().async{
             let async_image = self.snapShotImage
             DispatchQueue.main.async(execute: {
                 complete(async_image)
             })
         }
-     }
+    }
 }
 
 //MARK: -  Extending methods for UIView
@@ -76,16 +76,16 @@ extension LXSwiftBasics where Base: UIView {
                                  locations: [NSNumber] = [0.0,1.0],
                                  startPoint: CGPoint = CGPoint(x: 0, y: 0),
                                  endPoint: CGPoint = CGPoint(x: 1, y: 1)){
-          let gradientLayer = CAGradientLayer()
-          gradientLayer.frame =  base.bounds
-          base.layer.insertSublayer(gradientLayer, at: 0)
-          gradientLayer.colors = colors
-          gradientLayer.locations = locations
-          gradientLayer.startPoint = startPoint
-          gradientLayer.endPoint = endPoint
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame =  base.bounds
+        base.layer.insertSublayer(gradientLayer, at: 0)
+        gradientLayer.colors = colors
+        gradientLayer.locations = locations
+        gradientLayer.startPoint = startPoint
+        gradientLayer.endPoint = endPoint
         
     }
-
+    
     /// view set Shadow
     ///
     /// - Parameters:
@@ -99,12 +99,12 @@ extension LXSwiftBasics where Base: UIView {
         base.layer.shadowOpacity = opacity
         base.layer.shadowOffset = offset
     }
-
+    
     /// remove Shadow
     public func removeShadow() {
         base.layer.shadowOpacity = 0.0
     }
-
+    
     /// view set border
     public func setBorder(width: CGFloat, color: UIColor, cornerRadius: CGFloat? = nil) {
         base.layer.borderWidth = width
@@ -113,13 +113,13 @@ extension LXSwiftBasics where Base: UIView {
             base.layer.cornerRadius = cornerRadius
         }
     }
-
+    
     /// cornerRadius
     public func setCornerRadius(_ radius: CGFloat = 4.0, clips: Bool = false) {
         base.layer.cornerRadius = radius
         base.layer.masksToBounds = clips
     }
-
+    
     /// cornerRadius(topLeft topRight bottomLeft bottomRight)
     ///
     /// - Parameters:
@@ -133,7 +133,7 @@ extension LXSwiftBasics where Base: UIView {
         fieldLayer.path = fieldPath.cgPath
         base.layer.mask = fieldLayer
     }
-
+    
 }
 
 
@@ -157,11 +157,11 @@ extension UIView {
     
     /// can save callback
     internal var viewCallBack: ((UIView?) -> ())? {
-       set {
-          objc_setAssociatedObject(self, &viewCallBackKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
+        set {
+            objc_setAssociatedObject(self, &viewCallBackKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
         get {
-           return objc_getAssociatedObject(self, &viewCallBackKey) as? ((UIView?) -> ())
+            return objc_getAssociatedObject(self, &viewCallBackKey) as? ((UIView?) -> ())
         }
     }
     

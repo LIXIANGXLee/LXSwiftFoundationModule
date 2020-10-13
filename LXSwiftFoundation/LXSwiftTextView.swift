@@ -24,10 +24,10 @@ open class LXSwiftTextView: UITextView {
         placehoderLabel.numberOfLines = 0
         placehoderLabel.backgroundColor = UIColor.clear
         addSubview(placehoderLabel)
-      
+        
         /// call after placehoderLabel
         font = UIFont.systemFont(ofSize: 14).fitFont
-
+        
         NotificationCenter.default.addObserver(self, selector: #selector(textDidChange), name: UITextView.textDidChangeNotification, object: self)
     }
     
@@ -37,7 +37,7 @@ open class LXSwiftTextView: UITextView {
     
     ///Destruction
     deinit { NotificationCenter.default.removeObserver(self) }
-   
+    
     open override var font: UIFont? {
         didSet {
             guard let f = font else { return }
@@ -57,30 +57,30 @@ open class LXSwiftTextView: UITextView {
 }
 
 // MARK: - private
- 
+
 private var maxTextLengthKey: Void?
 extension LXSwiftTextView {
     
     /// can save maxTextLength
     internal var maxTextLength: Int? {
-       set {
-          objc_setAssociatedObject(self, &maxTextLengthKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
+        set {
+            objc_setAssociatedObject(self, &maxTextLengthKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
         }
         get {
             return objc_getAssociatedObject(self, &maxTextLengthKey) as? Int
         }
-     }
+    }
     
     /// 事件监听
     @objc internal func textDidChange() {
-       placehoderLabel.isHidden = self.hasText
-       
+        placehoderLabel.isHidden = self.hasText
+        
         if let maxLength = self.maxTextLength, (text?.count ?? 0) > maxLength{
-              text = text?.lx.substring(to: maxLength)
+            text = text?.lx.substring(to: maxLength)
         }else{
-              textCallBack?(self.text)
+            textCallBack?(self.text)
         }
     }
-        
+    
 }
 

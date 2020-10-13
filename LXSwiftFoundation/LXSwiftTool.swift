@@ -44,30 +44,30 @@ extension LXSwiftBasics where Base == LXSwiftTool {
             let propertyList = try? PropertyListSerialization.propertyList(from: data, options: .init(rawValue: 0), format: nil) else { return nil }
         return propertyList as? Dictionary<String, Any>
     }
-   
+    
     /// get QR code information
     public static func  getQrCodeString(with image: UIImage?) -> String? {
-         let context =  CIContext(options: nil)
-         let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: context, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh])
-         guard let cgImage = image?.cgImage else { return nil }
-         let ciImage =  CIImage(cgImage: cgImage)
-         guard let feature = detector?.features(in: ciImage).first as? CIQRCodeFeature else { return nil }
-         return feature.messageString
+        let context =  CIContext(options: nil)
+        let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: context, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh])
+        guard let cgImage = image?.cgImage else { return nil }
+        let ciImage =  CIImage(cgImage: cgImage)
+        guard let feature = detector?.features(in: ciImage).first as? CIQRCodeFeature else { return nil }
+        return feature.messageString
     }
     
     /// async get QR code information
     public static func async_getQrCodeString(with image: UIImage?, complete: @escaping (String?) -> ()) {
         DispatchQueue.global().async{
-           let async_qrString = self.getQrCodeString(with: image)
+            let async_qrString = self.getQrCodeString(with: image)
             DispatchQueue.main.async(execute: {
                 complete(async_qrString)
             })
         }
     }
- 
+    
     /// create QR code image
     public static func  getQrCodeImage(with qrCodeStr: String?,size: CGFloat = 800) -> UIImage? {
-
+        
         let filter = CIFilter(name: "CIQRCodeGenerator")
         filter?.setDefaults()
         let qrData = qrCodeStr?.data(using: String.Encoding.utf8)
@@ -79,13 +79,13 @@ extension LXSwiftBasics where Base == LXSwiftTool {
     /// async create QR code image
     public static func async_getQrCodeImage(with qrCodeStr: String?,size: CGFloat = 800, complete: @escaping (UIImage?) -> ()) {
         DispatchQueue.global().async{
-           let async_qrImage = self.getQrCodeImage(with: qrCodeStr, size: size)
+            let async_qrImage = self.getQrCodeImage(with: qrCodeStr, size: size)
             DispatchQueue.main.async(execute: {
                 complete(async_qrImage)
             })
         }
     }
-
+    
     /// create image
     private static func createNonInterpolatedImage(with ciImage: CIImage, size: CGFloat) -> UIImage? {
         let extent = ciImage.extent.integral

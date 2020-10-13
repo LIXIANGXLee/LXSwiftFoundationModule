@@ -19,9 +19,9 @@ extension LXSwiftBasics where Base: UIButton {
     
     /// h  for button
     public var bestHeight: CGFloat {
-       return base.sizeThatFits(CGSize.zero).height
+        return base.sizeThatFits(CGSize.zero).height
     }
-
+    
     ///Provides a convenient way to set the properties of uibutton
     ///
     /// - Parameters:
@@ -49,7 +49,7 @@ extension LXSwiftBasics where Base: UIButton {
 
 //MARK: -  Extending properties and methods for UIButton
 extension LXSwiftBasics where Base : UIButton {
-
+    
     public func setHandle(buttonCallBack: ((_ button: UIButton?) -> ())?){
         base.swiftCallBack = buttonCallBack
         base.addTarget(base, action: #selector(base.swiftButtonAction(_:)), for: .touchUpInside)
@@ -61,15 +61,15 @@ extension UIButton: LXSwiftPropertyCompatible {
     internal typealias Element = UIButton
     internal var swiftCallBack: SwiftCallBack?{
         set {
-          objc_setAssociatedObject(self, &buttonCallBackKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
+            objc_setAssociatedObject(self, &buttonCallBackKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
         get {
-           return objc_getAssociatedObject(self, &buttonCallBackKey)  as? SwiftCallBack
+            return objc_getAssociatedObject(self, &buttonCallBackKey)  as? SwiftCallBack
         }
     }
     
     @objc internal func swiftButtonAction(_ button: UIButton) {
         self.swiftCallBack?(button)
     }
-   
+    
 }

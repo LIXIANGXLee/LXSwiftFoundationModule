@@ -14,12 +14,12 @@ import UIKit
  for example:
  fileprivate class LXSwiftConvenienceBundlePath {}
  extension UIImage {
-    static let convenienceBundle = LXSwiftConvenienceBundle(bundlePath: Bundle(for: LXSwiftConvenienceBundlePath.self).bundlePath, bundleName: "Login.bundle", path: nil)
+ static let convenienceBundle = LXSwiftConvenienceBundle(bundlePath: Bundle(for: LXSwiftConvenienceBundlePath.self).bundlePath, bundleName: "Login.bundle", path: nil)
  
-     static func named(_ imageNamed: String?) -> UIImage? {
-         guard let imageNamed = imageNamed else { return nil }
-         return convenienceBundle.imageNamed(imageNamed)
-     }
+ static func named(_ imageNamed: String?) -> UIImage? {
+ guard let imageNamed = imageNamed else { return nil }
+ return convenienceBundle.imageNamed(imageNamed)
+ }
  }
  */
 
@@ -80,9 +80,9 @@ fileprivate struct LXSwiftX2ImageBuilder: LXSwiftImageAdaptNode {
     init(successor: LXSwiftImageAdaptNode? = nil) {
         self.successor = successor
     }
-
+    
     func loadImage(_ imagePath: String) -> UIImage? {
-
+        
         if let image = UIImage(contentsOfFile: "\(imagePath)@2x.png") {
             return image
         }else{
@@ -97,7 +97,7 @@ fileprivate struct LXSwiftX3ImageBuilder: LXSwiftImageAdaptNode {
     init(successor: LXSwiftImageAdaptNode? = nil) {
         self.successor = successor
     }
-
+    
     func loadImage(_ imagePath: String) -> UIImage? {
         if let image = UIImage(contentsOfFile: "\(imagePath)@3x.png") {
             return image
@@ -113,7 +113,7 @@ fileprivate struct LXSwiftX1ImageBuilder: LXSwiftImageAdaptNode {
     init(successor: LXSwiftImageAdaptNode? = nil) {
         self.successor = successor
     }
-
+    
     func loadImage(_ imagePath: String) -> UIImage? {
         if let image = UIImage(contentsOfFile: "\(imagePath).png") {
             return image

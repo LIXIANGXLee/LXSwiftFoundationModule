@@ -56,21 +56,21 @@ extension LXSwiftQueue {
         return list
     }
     
-     ///Number of Queue elements
-     public func size() -> Int {
+    ///Number of Queue elements
+    public func size() -> Int {
         lock.lock()
         let count = list.count
         lock.unlock()
         return count
-     }
+    }
     
-      ///Is the Queue element empty
-      public func isEmpty() -> Bool {
+    ///Is the Queue element empty
+    public func isEmpty() -> Bool {
         lock.lock()
         let isisEmpty = list.isEmpty
         lock.unlock()
         return isisEmpty
-     }
+    }
     
 }
 

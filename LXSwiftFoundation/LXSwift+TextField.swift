@@ -16,11 +16,11 @@ extension LXSwiftBasics where Base : LXSwiftTextField {
     public var maxLength: Int? {
         get{ return base.maxTextLength }
         set{
-           guard let newValue = newValue, newValue > 0 else { return }
-           base.maxTextLength = newValue
-           NotificationCenter.default.addObserver(base,  selector:#selector(base.textFieldTextChange(notification:)),name: UITextField.textDidChangeNotification,object: base)
-         }
-     }
+            guard let newValue = newValue, newValue > 0 else { return }
+            base.maxTextLength = newValue
+            NotificationCenter.default.addObserver(base,  selector:#selector(base.textFieldTextChange(notification:)),name: UITextField.textDidChangeNotification,object: base)
+        }
+    }
     
 }
 
@@ -29,14 +29,14 @@ extension LXSwiftBasics where Base : LXSwiftTextField {
     
     ///  set textField leftView
     public func setLeftView(_ view: UIView, mode: UITextField.ViewMode = .always) {
-       base.leftView = view
-       base.leftViewMode = mode
+        base.leftView = view
+        base.leftViewMode = mode
     }
-   
+    
     /// set textField rightView
     public func setRightView(_ view: UIView, mode: UITextField.ViewMode = .always) {
-       base.rightView = view
-       base.rightViewMode = mode
+        base.rightView = view
+        base.rightViewMode = mode
     }
     
     /// set placeholder and color
@@ -65,21 +65,21 @@ extension LXSwiftTextField {
     
     /// can save maxTextLength
     internal var maxTextLength: Int {
-       set {
-          objc_setAssociatedObject(self, &maxTextLengthKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
+        set {
+            objc_setAssociatedObject(self, &maxTextLengthKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
         }
         get {
-          return objc_getAssociatedObject(self, &maxTextLengthKey) as! Int
+            return objc_getAssociatedObject(self, &maxTextLengthKey) as! Int
         }
-     }
-     
-     /// action
-     @objc internal func textFieldTextChange(notification: Notification) {
-          if let maxLength = self.lx.maxLength {
-              if (text?.count ?? 0) > maxLength {
+    }
+    
+    /// action
+    @objc internal func textFieldTextChange(notification: Notification) {
+        if let maxLength = self.lx.maxLength {
+            if (text?.count ?? 0) > maxLength {
                 text = text?.lx.substring(to: maxLength)
-              }
-          }
-      }
-
+            }
+        }
+    }
+    
 }

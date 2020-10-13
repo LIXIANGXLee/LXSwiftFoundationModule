@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: - public
 open class LXSwiftModalController: UIViewController {
-
+    
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
@@ -27,8 +27,8 @@ open class LXSwiftModalController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         view.addSubview(contentView)
-
-
+        
+        
         //self.view
         view.addGestureRecognizer(tapGesture)
         
@@ -37,23 +37,23 @@ open class LXSwiftModalController: UIViewController {
         
     }
     
-     /// content view action click
-      open lazy var contentGesture: UITapGestureRecognizer = {
-          return  UITapGestureRecognizer(target: self, action: #selector(contentViewTaped(tap:)))
-      }()
+    /// content view action click
+    open lazy var contentGesture: UITapGestureRecognizer = {
+        return  UITapGestureRecognizer(target: self, action: #selector(contentViewTaped(tap:)))
+    }()
     
     /// allscreen UITapGestureRecognizer
-      open lazy var tapGesture: UITapGestureRecognizer = {
-          return UITapGestureRecognizer(target: self, action: #selector(backgroundViewTap))
-      }()
+    open lazy var tapGesture: UITapGestureRecognizer = {
+        return UITapGestureRecognizer(target: self, action: #selector(backgroundViewTap))
+    }()
     
     /// content view
-      open lazy var contentView: UIView = {
-           let contentView = UIView()
-           contentView.backgroundColor = UIColor.white
-           return contentView
-       }()
-   
+    open lazy var contentView: UIView = {
+        let contentView = UIView()
+        contentView.backgroundColor = UIColor.white
+        return contentView
+    }()
+    
 }
 
 // MARK: - public
@@ -63,8 +63,8 @@ extension LXSwiftModalController {
     @objc open func backgroundViewTap() {
         self.lx.dismissViewController()
     }
-
-     /// write bgviw action
+    
+    /// write bgviw action
     @objc open func contentViewTaped(tap: UITapGestureRecognizer) { }
     
 }
