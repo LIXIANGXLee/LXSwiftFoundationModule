@@ -7,7 +7,6 @@ target 'LXSwiftFoundationModule' do
   
   
   pod 'LXSwiftFoundation', :path => './'
-  pod 'SnapKit'
   # Pods for LXSwiftFoundationModule
 
 end

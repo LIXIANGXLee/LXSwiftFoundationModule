@@ -1,17 +1,14 @@
 PODS:
   - LXFitManager (1.2.0)
-  - LXSwiftFoundation (3.5.1):
+  - LXSwiftFoundation (3.5.2):
     - LXFitManager
-  - SnapKit (5.0.1)
 
 DEPENDENCIES:
   - LXSwiftFoundation (from `./`)
-  - SnapKit
 
 SPEC REPOS:
   trunk:
     - LXFitManager
-    - SnapKit
 
 EXTERNAL SOURCES:
   LXSwiftFoundation:
@@ -19,9 +16,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   LXFitManager: d8f6fa68d6379552ec58e55eb2acfb1a663fc6fe
-  LXSwiftFoundation: 0169a3735fd173c8acf5654e9ed347bbb3cd4d2e
-  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  LXSwiftFoundation: 616d1dd6e787cfb28d6c3c60e945ea43f3ad9962
 
-PODFILE CHECKSUM: ae53fb39281976ec1e4c00b5f00653cf7f7ab6f3
+PODFILE CHECKSUM: 30826b3cf81407779287c57ef0fb8dc3dd84a10e
 
 COCOAPODS: 1.9.3
