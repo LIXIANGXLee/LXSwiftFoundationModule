@@ -64,13 +64,9 @@ private var maxTextLengthKey: Void?
 extension LXSwiftTextField {
     
     /// can save maxTextLength
-    internal var maxTextLength: Int {
-        set {
-            objc_setAssociatedObject(self, &maxTextLengthKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
-        }
-        get {
-            return objc_getAssociatedObject(self, &maxTextLengthKey) as! Int
-        }
+    internal var maxTextLength: Int? {
+        get { return getAssociatedObject(self, &maxTextLengthKey) }
+        set { setRetainedAssociatedObject(self, &maxTextLengthKey, newValue,.OBJC_ASSOCIATION_ASSIGN) }
     }
     
     /// action

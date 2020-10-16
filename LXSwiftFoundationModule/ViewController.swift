@@ -8,13 +8,11 @@
 
 import UIKit
 import LXSwiftFoundation
-import SnapKit
 
 class ViewController: UIViewController {
     var  objc : LXObjcThreadActive! = nil
     
     
-     let button = UIButton()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,29 +25,8 @@ class ViewController: UIViewController {
         }
             
         
-        
-        
-         button.backgroundColor = UIColor.blue
-         view.addSubview(button)
-        button.lx.preventDoubleHit(2)
-        button.lx.setHandle { (button) in
-        }
-           
-        button.snp.makeConstraints { (maker) in
-            maker.left.equalTo(100)
-            maker.bottom.equalTo(-100)
-            maker.width.height.equalTo(100)
-        }
-        
-        
     }
  
-
-    override func viewLayoutMarginsDidChange() {
-                print("===---==\(button.frame)")
-
-    }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
 

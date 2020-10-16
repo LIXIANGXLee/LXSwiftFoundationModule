@@ -21,12 +21,8 @@ private var sliderCallBackKey: Void?
 extension UISlider: LXSwiftPropertyCompatible {
     internal typealias Element = Float
     internal var swiftCallBack: SwiftCallBack? {
-        set {
-            objc_setAssociatedObject(self, &sliderCallBackKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
-        }
-        get {
-            return objc_getAssociatedObject(self, &sliderCallBackKey)  as? SwiftCallBack
-        }
+        get { return getAssociatedObject(self, &sliderCallBackKey) }
+        set { setRetainedAssociatedObject(self, &sliderCallBackKey, newValue) }
     }
     
     @objc internal func sliderSwitchAction(_ event: UISlider) {

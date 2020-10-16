@@ -21,12 +21,8 @@ private var switchCallBackKey: Void?
 extension UISwitch: LXSwiftPropertyCompatible {
     internal typealias Element = Bool
     internal var swiftCallBack: SwiftCallBack? {
-        set {
-            objc_setAssociatedObject(self, &switchCallBackKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
-        }
-        get {
-            return objc_getAssociatedObject(self, &switchCallBackKey)  as? SwiftCallBack
-        }
+        get { return getAssociatedObject(self, &switchCallBackKey) }
+        set { setRetainedAssociatedObject(self, &switchCallBackKey, newValue) }
     }
     
     @objc internal func swiftSwitchAction(_ event: UISwitch) {

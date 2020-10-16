@@ -26,15 +26,15 @@ extension LXSwiftStack {
     ///Put an element on the stack
     public mutating func push(_ element: Element) {
         lock.lock()
+        defer { lock.unlock() }
         list.append(element)
-        lock.unlock()
     }
     
     ///get and remove Last element of the stack
     public mutating func pop() -> Element?{
         lock.lock()
+        defer { lock.unlock() }
         let element = list.removeLast()
-        lock.unlock()
         return element
     }
     
@@ -42,24 +42,24 @@ extension LXSwiftStack {
     @discardableResult
     public mutating func clear() -> ([Element]) {
         lock.lock()
+        defer { lock.unlock() }
         list.removeAll()
-        lock.unlock()
         return list
     }
     
     ///Number of stack elements
     public func size() -> Int {
         lock.lock()
+        defer { lock.unlock() }
         let count = list.count
-        lock.unlock()
         return count
     }
     
     ///Is the stack element empty
     public func isEmpty() -> Bool {
         lock.lock()
+        defer { lock.unlock() }
         let isisEmpty = list.isEmpty
-        lock.unlock()
         return isisEmpty
     }
     

@@ -157,12 +157,8 @@ extension UIView {
     
     /// can save callback
     internal var viewCallBack: ((UIView?) -> ())? {
-        set {
-            objc_setAssociatedObject(self, &viewCallBackKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
-        }
-        get {
-            return objc_getAssociatedObject(self, &viewCallBackKey) as? ((UIView?) -> ())
-        }
+        get { return getAssociatedObject(self, &viewCallBackKey) }
+        set { setRetainedAssociatedObject(self, &viewCallBackKey, newValue) }
     }
     
     @objc internal func gestureTap(_ gesture: UIGestureRecognizer) {

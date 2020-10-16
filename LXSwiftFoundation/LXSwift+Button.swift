@@ -60,12 +60,8 @@ private var buttonCallBackKey: Void?
 extension UIButton: LXSwiftPropertyCompatible {
     internal typealias Element = UIButton
     internal var swiftCallBack: SwiftCallBack?{
-        set {
-            objc_setAssociatedObject(self, &buttonCallBackKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
-        }
-        get {
-            return objc_getAssociatedObject(self, &buttonCallBackKey)  as? SwiftCallBack
-        }
+        get { return getAssociatedObject(self, &buttonCallBackKey) }
+        set { setRetainedAssociatedObject(self, &buttonCallBackKey, newValue) }
     }
     
     @objc internal func swiftButtonAction(_ button: UIButton) {

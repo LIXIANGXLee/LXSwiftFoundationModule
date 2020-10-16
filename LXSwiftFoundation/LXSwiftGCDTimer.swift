@@ -78,8 +78,8 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
         
         /// sync
         LXSwiftGCDTimer.semaphore.wait()
+        defer { LXSwiftGCDTimer.semaphore.signal() }
         LXSwiftGCDTimer.timers[iden] = timer
-        LXSwiftGCDTimer.semaphore.signal()
         
         timer.setEventHandler(handler: {
             DispatchQueue.main.async { task?() }
@@ -99,11 +99,10 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
         
         guard let iden = identified else { return }
         LXSwiftGCDTimer.semaphore.wait()
+        defer { LXSwiftGCDTimer.semaphore.signal() }
         if let timer = LXSwiftGCDTimer.timers[iden] {
             timer.cancel()
             LXSwiftGCDTimer.timers.removeValue(forKey: iden)
         }
-        LXSwiftGCDTimer.semaphore.signal()
     }
-    
 }

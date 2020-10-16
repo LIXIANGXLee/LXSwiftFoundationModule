@@ -19,13 +19,10 @@ extension LXSwiftBasics where Base: UIControl {
 
 private var hitTimerKey: Void?
 extension UIControl  {
-    private var hitTime: Double {
-        set {
-            objc_setAssociatedObject(self, &hitTimerKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
-        }
-        get {
-            return objc_getAssociatedObject(self, &hitTimerKey) as! Double
-        }
+    
+    private var hitTime: Double? {
+        get { return getAssociatedObject(self, &hitTimerKey) }
+        set { setRetainedAssociatedObject(self, &hitTimerKey, newValue,.OBJC_ASSOCIATION_ASSIGN) }
     }
     
     internal func preventDoubleHit(_ hitTime: Double) {
@@ -35,6 +32,8 @@ extension UIControl  {
     
     @objc internal func c_preventDoubleHit(_ base: UIControl)  {
         base.isUserInteractionEnabled = false
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + hitTime) { base.isUserInteractionEnabled = true }
+        DispatchQueue.main.lx.delay((hitTime ?? 1.0)) {
+            base.isUserInteractionEnabled = true
+        }
     }
 }

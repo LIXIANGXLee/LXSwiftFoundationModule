@@ -27,7 +27,6 @@ class TestViewController: UIViewController {
         let s =  UISegmentedControl(items: ["hahah","fdfdf"])
         s.frame = CGRect(x: 100, y: 200, width: 300, height: 200)
         s.lx.setHandle { (value) in
-            print("=======\(value)")
         }
 
 //          s.addTarget(self, action: #selector(swichAction(_:)), for: .touchUpInside)

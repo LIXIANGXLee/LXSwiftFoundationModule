@@ -63,12 +63,8 @@ extension LXSwiftTextView {
     
     /// can save maxTextLength
     internal var maxTextLength: Int? {
-        set {
-            objc_setAssociatedObject(self, &maxTextLengthKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
-        }
-        get {
-            return objc_getAssociatedObject(self, &maxTextLengthKey) as? Int
-        }
+        get { return getAssociatedObject(self, &maxTextLengthKey) }
+        set { setRetainedAssociatedObject(self, &maxTextLengthKey, newValue,.OBJC_ASSOCIATION_ASSIGN) }
     }
     
     /// 事件监听

@@ -27,23 +27,23 @@ extension LXSwiftQueue {
     ///Put an element on the Queue
     public mutating func enQueue(_ element: Element) {
         lock.lock()
+        defer { lock.unlock() }
         list.append(element)
-        lock.unlock()
     }
     
     ///get and remove first element of the Queue
     public mutating func deQueue() -> Element?{
         lock.lock()
+        defer { lock.unlock() }
         let element = list.removeFirst()
-        lock.unlock()
         return element
     }
     
     ///get first element of the Queue
     public func front() -> Element?{
         lock.lock()
+        defer { lock.unlock() }
         let element = list.first
-        lock.unlock()
         return element
     }
     
@@ -51,24 +51,24 @@ extension LXSwiftQueue {
     @discardableResult
     public mutating func clear() -> ([Element]) {
         lock.lock()
+        defer { lock.unlock() }
         list.removeAll()
-        lock.unlock()
         return list
     }
     
     ///Number of Queue elements
     public func size() -> Int {
         lock.lock()
+        defer { lock.unlock() }
         let count = list.count
-        lock.unlock()
         return count
     }
     
     ///Is the Queue element empty
     public func isEmpty() -> Bool {
         lock.lock()
+        defer { lock.unlock() }
         let isisEmpty = list.isEmpty
-        lock.unlock()
         return isisEmpty
     }
     
