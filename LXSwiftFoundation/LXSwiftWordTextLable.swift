@@ -142,16 +142,13 @@ extension LXSwiftWordTextLable {
                 delegate?.lxWordTextLable?(self, didSelect: l.text)
             }
         }
-        
     }
     
     /// Get links based on click points
     private func linkWithPoint(point: CGPoint) -> LXSwiftWordTextLable.TextLink? {
         for link in links {
             for rect in link.rects {
-                if rect.contains(point) {
-                    return link
-                }
+                if rect.contains(point) { return link  }
             }
         }
         return nil
