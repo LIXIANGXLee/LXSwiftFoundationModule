@@ -86,7 +86,7 @@ extension LXSwiftBasics where Base == Date {
     
     ///get stamp with Interval
     public var timeInterval: TimeInterval {
-        return Date().timeIntervalSince1970 * 1000
+        return base.timeIntervalSince1970 * 1000
     }
     
     public var year: Int {
