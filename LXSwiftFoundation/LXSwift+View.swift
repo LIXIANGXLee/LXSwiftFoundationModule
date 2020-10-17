@@ -72,17 +72,23 @@ extension LXSwiftBasics where Base: UIView {
     ///   - locations: []
     ///   - startPoint: start
     ///   - endPoint: end
-    public func setGradientLayer(with colors: [CGColor],
+    ///   - size leyar 大小
+    public func setGradientLayer(with colors: [UIColor],
                                  locations: [NSNumber] = [0.0,1.0],
-                                 startPoint: CGPoint = CGPoint(x: 0, y: 0),
-                                 endPoint: CGPoint = CGPoint(x: 1, y: 1)){
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame =  base.bounds
-        base.layer.insertSublayer(gradientLayer, at: 0)
-        gradientLayer.colors = colors
-        gradientLayer.locations = locations
-        gradientLayer.startPoint = startPoint
-        gradientLayer.endPoint = endPoint
+                                 startPoint: CGPoint = CGPoint(x: 0, y: 0.5),
+                                 endPoint: CGPoint = CGPoint(x: 1, y: 0.5),
+                                 size: CGSize? = nil){
+        
+        let s = size ?? base.bounds.size
+        if !s.equalTo(CGSize.zero) {
+            let gradientLayer = CAGradientLayer()
+            gradientLayer.frame =  CGRect(origin: CGPoint.zero, size: s)
+            base.layer.insertSublayer(gradientLayer, at: 0)
+            gradientLayer.colors = colors.map{ $0.cgColor }
+            gradientLayer.locations = locations
+            gradientLayer.startPoint = startPoint
+            gradientLayer.endPoint = endPoint
+        }
         
     }
     
@@ -115,7 +121,7 @@ extension LXSwiftBasics where Base: UIView {
     }
     
     /// cornerRadius
-    public func setCornerRadius(_ radius: CGFloat = 4.0, clips: Bool = false) {
+    public func setCornerRadius(radius: CGFloat = 4.0, clips: Bool = false) {
         base.layer.cornerRadius = radius
         base.layer.masksToBounds = clips
     }
@@ -126,12 +132,16 @@ extension LXSwiftBasics where Base: UIView {
     ///   - cornerRadii: radius size
     ///   - roundingCorners: UIRectCorner(rawValue:
     ///   (UIRectCorner.topRight.rawValue) | (UIRectCorner.bottomRight.rawValue))
-    public func setPartCornerRadius(_ radius: CGFloat = 4.0, _ roundingCorners:UIRectCorner) {
+    ///   - viewSize: size of the current view
+    public func setPartCornerRadius(radius: CGFloat = 4.0,  roundingCorners: UIRectCorner = .allCorners,viewSize: CGSize? = nil) {
         let fieldPath =  UIBezierPath(roundedRect: base.bounds, byRoundingCorners: roundingCorners, cornerRadii: CGSize(width: radius, height: radius))
-        let fieldLayer = CAShapeLayer()
-        fieldLayer.frame = base.bounds
-        fieldLayer.path = fieldPath.cgPath
-        base.layer.mask = fieldLayer
+        let s = viewSize ?? base.bounds.size
+        if !s.equalTo(CGSize.zero) {
+            let fieldLayer = CAShapeLayer()
+            fieldLayer.frame = base.bounds
+            fieldLayer.path = fieldPath.cgPath
+            base.layer.mask = fieldLayer
+        }
     }
     
 }

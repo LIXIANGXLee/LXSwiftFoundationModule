@@ -21,7 +21,7 @@ extension LXSwiftBasics where Base : UISegmentedControl {
 private var segmentedControlCallBackKey: Void?
 extension UISegmentedControl: LXSwiftPropertyCompatible {
     
-    internal typealias Element = Int
+    internal typealias T = Int
     internal var swiftCallBack: SwiftCallBack? {
         get { return getAssociatedObject(self, &segmentedControlCallBackKey) }
         set { setRetainedAssociatedObject(self, &segmentedControlCallBackKey, newValue) }

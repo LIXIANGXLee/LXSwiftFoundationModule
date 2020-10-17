@@ -8,5 +8,5 @@ target 'LXSwiftFoundationModule' do
   
   pod 'LXSwiftFoundation', :path => './'
   # Pods for LXSwiftFoundationModule
-
+  
 end

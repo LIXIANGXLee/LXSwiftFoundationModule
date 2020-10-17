@@ -34,15 +34,15 @@ extension LXSwiftRouter {
     ///   - urlStr:  url name, for example："http://home/bus"
     ///   - callInfoBack:  call back method
     public static func regist(with urlStr: String?,
-                              callInfoBack: LXSwiftRouter.CallInfoBack?)
-    {
-        guard let url = urlStr,
+                              callInfoBack: LXSwiftRouter.CallInfoBack? = nil) {
+        guard let url = urlStr?.lx.trim.lx.utf8,
             url.hasPrefix("http://"),
             let callBack = callInfoBack  else { return  }
         
         self.semaphore.wait()
+        defer { self.semaphore.signal() }
+
         routers[url] = callBack
-        self.semaphore.signal()
     }
     
     /// trigger event
@@ -52,11 +52,12 @@ extension LXSwiftRouter {
     ///   - paras:   call back method
     public static func open(with urlStr: String?,
                             paras:[String:Any?]? = nil,
-                            callBack: LXSwiftRouter.CallBack? = nil)
-    {
-        guard let url = urlStr,
+                            callBack: LXSwiftRouter.CallBack? = nil) {
+        guard let url = urlStr?.lx.trim.lx.utf8,
             url.hasPrefix("http://") else { return  }
         
+        self.semaphore.wait()
+        defer { self.semaphore.signal() }
         if  let callInfoBack =  routers[url] {
             let result = callInfoBack(paras)
             callBack?(result)
@@ -68,9 +69,11 @@ extension LXSwiftRouter {
     ///   - eventName: url  url name, for example："http://home/bus"
     ///   - return result
     public static func  object(for urlStr: String?) -> Any? {
-        guard let url = urlStr,
+        guard let url = urlStr?.lx.trim.lx.utf8,
             url.hasPrefix("http://") else { return nil }
         
+        self.semaphore.wait()
+        defer { self.semaphore.signal() }
         return routers[url]?(nil)
     }
     
@@ -80,20 +83,20 @@ extension LXSwiftRouter {
     ///   - urlStr: url  url name, for example："http://home/bus"
     @discardableResult
     public static func remove(with urlStr: String?) -> LXSwiftRouter.CallInfoBack? {
-        guard let url = urlStr,
+        guard let url = urlStr?.lx.trim.lx.utf8,
             url.hasPrefix("http://") else { return nil }
         
         self.semaphore.wait()
+        defer { self.semaphore.signal() }
         let callInfoBack = routers.removeValue(forKey: url)
-        self.semaphore.signal()
         return callInfoBack
     }
     
     ///deregister
     public static func deregister() {
         self.semaphore.wait()
+        defer { self.semaphore.signal() }
         routers.removeAll()
-        self.semaphore.signal()
     }
     
 }

@@ -12,26 +12,34 @@ import LXSwiftFoundation
 class ViewController: UIViewController {
     var  objc : LXObjcThreadActive! = nil
     
-    
-    override func viewDidLoad() {
+    var i = 0
+
+     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = UIColor.white
+        
 
-         let imgview = UIButton(frame: CGRect(x: 10, y: 200, width: 300, height: 300))
+         let imgview = UIView(frame: CGRect(x: 10, y: 200, width: 300, height: 300))
          imgview.backgroundColor = UIColor.blue
          view.addSubview(imgview)
-        imgview.lx.preventDoubleHit(2)
-        imgview.lx.setHandle { (button) in
-        }
-            
+//         imgview.lx.preventDoubleHit(2)
+//         imgview.lx.setHandle { (button) in
+      
+//        imgview.lx.setGradientLayer(with: [UIColor.red,UIColor.orange])
         
-    }
+
+        imgview.lx.setPartCornerRadius(radius: 20, roundingCorners: [UIRectCorner.bottomLeft, UIRectCorner.bottomRight])
+      
+   
+      }
  
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
+        
 
-//        let vc = TestViewController()
-//        self.present(vc, animated: true, completion: nil)
+        let vc = TestViewController()
+        self.present(vc, animated: true, completion: nil)
         
     }
     

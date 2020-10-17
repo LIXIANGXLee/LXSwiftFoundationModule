@@ -29,7 +29,6 @@ extension LXSwiftBasics where Base == Date {
         return (selfCmps,dateComps)
     }
     
-    
 }
 
 //MARK: -  Extending properties  for NSData

@@ -11,6 +11,7 @@ import UIKit
 extension LXSwiftBasics where Base : UISlider {
     
     public func setHandle(sliderCallBack: ((Float?) -> ())?){
+        
         base.swiftCallBack = sliderCallBack
         base.addTarget(base, action: #selector(base.sliderSwitchAction(_:)), for: .touchUpInside)
     }
@@ -19,7 +20,7 @@ extension LXSwiftBasics where Base : UISlider {
 
 private var sliderCallBackKey: Void?
 extension UISlider: LXSwiftPropertyCompatible {
-    internal typealias Element = Float
+    internal typealias T = Float
     internal var swiftCallBack: SwiftCallBack? {
         get { return getAssociatedObject(self, &sliderCallBackKey) }
         set { setRetainedAssociatedObject(self, &sliderCallBackKey, newValue) }

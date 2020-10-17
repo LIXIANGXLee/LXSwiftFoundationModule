@@ -73,31 +73,31 @@ extension LXSwiftWordRegex {
                             wordRegexTypes : [LXSwiftWordRegexType] = wordRegexTypes)
         -> NSAttributedString? {
             
-            if text.count <= 0 { return nil }
-            let attributes = [NSAttributedString.Key.font: textFont, NSAttributedString.Key.foregroundColor: textColor]
-            let attributedStr = NSMutableAttributedString(string: text, attributes:attributes)
+        if text.count <= 0 { return nil }
+        let attributes = [NSAttributedString.Key.font: textFont, NSAttributedString.Key.foregroundColor: textColor]
+        let attributedStr = NSMutableAttributedString(string: text, attributes:attributes)
+        
+        // Start text matching
+        for wordRegexType in wordRegexTypes {
             
-            // Start text matching
-            for wordRegexType in wordRegexTypes {
-                
-                if wordRegexType.isExpression { // Expression matching
-                    text.lx.enumerateStringsMatchedByRegex(regex: wordRegexType.link) { (captureCount, capturedStrings, range) in
-                        
-                        let attachment = NSTextAttachment()
-                        attachment.image = UIImage(named: capturedStrings)
-                        attachment.bounds = CGRect(x: 0, y: LXFit.fitFloat(-3), width: wordRegexType.font.fitFont.lineHeight, height: wordRegexType.font.fitFont.lineHeight)
-                        let imageAttr = NSAttributedString(attachment: attachment)
-                        attributedStr.replaceCharacters(in: range, with: imageAttr)
-                        attributedStr.addAttribute(NSAttributedString.Key(rawValue: LXSwiftWordRegex.imageLinkConst), value: capturedStrings, range: range)
-                    }
-                }else {
-                    // Match hyperlinks
-                    text.lx.enumerateStringsMatchedByRegex(regex: wordRegexType.link) { (captureCount, capturedStrings, range) in
-                        attributedStr.addAttributes([NSAttributedString.Key.foregroundColor : wordRegexType.color,NSAttributedString.Key.font: wordRegexType.font.fitFont], range: range)
-                        attributedStr.addAttribute(NSAttributedString.Key(rawValue: LXSwiftWordRegex.textLinkConst), value: capturedStrings, range: range)
-                    }
+            if wordRegexType.isExpression { // Expression matching
+                text.lx.enumerateStringsMatchedByRegex(regex: wordRegexType.link) { (captureCount, capturedStrings, range) in
+                    
+                    let attachment = NSTextAttachment()
+                    attachment.image = UIImage(named: capturedStrings)
+                    attachment.bounds = CGRect(x: 0, y: LXFit.fitFloat(-3), width: wordRegexType.font.fitFont.lineHeight, height: wordRegexType.font.fitFont.lineHeight)
+                    let imageAttr = NSAttributedString(attachment: attachment)
+                    attributedStr.replaceCharacters(in: range, with: imageAttr)
+                    attributedStr.addAttribute(NSAttributedString.Key(rawValue: LXSwiftWordRegex.imageLinkConst), value: capturedStrings, range: range)
+                }
+            }else {
+                // Match hyperlinks
+                text.lx.enumerateStringsMatchedByRegex(regex: wordRegexType.link) { (captureCount, capturedStrings, range) in
+                    attributedStr.addAttributes([NSAttributedString.Key.foregroundColor : wordRegexType.color,NSAttributedString.Key.font: wordRegexType.font.fitFont], range: range)
+                    attributedStr.addAttribute(NSAttributedString.Key(rawValue: LXSwiftWordRegex.textLinkConst), value: capturedStrings, range: range)
                 }
             }
-            return attributedStr
+        }
+        return attributedStr
     }
 }

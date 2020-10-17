@@ -159,7 +159,7 @@ extension LXSwiftWordTextLable {
         for rect in link.rects {
             let bgView = UIView(frame: rect)
             bgView.tag = linkBgTag
-            bgView.lx.setCornerRadius(LXFit.fitFloat(config.bgRadius), clips: true)
+            bgView.lx.setCornerRadius(radius: LXFit.fitFloat(config.bgRadius), clips: true)
             bgView.backgroundColor = config.bgColor
             insertSubview(bgView, belowSubview: textView)
         }

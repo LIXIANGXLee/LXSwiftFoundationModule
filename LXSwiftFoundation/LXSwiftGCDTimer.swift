@@ -100,9 +100,11 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
         guard let iden = identified else { return }
         LXSwiftGCDTimer.semaphore.wait()
         defer { LXSwiftGCDTimer.semaphore.signal() }
+        
         if let timer = LXSwiftGCDTimer.timers[iden] {
             timer.cancel()
             LXSwiftGCDTimer.timers.removeValue(forKey: iden)
         }
     }
+  
 }

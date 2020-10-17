@@ -36,7 +36,7 @@ open class LXSwiftWebViewController: UIViewController {
     open var loadWebViewContentH: ((Float) -> ())?
     open var loadWebViewTitle: ((String) -> ())?
     open var loadWebViewUrl: ((URL) -> ())?
-    fileprivate(set) var webView: WKWebView!
+    public fileprivate(set) var webView: WKWebView!
     
     fileprivate var spinner: UIActivityIndicatorView!
     fileprivate var progressView: UIProgressView!
