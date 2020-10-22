@@ -48,9 +48,9 @@ open class LXSwiftTextView: UITextView {
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-        let labelX = LXFit.fitInt(5)
-        let labelY = LXFit.fitInt(8)
         
+        let labelX = textContainer.lineFragmentPadding
+        let labelY = textContainer.lineFragmentPadding
         let size =  self.placehoderLabel.text?.lx.size(font: placehoderLabel.font, width: self.frame.width - CGFloat(labelX * 2))
         placehoderLabel.frame = CGRect(origin: CGPoint(x: labelX, y: labelY), size: size ?? CGSize.zero)
     }

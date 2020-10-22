@@ -20,7 +20,7 @@ class ViewController: UIViewController {
         self.view.backgroundColor = UIColor.white
         
 
-         let imgview = UIView(frame: CGRect(x: 10, y: 200, width: 300, height: 300))
+         let imgview = LXSwiftTextView(frame: CGRect(x: 10, y: 200, width: 300, height: 300))
          imgview.backgroundColor = UIColor.blue
          view.addSubview(imgview)
 //         imgview.lx.preventDoubleHit(2)
@@ -28,24 +28,10 @@ class ViewController: UIViewController {
       
 //        imgview.lx.setGradientLayer(with: [UIColor.red,UIColor.orange])
         
+        imgview.lx.set(with: "hhahh", color: UIColor.red)
 
-        imgview.lx.setPartCornerRadius(radius: 20, roundingCorners: [UIRectCorner.bottomLeft, UIRectCorner.bottomRight])
       
-        
-        let str = "rtrewdsds"
-        
-        switch str {
-        case has_prefix("e"):
-        print("-=-==-e")
-        case has_suffix("w"):
-        print("-=-==e-")
-        case has_contains("ew"):
-        print("-=-==ew-")
-
-        default:
-            break
-        }
-   
+      
       }
     
     
