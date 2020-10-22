@@ -31,8 +31,25 @@ class ViewController: UIViewController {
 
         imgview.lx.setPartCornerRadius(radius: 20, roundingCorners: [UIRectCorner.bottomLeft, UIRectCorner.bottomRight])
       
+        
+        let str = "rtrewdsds"
+        
+        switch str {
+        case has_prefix("e"):
+        print("-=-==-e")
+        case has_suffix("w"):
+        print("-=-==e-")
+        case has_contains("ew"):
+        print("-=-==ew-")
+
+        default:
+            break
+        }
    
       }
+    
+    
+
  
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         

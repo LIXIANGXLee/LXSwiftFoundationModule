@@ -100,12 +100,8 @@ extension UIColor {
     internal convenience init?(_ hex : String, _ alpha : CGFloat = 1.0) {
         var cHex = hex.trimmingCharacters(in: CharacterSet.whitespaces).uppercased()
         guard cHex.count >= 6 else { return nil }
-        if cHex.hasPrefix("0X") {
-            cHex = cHex.lx.substring(to: 2)
-        }
-        if cHex.hasPrefix("#") {
-            cHex = cHex.lx.substring(to: 1)
-        }
+        if cHex.hasPrefix("0X") { cHex = cHex.lx.substring(from: 2) }
+        if cHex.hasPrefix("#") { cHex = cHex.lx.substring(from: 1)  }
         
         var r : UInt64 = 0
         var g : UInt64  = 0

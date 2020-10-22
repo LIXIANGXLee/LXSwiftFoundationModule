@@ -1,5 +1,5 @@
 //
-//  LXWordTextLable.swift
+//  LXTextLable.swift
 //  LXSwiftFoundation
 //
 //  Created by Mac on 2020/5/1.
@@ -11,13 +11,13 @@ import LXFitManager
 
 ///A unique identifier used to distinguish the background color
 private let linkBgTag = 12344321
-@objc public protocol LXWordTextLableDelegate: AnyObject {
-    @objc optional func lxWordTextLable(_ textView: LXSwiftWordTextLable, didSelect text: String)
-    @objc optional func lxWordTextLable(_ textView: LXSwiftWordTextLable, longPress text: String)
+@objc public protocol LXTextLableDelegate: AnyObject {
+    @objc optional func lxTextLable(_ textView: LXSwiftTextLable, didSelect text: String)
+    @objc optional func lxTextLable(_ textView: LXSwiftTextLable, longPress text: String)
 }
 
 
-public struct LXSwiftWordTextLableConfig {
+public struct LXSwiftTextLableConfig {
     
     public var bgColor: UIColor
     public var bgRadius: CGFloat
@@ -28,17 +28,17 @@ public struct LXSwiftWordTextLableConfig {
     }
 }
 
-// MARK: - LXSwiftWordTextLable
-open class LXSwiftWordTextLable: UIView {
+// MARK: - LXSwiftTextLable
+open class LXSwiftTextLable: UIView {
     internal struct TextLink {
         var text: String
         var rang: NSRange
         var rects: [CGRect]
     }
     
-    public weak var delegate: LXWordTextLableDelegate?
-    private lazy var links = [LXSwiftWordTextLable.TextLink]()
-    private var config: LXSwiftWordTextLableConfig
+    public weak var delegate: LXTextLableDelegate?
+    private lazy var links = [LXSwiftTextLable.TextLink]()
+    private var config: LXSwiftTextLableConfig
     
     fileprivate lazy var textView: UITextView = {
         let textView = UITextView()
@@ -79,7 +79,7 @@ open class LXSwiftWordTextLable: UIView {
             textView.attributedText = attr
             
             attr.enumerateAttributes(in: NSRange(location: 0, length: attr.length), options: NSAttributedString.EnumerationOptions(rawValue: 0)) { (objct, range, stop) in
-                guard let textM = objct[NSAttributedString.Key(LXSwiftWordRegex.textLinkConst)] as? String else {return}
+                guard let textM = objct[NSAttributedString.Key(LXSwiftRegex.textLinkConst)] as? String else {return}
                 textView.selectedRange = range
                 guard let r = textView.selectedTextRange else { return }
                 let rselectionRects = textView.selectionRects(for: r)
@@ -89,13 +89,13 @@ open class LXSwiftWordTextLable: UIView {
                     if selectionRect.rect.width == 0 || selectionRect.rect.height == 0 { continue }
                     rects.append(selectionRect.rect)
                 }
-                links.append(LXSwiftWordTextLable.TextLink(text: textM, rang: range, rects: rects))
+                links.append(LXSwiftTextLable.TextLink(text: textM, rang: range, rects: rects))
             }
         }
     }
     
     // MARK: system method
-    public init(config: LXSwiftWordTextLableConfig = LXSwiftWordTextLableConfig())
+    public init(config: LXSwiftTextLableConfig = LXSwiftTextLableConfig())
     {
         self.config = config
         super.init(frame: CGRect.zero)
@@ -112,12 +112,12 @@ open class LXSwiftWordTextLable: UIView {
 
 
 // MARK: private method
-extension LXSwiftWordTextLable {
+extension LXSwiftTextLable {
     
     @objc private func gestureLong(gesture: UIGestureRecognizer) {
         
         if gesture.state ==  UIGestureRecognizer.State.began {
-            delegate?.lxWordTextLable?(self, longPress: self.attributedText?.string ?? "")
+            delegate?.lxTextLable?(self, longPress: self.attributedText?.string ?? "")
         }
     }
     
@@ -139,13 +139,13 @@ extension LXSwiftWordTextLable {
                 //Set selected link background
                 showLinkBackground(link: l)
                 //Click the link to inform the outside world
-                delegate?.lxWordTextLable?(self, didSelect: l.text)
+                delegate?.lxTextLable?(self, didSelect: l.text)
             }
         }
     }
     
     /// Get links based on click points
-    private func linkWithPoint(point: CGPoint) -> LXSwiftWordTextLable.TextLink? {
+    private func linkWithPoint(point: CGPoint) -> LXSwiftTextLable.TextLink? {
         for link in links {
             for rect in link.rects {
                 if rect.contains(point) { return link  }
@@ -155,7 +155,7 @@ extension LXSwiftWordTextLable {
     }
     
     ///Displays the background of the click
-    private func showLinkBackground(link: LXSwiftWordTextLable.TextLink) {
+    private func showLinkBackground(link: LXSwiftTextLable.TextLink) {
         for rect in link.rects {
             let bgView = UIView(frame: rect)
             bgView.tag = linkBgTag

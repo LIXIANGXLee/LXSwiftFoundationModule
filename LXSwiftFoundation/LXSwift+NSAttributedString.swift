@@ -8,13 +8,14 @@
 
 import UIKit
 
+extension NSAttributedString: LXSwiftCompatible{ }
 
 //MARK: -  Extending properties and methods for NSAttributedString
 extension LXSwiftBasics where Base : NSAttributedString {
     
     ///Get the font size based on the font size and width
     public func size(width: CGFloat) -> CGSize {
-        let rect = base.boundingRect(with: CGSize(width: width, height: 0), options: .usesLineFragmentOrigin, context: nil)
+        let rect = base.boundingRect(with: CGSize(width: width, height: CGFloat(MAXFLOAT)), options: .usesLineFragmentOrigin, context: nil)
         return rect.size
     }
     

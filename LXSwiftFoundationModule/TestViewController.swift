@@ -8,7 +8,6 @@
 
 import UIKit
 import LXSwiftFoundation
-import SnapKit
 
 class TestViewController: UIViewController {
 
@@ -16,45 +15,39 @@ class TestViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = UIColor.white
-        
-         let imgview = UIImageView()
-//             imgview.contentMode = .scaleAspectFit
-         imgview.backgroundColor = UIColor.blue
-         imgview.isUserInteractionEnabled = true
-         view.addSubview(imgview)
-        
-         imgview.snp.makeConstraints { (maker) in
-             maker.left.equalTo(100)
-             maker.top.equalTo(100)
-             maker.width.equalTo(100)
-             maker.height.equalTo(100)
 
-         }
+        let label = LXSwiftTextLable()
+        label.delegate = self
+        view.addSubview(label)
         
-        imgview.lx.setGradientLayer(with: [UIColor.orange,UIColor.red],size: CGSize(width: 100, height: 100))
+        label.viewFrame = CGRect(x: 20, y: 100, width: 300, height: 300)
+        let str1 = "本月再充电200度达到黄金会员，立享服务费9.8折 查看详情"
+    
         
+        let type2 = LXSwiftRegexType("([0-9]+\\.[0-9]+)|([0-9]+)", color: UIColor.red, font: UIFont.systemFont(ofSize: 12).fitFont, isExpression: false)
 
-          LXSwiftRouter.regist(with: "http://hahaa你hh ") { (result) -> Any? in
-              
-              print("======\(result)")
-              
-              
-              return self
-              
-          }
+        let attr1 = LXSwiftRegex.regex(of: str1, textColor: UIColor.lx.color(hex: "333333")!, textFont: UIFont.systemFont(ofSize: 12).fitFont, wordRegexTypes: [type2])
+        
+        label.attributedText = attr1
+        
+        
+        
     }
-    
-    deinit {
-        print("=TestViewController=deinit===")
-    }
-    
+
      
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        LXSwiftRouter.open(with: "http://hahaa你hh", paras: ["aa":"323232"]) { (result) in
-            print("-=--=-=\(result)")
-        }
+  
+        
+        
     }
     
     
+}
+
+
+extension TestViewController : LXTextLableDelegate {
+    func lxTextLable(_ textView: LXSwiftTextLable, didSelect text: String) {
+        print("========\(text)")
+    }
 }

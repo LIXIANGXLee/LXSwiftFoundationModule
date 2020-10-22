@@ -9,8 +9,30 @@
 import UIKit
 import CommonCrypto
 
+/// Switch de matching pattern, matching whether the first string contains
+public func has_prefix(_ prefix: String) -> ((String) -> (Bool)) {
+     { $0.hasPrefix(prefix) }
+}
+
+/// Switch de matching pattern, matching whether the last string contains
+public func has_suffix(_ suffix: String) -> ((String) -> (Bool)) {
+     { $0.hasSuffix(suffix) }
+}
+
+/// Switch de matching pattern, matching whether the all string contains  text
+public func has_contains(_ text: String) -> ((String) -> (Bool)) {
+     { $0.contains(text) }
+}
+
 /// String and NSString compliance
-extension String: LXSwiftCompatible { }
+extension String: LXSwiftCompatible {
+    
+    /// Switch de matching pattern, matching whether the first string contains or last string  contains
+    public static func ~= (pattern: (String) -> Bool, value: String) -> Bool {
+        pattern(value)
+    }
+    
+}
 
 //MARK: -  Extending methods and properties for String and NSString interception
 extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
@@ -80,6 +102,29 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         }
         return false
     }
+    
+    /// Keep a few significant digits after the decimal point
+    ///digits
+    public func formatDecimalString(_ digits: Int) -> String {
+        let string = base as! String
+        guard let m =  Double(string) else { return string }
+        return NSNumber(value: m).numberFormatter(with: .down, minDigits: digits, maxDigits: digits) ?? string
+    }
+    
+    ///Keep two valid digits after the decimal point.
+    public var formatDecimalStringTwo: String {
+       return formatDecimalString(2)
+    }
+    
+    ///Keep three  valid digits after the decimal point.
+    public var formatDecimalStringThree: String {
+       return formatDecimalString(3)
+    }
+    
+    ///Keep Four valid digits after the decimal point.
+    public var formatDecimalStringFour: String {
+       return formatDecimalString(4)
+    }
 }
 
 
@@ -92,12 +137,10 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     ///   - font: font size
     ///   - width: width
     ///   - lineSpace: lineSpace
-    public func size(font: UIFont, width: CGFloat, lineSpace: CGFloat = 5) -> CGSize {
+    public func size(font: UIFont, width: CGFloat) -> CGSize {
         let string = base as! String
-        let mulPara = NSMutableParagraphStyle()
-        mulPara.lineSpacing = lineSpace
-        let attrString = NSAttributedString(string: string, attributes: [NSAttributedString.Key.font: font, NSAttributedString.Key.paragraphStyle: mulPara])
-        return attrString.boundingRect(with: CGSize(width: width, height: CGFloat(MAXFLOAT)), options: .usesLineFragmentOrigin, context: nil).size
+        let attrString = NSAttributedString(string: string, attributes: [NSAttributedString.Key.font: font])
+        return attrString.lx.size(width: width)
     }
     
     ///Get the font width  according to the font
