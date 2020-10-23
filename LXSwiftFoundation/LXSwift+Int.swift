@@ -9,7 +9,32 @@
 import UIKit
 
 
-extension Int: LXSwiftCompatible { }
+/// Custom operators greater
+/// than or equal to,
+/// greater than,
+/// less than or equal to,
+/// less than
+prefix operator ~>
+prefix operator ~<
+prefix operator ~>=
+prefix operator ~<=
+
+public prefix func ~> (_ index: Int) -> (Int) -> (Bool) { { $0 > index } }
+public prefix func ~>= (_ index: Int) -> (Int) -> (Bool) { { $0 >= index } }
+public prefix func ~< (_ index: Int) -> (Int) -> (Bool) { { $0 < index } }
+public prefix func ~<= (_ index: Int) -> (Int) -> (Bool) { { $0 <= index } }
+
+extension Int: LXSwiftCompatible {
+    
+    /// Switch de matching pattern, matching
+    /// than or equal to,
+    /// greater than,
+    /// less than or equal to,
+    /// less than
+    public static func ~= (pattern: (Int) -> (Bool), value: Int) -> Bool {
+         pattern(value)
+    }
+}
 
 //MARK: -  Extending methods for Int
 extension LXSwiftBasics where Base == Int {

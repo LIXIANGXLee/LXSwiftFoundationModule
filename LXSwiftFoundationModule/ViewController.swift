@@ -42,18 +42,23 @@ class ViewController: UIViewController {
  
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
+        let index = 3
+        
+        switch index {
+        case ~>=1:
+            print("====>1")
+            
+        case ~<11:
+            print("====>1")
+        default:
+            break
+        }
         
 
-        let vc = TestViewController()
+        let vc = Test1ViewController()
         self.present(vc, animated: true, completion: nil)
         
     }
     
 
-}
-
-extension String {
-  
-    func qq()  {
-    }
 }

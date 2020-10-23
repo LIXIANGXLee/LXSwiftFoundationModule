@@ -1,6 +1,6 @@
 //
 //  LXSwift+SegmentedControl.swift
-//  LXSwiftFoundationModule
+//  LXSwiftFoundation
 //
 //  Created by Mac on 2020/10/12.
 //  Copyright © 2020 李响. All rights reserved.

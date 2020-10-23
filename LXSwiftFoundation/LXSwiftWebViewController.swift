@@ -298,6 +298,7 @@ extension LXSwiftWebViewController: WKNavigationDelegate{
         spinner.removeFromSuperview()
         progressView.removeFromSuperview()
     }
+    
 }
 
 // MARK: - WKUIDelegate It is mainly used to convert the three pop-up boxes of the website into IOS native pop-up boxes

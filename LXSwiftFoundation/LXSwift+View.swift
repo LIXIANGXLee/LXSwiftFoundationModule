@@ -52,15 +52,6 @@ extension LXSwiftBasics where Base: UIView {
         return false
     }
     
-    /// async  snapShot image
-    public func async_snapShotImage(complete: @escaping (UIImage?) -> ()) {
-        DispatchQueue.global().async{
-            let async_image = self.snapShotImage
-            DispatchQueue.main.async(execute: {
-                complete(async_image)
-            })
-        }
-    }
 }
 
 //MARK: -  Extending methods for UIView
