@@ -1,6 +1,6 @@
 //
 //  LXSwiftTool.swift
-//  LXSwiftFoundationModule
+//  LXSwiftFoundation
 //
 //  Created by XL on 2020/9/24.
 //  Copyright © 2020 李响. All rights reserved.
@@ -86,7 +86,7 @@ extension LXSwiftBasics where Base == LXSwiftTool {
         }
     }
     
-    /// create image
+    /// After generating the QR code, because it is not a real picture, it needs to be redrawn
     private static func createNonInterpolatedImage(with ciImage: CIImage, size: CGFloat) -> UIImage? {
         let extent = ciImage.extent.integral
         let scale = min(size / extent.width, size / extent.height)

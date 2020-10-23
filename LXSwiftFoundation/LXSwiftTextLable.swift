@@ -10,7 +10,7 @@ import UIKit
 import LXFitManager
 
 ///A unique identifier used to distinguish the background color
-private let linkBgTag = 12344321
+private let linkBgTag = 1234994321
 @objc public protocol LXTextLableDelegate: AnyObject {
     @objc optional func lxTextLable(_ textView: LXSwiftTextLable, didSelect text: String)
     @objc optional func lxTextLable(_ textView: LXSwiftTextLable, longPress text: String)
@@ -77,7 +77,6 @@ open class LXSwiftTextLable: UIView {
             guard let attr = self.attributedText else { return }
             
             textView.attributedText = attr
-            
             attr.enumerateAttributes(in: NSRange(location: 0, length: attr.length), options: NSAttributedString.EnumerationOptions(rawValue: 0)) { (objct, range, stop) in
                 guard let textM = objct[NSAttributedString.Key(LXSwiftRegex.textLinkConst)] as? String else {return}
                 textView.selectedRange = range
@@ -95,8 +94,7 @@ open class LXSwiftTextLable: UIView {
     }
     
     // MARK: system method
-    public init(config: LXSwiftTextLableConfig = LXSwiftTextLableConfig())
-    {
+    public init(config: LXSwiftTextLableConfig = LXSwiftTextLableConfig()){
         self.config = config
         super.init(frame: CGRect.zero)
         addSubview(textView)

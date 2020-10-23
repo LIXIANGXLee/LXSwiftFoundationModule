@@ -289,6 +289,37 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         #endif
         return digest.reduce(into: "") { $0 += String(format: "%02x", $1) }
     }
+    
+    
+    /// string transform utf8 data
+    public var utf8Data: Data? {
+        let string = base as! String
+        return string.data(using: .utf8)
+    }
+    
+    /// string transform base64EncodedData
+    public var base64EncodingString: String? {
+        let string = base as! String
+        guard let utf8EncodeData = string.data(using: .utf8, allowLossyConversion: true) else { return nil}
+        return utf8EncodeData.base64EncodedString(options: NSData.Base64EncodingOptions.init(rawValue: 0))
+    }
+    
+    
+    /// base64EncodedData transform  string
+    public var base64DecodingString: String? {
+        let string = base as! String
+        guard  let utf8DecodedData =  Data(base64Encoded: string, options: Data.Base64DecodingOptions.init(rawValue: 0)) else { return nil }
+        return  String(data: utf8DecodedData, encoding: String.Encoding.utf8)
+    }
+    
+    
+    /// string of  image base64 tranform uiimage
+    public var base64EncodingImage: UIImage? {
+        let string = base as! String
+        guard let base64Data = Data(base64Encoded: string, options: .ignoreUnknownCharacters) else { return nil }
+        return UIImage(data: base64Data)
+    }
+    
 }
 
 

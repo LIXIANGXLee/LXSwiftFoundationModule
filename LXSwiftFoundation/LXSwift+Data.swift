@@ -30,6 +30,13 @@ extension LXSwiftBasics where Base == Data {
         return String(data: base, encoding: .utf8)
     }
     
+    
+    /// base64 of data tranform uiimage
+    public var base64DecodingImage: UIImage? {
+        guard let base64Data = Data(base64Encoded: base, options: .ignoreUnknownCharacters) else { return nil }
+        return UIImage(data: base64Data)
+    }
+    
 }
 
 //MARK: -  Extending properties  for NSData

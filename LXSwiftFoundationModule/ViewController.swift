@@ -20,7 +20,7 @@ class ViewController: UIViewController {
         self.view.backgroundColor = UIColor.white
         
 
-         let imgview = LXSwiftTextView(frame: CGRect(x: 10, y: 200, width: 300, height: 300))
+         let imgview = UIImageView(frame: CGRect(x: 10, y: 200, width: 300, height: 300))
          imgview.backgroundColor = UIColor.blue
          view.addSubview(imgview)
 //         imgview.lx.preventDoubleHit(2)
@@ -28,10 +28,13 @@ class ViewController: UIViewController {
       
 //        imgview.lx.setGradientLayer(with: [UIColor.red,UIColor.orange])
         
-        imgview.lx.set(with: "hhahh", color: UIColor.red)
-
       
-      
+        guard let image = UIImage(named: "截屏2020-10-01 下午5.13.28") else {return }
+        
+        
+        guard let base64String = image.lx.base64EncodingImageString  else {return }
+        
+        imgview.image = base64String.lx.base64EncodingImage
       }
     
     

@@ -37,7 +37,7 @@ extension LXSwiftBasics where Base: UIDevice {
     }
     
     ///is can call tel
-    public static var canMakePhoneCalls: Bool {
+    public static var isCanPhoneCalls: Bool {
         return UIApplication.shared.canOpenURL(URL(string: "tel://")!)
     }
     
@@ -88,4 +88,15 @@ extension LXSwiftBasics where Base: UIDevice {
     public static var memoryTotal: UInt64 {
         return ProcessInfo.processInfo.physicalMemory
     }
+    
+    /// device type
+    public static var deviceType: String {
+        return UIDevice.current.model
+    }
+    
+    ///systemVersion
+    public static var deviceSyetemVersion: String {
+        return UIDevice.current.systemVersion
+    }
+
 }

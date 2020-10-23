@@ -12,6 +12,7 @@ extension UIFont: LXSwiftCompatible { }
 
 //MARK: -  Extending properties for UIFont
 extension LXSwiftBasics where Base: UIFont {
+   
     /// isBold
     public var isBold: Bool {
         return base.fontDescriptor.symbolicTraits == .traitBold

@@ -59,6 +59,35 @@ extension LXSwiftBasics where Base == LXSwiftUtil {
             }
         }
     }
+    
+    
+    /// Keep a few significant digits after the decimal point
+    ///
+    /// - Parameters:
+    ///   - text: text string
+    ///   - digits: digits Number of significant digits reserved
+    ///   - mode: mode
+    /// - Returns: string
+    public static func formatDecimalString(with text: String, _ digits: Int,_ mode: NumberFormatter.RoundingMode = .down) -> String {
+        guard let m =  Double(text) else { return text }
+        return NSNumber(value: m).numberFormatter(with: .down, minDigits: digits, maxDigits: digits) ?? text
+    }
+
+    ///Keep two valid digits after the decimal point.
+    public static func  formatDecimalStringTwo(with text: String) -> String {
+       return formatDecimalString(with: text, 2)
+    }
+    
+    ///Keep three  valid digits after the decimal point.
+    public static func formatDecimalStringThree(with text: String) -> String {
+       return formatDecimalString(with: text, 3)
+    }
+    
+    ///Keep Four valid digits after the decimal point.
+    public static func formatDecimalStringFour(with text: String) -> String {
+       return formatDecimalString(with: text, 4)
+    }
+    
 }
 
 

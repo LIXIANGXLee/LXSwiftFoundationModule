@@ -49,9 +49,21 @@ extension LXSwiftBasics where Base: UIImage {
     }
 }
 
-
+ 
 //MARK: -  Extending methods and properties for UIImage cut
 extension LXSwiftBasics where Base: UIImage {
+    
+    /// uiimage tranform base64 of data
+    public var base64EncodingImage: Data? {
+        let base64Data = base.pngData()
+        return  base64Data?.base64EncodedData(options: .lineLength64Characters)
+    }
+    
+     /// uiimage tranform base64 of data
+     public var base64EncodingImageString: String? {
+         let base64Data = base.pngData()
+         return  base64Data?.base64EncodedString(options: .lineLength64Characters)
+     }
     
     /// circle image
     public var imageWithCircle: UIImage? {

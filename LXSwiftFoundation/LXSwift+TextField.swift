@@ -40,16 +40,38 @@ extension LXSwiftBasics where Base : LXSwiftTextField {
     }
     
     /// set placeholder and color
-    public func set(withPlaceholder placeholder: String?,color: UIColor = UIColor.lx.color(hex: "999999")!) {
-        guard let placeholder = placeholder else {  return  }
-        let att = NSMutableAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor : color])
+    public func set(withPlaceholder placeholder: String?,color: UIColor? = UIColor.lx.color(hex: "999999")) {
+        guard let placeholder = placeholder , let c = color else {  return  }
+        let att = NSMutableAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor : c])
         base.attributedPlaceholder = att
     }
     
+    /// set placeholder and color string
+    public func set(withPlaceholder placeholder: String?,color: String =  "999999") {
+        set(withPlaceholder: placeholder, color: UIColor.lx.color(hex: color))
+    }
+    
     /// set font and textColor
-    public func set(withFont font: UIFont,textColor: UIColor) {
+    public func set(withFont font: UIFont,textColor: UIColor?) {
         base.font = font
-        base.textColor = textColor
+        if let c = textColor{
+            base.textColor = c
+        }
+    }
+    
+    /// set bold font and textColor
+    public func set(withBoldFont fontSize: CGFloat,textColor: String) {
+        set(withFont: UIFont.systemFont(ofSize: fontSize, weight: .bold), textColor: UIColor.lx.color(hex: textColor))
+    }
+    
+    /// set medium font and textColor
+    public func set(withMediumFont fontSize: CGFloat,textColor: String) {
+        set(withFont: UIFont.systemFont(ofSize: fontSize, weight: .medium), textColor: UIColor.lx.color(hex: textColor))
+    }
+    
+    /// set regular font and textColor
+    public func set(withRegularFont fontSize: CGFloat,textColor: String) {
+        set(withFont: UIFont.systemFont(ofSize: fontSize, weight: .regular), textColor: UIColor.lx.color(hex: textColor))
     }
     
     /// remove observer
