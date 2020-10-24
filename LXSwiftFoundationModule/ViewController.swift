@@ -20,21 +20,17 @@ class ViewController: UIViewController {
         self.view.backgroundColor = UIColor.white
         
 
-         let imgview = UIImageView(frame: CGRect(x: 10, y: 200, width: 300, height: 300))
-         imgview.backgroundColor = UIColor.blue
-         view.addSubview(imgview)
-//         imgview.lx.preventDoubleHit(2)
-//         imgview.lx.setHandle { (button) in
-      
-//        imgview.lx.setGradientLayer(with: [UIColor.red,UIColor.orange])
+         var viewt = LXSwiftTextField(frame: CGRect(x: 10, y: 200, width: 300, height: 300))
+         viewt.backgroundColor = UIColor.red
+         self.view.addSubview(viewt)
+        viewt.lx.maxLength = 8
+        viewt.lx.setHandle { (str) in
+            print("======\(str)")
+        }
         
-      
-        guard let image = UIImage(named: "截屏2020-10-01 下午5.13.28") else {return }
-        
-        
-        guard let base64String = image.lx.base64EncodingImageString  else {return }
-        
-        imgview.image = base64String.lx.base64EncodingImage
+        let d: Double = 3.54657855643
+//        print("-=-=-=\(3.232434.lx.k)")
+        d.lx.keep
       }
     
     

@@ -32,8 +32,7 @@ extension LXSwiftBasics where Base: UIColor {
     ///   - lightHex:Color of light mode (hexadecimal)
     ///   - darkHex:  Color of dark mode (hexadecimal)
     public  static func color(lightColor: UIColor,
-                              darkColor: UIColor)
-        -> UIColor {
+                              darkColor: UIColor) -> UIColor {
             if #available(iOS 13.0, *) {
                 return UIColor { (traitCollection) -> UIColor in
                     if traitCollection.userInterfaceStyle == .dark {

@@ -16,9 +16,7 @@ extension Dictionary: LXSwiftCompatible { }
 /// - Parameters:
 ///   - left: dic
 ///   - right: dic
-public func + (left: [String: Any],
-               right: [String: Any])
-    -> [String: Any] {
+public func + (left: [String: Any],  right: [String: Any]) -> [String: Any] {
         var dic = left
         for (k, v) in right { dic[k] = v }
         return dic
@@ -29,9 +27,7 @@ public func + (left: [String: Any],
 /// - Parameters:
 ///   - left: dic
 ///   - right: dic
-public func - (left: [String: Any],
-               right: [String: Any])
-    -> [String: Any] {
+public func - (left: [String: Any],  right: [String: Any]) -> [String: Any] {
         var dic = left
         for (k, _) in right where dic.keys.contains(k) {
             dic.removeValue(forKey: k)

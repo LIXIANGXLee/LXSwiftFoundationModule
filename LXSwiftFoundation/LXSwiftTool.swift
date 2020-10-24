@@ -29,7 +29,7 @@ extension LXSwiftBasics where Base == LXSwiftTool {
     ///
     /// - Parameter data: string
     /// - Returns: Dictionary
-    public static func getDictionary( with string: String?) -> Dictionary<String, Any>?  {
+    public static func getDictionary(with string: String?) -> Dictionary<String, Any>?  {
         let data = string?.data(using: .utf8)
         return LXSwiftTool.lx.getDictionary(with: data)
     }

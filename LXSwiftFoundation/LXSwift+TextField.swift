@@ -22,6 +22,11 @@ extension LXSwiftBasics where Base : LXSwiftTextField {
         }
     }
     
+    /// public method call back
+    public func setHandle(_ textFieldCallBack: ((String?) -> Void)?) {
+        base.swiftCallBack = textFieldCallBack
+    }
+    
 }
 
 //MARK: -  Extending methods for LXSwiftTextField
@@ -83,12 +88,20 @@ extension LXSwiftBasics where Base : LXSwiftTextField {
 
 //MARK: -  Extending methods for LXSwiftTextField
 private var maxTextLengthKey: Void?
-extension LXSwiftTextField {
+private var textFieldCallBackKey: Void?
+
+extension LXSwiftTextField: LXSwiftPropertyCompatible{
     
     /// can save maxTextLength
     internal var maxTextLength: Int? {
         get { return getAssociatedObject(self, &maxTextLengthKey) }
         set { setRetainedAssociatedObject(self, &maxTextLengthKey, newValue,.OBJC_ASSOCIATION_ASSIGN) }
+    }
+    
+    internal typealias T = String
+    internal var swiftCallBack: SwiftCallBack? {
+        get { return getAssociatedObject(self, &textFieldCallBackKey) }
+        set { setRetainedAssociatedObject(self, &textFieldCallBackKey, newValue) }
     }
     
     /// action
@@ -98,6 +111,8 @@ extension LXSwiftTextField {
                 text = text?.lx.substring(to: maxLength)
             }
         }
+        self.swiftCallBack?(text)
     }
     
 }
+

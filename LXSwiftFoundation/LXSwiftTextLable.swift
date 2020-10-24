@@ -113,7 +113,6 @@ open class LXSwiftTextLable: UIView {
 extension LXSwiftTextLable {
     
     @objc private func gestureLong(gesture: UIGestureRecognizer) {
-        
         if gesture.state ==  UIGestureRecognizer.State.began {
             delegate?.lxTextLable?(self, longPress: self.attributedText?.string ?? "")
         }
