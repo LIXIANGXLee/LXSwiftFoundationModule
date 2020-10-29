@@ -103,6 +103,18 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return false
     }
     
+    
+    /// one version campare two version
+    ///
+    /// - Parameters:
+    ///   - base: one version
+    ///   - v: two version
+    /// - Returns: big: base > two  ,small:two  < base, equal:base == two
+    public  func versionCompare(_ v: String) -> LXSwiftUtil.VersionCompareResult {
+        let string = base as! String
+        return LXSwiftUtil.lx.versionCompare(string, v)
+    }
+    
     /// Keep a few significant digits after the decimal point
     ///digits
     public func formatDecimalString(_ digits: Int) -> String {

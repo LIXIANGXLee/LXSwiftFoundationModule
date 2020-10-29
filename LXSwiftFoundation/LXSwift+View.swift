@@ -163,6 +163,10 @@ extension UIView {
     }
     
     @objc internal func gestureTap(_ gesture: UIGestureRecognizer) {
+        gesture.view?.isUserInteractionEnabled = false
+        DispatchQueue.main.lx.delay(1) {
+            gesture.view?.isUserInteractionEnabled = true
+        }
         self.viewCallBack?(gesture.view)
     }
     

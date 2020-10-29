@@ -39,6 +39,10 @@ extension LXSwiftImgView {
     
     ///action call
     @objc private func swiftImgViewAction(_ gesture: UIGestureRecognizer) {
+        gesture.view?.isUserInteractionEnabled = false
+        DispatchQueue.main.lx.delay(1) {
+            gesture.view?.isUserInteractionEnabled = true
+        }
         self.imgViewCallBack?(gesture.view as? LXSwiftImgView)
     }
     

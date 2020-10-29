@@ -65,6 +65,10 @@ extension UIButton: LXSwiftPropertyCompatible {
     }
     
     @objc internal func swiftButtonAction(_ button: UIButton) {
+        button.isUserInteractionEnabled = false
+        DispatchQueue.main.lx.delay(1) {
+            button.isUserInteractionEnabled = true
+        }
         self.swiftCallBack?(button)
     }
     

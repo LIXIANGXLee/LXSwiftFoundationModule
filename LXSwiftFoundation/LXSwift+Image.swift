@@ -67,76 +67,62 @@ extension LXSwiftBasics where Base: UIImage {
     
     /// circle image
     public var imageWithCircle: UIImage? {
-        return roundImage(cornerRadii: base.size)
+        return imageByRoundCornerRadius(with: min(base.size.width, base.size.height))
     }
-    
+ 
     /// interception roundCorners  with image
     ///
     /// - Parameters:
     ///   - roundCorners: left right top bottom
     ///   - cornerRadi: size
-    public func roundImage(byRoundCorners roundCorners: UIRectCorner = .allCorners,cornerRadi: CGFloat) -> UIImage? {
-        return roundImage(withRoundCorners: roundCorners, cornerRadii: CGSize(width: cornerRadi, height: cornerRadi))
-    }
-    
-    
-    /// add border for image
-    ///
-    /// - Parameters:
-    ///   - borderWidth: size
-    ///   - borderColor: size
-    /// - Returns: border image
-    public func roundImage(withBorderWidth borderWidth: CGFloat, borderColor: UIColor) -> UIImage? {
-        return roundImage(withBorderWidth: borderWidth, borderColor: borderColor, cornerRadii: base.size.width)
+    public func imageByRoundCornerRadius(with radius: CGFloat) -> UIImage? {
+        return imageByRoundCornerRadius(with: radius, corners: UIRectCorner.allCorners)
     }
     
     
     ///The drawing method cuts the picture into the round corner and adds the border
-    ///-cornerRadii -- border cornerRadii size
-    ///-Borderwidth -- border size
-    ///-Bordercolor -- border color
-    public func roundImage(withBorderWidth borderWidth: CGFloat,borderColor color: UIColor,cornerRadii: CGFloat,roundCorners: UIRectCorner = UIRectCorner.allCorners) -> UIImage? {
-        let imageSize = CGSize(width: base.size.width + borderWidth * 2 , height: base.size.height + borderWidth * 2)
-        UIGraphicsBeginImageContext(imageSize)
+    ///-radius -- border radius size
+    ///-corners
+    ///-borderWidth -- border color
+    ///-borderColor -- border color
+    ///-borderLineJoin
+    public func imageByRoundCornerRadius(with radius: CGFloat, corners: UIRectCorner, borderWidth: CGFloat = 0, borderColor: UIColor = UIColor.white, borderLineJoin: CGLineJoin = .round) -> UIImage? {
         
-        let path = UIBezierPath(ovalIn: CGRect(x: 0,
-                                               y: 0,
-                                               width: imageSize.width,
-                                               height: imageSize.height))
-        
-        color.set()
-        path.fill()
-        
-        let clipPath = UIBezierPath(roundedRect: CGRect(x: borderWidth, y: borderWidth,  width: base.size.width,  height: base.size.height),byRoundingCorners: roundCorners,cornerRadii: CGSize(width: cornerRadii, height: cornerRadii))
-        clipPath.addClip()
-        base.draw(at: CGPoint(x: borderWidth, y: borderWidth))
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return  newImage
-    }
-    
-    /// interception roundCorners  with image
-    ///
-    /// - Parameters:
-    ///   - roundCorners: left right top bottom
-    ///   - cornerRadi: size
-    public func roundImage(withRoundCorners roundCorners: UIRectCorner = UIRectCorner.allCorners, cornerRadii: CGSize) -> UIImage? {
-        
-        let imageRect = CGRect(origin: CGPoint.zero, size: base.size)
         UIGraphicsBeginImageContextWithOptions(base.size, false, base.scale)
+        guard let context = UIGraphicsGetCurrentContext(), let cgImage = base.cgImage else { return nil }
         
-        if let context = UIGraphicsGetCurrentContext() {
-            context.setShouldAntialias(true)
+        let rect = CGRect(x: 0,  y: 0, width: base.size.width, height: base.size.height)
+        context.scaleBy(x: 1, y: -1);
+        context.translateBy(x: 0, y: -rect.size.height);
+        let minSize = min(base.size.width, base.size.height)
+        
+        var path: UIBezierPath? = nil
+        if borderWidth < minSize / 2 {
+            path = UIBezierPath(roundedRect: rect.insetBy(dx: borderWidth, dy: borderWidth), byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: borderWidth))
         }
-        let bezierPath = UIBezierPath(roundedRect: imageRect,
-                                      byRoundingCorners: roundCorners,
-                                      cornerRadii: cornerRadii)
-        bezierPath.addClip()
-        base.draw(in: imageRect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
+        path?.close()
+        context.saveGState()
+        path?.addClip()
+        context.draw(cgImage, in: rect)
+        context.restoreGState()
         
-        return newImage
+        
+        if  borderWidth < minSize, borderWidth > 0 {
+            let strokeInset = floor(borderWidth * base.scale  + 0.5) / base.scale
+            let strokeRect = rect.insetBy(dx: strokeInset, dy: strokeInset)
+            let strokeRadius = radius > base.scale / 2 ? radius - base.scale / 2 : 0;
+            let strokePath = UIBezierPath(roundedRect: strokeRect, byRoundingCorners: corners, cornerRadii: CGSize(width: strokeRadius, height: strokeRadius))
+            strokePath.close()
+            strokePath.lineWidth = borderWidth
+            strokePath.lineJoinStyle = borderLineJoin
+            borderColor.setStroke()
+            strokePath.stroke()
+        }
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext();
+        return image
+        
     }
     
     
@@ -394,20 +380,6 @@ extension LXSwiftBasics where Base: UIImage {
         }
     }
     
-    /// async interception roundCorners  with image
-    ///
-    /// - Parameters:
-    ///   - roundCorners: left right top bottom
-    ///   - cornerRadi: size
-    public func async_roundImage(by roundCorners: UIRectCorner = .allCorners, cornerRadi: CGFloat, complete: @escaping (UIImage?) -> ()) {
-        DispatchQueue.global().async{
-            let async_image = self.roundImage(byRoundCorners: roundCorners, cornerRadi: cornerRadi)
-            DispatchQueue.main.async(execute: {
-                complete(async_image)
-            })
-        }
-    }
-    
     
     /// async circle image
     public func async_imageWithCircle(complete: @escaping (UIImage?) -> ()) {
@@ -434,18 +406,7 @@ extension LXSwiftBasics where Base: UIImage {
         }
     }
     
-    /// async The drawing method cuts the picture into the round corner and adds the border
-    ///-cornerRadii -- border cornerRadii size
-    ///-Borderwidth -- border size
-    ///-Bordercolor -- border color
-    public func async_image(with borderWidth: CGFloat,borderColor color: UIColor,cornerRadii: CGFloat,roundCorners: UIRectCorner = UIRectCorner.allCorners, complete: @escaping (UIImage?) -> ()) {
-        DispatchQueue.global().async{
-            let async_image = self.roundImage(withBorderWidth: borderWidth, borderColor: color, cornerRadii: cornerRadii,roundCorners: roundCorners)
-            DispatchQueue.main.async(execute: {
-                complete(async_image)
-            })
-        }
-    }
+
     
     
     /// image scale size,  compress

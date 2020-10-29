@@ -11,6 +11,7 @@ import UIKit
 public enum LXSwiftUserInterfaceStyle {
     case dark
     case light
+    
 }
 
 @objc public protocol LXViewSetup: NSObjectProtocol {

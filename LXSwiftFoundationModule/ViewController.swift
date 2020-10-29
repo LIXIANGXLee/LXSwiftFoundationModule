@@ -9,6 +9,8 @@
 import UIKit
 import LXSwiftFoundation
 
+
+
 class ViewController: UIViewController {
     var  objc : LXObjcThreadActive! = nil
     
@@ -20,17 +22,21 @@ class ViewController: UIViewController {
         self.view.backgroundColor = UIColor.white
         
 
-         var viewt = LXSwiftTextField(frame: CGRect(x: 10, y: 200, width: 300, height: 300))
-         viewt.backgroundColor = UIColor.red
-         self.view.addSubview(viewt)
-        viewt.lx.maxLength = 8
-        viewt.lx.setHandle { (str) in
-            print("======\(str)")
-        }
+         let imgView = UIImageView(frame: CGRect(x: 10, y: 200, width: 300, height: 300))
+         self.view.addSubview(imgView)
         
-        let d: Double = 3.54657855643
-//        print("-=-=-=\(3.232434.lx.k)")
-        d.lx.keep
+         
+        let str1 = "1.3.3.1"
+        let str2 = "1.3.3"
+
+//        let  temp = LXSwiftUtil.lx.versionCompare(str1, str2)
+        let  temp = str1.lx.versionCompare(str2)
+
+        print("-=-=-=-==-=-==\(temp)")
+        let image = UIImage(named: "截屏2020-10-01 下午5.13.28")
+        
+        imgView.image = image!.lx.imageByRoundCornerRadius(with: 40, corners: UIRectCorner.allCorners, borderWidth: 20, borderColor: UIColor.red, borderLineJoin: CGLineJoin.round)
+        
       }
     
     
