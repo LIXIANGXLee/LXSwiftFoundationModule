@@ -79,13 +79,14 @@ extension LXSwiftBasics where Base: UIImage {
         return imageByRoundCornerRadius(with: radius, corners: UIRectCorner.allCorners)
     }
     
-    
     ///The drawing method cuts the picture into the round corner and adds the border
-    ///-radius -- border radius size
-    ///-corners
-    ///-borderWidth -- border color
-    ///-borderColor -- border color
-    ///-borderLineJoin
+    ///
+    /// - Parameters:
+    /// -radius  border radius size
+    /// -corners  topleft topright bottomleft bottomright
+    /// -borderWidth -- border color
+    /// -borderColor -- border color
+    /// -borderLineJoin type
     public func imageByRoundCornerRadius(with radius: CGFloat, corners: UIRectCorner, borderWidth: CGFloat = 0, borderColor: UIColor = UIColor.white, borderLineJoin: CGLineJoin = .round) -> UIImage? {
         
         UIGraphicsBeginImageContextWithOptions(base.size, false, base.scale)
@@ -192,7 +193,6 @@ extension LXSwiftBasics where Base: UIImage {
         let newImage = UIImage(cgImage: cgImage!)
         return newImage
     }
-    
     
     
     ///Erase pictures with gestures
@@ -391,6 +391,22 @@ extension LXSwiftBasics where Base: UIImage {
         }
     }
     
+    /// async The drawing method cuts the picture into the round corner and adds the border
+    ///
+    /// - Parameters:
+    /// -radius  border radius size
+    /// -corners  topleft topright bottomleft bottomright
+    /// -borderWidth -- border color
+    /// -borderColor -- border color
+    /// -borderLineJoin type
+    public func async_imageByRoundCornerRadius(with radius: CGFloat, corners: UIRectCorner, borderWidth: CGFloat = 0, borderColor: UIColor = UIColor.white, borderLineJoin: CGLineJoin = .round, complete: @escaping (UIImage?) -> ()) {
+        DispatchQueue.global().async{
+            let async_image = self.imageByRoundCornerRadius(with: radius, corners: corners, borderWidth: borderWidth, borderColor: borderColor, borderLineJoin: borderLineJoin)
+            DispatchQueue.main.async(execute: {
+                complete(async_image)
+            })
+        }
+    }
     
     
     /// async video image
@@ -454,9 +470,9 @@ extension LXSwiftBasics where Base: UIImage {
     }
     
     ///Frame screenshot (capture any part of the picture)
-    /// -ImageView
-    ///-BGView -- screenshot background
-    ///-Parameter completed: asynchronous completion callback (main thread callback)
+    /// - Parameters:
+    /// - BGView -- screenshot background
+    /// - Parameter completed: asynchronous completion callback (main thread callback)
     public func async_imageShot(byFrame frame: CGRect?, complete: @escaping (UIImage?) -> ()){
         DispatchQueue.global().async{
             let async_images = self.imageShot(byFrame: frame)
@@ -467,6 +483,7 @@ extension LXSwiftBasics where Base: UIImage {
     }
     
     ///  async Image filter processing
+    /// - Parameters:
     ///- Image -- transfer picture
     ///- filter -- input filter
     public func async_imageFilter(withFilterName filterName: String,completed:@escaping (UIImage?) -> ()) -> Void {
@@ -480,7 +497,7 @@ extension LXSwiftBasics where Base: UIImage {
     
     
     /// async Erase pictures with gestures
-    ///
+    /// - Parameters:
     ///-ImageView
     ///-BGView -- screenshot background
     ///-Parameter completed: asynchronous completion callback (main thread callback)

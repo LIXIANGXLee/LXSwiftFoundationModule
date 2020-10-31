@@ -21,7 +21,7 @@ class TestViewController: UIViewController {
         view.addSubview(label)
         
         label.viewFrame = CGRect(x: 20, y: 100, width: 300, height: 300)
-        let str1 = "本月再充电200度达到黄金会员，立享服务费9.8折 查看详情"
+        let str1 = "本月再充电200度达到黄金会员，立享服务费折查看详情"
     
         
         let type2 = LXSwiftRegexType("([0-9]+\\.[0-9]+)|([0-9]+)", color: UIColor.red, font: UIFont.systemFont(ofSize: 12).fitFont, isExpression: false)

@@ -35,7 +35,12 @@ class ViewController: UIViewController {
         print("-=-=-=-==-=-==\(temp)")
         let image = UIImage(named: "截屏2020-10-01 下午5.13.28")
         
-        imgView.image = image!.lx.imageByRoundCornerRadius(with: 40, corners: UIRectCorner.allCorners, borderWidth: 20, borderColor: UIColor.red, borderLineJoin: CGLineJoin.round)
+        
+        image!.lx.async_imageWithCircle { (img) in
+            imgView.image = img
+        }
+        
+        
         
       }
     
@@ -57,7 +62,7 @@ class ViewController: UIViewController {
         }
         
 
-        let vc = Test1ViewController()
+        let vc = TestViewController()
         self.present(vc, animated: true, completion: nil)
         
     }

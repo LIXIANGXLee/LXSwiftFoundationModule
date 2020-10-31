@@ -45,7 +45,9 @@ open class LXSwiftTextLable: UIView {
         textView.isEditable = false
         textView.isScrollEnabled = false
         textView.isUserInteractionEnabled = false
-        textView.textContainerInset = UIEdgeInsets(top: 0, left: LXFit.fitFloat(5), bottom: 0, right: LXFit.fitFloat(-5))
+        textView.textContainerInset = UIEdgeInsets(top: 0, left:-textView.textContainer.lineFragmentPadding, bottom: 0, right: -textView.textContainer.lineFragmentPadding)
+        textView.showsVerticalScrollIndicator = false
+        textView.showsHorizontalScrollIndicator = false
         textView.backgroundColor = UIColor.clear
         return textView
     }()
