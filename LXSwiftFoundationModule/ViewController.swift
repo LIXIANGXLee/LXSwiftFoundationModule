@@ -29,17 +29,16 @@ class ViewController: UIViewController {
         let str1 = "1.3.3.1"
         let str2 = "1.3.3"
 
-//        let  temp = LXSwiftUtil.lx.versionCompare(str1, str2)
         let  temp = str1.lx.versionCompare(str2)
 
-        print("-=-=-=-==-=-==\(temp)")
         let image = UIImage(named: "截屏2020-10-01 下午5.13.28")
-        
-        
         image!.lx.async_imageWithCircle { (img) in
             imgView.image = img
         }
         
+        let str = "dsdasdfsfdsfdsf"
+        
+        print(str.lx.substring(to: 3));
         
         
       }

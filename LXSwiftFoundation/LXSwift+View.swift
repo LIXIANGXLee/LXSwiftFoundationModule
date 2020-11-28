@@ -149,9 +149,7 @@ extension LXSwiftBasics where Base: UIView {
         base.addGestureRecognizer(gesture)
         return gesture
     }
-    
 }
-
 
 private var viewCallBackKey: Void?
 extension UIView {
@@ -163,10 +161,6 @@ extension UIView {
     }
     
     @objc internal func gestureTap(_ gesture: UIGestureRecognizer) {
-        gesture.view?.isUserInteractionEnabled = false
-        DispatchQueue.main.lx.delay(1) {
-            gesture.view?.isUserInteractionEnabled = true
-        }
         self.viewCallBack?(gesture.view)
     }
     
