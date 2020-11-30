@@ -41,6 +41,8 @@ class ViewController: UIViewController {
         print(str.lx.substring(to: 3));
         
         
+        print("=====\(UIScreen.main.bounds.size.height)===\(UIScreen.main.bounds.size.width)")
+        
       }
     
     

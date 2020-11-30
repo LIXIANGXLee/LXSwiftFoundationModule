@@ -12,18 +12,18 @@ import UIKit
 /// define app const
 public struct LXSwiftApp {
     
-    ///Judge whether the mobile phone is iPhone X
-    public static let isIPhoneX = (LXSwiftApp.screenH == CGFloat(812) || LXSwiftApp.screenH == CGFloat(896)) ? true : false
+    ///Judge whether the mobile phone is iPhone X 11 12 pro
+    public static let isIPhoneX = (LXSwiftApp.screenH == CGFloat(812) || (LXSwiftApp.screenH == CGFloat(844)) || LXSwiftApp.screenH == CGFloat(896) || (LXSwiftApp.screenH == CGFloat(926))) ? true : false
     
     ///Judge whether the mobile phone is iPhone 5
-    public static var isIphone5 = LXSwiftApp.screenW == 320
+    public static var isIphone5 = LXSwiftApp.screenW == 320.0
     
     ///Judge whether the mobile phone is iPhone 6
-    public static var isIphone6 = LXSwiftApp.screenW == 375
+    public static var isIphone6 = LXSwiftApp.screenW == 375.0
     
     ///Judge whether the mobile phone is iPhone 6p
-    public static var isIphone6p = LXSwiftApp.screenW == 414
-    
+    public static var isIphone6p = LXSwiftApp.screenW == 414.0
+
     ///gets bounds
     public static let bounds = UIScreen.main.bounds
     
