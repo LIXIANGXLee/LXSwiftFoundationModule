@@ -23,6 +23,13 @@ extension LXSwiftBasics where Base: UIView {
         return aboveController?.view
     }
     
+    public var aboveNavVC: UINavigationController? {
+        guard let tabBar = UIApplication.shared.delegate?.window??.rootViewController as? UITabBarController else { return nil}
+        guard let navVc = tabBar.children[tabBar.selectedIndex] as? UINavigationController else { return nil }
+        
+        return navVc
+    }
+    
     /// snapShot image
     public var snapShotImage: UIImage? {
         
