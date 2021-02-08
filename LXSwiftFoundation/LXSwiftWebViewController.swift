@@ -36,20 +36,19 @@ open class LXSwiftWebViewController: UIViewController {
     open var loadWebViewContentH: ((Float) -> ())?
     open var loadWebViewTitle: ((String) -> ())?
     open var loadWebViewUrl: ((URL) -> ())?
-    public fileprivate(set) var webView: WKWebView!
     
     fileprivate var spinner: UIActivityIndicatorView!
     fileprivate var progressView: UIProgressView!
     fileprivate var methodTs = [LXSwiftMethodT]()
     
     // MARK: -  Customize the root view -- recommended when the entire page is a WebView or image
-    override open func loadView() {
+    public fileprivate(set) lazy var webView: WKWebView = {
         let config = WKWebViewConfiguration()
         //是否支持javaScript
         config.preferences.javaScriptEnabled = true
         config.allowsAirPlayForMediaPlayback = true
         
-        webView = WKWebView(frame: .zero, configuration: config)
+        let webView = WKWebView(frame: .zero, configuration: config)
         webView.allowsBackForwardNavigationGestures = true
         webView.uiDelegate = self
         webView.navigationDelegate = self
@@ -58,21 +57,21 @@ open class LXSwiftWebViewController: UIViewController {
         }else {
             webView.translatesAutoresizingMaskIntoConstraints = false
         }
-        view = webView
-    }
+        
+        return webView
+    }()
     
     override open func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.addSubview(self.webView)
+
         setUI()
         addObserver()
         
     }
     
     deinit {
-        
-        if webView == nil { return }
-        
+                
         webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress))
         webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.title))
         webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.url))
