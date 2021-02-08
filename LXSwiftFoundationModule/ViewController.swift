@@ -49,23 +49,30 @@ class ViewController: UIViewController {
 
  
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        LXSwiftStorage.lx.setStorage(with: "dsdsdsdsds", key: "haha")
         
-        let index = 3
+        let s =  LXSwiftStorage.lx.getStorage(for: "haha")
         
-        switch index {
-        case ~>=1:
-            print("====>1")
-            
-        case ~<11:
-            print("====>1")
-        default:
-            break
-        }
+        print("===\(s)")
         
-
-        let vc = TestViewController()
-        self.present(vc, animated: true, completion: nil)
         
+        
+//        let index = 3
+//
+//        switch index {
+//        case ~>=1:
+//            print("====>1")
+//
+//        case ~<11:
+//            print("====>1")
+//        default:
+//            break
+//        }
+//
+//
+//        let vc = TestViewController()
+//        self.present(vc, animated: true, completion: nil)
+//
     }
     
 
