@@ -10,7 +10,6 @@
 
 import UIKit
 import WebKit
-import LXFitManager
 
 public struct LXSwiftMethodT {
     public var method: String
@@ -57,21 +56,17 @@ open class LXSwiftWebViewController: UIViewController {
         }else {
             webView.translatesAutoresizingMaskIntoConstraints = false
         }
-        
         return webView
     }()
     
     override open func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(self.webView)
-
         setUI()
         addObserver()
-        
     }
     
     deinit {
-                
         webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress))
         webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.title))
         webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.url))
@@ -183,7 +178,6 @@ extension LXSwiftWebViewController {
             }
         }
     }
-    
 }
 
 // MARK: - WKScriptMessageHandler
@@ -207,9 +201,8 @@ extension LXSwiftWebViewController {
         
         spinner.centerXAnchor.constraint(equalTo: webView.centerXAnchor).isActive = true
         spinner.centerYAnchor.constraint(equalTo: webView.centerYAnchor).isActive = true
-        spinner.widthAnchor.constraint(equalToConstant: LXFit.fitFloat(60)).isActive = true
-        spinner.heightAnchor.constraint(equalToConstant: LXFit.fitFloat(60)).isActive = true
-        
+        spinner.widthAnchor.constraint(equalToConstant:scale_ip6_width(60)).isActive = true
+        spinner.heightAnchor.constraint(equalToConstant: scale_ip6_width(60)).isActive = true
         
         progressView = UIProgressView(progressViewStyle: .default)
         progressView.translatesAutoresizingMaskIntoConstraints = false
@@ -217,7 +210,7 @@ extension LXSwiftWebViewController {
         
         progressView.centerXAnchor.constraint(equalTo: webView.centerXAnchor).isActive = true
         progressView.widthAnchor.constraint(equalTo: webView.widthAnchor).isActive = true
-        progressView.heightAnchor.constraint(equalToConstant: LXFit.fitFloat(2)).isActive = true
+        progressView.heightAnchor.constraint(equalToConstant: scale_ip6_width(2)).isActive = true
         
     }
     

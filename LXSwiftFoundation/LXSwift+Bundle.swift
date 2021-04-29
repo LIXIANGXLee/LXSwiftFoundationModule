@@ -29,7 +29,7 @@ extension LXSwiftBasics where Base: Bundle {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String
     }
     
-    /// app version
+    /// app version 版本号 - 应用程序的版本号标识
     public static var bundleVersion: String? {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
     }
@@ -37,5 +37,18 @@ extension LXSwiftBasics where Base: Bundle {
     /// build version
     public static var buildVersion: String? {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String
+    }
+    
+    // AppName - APP装到手机里之后显示的名称
+    static var displayName: String {
+        return Bundle.main.localizedInfoDictionary?["CFBundleDisplayName"] as? String ?? ""
+    }
+
+    public static var appIcon: UIImage? {
+        guard let iconsDictionary = Bundle.main.infoDictionary?["CFBundleIcons"] as? [String: Any],
+            let primaryIconsDictionary = iconsDictionary["CFBundlePrimaryIcon"] as? [String: Any],
+            let iconFiles = primaryIconsDictionary["CFBundleIconFiles"] as? [String],
+            let lastIcon = iconFiles.last else { return nil }
+        return UIImage(named: lastIcon)
     }
 }

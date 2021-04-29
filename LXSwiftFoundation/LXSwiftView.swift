@@ -11,26 +11,29 @@ import UIKit
 public enum LXSwiftUserInterfaceStyle {
     case dark
     case light
-    
 }
 
-@objc public protocol LXViewSetup: NSObjectProtocol {
-    @objc optional func setupUI()
-    @objc optional func setupViewModel()
-    
+public protocol LXViewSetup: AnyObject {
+    func setupUI()
+    func setupViewModel()
 }
 
-open class LXSwiftView: UIView,LXSwiftUICompatible {
-    
-    public var swiftModel: Any?
+public extension LXViewSetup {
+    func setupUI() { }
+    func setupViewModel() { }
+}
+
+open class LXSwiftView<U>: UIView, LXSwiftUICompatible {
+    public typealias T = U
+    public var swiftModel: U?
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor.white
         setupUI()
         setupViewModel()
-        
     }
+    
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -57,5 +60,4 @@ open class LXSwiftView: UIView,LXSwiftUICompatible {
 extension LXSwiftView: LXViewSetup {
     open func setupUI() { }
     open func setupViewModel() {}
-    
 }

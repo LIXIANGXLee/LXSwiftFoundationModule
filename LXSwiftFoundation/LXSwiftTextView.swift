@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import LXFitManager
-
 
 // MARK: - TextView class
 open class LXSwiftTextView: UITextView {
@@ -26,7 +24,7 @@ open class LXSwiftTextView: UITextView {
         addSubview(placehoderLabel)
         
         /// call after placehoderLabel
-        font = UIFont.systemFont(ofSize: 14).fitFont
+        font = UIFont.systemFont(ofSize: 14)
         
         NotificationCenter.default.addObserver(self, selector: #selector(textDidChange), name: UITextView.textDidChangeNotification, object: self)
     }
@@ -57,14 +55,13 @@ open class LXSwiftTextView: UITextView {
 }
 
 // MARK: - private
-
 private var maxTextLengthKey: Void?
 extension LXSwiftTextView {
     
     /// can save maxTextLength
     internal var maxTextLength: Int? {
-        get { return getAssociatedObject(self, &maxTextLengthKey) }
-        set { setRetainedAssociatedObject(self, &maxTextLengthKey, newValue,.OBJC_ASSOCIATION_ASSIGN) }
+        get { return lx_getAssociatedObject(self, &maxTextLengthKey) }
+        set { lx_setRetainedAssociatedObject(self, &maxTextLengthKey, newValue,.OBJC_ASSOCIATION_ASSIGN) }
     }
     
     /// 事件监听
@@ -77,6 +74,5 @@ extension LXSwiftTextView {
             textCallBack?(self.text)
         }
     }
-    
 }
 

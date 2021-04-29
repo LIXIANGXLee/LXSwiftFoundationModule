@@ -35,7 +35,6 @@ public func - (left: [String: Any],  right: [String: Any]) -> [String: Any] {
         return dic
 }
 
-
 //MARK: -  Extending properties for Date
 extension LXSwiftBasics where Base == Dictionary<String, Any> {
     
@@ -59,7 +58,6 @@ extension LXSwiftBasics where Base == Dictionary<String, Any> {
         }
         return json
     }
-    
 }
 
 //MARK: -  Extending methods for Date

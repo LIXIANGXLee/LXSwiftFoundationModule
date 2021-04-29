@@ -28,7 +28,6 @@ open class LXSwiftModalController: UIViewController {
         view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         view.addSubview(contentView)
         
-        
         //self.view
         view.addGestureRecognizer(tapGesture)
         

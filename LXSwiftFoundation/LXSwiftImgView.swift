@@ -45,9 +45,7 @@ extension LXSwiftImgView {
         }
         self.imgViewCallBack?(gesture.view as? LXSwiftImgView)
     }
-    
 }
-
 
 //MARK: -  Extending properties and methods for UISwitch
 extension LXSwiftBasics where Base : LXSwiftImgView {
@@ -56,5 +54,4 @@ extension LXSwiftBasics where Base : LXSwiftImgView {
     public func setHandle(_ imgViewCallBack: LXSwiftImgView.ImgViewCallBack?) {
         base.imgViewCallBack = imgViewCallBack
     }
-    
 }

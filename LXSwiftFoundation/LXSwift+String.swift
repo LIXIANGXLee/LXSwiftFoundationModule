@@ -31,7 +31,6 @@ extension String: LXSwiftCompatible {
     public static func ~= (pattern: (String) -> Bool, value: String) -> Bool {
         pattern(value)
     }
-    
 }
 
 //MARK: -  Extending methods and properties for String and NSString interception
@@ -77,6 +76,21 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         }
     }
     
+    /// Split character
+    public func split(_ s: String) -> [String] {
+        let string = base as! String
+        if string.isEmpty {
+            return []
+        }
+        return string.components(separatedBy: s)
+    }
+    
+    /// Replace string in string
+    public func replace(_ old: String, new: String) -> String {
+        let string = base as! String
+        return string.replacingOccurrences(of: old, with: new, options: NSString.CompareOptions.numeric, range: nil)
+    }
+    
     /// Calculate the property and return the space before and after removing
     public var trim: String {
         let string = base as! String
@@ -102,7 +116,6 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         }
         return false
     }
-    
     
     /// one version campare two version
     ///
@@ -139,7 +152,6 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     }
 }
 
-
 //MARK: - Extending methods for String and NSString size
 extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     
@@ -174,7 +186,6 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return size.height
     }
 }
-
 
 //MARK: -  Extending properties for String and NSString tool
 extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
@@ -215,7 +226,6 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return json
     }
 }
-
 
 //MARK: -  String matching (hyperlink, phone number, emoticon) 😊 Etc.)
 extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
@@ -267,18 +277,8 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     /// The extended calculation attribute displays the corresponding g m KB B format according to the file size
     public var fileSize: String {
         let string = base as! String
-        guard let size = Int(string) else {  return "" }
-        if size >= 1024*1024*1024 {
-            return String(format: "%.2fG", CGFloat(size) / CGFloat(1024*1024*1024))
-        }else if size >= 1024*1024 {
-            return String(format: "%.2fM", CGFloat(size) / CGFloat(1024*1024))
-        }else if size >= 1024 {
-            return String(format: "%.2fKB", CGFloat(size) / CGFloat(1024))
-        }else if size > 0 {
-            return String(format: "%dB", size)
-        }else {
-            return ""
-        }
+        guard let size = Double(string) else {  return "" }
+        return size.lx.sizeToStr()
     }
 }
 
@@ -302,7 +302,6 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return digest.reduce(into: "") { $0 += String(format: "%02x", $1) }
     }
     
-    
     /// string transform utf8 data
     public var utf8Data: Data? {
         let string = base as! String
@@ -316,7 +315,6 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return utf8EncodeData.base64EncodedString(options: NSData.Base64EncodingOptions.init(rawValue: 0))
     }
     
-    
     /// base64EncodedData transform  string
     public var base64DecodingString: String? {
         let string = base as! String
@@ -324,16 +322,13 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return  String(data: utf8DecodedData, encoding: String.Encoding.utf8)
     }
     
-    
     /// string of  image base64 tranform uiimage
     public var base64EncodingImage: UIImage? {
         let string = base as! String
         guard let base64Data = Data(base64Encoded: string, options: .ignoreUnknownCharacters) else { return nil }
         return UIImage(data: base64Data)
     }
-    
 }
-
 
 //MARK: -  Extending methods for String and NSString md5
 extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
@@ -437,7 +432,6 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         let blank = "[\\s]"
         return string.verification(pattern: blank)
     }
-    
     
     /// Returns the range of numbers in a string, which can be one or more. If there are no numbers, an empty array is returned
     public func numberRanges() -> [NSRange] {

@@ -10,9 +10,12 @@ import UIKit
 open class LXSwiftScrollView: UIScrollView,LXSwiftUICompatible {
     public var swiftModel: Any?
     
-    /// Do you support multiple event delivery
-    public var isSopportRecognizeSimultaneous = false
-    
+    public typealias RecognizeSimultaneously = ((UIGestureRecognizer, UIGestureRecognizer) -> Bool)
+    public typealias ShouldBegin =  ((UIGestureRecognizer) -> Bool?)
+
+    public var shouldRecognizeSimultaneously: RecognizeSimultaneously?
+    public var shouldBegin: ShouldBegin?
+
     public override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor.white
@@ -29,22 +32,25 @@ open class LXSwiftScrollView: UIScrollView,LXSwiftUICompatible {
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
 //MARK: - UIGestureRecognizerDelegate
 extension LXSwiftScrollView: UIGestureRecognizerDelegate {
     
-    ///Do you support multiple event delivery delegate
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return isSopportRecognizeSimultaneous
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+           shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        let outResult = shouldRecognizeSimultaneously?(gestureRecognizer, otherGestureRecognizer)
+        return outResult ?? true
     }
     
+    open override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        let outResult = shouldBegin?(gestureRecognizer)
+        return outResult ??
+            super.gestureRecognizerShouldBegin(gestureRecognizer)
+    }
 }
 
 extension LXSwiftScrollView: LXViewSetup {
-    
     open func setupUI() { }
     open func setupViewModel() {}
-    
 }

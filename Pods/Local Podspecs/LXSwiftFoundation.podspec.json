@@ -1,6 +1,6 @@
 {
   "name": "LXSwiftFoundation",
-  "version": "4.4.3",
+  "version": "4.4.4",
   "summary": "Extend more user-friendly functions for system classes",
   "description": "LXSwiftFoundation is Extend more user-friendly functions for system classes",
   "homepage": "https://github.com/LIXIANGXLee/LXSwiftFoundationModule",
@@ -14,16 +14,11 @@
   "swift_versions": "5.0",
   "source": {
     "git": "https://github.com/LIXIANGXLee/LXSwiftFoundationModule.git",
-    "tag": "4.4.3"
+    "tag": "4.4.4"
   },
   "source_files": [
     "LXSwiftFoundation/*.swift",
     "LXSwiftFoundation/*.{h,m}"
   ],
-  "dependencies": {
-    "LXFitManager": [
-
-    ]
-  },
   "swift_version": "5.0"
 }

@@ -9,7 +9,6 @@ import UIKit
 
 public struct  LXSwiftStorage: LXSwiftCompatible { }
 
-
 /// 扩展存储 并且加密
 extension LXSwiftBasics where Base == LXSwiftStorage {
 

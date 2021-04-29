@@ -18,7 +18,7 @@ extension LXSwiftBasics where Base : LXSwiftTextView {
     }
     
     /// set placeholder and color
-    public func set(with placeholder: String?,color: UIColor? = UIColor.lx.color(hex: "999999")) {
+    public func set(with placeholder: String?, color: UIColor? = UIColor.lx.color(hex: "999999")) {
         
         base.placehoderLabel.text = placeholder
         if let c = color {
@@ -29,12 +29,12 @@ extension LXSwiftBasics where Base : LXSwiftTextView {
     }
     
     /// set placeholder and color string
-    public func set(with placeholder: String?,color: String = "999999") {
+    public func set(with placeholder: String?, color: String = "999999") {
         set(with: placeholder, color: UIColor.lx.color(hex: color))
     }
     
     /// set font and textColor
-    public func set(withFont font: UIFont,textColor: UIColor?) {
+    public func set(withFont font: UIFont, textColor: UIColor?) {
         base.font = font
         if let c = textColor {
             base.textColor = c
@@ -42,17 +42,17 @@ extension LXSwiftBasics where Base : LXSwiftTextView {
     }
     
     /// set bold font and textColor
-    public func set(withBoldFont fontSize: CGFloat,textColor: String) {
+    public func set(withBoldFont fontSize: CGFloat, textColor: String) {
         set(withFont: UIFont.systemFont(ofSize: fontSize, weight: .bold), textColor: UIColor.lx.color(hex: textColor))
     }
     
     /// set medium font and textColor
-    public func set(withMediumFont fontSize: CGFloat,textColor: String) {
+    public func set(withMediumFont fontSize: CGFloat, textColor: String) {
         set(withFont: UIFont.systemFont(ofSize: fontSize, weight: .medium), textColor: UIColor.lx.color(hex: textColor))
     }
     
     /// set regular font and textColor
-    public func set(withRegularFont fontSize: CGFloat,textColor: String) {
+    public func set(withRegularFont fontSize: CGFloat, textColor: String) {
         set(withFont: UIFont.systemFont(ofSize: fontSize, weight: .regular), textColor: UIColor.lx.color(hex: textColor))
     }
     

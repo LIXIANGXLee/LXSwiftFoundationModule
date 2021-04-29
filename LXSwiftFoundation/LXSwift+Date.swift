@@ -52,7 +52,6 @@ extension LXSwiftBasics where Base == Date {
             (count == 1)
     }
     
-    
     /// is today
     public var isToday: Bool{
         let unit: Set<Calendar.Component> = [.day,.month,.year]
@@ -85,7 +84,7 @@ extension LXSwiftBasics where Base == Date {
     
     ///get stamp with Interval
     public var timeInterval: TimeInterval {
-        return base.timeIntervalSince1970 * 1000
+        return base.timeIntervalSince1970
     }
     
     public var year: Int {

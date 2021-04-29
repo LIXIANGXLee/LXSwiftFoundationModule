@@ -17,7 +17,6 @@ extension LXSwiftBasics where Base: UIScrollView {
             callBack(image)
         }
     }
-    
 }
 
 //MARK: -  Extending methods for UIScrollView
@@ -50,7 +49,6 @@ extension LXSwiftBasics where Base: UIScrollView {
         off.x = base.contentSize.width - base.bounds.width + base.contentInset.right
         base.setContentOffset(off, animated: animated)
     }
-    
 }
 
 //MARK: -  internal

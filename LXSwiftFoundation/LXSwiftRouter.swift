@@ -98,5 +98,4 @@ extension LXSwiftRouter {
         defer { self.semaphore.signal() }
         routers.removeAll()
     }
-    
 }

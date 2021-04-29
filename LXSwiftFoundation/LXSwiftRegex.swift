@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import LXFitManager
 
 // MARK: public LXRegexType Hyperlink type
 public struct LXSwiftRegexType {
@@ -31,9 +30,7 @@ public struct LXSwiftRegexType {
     
     ///Whether to match for expression true for expression match false for hyperlink, phone match
     public var isExpression: Bool = false
-    
 }
-
 
 // MARK: public
 public class LXSwiftRegex {
@@ -54,7 +51,6 @@ public class LXSwiftRegex {
         LXSwiftRegexType(phoneRegex, isExpression: false),
         LXSwiftRegexType(expressionRegex, isExpression: true)
     ]
-    
 }
 
 // MARK: public method
@@ -85,7 +81,7 @@ extension LXSwiftRegex {
                     
                     let attachment = NSTextAttachment()
                     attachment.image = UIImage(named: capturedStrings)
-                    attachment.bounds = CGRect(x: 0, y: LXFit.fitFloat(-3), width: wordRegexType.font.fitFont.lineHeight, height: wordRegexType.font.fitFont.lineHeight)
+                    attachment.bounds = CGRect(x: 0, y: scale_ip6_width(-3), width: wordRegexType.font.lineHeight, height: wordRegexType.font.lineHeight)
                     let imageAttr = NSAttributedString(attachment: attachment)
                     attributedStr.replaceCharacters(in: range, with: imageAttr)
                     attributedStr.addAttribute(NSAttributedString.Key(rawValue: LXSwiftRegex.imageLinkConst), value: capturedStrings, range: range)
@@ -93,7 +89,7 @@ extension LXSwiftRegex {
             }else {
                 // Match hyperlinks
                 text.lx.enumerateStringsMatchedByRegex(regex: wordRegexType.link) { (captureCount, capturedStrings, range) in
-                    attributedStr.addAttributes([NSAttributedString.Key.foregroundColor : wordRegexType.color,NSAttributedString.Key.font: wordRegexType.font.fitFont], range: range)
+                    attributedStr.addAttributes([NSAttributedString.Key.foregroundColor : wordRegexType.color,NSAttributedString.Key.font: wordRegexType.font], range: range)
                     attributedStr.addAttribute(NSAttributedString.Key(rawValue: LXSwiftRegex.textLinkConst), value: capturedStrings, range: range)
                 }
             }

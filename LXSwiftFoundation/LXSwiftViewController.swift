@@ -7,13 +7,12 @@
 //
 import UIKit
 
-open class LXSwiftViewController: UIViewController,LXSwiftUICompatible {
+open class LXSwiftViewController: UIViewController, LXSwiftUICompatible {
     public var swiftModel: Any?
     
     open override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
-        
     }
     
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

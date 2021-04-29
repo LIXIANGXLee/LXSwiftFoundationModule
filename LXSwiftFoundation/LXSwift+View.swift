@@ -45,7 +45,6 @@ extension LXSwiftBasics where Base: UIView {
         return snapImage
     }
     
-    
     /// chromium source - snapshot_manager, fix wkwebview screenshot bug.
     public func isContainsWKWebView() -> Bool {
         if base.isKind(of: WKWebView.self) {
@@ -58,7 +57,6 @@ extension LXSwiftBasics where Base: UIView {
         }
         return false
     }
-    
 }
 
 //MARK: -  Extending methods for UIView
@@ -87,7 +85,6 @@ extension LXSwiftBasics where Base: UIView {
             gradientLayer.startPoint = startPoint
             gradientLayer.endPoint = endPoint
         }
-        
     }
     
     /// view set Shadow
@@ -131,9 +128,11 @@ extension LXSwiftBasics where Base: UIView {
     ///   - roundingCorners: UIRectCorner(rawValue:
     ///   (UIRectCorner.topRight.rawValue) | (UIRectCorner.bottomRight.rawValue))
     ///   - viewSize: size of the current view
-    public func setPartCornerRadius(radius: CGFloat = 4.0,  roundingCorners: UIRectCorner = .allCorners,viewSize: CGSize? = nil) {
-        let fieldPath =  UIBezierPath(roundedRect: base.bounds, byRoundingCorners: roundingCorners, cornerRadii: CGSize(width: radius, height: radius))
+    public func setPartCornerRadius(radius: CGFloat = 4.0, roundingCorners: UIRectCorner = .allCorners, viewSize: CGSize? = nil) {
+        
         let s = viewSize ?? base.bounds.size
+        let rect = CGRect(origin: CGPoint.zero, size: s)
+        let fieldPath =  UIBezierPath(roundedRect: rect, byRoundingCorners: roundingCorners, cornerRadii: CGSize(width: radius, height: radius))
         if !s.equalTo(CGSize.zero) {
             let fieldLayer = CAShapeLayer()
             fieldLayer.frame = base.bounds
@@ -141,9 +140,7 @@ extension LXSwiftBasics where Base: UIView {
             base.layer.mask = fieldLayer
         }
     }
-    
 }
-
 
 //MARK: -  Extending methods for UIView
 extension LXSwiftBasics where Base: UIView {
@@ -163,12 +160,11 @@ extension UIView {
     
     /// can save callback
     internal var viewCallBack: ((UIView?) -> ())? {
-        get { return getAssociatedObject(self, &viewCallBackKey) }
-        set { setRetainedAssociatedObject(self, &viewCallBackKey, newValue) }
+        get { return lx_getAssociatedObject(self, &viewCallBackKey) }
+        set { lx_setRetainedAssociatedObject(self, &viewCallBackKey, newValue) }
     }
     
     @objc internal func gestureTap(_ gesture: UIGestureRecognizer) {
         self.viewCallBack?(gesture.view)
     }
-    
 }

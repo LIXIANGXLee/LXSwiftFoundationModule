@@ -24,7 +24,6 @@ extension LXSwiftBasics where Base == LXSwiftTool {
         return LXSwiftTool.lx.getDictionary(with: data)
     }
     
-    
     ///  string tranform Dictionary
     ///
     /// - Parameter data: string
@@ -33,7 +32,6 @@ extension LXSwiftBasics where Base == LXSwiftTool {
         let data = string?.data(using: .utf8)
         return LXSwiftTool.lx.getDictionary(with: data)
     }
-    
     
     ///  data tranform Dictionary
     ///
@@ -46,7 +44,7 @@ extension LXSwiftBasics where Base == LXSwiftTool {
     }
     
     /// get QR code information
-    public static func  getQrCodeString(with image: UIImage?) -> String? {
+    public static func getQrCodeString(with image: UIImage?) -> String? {
         let context =  CIContext(options: nil)
         let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: context, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh])
         guard let cgImage = image?.cgImage else { return nil }
@@ -66,7 +64,7 @@ extension LXSwiftBasics where Base == LXSwiftTool {
     }
     
     /// create QR code image
-    public static func  getQrCodeImage(with qrCodeStr: String?,size: CGFloat = 800) -> UIImage? {
+    public static func getQrCodeImage(with qrCodeStr: String?, size: CGFloat = 800) -> UIImage? {
         
         let filter = CIFilter(name: "CIQRCodeGenerator")
         filter?.setDefaults()
@@ -77,7 +75,7 @@ extension LXSwiftBasics where Base == LXSwiftTool {
     }
     
     /// async create QR code image
-    public static func async_getQrCodeImage(with qrCodeStr: String?,size: CGFloat = 800, complete: @escaping (UIImage?) -> ()) {
+    public static func async_getQrCodeImage(with qrCodeStr: String?, size: CGFloat = 800, complete: @escaping (UIImage?) -> ()) {
         DispatchQueue.global().async{
             let async_qrImage = self.getQrCodeImage(with: qrCodeStr, size: size)
             DispatchQueue.main.async(execute: {
@@ -103,5 +101,4 @@ extension LXSwiftBasics where Base == LXSwiftTool {
         guard let scaledImage = bitmapRef.makeImage() else { return nil }
         return UIImage(cgImage: scaledImage)
     }
-    
 }

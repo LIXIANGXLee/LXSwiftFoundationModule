@@ -58,7 +58,6 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
             if total <= 0 { cancel(with: identified)   }
             task?(Int(total))
         }
-        
     }
     
     /// start timer repeats
@@ -106,5 +105,4 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
             LXSwiftGCDTimer.timers.removeValue(forKey: iden)
         }
     }
-  
 }

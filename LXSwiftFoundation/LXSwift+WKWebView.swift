@@ -17,5 +17,4 @@ extension LXSwiftBasics where Base: WKWebView {
             callBack(image)
         }
     }
-    
 }

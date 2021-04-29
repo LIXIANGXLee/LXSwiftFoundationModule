@@ -51,9 +51,10 @@ public extension LXSwiftCompatible {
 
 /// Define protocol
 public protocol LXSwiftUICompatible {
-    
+    associatedtype T
+
     ///Extend additional properties to bind controls and properties
-    var swiftModel: Any? { get set }
+    var swiftModel: T? { get set }
 }
 
 /// Define Property protocol
@@ -69,8 +70,13 @@ internal protocol LXSwiftPropertyCompatible {
     var swiftCallBack: SwiftCallBack?  { get set }
 }
 
+/// cell protocol
+public protocol LXSwiftCellCompatible: AnyObject {
+    static var reusableIdentifier: String { get }
+}
 
-//import class Foundation.NSObject
-//
-///// Extend NSObject with `lx` proxy.
-//extension NSObject: LXSwiftCompatible { }
+public extension LXSwiftCellCompatible {
+    static var reusableIdentifier: String {
+        return "\(self)"
+    }
+}

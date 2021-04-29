@@ -19,7 +19,18 @@ public enum LXSwiftImageDataType {
     case Unknown, PNG, JPEG, GIF
 }
 
-extension Data: LXSwiftCompatible { }
+extension Data: LXSwiftCompatible {
+    fileprivate static let mimeTypeSignatures: [UInt8: String] = [
+        0xFF: "image/jpeg",
+        0x89: "image/png",
+        0x47: "image/gif",
+        0x49: "image/tiff",
+        0x4D: "image/tiff",
+        0x25: "application/pdf",
+        0xD0: "application/vnd",
+        0x46: "text/plain"
+        ]
+}
 extension NSData: LXSwiftCompatible { }
 
 //MARK: -  Extending properties  for Data
@@ -30,13 +41,18 @@ extension LXSwiftBasics where Base == Data {
         return String(data: base, encoding: .utf8)
     }
     
-    
     /// base64 of data tranform uiimage
     public var base64DecodingImage: UIImage? {
         guard let base64Data = Data(base64Encoded: base, options: .ignoreUnknownCharacters) else { return nil }
         return UIImage(data: base64Data)
     }
     
+    /// 文件类型
+    public var mimeType: String {
+        var c: UInt8 = 0
+        base.copyBytes(to: &c, count: 1)
+        return Data.mimeTypeSignatures[c] ?? "application/octet-stream"
+    }
 }
 
 //MARK: -  Extending properties  for NSData

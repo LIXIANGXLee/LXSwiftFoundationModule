@@ -71,6 +71,5 @@ extension LXSwiftQueue {
         let isisEmpty = list.isEmpty
         return isisEmpty
     }
-    
 }
 

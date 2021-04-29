@@ -15,15 +15,14 @@ extension LXSwiftBasics where Base : UISlider {
         base.swiftCallBack = sliderCallBack
         base.addTarget(base, action: #selector(base.sliderSwitchAction(_:)), for: .touchUpInside)
     }
-    
 }
 
 private var sliderCallBackKey: Void?
 extension UISlider: LXSwiftPropertyCompatible {
     internal typealias T = Float
     internal var swiftCallBack: SwiftCallBack? {
-        get { return getAssociatedObject(self, &sliderCallBackKey) }
-        set { setRetainedAssociatedObject(self, &sliderCallBackKey, newValue) }
+        get { return lx_getAssociatedObject(self, &sliderCallBackKey) }
+        set { lx_setRetainedAssociatedObject(self, &sliderCallBackKey, newValue) }
     }
     
     @objc internal func sliderSwitchAction(_ event: UISlider) {

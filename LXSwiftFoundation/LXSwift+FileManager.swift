@@ -35,7 +35,5 @@ extension LXSwiftBasics where Base: FileManager {
     }
     public static var libraryPath: String? {
         return NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first
-    }
-    
-    
+    }    
 }

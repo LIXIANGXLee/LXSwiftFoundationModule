@@ -49,7 +49,6 @@ extension LXSwiftBasics where Base: UIImage {
     }
 }
 
- 
 //MARK: -  Extending methods and properties for UIImage cut
 extension LXSwiftBasics where Base: UIImage {
     
@@ -107,7 +106,6 @@ extension LXSwiftBasics where Base: UIImage {
         context.draw(cgImage, in: rect)
         context.restoreGState()
         
-        
         if  borderWidth < minSize, borderWidth > 0 {
             let strokeInset = floor(borderWidth * base.scale  + 0.5) / base.scale
             let strokeRect = rect.insetBy(dx: strokeInset, dy: strokeInset)
@@ -123,9 +121,7 @@ extension LXSwiftBasics where Base: UIImage {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext();
         return image
-        
     }
-    
     
     ///Frame screenshot (capture any part of the picture)
     /// -ImageView
@@ -159,7 +155,6 @@ extension LXSwiftBasics where Base: UIImage {
         }
         return images
     }
-    
 }
 
 //MARK: -  Extending methods and properties for UIImage init
@@ -193,7 +188,6 @@ extension LXSwiftBasics where Base: UIImage {
         let newImage = UIImage(cgImage: cgImage!)
         return newImage
     }
-    
     
     ///Erase pictures with gestures
     ///-ImageView
@@ -247,9 +241,7 @@ extension LXSwiftBasics where Base: UIImage {
         let shotImage = UIImage(cgImage: image)
         return shotImage;
     }
-    
-    
-    
+        
     /// scale return image
     ///
     /// - Parameter scale: (0~1)
@@ -360,7 +352,6 @@ extension LXSwiftBasics where Base: UIImage {
         guard let targetCGImage = context?.makeImage() else { return nil }
         return UIImage(cgImage: targetCGImage)
     }
-    
 }
 
 //MARK: -  Extending methods and properties for UIImage async
@@ -379,8 +370,7 @@ extension LXSwiftBasics where Base: UIImage {
             })
         }
     }
-    
-    
+        
     /// async circle image
     public func async_imageWithCircle(complete: @escaping (UIImage?) -> ()) {
         DispatchQueue.global().async{
@@ -408,7 +398,6 @@ extension LXSwiftBasics where Base: UIImage {
         }
     }
     
-    
     /// async video image
     ///
     /// - Parameters:
@@ -421,9 +410,6 @@ extension LXSwiftBasics where Base: UIImage {
             })
         }
     }
-    
-
-    
     
     /// image scale size,  compress
     ///
@@ -451,9 +437,7 @@ extension LXSwiftBasics where Base: UIImage {
                 complete(async_image)
             })
         }
-        
     }
-    
     
     /// division more image
     ///
@@ -495,7 +479,6 @@ extension LXSwiftBasics where Base: UIImage {
         }
     }
     
-    
     /// async Erase pictures with gestures
     /// - Parameters:
     ///-ImageView
@@ -509,5 +492,4 @@ extension LXSwiftBasics where Base: UIImage {
             })
         }
     }
-    
 }

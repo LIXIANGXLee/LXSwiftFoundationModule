@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import LXFitManager
 
 ///A unique identifier used to distinguish the background color
 private let linkBgTag = 1234994321
@@ -110,7 +109,6 @@ open class LXSwiftTextLable: UIView {
     }
 }
 
-
 // MARK: private method
 extension LXSwiftTextLable {
     
@@ -158,7 +156,7 @@ extension LXSwiftTextLable {
         for rect in link.rects {
             let bgView = UIView(frame: rect)
             bgView.tag = linkBgTag
-            bgView.lx.setCornerRadius(radius: LXFit.fitFloat(config.bgRadius), clips: true)
+            bgView.lx.setCornerRadius(radius:scale_ip6_width(config.bgRadius), clips: true)
             bgView.backgroundColor = config.bgColor
             insertSubview(bgView, belowSubview: textView)
         }

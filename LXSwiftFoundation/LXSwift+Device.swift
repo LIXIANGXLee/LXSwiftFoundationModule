@@ -40,9 +40,7 @@ extension LXSwiftBasics where Base: UIDevice {
     public static var isCanPhoneCalls: Bool {
         return UIApplication.shared.canOpenURL(URL(string: "tel://")!)
     }
-    
 }
-
 
 //MARK: -  Extending methods  for UIDevice is ipad or iphone
 extension LXSwiftBasics where Base: UIDevice {

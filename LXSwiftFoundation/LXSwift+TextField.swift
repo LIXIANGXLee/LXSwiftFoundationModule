@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 //MARK: -  Extending properties for LXSwiftTextField
 extension LXSwiftBasics where Base : LXSwiftTextField {
     
@@ -45,19 +44,19 @@ extension LXSwiftBasics where Base : LXSwiftTextField {
     }
     
     /// set placeholder and color
-    public func set(withPlaceholder placeholder: String?,color: UIColor? = UIColor.lx.color(hex: "999999")) {
+    public func set(withPlaceholder placeholder: String?, color: UIColor? = UIColor.lx.color(hex: "999999")) {
         guard let placeholder = placeholder , let c = color else {  return  }
         let att = NSMutableAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor : c])
         base.attributedPlaceholder = att
     }
     
     /// set placeholder and color string
-    public func set(withPlaceholder placeholder: String?,color: String =  "999999") {
+    public func set(withPlaceholder placeholder: String?, color: String =  "999999") {
         set(withPlaceholder: placeholder, color: UIColor.lx.color(hex: color))
     }
     
     /// set font and textColor
-    public func set(withFont font: UIFont,textColor: UIColor?) {
+    public func set(withFont font: UIFont, textColor: UIColor?) {
         base.font = font
         if let c = textColor{
             base.textColor = c
@@ -65,17 +64,17 @@ extension LXSwiftBasics where Base : LXSwiftTextField {
     }
     
     /// set bold font and textColor
-    public func set(withBoldFont fontSize: CGFloat,textColor: String) {
+    public func set(withBoldFont fontSize: CGFloat, textColor: String) {
         set(withFont: UIFont.systemFont(ofSize: fontSize, weight: .bold), textColor: UIColor.lx.color(hex: textColor))
     }
     
     /// set medium font and textColor
-    public func set(withMediumFont fontSize: CGFloat,textColor: String) {
+    public func set(withMediumFont fontSize: CGFloat, textColor: String) {
         set(withFont: UIFont.systemFont(ofSize: fontSize, weight: .medium), textColor: UIColor.lx.color(hex: textColor))
     }
     
     /// set regular font and textColor
-    public func set(withRegularFont fontSize: CGFloat,textColor: String) {
+    public func set(withRegularFont fontSize: CGFloat, textColor: String) {
         set(withFont: UIFont.systemFont(ofSize: fontSize, weight: .regular), textColor: UIColor.lx.color(hex: textColor))
     }
     
@@ -94,14 +93,14 @@ extension LXSwiftTextField: LXSwiftPropertyCompatible{
     
     /// can save maxTextLength
     internal var maxTextLength: Int? {
-        get { return getAssociatedObject(self, &maxTextLengthKey) }
-        set { setRetainedAssociatedObject(self, &maxTextLengthKey, newValue,.OBJC_ASSOCIATION_ASSIGN) }
+        get { return lx_getAssociatedObject(self, &maxTextLengthKey) }
+        set { lx_setRetainedAssociatedObject(self, &maxTextLengthKey, newValue,.OBJC_ASSOCIATION_ASSIGN) }
     }
     
     internal typealias T = String
     internal var swiftCallBack: SwiftCallBack? {
-        get { return getAssociatedObject(self, &textFieldCallBackKey) }
-        set { setRetainedAssociatedObject(self, &textFieldCallBackKey, newValue) }
+        get { return lx_getAssociatedObject(self, &textFieldCallBackKey) }
+        set { lx_setRetainedAssociatedObject(self, &textFieldCallBackKey, newValue) }
     }
     
     /// action
@@ -113,6 +112,5 @@ extension LXSwiftTextField: LXSwiftPropertyCompatible{
         }
         self.swiftCallBack?(text)
     }
-    
 }
 

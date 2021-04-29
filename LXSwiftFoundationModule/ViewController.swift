@@ -21,6 +21,9 @@ class ViewController: UIViewController {
         
         self.view.backgroundColor = UIColor.white
         
+        print("-----------\(UIApplication.shared.statusBarFrame.height)")
+        
+        
 
          let imgView = UIImageView(frame: CGRect(x: 10, y: 200, width: 300, height: 300))
          self.view.addSubview(imgView)
@@ -51,10 +54,12 @@ class ViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         LXSwiftStorage.lx.setStorage(with: "dsdsdsdsds", key: "haha")
         
-        let s =  LXSwiftStorage.lx.getStorage(for: "haha")
         
-        print("===\(s)")
-        
+        let urlStr = "https://www.baidu.com?id=20&aa=dew"
+        let url = URL(string: urlStr)
+        print(url!.lx.getParameters())
+        print(url!.lx.getParametersWithOrder())
+
         
         
 //        let index = 3

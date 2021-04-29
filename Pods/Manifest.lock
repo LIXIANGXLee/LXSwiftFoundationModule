@@ -1,22 +1,15 @@
 PODS:
-  - LXFitManager (6.0.0)
-  - LXSwiftFoundation (4.4.3):
-    - LXFitManager
+  - LXSwiftFoundation (4.4.4)
 
 DEPENDENCIES:
   - LXSwiftFoundation (from `./`)
-
-SPEC REPOS:
-  trunk:
-    - LXFitManager
 
 EXTERNAL SOURCES:
   LXSwiftFoundation:
     :path: "./"
 
 SPEC CHECKSUMS:
-  LXFitManager: 89c345ee602c266d16280046634f7e40664ff0b4
-  LXSwiftFoundation: dfb15c2d4b25e35d6368b9d68e55989401aa41ce
+  LXSwiftFoundation: 8adb2a11f544e6cd919046844a3a3ce85685fda5
 
 PODFILE CHECKSUM: d33c2ca11fc855ed835475c13e12f4d1e2a25868
 

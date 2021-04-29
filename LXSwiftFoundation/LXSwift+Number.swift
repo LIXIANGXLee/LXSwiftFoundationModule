@@ -23,9 +23,7 @@ extension LXSwiftBasics where Base: NSNumber {
     public  func numberFormatter() -> String? {
         return base.numberFormatter(with: .halfEven, minDigits: 0, maxDigits: 2)
     }
-    
 }
-
 
 //MARK: -  Extending internal methods for NSNumber
 extension NSNumber {

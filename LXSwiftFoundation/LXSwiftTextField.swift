@@ -32,5 +32,4 @@ open class LXSwiftTextField: UITextField {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
 }

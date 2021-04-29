@@ -27,6 +27,18 @@ extension LXSwiftBasics where Base == Double {
     public func roundTo(digits: Int = 0) -> String {
         return NSNumber(value: base).lx.numberFormatter(with: .halfEven, minDigits: digits, maxDigits: digits) ?? ""
     }
-
     
+    /// 用户显示化 容量大小
+    public func sizeToStr() -> String {
+        let unit = 1000.0
+        if base > pow(unit, 3) {
+            return String(format: "%.2fGB", base / pow(unit, 3))
+        } else if base > pow(unit, 2) {
+            return String(format: "%.2fMB", base / pow(unit, 2))
+        } else if base > pow(unit, 1) {
+            return String(format: "%.2fKB", base / pow(unit, 1))
+        } else {
+            return String(format: "%dKB", 0)
+        }
+    }
 }

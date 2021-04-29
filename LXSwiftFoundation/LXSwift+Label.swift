@@ -11,12 +11,12 @@ import UIKit
 //MARK: -  Extending properties for UILabel
 extension LXSwiftBasics where Base: UILabel {
     
-    /// w
+    /// 宽度
     public var bestWidth: CGFloat {
         return base.sizeThatFits(CGSize.zero).width
     }
     
-    /// h
+    /// 高度
     public var bestHeight: CGFloat {
         return base.sizeThatFits(CGSize.zero).height
     }
@@ -66,6 +66,5 @@ extension LXSwiftBasics where Base: UILabel {
        guard let color = UIColor.lx.color(hex: textColor) else { return }
        set(withFont: UIFont.systemFont(ofSize: boldSize, weight: .bold), textColor: color ,alignment: alignment)
    }
-
     
 }

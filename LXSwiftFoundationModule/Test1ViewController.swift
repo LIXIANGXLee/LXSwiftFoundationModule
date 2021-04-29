@@ -19,8 +19,6 @@ class Test1ViewController: LXSwiftWebViewController {
         
         self.load(with: "http://www.baidu.com")
   
-        
-        
         let imgView = UIImageView(frame: CGRect(x: 100, y: 100, width: 260, height: 500))
         imgView.contentMode = .scaleAspectFit
         view.addSubview(imgView)
@@ -39,7 +37,6 @@ class Test1ViewController: LXSwiftWebViewController {
 //                 imgView.image = image
 //            })
 //
-
         }
     }
 

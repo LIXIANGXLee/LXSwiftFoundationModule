@@ -70,7 +70,6 @@ extension LXSwiftBasics where Base == LXSwiftUtil {
         return temp
     }
     
-    
     /// call tel for all app
     public static func openTel(with number: String?, _ tellCallBack: LXSwiftUtil.TellCallBack? = nil) {
         guard let number = number,
@@ -84,7 +83,6 @@ extension LXSwiftBasics where Base == LXSwiftUtil {
         }
     }
     
-    
     /// Keep a few significant digits after the decimal point
     ///
     /// - Parameters:
@@ -92,13 +90,13 @@ extension LXSwiftBasics where Base == LXSwiftUtil {
     ///   - digits: digits Number of significant digits reserved
     ///   - mode: mode
     /// - Returns: string
-    public static func formatDecimalString(with text: String, _ digits: Int,_ mode: NumberFormatter.RoundingMode = .down) -> String {
-        guard let m =  Double(text) else { return text }
+    public static func formatDecimalString(with text: String, _ digits: Int, _ mode: NumberFormatter.RoundingMode = .down) -> String {
+        guard let m = Double(text) else { return text }
         return NSNumber(value: m).numberFormatter(with: .down, minDigits: digits, maxDigits: digits) ?? text
     }
 
     ///Keep two valid digits after the decimal point.
-    public static func  formatDecimalStringTwo(with text: String) -> String {
+    public static func formatDecimalStringTwo(with text: String) -> String {
        return formatDecimalString(with: text, 2)
     }
     

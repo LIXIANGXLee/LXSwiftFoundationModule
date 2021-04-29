@@ -62,5 +62,4 @@ extension LXSwiftStack {
         let isisEmpty = list.isEmpty
         return isisEmpty
     }
-    
 }
