@@ -8,8 +8,7 @@
 
 import UIKit
 
-open class LXSwiftCollectionView: UICollectionView, LXSwiftUICompatible {
-    public var swiftModel: Any?
+open class LXSwiftCollectionView: UICollectionView {
     
     public typealias RecognizeSimultaneously = ((UIGestureRecognizer, UIGestureRecognizer) -> Bool)
     public typealias ShouldBegin =  ((UIGestureRecognizer) -> Bool?)
@@ -77,12 +76,7 @@ extension LXSwiftCollectionView: LXViewSetup {
     
 }
 
-open class LXSwiftCollectionViewCell<U>: UICollectionViewCell,
-                                      LXSwiftUICompatible,
-                                      LXSwiftCellCompatible {
-    public typealias T = U
-    public var swiftModel: U?
-
+open class LXSwiftCollectionViewCell<U>: UICollectionViewCell, LXSwiftCellCompatible {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()

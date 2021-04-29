@@ -49,14 +49,6 @@ public extension LXSwiftCompatible {
     
 }
 
-/// Define protocol
-public protocol LXSwiftUICompatible {
-    associatedtype T
-
-    ///Extend additional properties to bind controls and properties
-    var swiftModel: T? { get set }
-}
-
 /// Define Property protocol
 internal protocol LXSwiftPropertyCompatible {
   

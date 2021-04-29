@@ -8,5 +8,4 @@
 #ifndef LXSwiftFoundation_h
 #define LXSwiftFoundation_h
 
-
 #endif /* LXSwiftFoundation_h */

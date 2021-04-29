@@ -8,7 +8,6 @@
 
 import UIKit
 
-open class LXSwiftButton<U>: UIButton, LXSwiftUICompatible {
-    public typealias T = U
-    public var swiftModel: U?
+open class LXSwiftButton<U>: UIButton {
+
 }

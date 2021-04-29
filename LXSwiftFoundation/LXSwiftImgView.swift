@@ -8,10 +8,10 @@
 
 import UIKit
 
-open class LXSwiftImgView: UIImageView, LXSwiftUICompatible {
+open class LXSwiftImgView: UIImageView {
     /// call back
     public typealias ImgViewCallBack = ((_ imgView: LXSwiftImgView?) -> ())
-    public var swiftModel: Any?
+
     internal var imgViewCallBack: LXSwiftImgView.ImgViewCallBack?
     
     /// 是否允许交互

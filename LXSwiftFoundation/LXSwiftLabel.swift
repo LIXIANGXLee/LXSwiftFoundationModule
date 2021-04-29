@@ -8,8 +8,7 @@
 
 import UIKit
 
-open class LXSwiftLabel<U>: UILabel, LXSwiftUICompatible {
-    public typealias T = U
-    public var swiftModel: U?
+open class LXSwiftLabel<U>: UILabel {
+
 }
 

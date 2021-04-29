@@ -7,8 +7,7 @@
 
 import UIKit
 
-open class LXSwiftScrollView: UIScrollView,LXSwiftUICompatible {
-    public var swiftModel: Any?
+open class LXSwiftScrollView: UIScrollView {
     
     public typealias RecognizeSimultaneously = ((UIGestureRecognizer, UIGestureRecognizer) -> Bool)
     public typealias ShouldBegin =  ((UIGestureRecognizer) -> Bool?)

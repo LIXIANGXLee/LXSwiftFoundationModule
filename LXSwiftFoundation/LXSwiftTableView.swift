@@ -8,8 +8,7 @@
 
 import UIKit
 
-open class LXSwiftTableView: UITableView, LXSwiftUICompatible{
-    public var swiftModel: Any?
+open class LXSwiftTableView: UITableView{
         
     public typealias RecognizeSimultaneously = ((UIGestureRecognizer, UIGestureRecognizer) -> Bool)
     public typealias ShouldBegin =  ((UIGestureRecognizer) -> Bool?)
@@ -80,10 +79,7 @@ extension LXSwiftTableView: UIGestureRecognizerDelegate {
 
 //MARK: - LXTableViewCell
 open class LXSwiftTableViewCell<U>: UITableViewCell,
-                                    LXSwiftUICompatible,
                                     LXSwiftCellCompatible {
-    public typealias T = U
-    public var swiftModel: U?
 
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

@@ -23,9 +23,7 @@ public extension LXViewSetup {
     func setupViewModel() { }
 }
 
-open class LXSwiftView<U>: UIView, LXSwiftUICompatible {
-    public typealias T = U
-    public var swiftModel: U?
+open class LXSwiftView<U>: UIView {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)

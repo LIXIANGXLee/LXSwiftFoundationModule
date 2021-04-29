@@ -7,9 +7,7 @@
 //
 import UIKit
 
-open class LXSwiftViewController: UIViewController, LXSwiftUICompatible {
-    public var swiftModel: Any?
-    
+open class LXSwiftViewController: UIViewController {    
     open override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
