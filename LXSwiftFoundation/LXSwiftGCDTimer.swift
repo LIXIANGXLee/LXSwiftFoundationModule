@@ -30,7 +30,11 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
     public static func startDelay(_ timer: TimeInterval,
                                   identified: String?,
                                   task: LXSwiftGCDTimer.TaskCallBack?) {
-        start(with: timer,  timeInterval: 1,  repeats: false,  identified: identified,  task: task)
+        start(with: timer,
+              timeInterval: 1,
+              repeats: false,
+              identified: identified,
+              task: task)
     }
     
     /// start timer repeats
@@ -40,7 +44,11 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
     public static func startDelayRepeats(_ timer: TimeInterval,
                                          identified: String?,
                                          task: LXSwiftGCDTimer.TaskCallBack?) {
-        start(with: timer, timeInterval: 1,  repeats: false,identified: identified,  task: task)
+        start(with: timer,
+              timeInterval: 1,
+              repeats: false,
+              identified: identified,
+              task: task)
     }
     
     /// start timer repeats
@@ -53,7 +61,10 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
                                       task: ((Int)->())?){
         
         var total = totalTimeInterval
-        start(with: 0,  timeInterval: 1, repeats: true, identified: identified) {
+        start(with: 0,
+              timeInterval: 1,
+              repeats: true,
+              identified: identified) {
             total -= 1
             if total <= 0 { cancel(with: identified)   }
             task?(Int(total))
@@ -70,10 +81,14 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
                              identified: String?,
                              task: LXSwiftGCDTimer.TaskCallBack?){
         
-        guard let iden = identified, startTimer >= 0, timeInterval >= 0, task != nil else { return }
+        guard let iden = identified,
+              startTimer >= 0,
+              timeInterval >= 0,
+              task != nil else { return }
         
         let timer = DispatchSource.makeTimerSource(queue: DispatchQueue.global())
-        timer.schedule(deadline: .now() + startTimer, repeating: timeInterval)
+        timer.schedule(deadline: .now() + startTimer,
+                       repeating: timeInterval)
         
         /// sync
         LXSwiftGCDTimer.semaphore.wait()

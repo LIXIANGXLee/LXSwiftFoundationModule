@@ -10,7 +10,8 @@ import UIKit
 
 open class LXSwiftTableView: UITableView{
         
-    public typealias RecognizeSimultaneously = ((UIGestureRecognizer, UIGestureRecognizer) -> Bool)
+    public typealias RecognizeSimultaneously = ((UIGestureRecognizer,
+                                                 UIGestureRecognizer) -> Bool)
     public typealias ShouldBegin =  ((UIGestureRecognizer) -> Bool?)
 
     public var shouldRecognizeSimultaneously: RecognizeSimultaneously?
@@ -55,8 +56,10 @@ public extension LXSwiftTableView {
         self.register(cell, forCellReuseIdentifier: cell.reusableIdentifier)
     }
 
-    func dequeueGenericReusableCell<T: UITableViewCell>(indexPath: IndexPath) -> T where T: LXSwiftCellCompatible {
-        return self.dequeueReusableCell(withIdentifier: T.reusableIdentifier, for: indexPath) as! T
+    func dequeueGenericReusableCell<T: UITableViewCell>(indexPath: IndexPath)
+    -> T where T: LXSwiftCellCompatible {
+        return self.dequeueReusableCell(withIdentifier: T.reusableIdentifier,
+                                        for: indexPath) as! T
     }
 }
 
@@ -64,13 +67,17 @@ public extension LXSwiftTableView {
 extension LXSwiftTableView: UIGestureRecognizerDelegate {
     
     /// Do you support multiple event delivery delegate
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        let outResult = shouldRecognizeSimultaneously?(gestureRecognizer, otherGestureRecognizer)
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+                                  shouldRecognizeSimultaneouslyWith
+                                    otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        let outResult = shouldRecognizeSimultaneously?(gestureRecognizer,
+                                                       otherGestureRecognizer)
         return outResult ?? true
     }
     
     /// is can event
-    open override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+    open override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer)
+    -> Bool {
         let outResult = shouldBegin?(gestureRecognizer)
         return outResult ??
             super.gestureRecognizerShouldBegin(gestureRecognizer)
@@ -78,10 +85,11 @@ extension LXSwiftTableView: UIGestureRecognizerDelegate {
 }
 
 //MARK: - LXTableViewCell
-open class LXSwiftTableViewCell<U>: UITableViewCell,
+open class LXSwiftTableViewCell: UITableViewCell,
                                     LXSwiftCellCompatible {
 
-    public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    public override init(style: UITableViewCell.CellStyle,
+                         reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
         setupViewModel()

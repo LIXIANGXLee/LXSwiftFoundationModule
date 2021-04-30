@@ -27,8 +27,10 @@ public func has_contains(_ text: String) -> ((String) -> (Bool)) {
 /// String and NSString compliance
 extension String: LXSwiftCompatible {
     
-    /// Switch de matching pattern, matching whether the first string contains or last string  contains
-    public static func ~= (pattern: (String) -> Bool, value: String) -> Bool {
+    /// Switch de matching pattern, matching
+    /// whether the first string contains or last string  contains
+    public static func ~= (pattern: (String) -> Bool,
+                           value: String) -> Bool {
         pattern(value)
     }
 }
@@ -88,7 +90,23 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     /// Replace string in string
     public func replace(_ old: String, new: String) -> String {
         let string = base as! String
-        return string.replacingOccurrences(of: old, with: new, options: NSString.CompareOptions.numeric, range: nil)
+        return string.replacingOccurrences(of: old,
+                                           with: new,
+                                           options: NSString.CompareOptions.numeric,
+                                           range: nil)
+    }
+    
+    /// string transform bool
+    public func toBool() -> Bool? {
+        let string = base as! String
+        switch string {
+        case "True", "true", "yes", "1":
+            return true
+        case "False", "false", "no", "0":
+            return false
+        default:
+            return nil
+        }
     }
     
     /// Calculate the property and return the space before and after removing
@@ -133,7 +151,9 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     public func formatDecimalString(_ digits: Int) -> String {
         let string = base as! String
         guard let m =  Double(string) else { return string }
-        return NSNumber(value: m).numberFormatter(with: .down, minDigits: digits, maxDigits: digits) ?? string
+        return NSNumber(value: m).numberFormatter(with: .down,
+                                                  minDigits: digits,
+                                                  maxDigits: digits) ?? string
     }
     
     ///Keep two valid digits after the decimal point.
@@ -163,7 +183,8 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     ///   - lineSpace: lineSpace
     public func size(font: UIFont, width: CGFloat) -> CGSize {
         let string = base as! String
-        let attrString = NSAttributedString(string: string, attributes: [NSAttributedString.Key.font: font])
+        let attrString = NSAttributedString(string: string,
+                                            attributes: [NSAttributedString.Key.font: font])
         return attrString.lx.size(width: width)
     }
     
@@ -213,14 +234,16 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     ///Convert to JSON object type
     public var jsonObject: Any? {
         let string = base as! String
-        return try? JSONSerialization.jsonObject(with: string.data(using: .utf8) ?? Data(), options: .allowFragments)
+        return try? JSONSerialization.jsonObject(with: string.data(using: .utf8) ?? Data(),
+                                                 options: .allowFragments)
     }
     
     /// Encode to JSON string
     public var jsonStringEncode: String? {
         let string = base as! String
         if !JSONSerialization.isValidJSONObject(string) { return nil }
-        guard let jsonData = try? JSONSerialization.data(withJSONObject: string, options: .init(rawValue: 0)),
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: string,
+                                                         options: .init(rawValue: 0)),
             let json = String(data: jsonData, encoding: .utf8) else {
                 return nil  }
         return json
@@ -234,16 +257,24 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     /// - Parameters:
     ///   - regex: want to  string matching
     ///   - usingBlock: callBack
-    public func enumerateStringsMatchedByRegex(regex: String, usingBlock: (_ captureCount: Int, _ capturedStrings: String, _ range: NSRange) -> ()) {
+    public func enumerateStringsMatchedByRegex(regex: String,
+                                               usingBlock: (_ captureCount: Int,
+                                                            _ capturedStrings: String,
+                                                            _ range: NSRange) -> ()) {
         // regex is not nil
         if regex.count <= 0 { return }
         let string = base as! String
         
-        guard let regex = try? NSRegularExpression(pattern: regex.lx.trim, options: []) else { return }
-        let results = regex.matches(in: string, options: [], range: NSRange(location: 0, length: string.count))
+        guard let regex = try? NSRegularExpression(pattern: regex.lx.trim,
+                                                   options: []) else { return }
+        let results = regex.matches(in: string,
+                                    options: [],
+                                    range: NSRange(location: 0, length: string.count))
         //can matching more string
         for result in results.reversed() {
-            usingBlock(results.count,string[result.range.location..<(result.range.location + result.range.length)], result.range)
+            usingBlock(results.count,
+                    string[result.range.location..<(result.range.location + result.range.length)],
+                    result.range)
         }
     }
 }
@@ -263,18 +294,22 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     public var transformToPinYin: String {
         let string = base as! String
         let mutableString = NSMutableString(string: string)
-        CFStringTransform(mutableString, nil, kCFStringTransformToLatin, false)
-        CFStringTransform(mutableString, nil,  kCFStringTransformStripDiacritics, false)
+        CFStringTransform(mutableString, nil,
+                          kCFStringTransformToLatin, false)
+        CFStringTransform(mutableString, nil,
+                          kCFStringTransformStripDiacritics, false)
         return String(mutableString).replacingOccurrences(of: " ", with: "")
     }
     
     ///String transcoding uft8
     public var utf8: String {
         let string = base as! String
-        return string.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) ?? ""
+        return string.addingPercentEncoding(withAllowedCharacters:
+                                                CharacterSet.urlQueryAllowed) ?? ""
     }
     
-    /// The extended calculation attribute displays the corresponding g m KB B format according to the file size
+    /// The extended calculation attribute displays the corresponding
+    ///  g m KB B format according to the file size
     public var fileSize: String {
         let string = base as! String
         guard let size = Double(string) else {  return "" }
@@ -288,7 +323,10 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     /// MD5
     public var md5: String {
         let string = base as! String
-        guard let data = string.data(using: .utf8, allowLossyConversion: true) else {  return string  }
+        guard let data = string.data(using: .utf8,
+                                     allowLossyConversion: true) else {
+            return string
+        }
         var digest = [UInt8](repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))
         #if swift(>=5.0)
         _ = data.withUnsafeBytes { (bytes: UnsafeRawBufferPointer) in
@@ -311,8 +349,12 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     /// string transform base64EncodedData
     public var base64EncodingString: String? {
         let string = base as! String
-        guard let utf8EncodeData = string.data(using: .utf8, allowLossyConversion: true) else { return nil}
-        return utf8EncodeData.base64EncodedString(options: NSData.Base64EncodingOptions.init(rawValue: 0))
+        guard let utf8EncodeData = string.data(using: .utf8,
+                                               allowLossyConversion: true) else {
+            return nil
+        }
+        return utf8EncodeData.base64EncodedString(options:
+                                                    NSData.Base64EncodingOptions.init(rawValue: 0))
     }
     
     /// base64EncodedData transform  string
@@ -325,7 +367,10 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     /// string of  image base64 tranform uiimage
     public var base64EncodingImage: UIImage? {
         let string = base as! String
-        guard let base64Data = Data(base64Encoded: string, options: .ignoreUnknownCharacters) else { return nil }
+        guard let base64Data = Data(base64Encoded: string,
+                                    options: .ignoreUnknownCharacters) else {
+            return nil
+        }
         return UIImage(data: base64Data)
     }
 }
@@ -379,8 +424,8 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     
     ///Verify legal ID number
     public func isValidIDCard() -> Bool {
-        let string = base as! String
-        let iaCardPattern = "(^[1-9]\\d{5}(18|19|([23]\\d))\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx]$)|(^[1-9]\\d{5}\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{2}$)"
+      let string = base as! String
+      let iaCardPattern = "(^[1-9]\\d{5}(18|19|([23]\\d))\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx]$)|(^[1-9]\\d{5}\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{2}$)"
         return string.verification(pattern: iaCardPattern)
     }
     
@@ -433,7 +478,8 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return string.verification(pattern: blank)
     }
     
-    /// Returns the range of numbers in a string, which can be one or more. If there are no numbers, an empty array is returned
+    /// Returns the range of numbers in a string,
+    /// which can be one or more. If there are no numbers, an empty array is returned
     public func numberRanges() -> [NSRange] {
         let string = base as! String
         guard let results = string.lx.matching(pattern: "[0-9]+(.[0-9]+)?") else {
@@ -451,7 +497,9 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
                          options: NSRegularExpression.Options = .caseInsensitive) -> [NSTextCheckingResult]? {
         let string = base as! String
         let regex = try? NSRegularExpression(pattern: pattern, options: [])
-        let results = regex?.matches(in: string, options: NSRegularExpression.MatchingOptions.init(rawValue: 0), range: NSMakeRange(0, string.count))
+        let results = regex?.matches(in: string,
+                                     options: NSRegularExpression.MatchingOptions.init(rawValue: 0),
+                                     range: NSMakeRange(0, string.count))
         return results
     }
 }

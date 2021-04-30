@@ -39,22 +39,27 @@ extension LXSwiftBasics where Base == LXSwiftTool {
     /// - Returns: Dictionary
     public static func getDictionary(with data: Data?) -> Dictionary<String, Any>? {
         guard let data = data,
-            let propertyList = try? PropertyListSerialization.propertyList(from: data, options: .init(rawValue: 0), format: nil) else { return nil }
+              let propertyList = try? PropertyListSerialization.propertyList(from: data,
+                                                        options: .init(rawValue: 0),
+                                                        format: nil) else { return nil }
         return propertyList as? Dictionary<String, Any>
     }
     
     /// get QR code information
     public static func getQrCodeString(with image: UIImage?) -> String? {
         let context =  CIContext(options: nil)
-        let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: context, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh])
+        let detector = CIDetector(ofType: CIDetectorTypeQRCode,
+                                  context: context,
+                                  options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])
         guard let cgImage = image?.cgImage else { return nil }
         let ciImage =  CIImage(cgImage: cgImage)
-        guard let feature = detector?.features(in: ciImage).first as? CIQRCodeFeature else { return nil }
-        return feature.messageString
+        let feature = detector?.features(in: ciImage).first as? CIQRCodeFeature
+        return feature?.messageString
     }
     
     /// async get QR code information
-    public static func async_getQrCodeString(with image: UIImage?, complete: @escaping (String?) -> ()) {
+    public static func async_getQrCodeString(with image: UIImage?,
+                                             complete: @escaping (String?) -> ()) {
         DispatchQueue.global().async{
             let async_qrString = self.getQrCodeString(with: image)
             DispatchQueue.main.async(execute: {
@@ -64,7 +69,8 @@ extension LXSwiftBasics where Base == LXSwiftTool {
     }
     
     /// create QR code image
-    public static func getQrCodeImage(with qrCodeStr: String?, size: CGFloat = 800) -> UIImage? {
+    public static func getQrCodeImage(with qrCodeStr: String?,
+                                      size: CGFloat = 800) -> UIImage? {
         
         let filter = CIFilter(name: "CIQRCodeGenerator")
         filter?.setDefaults()
@@ -75,7 +81,9 @@ extension LXSwiftBasics where Base == LXSwiftTool {
     }
     
     /// async create QR code image
-    public static func async_getQrCodeImage(with qrCodeStr: String?, size: CGFloat = 800, complete: @escaping (UIImage?) -> ()) {
+    public static func async_getQrCodeImage(with qrCodeStr: String?,
+                                            size: CGFloat = 800,
+                                            complete: @escaping (UIImage?) -> ()) {
         DispatchQueue.global().async{
             let async_qrImage = self.getQrCodeImage(with: qrCodeStr, size: size)
             DispatchQueue.main.async(execute: {
@@ -84,19 +92,29 @@ extension LXSwiftBasics where Base == LXSwiftTool {
         }
     }
     
-    /// After generating the QR code, because it is not a real picture, it needs to be redrawn
-    private static func createNonInterpolatedImage(with ciImage: CIImage, size: CGFloat) -> UIImage? {
+    /// After generating the QR code,
+    /// because it is not a real picture, it needs to be redrawn
+    private static func createNonInterpolatedImage(with ciImage: CIImage,
+                                                   size: CGFloat) -> UIImage? {
         let extent = ciImage.extent.integral
         let scale = min(size / extent.width, size / extent.height)
         let width = extent.width * scale;
         let height = extent.height * scale;
         
         let colorSpace = CGColorSpaceCreateDeviceGray();
-        guard let bitmapRef = CGContext(data: nil, width: Int(width), height: Int(height), bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: CGImageAlphaInfo.none.rawValue ) else { return nil }
+        guard let bitmapRef = CGContext(data: nil, width: Int(width),
+                                        height: Int(height),
+                                        bitsPerComponent: 8,
+                                        bytesPerRow: 0,
+                                        space: colorSpace,
+                                        bitmapInfo: CGImageAlphaInfo.none.rawValue ) else {
+            return nil
+        }
         bitmapRef.interpolationQuality = CGInterpolationQuality.high
         bitmapRef.scaleBy(x: scale, y: scale)
         let context =  CIContext(options: nil)
-        guard let bitmapImage = context.createCGImage(ciImage, from: extent) else { return nil }
+        guard let bitmapImage = context.createCGImage(ciImage,
+                                                      from: extent) else { return nil }
         bitmapRef.draw(bitmapImage, in: extent)
         guard let scaledImage = bitmapRef.makeImage() else { return nil }
         return UIImage(cgImage: scaledImage)

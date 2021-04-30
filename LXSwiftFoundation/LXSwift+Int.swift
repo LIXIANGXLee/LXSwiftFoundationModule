@@ -40,7 +40,8 @@ extension Int: LXSwiftCompatible {
 extension LXSwiftBasics where Base == Int {
     
     ///  Generating a random number of an interval
-    static func randomInt(lower: Int = 0,upper: Int = Int(UInt32.max)) -> Int {
+    static func randomInt(lower: Int = 0,
+                          upper: Int = Int(UInt32.max)) -> Int {
         return lower + Int(arc4random_uniform(UInt32(upper - lower)))
     }
     

@@ -20,11 +20,11 @@ extension LXSwiftBasics where Base: UIImage {
     /// - Parameters:
     ///   - light: light image
     ///   - dark:  dark image
-    public static func image(lightStr: String, darkStr: String) -> UIImage {
+    public static func image(lightStr: String,
+                             darkStr: String) -> UIImage {
         
         let light = UIImage(named: lightStr)
         let dark = UIImage(named: lightStr)
-        
         if light != nil && dark != nil {
             return image(light: light!, dark: dark!)
         }else {
@@ -37,11 +37,17 @@ extension LXSwiftBasics where Base: UIImage {
     /// - Parameters:
     ///   - light: light image
     ///   - dark:  dark image
-    public static func image(light: UIImage, dark: UIImage) -> UIImage {
+    public static func image(light: UIImage,
+                             dark: UIImage) -> UIImage {
         if #available(iOS 13.0, *) {
             guard let config = light.configuration else { return light }
-            let lightImage = light.withConfiguration(config.withTraitCollection(UITraitCollection.init(userInterfaceStyle: UIUserInterfaceStyle.light)))
-            lightImage.imageAsset?.register(dark, with: config.withTraitCollection(UITraitCollection.init(userInterfaceStyle: UIUserInterfaceStyle.dark)))
+            let lightImage = light.withConfiguration(
+                config.withTraitCollection(
+                    UITraitCollection.init(userInterfaceStyle: UIUserInterfaceStyle.light)))
+            lightImage.imageAsset?.register(dark,
+                                            with: config.withTraitCollection(
+                                                UITraitCollection.init(userInterfaceStyle:
+                                                                    UIUserInterfaceStyle.dark)))
             return lightImage.imageAsset?.image(with: UITraitCollection.current) ?? light
         } else {
             return light
@@ -68,14 +74,29 @@ extension LXSwiftBasics where Base: UIImage {
     public var imageWithCircle: UIImage? {
         return imageByRoundCornerRadius(with: min(base.size.width, base.size.height))
     }
- 
+    
+    /// Returns whether the image contains an alpha component.
+    public var isContainsAlphaComponent: Bool {
+        let alphaInfo = base.cgImage?.alphaInfo
+        return (
+            alphaInfo == .first ||
+                alphaInfo == .last ||
+                alphaInfo == .premultipliedFirst ||
+                alphaInfo == .premultipliedLast
+        )
+    }
+
+    /// Returns whether the image is opaque.
+    public var isOpaque: Bool { return !isContainsAlphaComponent }
+
+    
     /// interception roundCorners  with image
     ///
     /// - Parameters:
     ///   - roundCorners: left right top bottom
     ///   - cornerRadi: size
     public func imageByRoundCornerRadius(with radius: CGFloat) -> UIImage? {
-        return imageByRoundCornerRadius(with: radius, corners: UIRectCorner.allCorners)
+        return imageByRound(with: radius, corners: UIRectCorner.allCorners)
     }
     
     ///The drawing method cuts the picture into the round corner and adds the border
@@ -86,19 +107,31 @@ extension LXSwiftBasics where Base: UIImage {
     /// -borderWidth -- border color
     /// -borderColor -- border color
     /// -borderLineJoin type
-    public func imageByRoundCornerRadius(with radius: CGFloat, corners: UIRectCorner, borderWidth: CGFloat = 0, borderColor: UIColor = UIColor.white, borderLineJoin: CGLineJoin = .round) -> UIImage? {
+    public func imageByRound(with radius: CGFloat,
+                                         corners: UIRectCorner,
+                                         borderWidth: CGFloat = 0,
+                                         borderColor: UIColor = UIColor.white,
+                                         borderLineJoin: CGLineJoin = .round) -> UIImage? {
         
         UIGraphicsBeginImageContextWithOptions(base.size, false, base.scale)
-        guard let context = UIGraphicsGetCurrentContext(), let cgImage = base.cgImage else { return nil }
+        guard let context = UIGraphicsGetCurrentContext(),
+              let cgImage = base.cgImage else { return nil }
         
-        let rect = CGRect(x: 0,  y: 0, width: base.size.width, height: base.size.height)
+        let rect = CGRect(x: 0,
+                          y: 0,
+                          width: base.size.width,
+                          height: base.size.height)
         context.scaleBy(x: 1, y: -1);
         context.translateBy(x: 0, y: -rect.size.height);
         let minSize = min(base.size.width, base.size.height)
         
         var path: UIBezierPath? = nil
         if borderWidth < minSize / 2 {
-            path = UIBezierPath(roundedRect: rect.insetBy(dx: borderWidth, dy: borderWidth), byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: borderWidth))
+            path = UIBezierPath(roundedRect: rect.insetBy(dx: borderWidth,
+                                                          dy: borderWidth),
+                                byRoundingCorners: corners,
+                                cornerRadii: CGSize(width: radius,
+                                                    height: borderWidth))
         }
         path?.close()
         context.saveGState()
@@ -110,7 +143,10 @@ extension LXSwiftBasics where Base: UIImage {
             let strokeInset = floor(borderWidth * base.scale  + 0.5) / base.scale
             let strokeRect = rect.insetBy(dx: strokeInset, dy: strokeInset)
             let strokeRadius = radius > base.scale / 2 ? radius - base.scale / 2 : 0;
-            let strokePath = UIBezierPath(roundedRect: strokeRect, byRoundingCorners: corners, cornerRadii: CGSize(width: strokeRadius, height: strokeRadius))
+            let strokePath = UIBezierPath(roundedRect: strokeRect,
+                                          byRoundingCorners: corners,
+                                          cornerRadii: CGSize(width: strokeRadius,
+                                                              height: strokeRadius))
             strokePath.close()
             strokePath.lineWidth = borderWidth
             strokePath.lineJoinStyle = borderLineJoin
@@ -149,7 +185,13 @@ extension LXSwiftBasics where Base: UIImage {
         var images : [UIImage] = [UIImage]()
         for i in 0..<row {
             for j in 0..<col {
-                guard let subImageRef = imageRef.cropping(to: CGRect(x: CGFloat(j * imageRef.width / col), y: CGFloat(i * imageRef.height / row), width: CGFloat(imageRef.width / col), height: CGFloat(imageRef.height / row))) else {return [UIImage()]}
+                guard let subImageRef = imageRef.cropping(to:
+                                CGRect(x: CGFloat(j * imageRef.width / col),
+                                         y: CGFloat(i * imageRef.height / row),
+                                         width: CGFloat(imageRef.width / col),
+                                         height: CGFloat(imageRef.height / row))) else {
+                    return [UIImage()]
+                }
                 images.append(UIImage(cgImage: subImageRef))
             }
         }
@@ -165,7 +207,8 @@ extension LXSwiftBasics where Base: UIImage {
     /// - Parameters:
     ///   - color: color
     ///   - size: size
-    public static func image(WithColor color: UIColor, size: CGSize = CGSize(width: 10, height: 10)) -> UIImage? {
+    public static func image(WithColor color: UIColor,
+                             size: CGSize = CGSize(width: 10, height: 10)) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, 1.0)
         let context = UIGraphicsGetCurrentContext()
         context?.setFillColor(color.cgColor)
@@ -184,7 +227,8 @@ extension LXSwiftBasics where Base: UIImage {
         filter?.setValue(inputImage, forKey: kCIInputImageKey)
         let outputImage =  filter?.outputImage!
         let context: CIContext = CIContext(options: nil)
-        let cgImage = context.createCGImage(outputImage!, from: (outputImage?.extent)!)
+        let cgImage = context.createCGImage(outputImage!,
+                                            from: (outputImage?.extent)!)
         let newImage = UIImage(cgImage: cgImage!)
         return newImage
     }
@@ -209,7 +253,8 @@ extension LXSwiftBasics where Base: UIImage {
     ///   - Parameters:
     ///   - images: bg image
     ///   - imageRect: [imageRect]
-    public func imageCompose(withImages images:[UIImage], imageRect: [CGRect]) -> UIImage? {
+    public func imageCompose(withImages images:[UIImage],
+                             imageRect: [CGRect]) -> UIImage? {
         let imageRef = base.cgImage
         let w: CGFloat = CGFloat((imageRef?.width)!)
         let h: CGFloat = CGFloat((imageRef?.height)!)
@@ -237,7 +282,8 @@ extension LXSwiftBasics where Base: UIImage {
         let generator = AVAssetImageGenerator(asset: asset)
         generator.appliesPreferredTrackTransform = true
         let time = CMTimeMakeWithSeconds(1, preferredTimescale: 600)
-        guard let image = try? generator.copyCGImage(at: time, actualTime: nil) else { return nil }
+        guard let image = try? generator.copyCGImage(at: time,
+                                                     actualTime: nil) else { return nil }
         let shotImage = UIImage(cgImage: image)
         return shotImage;
     }
@@ -247,7 +293,8 @@ extension LXSwiftBasics where Base: UIImage {
     /// - Parameter scale: (0~1)
     /// - Returns: newimage
     public func zoomTo(scale: CGFloat) -> UIImage {
-        let targetSize = CGSize(width: base.size.width * scale, height: base.size.height * scale)
+        let targetSize = CGSize(width: base.size.width * scale,
+                                height: base.size.height * scale)
         return zoomTo(size: targetSize)
     }
     
@@ -323,14 +370,24 @@ extension LXSwiftBasics where Base: UIImage {
         default:
             break
         }
-        let ctx = CGContext(data: nil, width: Int(base.size.width), height: Int(base.size.height), bitsPerComponent: base.cgImage!.bitsPerComponent, bytesPerRow: 0, space: base.cgImage!.colorSpace!, bitmapInfo: base.cgImage!.bitmapInfo.rawValue)
+        let ctx = CGContext(data: nil, width: Int(base.size.width),
+                            height: Int(base.size.height),
+                            bitsPerComponent: base.cgImage!.bitsPerComponent,
+                            bytesPerRow: 0, space: base.cgImage!.colorSpace!,
+                            bitmapInfo: base.cgImage!.bitmapInfo.rawValue)
         ctx?.concatenate(transform)
         switch base.imageOrientation {
         case .left, .leftMirrored, .right, .rightMirrored:
-            ctx?.draw(base.cgImage!, in: CGRect(x: CGFloat(0), y: CGFloat(0), width: CGFloat(base.size.height), height: CGFloat(base.size.width)))
+            ctx?.draw(base.cgImage!, in: CGRect(x: CGFloat(0),
+                                                y: CGFloat(0),
+                                                width: CGFloat(base.size.height),
+                                                height: CGFloat(base.size.width)))
             break
         default:
-            ctx?.draw(base.cgImage!, in: CGRect(x: CGFloat(0), y: CGFloat(0), width: CGFloat(base.size.width), height: CGFloat(base.size.height)))
+            ctx?.draw(base.cgImage!, in: CGRect(x: CGFloat(0),
+                                                y: CGFloat(0),
+                                                width: CGFloat(base.size.width),
+                                                height: CGFloat(base.size.height)))
             break
         }
         let cgimg: CGImage = (ctx?.makeImage())!
@@ -347,7 +404,10 @@ extension LXSwiftBasics where Base: UIImage {
         let width = base.size.width
         let height = base.size.height
         let colorSpace = CGColorSpaceCreateDeviceGray()
-        let context = CGContext(data: nil, width: Int(width), height: Int(height), bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: CGImageAlphaInfo.none.rawValue)
+        let context = CGContext(data: nil, width: Int(width), height: Int(height),
+                                bitsPerComponent: 8, bytesPerRow: 0,
+                                space: colorSpace,
+                                bitmapInfo: CGImageAlphaInfo.none.rawValue)
         context?.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
         guard let targetCGImage = context?.makeImage() else { return nil }
         return UIImage(cgImage: targetCGImage)
@@ -362,7 +422,9 @@ extension LXSwiftBasics where Base: UIImage {
     /// - Parameters:
     ///   - color: color
     ///   - size: size
-    public static func async_image(of color: UIColor, size: CGSize = CGSize(width: 10, height: 10), complete: @escaping (UIImage?) -> ()) {
+    public static func async_image(of color: UIColor,
+                                   size: CGSize = CGSize(width: 10, height: 10),
+                                   complete: @escaping (UIImage?) -> ()) {
         DispatchQueue.global().async{
             let async_image = self.image(WithColor: color, size: size)
             DispatchQueue.main.async(execute: {
@@ -389,9 +451,18 @@ extension LXSwiftBasics where Base: UIImage {
     /// -borderWidth -- border color
     /// -borderColor -- border color
     /// -borderLineJoin type
-    public func async_imageByRoundCornerRadius(with radius: CGFloat, corners: UIRectCorner, borderWidth: CGFloat = 0, borderColor: UIColor = UIColor.white, borderLineJoin: CGLineJoin = .round, complete: @escaping (UIImage?) -> ()) {
+    public func async_imageByRound(with radius: CGFloat,
+                                               corners: UIRectCorner,
+                                               borderWidth: CGFloat = 0,
+                                               borderColor: UIColor = UIColor.white,
+                                               borderLineJoin: CGLineJoin = .round,
+                                               complete: @escaping (UIImage?) -> ()) {
         DispatchQueue.global().async{
-            let async_image = self.imageByRoundCornerRadius(with: radius, corners: corners, borderWidth: borderWidth, borderColor: borderColor, borderLineJoin: borderLineJoin)
+            let async_image = self.imageByRound(with: radius,
+                                                            corners: corners,
+                                                            borderWidth: borderWidth,
+                                                            borderColor: borderColor,
+                                                            borderLineJoin: borderLineJoin)
             DispatchQueue.main.async(execute: {
                 complete(async_image)
             })
@@ -402,7 +473,8 @@ extension LXSwiftBasics where Base: UIImage {
     ///
     /// - Parameters:
     ///   - videoUrl: video Url
-    public static func async_image(with videoUrl: URL?, complete: @escaping (UIImage?) -> ()) {
+    public static func async_image(with videoUrl: URL?,
+                                   complete: @escaping (UIImage?) -> ()) {
         DispatchQueue.global().async{
             let async_image = self.image(withVideoUrl: videoUrl)
             DispatchQueue.main.async(execute: {
@@ -416,7 +488,9 @@ extension LXSwiftBasics where Base: UIImage {
     /// - Parameter size: curent
     /// - Parameter contentMode: model
     /// - Returns: image
-    public func async_zoomTo(size: CGSize, contentMode: UIView.ContentMode = .scaleAspectFill, complete: @escaping (UIImage?) -> ()) {
+    public func async_zoomTo(size: CGSize,
+                             contentMode: UIView.ContentMode = .scaleAspectFill,
+                             complete: @escaping (UIImage?) -> ()) {
         DispatchQueue.global().async{
             let async_image = self.zoomTo(size: size, mode: contentMode)
             DispatchQueue.main.async(execute: {
@@ -430,7 +504,9 @@ extension LXSwiftBasics where Base: UIImage {
     ///   - Parameters:
     ///   - images: bg image
     ///   - imageRect: [imageRect]
-    public func async_imageCompose(with images:[UIImage], imageRect: [CGRect], complete: @escaping (UIImage?) -> ()) {
+    public func async_imageCompose(with images:[UIImage],
+                                   imageRect: [CGRect],
+                                   complete: @escaping (UIImage?) -> ()) {
         DispatchQueue.global().async{
             let async_image = self.imageCompose(withImages: images, imageRect: imageRect)
             DispatchQueue.main.async(execute: {
@@ -444,7 +520,9 @@ extension LXSwiftBasics where Base: UIImage {
     /// - Parameters:
     ///   - row:  row count
     ///   - col: col count
-    public func async_imageCut(with row:Int, col:Int, complete: @escaping ([UIImage?]?) -> ()){
+    public func async_imageCut(with row:Int,
+                               col:Int,
+                               complete: @escaping ([UIImage?]?) -> ()){
         DispatchQueue.global().async{
             let async_images = self.imageCut(withRow: row, col: col)
             DispatchQueue.main.async(execute: {
@@ -457,7 +535,8 @@ extension LXSwiftBasics where Base: UIImage {
     /// - Parameters:
     /// - BGView -- screenshot background
     /// - Parameter completed: asynchronous completion callback (main thread callback)
-    public func async_imageShot(byFrame frame: CGRect?, complete: @escaping (UIImage?) -> ()){
+    public func async_imageShot(byFrame frame: CGRect?,
+                                complete: @escaping (UIImage?) -> ()){
         DispatchQueue.global().async{
             let async_images = self.imageShot(byFrame: frame)
             DispatchQueue.main.async(execute: {
@@ -470,7 +549,8 @@ extension LXSwiftBasics where Base: UIImage {
     /// - Parameters:
     ///- Image -- transfer picture
     ///- filter -- input filter
-    public func async_imageFilter(withFilterName filterName: String,completed:@escaping (UIImage?) -> ()) -> Void {
+    public func async_imageFilter(withFilterName filterName: String,
+                                  completed:@escaping (UIImage?) -> ()) -> Void {
         DispatchQueue.global().async{
             let newImage = self.imageFilter(withFilterName: filterName)
             DispatchQueue.main.async(execute: {
@@ -484,7 +564,9 @@ extension LXSwiftBasics where Base: UIImage {
     ///-ImageView
     ///-BGView -- screenshot background
     ///-Parameter completed: asynchronous completion callback (main thread callback)
-    public static func async_clearImage(withView view: UIView?, rect: CGRect, complete: @escaping (UIImage?) -> ()) {
+    public static func async_clearImage(withView view: UIView?,
+                                        rect: CGRect,
+                                        complete: @escaping (UIImage?) -> ()) {
         DispatchQueue.global().async{
             let async_image = self.clearImage(withView: view, rect: rect)
             DispatchQueue.main.async(execute: {

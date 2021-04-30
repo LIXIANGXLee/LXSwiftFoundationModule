@@ -23,7 +23,7 @@ public extension LXViewSetup {
     func setupViewModel() { }
 }
 
-open class LXSwiftView<U>: UIView {
+open class LXSwiftView: UIView {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)

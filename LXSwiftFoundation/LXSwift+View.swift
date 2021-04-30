@@ -24,10 +24,11 @@ extension LXSwiftBasics where Base: UIView {
     }
     
     public var aboveNavVC: UINavigationController? {
-        guard let tabBar = UIApplication.shared.delegate?.window??.rootViewController as? UITabBarController else { return nil}
-        guard let navVc = tabBar.children[tabBar.selectedIndex] as? UINavigationController else { return nil }
-        
-        return navVc
+        let tootVC = UIApplication.shared.delegate?.window??.rootViewController
+        guard let tabBar = tootVC as? UITabBarController else { return nil }
+        if let navVc = tabBar.children[tabBar.selectedIndex] as? UINavigationController{
+            return navVc
+        } else { return nil }
     }
     
     /// snapShot image
@@ -94,7 +95,10 @@ extension LXSwiftBasics where Base: UIView {
     ///   - radius: shadowRadius
     ///   - opacity: shadowOpacity
     ///   - offset: shadowOffset
-    public func setShadow(color: UIColor, radius: CGFloat, opacity: Float, offset: CGSize = CGSize.zero) {
+    public func setShadow(color: UIColor,
+                          radius: CGFloat,
+                          opacity: Float,
+                          offset: CGSize = CGSize.zero) {
         base.layer.shadowColor = color.cgColor
         base.layer.shadowRadius = radius
         base.layer.shadowOpacity = opacity
@@ -107,7 +111,9 @@ extension LXSwiftBasics where Base: UIView {
     }
     
     /// view set border
-    public func setBorder(width: CGFloat, color: UIColor, cornerRadius: CGFloat? = nil) {
+    public func setBorder(width: CGFloat,
+                          color: UIColor,
+                          cornerRadius: CGFloat? = nil) {
         base.layer.borderWidth = width
         base.layer.borderColor = color.cgColor
         if let cornerRadius = cornerRadius {
@@ -116,7 +122,8 @@ extension LXSwiftBasics where Base: UIView {
     }
     
     /// cornerRadius
-    public func setCornerRadius(radius: CGFloat = 4.0, clips: Bool = false) {
+    public func setCornerRadius(radius: CGFloat = 4.0,
+                                clips: Bool = false) {
         base.layer.cornerRadius = radius
         base.layer.masksToBounds = clips
     }
@@ -128,11 +135,15 @@ extension LXSwiftBasics where Base: UIView {
     ///   - roundingCorners: UIRectCorner(rawValue:
     ///   (UIRectCorner.topRight.rawValue) | (UIRectCorner.bottomRight.rawValue))
     ///   - viewSize: size of the current view
-    public func setPartCornerRadius(radius: CGFloat = 4.0, roundingCorners: UIRectCorner = .allCorners, viewSize: CGSize? = nil) {
+    public func setPartCornerRadius(radius: CGFloat = 4.0,
+                                    roundingCorners: UIRectCorner = .allCorners,
+                                    viewSize: CGSize? = nil) {
         
         let s = viewSize ?? base.bounds.size
         let rect = CGRect(origin: CGPoint.zero, size: s)
-        let fieldPath =  UIBezierPath(roundedRect: rect, byRoundingCorners: roundingCorners, cornerRadii: CGSize(width: radius, height: radius))
+        let fieldPath =  UIBezierPath(roundedRect: rect,
+                                      byRoundingCorners: roundingCorners,
+                                      cornerRadii: CGSize(width: radius, height: radius))
         if !s.equalTo(CGSize.zero) {
             let fieldLayer = CAShapeLayer()
             fieldLayer.frame = base.bounds
@@ -149,7 +160,8 @@ extension LXSwiftBasics where Base: UIView {
     @discardableResult
     public func addGesture(_ viewCallBack: @escaping ((UIView?) -> ())) -> UITapGestureRecognizer {
         base.viewCallBack = viewCallBack
-        let gesture = UITapGestureRecognizer(target: base, action: #selector(base.gestureTap(_:)))
+        let gesture = UITapGestureRecognizer(target: base,
+                                             action: #selector(base.gestureTap(_:)))
         base.addGestureRecognizer(gesture)
         return gesture
     }
@@ -160,8 +172,11 @@ extension UIView {
     
     /// can save callback
     internal var viewCallBack: ((UIView?) -> ())? {
-        get { return lx_getAssociatedObject(self, &viewCallBackKey) }
-        set { lx_setRetainedAssociatedObject(self, &viewCallBackKey, newValue) }
+        get { return lx_getAssociatedObject(self,
+                                            &viewCallBackKey) }
+        set { lx_setRetainedAssociatedObject(self,
+                                             &viewCallBackKey,
+                                             newValue) }
     }
     
     @objc internal func gestureTap(_ gesture: UIGestureRecognizer) {

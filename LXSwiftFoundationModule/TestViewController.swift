@@ -26,7 +26,7 @@ class TestViewController: UIViewController {
         
         let type2 = LXSwiftRegexType("([0-9]+\\.[0-9]+)|([0-9]+)", color: UIColor.red, font: UIFont.systemFont(ofSize: 12), isExpression: false)
 
-        let attr1 = LXSwiftRegex.regex(of: str1, textColor: UIColor.lx.color(hex: "333333")!, textFont: UIFont.systemFont(ofSize: 12), wordRegexTypes: [type2])
+        let attr1 = LXSwiftRegex.regex(of: str1, textColor: UIColor.lx.color(hex: "333333"), textFont: UIFont.systemFont(ofSize: 12), wordRegexTypes: [type2])
         
         label.attributedText = attr1
         

@@ -8,6 +8,7 @@
 
 import UIKit
 
-open class LXSwiftButton<U>: UIButton {
+open class LXSwiftButton: UIButton {
+    open var swiftModel: Any?
 
 }

@@ -28,7 +28,8 @@ public struct LXSwiftRegexType {
     ///Hyperlink string font size
     public var font: UIFont = UIFont.systemFont(ofSize: 15)
     
-    ///Whether to match for expression true for expression match false for hyperlink, phone match
+    ///Whether to match for expression true for expression match false for hyperlink,
+    /// phone match
     public var isExpression: Bool = false
 }
 
@@ -39,8 +40,11 @@ public class LXSwiftRegex {
     public static let imageLinkConst = "imageLinkConst__"
     
     ///Hyperlink matching string
-    public static let httpRegex = "http(s)?://([a-zA-Z|\\d]+\\.)+[a-zA-Z|\\d]+(/[a-zA-Z|\\d|\\-|\\+|_./?%&=]*)?"
-    ///Phone number matching
+    public static let httpRegex = """
+    http(s)?://([a-zA-Z|\\d]+\\.)+[a-zA-Z|\\d]+(/\
+    [a-zA-Z|\\d|\\-|\\+|_./?%&=]*)?
+    """
+    
     public static let phoneRegex = "\\d{3,4}[- ]?\\d{7,8}"
     ///Expression matching
     public static let expressionRegex = "\\[.*?\\]"
@@ -66,11 +70,12 @@ extension LXSwiftRegex {
     public class func regex(of text: String,
                             textColor: UIColor = UIColor.black,
                             textFont: UIFont = UIFont.systemFont(ofSize: 15),
-                            wordRegexTypes : [LXSwiftRegexType] = wordRegexTypes)
+                            wordRegexTypes: [LXSwiftRegexType] = wordRegexTypes)
         -> NSAttributedString? {
             
         if text.count <= 0 { return nil }
-        let attributes = [NSAttributedString.Key.font: textFont, NSAttributedString.Key.foregroundColor: textColor]
+        let attributes = [NSAttributedString.Key.font: textFont,
+                          NSAttributedString.Key.foregroundColor: textColor]
         let attributedStr = NSMutableAttributedString(string: text, attributes:attributes)
         
         // Start text matching
@@ -81,16 +86,26 @@ extension LXSwiftRegex {
                     
                     let attachment = NSTextAttachment()
                     attachment.image = UIImage(named: capturedStrings)
-                    attachment.bounds = CGRect(x: 0, y: scale_ip6_width(-3), width: wordRegexType.font.lineHeight, height: wordRegexType.font.lineHeight)
+                    attachment.bounds = CGRect(x: 0,
+                                               y: scale_ip6_width(-3),
+                                               width: wordRegexType.font.lineHeight,
+                                               height: wordRegexType.font.lineHeight)
                     let imageAttr = NSAttributedString(attachment: attachment)
                     attributedStr.replaceCharacters(in: range, with: imageAttr)
-                    attributedStr.addAttribute(NSAttributedString.Key(rawValue: LXSwiftRegex.imageLinkConst), value: capturedStrings, range: range)
+                    attributedStr.addAttribute(NSAttributedString.Key(rawValue:
+                                                                        LXSwiftRegex.imageLinkConst),
+                                               value: capturedStrings,
+                                               range: range)
                 }
             }else {
                 // Match hyperlinks
                 text.lx.enumerateStringsMatchedByRegex(regex: wordRegexType.link) { (captureCount, capturedStrings, range) in
-                    attributedStr.addAttributes([NSAttributedString.Key.foregroundColor : wordRegexType.color,NSAttributedString.Key.font: wordRegexType.font], range: range)
-                    attributedStr.addAttribute(NSAttributedString.Key(rawValue: LXSwiftRegex.textLinkConst), value: capturedStrings, range: range)
+                    attributedStr.addAttributes([NSAttributedString.Key.foregroundColor : wordRegexType.color,NSAttributedString.Key.font: wordRegexType.font],
+                                                range: range)
+                    attributedStr.addAttribute(NSAttributedString.Key(rawValue:
+                                                                        LXSwiftRegex.textLinkConst),
+                                               value: capturedStrings,
+                                               range: range)
                 }
             }
         }

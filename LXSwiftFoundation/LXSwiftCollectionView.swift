@@ -10,13 +10,15 @@ import UIKit
 
 open class LXSwiftCollectionView: UICollectionView {
     
-    public typealias RecognizeSimultaneously = ((UIGestureRecognizer, UIGestureRecognizer) -> Bool)
+    public typealias RecognizeSimultaneously = ((UIGestureRecognizer,
+                                                 UIGestureRecognizer) -> Bool)
     public typealias ShouldBegin =  ((UIGestureRecognizer) -> Bool?)
 
     public var shouldRecognizeSimultaneously: RecognizeSimultaneously?
     public var shouldBegin: ShouldBegin?
 
-    public override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
+    public override init(frame: CGRect,
+                         collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
         backgroundColor = UIColor.white
         //适配iOS 11
@@ -48,8 +50,11 @@ public extension LXSwiftCollectionView {
         self.register(cell, forCellWithReuseIdentifier: cell.reusableIdentifier)
     }
 
-    func dequeueGenericReusableCell<T: UICollectionViewCell>(indexPath: IndexPath) -> T where T: LXSwiftCellCompatible {
-        return self.dequeueReusableCell(withReuseIdentifier: T.reusableIdentifier, for: indexPath) as! T
+    func dequeueGenericReusableCell<T: UICollectionViewCell>(indexPath:
+                                                                IndexPath)
+    -> T where T: LXSwiftCellCompatible {
+        return self.dequeueReusableCell(withReuseIdentifier: T.reusableIdentifier,
+                                        for: indexPath) as! T
     }
 }
 
@@ -57,13 +62,18 @@ public extension LXSwiftCollectionView {
 extension LXSwiftCollectionView: UIGestureRecognizerDelegate {
     
     /// Do you support multiple event delivery delegate
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        let outResult = shouldRecognizeSimultaneously?(gestureRecognizer, otherGestureRecognizer)
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+                                  shouldRecognizeSimultaneouslyWith otherGestureRecognizer:
+                                    UIGestureRecognizer) -> Bool {
+        let outResult = shouldRecognizeSimultaneously?(gestureRecognizer,
+                                                       otherGestureRecognizer)
         return outResult ?? true
     }
     
     /// is can event
-    open override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+    open override func gestureRecognizerShouldBegin(_ gestureRecognizer:
+                                                        UIGestureRecognizer)
+    -> Bool {
         let outResult = shouldBegin?(gestureRecognizer)
         return outResult ??
             super.gestureRecognizerShouldBegin(gestureRecognizer)
@@ -76,7 +86,7 @@ extension LXSwiftCollectionView: LXViewSetup {
     
 }
 
-open class LXSwiftCollectionViewCell<U>: UICollectionViewCell, LXSwiftCellCompatible {
+open class LXSwiftCollectionViewCell: UICollectionViewCell, LXSwiftCellCompatible {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()

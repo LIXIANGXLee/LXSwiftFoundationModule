@@ -26,7 +26,10 @@ open class LXSwiftTextView: UITextView {
         /// call after placehoderLabel
         font = UIFont.systemFont(ofSize: 14)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(textDidChange), name: UITextView.textDidChangeNotification, object: self)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(textDidChange),
+                                               name: UITextView.textDidChangeNotification,
+                                               object: self)
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -49,8 +52,10 @@ open class LXSwiftTextView: UITextView {
         
         let labelX = textContainer.lineFragmentPadding
         let labelY = CGFloat(8)
-        let size =  self.placehoderLabel.text?.lx.size(font: placehoderLabel.font, width: self.frame.width - CGFloat(labelX * 2)) ?? CGSize.zero
-        placehoderLabel.frame = CGRect(origin: CGPoint(x: labelX, y: labelY), size: size)
+        let size = self.placehoderLabel.text?.lx.size(font: placehoderLabel.font,
+                        width: self.frame.width - CGFloat(labelX * 2)) ?? CGSize.zero
+        placehoderLabel.frame = CGRect(origin: CGPoint(x: labelX, y: labelY),
+                                       size: size)
     }
 }
 
@@ -60,15 +65,19 @@ extension LXSwiftTextView {
     
     /// can save maxTextLength
     internal var maxTextLength: Int? {
-        get { return lx_getAssociatedObject(self, &maxTextLengthKey) }
-        set { lx_setRetainedAssociatedObject(self, &maxTextLengthKey, newValue,.OBJC_ASSOCIATION_ASSIGN) }
+        get { return lx_getAssociatedObject(self,
+                                            &maxTextLengthKey) }
+        set { lx_setRetainedAssociatedObject(self,
+                                             &maxTextLengthKey,
+                                             newValue,.OBJC_ASSOCIATION_ASSIGN) }
     }
     
     /// 事件监听
     @objc internal func textDidChange() {
         placehoderLabel.isHidden = self.hasText
         
-        if let maxLength = self.maxTextLength, (text?.count ?? 0) > maxLength{
+        if let maxLength = self.maxTextLength,
+           (text?.count ?? 0) > maxLength {
             text = text?.lx.substring(to: maxLength)
         }else{
             textCallBack?(self.text)

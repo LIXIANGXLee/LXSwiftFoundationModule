@@ -22,7 +22,9 @@ extension LXSwiftBasics where Base == Date {
     }
     
     /// date and date Compare
-    public func dateCompare(with date: Date, unit: Set<Calendar.Component> = [.year,.month,.day]) -> (DateComponents,DateComponents) {
+    public func dateCompare(with date: Date,
+                            unit: Set<Calendar.Component> = [.year,.month,.day])
+    -> (DateComponents,DateComponents) {
         let calendar = Calendar.current
         let dateComps = calendar.dateComponents(unit, from: date)
         let selfCmps = calendar.dateComponents(unit, from: base)

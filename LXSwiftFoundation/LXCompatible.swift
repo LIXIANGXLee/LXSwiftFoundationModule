@@ -46,7 +46,6 @@ public extension LXSwiftCompatible {
             LXSwiftBasics<Self>(self)
         }
     }
-    
 }
 
 /// Define Property protocol
@@ -66,7 +65,6 @@ internal protocol LXSwiftPropertyCompatible {
 public protocol LXSwiftCellCompatible: AnyObject {
     static var reusableIdentifier: String { get }
 }
-
 public extension LXSwiftCellCompatible {
     static var reusableIdentifier: String {
         return "\(self)"

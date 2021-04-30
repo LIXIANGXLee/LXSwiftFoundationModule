@@ -22,7 +22,8 @@ class ViewController: UIViewController {
         self.view.backgroundColor = UIColor.white
         
         print("-----------\(UIApplication.shared.statusBarFrame.height)")
-        
+        print("-----------\(LXSwiftRegex.httpRegex)")
+
         
 
          let imgView = UIImageView(frame: CGRect(x: 10, y: 200, width: 300, height: 300))

@@ -55,11 +55,16 @@ extension LXSwiftBasics where Base: UIScrollView {
 extension UIScrollView {
     
     /// get contentScroll long image for ScrollView
-    internal func snapShotContentScroll(_ completionHandler: @escaping (_ screenShotImage: UIImage?) -> Void) {
+    internal func snapShotContentScroll(_ completionHandler:
+                                            @escaping (_ screenShotImage: UIImage?)
+                                            -> Void) {
         
         /// Put a fake Cover of View
         let snapShotView = self.snapshotView(afterScreenUpdates: true)
-        snapShotView?.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: (snapShotView?.frame.size.width)!, height: (snapShotView?.frame.size.height)!)
+        snapShotView?.frame = CGRect(x: self.frame.origin.x,
+                                     y: self.frame.origin.y,
+                                     width: (snapShotView?.frame.size.width)!,
+                                     height: (snapShotView?.frame.size.height)!)
         self.superview?.addSubview(snapShotView!)
         
         ///  originOffset of base
@@ -71,7 +76,9 @@ extension UIScrollView {
         UIGraphicsBeginImageContextWithOptions(self.contentSize, false, UIScreen.main.scale)
         
         ///This method is a drawing, and there may be recursive calls inside
-        self.snapShotContentScrollPage(index: 0, maxIndex: Int(page), callback: { [weak self] () -> Void in
+        self.snapShotContentScrollPage(index: 0,
+                                       maxIndex: Int(page),
+                                       callback: { [weak self] () -> Void in
             let strongSelf = self
             
             let screenShotImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -89,14 +96,23 @@ extension UIScrollView {
     
     /// Draw according to offset and number of pages
     ///This method is a drawing, and there may be recursive calls inside
-    internal func snapShotContentScrollPage(index: Int, maxIndex: Int, callback: @escaping () -> Void) {
+    internal func snapShotContentScrollPage(index: Int,
+                                            maxIndex: Int,
+                                            callback: @escaping () -> Void) {
         
-        self.setContentOffset(CGPoint(x: 0, y: CGFloat(index) * self.frame.size.height), animated: false)
-        let splitFrame = CGRect(x: 0, y: CGFloat(index) * self.frame.size.height, width: bounds.size.width, height: bounds.size.height)
-        DispatchQueue.main.lx.delay( Double(Int64(0.3 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
+        self.setContentOffset(CGPoint(x: 0,
+                                      y: CGFloat(index) * self.frame.size.height),
+                              animated: false)
+        let splitFrame = CGRect(x: 0,
+                                y: CGFloat(index) * self.frame.size.height,
+                                width: bounds.size.width,
+                                height: bounds.size.height)
+       DispatchQueue.main.lx.delay(Double(Int64(0.3*Double(NSEC_PER_SEC)))/Double(NSEC_PER_SEC)) {
             self.drawHierarchy(in: splitFrame, afterScreenUpdates: true)
             if index < maxIndex {
-                self.snapShotContentScrollPage(index: index + 1, maxIndex: maxIndex, callback: callback)
+                self.snapShotContentScrollPage(index: index + 1,
+                                               maxIndex: maxIndex,
+                                               callback: callback)
             }else{
                 callback()
             }

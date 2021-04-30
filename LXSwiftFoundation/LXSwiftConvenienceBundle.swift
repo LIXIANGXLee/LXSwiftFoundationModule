@@ -29,7 +29,9 @@ public struct LXSwiftConvenienceBundle {
     private let bundlePath: String     //bundle  path
     private let bundleName: String
     
-    public init(bundlePath: String, bundleName: String, path: String? = nil) {
+    public init(bundlePath: String,
+                bundleName: String,
+                path: String? = nil) {
         self.bundlePath = bundlePath
         self.path = path
         self.bundleName = bundleName
@@ -39,7 +41,8 @@ public struct LXSwiftConvenienceBundle {
     ///
     /// - imageNamed: The name or path of the image
     /// - path: bundle If specified, the default path is not used
-    public func imageNamed(_ imageName: String, path: String? = nil) -> UIImage? {
+    public func imageNamed(_ imageName: String,
+                           path: String? = nil) -> UIImage? {
         var imagePath = "\(bundlePath)/\(bundleName)/"
         if let path = path {
             imagePath = imagePath + "\(path)/"
@@ -52,9 +55,12 @@ public struct LXSwiftConvenienceBundle {
 }
 
 fileprivate struct LXSwiftImageBuilder {
-    static var x1ImageBuilder: LXSwiftImageAdaptNode = LXSwiftX1ImageBuilder(successor: LXSwiftX2ImageBuilder(successor: LXSwiftX3ImageBuilder()))
-    static var x2ImageBuilder: LXSwiftImageAdaptNode = LXSwiftX2ImageBuilder(successor: LXSwiftX3ImageBuilder(successor: LXSwiftX1ImageBuilder()))
-    static var x3ImageBuilder: LXSwiftImageAdaptNode = LXSwiftX3ImageBuilder(successor: LXSwiftX2ImageBuilder(successor: LXSwiftX1ImageBuilder()))
+    static var x1ImageBuilder: LXSwiftImageAdaptNode = LXSwiftX1ImageBuilder(successor:
+                                LXSwiftX2ImageBuilder(successor: LXSwiftX3ImageBuilder()))
+    static var x2ImageBuilder: LXSwiftImageAdaptNode = LXSwiftX2ImageBuilder(successor:
+                                LXSwiftX3ImageBuilder(successor: LXSwiftX1ImageBuilder()))
+    static var x3ImageBuilder: LXSwiftImageAdaptNode = LXSwiftX3ImageBuilder(successor:
+                               LXSwiftX2ImageBuilder(successor: LXSwiftX1ImageBuilder()))
     static func loadImage(_ imagePath: String) -> UIImage? {
         let scale = UIScreen.main.scale
         if abs(scale - 3) <= 0.01 {

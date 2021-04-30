@@ -8,7 +8,8 @@
 
 import UIKit
 
-open class LXSwiftLabel<U>: UILabel {
+open class LXSwiftLabel: UILabel {
 
+    open var swiftModel: Any?
 }
 

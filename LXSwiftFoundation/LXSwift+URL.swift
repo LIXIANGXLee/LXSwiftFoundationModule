@@ -12,8 +12,10 @@ extension URL: LXSwiftCompatible { }
 extension LXSwiftBasics where Base == URL {
     
     /// 取出Get请求中的参数，结果是一个大字典
+    /// fetch the parameters in the GET request, and the result is a large dictionary
    public func getParameters() -> [String: String] {
-        let components = NSURLComponents(url: base, resolvingAgainstBaseURL: false)
+        let components = NSURLComponents(url: base,
+                                         resolvingAgainstBaseURL: false)
         // 取出items，如果為nil就改為預設值 空陣列
         let queryItems = components?.queryItems ?? []
         return queryItems.reduce([String: String]()) {
@@ -25,6 +27,9 @@ extension LXSwiftBasics where Base == URL {
 
     ///  按照原顺序 取出Get请求中的参数，结果是一个大字典
     /// - Returns:结果是一个数组，每个元素是一个字典，（可以有序）
+    /// Extract the parameters from the GET request in the original order.
+    ///  The result is a large dictionary
+    /// - Returns: Returns an array with each element as a dictionary.
     public func getParametersWithOrder() -> [[String: String]] {
         var queries = [[String: String]]()
         guard let query = base.query else { return queries }

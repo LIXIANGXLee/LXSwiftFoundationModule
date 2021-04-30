@@ -15,8 +15,8 @@ extension LXSwiftBasics where Base: Bundle {
     
     ///Get namespace
     public static var namespace: String {
-        guard let namespace =  Bundle.main.infoDictionary?["CFBundleExecutable"] as? String else { return "" }
-        return  namespace
+        let namespace =  Bundle.main.infoDictionary?["CFBundleExecutable"] as? String
+        return  namespace ?? ""
     }
     
     /// progect name

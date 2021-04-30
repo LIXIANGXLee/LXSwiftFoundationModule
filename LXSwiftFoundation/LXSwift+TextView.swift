@@ -18,7 +18,8 @@ extension LXSwiftBasics where Base : LXSwiftTextView {
     }
     
     /// set placeholder and color
-    public func set(with placeholder: String?, color: UIColor? = UIColor.lx.color(hex: "999999")) {
+    public func set(with placeholder: String?,
+                    color: UIColor? = UIColor.lx.color(hex: "999999")) {
         
         base.placehoderLabel.text = placeholder
         if let c = color {
@@ -29,12 +30,15 @@ extension LXSwiftBasics where Base : LXSwiftTextView {
     }
     
     /// set placeholder and color string
-    public func set(with placeholder: String?, color: String = "999999") {
-        set(with: placeholder, color: UIColor.lx.color(hex: color))
+    public func set(with placeholder: String?,
+                    color: String = "999999") {
+        set(with: placeholder,
+            color: UIColor.lx.color(hex: color))
     }
     
     /// set font and textColor
-    public func set(withFont font: UIFont, textColor: UIColor?) {
+    public func set(withFont font: UIFont,
+                    textColor: UIColor?) {
         base.font = font
         if let c = textColor {
             base.textColor = c
@@ -42,22 +46,32 @@ extension LXSwiftBasics where Base : LXSwiftTextView {
     }
     
     /// set bold font and textColor
-    public func set(withBoldFont fontSize: CGFloat, textColor: String) {
-        set(withFont: UIFont.systemFont(ofSize: fontSize, weight: .bold), textColor: UIColor.lx.color(hex: textColor))
+    public func set(withBoldFont fontSize: CGFloat,
+                    textColor: String) {
+        set(withFont: UIFont.systemFont(ofSize: fontSize,
+                                        weight: .bold),
+            textColor: UIColor.lx.color(hex: textColor))
     }
     
     /// set medium font and textColor
-    public func set(withMediumFont fontSize: CGFloat, textColor: String) {
-        set(withFont: UIFont.systemFont(ofSize: fontSize, weight: .medium), textColor: UIColor.lx.color(hex: textColor))
+    public func set(withMediumFont fontSize: CGFloat,
+                    textColor: String) {
+        set(withFont: UIFont.systemFont(ofSize: fontSize,
+                                        weight: .medium),
+            textColor: UIColor.lx.color(hex: textColor))
     }
     
     /// set regular font and textColor
-    public func set(withRegularFont fontSize: CGFloat, textColor: String) {
-        set(withFont: UIFont.systemFont(ofSize: fontSize, weight: .regular), textColor: UIColor.lx.color(hex: textColor))
+    public func set(withRegularFont fontSize: CGFloat,
+                    textColor: String) {
+        set(withFont: UIFont.systemFont(ofSize: fontSize,
+                                        weight: .regular),
+            textColor: UIColor.lx.color(hex: textColor))
     }
     
     /// call updateUI  after set text or NSAttributedString
-    ///After calling this method, if you want to call the callback function setHandle, please call after setHandle settings.
+    ///After calling this method, if you want to call the callback function setHandle,
+    /// please call after setHandle settings.
     public func updateUI() {
         base.textDidChange()
         base.textCallBack?(base.text)
@@ -72,7 +86,8 @@ extension LXSwiftBasics where Base : LXSwiftTextView {
     public var maxLength: Int? {
         get{ return base.maxTextLength }
         set{
-            guard let newValue = newValue, newValue > 0 else { return }
+            guard let newValue = newValue,
+                  newValue > 0 else { return }
             base.maxTextLength = newValue
         }
     }

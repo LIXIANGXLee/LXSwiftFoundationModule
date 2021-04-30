@@ -5,6 +5,7 @@
 //  Created by XL on 2020/9/24.
 //  Copyright © 2020 李响. All rights reserved.
 //
+
 import UIKit
 import AVFoundation
 import Photos
@@ -17,21 +18,24 @@ public class LXSwiftPrivacyManager: NSObject, LXSwiftCompatible {
     /// 返回空除了代表用户已同意以外，也可能代表还未申请过
     @objc class public func checkVideoAuthority(
         with restrictedMessage: String = "未开启相机权限") -> String? {
-        return getPrivacyResult(of: .video, restrictedMessage: restrictedMessage)
+        return getPrivacyResult(of: .video,
+                                restrictedMessage: restrictedMessage)
     }
 
     /// 检查麦克风权限，无权限时返回提示语
     /// 返回空除了代表用户已同意以外，也可能代表还未申请过
     @objc class public func checkAudioAuthority(
         with restrictedMessage: String = "未开启麦克风权限") -> String? {
-        return getPrivacyResult(of: .audio, restrictedMessage: restrictedMessage)
+        return getPrivacyResult(of: .audio,
+                                restrictedMessage: restrictedMessage)
     }
 
     /// 检查相册权限，无权限时返回提示语
     /// 返回空除了代表用户已同意以外，也可能代表还未申请过
     @objc class public func checkLibraryAuthority(
         with restrictedMessage: String = "未开启相册权限") -> String? {
-        return getPrivacyResult(of: .photo, restrictedMessage: restrictedMessage)
+        return getPrivacyResult(of: .photo,
+                                restrictedMessage: restrictedMessage)
     }
 
     /// 检查网络权限，无权限时返回提示
@@ -39,11 +43,13 @@ public class LXSwiftPrivacyManager: NSObject, LXSwiftCompatible {
     @objc class public func checkNetworkPrivacy(
         with restrictedMessage: String = "网络链接失败,请检查你的网络是否受限\n请检查是否允许【DaDaBaby】APP 使用网络(设置->DaDaBaby->无线数据)"
         ) -> String? {
-        return getPrivacyResult(of: .net, restrictedMessage: restrictedMessage)
+        return getPrivacyResult(of: .net,
+                                restrictedMessage: restrictedMessage)
     }
 
     /// 实际检查调用
-    private class func getPrivacyResult(of type: LXSwiftPrivacyType, restrictedMessage: String) -> String? {
+    private class func getPrivacyResult(of type: LXSwiftPrivacyType,
+                                        restrictedMessage: String) -> String? {
         let status = LXSwiftPrivacyChecker.check(type)
         if status.pass {
             // 用户已同意
@@ -64,7 +70,8 @@ public class LXSwiftPrivacyManager: NSObject, LXSwiftCompatible {
                                         message: message,
                                         preferredStyle: .alert)
 
-        let goAction = UIAlertAction(title: "去设置", style: .default) {_ in
+        let goAction = UIAlertAction(title: "去设置",
+                                     style: .default) {_ in
             LXSwiftPrivacyManager.jumpToSettingAppDirectly()
         }
 
@@ -83,7 +90,8 @@ public class LXSwiftPrivacyManager: NSObject, LXSwiftCompatible {
         
         if UIApplication.shared.canOpenURL(targetURL) {
             if #available(iOS 10.0, *) {
-                UIApplication.shared.open(targetURL, options: [:], completionHandler: nil)
+                UIApplication.shared.open(targetURL, options: [:],
+                                          completionHandler: nil)
             } else {
                 UIApplication.shared.openURL(targetURL)
             }
@@ -105,7 +113,6 @@ public class LXSwiftPrivacyManager: NSObject, LXSwiftCompatible {
     }
 }
 
-// MARK: ============Checker 返回状态详细信息
 /// net 只适用于iOS10之后
 @objc public enum LXSwiftPrivacyType: NSInteger {
     case video, audio, photo, net
@@ -154,7 +161,9 @@ public class LXSwiftPrivacyManager: NSObject, LXSwiftCompatible {
     ///   - type: 检查哪项权限
     ///   - block: 最终结果回调
     @objc class public func checkAndAutoAsk(_ type: LXSwiftPrivacyType,
-                                            block: @escaping ((_ finalResult: LXSwiftPrivacyCheckResult) -> Void)) {
+                                            block: @escaping ((_ finalResult:
+                                                                LXSwiftPrivacyCheckResult)
+                                                              -> Void)) {
         switch type {
         case .video, .audio, .photo:
             let normalCheckResult = check(type)
@@ -168,7 +177,8 @@ public class LXSwiftPrivacyManager: NSObject, LXSwiftCompatible {
                 // 尚未申请过
                 requestPrivacy(type) { (requestResult: Bool) in
                     DispatchQueue.main.async(execute: {
-                        block(LXSwiftPrivacyCheckResult(pass: requestResult, askedUser: true))
+                        block(LXSwiftPrivacyCheckResult(pass: requestResult,
+                                                        askedUser: true))
                     })
                 }
             }

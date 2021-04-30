@@ -21,13 +21,18 @@ private var hitTimerKey: Void?
 extension UIControl  {
     
     private var hitTime: Double? {
-        get { return lx_getAssociatedObject(self, &hitTimerKey) }
-        set { lx_setRetainedAssociatedObject(self, &hitTimerKey, newValue,.OBJC_ASSOCIATION_ASSIGN) }
+        get { return lx_getAssociatedObject(self,
+                                            &hitTimerKey) }
+        set { lx_setRetainedAssociatedObject(self,
+                                             &hitTimerKey,
+                                             newValue,
+                                             .OBJC_ASSOCIATION_ASSIGN) }
     }
     
     internal func preventDoubleHit(_ hitTime: Double) {
         self.hitTime = hitTime
-        addTarget(self, action: #selector(c_preventDoubleHit), for: .touchUpInside)
+        addTarget(self, action: #selector(c_preventDoubleHit),
+                  for: .touchUpInside)
     }
     
     @objc internal func c_preventDoubleHit(_ base: UIControl)  {

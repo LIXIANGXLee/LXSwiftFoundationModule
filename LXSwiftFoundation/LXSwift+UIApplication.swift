@@ -12,7 +12,8 @@ extension UIApplication: LXSwiftCompatible { }
 extension LXSwiftBasics where Base: UIApplication {
     
     static var visibleViewController: UIViewController? {
-        return UIApplication.lx.getVisibleViewController(from: UIApplication.shared.keyWindow?.rootViewController)
+        return UIApplication.lx.getVisibleViewController(from:
+                            UIApplication.shared.keyWindow?.rootViewController)
     }
 
     static func getVisibleViewController(from vc: UIViewController?) -> UIViewController? {

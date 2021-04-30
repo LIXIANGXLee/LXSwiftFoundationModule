@@ -46,7 +46,8 @@ extension LXSwiftBasics where Base: UIFont {
     
     /// withBoldItalic
     public func withBoldItalic() -> UIFont {
-        guard let desc = base.fontDescriptor.withSymbolicTraits([.traitBold, .traitItalic]) else {
+        guard let desc = base.fontDescriptor.withSymbolicTraits([.traitBold,
+                                                                 .traitItalic]) else {
             return base
         }
         return UIFont(descriptor: desc, size: base.pointSize)

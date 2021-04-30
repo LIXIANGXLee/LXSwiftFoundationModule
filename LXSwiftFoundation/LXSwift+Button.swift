@@ -12,12 +12,12 @@ import UIKit
 //MARK: -  Extending properties for UIButton
 extension LXSwiftBasics where Base: UIButton {
     
-    /// w for button
+    /// Width for button
     public var bestWidth: CGFloat {
         return base.sizeThatFits(CGSize.zero).width
     }
     
-    /// h  for button
+    /// Height  for button
     public var bestHeight: CGFloat {
         return base.sizeThatFits(CGSize.zero).height
     }
@@ -40,7 +40,8 @@ extension LXSwiftBasics where Base: UIButton {
     ///- Title: set title
     ///- image: set image
     ///- state: set UIControl.State
-    public func set(title: String?, image: UIImage?, state: UIControl.State = .normal) {
+    public func set(title: String?, image: UIImage?,
+                    state: UIControl.State = .normal) {
         if let title = title { base.setTitle(title, for: state) }
         if let image = image { base.setImage(image, for: state) }
     }
@@ -51,7 +52,9 @@ extension LXSwiftBasics where Base : UIButton {
     
     public func setHandle(buttonCallBack: ((_ button: UIButton?) -> ())?){
         base.swiftCallBack = buttonCallBack
-        base.addTarget(base, action: #selector(base.swiftButtonAction(_:)), for: .touchUpInside)
+        base.addTarget(base,
+                       action: #selector(base.swiftButtonAction(_:)),
+                       for: .touchUpInside)
     }
 }
 
@@ -66,5 +69,4 @@ extension UIButton: LXSwiftPropertyCompatible {
     @objc internal func swiftButtonAction(_ button: UIButton) {
         self.swiftCallBack?(button)
     }
-    
 }

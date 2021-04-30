@@ -9,7 +9,7 @@
 import UIKit
 
 /// Add button horizontal layout and button vertical layout
-open class LXSwiftButtonView: LXSwiftButton<Any> {
+open class LXSwiftButtonView: LXSwiftButton {
     
     public typealias ButtonCallBack = ((_ contentRect: CGRect) -> (CGRect))
     public var titleCallBack: ButtonCallBack?
@@ -41,7 +41,8 @@ open class LXSwiftButtonView: LXSwiftButton<Any> {
 extension LXSwiftBasics where Base: LXSwiftButtonView {
     
     /// set cgrect of title and  cgrect of image
-    public func setHandle(titleCallBack: LXSwiftButtonView.ButtonCallBack?,imageCallBack: LXSwiftButtonView.ButtonCallBack?){
+    public func setHandle(titleCallBack: LXSwiftButtonView.ButtonCallBack?,
+                          imageCallBack: LXSwiftButtonView.ButtonCallBack?){
         base.titleCallBack = titleCallBack
         base.imageCallBack = imageCallBack
     }

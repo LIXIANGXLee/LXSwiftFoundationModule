@@ -11,8 +11,10 @@ import UIKit
 ///A unique identifier used to distinguish the background color
 private let linkBgTag = 1234994321
 @objc public protocol LXTextLableDelegate: AnyObject {
-    @objc optional func lxTextLable(_ textView: LXSwiftTextLable, didSelect text: String)
-    @objc optional func lxTextLable(_ textView: LXSwiftTextLable, longPress text: String)
+    @objc optional func lxTextLable(_ textView: LXSwiftTextLable,
+                                    didSelect text: String)
+    @objc optional func lxTextLable(_ textView: LXSwiftTextLable,
+                                    longPress text: String)
 }
 
 
@@ -21,7 +23,8 @@ public struct LXSwiftTextLableConfig {
     public var bgColor: UIColor
     public var bgRadius: CGFloat
     
-    public init(bgRadius: CGFloat = 6, bgColor: UIColor = UIColor.black.withAlphaComponent(0.1)) {
+    public init(bgRadius: CGFloat = 6,
+                bgColor: UIColor = UIColor.black.withAlphaComponent(0.1)) {
         self.bgColor = bgColor
         self.bgRadius = bgRadius
     }
@@ -44,7 +47,10 @@ open class LXSwiftTextLable: UIView {
         textView.isEditable = false
         textView.isScrollEnabled = false
         textView.isUserInteractionEnabled = false
-        textView.textContainerInset = UIEdgeInsets(top: 0, left:-textView.textContainer.lineFragmentPadding, bottom: 0, right: -textView.textContainer.lineFragmentPadding)
+        textView.textContainerInset = UIEdgeInsets(top: 0,
+                                       left:-textView.textContainer.lineFragmentPadding,
+                                       bottom: 0,
+                                       right:-textView.textContainer.lineFragmentPadding)
         textView.showsVerticalScrollIndicator = false
         textView.showsHorizontalScrollIndicator = false
         textView.backgroundColor = UIColor.clear
@@ -52,18 +58,21 @@ open class LXSwiftTextLable: UIView {
     }()
     
     fileprivate lazy var tagGesture: UITapGestureRecognizer = {
-        let tagGesture = UITapGestureRecognizer(target: self, action: #selector(gestureTag(gesture:)))
+        let tagGesture = UITapGestureRecognizer(target: self,
+                                                action: #selector(gestureTag(gesture:)))
         tagGesture.numberOfTouchesRequired = 1
         return tagGesture
     }()
     
     fileprivate lazy var longGesture: UILongPressGestureRecognizer = {
-        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(gestureLong(gesture:)))
+        let longGesture = UILongPressGestureRecognizer(target: self,
+                                                       action: #selector(gestureLong(gesture:)))
         longGesture.minimumPressDuration = 0.8
         return longGesture
     }()
     
-    ///External call to observe the storage property setting size note ⚠️ Please set viewframe size before attributedtext
+    ///External call to observe the storage property setting size note ⚠️
+    ///Please set viewframe size before attributedtext
     public var viewFrame: CGRect? {
         didSet {
             guard let frame = viewFrame else { return }
@@ -72,24 +81,31 @@ open class LXSwiftTextLable: UIView {
         }
     }
     
-    ///External call to observe storage properties ⚠️ Please set viewframe size before setting attributedtext
+    ///External call to observe storage properties ⚠️
+    ///Please set viewframe size before setting attributedtext
     public var attributedText: NSAttributedString? {
         didSet {
-            guard let attr = self.attributedText else { return }
+        guard let attr = self.attributedText else { return }
+        
+        textView.attributedText = attr
+        attr.enumerateAttributes(in: NSRange(location: 0,
+                                             length: attr.length),
+                                 options: NSAttributedString.EnumerationOptions(rawValue: 0)) {
+            (objct, range, stop) in
+            let t = objct[NSAttributedString.Key(LXSwiftRegex.textLinkConst)]
+            guard let textM = t as? String else {return}
+            textView.selectedRange = range
+            guard let r = textView.selectedTextRange else { return }
+            let rselectionRects = textView.selectionRects(for: r)
             
-            textView.attributedText = attr
-            attr.enumerateAttributes(in: NSRange(location: 0, length: attr.length), options: NSAttributedString.EnumerationOptions(rawValue: 0)) { (objct, range, stop) in
-                guard let textM = objct[NSAttributedString.Key(LXSwiftRegex.textLinkConst)] as? String else {return}
-                textView.selectedRange = range
-                guard let r = textView.selectedTextRange else { return }
-                let rselectionRects = textView.selectionRects(for: r)
-                
-                var rects: [CGRect] = [CGRect]()
-                for selectionRect in rselectionRects{
-                    if selectionRect.rect.width == 0 || selectionRect.rect.height == 0 { continue }
-                    rects.append(selectionRect.rect)
-                }
-                links.append(LXSwiftTextLable.TextLink(text: textM, rang: range, rects: rects))
+            var rects: [CGRect] = [CGRect]()
+            for selectionRect in rselectionRects{
+                if selectionRect.rect.width == 0 || selectionRect.rect.height == 0 { continue }
+                rects.append(selectionRect.rect)
+            }
+            links.append(LXSwiftTextLable.TextLink(text: textM,
+                                                   rang: range,
+                                                   rects: rects))
             }
         }
     }
@@ -114,7 +130,8 @@ extension LXSwiftTextLable {
     
     @objc private func gestureLong(gesture: UIGestureRecognizer) {
         if gesture.state ==  UIGestureRecognizer.State.began {
-            delegate?.lxTextLable?(self, longPress: self.attributedText?.string ?? "")
+            delegate?.lxTextLable?(self,
+                                   longPress: self.attributedText?.string ?? "")
         }
     }
     

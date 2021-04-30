@@ -13,7 +13,9 @@ extension LXSwiftBasics where Base : UISegmentedControl {
     
     public func setHandle(segmentedControlCallBack: ((Int?) -> ())?){
         base.swiftCallBack = segmentedControlCallBack
-        base.addTarget(base, action: #selector(base.segmentedControlAction(_:)), for: .valueChanged)
+        base.addTarget(base,
+                       action: #selector(base.segmentedControlAction(_:)),
+                       for: .valueChanged)
     }
 }
 
@@ -22,8 +24,11 @@ extension UISegmentedControl: LXSwiftPropertyCompatible {
     
     internal typealias T = Int
     internal var swiftCallBack: SwiftCallBack? {
-        get { return lx_getAssociatedObject(self, &segmentedControlCallBackKey) }
-        set { lx_setRetainedAssociatedObject(self, &segmentedControlCallBackKey, newValue) }
+        get { return lx_getAssociatedObject(self,
+                                            &segmentedControlCallBackKey) }
+        set { lx_setRetainedAssociatedObject(self,
+                                             &segmentedControlCallBackKey,
+                                             newValue) }
     }
     
     @objc internal func segmentedControlAction(_ event: UISegmentedControl) {
