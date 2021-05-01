@@ -44,7 +44,6 @@ public class LXSwiftRegex {
     http(s)?://([a-zA-Z|\\d]+\\.)+[a-zA-Z|\\d]+(/\
     [a-zA-Z|\\d|\\-|\\+|_./?%&=]*)?
     """
-    
     public static let phoneRegex = "\\d{3,4}[- ]?\\d{7,8}"
     ///Expression matching
     public static let expressionRegex = "\\[.*?\\]"

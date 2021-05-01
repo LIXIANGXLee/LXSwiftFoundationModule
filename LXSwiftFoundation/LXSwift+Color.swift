@@ -103,7 +103,7 @@ extension UIColor {
         self.init(red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: alpha)
     }
     
-   public convenience init(_ hex: Int, alpha: CGFloat = 1) {
+    internal convenience init(_ hex: Int, alpha: CGFloat = 1) {
         let red = CGFloat((hex & 0xFF0000) >> 16) / 255
         let green = CGFloat((hex & 0xFF00) >> 8) / 255
         let blue = CGFloat(hex & 0xFF) / 255
@@ -113,7 +113,7 @@ extension UIColor {
     ///Constructor (hexadecimal)
     ///hex  color (hexadecimal)
     ///alpha
-   public convenience init(_ hex: String, alpha: CGFloat = 1.0) {
+    internal convenience init(_ hex: String, alpha: CGFloat = 1.0) {
         var cHex: String = hex.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
         switch hex {
         case has_prefix("0X"), has_prefix("0x"):

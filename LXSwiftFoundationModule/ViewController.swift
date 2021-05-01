@@ -9,8 +9,6 @@
 import UIKit
 import LXSwiftFoundation
 
-
-
 class ViewController: UIViewController {
     var  objc : LXObjcThreadActive! = nil
     
@@ -45,12 +43,18 @@ class ViewController: UIViewController {
         print(str.lx.substring(to: 3));
         
         
-        print("=====\(UIScreen.main.bounds.size.height)===\(UIScreen.main.bounds.size.width)")
+        NotificationCenter.addObserver(self, selector: #selector(aa(_:)), notification: LXSwiftNotifications.shared)
         
       }
     
-    
-
+    @objc func aa(_ notification: Notification) {
+        let noti = LXSwiftNotifications.shared
+        guard let config = noti.decodeInfo(from: notification) else {
+            return
+        }
+        print("-------\(config.id)")
+      
+    }
  
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         LXSwiftStorage.lx.setStorage(with: "dsdsdsdsds", key: "haha")
@@ -62,6 +66,9 @@ class ViewController: UIViewController {
         print(url!.lx.getParametersWithOrder())
 
         
+        LXSwiftNotifications.shared.post(with: LXSwiftNotifications.Model.init(id: 10))
+        
+
         
 //        let index = 3
 //
@@ -83,3 +90,12 @@ class ViewController: UIViewController {
     
 
 }
+
+
+extension LXSwiftNotifications {
+     static let shared = LXSwiftNotification<Model>("aa")
+     struct Model: Codable {
+         var id: Int64
+     }
+ }
+ 

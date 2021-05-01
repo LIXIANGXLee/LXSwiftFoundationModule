@@ -11,6 +11,7 @@ extension UIApplication: LXSwiftCompatible { }
 
 extension LXSwiftBasics where Base: UIApplication {
     
+    /// 当前显示的控制器
     static var visibleViewController: UIViewController? {
         return UIApplication.lx.getVisibleViewController(from:
                             UIApplication.shared.keyWindow?.rootViewController)
@@ -25,5 +26,31 @@ extension LXSwiftBasics where Base: UIApplication {
             return getVisibleViewController(from: pvc)
         }
         return vc
+    }
+    
+    /// 打开url
+    static func openUrl(_ urlStr: String,
+                        completionHandler: ((Bool) -> Void)? = nil) {
+        if let url = URL(string: urlStr) {
+            openUrl(url,
+                    completionHandler: completionHandler)
+        }
+    }
+    
+    static func openUrl(_ url: URL,
+                        completionHandler: ((Bool) -> Void)? = nil) {
+        if isCanOpen(url) {
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(url, options: [:],
+                                          completionHandler: completionHandler)
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+        }
+    }
+    
+    /// 判断是否能打开url
+    static func isCanOpen(_ url: URL) -> Bool {
+       return UIApplication.shared.canOpenURL(url)
     }
 }

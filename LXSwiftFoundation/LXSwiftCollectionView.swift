@@ -12,7 +12,7 @@ open class LXSwiftCollectionView: UICollectionView {
     
     public typealias RecognizeSimultaneously = ((UIGestureRecognizer,
                                                  UIGestureRecognizer) -> Bool)
-    public typealias ShouldBegin =  ((UIGestureRecognizer) -> Bool?)
+    public typealias ShouldBegin = ((UIGestureRecognizer) -> Bool?)
 
     public var shouldRecognizeSimultaneously: RecognizeSimultaneously?
     public var shouldBegin: ShouldBegin?

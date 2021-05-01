@@ -31,6 +31,7 @@ extension Data: LXSwiftCompatible {
         0x46: "text/plain"
         ]
 }
+
 extension NSData: LXSwiftCompatible { }
 
 //MARK: -  Extending properties  for Data
@@ -44,7 +45,9 @@ extension LXSwiftBasics where Base == Data {
     /// base64 of data tranform uiimage
     public var base64DecodingImage: UIImage? {
         guard let base64Data = Data(base64Encoded: base,
-                                    options: .ignoreUnknownCharacters) else { return nil }
+                                    options: .ignoreUnknownCharacters) else {
+            return nil
+        }
         return UIImage(data: base64Data)
     }
     

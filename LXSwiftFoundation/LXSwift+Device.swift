@@ -38,7 +38,7 @@ extension LXSwiftBasics where Base: UIDevice {
     
     ///is can call tel
     public static var isCanPhoneCalls: Bool {
-        return UIApplication.shared.canOpenURL(URL(string: "tel://")!)
+        return UIApplication.lx.isCanOpen(URL(string: "tel://")!)
     }
 }
 
@@ -73,8 +73,8 @@ extension LXSwiftBasics where Base: UIDevice {
     
     /// disk space is used size
     public static var diskSpaceUsed: Int64 {
-        let total   = diskSpace
-        let free    = diskSpaceFree
+        let total = diskSpace
+        let free  = diskSpaceFree
         if total <= 0 || free <= 0 {
             return -1
         }

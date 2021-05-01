@@ -71,7 +71,7 @@ public struct LXSwiftApp {
      *  若不一致，不可使用 flat() 函数，而应该用 flatSpecificScale
      */
     public static func flat(_ value: CGFloat) -> CGFloat {
-        return flatSpecificScale(value, 0)
+        return flatScale(value, 0)
     }
 
     /**
@@ -79,7 +79,7 @@ public struct LXSwiftApp {
      *  例如传进来 “2.1”，在 2x 倍数下会返回 2.5（0.5pt 对应 1px），
      *  在 3x 倍数下会返回 2.333（0.333pt 对应 1px）。
      */
-    public static func flatSpecificScale(_ value: CGFloat,
+    public static func flatScale(_ value: CGFloat,
                                          _ scale: CGFloat) -> CGFloat {
         let s = scale == 0 ? LXSwiftApp.screen_scale : scale
         return ceil(value * s) / s

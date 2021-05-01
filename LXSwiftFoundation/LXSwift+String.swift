@@ -141,7 +141,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     ///   - base: one version
     ///   - v: two version
     /// - Returns: big: base > two  ,small:two  < base, equal:base == two
-    public  func versionCompare(_ v: String) -> LXSwiftUtil.VersionCompareResult {
+    public func versionCompare(_ v: String) -> LXSwiftUtil.VersionCompareResult {
         let string = base as! String
         return LXSwiftUtil.lx.versionCompare(string, v)
     }
@@ -360,7 +360,9 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     /// base64EncodedData transform  string
     public var base64DecodingString: String? {
         let string = base as! String
-        guard  let utf8DecodedData =  Data(base64Encoded: string, options: Data.Base64DecodingOptions.init(rawValue: 0)) else { return nil }
+        guard  let utf8DecodedData =  Data(base64Encoded: string, options: Data.Base64DecodingOptions.init(rawValue: 0)) else {
+            return nil
+        }
         return  String(data: utf8DecodedData, encoding: String.Encoding.utf8)
     }
     

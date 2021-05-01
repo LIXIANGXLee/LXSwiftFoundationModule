@@ -77,15 +77,10 @@ extension LXSwiftBasics where Base == LXSwiftUtil {
     /// call tel for all app
     public static func openTel(with number: String?,
                                _ tellCallBack: LXSwiftUtil.TellCallBack? = nil) {
-        guard let number = number,
-            let url = URL(string: "tel:" + number) else{ return }
-        if UIApplication.shared.canOpenURL(url) {
-            if #available(iOS 10.0, *) {
-                UIApplication.shared.open(url,
-                                          options: [:],
-                                          completionHandler: tellCallBack)
-            } else {
-                UIApplication.shared.openURL(url)
+        if let number = number,
+            let url = URL(string: "tel:" + number) {
+            if UIApplication.lx.isCanOpen(url) {
+                UIApplication.lx.openUrl(url)
             }
         }
     }

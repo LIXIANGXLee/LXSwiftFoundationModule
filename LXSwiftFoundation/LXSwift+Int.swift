@@ -19,9 +19,9 @@ prefix operator ~<
 prefix operator ~>=
 prefix operator ~<=
 
-public prefix func ~> (_ index: Int) -> (Int) -> (Bool) { { $0 > index } }
+public prefix func ~>  (_ index: Int) -> (Int) -> (Bool) { { $0 > index } }
 public prefix func ~>= (_ index: Int) -> (Int) -> (Bool) { { $0 >= index } }
-public prefix func ~< (_ index: Int) -> (Int) -> (Bool) { { $0 < index } }
+public prefix func ~<  (_ index: Int) -> (Int) -> (Bool) { { $0 < index } }
 public prefix func ~<= (_ index: Int) -> (Int) -> (Bool) { { $0 <= index } }
 
 extension Int: LXSwiftCompatible {

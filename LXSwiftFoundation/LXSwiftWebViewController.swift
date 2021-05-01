@@ -42,7 +42,7 @@ open class LXSwiftWebViewController: UIViewController {
     fileprivate var progressView: UIProgressView!
     fileprivate var methodTs = [LXSwiftMethodT]()
     
-    // MARK: -  Customize the root view -- recommended when the entire page is a WebView or image
+    // MARK: - Customize the root view -- recommended when the entire page is a WebView or image
     public fileprivate(set) lazy var webView: WKWebView = {
         let config = WKWebViewConfiguration()
         //是否支持javaScript
@@ -247,10 +247,10 @@ extension LXSwiftWebViewController {
                                     context: UnsafeMutableRawPointer?) {
         if keyPath == #keyPath(WKWebView.estimatedProgress){
             progressView.progress = Float(webView.estimatedProgress)
-        }else if  keyPath == #keyPath(WKWebView.title) {
+        }else if keyPath == #keyPath(WKWebView.title) {
             guard let t = webView.title else { return }
             self.loadWebViewTitle?(t)
-        }else if  keyPath == #keyPath(WKWebView.url) {
+        }else if keyPath == #keyPath(WKWebView.url) {
             guard let u = webView.url else { return }
             self.loadWebViewUrl?(u)
         }

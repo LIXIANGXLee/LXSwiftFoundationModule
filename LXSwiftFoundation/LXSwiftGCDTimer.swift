@@ -8,16 +8,15 @@
 
 import UIKit
 
-
 // MARK: - timer（GCD）
 public struct LXSwiftGCDTimer: LXSwiftCompatible {
     
     public typealias TaskCallBack = (() -> Void)
     
     ///Timer set
-    fileprivate static var timers = [String:DispatchSourceTimer]()
+    fileprivate static var timers = [String: DispatchSourceTimer]()
     /// DispatchSemaphore
-    fileprivate static let semaphore = DispatchSemaphore(value: 1)
+    fileprivate static let semaphore = DispatchSemaphore(value: 0)
     
 }
 

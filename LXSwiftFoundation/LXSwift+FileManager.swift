@@ -20,7 +20,8 @@ extension LXSwiftBasics where Base: FileManager {
     }
     public static var cachesPath: String? {
         return NSSearchPathForDirectoriesInDomains(.cachesDirectory,
-                                                   .userDomainMask, true).first
+                                                   .userDomainMask,
+                                                   true).first
     }
     
     /// Documents
@@ -30,7 +31,8 @@ extension LXSwiftBasics where Base: FileManager {
     }
     public static var documentPath: String {
         return NSSearchPathForDirectoriesInDomains(.documentDirectory,
-                                                   .userDomainMask, true).first!
+                                                   .userDomainMask,
+                                                   true).first!
     }
     
     /// Library
@@ -40,6 +42,7 @@ extension LXSwiftBasics where Base: FileManager {
     }
     public static var libraryPath: String? {
         return NSSearchPathForDirectoriesInDomains(.libraryDirectory,
-                                                   .userDomainMask, true).first
+                                                   .userDomainMask,
+                                                   true).first
     }    
 }

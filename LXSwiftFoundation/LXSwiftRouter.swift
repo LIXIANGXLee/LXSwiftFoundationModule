@@ -18,10 +18,10 @@ public struct LXSwiftRouter {
     public typealias CallBack = ((Any?) -> Void)
     
     /// DispatchSemaphore
-    private static let semaphore = DispatchSemaphore(value: 1)
+    private static let semaphore = DispatchSemaphore(value: 0)
     
     ///router array
-    private static var routers = [String : LXSwiftRouter.CallInfoBack]()
+    private static var routers = [String: LXSwiftRouter.CallInfoBack]()
     
 }
 
@@ -37,7 +37,7 @@ extension LXSwiftRouter {
                               callInfoBack: LXSwiftRouter.CallInfoBack? = nil) {
         guard let url = urlStr?.lx.trim.lx.utf8,
             url.hasPrefix("http://"),
-            let callBack = callInfoBack  else { return  }
+            let callBack = callInfoBack else { return }
         
         self.semaphore.wait()
         defer { self.semaphore.signal() }

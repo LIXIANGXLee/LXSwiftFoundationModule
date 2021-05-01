@@ -10,5 +10,4 @@ import UIKit
 
 open class LXSwiftButton: UIButton {
     open var swiftModel: Any?
-
 }

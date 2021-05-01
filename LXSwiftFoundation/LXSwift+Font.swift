@@ -60,4 +60,33 @@ extension LXSwiftBasics where Base: UIFont {
         }
         return UIFont(descriptor: desc, size: base.pointSize)
     }
+    
+    public static func systemFontWithMedium(ofSize: CGFloat) -> UIFont {
+       return UIFont.systemFont(ofSize: ofSize, weight: .medium)
+    }
+    
+    public static func systemFontWithRegular(ofSize: CGFloat) -> UIFont {
+       return UIFont.systemFont(ofSize: ofSize, weight: .regular)
+    }
+    
+    public static func systemFontWithBold(ofSize: CGFloat) -> UIFont {
+       return UIFont.systemFont(ofSize: ofSize, weight: .bold)
+    }
+    
+    public static func systemFontWithSemibold(ofSize: CGFloat) -> UIFont {
+       return UIFont.systemFont(ofSize: ofSize, weight: .semibold)
+    }
+    
+    public static func systemFontWithHeavy(ofSize: CGFloat) -> UIFont {
+       return UIFont.systemFont(ofSize: ofSize, weight: .heavy)
+    }
+    
+    public static func systemFontWithLight(ofSize: CGFloat) -> UIFont {
+       return UIFont.systemFont(ofSize: ofSize, weight: .light)
+    }
+    
+    public static func systemFontWithBlack(ofSize: CGFloat) -> UIFont {
+       return UIFont.systemFont(ofSize: ofSize, weight: .black)
+    }
+    
 }

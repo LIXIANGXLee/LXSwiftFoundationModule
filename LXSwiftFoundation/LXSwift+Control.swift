@@ -31,7 +31,8 @@ extension UIControl  {
     
     internal func preventDoubleHit(_ hitTime: Double) {
         self.hitTime = hitTime
-        addTarget(self, action: #selector(c_preventDoubleHit),
+        addTarget(self,
+                  action: #selector(c_preventDoubleHit),
                   for: .touchUpInside)
     }
     

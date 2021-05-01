@@ -41,7 +41,9 @@ extension LXSwiftBasics where Base == LXSwiftTool {
         guard let data = data,
               let propertyList = try? PropertyListSerialization.propertyList(from: data,
                                                         options: .init(rawValue: 0),
-                                                        format: nil) else { return nil }
+                                                        format: nil) else {
+            return nil
+        }
         return propertyList as? Dictionary<String, Any>
     }
     
@@ -51,7 +53,9 @@ extension LXSwiftBasics where Base == LXSwiftTool {
         let detector = CIDetector(ofType: CIDetectorTypeQRCode,
                                   context: context,
                                   options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])
-        guard let cgImage = image?.cgImage else { return nil }
+        guard let cgImage = image?.cgImage else {
+            return nil
+        }
         let ciImage =  CIImage(cgImage: cgImage)
         let feature = detector?.features(in: ciImage).first as? CIQRCodeFeature
         return feature?.messageString
@@ -76,7 +80,9 @@ extension LXSwiftBasics where Base == LXSwiftTool {
         filter?.setDefaults()
         let qrData = qrCodeStr?.data(using: String.Encoding.utf8)
         filter?.setValue(qrData, forKey: "inputMessage")
-        guard let qrImage = filter?.outputImage else { return nil }
+        guard let qrImage = filter?.outputImage else {
+            return nil
+        }
         return createNonInterpolatedImage(with: qrImage, size: size)
     }
     
@@ -85,7 +91,8 @@ extension LXSwiftBasics where Base == LXSwiftTool {
                                             size: CGFloat = 800,
                                             complete: @escaping (UIImage?) -> ()) {
         DispatchQueue.global().async{
-            let async_qrImage = self.getQrCodeImage(with: qrCodeStr, size: size)
+            let async_qrImage = self.getQrCodeImage(with: qrCodeStr,
+                                                    size: size)
             DispatchQueue.main.async(execute: {
                 complete(async_qrImage)
             })
@@ -114,9 +121,13 @@ extension LXSwiftBasics where Base == LXSwiftTool {
         bitmapRef.scaleBy(x: scale, y: scale)
         let context =  CIContext(options: nil)
         guard let bitmapImage = context.createCGImage(ciImage,
-                                                      from: extent) else { return nil }
+                                                      from: extent) else {
+            return nil
+        }
         bitmapRef.draw(bitmapImage, in: extent)
-        guard let scaledImage = bitmapRef.makeImage() else { return nil }
+        guard let scaledImage = bitmapRef.makeImage() else {
+            return nil
+        }
         return UIImage(cgImage: scaledImage)
     }
 }

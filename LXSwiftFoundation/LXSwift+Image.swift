@@ -40,7 +40,9 @@ extension LXSwiftBasics where Base: UIImage {
     public static func image(light: UIImage,
                              dark: UIImage) -> UIImage {
         if #available(iOS 13.0, *) {
-            guard let config = light.configuration else { return light }
+            guard let config = light.configuration else {
+                return light
+            }
             let lightImage = light.withConfiguration(
                 config.withTraitCollection(
                     UITraitCollection.init(userInterfaceStyle: UIUserInterfaceStyle.light)))
@@ -72,14 +74,14 @@ extension LXSwiftBasics where Base: UIImage {
     
     /// circle image
     public var imageWithCircle: UIImage? {
-        return imageByRoundCornerRadius(with: min(base.size.width, base.size.height))
+        return imageByRound(with: min(base.size.width, base.size.height))
     }
     
     /// Returns whether the image contains an alpha component.
     public var isContainsAlphaComponent: Bool {
         let alphaInfo = base.cgImage?.alphaInfo
         return (
-            alphaInfo == .first ||
+                alphaInfo == .first ||
                 alphaInfo == .last ||
                 alphaInfo == .premultipliedFirst ||
                 alphaInfo == .premultipliedLast
@@ -95,7 +97,7 @@ extension LXSwiftBasics where Base: UIImage {
     /// - Parameters:
     ///   - roundCorners: left right top bottom
     ///   - cornerRadi: size
-    public func imageByRoundCornerRadius(with radius: CGFloat) -> UIImage? {
+    public func imageByRound(with radius: CGFloat) -> UIImage? {
         return imageByRound(with: radius, corners: UIRectCorner.allCorners)
     }
     
@@ -213,7 +215,7 @@ extension LXSwiftBasics where Base: UIImage {
         let context = UIGraphicsGetCurrentContext()
         context?.setFillColor(color.cgColor)
         context?.fill(CGRect(origin: CGPoint.zero, size: size))
-        guard let img = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
+        let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return img
     }
@@ -237,9 +239,12 @@ extension LXSwiftBasics where Base: UIImage {
     ///-ImageView
     ///-BGView -- screenshot background
     ///-Parameter completed: asynchronous completion callback (main thread callback)
-    public static func clearImage(withView view: UIView?, rect: CGRect) -> UIImage? {
-        if view == nil { return nil  }
-        UIGraphicsBeginImageContextWithOptions((view?.bounds.size)!, false, 0.0)
+    public static func clearImage(withView view: UIView?,
+                                  rect: CGRect) -> UIImage? {
+        guard let v = view else { return nil }
+        UIGraphicsBeginImageContextWithOptions(v.bounds.size,
+                                               false,
+                                               0.0)
         let imageCtx = UIGraphicsGetCurrentContext()
         view?.layer.render(in: imageCtx!)
         imageCtx!.clear(rect)
@@ -275,7 +280,7 @@ extension LXSwiftBasics where Base: UIImage {
     ///
     /// - Parameters:
     ///   - videoUrl: video Url
-    public static func image(withVideoUrl videoUrl: URL?) -> UIImage?{
+    public static func image(withVideoUrl videoUrl: URL?) -> UIImage? {
         guard let videoUrl = videoUrl else { return nil }
         
         let asset = AVURLAsset(url: videoUrl, options: nil)
@@ -283,7 +288,9 @@ extension LXSwiftBasics where Base: UIImage {
         generator.appliesPreferredTrackTransform = true
         let time = CMTimeMakeWithSeconds(1, preferredTimescale: 600)
         guard let image = try? generator.copyCGImage(at: time,
-                                                     actualTime: nil) else { return nil }
+                                                     actualTime: nil) else {
+            return nil
+        }
         let shotImage = UIImage(cgImage: image)
         return shotImage;
     }
@@ -404,12 +411,19 @@ extension LXSwiftBasics where Base: UIImage {
         let width = base.size.width
         let height = base.size.height
         let colorSpace = CGColorSpaceCreateDeviceGray()
-        let context = CGContext(data: nil, width: Int(width), height: Int(height),
-                                bitsPerComponent: 8, bytesPerRow: 0,
+        let context = CGContext(data: nil, width: Int(width),
+                                height: Int(height),
+                                bitsPerComponent: 8,
+                                bytesPerRow: 0,
                                 space: colorSpace,
                                 bitmapInfo: CGImageAlphaInfo.none.rawValue)
-        context?.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
-        guard let targetCGImage = context?.makeImage() else { return nil }
+        context?.draw(cgImage, in: CGRect(x: 0,
+                                          y: 0,
+                                          width: width,
+                                          height: height))
+        guard let targetCGImage = context?.makeImage() else {
+            return nil
+        }
         return UIImage(cgImage: targetCGImage)
     }
 }

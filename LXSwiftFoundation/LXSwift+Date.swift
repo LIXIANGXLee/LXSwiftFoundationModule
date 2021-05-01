@@ -14,7 +14,8 @@ extension Date: LXSwiftCompatible { }
 extension LXSwiftBasics where Base == Date {
     
     /// date transform string yyyy-MM-dd HH:mm:ss
-    public func dateTranformString(with ymd: String = "yyyy-MM-dd HH:mm:ss") -> String {
+    public func dateTranformString(with ymd: String = "yyyy-MM-dd HH:mm:ss")
+    -> String {
         let fmt = DateFormatter()
         fmt.dateFormat = ymd
         let selfStr = fmt.string(from: base)
@@ -30,7 +31,6 @@ extension LXSwiftBasics where Base == Date {
         let selfCmps = calendar.dateComponents(unit, from: base)
         return (selfCmps,dateComps)
     }
-    
 }
 
 //MARK: -  Extending properties  for NSData
@@ -83,12 +83,7 @@ extension LXSwiftBasics where Base == Date {
             (selfCmps.hour == nowComps.hour) &&
             (selfCmps.minute == nowComps.minute)
     }
-    
-    ///get stamp with Interval
-    public var timeInterval: TimeInterval {
-        return base.timeIntervalSince1970
-    }
-    
+
     public var year: Int {
         return NSCalendar.current.component(.year, from: base)
     }
@@ -128,4 +123,8 @@ extension LXSwiftBasics where Base == Date {
         return ((year % 400 == 0) || ((year % 100 != 0) && (year % 4 == 0)))
     }
     
+    ///get stamp with Interval
+    public var timeInterval: TimeInterval {
+        return base.timeIntervalSince1970
+    }
 }

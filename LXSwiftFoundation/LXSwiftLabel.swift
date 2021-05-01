@@ -9,7 +9,6 @@
 import UIKit
 
 open class LXSwiftLabel: UILabel {
-
     open var swiftModel: Any?
 }
 

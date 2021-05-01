@@ -39,11 +39,12 @@ extension LXSwiftBasics where Base: Bundle {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String
     }
     
-    // AppName - APP装到手机里之后显示的名称
+    /// AppName - APP装到手机里之后显示的名称
     static var displayName: String {
         return Bundle.main.localizedInfoDictionary?["CFBundleDisplayName"] as? String ?? ""
     }
 
+    ///获取icon图标
     public static var appIcon: UIImage? {
         guard let iconsDictionary = Bundle.main.infoDictionary?["CFBundleIcons"] as? [String: Any],
             let primaryIconsDictionary = iconsDictionary["CFBundlePrimaryIcon"] as? [String: Any],

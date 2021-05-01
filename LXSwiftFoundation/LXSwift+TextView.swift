@@ -48,24 +48,21 @@ extension LXSwiftBasics where Base : LXSwiftTextView {
     /// set bold font and textColor
     public func set(withBoldFont fontSize: CGFloat,
                     textColor: String) {
-        set(withFont: UIFont.systemFont(ofSize: fontSize,
-                                        weight: .bold),
+        set(withFont: UIFont.lx.systemFontWithBold(ofSize: fontSize),
             textColor: UIColor.lx.color(hex: textColor))
     }
     
     /// set medium font and textColor
     public func set(withMediumFont fontSize: CGFloat,
                     textColor: String) {
-        set(withFont: UIFont.systemFont(ofSize: fontSize,
-                                        weight: .medium),
+        set(withFont: UIFont.lx.systemFontWithMedium(ofSize: fontSize),
             textColor: UIColor.lx.color(hex: textColor))
     }
     
     /// set regular font and textColor
     public func set(withRegularFont fontSize: CGFloat,
                     textColor: String) {
-        set(withFont: UIFont.systemFont(ofSize: fontSize,
-                                        weight: .regular),
+        set(withFont: UIFont.lx.systemFontWithRegular(ofSize: fontSize),
             textColor: UIColor.lx.color(hex: textColor))
     }
     

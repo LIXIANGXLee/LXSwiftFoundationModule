@@ -70,15 +70,12 @@ public class LXSwiftPrivacyManager: NSObject, LXSwiftCompatible {
                                         message: message,
                                         preferredStyle: .alert)
 
-        let goAction = UIAlertAction(title: "去设置",
-                                     style: .default) {_ in
+        alertVC.lx.action("去设置", style: .default) { (_) in
             LXSwiftPrivacyManager.jumpToSettingAppDirectly()
         }
-
-        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
-
-        alertVC.addAction(goAction)
-        alertVC.addAction(cancelAction)
+        alertVC.lx.action("取消", style: .cancel) { (_) in
+        }
+       
         let vc = UIApplication.lx.visibleViewController
         vc?.present(alertVC, animated: true, completion: nil)
     }
@@ -87,15 +84,7 @@ public class LXSwiftPrivacyManager: NSObject, LXSwiftCompatible {
     @objc class public func jumpToSettingAppDirectly() {
         let url = getURLToSettingFromSystemVersion()
         guard let targetURL = url else { return }
-        
-        if UIApplication.shared.canOpenURL(targetURL) {
-            if #available(iOS 10.0, *) {
-                UIApplication.shared.open(targetURL, options: [:],
-                                          completionHandler: nil)
-            } else {
-                UIApplication.shared.openURL(targetURL)
-            }
-        }
+        UIApplication.lx.openUrl(targetURL)
     }
 
     /// 根据系统版本取跳设置的最佳方式

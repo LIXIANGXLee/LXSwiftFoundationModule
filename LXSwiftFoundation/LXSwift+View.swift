@@ -25,16 +25,17 @@ extension LXSwiftBasics where Base: UIView {
     
     public var aboveNavVC: UINavigationController? {
         let tootVC = UIApplication.shared.delegate?.window??.rootViewController
-        guard let tabBar = tootVC as? UITabBarController else { return nil }
-        if let navVc = tabBar.children[tabBar.selectedIndex] as? UINavigationController{
-            return navVc
-        } else { return nil }
+        guard let tabBar = tootVC as? UITabBarController else {
+            return nil
+        }
+        return tabBar.children[tabBar.selectedIndex] as? UINavigationController
     }
     
     /// snapShot image
     public var snapShotImage: UIImage? {
         
-        UIGraphicsBeginImageContextWithOptions(base.bounds.size, base.isOpaque, 0)
+        UIGraphicsBeginImageContextWithOptions(base.bounds.size,
+                                               base.isOpaque, 0)
         if isContainsWKWebView() {
             base.drawHierarchy(in: base.bounds, afterScreenUpdates: true)
         }else{
@@ -141,7 +142,7 @@ extension LXSwiftBasics where Base: UIView {
         
         let s = viewSize ?? base.bounds.size
         let rect = CGRect(origin: CGPoint.zero, size: s)
-        let fieldPath =  UIBezierPath(roundedRect: rect,
+        let fieldPath = UIBezierPath(roundedRect: rect,
                                       byRoundingCorners: roundingCorners,
                                       cornerRadii: CGSize(width: radius, height: radius))
         if !s.equalTo(CGSize.zero) {
@@ -158,7 +159,8 @@ extension LXSwiftBasics where Base: UIView {
     
     /// add gesture
     @discardableResult
-    public func addGesture(_ viewCallBack: @escaping ((UIView?) -> ())) -> UITapGestureRecognizer {
+    public func addGesture(_ viewCallBack: @escaping ((UIView?) -> ()))
+    -> UITapGestureRecognizer {
         base.viewCallBack = viewCallBack
         let gesture = UITapGestureRecognizer(target: base,
                                              action: #selector(base.gestureTap(_:)))

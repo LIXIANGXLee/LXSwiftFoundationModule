@@ -32,8 +32,9 @@ extension LXSwiftBasics where Base: UILabel {
                     alignment: NSTextAlignment? = nil) {
         base.font = font
         base.textColor = textColor
-        guard let alignment = alignment else { return }
-        base.textAlignment = alignment
+        if let alignment = alignment {
+            base.textAlignment = alignment
+        }
     }
     
     ///Provides a convenient way to set the properties of the label
@@ -46,8 +47,7 @@ extension LXSwiftBasics where Base: UILabel {
                     textColor: String,
                     alignment: NSTextAlignment? = nil) {
         let color = UIColor.lx.color(hex: textColor)
-        set(withFont: UIFont.systemFont(ofSize: regularSize,
-                                        weight: .regular),
+        set(withFont: UIFont.lx.systemFontWithRegular(ofSize: regularSize),
             textColor: color,
             alignment: alignment)
     }
@@ -62,8 +62,7 @@ extension LXSwiftBasics where Base: UILabel {
                     textColor: String,
                     alignment: NSTextAlignment? = nil) {
         let color = UIColor.lx.color(hex: textColor)
-        set(withFont: UIFont.systemFont(ofSize: mediumSize,
-                                        weight: .medium),
+        set(withFont: UIFont.lx.systemFontWithMedium(ofSize: mediumSize),
             textColor: color,
             alignment: alignment)
     }
@@ -78,8 +77,7 @@ extension LXSwiftBasics where Base: UILabel {
                    textColor: String,
                    alignment: NSTextAlignment? = nil) {
        let color = UIColor.lx.color(hex: textColor)
-       set(withFont: UIFont.systemFont(ofSize: boldSize,
-                                       weight: .bold),
+       set(withFont: UIFont.lx.systemFontWithBold(ofSize: boldSize),
            textColor: color,
            alignment: alignment)
    }

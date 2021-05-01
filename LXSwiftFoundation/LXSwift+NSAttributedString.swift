@@ -43,7 +43,8 @@ extension LXSwiftBasics where Base : NSAttributedString {
 extension LXSwiftBasics where Base : NSMutableAttributedString {
     
     internal func setAttribute(_ attribute: NSAttributedString.Key,
-                               value: Any?, range: NSRange) {
+                               value: Any?,
+                               range: NSRange) {
         guard let value = value else { return }
         base.addAttribute(attribute, value: value, range: range)
     }
@@ -66,7 +67,7 @@ extension LXSwiftBasics where Base : NSMutableAttributedString {
     @discardableResult
     public func set(with textColor: UIColor?,
                     range: NSRange? = nil) -> NSMutableAttributedString {
-        guard let color = textColor else { return base}
+        guard let color = textColor else { return base }
         let range = range ?? NSMakeRange(0, base.length)
         setAttribute(.foregroundColor, value: color, range: range)
         return base

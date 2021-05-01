@@ -17,7 +17,8 @@ extension LXSwiftBasics where Base == Double {
     /// - Parameters:
     ///   - minDigits: min decimal
     ///   - maxDigits: max decimal
-    public func roundTo(minDigits: Int = 0, maxDigits: Int = 2) -> String {
+    public func roundTo(minDigits: Int = 0,
+                        maxDigits: Int = 2) -> String {
         return NSNumber(value: base).lx.numberFormatter(with: .halfEven,
                                                         minDigits: minDigits,
                                                         maxDigits: maxDigits) ?? ""
