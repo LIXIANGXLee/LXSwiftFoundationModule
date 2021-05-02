@@ -124,7 +124,7 @@ extension LXSwiftBasics where Base: UIView {
     
     /// cornerRadius
     public func setCornerRadius(radius: CGFloat = 4.0,
-                                clips: Bool = false) {
+                                clips: Bool = true) {
         base.layer.cornerRadius = radius
         base.layer.masksToBounds = clips
     }
@@ -144,7 +144,8 @@ extension LXSwiftBasics where Base: UIView {
         let rect = CGRect(origin: CGPoint.zero, size: s)
         let fieldPath = UIBezierPath(roundedRect: rect,
                                       byRoundingCorners: roundingCorners,
-                                      cornerRadii: CGSize(width: radius, height: radius))
+                                      cornerRadii: CGSize(width: radius,
+                                                          height: radius))
         if !s.equalTo(CGSize.zero) {
             let fieldLayer = CAShapeLayer()
             fieldLayer.frame = base.bounds

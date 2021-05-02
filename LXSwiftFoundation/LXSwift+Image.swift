@@ -183,8 +183,8 @@ extension LXSwiftBasics where Base: UIImage {
     ///   - col: col count
     public func imageCut(withRow row:Int, col:Int) -> [UIImage] {
         
-        guard  let imageRef = base.cgImage else {return [UIImage()]}
-        var images : [UIImage] = [UIImage]()
+        guard let imageRef = base.cgImage else {return [UIImage()]}
+        var images: [UIImage] = [UIImage]()
         for i in 0..<row {
             for j in 0..<col {
                 guard let subImageRef = imageRef.cropping(to:
@@ -210,7 +210,8 @@ extension LXSwiftBasics where Base: UIImage {
     ///   - color: color
     ///   - size: size
     public static func image(WithColor color: UIColor,
-                             size: CGSize = CGSize(width: 10, height: 10)) -> UIImage? {
+                             size: CGSize = CGSize(width: 10,
+                                                   height: 10)) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, 1.0)
         let context = UIGraphicsGetCurrentContext()
         context?.setFillColor(color.cgColor)
@@ -227,7 +228,7 @@ extension LXSwiftBasics where Base: UIImage {
         let inputImage = CIImage(image: base)
         let filter = CIFilter(name: filterName)
         filter?.setValue(inputImage, forKey: kCIInputImageKey)
-        let outputImage =  filter?.outputImage!
+        let outputImage = filter?.outputImage!
         let context: CIContext = CIContext(options: nil)
         let cgImage = context.createCGImage(outputImage!,
                                             from: (outputImage?.extent)!)
@@ -340,7 +341,8 @@ extension LXSwiftBasics where Base: UIImage {
         guard let cgimage = base.cgImage else {
             return base
         }
-        return UIImage(cgImage: cgimage, scale: base.scale, orientation: orientation)
+        return UIImage(cgImage: cgimage, scale: base.scale,
+                       orientation: orientation)
     }
     
     /// Rotate the picture (solve the problem of 90 degree photographing)

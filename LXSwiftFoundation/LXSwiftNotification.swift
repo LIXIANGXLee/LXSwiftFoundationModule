@@ -61,7 +61,8 @@ public class LXSwiftNotification<T: Codable>: LXSwiftNotifications {
         guard let notNilInfo = systemInfo else {
             return nil
         }
-        guard let jsonData = try? JSONSerialization.data(withJSONObject: notNilInfo, options: [])
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: notNilInfo,
+                                                         options: [])
             else {
             return nil
         }

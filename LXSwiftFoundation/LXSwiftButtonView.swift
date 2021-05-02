@@ -42,7 +42,7 @@ extension LXSwiftBasics where Base: LXSwiftButtonView {
     
     /// set cgrect of title and  cgrect of image
     public func setHandle(titleCallBack: LXSwiftButtonView.ButtonCallBack?,
-                          imageCallBack: LXSwiftButtonView.ButtonCallBack?){
+                          imageCallBack: LXSwiftButtonView.ButtonCallBack?) {
         base.titleCallBack = titleCallBack
         base.imageCallBack = imageCallBack
     }

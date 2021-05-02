@@ -8,9 +8,53 @@
 
 import UIKit
 
-
 //MARK: -  Extending properties for UIButton
 extension LXSwiftBasics where Base: UIButton {
+    
+    /// Set the text level to center
+    /// Space
+    public func horizontalCenterImageAndTitle(space: CGFloat) {
+        guard let imageView = base.imageView,
+              let titleLabel = base.titleLabel else {
+            return
+        }
+        let imageHeight = imageView.intrinsicContentSize.height
+        let imageWidth = imageView.intrinsicContentSize.width
+        let titleHeight = titleLabel.intrinsicContentSize.height
+        let titleWitdh = titleLabel.intrinsicContentSize.width
+        let totalHeight = imageHeight + titleHeight + space
+        base.imageEdgeInsets = UIEdgeInsets(top: -(totalHeight - imageHeight),
+                                            left: 0,
+                                            bottom: 0,
+                                            right: -titleWitdh)
+        base.titleEdgeInsets = UIEdgeInsets(top: 0,
+                                            left: -imageWidth,
+                                            bottom: -(totalHeight - titleHeight),
+                                            right: 0)
+    }
+    
+    /// Set the image text to be vertically centered
+    /// Space
+    public func verticalCenterImageAndTitle(space: CGFloat,
+                               isLeftImage: Bool = true) {
+        guard let imageView = base.imageView,
+              let titleLabel = base.titleLabel else {
+            return
+        }
+        let imageWidth = imageView.intrinsicContentSize.width
+        let titleWitdh = titleLabel.intrinsicContentSize.width
+        let imageSpace = isLeftImage ? space * 0.5 : (space * 0.5 + titleWitdh)
+        let titleSpace = isLeftImage ? space * 0.5 : (space * 0.5 + imageWidth)
+
+        base.imageEdgeInsets = UIEdgeInsets(top: 0,
+                                            left:isLeftImage ? -imageSpace : imageSpace,
+                                            bottom: 0,
+                                            right: isLeftImage ? imageSpace : -imageSpace)
+        base.titleEdgeInsets = UIEdgeInsets(top: 0,
+                                            left: isLeftImage ? titleSpace : -titleSpace,
+                                            bottom:0,
+                                            right: isLeftImage ? -titleSpace : titleSpace)
+    }
     
     /// Width for button
     public var bestWidth: CGFloat {

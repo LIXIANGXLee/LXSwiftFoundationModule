@@ -15,7 +15,7 @@ extension LXSwiftBasics where Base: NSNumber {
     
     /// minDigits: How many decimal places should be reserved with  rounding 
     ///maxDigits:Keep a few decimal places
-    public  func numberFormatter(with mode: NumberFormatter.RoundingMode = .halfEven,
+    public func numberFormatter(with mode: NumberFormatter.RoundingMode = .halfEven,
                                  minDigits: Int = 0,
                                  maxDigits:Int = 0)
     -> String? {
@@ -25,7 +25,7 @@ extension LXSwiftBasics where Base: NSNumber {
     }
     
     ///Keep a two decimal places
-    public  func numberFormatter() -> String? {
+    public func numberFormatter() -> String? {
         return base.numberFormatter(with: .halfEven,
                                     minDigits: 0,
                                     maxDigits: 2)

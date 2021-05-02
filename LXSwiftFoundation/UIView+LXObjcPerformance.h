@@ -26,7 +26,7 @@ typedef void (^ObjcRunloopBlock)(void);
 /// Add task
 -(void)addTask:(ObjcRunloopBlock)task;
 
-/// remove Observer （Please call to remove the observer when you do not use the observer, otherwise it will cause memory leak）
+/// remove Observer（Please call to remove the observer when you do not use the observer, otherwise it will cause memory leak）
 -(void)removeRunLoopObserver;
 
 @end

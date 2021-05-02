@@ -81,5 +81,4 @@ extension LXSwiftBasics where Base: UILabel {
            textColor: color,
            alignment: alignment)
    }
-    
 }

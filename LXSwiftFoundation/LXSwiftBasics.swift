@@ -20,7 +20,6 @@ public struct LXSwiftBasics<Base> {
     public init(_ base: Base) {
         self.base = base
     }
-    
 }
 
 

@@ -13,7 +13,7 @@ extension LXSwiftBasics where Base: UIControl {
     
     // repeat tap in 1s
     public func preventDoubleHit(_ hitTime: Double = 1) {
-        base.preventDoubleHit(hitTime)
+        base.hitDouble(hitTime)
     }
 }
 
@@ -29,14 +29,13 @@ extension UIControl  {
                                              .OBJC_ASSOCIATION_ASSIGN) }
     }
     
-    internal func preventDoubleHit(_ hitTime: Double) {
+    internal func hitDouble(_ hitTime: Double) {
         self.hitTime = hitTime
-        addTarget(self,
-                  action: #selector(c_preventDoubleHit),
+        addTarget(self, action: #selector(c_hitDouble(_:)),
                   for: .touchUpInside)
     }
     
-    @objc internal func c_preventDoubleHit(_ base: UIControl)  {
+    @objc internal func c_hitDouble(_ base: UIControl)  {
         base.isUserInteractionEnabled = false
         DispatchQueue.main.lx.delay((hitTime ?? 1.0)) {
             base.isUserInteractionEnabled = true

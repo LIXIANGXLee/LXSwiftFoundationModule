@@ -49,7 +49,7 @@ extension LXSwiftImgView {
 }
 
 //MARK: -  Extending properties and methods for UISwitch
-extension LXSwiftBasics where Base : LXSwiftImgView {
+extension LXSwiftBasics where Base: LXSwiftImgView {
     
     /// set handle for method call back
     public func setHandle(_ imgViewCallBack: LXSwiftImgView.ImgViewCallBack?) {
