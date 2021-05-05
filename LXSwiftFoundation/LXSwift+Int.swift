@@ -40,13 +40,23 @@ extension Int: LXSwiftCompatible {
 extension LXSwiftBasics where Base == Int {
     
     ///  Generating a random number of an interval
-    static func randomInt(lower: Int = 0,
+   public static func randomInt(lower: Int = 0,
                           upper: Int = Int(UInt32.max)) -> Int {
         return lower + Int(arc4random_uniform(UInt32(upper - lower)))
     }
     
     ///  Generating a random number of an interval
-    static func randomInt(range: Range<Int>) -> Int {
+    public static func randomInt(range: Range<Int>) -> Int {
         return randomInt(lower: range.lowerBound, upper: range.upperBound)
+    }
+    
+    /// Convert to string format
+    public func toString() -> String {
+        return String(base)
+    }
+    
+    /// Convert bool
+    public func toBool() -> Bool {
+        return base > 0 ? true : false
     }
 }

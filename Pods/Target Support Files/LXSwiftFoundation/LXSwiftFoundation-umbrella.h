@@ -10,6 +10,7 @@
 #endif
 #endif
 
+#import "CADisplayLink+Block.h"
 #import "LXObjcProxy.h"
 #import "LXObjcSuport.h"
 #import "LXObjcThreadActive.h"

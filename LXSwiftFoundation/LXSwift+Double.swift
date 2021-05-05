@@ -33,6 +33,26 @@ extension LXSwiftBasics where Base == Double {
                                                         maxDigits: digits) ?? ""
     }
     
+    /// 取余两位
+    public func leaveTwoFormatWith() -> String {
+        let num = base
+        let numberFormatter1 = NumberFormatter()
+        numberFormatter1.positiveFormat = "###,##0.00"
+        var str = String()
+        str = numberFormatter1.string(from: NSNumber(value: num as Double))!
+        return str
+    }
+    
+    /// 百分比显示 乘100
+    public func hundredPercentFormat() -> String {
+        let num = base * 100
+        let numberFormatter1 = NumberFormatter()
+        numberFormatter1.positiveFormat = "###,##0.00"
+        var str = String()
+        str = numberFormatter1.string(from: NSNumber(value: num as Double))!
+        return str+"%"
+    }
+    
     /// User display capacity size size
     public func sizeToStr() -> String {
         let unit = 1000.0

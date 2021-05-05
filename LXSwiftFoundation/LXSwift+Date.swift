@@ -39,7 +39,8 @@ extension LXSwiftBasics where Base == Date {
     /// is this year
     public var isThisYear: Bool {
         let unit: Set<Calendar.Component> = [.year]
-        let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(), unit: unit)
+        let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(),
+                                                      unit: unit)
         let result = nowComps.year == selfCmps.year
         return result
     }
@@ -47,7 +48,8 @@ extension LXSwiftBasics where Base == Date {
     ///isYesterday
     public var isYesterday: Bool {
         let unit: Set<Calendar.Component> = [.day,.month,.year]
-        let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(), unit: unit)
+        let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(),
+                                                      unit: unit)
         let count = nowComps.day! - selfCmps.day!
         return (selfCmps.year == nowComps.year) &&
             (selfCmps.month == nowComps.month) &&
@@ -57,7 +59,8 @@ extension LXSwiftBasics where Base == Date {
     /// is today
     public var isToday: Bool{
         let unit: Set<Calendar.Component> = [.day,.month,.year]
-        let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(), unit: unit)
+        let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(),
+                                                      unit: unit)
         return (selfCmps.year == nowComps.year) &&
             (selfCmps.month == nowComps.month) &&
             (selfCmps.day == nowComps.day)
@@ -66,7 +69,8 @@ extension LXSwiftBasics where Base == Date {
     /// An hour ago
     public var isAnHourAgo: Bool{
         let unit: Set<Calendar.Component> = [.hour,.day,.month,.year]
-        let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(), unit: unit)
+        let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(),
+                                                      unit: unit)
         return (selfCmps.year == nowComps.year) &&
             (selfCmps.month == nowComps.month) &&
             (selfCmps.day == nowComps.day) &&
@@ -76,7 +80,8 @@ extension LXSwiftBasics where Base == Date {
     /// An minute ago
     public var isJust: Bool{
         let unit: Set<Calendar.Component> = [.minute,.hour,.day,.month,.year]
-        let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(), unit: unit)
+        let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(),
+                                                      unit: unit)
         return (selfCmps.year == nowComps.year) &&
             (selfCmps.month == nowComps.month) &&
             (selfCmps.day == nowComps.day) &&
@@ -126,5 +131,54 @@ extension LXSwiftBasics where Base == Date {
     ///get stamp with Interval
     public var timeInterval: TimeInterval {
         return base.timeIntervalSince1970
+    }
+    
+    var noHourDate: Date {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.date(from: "\(base.lx.year)-\(base.lx.month)-\(base.lx.day)") ?? base
+    }
+    
+    public var bsDescription: String {
+        /**
+         60秒内：刚刚
+         1-60分钟 ：5分钟前
+         60以上 - 今天0点之后：几小时以前，
+         昨天：昨天22：00
+         前1-7日前，在今年内：X天前
+         7日前-今年1.1：XX-XX
+         去年及以前：20XX-XX-XX
+         */
+        let now = Date()
+        //            let now = dateNow!
+        let secDiff = now.timeIntervalSince1970 - base.timeIntervalSince1970
+        let dayDiffSec = now.lx.noHourDate.timeIntervalSince1970 -
+            base.lx.noHourDate.timeIntervalSince1970
+        let dayDiff = Int(dayDiffSec / (24.0 * 60 * 60))
+        
+        if secDiff < 60 {
+            return "刚刚"
+        } else if secDiff < 60 * 60 {
+            return "\(Int(secDiff / 60))分钟前"
+        } else if base.timeIntervalSince1970 - now.lx.noHourDate.timeIntervalSince1970 > 0 {
+            let min = Int(secDiff / 60)
+            let hour = min / 60
+            return "\(hour)小时前"
+        } else if dayDiff <= 1 {
+            let hour = NSString(format: "%02d", self.hour)
+            let minute = NSString(format: "%02d", self.minute)
+            return "昨天\(hour):\(minute)"
+        } else if now.lx.year != base.lx.year {
+            let year = NSString(format: "%02d", base.lx.year)
+            let month = NSString(format: "%02d", base.lx.month)
+            let day = NSString(format: "%02d", base.lx.day)
+            return "\(year)-\(month)-\(day)"
+        } else if dayDiff <= 7 {
+            return "\(dayDiff)天前"
+        } else {
+            let month = NSString(format: "%02d", base.lx.month)
+            let day = NSString(format: "%02d", base.lx.day)
+            return "\(month)-\(day)"
+        }
     }
 }

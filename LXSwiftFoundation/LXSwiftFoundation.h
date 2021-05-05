@@ -12,5 +12,6 @@
 #import "LXObjcProxy.h"
 #import "LXObjcSuport.h"
 #import "LXObjcThreadActive.h"
+#import "CADisplayLink+Block.h"
 
 #endif /* LXSwiftFoundation_h */

@@ -17,7 +17,6 @@ private let linkBgTag = 1234994321
                                     longPress text: String)
 }
 
-
 public struct LXSwiftTextLableConfig {
     
     public var bgColor: UIColor

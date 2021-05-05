@@ -18,9 +18,11 @@ class ViewController: UIViewController {
         NotificationCenter.addObserver(self, selector: #selector(aa(_:)), notification: LXSwiftNotifications.shared)
         
         
-        let btn = UIButton(type: .custom)
+        var btn = UIButton(type: .custom)
         btn.backgroundColor = UIColor.orange
         btn.frame = CGRect(x: 100, y: 100, width: 260, height: 100)
+        btn.lx.y = 20
+
         btn.setTitle("首页tab_center", for: .normal)
         btn.setTitleColor(UIColor.blue, for: .normal)
         btn.setImage(UIImage(named: "tab_center"), for: .normal)

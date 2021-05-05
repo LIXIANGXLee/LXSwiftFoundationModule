@@ -12,7 +12,7 @@ import UIKit
 public struct LXSwiftBasics<Base> {
     
     /// Base object to extend.
-    public let base: Base
+    public var base: Base
     
     /// Creates extensions with base object.
     ///
