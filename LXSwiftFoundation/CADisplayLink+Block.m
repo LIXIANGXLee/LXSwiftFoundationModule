@@ -11,27 +11,28 @@
 
 @implementation CADisplayLink (Block)
 
-- (void)setExecuteBlock:(LXDisplayLinkBlock)executeBlock {
+- (void)setLx_executeBlock:(LXDisplayLinkBlock)lx_executeBlock {
     objc_setAssociatedObject(self,
-                             @selector(executeBlock),
-                             executeBlock,
+                             @selector(lx_executeBlock),
+                             lx_executeBlock,
                              OBJC_ASSOCIATION_COPY_NONATOMIC);
+
 }
 
-- (LXDisplayLinkBlock)executeBlock {
+- (LXDisplayLinkBlock)lx_executeBlock {
     return objc_getAssociatedObject(self,
-                                    @selector(executeBlock));
+                                    @selector(lx_executeBlock));
 }
 
-+ (CADisplayLink *)displayLinkWithBlock:(LXDisplayLinkBlock)block {
++ (CADisplayLink *)lx_displayLinkWithBlock:(LXDisplayLinkBlock)block {
     CADisplayLink *displayLink = [CADisplayLink displayLinkWithTarget:[LXObjcProxy proxyWithTarget:self] selector:@selector(lx_displayLink:)];
-    displayLink.executeBlock = [block copy];
+    displayLink.lx_executeBlock = [block copy];
     return displayLink;
 }
 
 + (void)lx_displayLink:(CADisplayLink *)displayLink {
-    if (displayLink.executeBlock) {
-        displayLink.executeBlock(displayLink);
+    if (displayLink.lx_executeBlock) {
+        displayLink.lx_executeBlock(displayLink);
     }
 }
 

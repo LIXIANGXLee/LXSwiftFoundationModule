@@ -13,9 +13,9 @@ typedef void(^LXDisplayLinkBlock) (CADisplayLink *displayLink);
 
 @interface CADisplayLink (Block)
 
-@property (nonatomic, copy)LXDisplayLinkBlock executeBlock;
+@property (nonatomic, copy)LXDisplayLinkBlock lx_executeBlock;
 
-+ (CADisplayLink *)displayLinkWithBlock:(LXDisplayLinkBlock)block;
++ (CADisplayLink *)lx_displayLinkWithBlock:(LXDisplayLinkBlock)block;
 
 @end
 

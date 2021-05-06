@@ -15,19 +15,21 @@
 // Global observer object
 static  CFRunLoopObserverRef currentObserver;
 
-- (void)setMaxTaskPerformedCount:(int)maxTaskPerformedCount{
-    objc_setAssociatedObject(self, @selector(maxTaskPerformedCount), @(maxTaskPerformedCount), OBJC_ASSOCIATION_ASSIGN);
+-(void)setLx_maxTaskPerformedCount:(int)lx_maxTaskPerformedCount {
+    objc_setAssociatedObject(self, @selector(lx_maxTaskPerformedCount), @(lx_maxTaskPerformedCount), OBJC_ASSOCIATION_ASSIGN);
 }
 
-- (int)maxTaskPerformedCount {
+
+- (int)lx_maxTaskPerformedCount {
     return (int)objc_getAssociatedObject(self, _cmd);
 }
 
--(void)setTimer:(NSTimer * )timer{
-    objc_setAssociatedObject(self, @selector(timer), timer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+
+- (void)setLx_timer:(NSTimer * _Nullable)lx_timer {
+    objc_setAssociatedObject(self, @selector(lx_timer), lx_timer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (NSTimer *)timer {
+- (NSTimer *)lx_timer {
     return (NSTimer *)objc_getAssociatedObject(self, _cmd);
 }
 
@@ -46,7 +48,7 @@ static  CFRunLoopObserverRef currentObserver;
 -(void)repeats{ }
 
 /// - Using this method, uitableview and uicollectionview performance can be optimized add Observer
--(void)addRunLoopObserverOfPerformance{
+-(void)lx_addRunLoopObserverOfPerformance{
     
     CFRunLoopRef runloop = CFRunLoopGetCurrent();
     CFRunLoopObserverContext context = {
@@ -63,7 +65,7 @@ static  CFRunLoopObserverRef currentObserver;
 }
 
 /// remove Observer
--(void)removeRunLoopObserver {
+-(void)lx_removeRunLoopObserver {
     
     CFRunLoopRef runloop = CFRunLoopGetCurrent();
     if (runloop && currentObserver) {
@@ -72,16 +74,16 @@ static  CFRunLoopObserverRef currentObserver;
     [self removeTimer];
 }
 
--(void)addTask:(ObjcRunloopBlock)task{
+-(void)lx_addTask:(ObjcRunloopBlock)task{
     
     /// 创建定时器
-    if (self.timer == nil) {
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:0.001 target:[LXObjcProxy proxyWithTarget:self] selector:@selector(repeats) userInfo:nil repeats:YES];
-        [self.timer fire];
+    if (self.lx_timer == nil) {
+        self.lx_timer = [NSTimer scheduledTimerWithTimeInterval:0.001 target:[LXObjcProxy proxyWithTarget:self] selector:@selector(repeats) userInfo:nil repeats:YES];
+        [self.lx_timer fire];
     }
     
     [self.tasks addObject:task];
-    int maxTaskCount = self.maxTaskPerformedCount ? self.maxTaskPerformedCount : 10;
+    int maxTaskCount = self.lx_maxTaskPerformedCount ? self.lx_maxTaskPerformedCount : 10;
     /// cell is  screen out
     if (self.tasks.count > maxTaskCount) {
         [self.tasks removeObjectAtIndex:0];
@@ -104,9 +106,9 @@ static void CallBack(CFRunLoopObserverRef observer, CFRunLoopActivity activity, 
 
 /// remove timer
 -(void)removeTimer {
-    if (self.timer != nil && [self.timer isValid]) {
-        [self.timer invalidate];
-        [self setTimer:nil];
+    if (self.lx_timer != nil && [self.lx_timer isValid]) {
+        [self.lx_timer invalidate];
+        [self setLx_timer:nil];
     }
 }
 
