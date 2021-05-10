@@ -25,14 +25,14 @@ extension LXSwiftBasics where Base: FileManager {
     }
     
     /// Documents
-    public static var documentURL: URL {
+    public static var documentURL: URL? {
         return FileManager.default.urls(for: .documentDirectory,
-                                        in: .userDomainMask).last!
+                                        in: .userDomainMask).last
     }
-    public static var documentPath: String {
+    public static var documentPath: String? {
         return NSSearchPathForDirectoriesInDomains(.documentDirectory,
                                                    .userDomainMask,
-                                                   true).first!
+                                                   true).first
     }
     
     /// Library
