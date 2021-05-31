@@ -41,24 +41,24 @@ open class LXSwiftTableView: UITableView{
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setShouldRecognizeSimultaneously(_ callBack: RecognizeSimultaneously?) {
+    open func setShouldRecognizeSimultaneously(_ callBack: RecognizeSimultaneously?) {
         self.shouldRecognizeSimultaneously = callBack
     }
     
-    func setShouldBegin(_ callBack: ShouldBegin?) {
+    open func setShouldBegin(_ callBack: ShouldBegin?) {
         self.shouldBegin = callBack
     }
 }
 
 public extension LXSwiftTableView {
 
-    func registCell<T: UITableViewCell>(_ cell: T.Type) where T: LXSwiftCellCompatible {
-        self.register(cell, forCellReuseIdentifier: cell.reusableIdentifier)
+    func registSwiftCell<T: UITableViewCell>(_ cell: T.Type) where T: LXSwiftCellCompatible {
+        self.register(cell, forCellReuseIdentifier: cell.reusableSwiftIdentifier)
     }
 
-    func dequeueGenericReusableCell<T: UITableViewCell>(indexPath: IndexPath)
+    func dequeueSwiftReusableCell<T: UITableViewCell>(indexPath: IndexPath)
     -> T where T: LXSwiftCellCompatible {
-        return self.dequeueReusableCell(withIdentifier: T.reusableIdentifier,
+        return self.dequeueReusableCell(withIdentifier: T.reusableSwiftIdentifier,
                                         for: indexPath) as! T
     }
 }
@@ -101,11 +101,11 @@ open class LXSwiftTableViewCell: UITableViewCell,
 }
 
 extension LXSwiftTableView: LXViewSetup {
-    open func setupUI() { }
-    open func setupViewModel() {}
+    @objc open func setupUI() { }
+    @objc open func setupViewModel() { }
 }
 
 extension LXSwiftTableViewCell: LXViewSetup {
-    open func setupUI() {}
-    open func setupViewModel() {}
+    @objc open func setupUI() { }
+    @objc open func setupViewModel() { }
 }

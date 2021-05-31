@@ -29,6 +29,14 @@ open class LXSwiftScrollView: UIScrollView {
         setupViewModel()
     }
     
+    open func setShouldRecognizeSimultaneously(_ callBack: RecognizeSimultaneously?) {
+        self.shouldRecognizeSimultaneously = callBack
+    }
+    
+    open func setShouldBegin(_ callBack: ShouldBegin?) {
+        self.shouldBegin = callBack
+    }
+    
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -54,6 +62,6 @@ extension LXSwiftScrollView: UIGestureRecognizerDelegate {
 }
 
 extension LXSwiftScrollView: LXViewSetup {
-    open func setupUI() { }
-    open func setupViewModel() {}
+    @objc open func setupUI() { }
+    @objc open func setupViewModel() { }
 }

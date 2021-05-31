@@ -56,6 +56,6 @@ open class LXSwiftView: UIView {
 }
 
 extension LXSwiftView: LXViewSetup {
-    open func setupUI() { }
-    open func setupViewModel() {}
+    @objc open func setupUI() { }
+    @objc open func setupViewModel() {}
 }

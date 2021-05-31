@@ -29,12 +29,8 @@ class TestViewController: UIViewController {
         let attr1 = LXSwiftRegex.regex(of: str1, textColor: UIColor.lx.color(hex: "333333"), textFont: UIFont.systemFont(ofSize: 12), wordRegexTypes: [type2])
         
         label.attributedText = attr1
-        
-        
-        
+         
     }
-
-     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
   

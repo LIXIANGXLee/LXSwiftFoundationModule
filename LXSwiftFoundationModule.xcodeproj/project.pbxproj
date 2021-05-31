@@ -18,6 +18,7 @@
 		7B566DDA1A33A0ADA6224DD1 /* Pods_LXSwiftFoundationModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F715AA7BA9B925B133355970 /* Pods_LXSwiftFoundationModule.framework */; };
 		8493CB95263A69A4000769A1 /* LXTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8493CB94263A69A4000769A1 /* LXTableView.swift */; };
 		8493CB9C263A7B72000769A1 /* dddd.m in Sources */ = {isa = PBXBuildFile; fileRef = 8493CB9B263A7B72000769A1 /* dddd.m */; };
+		84EF37DD266483620087E578 /* LXCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EF37DC266483620087E578 /* LXCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		8493CB94263A69A4000769A1 /* LXTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTableView.swift; sourceTree = "<group>"; };
 		8493CB9A263A7B72000769A1 /* dddd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dddd.h; sourceTree = "<group>"; };
 		8493CB9B263A7B72000769A1 /* dddd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = dddd.m; sourceTree = "<group>"; };
+		84EF37DC266483620087E578 /* LXCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXCollectionViewCell.swift; sourceTree = "<group>"; };
 		8DFBEB594E654C05D56544BE /* Pods-LXSwiftFoundationModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXSwiftFoundationModule.release.xcconfig"; path = "Target Support Files/Pods-LXSwiftFoundationModule/Pods-LXSwiftFoundationModule.release.xcconfig"; sourceTree = "<group>"; };
 		F715AA7BA9B925B133355970 /* Pods_LXSwiftFoundationModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LXSwiftFoundationModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -103,6 +105,7 @@
 				8493CB94263A69A4000769A1 /* LXTableView.swift */,
 				8493CB9A263A7B72000769A1 /* dddd.h */,
 				8493CB9B263A7B72000769A1 /* dddd.m */,
+				84EF37DC266483620087E578 /* LXCollectionViewCell.swift */,
 			);
 			path = LXSwiftFoundationModule;
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 				763271542530660D00B3C69E /* TestViewController.swift in Sources */,
 				7637401E253ACFEF001EC785 /* Test1ViewController.swift in Sources */,
 				7607A083251B1C0B0071B9AD /* ViewController.swift in Sources */,
+				84EF37DD266483620087E578 /* LXCollectionViewCell.swift in Sources */,
 				8493CB9C263A7B72000769A1 /* dddd.m in Sources */,
 				8493CB95263A69A4000769A1 /* LXTableView.swift in Sources */,
 				7607A07F251B1C0B0071B9AD /* AppDelegate.swift in Sources */,

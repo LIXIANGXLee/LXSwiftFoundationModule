@@ -35,25 +35,25 @@ open class LXSwiftCollectionView: UICollectionView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setShouldRecognizeSimultaneously(_ callBack: RecognizeSimultaneously?) {
+    open func setShouldRecognizeSimultaneously(_ callBack: RecognizeSimultaneously?) {
         self.shouldRecognizeSimultaneously = callBack
     }
     
-    func setShouldBegin(_ callBack: ShouldBegin?) {
+    open func setShouldBegin(_ callBack: ShouldBegin?) {
         self.shouldBegin = callBack
     }
 }
 
 public extension LXSwiftCollectionView {
 
-    func registCell<T: UICollectionViewCell>(_ cell: T.Type) where T: LXSwiftCellCompatible {
-        self.register(cell, forCellWithReuseIdentifier: cell.reusableIdentifier)
+    func registSwiftCell<T: UICollectionViewCell>(_ cell: T.Type) where T: LXSwiftCellCompatible {
+        self.register(cell, forCellWithReuseIdentifier: cell.reusableSwiftIdentifier)
     }
 
-    func dequeueGenericReusableCell<T: UICollectionViewCell>(indexPath:
+    func dequeueSwiftReusableCell<T: UICollectionViewCell>(indexPath:
                                                                 IndexPath)
     -> T where T: LXSwiftCellCompatible {
-        return self.dequeueReusableCell(withReuseIdentifier: T.reusableIdentifier,
+        return self.dequeueReusableCell(withReuseIdentifier: T.reusableSwiftIdentifier,
                                         for: indexPath) as! T
     }
 }
@@ -80,12 +80,6 @@ extension LXSwiftCollectionView: UIGestureRecognizerDelegate {
     }
 }
 
-extension LXSwiftCollectionView: LXViewSetup {
-    open func setupUI() { }
-    open func setupViewModel() {}
-    
-}
-
 open class LXSwiftCollectionViewCell: UICollectionViewCell, LXSwiftCellCompatible {
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -98,8 +92,12 @@ open class LXSwiftCollectionViewCell: UICollectionViewCell, LXSwiftCellCompatibl
     }
 }
 
+extension LXSwiftCollectionView: LXViewSetup {
+    @objc open func setupUI() { }
+    @objc open func setupViewModel() { }
+}
+
 extension LXSwiftCollectionViewCell: LXViewSetup {
-    open func setupUI() {}
-    open func setupViewModel() {}
-    
+    @objc open func setupUI() { }
+    @objc open func setupViewModel() { }
 }

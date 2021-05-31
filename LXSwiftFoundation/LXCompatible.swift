@@ -63,10 +63,10 @@ internal protocol LXSwiftPropertyCompatible {
 
 /// cell protocol
 public protocol LXSwiftCellCompatible: AnyObject {
-    static var reusableIdentifier: String { get }
+    static var reusableSwiftIdentifier: String { get }
 }
 public extension LXSwiftCellCompatible {
-    static var reusableIdentifier: String {
+    static var reusableSwiftIdentifier: String {
         return "\(self)"
     }
 }
