@@ -66,4 +66,25 @@ extension LXSwiftBasics where Base == Double {
             return String(format: "%dKB", 0)
         }
     }
+    
+    /// timer string
+    func transformTimeString() -> String {
+        let dur = Int(round(base))
+        switch dur {
+        case 0..<60:
+            return String(format: "00:%02d", dur)
+        case 60..<3600:
+            let m = dur / 60
+            let s = dur % 60
+            return String(format: "%02d:%02d", m, s)
+        case 3600...:
+            let h = dur / 3600
+            let m = (dur % 3600) / 60
+            let s = dur % 60
+            return String(format: "%02d:%02d:%02d", h, m, s)
+        default:
+            return ""
+        }
+    }
+    
 }
