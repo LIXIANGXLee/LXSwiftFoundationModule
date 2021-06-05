@@ -14,6 +14,12 @@ class ViewController: UIViewController {
 
      override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        print("----====-=-=-=-=-=-======\(LXSwiftApp.statusbarH)")
+        
+        
+        
         self.view.backgroundColor = UIColor.white
         NotificationCenter.addObserver(self, selector: #selector(aa(_:)), notification: LXSwiftNotifications.shared)
         

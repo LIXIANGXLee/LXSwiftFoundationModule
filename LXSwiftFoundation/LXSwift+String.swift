@@ -313,7 +313,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     public var fileSize: String {
         let string = base as! String
         guard let size = Double(string) else {  return "" }
-        return size.lx.sizeToStr()
+        return size.lx.sizeToStr
     }
 }
 

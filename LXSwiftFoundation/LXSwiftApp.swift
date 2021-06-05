@@ -48,7 +48,7 @@ public struct LXSwiftApp {
     public static let screenH = CGFloat(UIScreen.main.bounds.height)
 
     /// 状态栏高度
-    public static let statusbarH: CGFloat = UIApplication.shared.statusBarFrame.height
+    public static let statusbarH: CGFloat = statusBarHeight
     /// 屏幕底部刘海高度
     public static let touchBarH: CGFloat = Int(statusbarH) == 44 ? 34 : 0
         
@@ -64,6 +64,15 @@ public struct LXSwiftApp {
 
     /// 适配比例
     public static let scale = LXSwiftApp.screenW / CGFloat(375.0)
+    
+    /// 获取状态栏高度
+    private static var statusBarHeight: CGFloat {
+        var statusH: CGFloat = UIApplication.shared.statusBarFrame.height
+        if statusH == 0, #available(iOS 13.0, *) {
+            statusH = UIApplication.shared.windows.first?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+        }
+        return statusH
+    }
     
     /**
      *  基于当前设备的屏幕倍数，对传进来的 floatValue 进行像素取整。
