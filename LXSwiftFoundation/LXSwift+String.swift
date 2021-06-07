@@ -234,7 +234,10 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     ///Convert to JSON object type
     public var jsonObject: Any? {
         let string = base as! String
-        return try? JSONSerialization.jsonObject(with: string.data(using: .utf8) ?? Data(),
+        guard let data = string.data(using: .utf8) else {
+            return nil
+        }
+        return try? JSONSerialization.jsonObject(with:data,
                                                  options: .allowFragments)
     }
     
@@ -314,6 +317,38 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         let string = base as! String
         guard let size = Double(string) else {  return "" }
         return size.lx.sizeToStr
+    }
+    
+    /// Retrieves the parameter from the URL String and converts it to the dictionary type
+    /// 从URL String 中获取参数，并将参数转为字典类型
+    public var getUrlParams1: [String: String]? {
+        let string = base as! String
+        guard let url = URL(string: string) else { return nil }
+        return url.lx.getUrlParams1
+    }
+    
+    /// Retrieves the parameter from the URL String and converts it to the dictionary type
+    /// 从URL String 中获取参数，并将参数转为字典类型
+    public var getUrlParams2: [String: String]? {
+        let string = base as! String
+        guard let url = URL(string: string) else { return nil }
+        return url.lx.getUrlParams2
+    }
+    
+    /// Encodes the original URL into a valid URL
+    ///将原始的url编码为合法的url
+    public var urlEncoded: String {
+        let string = base as! String
+        let encodeUrlString = string.addingPercentEncoding(withAllowedCharacters:
+            .urlQueryAllowed)
+        return encodeUrlString ?? ""
+    }
+    
+    /// Converts the encoded URL back to the original URL
+    ///将编码后的url转换回原始的url
+    public var urlDecoded: String {
+        let string = base as! String
+        return string.removingPercentEncoding ?? ""
     }
 }
 

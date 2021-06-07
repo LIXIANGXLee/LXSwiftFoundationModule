@@ -15,9 +15,14 @@ class ViewController: UIViewController {
      override func viewDidLoad() {
         super.viewDidLoad()
         
+        let urlStr = "http//msb.com/activity-rank?activityId=xxx&isEnd=0"
         
-        print("----====-=-=-=-=-=-======\(LXSwiftApp.statusbarH)")
+        let p1 =  URL(string: urlStr)!.lx.getUrlParams1
+        let p2 =  URL(string: urlStr)!.lx.getUrlParamsWithOrder
+        let p3 = urlStr.lx.getUrlParams1
         
+        
+        print("-=-=-=-========\(p1)====\(p2)====\(p3)")
         
         
         self.view.backgroundColor = UIColor.white
