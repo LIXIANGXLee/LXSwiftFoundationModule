@@ -17,11 +17,11 @@ var window: UIWindow?
         [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
 
-        
+
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        
+
         self.window?.rootViewController = ViewController()
-        
+
         self.window?.makeKeyAndVisible()
         
         return true

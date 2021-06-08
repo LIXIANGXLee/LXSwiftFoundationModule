@@ -50,7 +50,7 @@ public struct LXSwiftApp {
     /// 状态栏高度
     public static let statusbarH: CGFloat = statusBarHeight
     /// 屏幕底部刘海高度
-    public static let touchBarH: CGFloat = Int(statusbarH) >= 44 ? 34 : 0
+    public static let touchBarH: CGFloat = touchBarHeight
         
     ///Gets the height of the Navigation bar
     public static let navbarH: CGFloat = statusbarH + 44
@@ -71,9 +71,24 @@ public struct LXSwiftApp {
         if statusH == 0, #available(iOS 13.0, *) {
             statusH = UIApplication.shared.windows.first?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
         }
+        
+        if  statusH == 0, #available(iOS 11.0, *)  {
+            statusH = UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0
+        }
+        
         return statusH
     }
     
+    private static var touchBarHeight: CGFloat {
+        var touchBarH: CGFloat = 0
+        if #available(iOS 11.0, *) {
+            touchBarH = UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0
+            if touchBarH == 0 && Int(statusbarH) >= 44 {
+                touchBarH = 34
+            }
+        }
+        return touchBarH
+    }
     /**
      *  基于当前设备的屏幕倍数，对传进来的 floatValue 进行像素取整。
      *  注意如果在 Core Graphic 绘图里使用时，要注意当前画布的倍数是否和设备屏幕倍数一致，
