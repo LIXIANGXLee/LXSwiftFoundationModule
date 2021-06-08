@@ -50,7 +50,7 @@ public struct LXSwiftApp {
     /// 状态栏高度
     public static let statusbarH: CGFloat = statusBarHeight
     /// 屏幕底部刘海高度
-    public static let touchBarH: CGFloat = Int(statusbarH) == 44 ? 34 : 0
+    public static let touchBarH: CGFloat = Int(statusbarH) >= 44 ? 34 : 0
         
     ///Gets the height of the Navigation bar
     public static let navbarH: CGFloat = statusbarH + 44

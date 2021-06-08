@@ -25,7 +25,7 @@ class ViewController: UIViewController {
         let dic = ["aa", "bb"] as [Any]
         
         
-        print("-=-=-=-========\(dic.lx.arrToJsonStr)==\(dic.lx.arrToJsonStr?.lx.jsonStrToArr)==")
+        print("-=-=-=-========\(LXSwiftApp.touchBarH)==\(dic.lx.arrToJsonStr?.lx.jsonStrToArr)==")
         
         
         print("=====----====\(Date().lx.isLeapYear)")
