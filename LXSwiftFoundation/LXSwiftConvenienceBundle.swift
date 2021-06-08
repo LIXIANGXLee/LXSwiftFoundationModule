@@ -29,8 +29,7 @@ public struct LXSwiftConvenienceBundle {
     private let bundlePath: String     //bundle  path
     private let bundleName: String
     
-    public init(bundlePath: String,
-                bundleName: String,
+    public init(bundlePath: String, bundleName: String,
                 path: String? = nil) {
         self.bundlePath = bundlePath
         self.path = path
@@ -87,7 +86,6 @@ fileprivate struct LXSwiftX2ImageBuilder: LXSwiftImageAdaptNode {
     }
     
     func loadImage(_ imagePath: String) -> UIImage? {
-        
         if let image = UIImage(contentsOfFile: "\(imagePath)@2x.png") {
             return image
         }else{

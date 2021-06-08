@@ -15,7 +15,7 @@ extension LXSwiftBasics where Base: Bundle {
     
     ///Get namespace
     public static var namespace: String {
-        let namespace =  Bundle.main.infoDictionary?["CFBundleExecutable"] as? String
+        let namespace = Bundle.main.infoDictionary?["CFBundleExecutable"] as? String
         return  namespace ?? ""
     }
     
@@ -43,13 +43,18 @@ extension LXSwiftBasics where Base: Bundle {
     static var displayName: String {
         return Bundle.main.localizedInfoDictionary?["CFBundleDisplayName"] as? String ?? ""
     }
-
+    
     ///获取icon图标
     public static var appIcon: UIImage? {
+        guard let lastIcon = appIconStrs?.last else { return nil }
+        return UIImage(named: lastIcon)
+    }
+    
+    ///获取icon string 集合
+    public static var appIconStrs: [String]? {
         guard let iconsDictionary = Bundle.main.infoDictionary?["CFBundleIcons"] as? [String: Any],
             let primaryIconsDictionary = iconsDictionary["CFBundlePrimaryIcon"] as? [String: Any],
-            let iconFiles = primaryIconsDictionary["CFBundleIconFiles"] as? [String],
-            let lastIcon = iconFiles.last else { return nil }
-        return UIImage(named: lastIcon)
+            let iconFiles = primaryIconsDictionary["CFBundleIconFiles"] as? [String] else { return nil }
+        return iconFiles
     }
 }

@@ -44,8 +44,7 @@ extension LXSwiftBasics where Base : NSAttributedString {
 extension LXSwiftBasics where Base : NSMutableAttributedString {
     
     internal func setAttribute(_ attribute: NSAttributedString.Key,
-                               value: Any?,
-                               range: NSRange) {
+                               value: Any?, range: NSRange) {
         guard let value = value else { return }
         base.addAttribute(attribute, value: value, range: range)
     }

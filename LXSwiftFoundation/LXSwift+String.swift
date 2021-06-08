@@ -97,7 +97,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     }
     
     /// string transform bool
-    public func toBool() -> Bool? {
+    public var strToBool: Bool? {
         let string = base as! String
         switch string {
         case "True", "true", "yes", "1":

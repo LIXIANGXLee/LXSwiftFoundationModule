@@ -155,7 +155,6 @@ extension LXSwiftBasics where Base == Date {
         let dayDiffSec = now.lx.noHourDate.timeIntervalSince1970 -
             base.lx.noHourDate.timeIntervalSince1970
         let dayDiff = Int(dayDiffSec / (24.0 * 60 * 60))
-        
         if secDiff < 60 {
             return "刚刚"
         } else if secDiff < 60 * 60 {

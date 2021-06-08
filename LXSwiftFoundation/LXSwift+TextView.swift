@@ -24,7 +24,6 @@ extension LXSwiftBasics where Base : LXSwiftTextView {
         if let c = color {
             base.placehoderLabel.textColor = c
         }
-        
         base.setNeedsLayout()
     }
     

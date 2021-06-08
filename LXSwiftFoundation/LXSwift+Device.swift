@@ -45,6 +45,25 @@ extension LXSwiftBasics where Base: UIDevice {
 //MARK: -  Extending methods  for UIDevice is ipad or iphone
 extension LXSwiftBasics where Base: UIDevice {
     
+    ///get network type
+    public static var netType: String {
+        let type = LXObjcUtils.getNetWorkType()
+        var netType: String
+        switch type {
+        case 1:
+            netType = "wifi"
+        case 2:
+            netType = "4G"
+        case 3:
+            netType = "3G"
+        case 4:
+            netType = "2G"
+        default:
+            netType = "未知"
+        }
+        return netType
+    }
+    
     /// get system start date
     public static var systemUptime: Date {
         let time = ProcessInfo.processInfo.systemUptime
@@ -84,25 +103,6 @@ extension LXSwiftBasics where Base: UIDevice {
         }else{
             return used
         }
-    }
-    
-    ///get network type
-    public static var netType: String {
-        let type = LXObjcUtils.getNetWorkType()
-        var netType: String
-        switch type {
-        case 1:
-            netType = "wifi"
-        case 2:
-            netType = "4G"
-        case 3:
-            netType = "3G"
-        case 4:
-            netType = "2G"
-        default:
-            netType = "未知"
-        }
-        return netType
     }
     
     /// get memory size

@@ -51,12 +51,12 @@ extension LXSwiftBasics where Base == Int {
     }
     
     /// Convert to string format
-    public func toString() -> String {
+    public var intToStr: String {
         return String(base)
     }
     
     /// Convert bool
-    public func toBool() -> Bool {
+    public var intToBool: Bool {
         return base > 0 ? true : false
     }
 }
