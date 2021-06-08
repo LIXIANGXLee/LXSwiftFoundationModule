@@ -14,7 +14,8 @@
  @param v2 two version
  @return 0:eque,-1:one small,1:two small
  */
-int _compareVersionInSwift(const char *v1, const char *v2);
+int _compareVersionInSwift(const char * _Nullable v1,
+                           const char * _Nullable v2);
 
 NS_ASSUME_NONNULL_BEGIN
 

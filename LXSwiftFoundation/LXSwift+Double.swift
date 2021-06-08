@@ -34,7 +34,7 @@ extension LXSwiftBasics where Base == Double {
     }
     
     /// 取余两位
-    public var leaveTwoFormatWith: String {
+    public var leaveTwoFormat: String {
         let num = base
         let numberFormatter1 = NumberFormatter()
         numberFormatter1.positiveFormat = "###,##0.00"
@@ -68,7 +68,7 @@ extension LXSwiftBasics where Base == Double {
     }
     
     /// timer string
-    public var timeToString: String {
+    public var timeToStr: String {
         let dur = Int(round(base))
         switch dur {
         case 0..<60:
