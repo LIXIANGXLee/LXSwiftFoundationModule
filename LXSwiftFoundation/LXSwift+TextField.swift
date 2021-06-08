@@ -77,21 +77,21 @@ extension LXSwiftBasics where Base : LXSwiftTextField {
     /// set bold font and textColor
     public func set(withBoldFont fontSize: CGFloat,
                     textColor: String) {
-        set(withFont: UIFont.lx.systemFontWithBold(ofSize: fontSize),
+        set(withFont: UIFont.lx.fontWithBold(fontSize),
             textColor: UIColor.lx.color(hex: textColor))
     }
     
     /// set medium font and textColor
     public func set(withMediumFont fontSize: CGFloat,
                     textColor: String) {
-        set(withFont: UIFont.lx.systemFontWithMedium(ofSize: fontSize),
+        set(withFont: UIFont.lx.fontWithMedium(fontSize),
             textColor: UIColor.lx.color(hex: textColor))
     }
     
     /// set regular font and textColor
     public func set(withRegularFont fontSize: CGFloat,
                     textColor: String) {
-        set(withFont: UIFont.lx.systemFontWithRegular(ofSize: fontSize),
+        set(withFont: UIFont.lx.fontWithRegular(fontSize),
             textColor: UIColor.lx.color(hex: textColor))
     }
     
@@ -137,3 +137,26 @@ extension LXSwiftTextField: LXSwiftPropertyCompatible{
     }
 }
 
+extension LXSwiftBasics where Base : UITextField {
+    ///Sets the color of the transient text
+    /// 设置暂位文字的颜色
+    var placeholderColor: UIColor {
+        get {
+            let color = base.value(forKeyPath: "_placeholderLabel.textColor") as? UIColor
+            return color ?? .white
+        } set {
+            base.setValue(newValue, forKeyPath: "_placeholderLabel.textColor")
+        }
+    }
+
+    ///Sets the font of the transient tex
+    ///设置暂位文字的字体
+    var placeholderFont: UIFont {
+        get {
+            let font = base.value(forKeyPath: "_placeholderLabel.font") as? UIFont
+            return font ?? UIFont.lx.fontWithRegular(14)
+        } set {
+            base.setValue(newValue, forKeyPath: "_placeholderLabel.font")
+        }
+    }
+}

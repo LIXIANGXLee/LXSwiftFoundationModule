@@ -41,24 +41,24 @@ public func - (left: [String: Any],
 extension LXSwiftBasics where Base == Dictionary<String, Any> {
     
     /// Dictionary to json String
-    public var jsonStringEncode: String? {
+    public var dicToJsonStr: String? {
         guard JSONSerialization.isValidJSONObject(base) else {
             return nil
         }
-        guard let jsonData = try? JSONSerialization.data(withJSONObject: self,
-                                                         options: .init(rawValue: 0)),
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: base,
+                                                         options: []),
             let json = String(data: jsonData, encoding: .utf8) else {
                 return nil
         }
         return json
     }
-    
+
     /// Dictionary to json string
-    public var jsonPrettyStringEncoded: String? {
+    public var dicToPrettyStr: String? {
         guard JSONSerialization.isValidJSONObject(base) else {
             return nil
         }
-        guard let jsonData = try? JSONSerialization.data(withJSONObject: self,
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: base,
                                                          options: .prettyPrinted),
             let json = String(data: jsonData, encoding: .utf8) else {
                 return nil
@@ -72,7 +72,7 @@ extension LXSwiftBasics where Base == Dictionary<String, Any> {
     
     ///  dic to plist data type
     public var plistData: Data? {
-        return try? PropertyListSerialization.data(fromPropertyList: self,
+        return try? PropertyListSerialization.data(fromPropertyList: base,
                                                    format: .xml,
                                                    options: 0)
     }

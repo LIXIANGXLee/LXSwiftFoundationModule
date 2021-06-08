@@ -10,19 +10,16 @@ extension Array: LXSwiftCompatible { }
 
 extension LXSwiftBasics where Base == Array<Any> {
    
-   /// 数组转成json
-   public func toJson() -> String {
-        if (!JSONSerialization.isValidJSONObject(self)) {
-            print("无法解析出JSONString")
-            return ""
+    /// 数组转成json
+    public var arrToJsonStr: String? {
+        guard JSONSerialization.isValidJSONObject(base) else {
+            return nil
         }
-        
-        guard let data = try? JSONSerialization.data(withJSONObject: self, options: []) as NSData else {
-            return ""
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: base,
+                                                         options: []),
+            let json = String(data: jsonData, encoding: .utf8) else {
+                return nil
         }
-        
-        let JSONString = NSString(data:data as Data,encoding: String.Encoding.utf8.rawValue)
-        
-        return JSONString! as String
+        return json
     }
 }

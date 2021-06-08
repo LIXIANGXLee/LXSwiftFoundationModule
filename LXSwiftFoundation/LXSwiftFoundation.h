@@ -10,7 +10,7 @@
 
 #import "UIView+LXObjcPerformance.h"
 #import "LXObjcProxy.h"
-#import "LXObjcSuport.h"
+#import "LXObjcUtils.h"
 #import "LXObjcThreadActive.h"
 #import "CADisplayLink+Block.h"
 

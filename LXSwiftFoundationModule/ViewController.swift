@@ -22,8 +22,13 @@ class ViewController: UIViewController {
         let p3 = urlStr.lx.getUrlParams1
         
         
-        print("-=-=-=-========\(p1)====\(p2)====\(p3)")
+        let dic = ["aa", "bb"] as [Any]
         
+        
+        print("-=-=-=-========\(dic.lx.arrToJsonStr)==\(dic.lx.arrToJsonStr?.lx.jsonStrToArr)==")
+        
+        
+        print("=====----====\(Date().lx.isLeapYear)")
         
         self.view.backgroundColor = UIColor.white
         NotificationCenter.addObserver(self, selector: #selector(aa(_:)), notification: LXSwiftNotifications.shared)

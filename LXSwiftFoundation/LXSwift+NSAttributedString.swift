@@ -15,8 +15,9 @@ extension LXSwiftBasics where Base : NSAttributedString {
     
     ///Get the font size based on the font size and width
     public func size(width: CGFloat) -> CGSize {
-        let rect = base.boundingRect(with: CGSize(width: width,
-                                                  height: CGFloat(MAXFLOAT)),
+        let size = CGSize(width: width,
+                          height: CGFloat(MAXFLOAT))
+        let rect = base.boundingRect(with: size,
                                      options: .usesLineFragmentOrigin,
                                      context: nil)
         return rect.size
@@ -77,7 +78,7 @@ extension LXSwiftBasics where Base : NSMutableAttributedString {
     @discardableResult
     public func setBackgroundColor(with backgroundColor: UIColor?,
                                    range: NSRange? = nil) -> NSMutableAttributedString {
-        guard let backgroundColor = backgroundColor else { return base}
+        guard let backgroundColor = backgroundColor else { return base }
         let range = range ?? NSMakeRange(0, base.length)
         setAttribute(.backgroundColor, value: backgroundColor, range: range)
         return base

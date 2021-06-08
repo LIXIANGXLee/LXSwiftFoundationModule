@@ -20,7 +20,6 @@ extension LXSwiftBasics where Base : LXSwiftTextView {
     /// set placeholder and color
     public func set(with placeholder: String?,
                     color: UIColor? = UIColor.lx.color(hex: "999999")) {
-        
         base.placehoderLabel.text = placeholder
         if let c = color {
             base.placehoderLabel.textColor = c
@@ -48,21 +47,21 @@ extension LXSwiftBasics where Base : LXSwiftTextView {
     /// set bold font and textColor
     public func set(withBoldFont fontSize: CGFloat,
                     textColor: String) {
-        set(withFont: UIFont.lx.systemFontWithBold(ofSize: fontSize),
+        set(withFont: UIFont.lx.fontWithBold(fontSize),
             textColor: UIColor.lx.color(hex: textColor))
     }
     
     /// set medium font and textColor
     public func set(withMediumFont fontSize: CGFloat,
                     textColor: String) {
-        set(withFont: UIFont.lx.systemFontWithMedium(ofSize: fontSize),
+        set(withFont: UIFont.lx.fontWithMedium(fontSize),
             textColor: UIColor.lx.color(hex: textColor))
     }
     
     /// set regular font and textColor
     public func set(withRegularFont fontSize: CGFloat,
                     textColor: String) {
-        set(withFont: UIFont.lx.systemFontWithRegular(ofSize: fontSize),
+        set(withFont: UIFont.lx.fontWithRegular(fontSize),
             textColor: UIColor.lx.color(hex: textColor))
     }
     

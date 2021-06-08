@@ -68,7 +68,7 @@ extension LXSwiftBasics where Base == Double {
     }
     
     /// timer string
-    public var timeString: String {
+    public var timeToString: String {
         let dur = Int(round(base))
         switch dur {
         case 0..<60:

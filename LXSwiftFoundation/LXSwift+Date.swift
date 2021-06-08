@@ -124,7 +124,7 @@ extension LXSwiftBasics where Base == Date {
     }
     
     public var isLeapYear: Bool {
-        let year = self.year
+        let year = base.lx.year
         return ((year % 400 == 0) || ((year % 100 != 0) && (year % 4 == 0)))
     }
     
@@ -165,8 +165,8 @@ extension LXSwiftBasics where Base == Date {
             let hour = min / 60
             return "\(hour)小时前"
         } else if dayDiff <= 1 {
-            let hour = NSString(format: "%02d", self.hour)
-            let minute = NSString(format: "%02d", self.minute)
+            let hour = NSString(format: "%02d", base.lx.hour)
+            let minute = NSString(format: "%02d", base.lx.minute)
             return "昨天\(hour):\(minute)"
         } else if now.lx.year != base.lx.year {
             let year = NSString(format: "%02d", base.lx.year)

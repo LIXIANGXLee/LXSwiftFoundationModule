@@ -141,9 +141,9 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     ///   - base: one version
     ///   - v: two version
     /// - Returns: big: base > two  ,small:two  < base, equal:base == two
-    public func versionCompare(_ v: String) -> LXSwiftUtil.VersionCompareResult {
+    public func versionCompare(_ v: String) -> LXSwiftUtils.VersionCompareResult {
         let string = base as! String
-        return LXSwiftUtil.lx.versionCompare(string, v)
+        return LXSwiftUtils.lx.versionCompare(string, v)
     }
     
     /// Keep a few significant digits after the decimal point
@@ -231,6 +231,18 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return jsonObject != nil
     }
     
+    /// string to dic
+    public var jsonStrToDic: [String: Any] {
+        let string = base as! String
+        return (string.lx.jsonObject as? [String: Any]) ?? [:]
+    }
+
+    /// string to array
+    public var jsonStrToArr: [Any] {
+        let string = base as! String
+        return (string.lx.jsonObject as? [Any]) ?? []
+    }
+    
     ///Convert to JSON object type
     public var jsonObject: Any? {
         let string = base as! String
@@ -239,17 +251,6 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         }
         return try? JSONSerialization.jsonObject(with:data,
                                                  options: .allowFragments)
-    }
-    
-    /// Encode to JSON string
-    public var jsonStringEncode: String? {
-        let string = base as! String
-        if !JSONSerialization.isValidJSONObject(string) { return nil }
-        guard let jsonData = try? JSONSerialization.data(withJSONObject: string,
-                                                         options: .init(rawValue: 0)),
-            let json = String(data: jsonData, encoding: .utf8) else {
-                return nil  }
-        return json
     }
 }
 
