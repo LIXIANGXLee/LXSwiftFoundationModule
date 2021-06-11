@@ -50,7 +50,7 @@ open class LXSwiftTableView: UITableView{
     }
 }
 
-public extension LXSwiftTableView {
+public extension UITableView {
 
     func registSwiftCell<T: UITableViewCell>(_ cell: T.Type) where T: LXSwiftCellCompatible {
         self.register(cell, forCellReuseIdentifier: cell.reusableSwiftIdentifier)

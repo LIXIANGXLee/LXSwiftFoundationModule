@@ -12,12 +12,12 @@ extension UIApplication: LXSwiftCompatible { }
 extension LXSwiftBasics where Base: UIApplication {
     
     /// 当前显示的控制器
-    static var visibleViewController: UIViewController? {
+    public static var visibleViewController: UIViewController? {
         return UIApplication.lx.getVisibleViewController(from:
                             UIApplication.shared.keyWindow?.rootViewController)
     }
 
-    static func getVisibleViewController(from vc: UIViewController?) -> UIViewController? {
+    public static func getVisibleViewController(from vc: UIViewController?) -> UIViewController? {
         if let nav = vc as? UINavigationController {
             return getVisibleViewController(from: nav.visibleViewController)
         } else if let tab = vc as? UITabBarController {
@@ -29,7 +29,7 @@ extension LXSwiftBasics where Base: UIApplication {
     }
     
     /// 打开url
-    static func openUrl(_ urlStr: String,
+    public static func openUrl(_ urlStr: String,
                         completionHandler: ((Bool) -> Void)? = nil) {
         if let url = URL(string: urlStr) {
             openUrl(url,
@@ -37,7 +37,7 @@ extension LXSwiftBasics where Base: UIApplication {
         }
     }
     
-    static func openUrl(_ url: URL,
+    public static func openUrl(_ url: URL,
                         completionHandler: ((Bool) -> Void)? = nil) {
         if isCanOpen(url) {
             if #available(iOS 10.0, *) {
@@ -50,7 +50,7 @@ extension LXSwiftBasics where Base: UIApplication {
     }
     
     /// 判断是否能打开url
-    static func isCanOpen(_ url: URL) -> Bool {
+    public static func isCanOpen(_ url: URL) -> Bool {
        return UIApplication.shared.canOpenURL(url)
     }
 }

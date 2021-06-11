@@ -9,7 +9,14 @@
 import UIKit
 import LXSwiftFoundation
 
-class LXTableView: LXSwiftTableView {
+class LXTableView: LXSwiftTableView{
 
 
+    override func setupUI() {
+                
+        
+    }
+ 
+  
+    
 }

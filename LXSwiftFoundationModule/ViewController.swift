@@ -12,14 +12,19 @@ import LXSwiftFoundation
 class ViewController: UIViewController {
     var  objc : LXObjcThreadActive! = nil
     //隐藏状态栏
-       override var prefersStatusBarHidden: Bool {
-           return true
-       }
+     
+    override var prefersStatusBarHidden: Bool {
+        
+        return true
+     
+    }
+    
+    
      override func viewDidLoad() {
         super.viewDidLoad()
-           
         
-        print("-=-=-=-==\(LXSwiftApp.touchBarH)===\(LXSwiftApp.statusbarH)=")
+    
+        print("-=-=\(UIApplication.shared.statusBarFrame.height)-=-==\(LXSwiftApp.touchBarH)===\(LXSwiftApp.statusbarH)=")
         
                 
         self.view.backgroundColor = UIColor.white

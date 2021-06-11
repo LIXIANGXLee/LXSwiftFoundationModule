@@ -7,7 +7,7 @@ target 'LXSwiftFoundationModule' do
   
   
   pod 'LXSwiftFoundation', :path => './'
-
+#  pod 'SDWebImage'
   # Pods for LXSwiftFoundationModule
   
 end

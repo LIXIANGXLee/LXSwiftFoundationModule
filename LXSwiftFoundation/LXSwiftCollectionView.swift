@@ -44,7 +44,7 @@ open class LXSwiftCollectionView: UICollectionView {
     }
 }
 
-public extension LXSwiftCollectionView {
+public extension UICollectionView {
 
     func registSwiftCell<T: UICollectionViewCell>(_ cell: T.Type) where T: LXSwiftCellCompatible {
         self.register(cell, forCellWithReuseIdentifier: cell.reusableSwiftIdentifier)
