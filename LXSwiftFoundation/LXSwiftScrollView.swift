@@ -50,7 +50,7 @@ extension LXSwiftScrollView: UIGestureRecognizerDelegate {
     -> Bool {
         let outResult = shouldRecognizeSimultaneously?(gestureRecognizer,
                                                        otherGestureRecognizer)
-        return outResult ?? true
+        return outResult ?? false
     }
     
     open override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer)

@@ -72,7 +72,7 @@ extension LXSwiftTableView: UIGestureRecognizerDelegate {
                                     otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         let outResult = shouldRecognizeSimultaneously?(gestureRecognizer,
                                                        otherGestureRecognizer)
-        return outResult ?? true
+        return outResult ?? false
     }
     
     /// is can event

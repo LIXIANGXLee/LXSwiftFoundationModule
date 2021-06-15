@@ -133,7 +133,7 @@ extension LXSwiftBasics where Base == Date {
         return base.timeIntervalSince1970
     }
     
-    var noHourDate: Date {
+    public var noHourDate: Date {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter.date(from: "\(base.lx.year)-\(base.lx.month)-\(base.lx.day)") ?? base
