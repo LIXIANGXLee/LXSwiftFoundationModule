@@ -25,7 +25,9 @@
 }
 
 + (CADisplayLink *)lx_displayLinkWithBlock:(LXDisplayLinkBlock)block {
-    CADisplayLink *displayLink = [CADisplayLink displayLinkWithTarget:[LXObjcProxy proxyWithTarget:self] selector:@selector(lx_displayLink:)];
+    CADisplayLink *displayLink = [CADisplayLink displayLinkWithTarget:[LXObjcProxy
+                                                                       proxyWithTarget:self]
+                                                             selector:@selector(lx_displayLink:)];
     displayLink.lx_executeBlock = [block copy];
     return displayLink;
 }

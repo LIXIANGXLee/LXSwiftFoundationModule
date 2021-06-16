@@ -16,7 +16,10 @@
 static  CFRunLoopObserverRef currentObserver;
 
 -(void)setLx_maxTaskPerformedCount:(int)lx_maxTaskPerformedCount {
-    objc_setAssociatedObject(self, @selector(lx_maxTaskPerformedCount), @(lx_maxTaskPerformedCount), OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self,
+                             @selector(lx_maxTaskPerformedCount),
+                             @(lx_maxTaskPerformedCount),
+                             OBJC_ASSOCIATION_ASSIGN);
 }
 
 
@@ -26,7 +29,8 @@ static  CFRunLoopObserverRef currentObserver;
 
 
 - (void)setLx_timer:(NSTimer * _Nullable)lx_timer {
-    objc_setAssociatedObject(self, @selector(lx_timer), lx_timer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(lx_timer),
+                             lx_timer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (NSTimer *)lx_timer {
@@ -36,10 +40,13 @@ static  CFRunLoopObserverRef currentObserver;
 #pragma mark - Add task
 -(NSMutableArray *)tasks{
     
-    NSMutableArray * taskArr = objc_getAssociatedObject(self, @selector(tasks));
+    NSMutableArray * taskArr = objc_getAssociatedObject(self,
+                                                        @selector(tasks));
     if (!taskArr) {
         taskArr = [NSMutableArray array];
-        objc_setAssociatedObject(self, @selector(tasks), taskArr, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self,
+                                 @selector(tasks),
+                                 taskArr, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return taskArr;
 }
@@ -47,7 +54,8 @@ static  CFRunLoopObserverRef currentObserver;
 /// not events
 -(void)repeats{ }
 
-/// - Using this method, uitableview and uicollectionview performance can be optimized add Observer
+/// - Using this method,
+/// uitableview and uicollectionview performance can be optimized add Observer
 -(void)lx_addRunLoopObserverOfPerformance{
     
     CFRunLoopRef runloop = CFRunLoopGetCurrent();
@@ -58,7 +66,12 @@ static  CFRunLoopObserverRef currentObserver;
         &CFRelease,
         NULL
     };
-    currentObserver =  CFRunLoopObserverCreate(NULL, kCFRunLoopBeforeWaiting, YES, 0, &CallBack, &context);
+    currentObserver =  CFRunLoopObserverCreate(NULL,
+                                               kCFRunLoopBeforeWaiting,
+                                               YES,
+                                               0,
+                                               &CallBack,
+                                               &context);
     CFRunLoopAddObserver(runloop, currentObserver, kCFRunLoopCommonModes);
     CFRelease(currentObserver);
     
@@ -69,7 +82,9 @@ static  CFRunLoopObserverRef currentObserver;
     
     CFRunLoopRef runloop = CFRunLoopGetCurrent();
     if (runloop && currentObserver) {
-        CFRunLoopRemoveObserver(runloop, currentObserver, kCFRunLoopCommonModes);
+        CFRunLoopRemoveObserver(runloop,
+                                currentObserver,
+                                kCFRunLoopCommonModes);
     }
     [self removeTimer];
 }
@@ -78,7 +93,12 @@ static  CFRunLoopObserverRef currentObserver;
     
     /// 创建定时器
     if (self.lx_timer == nil) {
-        self.lx_timer = [NSTimer scheduledTimerWithTimeInterval:0.001 target:[LXObjcProxy proxyWithTarget:self] selector:@selector(repeats) userInfo:nil repeats:YES];
+        self.lx_timer = [NSTimer scheduledTimerWithTimeInterval:0.001
+                                                         target:[LXObjcProxy
+                                                                 proxyWithTarget:self]
+                                                       selector:@selector(repeats)
+                                                       userInfo:nil
+                                                        repeats:YES];
         [self.lx_timer fire];
     }
     
@@ -92,7 +112,9 @@ static  CFRunLoopObserverRef currentObserver;
 }
 
 /// observer call back
-static void CallBack(CFRunLoopObserverRef observer, CFRunLoopActivity activity, void *info){
+static void CallBack(CFRunLoopObserverRef observer,
+                     CFRunLoopActivity activity,
+                     void *info){
     UIView * objc = (__bridge UIView *)info;
     if (objc.tasks.count == 0) {
         [objc removeTimer];

@@ -15,9 +15,6 @@ public struct LXSwiftGCDTimer: LXSwiftCompatible {
     
     ///Timer set
     fileprivate static var timers = [String: DispatchSourceTimer]()
-    /// DispatchSemaphore
-    fileprivate static let semaphore = DispatchSemaphore(value: 0)
-    
 }
 
 //MARK: -  Extending methods for Date
@@ -77,12 +74,7 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
         let timer = DispatchSource.makeTimerSource(queue: DispatchQueue.global())
         timer.schedule(deadline: .now() + startTimer,
                        repeating: timeInterval)
-        
-        /// sync
-        LXSwiftGCDTimer.semaphore.wait()
-        defer { LXSwiftGCDTimer.semaphore.signal() }
         LXSwiftGCDTimer.timers[iden] = timer
-        
         timer.setEventHandler(handler: {
             DispatchQueue.main.async { task?() }
             if !repeats && !timer.isCancelled{
@@ -98,11 +90,7 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
     /// - Parameters:
     ///   - identified: save identified
     public static func cancel(with identified: String?) {
-        
         guard let iden = identified else { return }
-        LXSwiftGCDTimer.semaphore.wait()
-        defer { LXSwiftGCDTimer.semaphore.signal() }
-        
         if let timer = LXSwiftGCDTimer.timers[iden] {
             timer.cancel()
             LXSwiftGCDTimer.timers.removeValue(forKey: iden)
