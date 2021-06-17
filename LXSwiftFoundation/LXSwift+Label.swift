@@ -12,13 +12,30 @@ import UIKit
 extension LXSwiftBasics where Base: UILabel {
     
     /// 宽度
-    public var bestWidth: CGFloat {
-        return base.sizeThatFits(CGSize.zero).width
+    public func width(_ width: CGFloat = LXSwiftApp.screenW) -> CGFloat {
+        return size(height: CGFloat(MAXFLOAT),
+                    width: width, lines: 1).width
     }
     
-    /// 高度
-    public var bestHeight: CGFloat {
-        return base.sizeThatFits(CGSize.zero).height
+    ///高度
+    public func height(_ width: CGFloat,
+                       lines: Int) -> CGFloat {
+        return size(height: height,
+                    width: width, lines: lines).width
+    }
+   
+    /// size
+    public func size(height: CGFloat,
+                      width: CGFloat, lines: Int) -> CGSize {
+        let r = CGRect(origin: CGPoint.zero,
+                          size: CGSize(width: width, height: height))
+        return rect(rect: r, lines: lines).size
+    }
+    
+    /// rect
+    public func rect(rect: CGRect, lines: Int) -> CGRect {
+        return base.textRect(forBounds: rect,
+                             limitedToNumberOfLines: lines)
     }
     
     ///Provides a convenient way to set the properties of the label
