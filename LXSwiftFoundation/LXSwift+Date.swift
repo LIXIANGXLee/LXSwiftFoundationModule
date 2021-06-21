@@ -31,6 +31,24 @@ extension LXSwiftBasics where Base == Date {
         let selfCmps = calendar.dateComponents(unit, from: base)
         return (selfCmps,dateComps)
     }
+    
+    /// Gets the number of days between two datas
+    /// 获取两个日期之间的数据
+    public func omponentCompare(from date: Date,
+                              unit: Set<Calendar.Component> = [.year,.month,.day])
+    -> DateComponents {
+        let calendar = Calendar.current
+        let comp = calendar.dateComponents(unit, from: date,
+                                           to: base)
+        return comp
+    }
+    
+    /// Gets the number of days between two dates
+    /// 获取两个日期之间的天数
+    public func numberOfDays(from date: Date) -> Int? {
+       return omponentCompare(from: date, unit: [.day]).day
+    }
+    
 }
 
 //MARK: -  Extending properties  for NSData
