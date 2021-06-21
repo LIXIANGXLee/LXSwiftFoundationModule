@@ -49,6 +49,23 @@ extension LXSwiftBasics where Base == Date {
        return omponentCompare(from: date, unit: [.day]).day
     }
     
+    /// Gets the number of days between two hours
+    /// 获取两个日期之间的小时
+    public func numberOfHours(from date: Date) -> Int? {
+       return omponentCompare(from: date, unit: [.hour]).hour
+    }
+    
+    /// Gets the number of days between two minutes
+    /// 获取两个日期之间的分钟
+    public func numberOfMinutes(from date: Date) -> Int? {
+       return omponentCompare(from: date, unit: [.minute]).minute
+    }
+    
+    /// Gets the number of days between two seconds
+    /// 获取两个日期之间的秒数
+    public func numberOfSeconds(from date: Date) -> Int? {
+       return omponentCompare(from: date, unit: [.second]).second
+    }
 }
 
 //MARK: -  Extending properties  for NSData
