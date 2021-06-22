@@ -50,6 +50,7 @@ class ViewController: UIViewController {
             return
         }
         print("-------\(config.id)")
+        
     }
  
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

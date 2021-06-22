@@ -13,6 +13,23 @@ extension UIFont: LXSwiftCompatible { }
 //MARK: -  Extending properties for UIFont
 extension LXSwiftBasics where Base: UIFont {
    
+    ///   获取字体斜体
+    ///
+    /// - Parameters:
+    ///   - size: 字体大小
+    ///   - name: 字体类型
+    ///   - italics: 斜体成都大小 默认是10
+    public static func fontMatrix(size: CGFloat,
+                              name: String,
+                              italics: CGFloat = 10) -> UIFont {
+        let matrix = CGAffineTransform(a: 1, b: 0,
+                                       c: CGFloat(tanf(Float(italics) * Float(Double.pi) / 180)),
+                                       d: 1, tx: 0, ty: 0)
+        let desc = UIFontDescriptor(name: name, matrix: matrix)
+        return UIFont(descriptor: desc,
+                          size: size)
+    }
+
     /// isBold
     public var isBold: Bool {
         return base.fontDescriptor.symbolicTraits == .traitBold
