@@ -16,19 +16,16 @@ extension LXSwiftBasics where Base: UIView {
     
     /// presented root
     public var aboveView: UIView? {
-        var aboveController = UIApplication.shared.delegate?.window??.rootViewController
-        while aboveController?.presentedViewController != nil {
-            aboveController = aboveController?.presentedViewController
-        }
-        return aboveController?.view
+        return UIApplication.lx.visiblePresentViewController?.view
+    }
+    
+    /// current view
+    public var currentVCView: UIView? {
+        return UIApplication.lx.visibleViewController?.view
     }
     
     public var aboveNavVC: UINavigationController? {
-        let tootVC = UIApplication.shared.delegate?.window??.rootViewController
-        guard let tabBar = tootVC as? UITabBarController else {
-            return nil
-        }
-        return tabBar.children[tabBar.selectedIndex] as? UINavigationController
+        return UIApplication.lx.visibleNavRootViewController
     }
     
     /// snapShot image

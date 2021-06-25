@@ -20,7 +20,7 @@ var window: UIWindow?
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
 
-        self.window?.rootViewController = ViewController()
+        self.window?.rootViewController = UINavigationController(rootViewController: ViewController())
 
         self.window?.makeKeyAndVisible()
         

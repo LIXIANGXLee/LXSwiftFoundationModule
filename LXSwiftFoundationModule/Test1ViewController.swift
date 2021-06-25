@@ -14,6 +14,10 @@ class Test1ViewController: LXSwiftWebViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        print("-=-========\(UIApplication.lx.visibleNavRootViewController)")
+        
+        
 
         self.webView.frame = CGRect(x: 0, y: 0, width: LXSwiftApp.screenW, height: LXSwiftApp.screenH)
         
@@ -46,6 +50,7 @@ class Test1ViewController: LXSwiftWebViewController {
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
+        self.present(Test1ViewController(), animated: true, completion: nil)
 
     }
 }

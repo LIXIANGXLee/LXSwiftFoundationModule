@@ -23,8 +23,7 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
     ///
     /// - Parameters:
     ///   - identified: save identified
-    public static func startDelay(_ timer: TimeInterval,
-                                  identified: String?,
+    public static func startDelay(_ timer: TimeInterval, identified: String?,
                                   task: LXSwiftGCDTimer.TaskCallBack?) {
         start(with: timer, timeInterval: 1, repeats: false,
               identified: identified,  task: task)
@@ -34,8 +33,7 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
     ///
     /// - Parameters:
     ///   - identified: save identified
-    public static func startDelayRepeats(_ timer: TimeInterval,
-                                         identified: String?,
+    public static func startDelayRepeats(_ timer: TimeInterval, identified: String?,
                                          task: LXSwiftGCDTimer.TaskCallBack?) {
         start(with: timer, timeInterval: 1, repeats: false,
               identified: identified, task: task)
@@ -47,8 +45,7 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
     ///   - totalTimeInterval  total time
     ///   - identified:  save identified
     public static func startCountDown(totalTimeInterval: TimeInterval = 60,
-                                      identified: String?,
-                                      task: ((Int)->())?){
+                                      identified: String?, task: ((Int)->())?){
         
         var total = totalTimeInterval
         start(with: 0, timeInterval: 1,
@@ -65,8 +62,7 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
     ///   - identified:  save identified
     public static func start(with startTimer: TimeInterval = 0,
                              timeInterval: TimeInterval = 1,
-                             repeats: Bool = true,
-                             identified: String?,
+                             repeats: Bool = true, identified: String?,
                              task: LXSwiftGCDTimer.TaskCallBack?){
         
         guard let iden = identified, startTimer >= 0,

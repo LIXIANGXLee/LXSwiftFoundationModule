@@ -23,13 +23,7 @@ class ViewController: UIViewController {
      override func viewDidLoad() {
         super.viewDidLoad()
         
-    
-        print("-=-=\(UIApplication.shared.statusBarFrame.height)-=-==\(LXSwiftApp.touchBarH)===\(LXSwiftApp.statusbarH)=")
-        
-                
-        self.view.backgroundColor = UIColor.white
-        NotificationCenter.addObserver(self, selector: #selector(aa(_:)), notification: LXSwiftNotifications.shared)
-        
+        self.view.backgroundColor = UIColor.red
         
         var btn = UIButton(type: .custom)
         btn.backgroundColor = UIColor.orange
@@ -44,25 +38,13 @@ class ViewController: UIViewController {
         view.addSubview(btn)
       }
     
-    @objc func aa(_ notification: Notification) {
-        let noti = LXSwiftNotifications.shared
-        guard let config = noti.decodeInfo(from: notification) else {
-            return
-        }
-        print("-------\(config.id)")
-        
-    }
  
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        LXSwiftNotifications.shared.post(with: LXSwiftNotifications.Model.init(id: 10))
+        
+        let vc = TestViewController()
+
+        self.navigationController?.pushViewController(vc, animated:true)
+        
     }
 }
 
-
-extension LXSwiftNotifications {
-     static let shared = LXSwiftNotification<Model>("aa")
-     struct Model: Codable {
-         var id: Int64
-     }
- }
- 

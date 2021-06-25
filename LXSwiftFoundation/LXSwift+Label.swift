@@ -13,20 +13,16 @@ extension LXSwiftBasics where Base: UILabel {
     
     /// 宽度
     public func width(_ width: CGFloat = LXSwiftApp.screenW) -> CGFloat {
-        return size(height: CGFloat(MAXFLOAT),
-                    width: width, lines: 1).width
+        return size(height: CGFloat(MAXFLOAT), width: width, lines: 1).width
     }
     
     ///高度
-    public func height(_ width: CGFloat,
-                       lines: Int) -> CGFloat {
-        return size(height: height,
-                    width: width, lines: lines).width
+    public func height(_ width: CGFloat, lines: Int) -> CGFloat {
+        return size(height: height, width: width, lines: lines).width
     }
    
     /// size
-    public func size(height: CGFloat,
-                      width: CGFloat, lines: Int) -> CGSize {
+    public func size(height: CGFloat, width: CGFloat, lines: Int) -> CGSize {
         let r = CGRect(origin: CGPoint.zero,
                           size: CGSize(width: width, height: height))
         return rect(rect: r, lines: lines).size
@@ -34,8 +30,7 @@ extension LXSwiftBasics where Base: UILabel {
     
     /// rect
     public func rect(rect: CGRect, lines: Int) -> CGRect {
-        return base.textRect(forBounds: rect,
-                             limitedToNumberOfLines: lines)
+        return base.textRect(forBounds: rect, limitedToNumberOfLines: lines)
     }
     
     ///Provides a convenient way to set the properties of the label
@@ -77,8 +72,7 @@ extension LXSwiftBasics where Base: UILabel {
                     alignment: NSTextAlignment? = nil) {
         let color = UIColor.lx.color(hex: textColor)
         set(withFont: UIFont.lx.fontWithMedium(mediumSize),
-            textColor: color,
-            alignment: alignment)
+            textColor: color, alignment: alignment)
     }
     
    ///Provides a convenient way to set the properties of the label
@@ -91,7 +85,6 @@ extension LXSwiftBasics where Base: UILabel {
                    alignment: NSTextAlignment? = nil) {
        let color = UIColor.lx.color(hex: textColor)
        set(withFont: UIFont.lx.fontWithBold(boldSize),
-           textColor: color,
-           alignment: alignment)
+           textColor: color, alignment: alignment)
    }
 }

@@ -18,13 +18,14 @@ extension LXSwiftBasics where Base: UIViewController {
         return base.isViewLoaded && (base.view.window != nil)
     }
     
+    /// current vc
+    public var visibleViewController: UIViewController? {
+        return UIApplication.lx.visibleViewController
+    }
+    
     /// presented root
     public var aboveViewController: UIViewController? {
-        var aboveController = UIApplication.shared.delegate?.window??.rootViewController
-        while aboveController?.presentedViewController != nil {
-            aboveController = aboveController?.presentedViewController
-        }
-        return aboveController
+        return UIApplication.lx.visiblePresentViewController
     }
     
     /// dismiss

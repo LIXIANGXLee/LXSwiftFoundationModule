@@ -13,10 +13,39 @@ extension LXSwiftBasics where Base: UIApplication {
     
     /// 当前显示的控制器
     public static var visibleViewController: UIViewController? {
-        return UIApplication.lx.getVisibleViewController(from:
-                            UIApplication.shared.keyWindow?.rootViewController)
+        return UIApplication.lx.getVisibleViewController(from: visibleRootViewController)
+    }
+    
+    /// 获取当前的导航控制器
+    public static var visibleNavRootViewController: UINavigationController? {
+        let rootVC = visibleRootViewController
+        if let navVC = rootVC as? UINavigationController {
+            return navVC
+        }else if let tabBar = rootVC as? UITabBarController {
+            return tabBar.children[tabBar.selectedIndex] as? UINavigationController
+        } else {
+            return nil
+        }
     }
 
+    /// 获取present 控制器
+    public static var visiblePresentViewController: UIViewController? {
+        var aboveController = visibleRootViewController
+        while aboveController?.presentedViewController != nil {
+            aboveController = aboveController?.presentedViewController
+        }
+        return aboveController
+    }
+    
+    /// root跟控制器
+    public static var visibleRootViewController: UIViewController? {
+        var root = UIApplication.shared.delegate?.window??.rootViewController
+        if root == nil {
+            root = UIApplication.shared.keyWindow?.rootViewController
+        }
+        return root
+    }
+    
     public static func getVisibleViewController(from vc: UIViewController?) -> UIViewController? {
         if let nav = vc as? UINavigationController {
             return getVisibleViewController(from: nav.visibleViewController)
@@ -27,7 +56,7 @@ extension LXSwiftBasics where Base: UIApplication {
         }
         return vc
     }
-    
+      
     /// 打开url
     public static func openUrl(_ urlStr: String,
                         completionHandler: ((Bool) -> Void)? = nil) {

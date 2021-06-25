@@ -20,8 +20,7 @@ extension LXSwiftBasics where Base: UIImage {
     /// - Parameters:
     ///   - light: light image
     ///   - dark:  dark image
-    public static func image(lightStr: String,
-                             darkStr: String) -> UIImage {
+    public static func image(lightStr: String, darkStr: String) -> UIImage {
         
         let light = UIImage(named: lightStr)
         let dark = UIImage(named: lightStr)
@@ -37,8 +36,7 @@ extension LXSwiftBasics where Base: UIImage {
     /// - Parameters:
     ///   - light: light image
     ///   - dark:  dark image
-    public static func image(light: UIImage,
-                             dark: UIImage) -> UIImage {
+    public static func image(light: UIImage, dark: UIImage) -> UIImage {
         if #available(iOS 13.0, *) {
             guard let config = light.configuration else {
                 return light
