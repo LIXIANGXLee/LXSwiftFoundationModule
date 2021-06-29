@@ -14,7 +14,7 @@ public struct LXSwiftRegexType {
     public init(_ link: String,
                 color: UIColor = UIColor.orange,
                 font: UIFont = UIFont.systemFont(ofSize: 15),
-                isExpression: Bool = false){
+                isExpression: Bool = false) {
         self.link = link
         self.color = color
         self.font = font

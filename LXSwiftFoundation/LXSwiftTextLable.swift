@@ -102,9 +102,7 @@ open class LXSwiftTextLable: UIView {
                 if selectionRect.rect.width == 0 || selectionRect.rect.height == 0 { continue }
                 rects.append(selectionRect.rect)
             }
-            links.append(LXSwiftTextLable.TextLink(text: textM,
-                                                   rang: range,
-                                                   rects: rects))
+            links.append(LXSwiftTextLable.TextLink(text: textM, rang: range, rects: rects))
             }
         }
     }

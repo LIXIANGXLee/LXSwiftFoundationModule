@@ -58,8 +58,7 @@ extension LXSwiftBasics where Base: UILabel {
                     alignment: NSTextAlignment? = nil) {
         let color = UIColor.lx.color(hex: textColor)
         set(withFont: UIFont.lx.fontWithRegular(regularSize),
-            textColor: color,
-            alignment: alignment)
+            textColor: color, alignment: alignment)
     }
     
     ///Provides a convenient way to set the properties of the label

@@ -31,6 +31,10 @@ public func CGFloatGetCenter(_ parent: CGFloat,
     return LXSwiftApp.flat((parent - child) / 2.0)
 }
 
+/// 屏幕宽高
+public var SCREEN_WIDTH_APP = LXSwiftApp.screenW
+public var SCREEN_HEIGHT_APP = LXSwiftApp.screenH
+
 // MARK: - LXSwftApp const
 /// define app const
 public struct LXSwiftApp {
