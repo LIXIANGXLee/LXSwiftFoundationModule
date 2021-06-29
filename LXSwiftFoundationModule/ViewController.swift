@@ -23,6 +23,8 @@ class ViewController: UIViewController {
      override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("===--------======\( 3606.lx.timeToStr)");
+        
         self.view.backgroundColor = UIColor.red
         
         var btn = UIButton(type: .custom)

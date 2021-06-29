@@ -56,7 +56,7 @@ extension LXSwiftBasics where Base == Double {
     }
     
     /// User display capacity size size
-    public var sizeToStr: String {
+    public var sizeFileToStr: String {
         let unit = 1000.0
         if base > pow(unit, 3) {
             return String(format: "%.2fGB", base / pow(unit, 3))
@@ -73,19 +73,19 @@ extension LXSwiftBasics where Base == Double {
     public var timeToStr: String {
         let dur = Int(round(base))
         switch dur {
-        case 0..<60:
-            return String(format: "00:%02d", dur)
-        case 60..<3600:
-            let m = dur / 60
-            let s = dur % 60
-            return String(format: "%02d:%02d", m, s)
-        case 3600...:
+        case ~>=3600:
             let h = dur / 3600
             let m = (dur % 3600) / 60
             let s = dur % 60
             return String(format: "%02d:%02d:%02d", h, m, s)
+        case ~>=60:
+            let m = dur / 60
+            let s = dur % 60
+            return String(format: "00:%02d:%02d", m, s)
+        case ~>=0:
+            return String(format: "00:00:%02d", dur)
         default:
-            return ""
+            return "00:00:00"
         }
     }
 }

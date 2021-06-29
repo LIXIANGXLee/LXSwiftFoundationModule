@@ -19,9 +19,9 @@ prefix operator ~<
 prefix operator ~>=
 prefix operator ~<=
 
-public prefix func ~>  (_ index: Int) -> (Int) -> (Bool) { { $0 > index } }
+public prefix func ~> (_ index: Int) -> (Int) -> (Bool) { { $0 > index } }
 public prefix func ~>= (_ index: Int) -> (Int) -> (Bool) { { $0 >= index } }
-public prefix func ~<  (_ index: Int) -> (Int) -> (Bool) { { $0 < index } }
+public prefix func ~< (_ index: Int) -> (Int) -> (Bool) { { $0 < index } }
 public prefix func ~<= (_ index: Int) -> (Int) -> (Bool) { { $0 <= index } }
 
 extension Int: LXSwiftCompatible {
@@ -58,5 +58,15 @@ extension LXSwiftBasics where Base == Int {
     /// Convert bool
     public var intToBool: Bool {
         return base > 0 ? true : false
+    }
+    
+    /// User display capacity size size
+    public var sizeFileToStr: String {
+       return Double(base).lx.sizeFileToStr
+    }
+    
+    /// timer string
+    public var timeToStr: String {
+        return Double(base).lx.timeToStr
     }
 }
