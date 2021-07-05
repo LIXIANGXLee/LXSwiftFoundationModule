@@ -28,15 +28,13 @@ extension LXSwiftBasics where Base : LXSwiftTextView {
     }
     
     /// set placeholder and color string
-    public func set(with placeholder: String?,
-                    color: String = "999999") {
+    public func set(with placeholder: String?, color: String = "999999") {
         set(with: placeholder,
             color: UIColor.lx.color(hex: color))
     }
     
     /// set font and textColor
-    public func set(withFont font: UIFont,
-                    textColor: UIColor?) {
+    public func set(withFont font: UIFont, textColor: UIColor?) {
         base.font = font
         if let c = textColor {
             base.textColor = c
@@ -44,22 +42,19 @@ extension LXSwiftBasics where Base : LXSwiftTextView {
     }
     
     /// set bold font and textColor
-    public func set(withBoldFont fontSize: CGFloat,
-                    textColor: String) {
+    public func set(withBoldFont fontSize: CGFloat,textColor: String) {
         set(withFont: UIFont.lx.fontWithBold(fontSize),
             textColor: UIColor.lx.color(hex: textColor))
     }
     
     /// set medium font and textColor
-    public func set(withMediumFont fontSize: CGFloat,
-                    textColor: String) {
+    public func set(withMediumFont fontSize: CGFloat, textColor: String) {
         set(withFont: UIFont.lx.fontWithMedium(fontSize),
             textColor: UIColor.lx.color(hex: textColor))
     }
     
     /// set regular font and textColor
-    public func set(withRegularFont fontSize: CGFloat,
-                    textColor: String) {
+    public func set(withRegularFont fontSize: CGFloat, textColor: String) {
         set(withFont: UIFont.lx.fontWithRegular(fontSize),
             textColor: UIColor.lx.color(hex: textColor))
     }
@@ -81,8 +76,7 @@ extension LXSwiftBasics where Base : LXSwiftTextView {
     public var maxLength: Int? {
         get{ return base.maxTextLength }
         set{
-            guard let newValue = newValue,
-                  newValue > 0 else { return }
+            guard let newValue = newValue, newValue > 0 else { return }
             base.maxTextLength = newValue
         }
     }

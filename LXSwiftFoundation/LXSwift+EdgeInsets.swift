@@ -27,10 +27,7 @@ extension LXSwiftBasics where Base == UIEdgeInsets {
         let left = base.left + insets.left
         let bottom = base.bottom + insets.bottom
         let right = base.right + insets.right
-        return UIEdgeInsets(top: top,
-                            left: left,
-                            bottom: bottom,
-                            right: right)
+        return UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
     }
 
     public mutating func setTop(_ top: CGFloat) {

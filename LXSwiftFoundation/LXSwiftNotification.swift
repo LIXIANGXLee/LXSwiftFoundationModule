@@ -39,8 +39,7 @@ public class LXSwiftNotification<T: Codable>: LXSwiftNotifications {
       
         let postObject = { (result: [AnyHashable: Any]?) in
             NotificationCenter.default.post(name: self.name,
-                                            object: self,
-                                            userInfo: result)
+                                            object: self, userInfo: result)
         }
         
         guard let jsonData = try? JSONEncoder().encode(object) else {

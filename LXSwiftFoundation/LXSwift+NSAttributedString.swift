@@ -15,11 +15,9 @@ extension LXSwiftBasics where Base : NSAttributedString {
     
     ///Get the font size based on the font size and width
     public func size(width: CGFloat) -> CGSize {
-        let size = CGSize(width: width,
-                          height: CGFloat(MAXFLOAT))
+        let size = CGSize(width: width, height: CGFloat(MAXFLOAT))
         let rect = base.boundingRect(with: size,
-                                     options: .usesLineFragmentOrigin,
-                                     context: nil)
+                                     options: .usesLineFragmentOrigin, context: nil)
         return rect.size
     }
     
@@ -43,14 +41,13 @@ extension LXSwiftBasics where Base : NSAttributedString {
 //MARK: -  Extending properties and methods for NSMutableAttributedString
 extension LXSwiftBasics where Base : NSMutableAttributedString {
     
-    internal func setAttribute(_ attribute: NSAttributedString.Key,
+    func setAttribute(_ attribute: NSAttributedString.Key,
                                value: Any?, range: NSRange) {
         guard let value = value else { return }
         base.addAttribute(attribute, value: value, range: range)
     }
     
-    internal func attribute(_ key: NSAttributedString.Key,
-                            index: Int) -> Any? {
+    func attribute(_ key: NSAttributedString.Key, index: Int) -> Any? {
         return base.attribute(key, at: index, effectiveRange: nil)
     }
     
@@ -179,7 +176,7 @@ extension LXSwiftBasics where Base : NSMutableAttributedString {
         return base
     }
     
-    internal var paragraphStyle: NSMutableParagraphStyle {
+    var paragraphStyle: NSMutableParagraphStyle {
         if let paraStyle = attribute(.paragraphStyle, index: 0) as? NSParagraphStyle,
             let mulParaStyle = paraStyle.mutableCopy() as? NSMutableParagraphStyle {
             setAttribute(.paragraphStyle, value: mulParaStyle,

@@ -31,7 +31,7 @@ public struct LXSwiftTextLableConfig {
 
 // MARK: - LXSwiftTextLable
 open class LXSwiftTextLable: UIView {
-    internal struct TextLink {
+    struct TextLink {
         var text: String
         var rang: NSRange
         var rects: [CGRect]

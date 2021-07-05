@@ -46,7 +46,6 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
     ///   - identified:  save identified
     public static func startCountDown(totalTimeInterval: TimeInterval = 60,
                                       identified: String?, task: ((Int)->())?){
-        
         var total = totalTimeInterval
         start(with: 0, timeInterval: 1,
               repeats: true, identified: identified) {
@@ -64,7 +63,6 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
                              timeInterval: TimeInterval = 1,
                              repeats: Bool = true, identified: String?,
                              task: LXSwiftGCDTimer.TaskCallBack?){
-        
         guard let iden = identified, startTimer >= 0,
               timeInterval >= 0, task != nil else { return }
         let timer = DispatchSource.makeTimerSource(queue: DispatchQueue.global())

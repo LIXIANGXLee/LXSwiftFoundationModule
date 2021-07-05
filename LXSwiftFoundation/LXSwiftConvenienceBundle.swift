@@ -29,8 +29,7 @@ public struct LXSwiftConvenienceBundle {
     private let bundlePath: String     //bundle  path
     private let bundleName: String
     
-    public init(bundlePath: String, bundleName: String,
-                path: String? = nil) {
+    public init(bundlePath: String, bundleName: String, path: String? = nil) {
         self.bundlePath = bundlePath
         self.path = path
         self.bundleName = bundleName
@@ -40,8 +39,7 @@ public struct LXSwiftConvenienceBundle {
     ///
     /// - imageNamed: The name or path of the image
     /// - path: bundle If specified, the default path is not used
-    public func imageNamed(_ imageName: String,
-                           path: String? = nil) -> UIImage? {
+    public func imageNamed(_ imageName: String, path: String? = nil) -> UIImage? {
         var imagePath = "\(bundlePath)/\(bundleName)/"
         if let path = path {
             imagePath = imagePath + "\(path)/"

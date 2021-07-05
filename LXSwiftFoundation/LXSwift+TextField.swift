@@ -109,25 +109,22 @@ private var textFieldCallBackKey: Void?
 extension LXSwiftTextField: LXSwiftPropertyCompatible{
     
     /// can save maxTextLength
-    internal var maxTextLength: Int? {
-        get { return lx_getAssociatedObject(self,
-                                            &maxTextLengthKey) }
+    var maxTextLength: Int? {
+        get { return lx_getAssociatedObject(self, &maxTextLengthKey) }
         set { lx_setRetainedAssociatedObject(self,
                                              &maxTextLengthKey,
                                              newValue,.OBJC_ASSOCIATION_ASSIGN) }
     }
     
-    internal typealias T = String
-    internal var swiftCallBack: SwiftCallBack? {
-        get { return lx_getAssociatedObject(self,
-                                            &textFieldCallBackKey) }
+    typealias T = String
+    var swiftCallBack: SwiftCallBack? {
+        get { return lx_getAssociatedObject(self, &textFieldCallBackKey) }
         set { lx_setRetainedAssociatedObject(self,
-                                             &textFieldCallBackKey,
-                                             newValue) }
+                                             &textFieldCallBackKey, newValue) }
     }
     
     /// action
-    @objc internal func textFieldTextChange(notification: Notification) {
+    @objc func textFieldTextChange(notification: Notification) {
         if let maxLength = self.lx.maxLength {
             if (text?.count ?? 0) > maxLength {
                 text = text?.lx.substring(to: maxLength)

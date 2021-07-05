@@ -33,7 +33,8 @@ extension NSNumber {
     
     /// minDigits: How many decimal places should be reserved with  rounding
     ///maxDigits:Keep a few decimal places
-    internal func numberFormatter(with mode: NumberFormatter.RoundingMode = .halfEven, minDigits: Int = 0, maxDigits:Int = 0) -> String? {
+     func numberFormatter(with mode: NumberFormatter.RoundingMode = .halfEven,
+                          minDigits: Int = 0, maxDigits:Int = 0) -> String? {
         let formate = NumberFormatter()
         formate.numberStyle = NumberFormatter.Style.decimal
         formate.groupingSeparator = ","

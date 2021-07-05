@@ -49,7 +49,7 @@ public extension LXSwiftCompatible {
 }
 
 /// Define Property protocol
-internal protocol LXSwiftPropertyCompatible {
+protocol LXSwiftPropertyCompatible {
   
     /// Extended type
     associatedtype T

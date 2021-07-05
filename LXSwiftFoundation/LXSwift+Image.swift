@@ -241,9 +241,7 @@ extension LXSwiftBasics where Base: UIImage {
     public static func clearImage(withView view: UIView?,
                                   rect: CGRect) -> UIImage? {
         guard let v = view else { return nil }
-        UIGraphicsBeginImageContextWithOptions(v.bounds.size,
-                                               false,
-                                               0.0)
+        UIGraphicsBeginImageContextWithOptions(v.bounds.size, false, 0.0)
         let imageCtx = UIGraphicsGetCurrentContext()
         view?.layer.render(in: imageCtx!)
         imageCtx!.clear(rect)

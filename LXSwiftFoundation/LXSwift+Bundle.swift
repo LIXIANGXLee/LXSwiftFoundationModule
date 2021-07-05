@@ -14,9 +14,8 @@ extension Bundle: LXSwiftCompatible { }
 extension LXSwiftBasics where Base: Bundle {
     
     ///Get namespace
-    public static var namespace: String {
-        let namespace = Bundle.main.infoDictionary?["CFBundleExecutable"] as? String
-        return  namespace ?? ""
+    public static var namespace: String? {
+        return Bundle.main.infoDictionary?["CFBundleExecutable"] as? String
     }
     
     /// progect name
@@ -40,8 +39,8 @@ extension LXSwiftBasics where Base: Bundle {
     }
     
     /// AppName - APP装到手机里之后显示的名称
-    static var displayName: String {
-        return Bundle.main.localizedInfoDictionary?["CFBundleDisplayName"] as? String ?? ""
+    static var displayName: String? {
+        return Bundle.main.localizedInfoDictionary?["CFBundleDisplayName"] as? String
     }
     
     ///获取icon图标
@@ -54,7 +53,9 @@ extension LXSwiftBasics where Base: Bundle {
     public static var appIconStrs: [String]? {
         guard let iconsDictionary = Bundle.main.infoDictionary?["CFBundleIcons"] as? [String: Any],
             let primaryIconsDictionary = iconsDictionary["CFBundlePrimaryIcon"] as? [String: Any],
-            let iconFiles = primaryIconsDictionary["CFBundleIconFiles"] as? [String] else { return nil }
+            let iconFiles = primaryIconsDictionary["CFBundleIconFiles"] as? [String] else {
+            return nil
+        }
         return iconFiles
     }
 }

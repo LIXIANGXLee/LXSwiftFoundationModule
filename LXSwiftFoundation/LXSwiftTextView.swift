@@ -15,7 +15,7 @@ open class LXSwiftTextView: UITextView {
     public var textCallBack: LXSwiftTextView.TextCallBack?
     
     ///Label showing copywriting
-    internal var placehoderLabel: UILabel!
+    var placehoderLabel: UILabel!
     override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
         placehoderLabel = UILabel()
@@ -64,16 +64,14 @@ private var maxTextLengthKey: Void?
 extension LXSwiftTextView {
     
     /// can save maxTextLength
-    internal var maxTextLength: Int? {
-        get { return lx_getAssociatedObject(self,
-                                            &maxTextLengthKey) }
-        set { lx_setRetainedAssociatedObject(self,
-                                             &maxTextLengthKey,
+    var maxTextLength: Int? {
+        get { return lx_getAssociatedObject(self, &maxTextLengthKey) }
+        set { lx_setRetainedAssociatedObject(self, &maxTextLengthKey,
                                              newValue,.OBJC_ASSOCIATION_ASSIGN) }
     }
     
     /// 事件监听
-    @objc internal func textDidChange() {
+    @objc func textDidChange() {
         placehoderLabel.isHidden = self.hasText
         
         if let maxLength = self.maxTextLength,

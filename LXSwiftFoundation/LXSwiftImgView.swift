@@ -12,7 +12,7 @@ open class LXSwiftImgView: UIImageView {
     /// call back
     public typealias ImgViewCallBack = ((_ imgView: LXSwiftImgView?) -> ())
 
-    internal var imgViewCallBack: LXSwiftImgView.ImgViewCallBack?
+    var imgViewCallBack: LXSwiftImgView.ImgViewCallBack?
     
     /// 是否允许交互
     public var isInteractionEnabled: Bool = false {

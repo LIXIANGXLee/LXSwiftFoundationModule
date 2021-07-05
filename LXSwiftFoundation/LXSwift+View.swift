@@ -171,15 +171,13 @@ private var viewCallBackKey: Void?
 extension UIView {
     
     /// can save callback
-    internal var viewCallBack: ((UIView?) -> ())? {
-        get { return lx_getAssociatedObject(self,
-                                            &viewCallBackKey) }
+    var viewCallBack: ((UIView?) -> ())? {
+        get { return lx_getAssociatedObject(self, &viewCallBackKey) }
         set { lx_setRetainedAssociatedObject(self,
-                                             &viewCallBackKey,
-                                             newValue) }
+                                             &viewCallBackKey, newValue) }
     }
     
-    @objc internal func gestureTap(_ gesture: UIGestureRecognizer) {
+    @objc func gestureTap(_ gesture: UIGestureRecognizer) {
         self.viewCallBack?(gesture.view)
     }
 }

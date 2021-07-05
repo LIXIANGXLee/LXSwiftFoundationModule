@@ -21,16 +21,14 @@ extension LXSwiftBasics where Base : UISlider {
 
 private var sliderCallBackKey: Void?
 extension UISlider: LXSwiftPropertyCompatible {
-    internal typealias T = Float
-    internal var swiftCallBack: SwiftCallBack? {
-        get { return lx_getAssociatedObject(self,
-                                            &sliderCallBackKey) }
+    typealias T = Float
+    var swiftCallBack: SwiftCallBack? {
+        get { return lx_getAssociatedObject(self, &sliderCallBackKey) }
         set { lx_setRetainedAssociatedObject(self,
-                                             &sliderCallBackKey,
-                                             newValue) }
+                                             &sliderCallBackKey, newValue) }
     }
     
-    @objc internal func sliderSwitchAction(_ event: UISlider) {
+    @objc func sliderSwitchAction(_ event: UISlider) {
         self.swiftCallBack?(event.value)
     }
     

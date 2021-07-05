@@ -16,8 +16,7 @@ extension Dictionary: LXSwiftCompatible { }
 /// - Parameters:
 ///   - left: dic
 ///   - right: dic
-public func + (left: [String: Any],
-               right: [String: Any]) -> [String: Any] {
+public func + (left: [String: Any], right: [String: Any]) -> [String: Any] {
         var dic = left
         for (k, v) in right { dic[k] = v }
         return dic
@@ -28,8 +27,7 @@ public func + (left: [String: Any],
 /// - Parameters:
 ///   - left: dic
 ///   - right: dic
-public func - (left: [String: Any],
-               right: [String: Any]) -> [String: Any] {
+public func - (left: [String: Any], right: [String: Any]) -> [String: Any] {
         var dic = left
         for (k, _) in right where dic.keys.contains(k) {
             dic.removeValue(forKey: k)
@@ -73,8 +71,7 @@ extension LXSwiftBasics where Base == Dictionary<String, Any> {
     ///  dic to plist data type
     public var plistData: Data? {
         return try? PropertyListSerialization.data(fromPropertyList: base,
-                                                   format: .xml,
-                                                   options: 0)
+                                                   format: .xml, options: 0)
     }
     
     /// dic to plist string type

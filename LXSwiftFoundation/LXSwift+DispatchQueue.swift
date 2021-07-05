@@ -13,7 +13,7 @@ extension DispatchQueue: LXSwiftCompatible {
     public typealias LXSwiftCallTask = (() -> Void)
 
     /// Global collection
-    internal static var onceTracker = Set<String>()
+    static var onceTracker = Set<String>()
 }
 
 //MARK: -  Extending method for UIFont

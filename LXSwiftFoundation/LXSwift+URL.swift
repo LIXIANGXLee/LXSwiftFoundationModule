@@ -14,8 +14,7 @@ extension LXSwiftBasics where Base == URL {
     /// 取出Get请求中的参数，结果是一个大字典
     /// fetch the parameters in the GET request, and the result is a large dictionary
     public var getUrlParams1: [String: String] {
-        let components = NSURLComponents(url: base,
-                                         resolvingAgainstBaseURL: false)
+        let components = NSURLComponents(url: base, resolvingAgainstBaseURL: false)
         let queryItems = components?.queryItems ?? []
         return queryItems.reduce([String: String]()) {
             var dict = $0

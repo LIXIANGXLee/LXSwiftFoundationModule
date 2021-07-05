@@ -546,7 +546,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
 extension String {
     
     ///internal String interception
-    internal subscript (_ r: Range<Int>) -> String {
+    subscript (_ r: Range<Int>) -> String {
         get {
             let startIndex = index(self.startIndex, offsetBy: r.lowerBound)
             let endIndex = index(self.startIndex, offsetBy: r.upperBound)
@@ -555,7 +555,7 @@ extension String {
     }
     
     ///Verify whether the string matching results meet the requirements, and return bool value
-    internal func verification(pattern: String) -> Bool {
+    func verification(pattern: String) -> Bool {
         return (self.lx.matching(pattern: pattern)?.count ?? -1) > 0
     }
 }

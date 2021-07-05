@@ -55,7 +55,7 @@ extension LXSwiftBasics where Base: UIScrollView {
 extension UIScrollView {
     
     /// get contentScroll long image for ScrollView
-    internal func snapShotContentScroll(_ completionHandler:
+    func snapShotContentScroll(_ completionHandler:
                                             @escaping (_ screenShotImage: UIImage?)
                                             -> Void) {
         
@@ -96,7 +96,7 @@ extension UIScrollView {
     
     /// Draw according to offset and number of pages
     ///This method is a drawing, and there may be recursive calls inside
-    internal func snapShotContentScrollPage(index: Int,
+    func snapShotContentScrollPage(index: Int,
                                             maxIndex: Int,
                                             callback: @escaping () -> Void) {
         
