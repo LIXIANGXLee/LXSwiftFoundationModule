@@ -1,6 +1,6 @@
 //
-//  LXWaterfallLayout.swift
-//  LXFoundationManager
+//  LXSwiftWaterfallLayout.swift
+//  LXSwiftFoundationManager
 //
 //  Created by Mac on 2020/4/23.
 //  Copyright © 2020 李响. All rights reserved.
@@ -8,20 +8,20 @@
 
 import UIKit
 
-@objc public protocol LXWaterfallLayoutDataSource: AnyObject {
+@objc public protocol LXSwiftWaterfallLayoutDataSource: AnyObject {
     
     /// 根据给出的宽度计算高度
-    func waterfallLayout(_ layout: LXWaterfallLayout,
+    func waterfallLayout(_ layout: LXSwiftWaterfallLayout,
                          width: CGFloat, indexPath: IndexPath) -> CGFloat
     
     /// 每一行的列数
-    func numberOfColsInWaterfallLayout(_ layout: LXWaterfallLayout) -> Int
+    func numberOfColsInWaterfallLayout(_ layout: LXSwiftWaterfallLayout) -> Int
 }
 
 // MARK: - 瀑布流
-open class LXWaterfallLayout: UICollectionViewFlowLayout {
+open class LXSwiftWaterfallLayout: UICollectionViewFlowLayout {
     
-    public weak var dataSource: LXWaterfallLayoutDataSource?
+    public weak var dataSource: LXSwiftWaterfallLayoutDataSource?
     
     // MARK: 私有延时属性
     private lazy var attrsArray = [UICollectionViewLayoutAttributes]()
@@ -34,7 +34,7 @@ open class LXWaterfallLayout: UICollectionViewFlowLayout {
     }()
 }
 
-extension LXWaterfallLayout {
+extension LXSwiftWaterfallLayout {
     
     open override func prepare() {
         super.prepare()

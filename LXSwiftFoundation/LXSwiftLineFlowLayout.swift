@@ -1,23 +1,23 @@
 //
-//  LXLineFlowLayout.swift
-//  LXSwiftFoundation
+//  LXSwiftLineFlowLayout.swift
+//  LXSwiftSwiftFoundation
 //
 //  Created by 李响 on 2020/7/5.
 //
 
 import UIKit
 
-@objc public protocol LXLineFlowLayoutDelegate: AnyObject {
+@objc public protocol LXSwiftLineFlowLayoutDelegate: AnyObject {
     
     /// 滑动到的中心view的索引的回调
-    @objc optional func lineFlowLayout(_ lineFlowLayout: LXLineFlowLayout,
+    @objc optional func lineFlowLayout(_ lineFlowLayout: LXSwiftLineFlowLayout,
                                        _ index: Int)
 }
 
 // MARK: - 线性布局
-open class LXLineFlowLayout: UICollectionViewFlowLayout {
+open class LXSwiftLineFlowLayout: UICollectionViewFlowLayout {
    
-    public weak var delegate: LXLineFlowLayoutDelegate?
+    public weak var delegate: LXSwiftLineFlowLayoutDelegate?
     private var index: Int = 0
     open override func prepare() {
         super.prepare()

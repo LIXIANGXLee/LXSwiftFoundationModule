@@ -17,8 +17,6 @@ class Test1ViewController: LXSwiftWebViewController {
         
         print("-=-========\(UIApplication.lx.visibleNavRootViewController)")
         
-        
-
         self.webView.frame = CGRect(x: 0, y: 0, width: LXSwiftApp.screenW, height: LXSwiftApp.screenH)
         
         self.load(with: "http://www.baidu.com")
