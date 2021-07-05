@@ -59,6 +59,7 @@
 		7FC7174E66928D62FE9D209F44F1680C /* LXSwift+Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F9D730B4945D6F6B0264F17172837D /* LXSwift+Button.swift */; };
 		8125BBE7FC0568776C91D520655DF49F /* LXSwift+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7379A75B6713AD7BC8D4C5E9D7E409 /* LXSwift+Array.swift */; };
 		8340F0B9A9D1A4D37C8BAE5FA58B8654 /* LXObjcThreadActive.h in Headers */ = {isa = PBXBuildFile; fileRef = 178A82AE6AB3FC5333F71526FABF433D /* LXObjcThreadActive.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		844EA0CE2692D946000D85EF /* LXWaterfallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844EA0CD2692D946000D85EF /* LXWaterfallLayout.swift */; };
 		85B175910626342A945181EDAB203F93 /* LXSwiftConvenienceBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01962A7F1746A9307022BA5AF9D9FB7 /* LXSwiftConvenienceBundle.swift */; };
 		9E0CAEEDDC4B0C1219A9952C2D9F9246 /* UIView+LXObjcPerformance.h in Headers */ = {isa = PBXBuildFile; fileRef = FA49D5A814AA071FAADF0407D23ECE55 /* UIView+LXObjcPerformance.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9E465D32C38B81A51FB388AFA8B82338 /* LXObjcProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 98B39A16D97D4D50D920009D233CCD15 /* LXObjcProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -129,7 +130,7 @@
 		5C388C4499BF688F46EB49D074B3445E /* LXObjcUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LXObjcUtils.m; path = LXSwiftFoundation/LXObjcUtils.m; sourceTree = "<group>"; };
 		5E99F0F9B7F37EA212322362B79BCD44 /* LXSwiftFoundation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LXSwiftFoundation.h; path = LXSwiftFoundation/LXSwiftFoundation.h; sourceTree = "<group>"; };
 		60DF07044275569549591405ACF4265C /* LXSwift+TextView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+TextView.swift"; path = "LXSwiftFoundation/LXSwift+TextView.swift"; sourceTree = "<group>"; };
-		61606673D2D7824AC1FDEDAC9F7C5CBD /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		61606673D2D7824AC1FDEDAC9F7C5CBD /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		69AD08F5882C219CB8B1A36441B884DD /* LXSwiftStack.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftStack.swift; path = LXSwiftFoundation/LXSwiftStack.swift; sourceTree = "<group>"; };
 		69CA815F1DFA168067D334B95956C664 /* LXObjcUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LXObjcUtils.h; path = LXSwiftFoundation/LXObjcUtils.h; sourceTree = "<group>"; };
 		6BCE8F0DD975B49DEFC8EA29EA561C35 /* Pods-LXSwiftFoundationModule-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LXSwiftFoundationModule-Info.plist"; sourceTree = "<group>"; };
@@ -141,6 +142,7 @@
 		7CA0CC33DBA39BFF87425109F52BA159 /* LXSwiftTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftTextField.swift; path = LXSwiftFoundation/LXSwiftTextField.swift; sourceTree = "<group>"; };
 		7D285C3324D29DF48597EE5670C77493 /* LXSwift+Dictionary.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Dictionary.swift"; path = "LXSwiftFoundation/LXSwift+Dictionary.swift"; sourceTree = "<group>"; };
 		82C21A558034ED9691C3DC8901D4F686 /* LXSwiftRegex.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftRegex.swift; path = LXSwiftFoundation/LXSwiftRegex.swift; sourceTree = "<group>"; };
+		844EA0CD2692D946000D85EF /* LXWaterfallLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LXWaterfallLayout.swift; sourceTree = "<group>"; };
 		88E3469E2B96F73C980CF2411B53D106 /* LXSwiftFoundation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LXSwiftFoundation.debug.xcconfig; sourceTree = "<group>"; };
 		8A20E1970AFDF675438FDF9FDA838386 /* LXSwift+FileManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+FileManager.swift"; path = "LXSwiftFoundation/LXSwift+FileManager.swift"; sourceTree = "<group>"; };
 		8A7C972BC725F0E3E791BAC98DA00B2B /* LXSwiftUtils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftUtils.swift; path = LXSwiftFoundation/LXSwiftUtils.swift; sourceTree = "<group>"; };
@@ -149,17 +151,17 @@
 		8CD7ECCC3DAC82DD0213A08F6748B8FE /* Pods-LXSwiftFoundationModule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LXSwiftFoundationModule.debug.xcconfig"; sourceTree = "<group>"; };
 		8EC4B08554BC62C2BA2A4AD00B71FDE7 /* Pods-LXSwiftFoundationModule.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-LXSwiftFoundationModule.modulemap"; sourceTree = "<group>"; };
 		8FE90AAFF9169ED71A7E22DBFA456834 /* LXSwiftApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftApp.swift; path = LXSwiftFoundation/LXSwiftApp.swift; sourceTree = "<group>"; };
-		91A4F3DDA382BE2E8A7F55E69898FCF0 /* LXSwiftFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = LXSwiftFoundation.framework; path = LXSwiftFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		91A4F3DDA382BE2E8A7F55E69898FCF0 /* LXSwiftFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LXSwiftFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		94A69D0EF7EF160B6660F3A04D8D0E91 /* LXSwiftRuntime.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftRuntime.swift; path = LXSwiftFoundation/LXSwiftRuntime.swift; sourceTree = "<group>"; };
 		95B87A18FADBB01ED13D95D7605BB474 /* Pods-LXSwiftFoundationModule-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LXSwiftFoundationModule-acknowledgements.plist"; sourceTree = "<group>"; };
 		98B39A16D97D4D50D920009D233CCD15 /* LXObjcProxy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LXObjcProxy.h; path = LXSwiftFoundation/LXObjcProxy.h; sourceTree = "<group>"; };
 		9B1F48B44CFF6FC4DC386D5A41198E6D /* LXSwift+Data.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Data.swift"; path = "LXSwiftFoundation/LXSwift+Data.swift"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9E093E81AA39BD512D225DADBDD07811 /* Pods-LXSwiftFoundationModule-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-LXSwiftFoundationModule-dummy.m"; sourceTree = "<group>"; };
 		9EE03FFC52D9961A2007A155BDCB3363 /* LXSwiftView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftView.swift; path = LXSwiftFoundation/LXSwiftView.swift; sourceTree = "<group>"; };
 		9F76BE6D6CB536BF27A19EA133818A56 /* LXSwift+UIApplication.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+UIApplication.swift"; path = "LXSwiftFoundation/LXSwift+UIApplication.swift"; sourceTree = "<group>"; };
 		9FB69067BF9993052059566B5F008BF1 /* CADisplayLink+Block.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "CADisplayLink+Block.m"; path = "LXSwiftFoundation/CADisplayLink+Block.m"; sourceTree = "<group>"; };
-		AB520CD132149910E44FA2B2654DBA13 /* Pods_LXSwiftFoundationModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_LXSwiftFoundationModule.framework; path = "Pods-LXSwiftFoundationModule.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB520CD132149910E44FA2B2654DBA13 /* Pods_LXSwiftFoundationModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LXSwiftFoundationModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC7379A75B6713AD7BC8D4C5E9D7E409 /* LXSwift+Array.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Array.swift"; path = "LXSwiftFoundation/LXSwift+Array.swift"; sourceTree = "<group>"; };
 		B461C8AA0CD4CB9596ADD6A4EB23539B /* LXSwift+ScrollView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+ScrollView.swift"; path = "LXSwiftFoundation/LXSwift+ScrollView.swift"; sourceTree = "<group>"; };
 		B66E9B77BABDF5075C0E84F171E8A217 /* LXSwiftViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftViewController.swift; path = LXSwiftFoundation/LXSwiftViewController.swift; sourceTree = "<group>"; };
@@ -184,7 +186,7 @@
 		E5C8D93C3E51C5F9E6EEF336A8BA4B30 /* LXSwift+Color.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Color.swift"; path = "LXSwiftFoundation/LXSwift+Color.swift"; sourceTree = "<group>"; };
 		E6360288B37D3CB53BA15A532010B406 /* LXSwiftFoundation-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LXSwiftFoundation-dummy.m"; sourceTree = "<group>"; };
 		E78C52CE7221109AED2A0715EB99A1E2 /* LXSwift+String.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+String.swift"; path = "LXSwiftFoundation/LXSwift+String.swift"; sourceTree = "<group>"; };
-		E872B834B43BE61A1E5A45D07A8DCDDA /* LXSwiftFoundation.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = LXSwiftFoundation.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		E872B834B43BE61A1E5A45D07A8DCDDA /* LXSwiftFoundation.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = LXSwiftFoundation.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E923324A0BF723AA323F77F9CB5352F5 /* LXSwiftStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftStorage.swift; path = LXSwiftFoundation/LXSwiftStorage.swift; sourceTree = "<group>"; };
 		ED5A4925ADCE43E341CCA597F284D4F8 /* LXSwift+Control.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Control.swift"; path = "LXSwiftFoundation/LXSwift+Control.swift"; sourceTree = "<group>"; };
 		EE4DBFF1C1C582F15B420B1BCD333DCA /* LXSwift+DispatchQueue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+DispatchQueue.swift"; path = "LXSwiftFoundation/LXSwift+DispatchQueue.swift"; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				FED5D356C1B40A188C003A22984BD333 /* CADisplayLink+Block.h */,
 				9FB69067BF9993052059566B5F008BF1 /* CADisplayLink+Block.m */,
 				03A4C90A51763E4A6F5C69DA7AE3D2E5 /* LXCompatible.swift */,
+				844EA0CD2692D946000D85EF /* LXWaterfallLayout.swift */,
 				FC719FF0FCBD3EF7EF3235B0F640623E /* LXLineFlowLayout.swift */,
 				98B39A16D97D4D50D920009D233CCD15 /* LXObjcProxy.h */,
 				568747272C9DE21CFD44CA519DE6A927 /* LXObjcProxy.m */,
@@ -534,6 +537,7 @@
 				24FC7F9B226950AF011B718B7F5618C7 /* LXSwift+Date.swift in Sources */,
 				218E061BDFBF771F2F32CC2B1D1591CB /* LXSwift+Device.swift in Sources */,
 				C6094F0391A21F3432D6B76B03254476 /* LXSwift+Dictionary.swift in Sources */,
+				844EA0CE2692D946000D85EF /* LXWaterfallLayout.swift in Sources */,
 				15261AE4C6779DFEE32ECDBFDD040F80 /* LXSwift+DispatchQueue.swift in Sources */,
 				7EE7B4F8805DA2492CE4755B8700153D /* LXSwift+Double.swift in Sources */,
 				64A833819BDB67A5CBC64F1167093FD8 /* LXSwift+EdgeInsets.swift in Sources */,

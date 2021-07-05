@@ -14,6 +14,7 @@ import UIKit
                                        _ index: Int)
 }
 
+// MARK: - 线性布局
 open class LXLineFlowLayout: UICollectionViewFlowLayout {
    
     public weak var delegate: LXLineFlowLayoutDelegate?
