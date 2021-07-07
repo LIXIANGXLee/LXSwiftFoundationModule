@@ -38,8 +38,7 @@ extension LXSwiftBasics where Base == Date {
                               unit: Set<Calendar.Component> = [.year,.month,.day])
     -> DateComponents {
         let calendar = Calendar.current
-        let comp = calendar.dateComponents(unit, from: date,
-                                           to: base)
+        let comp = calendar.dateComponents(unit, from: date, to: base)
         return comp
     }
     
@@ -74,8 +73,7 @@ extension LXSwiftBasics where Base == Date {
     /// is this year
     public var isThisYear: Bool {
         let unit: Set<Calendar.Component> = [.year]
-        let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(),
-                                                      unit: unit)
+        let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(), unit: unit)
         let result = nowComps.year == selfCmps.year
         return result
     }
@@ -83,8 +81,7 @@ extension LXSwiftBasics where Base == Date {
     ///isYesterday
     public var isYesterday: Bool {
         let unit: Set<Calendar.Component> = [.day,.month,.year]
-        let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(),
-                                                      unit: unit)
+        let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(), unit: unit)
         let count = nowComps.day! - selfCmps.day!
         return (selfCmps.year == nowComps.year) &&
             (selfCmps.month == nowComps.month) &&
@@ -94,8 +91,7 @@ extension LXSwiftBasics where Base == Date {
     /// is today
     public var isToday: Bool{
         let unit: Set<Calendar.Component> = [.day,.month,.year]
-        let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(),
-                                                      unit: unit)
+        let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(), unit: unit)
         return (selfCmps.year == nowComps.year) &&
             (selfCmps.month == nowComps.month) &&
             (selfCmps.day == nowComps.day)
@@ -104,8 +100,7 @@ extension LXSwiftBasics where Base == Date {
     /// An hour ago
     public var isAnHourAgo: Bool{
         let unit: Set<Calendar.Component> = [.hour,.day,.month,.year]
-        let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(),
-                                                      unit: unit)
+        let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(), unit: unit)
         return (selfCmps.year == nowComps.year) &&
             (selfCmps.month == nowComps.month) &&
             (selfCmps.day == nowComps.day) &&
@@ -115,8 +110,7 @@ extension LXSwiftBasics where Base == Date {
     /// An minute ago
     public var isJust: Bool{
         let unit: Set<Calendar.Component> = [.minute,.hour,.day,.month,.year]
-        let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(),
-                                                      unit: unit)
+        let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(), unit: unit)
         return (selfCmps.year == nowComps.year) &&
             (selfCmps.month == nowComps.month) &&
             (selfCmps.day == nowComps.day) &&

@@ -61,8 +61,7 @@ extension LXSwiftBasics where Base: UIApplication {
     public static func openUrl(_ urlStr: String,
                         completionHandler: ((Bool) -> Void)? = nil) {
         if let url = URL(string: urlStr) {
-            openUrl(url,
-                    completionHandler: completionHandler)
+            openUrl(url, completionHandler: completionHandler)
         }
     }
     

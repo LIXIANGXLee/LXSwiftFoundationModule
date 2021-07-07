@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 //MARK: -  Extending properties and methods for LXSwiftTextView
 extension LXSwiftBasics where Base : LXSwiftTextView {
     

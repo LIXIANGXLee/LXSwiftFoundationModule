@@ -13,10 +13,10 @@ extension Double: LXSwiftCompatible { }
 //MARK: -  Extending methods for Double
 extension LXSwiftBasics where Base == Double {
     
-    /// Keep decimal places after decimal points
+    /// 保留小数点后的小数位
     /// - Parameters:
-    ///   - minDigits: min decimal
-    ///   - maxDigits: max decimal
+    /// - minDigits: min decimal
+    /// - maxDigits: max decimal
     public func roundTo(minDigits: Int = 0, maxDigits: Int = 2,
                         mode: NumberFormatter.RoundingMode = .halfEven) -> String {
         return NSNumber(value: base).lx.numberFormatter(with: mode,
@@ -24,9 +24,9 @@ extension LXSwiftBasics where Base == Double {
                                                         maxDigits: maxDigits) ?? ""
     }
     
-    /// Keep decimal places after decimal points
+    /// 保留小数点后的小数位
     /// - Parameters:
-    ///   - digits:  min decimal max decimal is  digits
+    /// - digits:  min decimal max decimal is  digits
     public func roundTo(digits: Int = 0,
                         mode: NumberFormatter.RoundingMode = .halfEven) -> String {
         return NSNumber(value: base).lx.numberFormatter(with: mode,
@@ -54,7 +54,7 @@ extension LXSwiftBasics where Base == Double {
         return str+"%"
     }
     
-    /// User display capacity size size
+    ///用户显示容量
     public var sizeFileToStr: String {
         let unit = 1000.0
         if base > pow(unit, 3) {

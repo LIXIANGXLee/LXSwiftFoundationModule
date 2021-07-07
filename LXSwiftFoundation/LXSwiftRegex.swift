@@ -11,10 +11,8 @@ import UIKit
 // MARK: public LXRegexType Hyperlink type
 public struct LXSwiftRegexType {
     
-    public init(_ link: String,
-                color: UIColor = UIColor.orange,
-                font: UIFont = UIFont.systemFont(ofSize: 15),
-                isExpression: Bool = false) {
+    public init(_ link: String, color: UIColor = UIColor.orange,
+                font: UIFont = UIFont.systemFont(ofSize: 15), isExpression: Bool = false) {
         self.link = link
         self.color = color
         self.font = font
@@ -66,8 +64,7 @@ extension LXSwiftRegex {
     ///- textcolor: text content color
     ///- textfont: text content font size
     ///- wordregextypes: hyperlink text configuration information
-    public class func regex(of text: String,
-                            textColor: UIColor = UIColor.black,
+    public class func regex(of text: String, textColor: UIColor = UIColor.black,
                             textFont: UIFont = UIFont.systemFont(ofSize: 15),
                             wordRegexTypes: [LXSwiftRegexType] = wordRegexTypes)
         -> NSAttributedString? {

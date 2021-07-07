@@ -25,6 +25,21 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (int)getNetWorkType;
 
+/**
+ * 是否在主线程
+ */
++ (BOOL)isMainThread;
+
+/**
+ * 主线程执行block
+ */
++ (void)executeOnSafeMian:(void(^)(void)) block;
+
+/**
+ *  异步线程执行block
+ */
++ (void)executeOnSafeGlobal:(void(^)(void)) block;
+
 @end
 
 NS_ASSUME_NONNULL_END

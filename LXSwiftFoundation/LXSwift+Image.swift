@@ -31,11 +31,11 @@ extension LXSwiftBasics where Base: UIImage {
         }
     }
     
-    ///  light or dark is changed
+    /// light or dark is changed
     ///
     /// - Parameters:
-    ///   - light: light image
-    ///   - dark:  dark image
+    /// - light: light image
+    /// - dark:  dark image
     public static func image(light: UIImage, dark: UIImage) -> UIImage {
         if #available(iOS 13.0, *) {
             guard let config = light.configuration else {
@@ -58,24 +58,24 @@ extension LXSwiftBasics where Base: UIImage {
 //MARK: -  Extending methods and properties for UIImage cut
 extension LXSwiftBasics where Base: UIImage {
     
-    /// uiimage tranform base64 of data
+    /// uiimage转换base64数据
     public var base64EncodingImage: Data? {
         let base64Data = base.pngData()
         return  base64Data?.base64EncodedData(options: .lineLength64Characters)
     }
     
-     /// uiimage tranform base64 of data
+     /// uiimage转换base64数据
      public var base64EncodingImageString: String? {
          let base64Data = base.pngData()
          return  base64Data?.base64EncodedString(options: .lineLength64Characters)
      }
     
-    /// circle image
+    /// 圆形图像
     public var imageWithCircle: UIImage? {
         return imageByRound(with: min(base.size.width, base.size.height))
     }
     
-    /// Returns whether the image contains an alpha component.
+    ///返回图像是否包含alpha分量
     public var isContainsAlphaComponent: Bool {
         let alphaInfo = base.cgImage?.alphaInfo
         return (
@@ -90,29 +90,29 @@ extension LXSwiftBasics where Base: UIImage {
     public var isOpaque: Bool { return !isContainsAlphaComponent }
 
     
-    /// interception roundCorners  with image
+    /// 用图像截取圆角
     ///
     /// - Parameters:
-    ///   - roundCorners: left right top bottom
-    ///   - cornerRadi: size
+    /// - roundCorners: left right top bottom
+    /// - cornerRadi: size
     public func imageByRound(with radius: CGFloat) -> UIImage? {
         return imageByRound(with: radius, corners: UIRectCorner.allCorners)
     }
     
-    ///The drawing method cuts the picture into the round corner and adds the border
+    /// 绘图方法将图片剪切成圆角并添加边框
     ///
     /// - Parameters:
-    /// -radius  border radius size
-    /// -corners  topleft topright bottomleft bottomright
-    /// -borderWidth -- border color
-    /// -borderColor -- border color
-    /// -borderLineJoin type
+    /// - radius  border radius size
+    /// - corners  topleft topright bottomleft bottomright
+    /// - borderWidth -- border color
+    /// - borderColor -- border color
+    /// - borderLineJoin type
     public func imageByRound(with radius: CGFloat,
-                                         corners: UIRectCorner,
-                                         borderWidth: CGFloat = 0,
-                                         borderColor: UIColor = UIColor.white,
-                                         borderLineJoin: CGLineJoin = .round) -> UIImage? {
-        
+                                 corners: UIRectCorner,
+                                 borderWidth: CGFloat = 0,
+                                 borderColor: UIColor = UIColor.white,
+                                 borderLineJoin: CGLineJoin = .round) -> UIImage? {
+
         UIGraphicsBeginImageContextWithOptions(base.size, false, base.scale)
         guard let context = UIGraphicsGetCurrentContext(),
               let cgImage = base.cgImage else { return nil }
@@ -159,10 +159,10 @@ extension LXSwiftBasics where Base: UIImage {
         return image
     }
     
-    ///Frame screenshot (capture any part of the picture)
-    /// -ImageView
-    ///-BGView -- screenshot background
-    ///-Parameter completed: asynchronous completion callback (main thread callback)
+    /// 框架截图（捕捉图片的任何部分）
+    /// - ImageView
+    /// - BGView -- screenshot background
+    /// - Parameter completed: asynchronous completion callback (main thread callback)
     public func imageShot(byFrame frame: CGRect?) -> UIImage? {
         
         UIGraphicsBeginImageContextWithOptions(base.size, false, 0.0)
@@ -174,11 +174,11 @@ extension LXSwiftBasics where Base: UIImage {
         return newImage
     }
     
-    /// division more image
+    /// 分割更多图像
     ///
     /// - Parameters:
-    ///   - row:  row count
-    ///   - col: col count
+    /// - row:  row count
+    /// - col: col count
     public func imageCut(withRow row:Int, col:Int) -> [UIImage] {
         
         guard let imageRef = base.cgImage else {return [UIImage()]}
@@ -202,14 +202,13 @@ extension LXSwiftBasics where Base: UIImage {
 //MARK: -  Extending methods and properties for UIImage init
 extension LXSwiftBasics where Base: UIImage {
     
-    /// create image return newImage
+    /// 创建图像返回newImage
     ///
     /// - Parameters:
-    ///   - color: color
-    ///   - size: size
+    /// - color: color
+    /// - size: size
     public static func image(WithColor color: UIColor,
-                             size: CGSize = CGSize(width: 10,
-                                                   height: 10)) -> UIImage? {
+                             size: CGSize = CGSize(width: 10, height: 10)) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, 1.0)
         let context = UIGraphicsGetCurrentContext()
         context?.setFillColor(color.cgColor)
@@ -219,9 +218,9 @@ extension LXSwiftBasics where Base: UIImage {
         return img
     }
     
-    ///Image filter processing
-    ///- Image -- transfer picture
-    ///- filter -- input filter
+    /// 图像滤波处理
+    /// - Image -- transfer picture
+    /// - filter -- input filter
     public func imageFilter(withFilterName filterName: String) -> UIImage? {
         let inputImage = CIImage(image: base)
         let filter = CIFilter(name: filterName)
@@ -234,12 +233,11 @@ extension LXSwiftBasics where Base: UIImage {
         return newImage
     }
     
-    ///Erase pictures with gestures
-    ///-ImageView
-    ///-BGView -- screenshot background
-    ///-Parameter completed: asynchronous completion callback (main thread callback)
-    public static func clearImage(withView view: UIView?,
-                                  rect: CGRect) -> UIImage? {
+    /// 用手势擦除图片
+    /// - ImageView
+    /// - BGView -- screenshot background
+    /// - Parameter completed: asynchronous completion callback (main thread callback)
+    public static func clearImage(withView view: UIView?, rect: CGRect) -> UIImage? {
         guard let v = view else { return nil }
         UIGraphicsBeginImageContextWithOptions(v.bounds.size, false, 0.0)
         let imageCtx = UIGraphicsGetCurrentContext()
@@ -250,13 +248,12 @@ extension LXSwiftBasics where Base: UIImage {
         return newImage
     }
     
-    /// add water for image
+    /// 为图像添加水
     ///
-    ///   - Parameters:
-    ///   - images: bg image
-    ///   - imageRect: [imageRect]
-    public func imageCompose(withImages images:[UIImage],
-                             imageRect: [CGRect]) -> UIImage? {
+    /// - Parameters:
+    /// - images: bg image
+    /// - imageRect: [imageRect]
+    public func imageCompose(withImages images:[UIImage], imageRect: [CGRect]) -> UIImage? {
         let imageRef = base.cgImage
         let w: CGFloat = CGFloat((imageRef?.width)!)
         let h: CGFloat = CGFloat((imageRef?.height)!)
@@ -273,10 +270,10 @@ extension LXSwiftBasics where Base: UIImage {
         return resultImg
     }
     
-    /// video image
+    /// 视频图像
     ///
     /// - Parameters:
-    ///   - videoUrl: video Url
+    /// - videoUrl: video Url
     public static func image(withVideoUrl videoUrl: URL?) -> UIImage? {
         guard let videoUrl = videoUrl else { return nil }
         
@@ -292,7 +289,7 @@ extension LXSwiftBasics where Base: UIImage {
         return shotImage;
     }
         
-    /// scale return image
+    /// 缩放返回图像
     ///
     /// - Parameter scale: (0~1)
     /// - Returns: newimage
@@ -302,7 +299,7 @@ extension LXSwiftBasics where Base: UIImage {
         return zoomTo(size: targetSize)
     }
     
-    /// image scale size,  compress
+    /// 图像缩放大小，压缩
     ///
     /// - Parameter size: curent
     /// - Parameter contentMode: model
@@ -329,7 +326,7 @@ extension LXSwiftBasics where Base: UIImage {
         return newImage
     }
     
-    /// image rotation
+    /// 图像旋转
     ///
     /// - Parameter orientation: Orientation
     /// - Returns: image
@@ -400,7 +397,7 @@ extension LXSwiftBasics where Base: UIImage {
         return img
     }
     
-    /// How to change color picture into black and white picture
+    /// 如何将彩色图片转换成黑白图片
     ///
     /// - Returns: new image
     public func grayImage() -> UIImage? {
@@ -429,11 +426,11 @@ extension LXSwiftBasics where Base: UIImage {
 //MARK: -  Extending methods and properties for UIImage async
 extension LXSwiftBasics where Base: UIImage {
     
-    /// async create image return newImage
+    /// 异步创建映像返回newImage
     ///
     /// - Parameters:
-    ///   - color: color
-    ///   - size: size
+    /// - color: color
+    /// - size: size
     public static func async_image(of color: UIColor,
                                    size: CGSize = CGSize(width: 10, height: 10),
                                    complete: @escaping (UIImage?) -> ()) {
@@ -445,7 +442,7 @@ extension LXSwiftBasics where Base: UIImage {
         }
     }
         
-    /// async circle image
+    ///异步圆图像
     public func async_imageWithCircle(complete: @escaping (UIImage?) -> ()) {
         DispatchQueue.global().async{
             let async_image = self.imageWithCircle
@@ -455,7 +452,7 @@ extension LXSwiftBasics where Base: UIImage {
         }
     }
     
-    /// async The drawing method cuts the picture into the round corner and adds the border
+    /// 异步绘图方法将图片剪切成圆角并添加边框
     ///
     /// - Parameters:
     /// -radius  border radius size
@@ -464,24 +461,24 @@ extension LXSwiftBasics where Base: UIImage {
     /// -borderColor -- border color
     /// -borderLineJoin type
     public func async_imageByRound(with radius: CGFloat,
-                                               corners: UIRectCorner,
-                                               borderWidth: CGFloat = 0,
-                                               borderColor: UIColor = UIColor.white,
-                                               borderLineJoin: CGLineJoin = .round,
-                                               complete: @escaping (UIImage?) -> ()) {
+                                       corners: UIRectCorner,
+                                       borderWidth: CGFloat = 0,
+                                       borderColor: UIColor = UIColor.white,
+                                       borderLineJoin: CGLineJoin = .round,
+                                       complete: @escaping (UIImage?) -> ()) {
         DispatchQueue.global().async{
             let async_image = self.imageByRound(with: radius,
-                                                            corners: corners,
-                                                            borderWidth: borderWidth,
-                                                            borderColor: borderColor,
-                                                            borderLineJoin: borderLineJoin)
+                                                    corners: corners,
+                                                    borderWidth: borderWidth,
+                                                    borderColor: borderColor,
+                                                    borderLineJoin: borderLineJoin)
             DispatchQueue.main.async(execute: {
                 complete(async_image)
             })
         }
     }
     
-    /// async video image
+    /// 异步视频图像
     ///
     /// - Parameters:
     ///   - videoUrl: video Url
@@ -495,7 +492,7 @@ extension LXSwiftBasics where Base: UIImage {
         }
     }
     
-    /// image scale size,  compress
+    /// 图像缩放大小，压缩
     ///
     /// - Parameter size: curent
     /// - Parameter contentMode: model
@@ -511,13 +508,12 @@ extension LXSwiftBasics where Base: UIImage {
         }
     }
     
-    ///  async add water for image
+    ///  异步为图像添加水
     ///
-    ///   - Parameters:
-    ///   - images: bg image
-    ///   - imageRect: [imageRect]
-    public func async_imageCompose(with images:[UIImage],
-                                   imageRect: [CGRect],
+    ///  - Parameters:
+    ///  - images: bg image
+    ///  - imageRect: [imageRect]
+    public func async_imageCompose(with images:[UIImage], imageRect: [CGRect],
                                    complete: @escaping (UIImage?) -> ()) {
         DispatchQueue.global().async{
             let async_image = self.imageCompose(withImages: images, imageRect: imageRect)
@@ -527,13 +523,12 @@ extension LXSwiftBasics where Base: UIImage {
         }
     }
     
-    /// division more image
+    /// 分割更多图像
     ///
     /// - Parameters:
-    ///   - row:  row count
-    ///   - col: col count
-    public func async_imageCut(with row:Int,
-                               col:Int,
+    /// - row:  row count
+    /// - col: col count
+    public func async_imageCut(with row:Int, col:Int,
                                complete: @escaping ([UIImage?]?) -> ()){
         DispatchQueue.global().async{
             let async_images = self.imageCut(withRow: row, col: col)
@@ -543,7 +538,7 @@ extension LXSwiftBasics where Base: UIImage {
         }
     }
     
-    ///Frame screenshot (capture any part of the picture)
+    /// 框架截图（捕捉图片的任何部分）
     /// - Parameters:
     /// - BGView -- screenshot background
     /// - Parameter completed: asynchronous completion callback (main thread callback)
@@ -557,10 +552,10 @@ extension LXSwiftBasics where Base: UIImage {
         }
     }
     
-    ///  async Image filter processing
+    ///  异步图像滤波处理
     /// - Parameters:
-    ///- Image -- transfer picture
-    ///- filter -- input filter
+    /// - Image -- transfer picture
+    /// - filter -- input filter
     public func async_imageFilter(withFilterName filterName: String,
                                   completed:@escaping (UIImage?) -> ()) -> Void {
         DispatchQueue.global().async{
@@ -571,13 +566,12 @@ extension LXSwiftBasics where Base: UIImage {
         }
     }
     
-    /// async Erase pictures with gestures
+    /// 用手势异步擦除图片
     /// - Parameters:
-    ///-ImageView
-    ///-BGView -- screenshot background
-    ///-Parameter completed: asynchronous completion callback (main thread callback)
-    public static func async_clearImage(withView view: UIView?,
-                                        rect: CGRect,
+    /// -ImageView
+    /// -BGView -- screenshot background
+    /// -Parameter completed: asynchronous completion callback (main thread callback)
+    public static func async_clearImage(withView view: UIView?, rect: CGRect,
                                         complete: @escaping (UIImage?) -> ()) {
         DispatchQueue.global().async{
             let async_image = self.clearImage(withView: view, rect: rect)

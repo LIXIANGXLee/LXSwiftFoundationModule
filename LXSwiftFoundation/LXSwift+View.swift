@@ -93,10 +93,8 @@ extension LXSwiftBasics where Base: UIView {
     ///   - radius: shadowRadius
     ///   - opacity: shadowOpacity
     ///   - offset: shadowOffset
-    public func setShadow(color: UIColor,
-                          radius: CGFloat,
-                          opacity: Float,
-                          offset: CGSize = CGSize.zero) {
+    public func setShadow(color: UIColor, radius: CGFloat,
+                          opacity: Float, offset: CGSize = CGSize.zero) {
         base.layer.shadowColor = color.cgColor
         base.layer.shadowRadius = radius
         base.layer.shadowOpacity = opacity

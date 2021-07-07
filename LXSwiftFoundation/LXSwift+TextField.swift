@@ -137,7 +137,7 @@ extension LXSwiftTextField: LXSwiftPropertyCompatible{
 extension LXSwiftBasics where Base : UITextField {
     ///Sets the color of the transient text
     /// 设置暂位文字的颜色
-    var placeholderColor: UIColor {
+   public var placeholderColor: UIColor {
         get {
             let color = base.value(forKeyPath: "_placeholderLabel.textColor") as? UIColor
             return color ?? .white
@@ -148,7 +148,7 @@ extension LXSwiftBasics where Base : UITextField {
 
     ///Sets the font of the transient tex
     ///设置暂位文字的字体
-    var placeholderFont: UIFont {
+    public var placeholderFont: UIFont {
         get {
             let font = base.value(forKeyPath: "_placeholderLabel.font") as? UIFont
             return font ?? UIFont.lx.fontWithRegular(14)

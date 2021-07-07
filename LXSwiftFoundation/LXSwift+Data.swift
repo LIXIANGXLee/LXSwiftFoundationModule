@@ -57,6 +57,19 @@ extension LXSwiftBasics where Base == Data {
         base.copyBytes(to: &c, count: 1)
         return Data.mimeTypeSignatures[c] ?? "application/octet-stream"
     }
+    
+    ///  data tranform Dictionary
+    ///
+    /// - Parameter data: data
+    /// - Returns: Dictionary
+    public var dataToPlistDictionary: Dictionary<String, Any>? {
+        
+        guard let propertyList = try? PropertyListSerialization.propertyList(from: base,
+                                 options: .init(rawValue: 0),format: nil) else {
+            return nil
+        }
+        return propertyList as? Dictionary<String, Any>
+    }
 }
 
 //MARK: -  Extending properties  for NSData

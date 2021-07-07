@@ -236,11 +236,20 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         let string = base as! String
         return (string.lx.jsonObject as? [String: Any]) ?? [:]
     }
-
+    
     /// string to array
     public var jsonStrToArr: [Any] {
         let string = base as! String
         return (string.lx.jsonObject as? [Any]) ?? []
+    }
+    /// string tranform plist Dictionary
+    ///
+    /// - Parameter data: string
+    /// - Returns: Dictionary
+    public var stringToPlistDictionary: Dictionary<String, Any>?  {
+        let string = base as! String
+        guard let data = string.data(using: .utf8) else { return nil }
+        return data.lx.dataToPlistDictionary
     }
     
     ///Convert to JSON object type

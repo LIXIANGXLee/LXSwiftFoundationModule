@@ -126,4 +126,24 @@ int _compareVersionInSwift(const char * _Nullable v1,
     return NetworkType;
 }
 
++ (BOOL)isMainThread {
+    return [[NSThread currentThread] isMainThread];
+}
+
++ (void)executeOnSafeMian:(void (^)(void))block {
+    if([self isMainThread]) {
+        block();
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            block();
+        });
+    }
+}
+
++ (void)executeOnSafeGlobal:(void (^)(void))block {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        block();
+    });
+}
+
 @end

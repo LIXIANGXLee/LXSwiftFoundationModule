@@ -11,7 +11,7 @@ import UIKit
 //MARK: -  Extending properties for UIScrollView
 extension LXSwiftBasics where Base: UIScrollView {
  
-    ///Capture the long picture, you can capture the picture for Scrollview
+    ///抓拍长图片，可以抓拍图片进行滚动查看 截取长图
     public func snapShotContentScroll(callBack: @escaping (UIImage?) -> ()) {
         base.snapShotContentScroll { (image) in
             callBack(image)

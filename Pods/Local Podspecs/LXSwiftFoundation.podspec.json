@@ -1,6 +1,6 @@
 {
   "name": "LXSwiftFoundation",
-  "version": "6.6.0",
+  "version": "6.7.0",
   "summary": "Extend more user-friendly functions for system classes",
   "description": "LXSwiftFoundation is Extend more user-friendly functions for system classes",
   "homepage": "https://github.com/LIXIANGXLee/LXSwiftFoundationModule",
@@ -14,7 +14,7 @@
   "swift_versions": "5.0",
   "source": {
     "git": "https://github.com/LIXIANGXLee/LXSwiftFoundationModule.git",
-    "tag": "6.6.0"
+    "tag": "6.7.0"
   },
   "source_files": [
     "LXSwiftFoundation/*.swift",

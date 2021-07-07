@@ -11,8 +11,7 @@ import UIKit
 //MARK: -  Extending properties for UIButton
 extension LXSwiftBasics where Base: UIButton {
     
-    /// Set the text level to center
-    /// Space
+    /// 将文字级别设置为“居中” space 间距大小
     public func horizontalCenterImageAndTitle(space: CGFloat) {
         guard let imageView = base.imageView,
               let titleLabel = base.titleLabel else {
@@ -33,8 +32,7 @@ extension LXSwiftBasics where Base: UIButton {
                                             right: 0)
     }
     
-    /// Set the image text to be vertically centered
-    /// Space
+    /// 将图像文本设置为垂直居中 space 间距大小
     public func verticalCenterImageAndTitle(space: CGFloat,
                                isLeftImage: Bool = true) {
         guard let imageView = base.imageView,

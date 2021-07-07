@@ -27,10 +27,10 @@ public prefix func ~<= (_ index: Int) -> (Int) -> (Bool) { { $0 <= index } }
 extension Int: LXSwiftCompatible {
     
     /// Switch de matching pattern, matching
-    /// than or equal to,
-    /// greater than,
-    /// less than or equal to,
-    /// less than
+    /// - than or equal to,
+    /// - greater than,
+    /// - less than or equal to,
+    /// - less than
     public static func ~= (pattern: (Int) -> (Bool), value: Int) -> Bool {
          pattern(value)
     }

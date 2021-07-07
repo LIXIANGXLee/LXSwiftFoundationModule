@@ -14,12 +14,12 @@ extension UIColor: LXSwiftCompatible { }
 //MARK: -  Extending methods for UIColor
 extension LXSwiftBasics where Base: UIColor {
     
-    ///Suitable for dark mode and light mode , not layer
+    /// Suitable for dark mode and light mode , not layer
     ///
     /// - Parameters:
-    ///   - lightHex:Color of light mode (hexadecimal)
-    ///   - darkHex:  Color of dark mode (hexadecimal)
-    ///   - alpha: alpha
+    /// - lightHex:Color of light mode (hexadecimal)
+    /// - darkHex:  Color of dark mode (hexadecimal)
+    /// - alpha: alpha
     public static func color(lightHex: String, darkHex: String,
                              alpha: CGFloat = 1.0) -> UIColor {
         let light = UIColor(lightHex, alpha: alpha)
@@ -27,11 +27,11 @@ extension LXSwiftBasics where Base: UIColor {
         return color(lightColor: light, darkColor: dark)
     }
     
-    ///Suitable for dark mode and light mode , not layer
+    /// Suitable for dark mode and light mode , not layer
     ///
     /// - Parameters:
-    ///   - lightHex:Color of light mode (hexadecimal)
-    ///   - darkHex:  Color of dark mode (hexadecimal)
+    /// - lightHex:Color of light mode (hexadecimal)
+    /// - darkHex:  Color of dark mode (hexadecimal)
     public static func color(lightColor: UIColor, darkColor: UIColor) -> UIColor {
         if #available(iOS 13.0, *) {
             return UIColor { (traitCollection) -> UIColor in
@@ -47,8 +47,8 @@ extension LXSwiftBasics where Base: UIColor {
     }
     
     // MARK: - Constructor (hexadecimal)
-    ///hex  color (hexadecimal)
-    ///alpha
+    /// hex color (hexadecimal)
+    /// alpha
     public static func color(hex: String, alpha: CGFloat = 1.0) -> UIColor {
         return UIColor(hex, alpha: alpha)
     }
@@ -74,7 +74,7 @@ extension LXSwiftBasics where Base: UIColor {
     /// firstColor
     /// seccondColor
     public static func getRGBDelta(_ firstColor: UIColor, _ seccondColor: UIColor)
-    -> (CGFloat, CGFloat,  CGFloat) {
+    -> (CGFloat, CGFloat, CGFloat) {
         let firstRGB = firstColor.lx.getRGB()
         let secondRGB = seccondColor.lx.getRGB()
         return (firstRGB.0 - secondRGB.0,
@@ -94,7 +94,7 @@ extension LXSwiftBasics where Base: UIColor {
 //MARK: -  Extending Constructor methods for UIColor
 extension UIColor {
     
-    ///Constructor r g b a
+    /// Constructor r g b a
     convenience init(r : CGFloat, g : CGFloat, b : CGFloat,
                      alpha : CGFloat = 1.0) {
         self.init(red: r / 255.0,
@@ -109,9 +109,9 @@ extension UIColor {
         self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
 
-    ///Constructor (hexadecimal)
-    ///hex  color (hexadecimal)
-    ///alpha
+    /// Constructor (hexadecimal)
+    /// hex  color (hexadecimal)
+    /// alpha
     convenience init(_ hex: String, alpha: CGFloat = 1.0) {
         var cHex: String = hex.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
         switch hex {

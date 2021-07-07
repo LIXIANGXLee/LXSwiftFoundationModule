@@ -58,11 +58,8 @@ extension LXSwiftWaterfallLayout {
             let attrs = UICollectionViewLayoutAttributes(forCellWith: indexPath)
             
             // 获取高度
-            guard let height = dataSource?.waterfallLayout(self,
-                                                           width: itemW,
-                                                           indexPath: indexPath) else {
-                fatalError("请设置数据源,并且实现对应的数据源方法")
-            }
+            let height = dataSource?.waterfallLayout(self,
+                                                     width: itemW, indexPath: indexPath) ?? 1
             
             // 取出最小列的位置
             var minH = colHeights.min()!
