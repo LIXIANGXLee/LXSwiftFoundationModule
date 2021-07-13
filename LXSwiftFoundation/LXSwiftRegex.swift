@@ -66,12 +66,21 @@ extension LXSwiftRegex {
     ///- wordregextypes: hyperlink text configuration information
     public class func regex(of text: String, textColor: UIColor = UIColor.black,
                             textFont: UIFont = UIFont.systemFont(ofSize: 15),
+                            lineSpaceing: CGFloat = 4,
+                            wordSpaceing: CGFloat = 0,
                             wordRegexTypes: [LXSwiftRegexType] = wordRegexTypes)
         -> NSAttributedString? {
             
         if text.count <= 0 { return nil }
-        let attributes = [NSAttributedString.Key.font: textFont,
-                          NSAttributedString.Key.foregroundColor: textColor]
+        let style = NSMutableParagraphStyle()
+        style.lineSpacing = lineSpaceing
+        let attributes = [
+            NSAttributedString.Key.font: textFont,
+            NSAttributedString.Key.foregroundColor: textColor,
+            NSAttributedString.Key.paragraphStyle: style,
+            NSAttributedString.Key.kern: wordSpaceing
+        ] as [NSAttributedString.Key : Any]
+        
         let attributedStr = NSMutableAttributedString(string: text, attributes:attributes)
         
         // Start text matching
