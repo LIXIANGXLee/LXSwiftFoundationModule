@@ -196,9 +196,7 @@ extension LXSwiftBasics where Base == LXSwiftUtils {
                                         bitsPerComponent: 8,
                                         bytesPerRow: 0,
                                         space: colorSpace,
-                                        bitmapInfo: CGImageAlphaInfo.none.rawValue ) else {
-            return nil
-        }
+                                        bitmapInfo: CGImageAlphaInfo.none.rawValue ) else { return nil }
         bitmapRef.interpolationQuality = CGInterpolationQuality.high
         bitmapRef.scaleBy(x: scale, y: scale)
         let context =  CIContext(options: nil)
