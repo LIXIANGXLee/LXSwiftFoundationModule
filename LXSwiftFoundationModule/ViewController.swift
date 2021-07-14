@@ -43,10 +43,62 @@ class ViewController: UIViewController {
  
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        let vc = TestViewController()
-
-        self.navigationController?.pushViewController(vc, animated:true)
         
+        
+   protocolUIShow()
     }
+    
+    
+    func protocolUIShow() {
+        let config = LXSwiftModalConfig()
+        config.isDismissBg = false
+        config.contentMidViewH = scale_ip6_width(121)
+        config.titleFont = UIFont.lx.fontWithMedium(16)
+        config.titleColor = UIColor.black
+        config.isContentMidViewScrollEnabled = true
+        let itemCancel = LXSwiftModalItem(title: "不同意",
+                                         titleColor: UIColor.blue,
+                                         titleFont: UIFont.systemFont(ofSize: 17, weight: .medium))
+        { [weak self] in
+           
+        }
+        let itemTrue =  LXSwiftModalItem(title: "同意",
+                                         titleColor: UIColor.blue,
+                                        titleFont: UIFont.systemFont(ofSize: 17, weight: .medium))
+        { [weak self] in
+//            guard let b = Int(Bundle.lx.buildVersion ?? "0") else { return  }
+            UserDefaults.standard.setValue(true, forKey: "isProtocolMark")
+            UserDefaults.standard.synchronize()
+       }
+        
+        let modal = LXSwiftHyperlinksModalController(config,modalItems:  itemCancel,itemTrue)
+       
+        
+        let s1 = "《用户服务协议》"
+        let s2 = "《美术宝相框隐私政策》"
+
+        modal.setHandle { (text) -> (Void) in
+           
+        }
+        
+        let r1 = LXSwiftRegexType(s1,
+                                  color: UIColor.lx.color(hex: "36acff"),
+                                  font: UIFont.systemFont(ofSize: 14),
+                                  isExpression: false)
+        let r2 = LXSwiftRegexType(s2,
+                                  color: UIColor.lx.color(hex: "36acff"),
+                                  font: UIFont.systemFont(ofSize: 14),
+                                  isExpression: false)
+
+        let str = "欢迎使用美术宝相框！我们非常重视您的隐私和个人信息安全。在您使用美术宝相框前，请认真阅读\(s1)及\(s2)，您同意并接受全部条使用美术宝相框！我们非常重视您的隐私和个人信息安全。在您使用美术宝相框前，请认真阅读\(s1)及\(s2)，您同意并接受全部条款后方可开始使用美术宝相框。"
+        guard let attr = LXSwiftRegex.regex(of: str,
+                                            textColor: UIColor.lx.color(hex: "666666"),
+                                            textFont: UIFont.systemFont(ofSize: 14),
+                                            wordRegexTypes: [r1,r2]) else { return }
+
+        modal.show(with: "温馨提示", content: attr)
+    }
+    
+
 }
 

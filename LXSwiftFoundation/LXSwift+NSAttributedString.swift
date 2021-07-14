@@ -17,7 +17,7 @@ extension LXSwiftBasics where Base : NSAttributedString {
     public func size(width: CGFloat) -> CGSize {
         let size = CGSize(width: width, height: CGFloat(MAXFLOAT))
         let rect = base.boundingRect(with: size,
-                                     options: .usesLineFragmentOrigin, context: nil)
+                                     options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil)
         return rect.size
     }
     
