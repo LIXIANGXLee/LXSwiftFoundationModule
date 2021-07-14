@@ -8,13 +8,11 @@
 
 import UIKit
 
-///A unique identifier used to distinguish the background color
+///用于区分背景色的唯一标识符
 private let linkBgTag = 1234994321
 @objc public protocol LXTextLableDelegate: AnyObject {
-    @objc optional func lxTextLable(_ textView: LXSwiftTextLable,
-                                    didSelect text: String)
-    @objc optional func lxTextLable(_ textView: LXSwiftTextLable,
-                                    longPress text: String)
+    @objc optional func lxTextLable(_ textView: LXSwiftTextLable, didSelect text: String)
+    @objc optional func lxTextLable(_ textView: LXSwiftTextLable, longPress text: String)
 }
 
 public struct LXSwiftTextLableConfig {
@@ -70,8 +68,8 @@ open class LXSwiftTextLable: UIView {
         return longGesture
     }()
     
-    ///External call to observe the storage property setting size note ⚠️
-    ///Please set viewframe size before attributedtext
+
+    /// 外部调用以观察存储属性设置大小注释⚠️请在AttributeText之前设置viewframe大小
     public var viewFrame: CGRect? {
         didSet {
             guard let frame = viewFrame else { return }
@@ -80,29 +78,26 @@ open class LXSwiftTextLable: UIView {
         }
     }
     
-    ///External call to observe storage properties ⚠️
-    ///Please set viewframe size before setting attributedtext
+    /// 外部调用以观察存储属性富文本内容⚠️请在AttributeText之前设置viewframe大小
     public var attributedText: NSAttributedString? {
         didSet {
         guard let attr = self.attributedText else { return }
         
         textView.attributedText = attr
-        attr.enumerateAttributes(in: NSRange(location: 0,
-                                             length: attr.length),
-                                 options: NSAttributedString.EnumerationOptions(rawValue: 0)) {
-            (objct, range, stop) in
-            let t = objct[NSAttributedString.Key(LXSwiftRegex.textLinkConst)]
-            guard let textM = t as? String else {return}
-            textView.selectedRange = range
-            guard let r = textView.selectedTextRange else { return }
-            let rselectionRects = textView.selectionRects(for: r)
-            
-            var rects: [CGRect] = [CGRect]()
-            for selectionRect in rselectionRects{
-                if selectionRect.rect.width == 0 || selectionRect.rect.height == 0 { continue }
-                rects.append(selectionRect.rect)
-            }
-            links.append(LXSwiftTextLable.TextLink(text: textM, rang: range, rects: rects))
+        attr.enumerateAttributes(in: NSRange(location: 0, length: attr.length),
+                                 options: NSAttributedString.EnumerationOptions(rawValue: 0))
+            { (objct, range, stop) in
+                let t = objct[NSAttributedString.Key(LXSwiftRegex.textLinkConst)]
+                guard let textM = t as? String else { return }
+                textView.selectedRange = range
+                guard let r = textView.selectedTextRange else { return }
+                let rselectionRects = textView.selectionRects(for: r)
+                var rects: [CGRect] = [CGRect]()
+                for selectionRect in rselectionRects{
+                    if selectionRect.rect.width == 0 || selectionRect.rect.height == 0 { continue }
+                    rects.append(selectionRect.rect)
+                }
+                links.append(LXSwiftTextLable.TextLink(text: textM, rang: range, rects: rects))
             }
         }
     }
@@ -112,7 +107,6 @@ open class LXSwiftTextLable: UIView {
         self.config = config
         super.init(frame: CGRect.zero)
         addSubview(textView)
-        
         addGestureRecognizer(longGesture)
         addGestureRecognizer(tagGesture)
     }
@@ -127,19 +121,14 @@ extension LXSwiftTextLable {
     
     @objc private func gestureLong(gesture: UIGestureRecognizer) {
         if gesture.state ==  UIGestureRecognizer.State.began {
-            delegate?.lxTextLable?(self,
-                                   longPress: self.attributedText?.string ?? "")
+            delegate?.lxTextLable?(self, longPress: self.attributedText?.string ?? "")
         }
     }
     
-    /// Click on link response
     @objc private func gestureTag(gesture: UITapGestureRecognizer) {
-        
-        //Prevention of even click
         gesture.view?.isUserInteractionEnabled = false
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
             gesture.view?.isUserInteractionEnabled = true
-            //Remove background after delay
             self.removeAllLinkBackground()
         }
         
@@ -147,37 +136,31 @@ extension LXSwiftTextLable {
             let point = gesture.location(in: gesture.view)
             let link = linkWithPoint(point: point)
             if let l = link {
-                //Set selected link background
                 showLinkBackground(link: l)
-                //Click the link to inform the outside world
                 delegate?.lxTextLable?(self, didSelect: l.text)
             }
         }
     }
     
-    /// Get links based on click points
     private func linkWithPoint(point: CGPoint) -> LXSwiftTextLable.TextLink? {
         for link in links {
             for rect in link.rects {
-                if rect.contains(point) { return link  }
+                if rect.contains(point) { return link }
             }
         }
         return nil
     }
     
-    ///Displays the background of the click
     private func showLinkBackground(link: LXSwiftTextLable.TextLink) {
         for rect in link.rects {
             let bgView = UIView(frame: rect)
             bgView.tag = linkBgTag
-            bgView.lx.setCornerRadius(radius:scale_ip6_width(config.bgRadius),
-                                      clips: true)
+            bgView.lx.setCornerRadius(radius: scale_ip6_width(config.bgRadius), clips: true)
             bgView.backgroundColor = config.bgColor
             insertSubview(bgView, belowSubview: textView)
         }
     }
     
-    /// After a few seconds, remove the background from the click display
     @objc fileprivate func removeAllLinkBackground() {
         for view in subviews {
             if view.tag == linkBgTag {

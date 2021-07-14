@@ -258,8 +258,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         guard let data = string.data(using: .utf8) else {
             return nil
         }
-        return try? JSONSerialization.jsonObject(with:data,
-                                                 options: .allowFragments)
+        return try? JSONSerialization.jsonObject(with:data, options: .allowFragments)
     }
 }
 
@@ -271,23 +270,18 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     ///   - regex: want to  string matching
     ///   - usingBlock: callBack
     public func enumerateStringsMatchedByRegex(regex: String,
-                                               usingBlock: (_ captureCount: Int,
-                                                            _ capturedStrings: String,
-                                                            _ range: NSRange) -> ()) {
+            usingBlock: (_ captureCount: Int, _ capturedStrings: String, _ range: NSRange) -> ()) {
         // regex is not nil
         if regex.count <= 0 { return }
         let string = base as! String
         
-        guard let regex = try? NSRegularExpression(pattern: regex.lx.trim,
-                                                   options: []) else { return }
+        guard let regex = try? NSRegularExpression(pattern: regex.lx.trim, options: []) else { return }
         let results = regex.matches(in: string,
                                     options: [],
                                     range: NSRange(location: 0, length: string.count))
         //can matching more string
         for result in results.reversed() {
-            usingBlock(results.count,
-                    string[result.range.location..<(result.range.location + result.range.length)],
-                    result.range)
+            usingBlock(results.count, string[result.range.location..<(result.range.location + result.range.length)], result.range)
         }
     }
 }

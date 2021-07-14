@@ -19,15 +19,11 @@ public struct LXSwiftRegexType {
         self.isExpression = isExpression
     }
     
-    ///Hyperlink matching string
     public var link: String
-    ///Hyperlink string color
     public var color: UIColor = UIColor.orange
-    ///Hyperlink string font size
     public var font: UIFont = UIFont.systemFont(ofSize: 15)
     
-    ///Whether to match for expression true for expression match false for hyperlink,
-    /// phone match
+    /// 是否匹配表达式true for expression match false for hyperlink，
     public var isExpression: Bool = false
 }
 
@@ -37,16 +33,18 @@ public class LXSwiftRegex {
     public static let textLinkConst = "textLinkConst__"
     public static let imageLinkConst = "imageLinkConst__"
     
-    ///Hyperlink matching string
+    /// 超链接匹配字符串表达式
     public static let httpRegex = """
     http(s)?://([a-zA-Z|\\d]+\\.)+[a-zA-Z|\\d]+(/\
     [a-zA-Z|\\d|\\-|\\+|_./?%&=]*)?
     """
+    /// 电话号匹配表达式
     public static let phoneRegex = "\\d{3,4}[- ]?\\d{7,8}"
-    ///Expression matching
+    
+    /// 表情匹配表达式
     public static let expressionRegex = "\\[.*?\\]"
     
-    ///Default parameters
+    /// 默认匹配集合（超链接、电话号码、表情）
     public static let wordRegexTypes = [
         LXSwiftRegexType(httpRegex, isExpression: false),
         LXSwiftRegexType(phoneRegex, isExpression: false),
@@ -57,14 +55,17 @@ public class LXSwiftRegex {
 // MARK: public method
 extension LXSwiftRegex {
     
-    ///String matching
+    /// 字符串匹配 识别返回NSAttributedString富文本
     ///
-    /// - Parameters:
-    ///- Text: text content
-    ///- textcolor: text content color
-    ///- textfont: text content font size
-    ///- wordregextypes: hyperlink text configuration information
-    public class func regex(of text: String, textColor: UIColor = UIColor.black,
+    /// - 参数：
+    /// - text：文本内容
+    /// - textColor：文本内容颜色
+    /// - textFont：文本内容字体大小
+    /// - lineSpaceing：行间距
+    /// - wordSpaceing：字间距
+    /// - wordregextypes:超链接文本配置信息
+    public class func regex(of text: String,
+                            textColor: UIColor = UIColor.black,
                             textFont: UIFont = UIFont.systemFont(ofSize: 15),
                             lineSpaceing: CGFloat = 4,
                             wordSpaceing: CGFloat = 0,
@@ -80,15 +81,13 @@ extension LXSwiftRegex {
             NSAttributedString.Key.paragraphStyle: style,
             NSAttributedString.Key.kern: wordSpaceing
         ] as [NSAttributedString.Key : Any]
-        
         let attributedStr = NSMutableAttributedString(string: text, attributes:attributes)
         
         // Start text matching
         for wordRegexType in wordRegexTypes {
-            
             if wordRegexType.isExpression { // Expression matching
-                text.lx.enumerateStringsMatchedByRegex(regex: wordRegexType.link) { (captureCount, capturedStrings, range) in
-                    
+                text.lx.enumerateStringsMatchedByRegex(regex: wordRegexType.link)
+                { (captureCount, capturedStrings, range) in
                     let attachment = NSTextAttachment()
                     attachment.image = UIImage(named: capturedStrings)
                     attachment.bounds = CGRect(x: 0,
@@ -97,20 +96,17 @@ extension LXSwiftRegex {
                                                height: wordRegexType.font.lineHeight)
                     let imageAttr = NSAttributedString(attachment: attachment)
                     attributedStr.replaceCharacters(in: range, with: imageAttr)
-                    attributedStr.addAttribute(NSAttributedString.Key(rawValue:
-                                                                        LXSwiftRegex.imageLinkConst),
-                                               value: capturedStrings,
-                                               range: range)
+                    let key = NSAttributedString.Key(rawValue: LXSwiftRegex.imageLinkConst)
+                    attributedStr.addAttribute(key, value: capturedStrings, range: range)
                 }
             }else {
                 // Match hyperlinks
-                text.lx.enumerateStringsMatchedByRegex(regex: wordRegexType.link) { (captureCount, capturedStrings, range) in
-                    attributedStr.addAttributes([NSAttributedString.Key.foregroundColor : wordRegexType.color,NSAttributedString.Key.font: wordRegexType.font],
-                                                range: range)
-                    attributedStr.addAttribute(NSAttributedString.Key(rawValue:
-                                                                        LXSwiftRegex.textLinkConst),
-                                               value: capturedStrings,
-                                               range: range)
+                text.lx.enumerateStringsMatchedByRegex(regex: wordRegexType.link)
+                { (captureCount, capturedStrings, range) in
+                    attributedStr.addAttributes([.foregroundColor : wordRegexType.color,
+                                                 .font: wordRegexType.font], range: range)
+                    let key = NSAttributedString.Key(rawValue: LXSwiftRegex.textLinkConst)
+                    attributedStr.addAttribute(key, value: capturedStrings, range: range)
                 }
             }
         }
