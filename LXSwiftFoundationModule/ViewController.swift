@@ -55,13 +55,13 @@ class ViewController: UIViewController {
         config.contentMidViewH = scale_ip6_width(260)
         config.titleFont = UIFont.lx.fontWithMedium(16)
         config.titleColor = UIColor.black
-        let itemCancel = LXSwiftModalItem(title: "不同意",
+        let itemCancel = LXSwiftItem(title: "不同意",
                                          titleColor: UIColor.blue,
                                          titleFont: UIFont.systemFont(ofSize: 17, weight: .medium))
         {
            
         }
-        let itemTrue =  LXSwiftModalItem(title: "同意",
+        let itemTrue =  LXSwiftItem(title: "同意",
                                          titleColor: UIColor.blue,
                                         titleFont: UIFont.systemFont(ofSize: 17, weight: .medium))
         {
@@ -91,7 +91,7 @@ class ViewController: UIViewController {
                                   font: UIFont.systemFont(ofSize: 14),
                                   isExpression: false)
 
-        let str = "欢迎使用美术迎使用美术宝相框！我们非常重视您的隐私和个人信息安全。在您使用美术宝相框前，请认真阅读\(s1)及\(s2)，您同意并接受全部条使用美术宝相框！我们非常重视您的隐私和个人信息安全。在您使用美术宝相框前，请认真阅读\(s1)及\(s2)，您同意并接受全部条款后方可开始使用美术宝相框宝相框！我们非常重视您的隐私和个人信息安全。在您使用美术宝相框前，请认真阅读\(s1)及\(s2)，您同意并接受全部条使用美术宝相框！我们非常重视您的隐私和个人信息安全。在您使用美术宝相框前，请认真阅读\(s1)及\(s2)，您同意并接受全部条款后方可开始使用美术宝相框。"
+        let str = "欢迎使用美术迎使用美术宝相框！我们非常重视您的隐私和个人信息安全。在您使用美术宝相框前，请认真阅读\(s1)及\(s2)，您同意并接受全部条款后方可开始使用美术宝相框。"
         
         guard let attr = modal.getAttributedString(with: str, textColor: UIColor.lx.color(hex: "666666"), textFont: UIFont.systemFont(ofSize: 14), regexTypes: [r1,r2]) else { return }
 

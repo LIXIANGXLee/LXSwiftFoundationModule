@@ -8,15 +8,13 @@
 
 import UIKit
 
-
 open class LXSwiftHyperlinksModalController: LXSwiftModalController {
     
     public typealias CallBack = ((String) -> (Void))
     public var callBack: LXSwiftHyperlinksModalController.CallBack?
     
     private var modaConfig: LXSwiftModalConfig
-    public init(_ modaConfig: LXSwiftModalConfig,
-                modalItems: LXSwiftModalItem...) {
+    public init(_ modaConfig: LXSwiftModalConfig, modalItems: LXSwiftItem...) {
         self.modaConfig = modaConfig
         self.modalItems = modalItems
         super.init(nibName: nil, bundle: nil)
@@ -78,7 +76,7 @@ open class LXSwiftHyperlinksModalController: LXSwiftModalController {
     var itemViews = [LXSwiftItemView]()
     
     /// ModalItem事件集合
-    var modalItems = [LXSwiftModalItem]()
+    var modalItems = [LXSwiftItem]()
 
     public override func backgroundViewTap() {
         if modaConfig.isDismissBg {
@@ -128,13 +126,10 @@ extension LXSwiftHyperlinksModalController {
     public func show(with title: String, content: NSAttributedString) {
         titleLabel.text = title
         contentView.layer.cornerRadius = self.modaConfig.contentViewRadius
-        let contentViewH = getContentViewH()
-        contentView.frame = CGRect(x: (UIScreen.main.bounds.width - modaConfig.contentViewW) * 0.5,
-                                    y: (UIScreen.main.bounds.height - contentViewH) * 0.5 + modaConfig.contentViewOffSet,
-                                    width: modaConfig.contentViewW,
-                                    height: contentViewH)
-        self.titleLabel.frame = CGRect(x:
-                                  modaConfig.contentViewSubViewX,
+        contentView.lx.width = modaConfig.contentViewW
+        contentView.lx.x = (UIScreen.main.bounds.width - modaConfig.contentViewW) * 0.5
+       
+        self.titleLabel.frame = CGRect(x: modaConfig.contentViewSubViewX,
                                   y: modaConfig.titleTop,
                                   width: contentView.frame.width - modaConfig.contentViewSubViewX * 2,
                                   height: getTitleH())
@@ -154,25 +149,33 @@ extension LXSwiftHyperlinksModalController {
                                 width: contentView.frame.width,
                                 height: scale_ip6_width(0.5))
       
-        let colW = contentView.frame.width / CGFloat(itemViews.count)
-        for (index, itemView) in itemViews.enumerated() {
-            if itemViews.count - 1 == index {
-                itemView.lineView.isHidden = true
+        if itemViews.count > 0 {
+            let colW = contentView.frame.width / CGFloat(itemViews.count)
+            for (index, itemView) in itemViews.enumerated() {
+                itemView.lineView.isHidden = (itemViews.count - 1 == index)
+                itemView.tag = index
+                itemView.frame = CGRect(x: CGFloat(index) * colW,
+                                        y: lineView.frame.maxY,
+                                        width: colW,
+                                        height: modaConfig.itemH)
+                itemView.setLineViewFrame()
             }
-            itemView.tag = index
-            itemView.frame = CGRect(x: CGFloat(index) * colW,
-                                    y: lineView.frame.maxY,
-                                    width: colW,
-                                    height: modaConfig.itemH)
-            itemView.setLineViewFrame()
         }
+        
+        if itemViews.count > 0 {
+            contentView.lx.height = itemViews.last!.frame.maxY
+        } else {
+            contentView.lx.height = lineView.frame.maxY
+        }
+        contentView.lx.y = (UIScreen.main.bounds.height -  contentView.lx.height) * 0.5 + modaConfig.contentViewOffSet
         
         UIApplication.lx.visibleViewController?.present(self, animated: true, completion: nil)
     }
     
     func getTitleH() -> CGFloat {
         if let text = titleLabel.text {
-            return text.lx.height(font: modaConfig.titleFont, width: contentView.frame.width - modaConfig.contentViewSubViewX * 2)
+            return text.lx.height(font: modaConfig.titleFont,
+                                  width: contentView.frame.width - modaConfig.contentViewSubViewX * 2)
         }else{
             return 0
         }
@@ -181,15 +184,7 @@ extension LXSwiftHyperlinksModalController {
     func getContentH(_ attr: NSAttributedString) -> CGFloat {
         return attr.lx.height(width: contentView.frame.width - self.modaConfig.contentViewSubViewX * 2)
     }
-        
-    func getContentViewH() -> CGFloat {
-        return self.modaConfig.titleTop +
-            getTitleH() +
-            self.modaConfig.contentMidViewTop +
-            self.modaConfig.contentMidViewH +
-            self.modaConfig.lineTop +
-            self.modaConfig.itemH
-    }
+
 }
 
 public class LXSwiftModalConfig {
@@ -213,7 +208,6 @@ public class LXSwiftModalConfig {
     public var contentMidViewH: CGFloat = scale_ip6_width(200)
     public var isContentMidViewScrollEnabled: Bool = true
     public var isshowsVerticalScrollIndicator: Bool = true
-
     
     /// 线颜色 和 距离内容的距离
     public var lineTop: CGFloat =  scale_ip6_width(13)
@@ -228,17 +222,17 @@ public class LXSwiftModalConfig {
     public var selectBgColor: UIColor = UIColor.black.withAlphaComponent(0.1)
 }
 
-public struct LXSwiftModalItem {
+public struct LXSwiftItem {
     
    public typealias LXSwiftModalItemCallBack = (() -> Void)
    public var title: String
    public var titleColor: UIColor
    public var titleFont: UIFont
-   public var callBack: LXSwiftModalItem.LXSwiftModalItemCallBack?
+   public var callBack: LXSwiftItem.LXSwiftModalItemCallBack?
     
    public init(title: String, titleColor: UIColor = UIColor.black,
                 titleFont: UIFont = UIFont.lx.fontWithMedium(16),
-                callBack: LXSwiftModalItem.LXSwiftModalItemCallBack?) {
+                callBack: LXSwiftItem.LXSwiftModalItemCallBack?) {
         self.title = title
         self.titleFont = titleFont
         self.titleColor = titleColor
