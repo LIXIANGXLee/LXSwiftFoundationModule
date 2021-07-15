@@ -87,17 +87,9 @@ open class LXSwiftHyperlinksModalController: LXSwiftModalController {
     ///事件监听 及回调
     @objc private func itemViewClick(_ itemView: LXSwiftItemView) {
         modalItems[itemView.tag].callBack?()
-        dismissViewController()
+        lx.dismissViewController()
     }
-    
-    /// 模态窗口dismiss方法
-    open func dismissViewController() {
-       if navigationController != nil {
-           navigationController?.dismiss(animated: true, completion: nil)
-       }else{
-           dismiss(animated: true, completion: nil)
-       }
-   }
+
 }
 
 extension LXSwiftHyperlinksModalController: LXTextLableDelegate {
