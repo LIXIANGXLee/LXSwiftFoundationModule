@@ -29,14 +29,13 @@ open class LXSwiftHyperlinksModalController: LXSwiftModalController {
         
         for modalItem in modalItems {
             let itemView = LXSwiftItemView()
-            itemView.lineView.backgroundColor = self.modaConfig.lineColor
+            itemView.lineView.backgroundColor = modaConfig.lineColor
             itemView.setTitle(modalItem.title, for:.normal)
             itemView.setTitleColor(modalItem.titleColor, for: .normal)
             itemView.titleLabel?.font = modalItem.titleFont
             contentView.addSubview(itemView)
             itemViews.append(itemView)
-            itemView.addTarget(self,
-                               action: #selector(itemViewClick(_:)),
+            itemView.addTarget(self,action: #selector(itemViewClick(_:)),
                                for: UIControl.Event.touchUpInside)
         }
         
@@ -116,13 +115,24 @@ extension LXSwiftHyperlinksModalController {
         self.callBack = callBack
     }
     
+    public func getAttributedString(with text: String,
+                                    textColor: UIColor = UIColor.lx.color(hex: "666666"),
+                                    textFont: UIFont = UIFont.systemFont(ofSize: 14),
+                                    regexTypes: [LXSwiftRegexType])
+    -> NSAttributedString? {
+        return LXSwiftRegex.regex(of: text, textColor: textColor,
+                                            textFont: textFont,
+                                            wordRegexTypes: regexTypes)
+    }
+    
     public func show(with title: String, content: NSAttributedString) {
         titleLabel.text = title
         contentView.layer.cornerRadius = self.modaConfig.contentViewRadius
+        let contentViewH = getContentViewH()
         contentView.frame = CGRect(x: (UIScreen.main.bounds.width - modaConfig.contentViewW) * 0.5,
-                                    y: (UIScreen.main.bounds.height - getContentViewH()) * 0.5 + modaConfig.contentViewOffSet,
-                                    width: self.modaConfig.contentViewW,
-                                    height: getContentViewH())
+                                    y: (UIScreen.main.bounds.height - contentViewH) * 0.5 + modaConfig.contentViewOffSet,
+                                    width: modaConfig.contentViewW,
+                                    height: contentViewH)
         self.titleLabel.frame = CGRect(x:
                                   modaConfig.contentViewSubViewX,
                                   y: modaConfig.titleTop,
