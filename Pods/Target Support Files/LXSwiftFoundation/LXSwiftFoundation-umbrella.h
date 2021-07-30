@@ -11,6 +11,7 @@
 #endif
 
 #import "CADisplayLink+Block.h"
+#import "LXObjcLinkedList.h"
 #import "LXObjcProxy.h"
 #import "LXObjcThreadActive.h"
 #import "LXObjcUtils.h"
