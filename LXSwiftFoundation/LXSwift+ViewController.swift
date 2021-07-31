@@ -13,22 +13,22 @@ extension UIViewController: LXSwiftCompatible { }
 //MARK: -  Extending properties for UIViewController
 extension LXSwiftBasics where Base: UIViewController {
     
-    /// current view isVisible
+    /// 当前视图是否可见
     public var isVisible: Bool {
         return base.isViewLoaded && (base.view.window != nil)
     }
     
-    /// current vc
+    /// 当前视图控制器
     public var visibleViewController: UIViewController? {
         return UIApplication.lx.visibleViewController
     }
     
-    /// presented root
+    /// 模态 presented root
     public var aboveViewController: UIViewController? {
         return UIApplication.lx.visiblePresentViewController
     }
     
-    /// dismiss
+    /// 控制器 dismiss 销毁
     public func dismissViewController() {
         if base.navigationController != nil {
             base.navigationController?.dismiss(animated: true, completion: nil)

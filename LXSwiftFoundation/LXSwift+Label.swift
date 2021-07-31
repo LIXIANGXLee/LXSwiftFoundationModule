@@ -16,29 +16,24 @@ extension LXSwiftBasics where Base: UILabel {
         return size(height: CGFloat(MAXFLOAT), width: width, lines: 1).width
     }
     
-    ///高度
+    /// 高度
     public func height(_ width: CGFloat, lines: Int) -> CGFloat {
         return size(height: height, width: width, lines: lines).width
     }
    
-    /// size
+    /// size 大小
     public func size(height: CGFloat, width: CGFloat, lines: Int) -> CGSize {
         let r = CGRect(origin: CGPoint.zero,
                           size: CGSize(width: width, height: height))
         return rect(rect: r, lines: lines).size
     }
     
-    /// rect
+    /// rect 尺寸
     public func rect(rect: CGRect, lines: Int) -> CGRect {
         return base.textRect(forBounds: rect, limitedToNumberOfLines: lines)
     }
     
-    /// 提供了设置标签属性的方便方法
-    ///
-    /// - Parameters:
-    /// - Font: set font
-    /// - textcolor: set text color
-    /// - alignment: set the text alignment method
+    /// 提供了设置标签属性的方便方法（颜色、字体大小、对齐方式）
     public func set(withFont font: UIFont, textColor: UIColor,
                     alignment: NSTextAlignment? = nil) {
         base.font = font
@@ -48,12 +43,7 @@ extension LXSwiftBasics where Base: UILabel {
         }
     }
     
-    /// 提供了设置标签属性的方便方法
-    ///
-    /// - Parameters:
-    /// - Font: set regularSize
-    /// - textcolor: set text color
-    /// - alignment: set the text alignment method
+    /// 提供了设置标签属性的方便方法（颜色、字体大小、对齐方式）
     public func set(regularSize: CGFloat, textColor: String,
                     alignment: NSTextAlignment? = nil) {
         let color = UIColor.lx.color(hex: textColor)
@@ -61,12 +51,7 @@ extension LXSwiftBasics where Base: UILabel {
             textColor: color, alignment: alignment)
     }
     
-    /// 提供了设置标签属性的方便方法
-    ///
-    /// - Parameters:
-    /// - Font: set mediumSize
-    /// - textcolor: set text color
-    /// - alignment: set the text alignment method
+    /// 提供了设置标签属性的方便方法（颜色、字体大小、对齐方式）
     public func set(mediumSize: CGFloat, textColor: String,
                     alignment: NSTextAlignment? = nil) {
         let color = UIColor.lx.color(hex: textColor)
@@ -74,12 +59,7 @@ extension LXSwiftBasics where Base: UILabel {
             textColor: color, alignment: alignment)
     }
     
-   /// 提供了设置标签属性的方便方法
-   ///
-   /// - Parameters:
-   /// - Font: set boldSize
-   /// - textcolor: set text color
-   /// - alignment: set the text alignment method
+    /// 提供了设置标签属性的方便方法（颜色、字体大小、对齐方式）
    public func set(boldSize: CGFloat, textColor: String,
                    alignment: NSTextAlignment? = nil) {
        let color = UIColor.lx.color(hex: textColor)

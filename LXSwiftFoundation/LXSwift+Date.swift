@@ -13,7 +13,7 @@ extension Date: LXSwiftCompatible { }
 //MARK: -  Extending methods for Date
 extension LXSwiftBasics where Base == Date {
     
-    /// date transform string yyyy-MM-dd HH:mm:ss
+    /// 日期转换字符串 yyyy-MM-dd HH:mm:ss
     public func dateTranformString(with ymd: String = "yyyy-MM-dd HH:mm:ss")
     -> String {
         let fmt = DateFormatter()
@@ -22,7 +22,7 @@ extension LXSwiftBasics where Base == Date {
         return selfStr
     }
     
-    /// date and date Compare
+    /// 日期和日期比较
     public func dateCompare(with date: Date,
                             unit: Set<Calendar.Component> = [.year,.month,.day])
     -> (DateComponents,DateComponents) {
@@ -32,7 +32,6 @@ extension LXSwiftBasics where Base == Date {
         return (selfCmps,dateComps)
     }
     
-    /// Gets the number of days between two datas
     /// 获取两个日期之间的数据
     public func omponentCompare(from date: Date,
                               unit: Set<Calendar.Component> = [.year,.month,.day])
@@ -42,25 +41,21 @@ extension LXSwiftBasics where Base == Date {
         return comp
     }
     
-    /// Gets the number of days between two dates
     /// 获取两个日期之间的天数
     public func numberOfDays(from date: Date) -> Int? {
        return omponentCompare(from: date, unit: [.day]).day
     }
     
-    /// Gets the number of days between two hours
     /// 获取两个日期之间的小时
     public func numberOfHours(from date: Date) -> Int? {
        return omponentCompare(from: date, unit: [.hour]).hour
     }
     
-    /// Gets the number of days between two minutes
     /// 获取两个日期之间的分钟
     public func numberOfMinutes(from date: Date) -> Int? {
        return omponentCompare(from: date, unit: [.minute]).minute
     }
     
-    /// Gets the number of days between two seconds
     /// 获取两个日期之间的秒数
     public func numberOfSeconds(from date: Date) -> Int? {
        return omponentCompare(from: date, unit: [.second]).second
@@ -78,7 +73,7 @@ extension LXSwiftBasics where Base == Date {
         return result
     }
     
-    ///isYesterday
+    /// isYesterday
     public var isYesterday: Bool {
         let unit: Set<Calendar.Component> = [.day,.month,.year]
         let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(), unit: unit)

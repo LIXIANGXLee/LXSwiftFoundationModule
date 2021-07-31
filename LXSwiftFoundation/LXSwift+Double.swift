@@ -2,8 +2,8 @@
 //  LXSwift+Double.swift
 //  LXSwiftFoundation
 //
-//  Created by XL on 2020/9/24.
-//  Copyright © 2020 李响. All rights reserved.
+//  Created by XL on 2017/9/24.
+//  Copyright © 2017 李响. All rights reserved.
 //
 
 import UIKit
@@ -14,9 +14,6 @@ extension Double: LXSwiftCompatible { }
 extension LXSwiftBasics where Base == Double {
     
     /// 保留小数点后的小数位
-    /// - Parameters:
-    /// - minDigits: min decimal
-    /// - maxDigits: max decimal
     public func roundTo(minDigits: Int = 0, maxDigits: Int = 2,
                         mode: NumberFormatter.RoundingMode = .halfEven) -> String {
         return NSNumber(value: base).lx.numberFormatter(with: mode,
@@ -25,8 +22,6 @@ extension LXSwiftBasics where Base == Double {
     }
     
     /// 保留小数点后的小数位
-    /// - Parameters:
-    /// - digits:  min decimal max decimal is  digits
     public func roundTo(digits: Int = 0,
                         mode: NumberFormatter.RoundingMode = .halfEven) -> String {
         return NSNumber(value: base).lx.numberFormatter(with: mode,
@@ -54,21 +49,21 @@ extension LXSwiftBasics where Base == Double {
         return str+"%"
     }
     
-    ///用户显示容量
+    /// 用户显示容量 (G、M、KB)
     public var sizeFileToStr: String {
         let unit = 1000.0
         if base > pow(unit, 3) {
-            return String(format: "%.2fGB", base / pow(unit, 3))
+            return String(format: "%.2fG", base / pow(unit, 3))
         } else if base > pow(unit, 2) {
-            return String(format: "%.2fMB", base / pow(unit, 2))
+            return String(format: "%.2fM", base / pow(unit, 2))
         } else if base > pow(unit, 1) {
             return String(format: "%.2fKB", base / pow(unit, 1))
         } else {
-            return String(format: "%dKB", 0)
+            return String(format: "%dB", 0)
         }
     }
     
-    /// timer string
+    /// 时间字符串
     public var timeToStr: String {
         let dur = Int(round(base))
         switch dur {

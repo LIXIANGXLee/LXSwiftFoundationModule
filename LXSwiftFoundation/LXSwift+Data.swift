@@ -37,12 +37,12 @@ extension NSData: LXSwiftCompatible { }
 //MARK: -  Extending properties  for Data
 extension LXSwiftBasics where Base == Data {
     
-    /// Data transform utf8 string
+    /// 数据转换utf8字符串
     public var utf8String: String? {
         return String(data: base, encoding: .utf8)
     }
     
-    /// base64 of data tranform uiimage
+    /// 数据传输uiimage的base64
     public var base64DecodingImage: UIImage? {
         guard let base64Data = Data(base64Encoded: base,
                                     options: .ignoreUnknownCharacters) else {
@@ -58,10 +58,7 @@ extension LXSwiftBasics where Base == Data {
         return Data.mimeTypeSignatures[c] ?? "application/octet-stream"
     }
     
-    ///  data tranform Dictionary
-    ///
-    /// - Parameter data: data
-    /// - Returns: Dictionary
+    /// data转换字典
     public var dataToPlistDictionary: Dictionary<String, Any>? {
         
         guard let propertyList = try? PropertyListSerialization.propertyList(from: base,
@@ -75,7 +72,7 @@ extension LXSwiftBasics where Base == Data {
 //MARK: -  Extending properties  for NSData
 extension LXSwiftBasics where Base == NSData {
     
-    /// return image type
+    /// data类型
     public var imageType: LXSwiftImageDataType {
         var buffer = [UInt8](repeating: 0, count: 8)
         base.getBytes(&buffer, length: 8)

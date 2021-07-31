@@ -9,6 +9,7 @@
 import UIKit
 
 open class LXSwiftTextField: UITextField {
+  
     /// 配置文本框的输入位置和左右间距
     open var textRectInsert: UIEdgeInsets?
     

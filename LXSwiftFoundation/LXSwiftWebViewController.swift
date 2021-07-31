@@ -6,7 +6,7 @@
 //  Copyright © 2020 李响. All rights reserved.
 //
 
-//WkWebView Loading web page encapsulation
+/// WkWebView Loading web page encapsulation
 
 import UIKit
 import WebKit
@@ -81,10 +81,7 @@ open class LXSwiftWebViewController: UIViewController {
 
 extension LXSwiftWebViewController {
     
-    /// load webview
-    ///
-    /// - Parameters:
-    ///   - string: url
+    /// load webview 的网络连接
     open func load(with string: String) {
         if let url = URL(string: string){
             webView.load(URLRequest(url: url))
@@ -92,19 +89,12 @@ extension LXSwiftWebViewController {
     }
     
     /// load HTML
-    ///
-    /// - Parameters:
-    ///   - string: HTML
     open func loadHTML(with string: String) {
         if string.count == 0 { return }
         webView.loadHTMLString(string, baseURL: Bundle.main.resourceURL)
     }
     
     /// load HTMLFile
-    ///
-    /// - Parameters:
-    ///   - string:  file name
-    ///   - type:  file type
     open func loadHTMLFile(with string: String,_ type: String) {
         if string.count == 0 { return }
         let url = Bundle.main.url(forResource: string, withExtension: type)!
@@ -112,10 +102,6 @@ extension LXSwiftWebViewController {
     }
     
     /// load webView h5
-    ///
-    /// - Parameters:
-    ///   - javaScriptString:  call back string
-    ///   - completionHandler:  call back method
     open func noticeWebviewShareResult(_ javaScriptString: String,
                                        completionHandler: ((Any?, Error?) -> Void)? = nil) {
         webView.evaluateJavaScript(javaScriptString,
@@ -123,10 +109,6 @@ extension LXSwiftWebViewController {
     }
     
     /// add js call back
-    ///
-    /// - Parameters:
-    ///   - method:  name
-    ///   - handel:  call back
     @available(iOS 8.0, *)
     open func jsMethod(_ method: String, _ handel: @escaping (Any) -> ()) {
         for methodT in methodTs {
@@ -138,11 +120,7 @@ extension LXSwiftWebViewController {
                                                              name: method)
     }
     
-    ///Snap Shot
-    ///
-    /// - Parameters:
-    ///   - rect:  size
-    ///   - handel:  call back
+    /// Snap Shot 截图
     @available(iOS 11.0, *)
     open func takeSnapShot(_ rect: CGRect = CGRect(x: 0,
                                                    y: 0,
@@ -157,11 +135,7 @@ extension LXSwiftWebViewController {
         }
     }
     
-    /// remove cookie  HTTPCookie
-    ///
-    /// - Parameters:
-    ///   - string:  string
-    ///   - handel:  call back
+    /// 删除cookie HTTPCookie
     @available(iOS 11.0, *)
     open func handleCookie(_ string: String,
                            handle: @escaping ([HTTPCookie]) -> ()) {
@@ -179,7 +153,7 @@ extension LXSwiftWebViewController {
         }
     }
     
-    ///remove
+    /// 清楚缓存
     public func clearBrowserCache(handle: ((String) -> ())?) {
         let dataSouce = WKWebsiteDataStore.default()
         dataSouce.fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { (records) in
@@ -205,7 +179,7 @@ extension LXSwiftWebViewController: WKScriptMessageHandler {
     }
 }
 
-// MARK: -  UI
+// MARK: -  UI部分
 extension LXSwiftWebViewController {
     
     fileprivate func setUI() {
@@ -230,7 +204,7 @@ extension LXSwiftWebViewController {
     
     ///observer
     fileprivate func addObserver() {
-        ///Add observer -- monitors the value of the estimated progress property in real time
+        /// 添加观察者--实时监视“估计进度”属性的值
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress),
                             options: .new, context: nil)
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.title),
@@ -240,7 +214,7 @@ extension LXSwiftWebViewController {
         
     }
     
-    ///Get the value of loading progress in real time
+    /// 实时获取加载进度的值
     override open func observeValue(forKeyPath keyPath: String?,
                                     of object: Any?,
                                     change: [NSKeyValueChangeKey : Any]?,
@@ -256,7 +230,7 @@ extension LXSwiftWebViewController {
         }
     }
     
-    ///Executing JS code -- also known as injecting JavaScript
+    /// 执行JS代码——也称为注入JavaScript
     fileprivate func handleJS(){
         webView.evaluateJavaScript("document.body.offsetHeight") { (res, error) in
             guard let h = res as? Int else { return }
@@ -268,9 +242,7 @@ extension LXSwiftWebViewController {
 // MARK: - WKNavigationDelegate Some hook functions from request to response
 extension LXSwiftWebViewController: WKNavigationDelegate{
     
-    ///Decide whether to load the website in the current
-    ///WebView (for example, when the load contains a dynamic URL)
-    ///- mainly based on the first-class information of the request
+    ///决定是否在当前文件夹中加载网站，WebView（例如，当加载包含动态URL时），主要基于一级信息的请求
     open func webView(_ webView: WKWebView,
                       decidePolicyFor navigationAction: WKNavigationAction,
                       decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
@@ -286,21 +258,23 @@ extension LXSwiftWebViewController: WKNavigationDelegate{
         decisionHandler(.allow)
     }
     
-    ///Called when data is requested from the web server (web page begins to load)
+    /// 从web服务器请求数据时调用（网页开始加载）
     open func webView(_ webView: WKWebView,
                       didStartProvisionalNavigation navigation: WKNavigation!) {
         spinner.startAnimating()
     }
-    ///After receiving the response from the server, decide whether to load the website in the current WebView mainly based on the response header information
+    
+    /// 收到服务器响应后，主要根据响应头信息决定是否在当前WebView中加载网站
     open func webView(_ webView: WKWebView,
                       decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
         decisionHandler(.allow)
     }
     
-    ///Called when starting to receive data from the web server
+    /// 开始从web服务器接收数据时调用
     open func webView(_ webView: WKWebView,
                       didCommit navigation: WKNavigation!) { }
-    //Called when data is received from the web server (page loading complete)
+    
+    /// 从web服务器接收数据时调用（页面加载完成）
     open func webView(_ webView: WKWebView,
                       didFinish navigation: WKNavigation!) {
         print(#function)
@@ -311,7 +285,7 @@ extension LXSwiftWebViewController: WKNavigationDelegate{
         //Inject JS code
         handleJS()
     }
-    ///Called when a web page fails to load
+    /// 当网页加载失败时调用
     open func webView(_ webView: WKWebView,
                       didFail navigation: WKNavigation!,
                       withError error: Error) {
@@ -327,12 +301,9 @@ extension LXSwiftWebViewController: WKNavigationDelegate{
 //         three pop-up boxes of the website into IOS native pop-up boxes
 extension LXSwiftWebViewController: WKUIDelegate{
     
-    //Closure: functions used as arguments
-    //Non escape closure - default: the peripheral function is released after execution
-    //Escape closure -@escaping : after the peripheral function is executed,
-    //its reference is still held by other objects and will not be released
-    //Runaway closures are risky for memory management -- use cautiously unless you know it
-    //[JS] alert() warning box
+    /// 闭包：用作参数的函数，非转义关闭-默认：执行后释放外围功能，Escape closure-@escaping:执行外围功能后，其引用仍由其他对象保留，
+    /// 不会被释放，失控的闭包对于内存管理是有风险的——除非您知道，否则请谨慎使用
+    /// [JS]警报（）警告框
     open func webView(_ webView: WKWebView,
                       runJavaScriptAlertPanelWithMessage message: String,
                       initiatedByFrame frame: WKFrameInfo,

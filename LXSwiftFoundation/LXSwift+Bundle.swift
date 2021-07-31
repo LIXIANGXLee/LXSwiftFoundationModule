@@ -13,7 +13,7 @@ extension Bundle: LXSwiftCompatible { }
 //MARK: -  Extending methods  for Bundle
 extension LXSwiftBasics where Base: Bundle {
     
-    ///Get namespace
+    /// Get namespace
     public static var namespace: String? {
         return Bundle.main.infoDictionary?["CFBundleExecutable"] as? String
     }

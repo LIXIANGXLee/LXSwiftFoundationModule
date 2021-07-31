@@ -2,8 +2,8 @@
 //  LXSwiftWaterfallLayout.swift
 //  LXSwiftFoundationManager
 //
-//  Created by Mac on 2020/4/23.
-//  Copyright © 2020 李响. All rights reserved.
+//  Created by Mac on 2018/4/23.
+//  Copyright © 2018 李响. All rights reserved.
 //
 
 import UIKit

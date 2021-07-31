@@ -9,5 +9,7 @@
 import UIKit
 
 open class LXSwiftButton: UIButton {
+    
+    /// 方便携带的参数
     open var swiftModel: Any?
 }

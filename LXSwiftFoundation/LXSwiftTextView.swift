@@ -14,7 +14,7 @@ open class LXSwiftTextView: UITextView {
     public typealias TextCallBack = (String) -> Void
     public var textCallBack: LXSwiftTextView.TextCallBack?
     
-    ///Label showing copywriting
+    /// 显示文案的标签
     var placehoderLabel: UILabel!
     override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
@@ -36,7 +36,7 @@ open class LXSwiftTextView: UITextView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    ///Destruction
+    /// Destruction
     deinit { NotificationCenter.default.removeObserver(self) }
     
     open override var font: UIFont? {

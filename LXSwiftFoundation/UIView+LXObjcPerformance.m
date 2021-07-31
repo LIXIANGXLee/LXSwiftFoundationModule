@@ -54,8 +54,7 @@ static  CFRunLoopObserverRef currentObserver;
 /// not events
 -(void)repeats{ }
 
-/// - Using this method,
-/// uitableview and uicollectionview performance can be optimized add Observer
+/// 使用这种方法，uitableview和uicollectionview性能可以通过添加观察者进行优化
 -(void)lx_addRunLoopObserverOfPerformance{
     
     CFRunLoopRef runloop = CFRunLoopGetCurrent();
@@ -66,7 +65,7 @@ static  CFRunLoopObserverRef currentObserver;
         &CFRelease,
         NULL
     };
-    currentObserver =  CFRunLoopObserverCreate(NULL,
+    currentObserver = CFRunLoopObserverCreate(NULL,
                                                kCFRunLoopBeforeWaiting,
                                                YES,
                                                0,
@@ -74,10 +73,9 @@ static  CFRunLoopObserverRef currentObserver;
                                                &context);
     CFRunLoopAddObserver(runloop, currentObserver, kCFRunLoopCommonModes);
     CFRelease(currentObserver);
-    
 }
 
-/// remove Observer
+/// 移除观察者
 -(void)lx_removeRunLoopObserver {
     
     CFRunLoopRef runloop = CFRunLoopGetCurrent();
@@ -104,7 +102,6 @@ static  CFRunLoopObserverRef currentObserver;
     
     [self.tasks addObject:task];
     int maxTaskCount = self.lx_maxTaskPerformedCount ? self.lx_maxTaskPerformedCount : 10;
-    /// cell is  screen out
     if (self.tasks.count > maxTaskCount) {
         [self.tasks removeObjectAtIndex:0];
     }
@@ -126,7 +123,7 @@ static void CallBack(CFRunLoopObserverRef observer,
     
 }
 
-/// remove timer
+/// 移除计时器
 -(void)removeTimer {
     if (self.lx_timer != nil && [self.lx_timer isValid]) {
         [self.lx_timer invalidate];

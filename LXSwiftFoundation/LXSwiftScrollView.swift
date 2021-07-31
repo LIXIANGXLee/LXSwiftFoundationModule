@@ -2,7 +2,8 @@
 //  LXScrollView.swift
 //  LXSwiftFoundation
 //
-//  Created by Mac on 2020/6/17.
+//  Created by Mac on 2018/4/23.
+//  Copyright © 2018 李响. All rights reserved.
 //
 
 import UIKit
@@ -29,10 +30,12 @@ open class LXSwiftScrollView: UIScrollView {
         setupViewModel()
     }
     
+    /// 您是否支持多事件传递
     open func setShouldRecognizeSimultaneously(_ callBack: RecognizeSimultaneously?) {
         self.shouldRecognizeSimultaneously = callBack
     }
     
+    /// 是否允许开始手势
     open func setShouldBegin(_ callBack: ShouldBegin?) {
         self.shouldBegin = callBack
     }
@@ -44,7 +47,8 @@ open class LXSwiftScrollView: UIScrollView {
 
 //MARK: - UIGestureRecognizerDelegate
 extension LXSwiftScrollView: UIGestureRecognizerDelegate {
-    
+   
+    /// 您是否支持多事件传递代理
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
            shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer)
     -> Bool {
@@ -53,6 +57,7 @@ extension LXSwiftScrollView: UIGestureRecognizerDelegate {
         return outResult ?? false
     }
     
+    /// 是否允许开始手势
     open override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer)
     -> Bool {
         let outResult = shouldBegin?(gestureRecognizer)

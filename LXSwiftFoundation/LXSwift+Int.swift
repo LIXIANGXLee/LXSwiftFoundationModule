@@ -9,15 +9,11 @@
 import UIKit
 
 
-/// Custom operators greater
-/// than or equal to,
-/// greater than,
-/// less than or equal to,
-/// less than
-prefix operator ~>
-prefix operator ~<
-prefix operator ~>=
-prefix operator ~<=
+/// 自定义运算符
+prefix operator ~>  /// 小于
+prefix operator ~<  /// 大于
+prefix operator ~>= /// 小于等于
+prefix operator ~<= /// 大于等于
 
 public prefix func ~> (_ index: Int) -> (Int) -> (Bool) { { $0 > index } }
 public prefix func ~>= (_ index: Int) -> (Int) -> (Bool) { { $0 >= index } }
@@ -27,10 +23,6 @@ public prefix func ~<= (_ index: Int) -> (Int) -> (Bool) { { $0 <= index } }
 extension Int: LXSwiftCompatible {
     
     /// Switch 匹配模式
-    /// - than or equal to,
-    /// - greater than,
-    /// - less than or equal to,
-    /// - less than
     public static func ~= (pattern: (Int) -> (Bool), value: Int) -> Bool {
          pattern(value)
     }
@@ -55,17 +47,17 @@ extension LXSwiftBasics where Base == Int {
         return String(base)
     }
     
-    /// Convert bool
+    /// int 转 bool
     public var intToBool: Bool {
         return base > 0 ? true : false
     }
     
-    /// User display capacity size size
+    /// 用户显示容量 (G、M、KB)
     public var sizeFileToStr: String {
        return Double(base).lx.sizeFileToStr
     }
     
-    /// timer string
+    /// 时间（秒数）转换字符串
     public var timeToStr: String {
         return Double(base).lx.timeToStr
     }

@@ -18,7 +18,7 @@ extension LXSwiftBasics where Base == LXSwiftStorage {
         UserDefaults.standard.synchronize()
     }
     
-    ///取值
+    /// 取值
     public static func getStorage(for key: String) -> Any? {
         return UserDefaults.standard.object(forKey: key)
     }

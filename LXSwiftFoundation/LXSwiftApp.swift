@@ -25,6 +25,7 @@ public func scale_ipad129_width(_ distance: CGFloat) -> CGFloat {
 public func scale_ipad129_height(_ distance: CGFloat) -> CGFloat {
     return LXSwiftApp.flat(distance * (LXSwiftApp.screenH / 1366))
 }
+
 /// 居中运算
 public func CGFloatGetCenter(_ parent: CGFloat,
                              _ child: CGFloat) -> CGFloat {
@@ -93,24 +94,18 @@ public struct LXSwiftApp {
         }
         return touchBarH
     }
+    
     /**
      *  基于当前设备的屏幕倍数，对传进来的 floatValue 进行像素取整。
      *  注意如果在 Core Graphic 绘图里使用时，要注意当前画布的倍数是否和设备屏幕倍数一致，
-     *  若不一致，不可使用 flat() 函数，而应该用 flatSpecificScale
-     */
-    public static func flat(_ value: CGFloat) -> CGFloat {
-        return flatScale(value, 0)
-    }
-
-    /**
-     *  基于指定的倍数，对传进来的 floatValue 进行像素取整。若指定倍数为0，则表示以当前设备的屏幕倍数为准。
+     *  若不一致，不可使用 flat() 函数，而应该用
+     *  基于指定的倍数，对传进来的 floatValue进行像素取整。若指定倍数为0，则表示以当前设备的屏幕倍数为准。
      *  例如传进来 “2.1”，在 2x 倍数下会返回 2.5（0.5pt 对应 1px），
      *  在 3x 倍数下会返回 2.333（0.333pt 对应 1px）。
      */
-    public static func flatScale(_ value: CGFloat,
-                                         _ scale: CGFloat) -> CGFloat {
-        let s = scale == 0 ? LXSwiftApp.screen_scale : scale
-        return ceil(value * s) / s
+    public static func flat(_ value: CGFloat) -> CGFloat {
+        return ceil(value * LXSwiftApp.screen_scale) / LXSwiftApp.screen_scale
     }
+
 }
 

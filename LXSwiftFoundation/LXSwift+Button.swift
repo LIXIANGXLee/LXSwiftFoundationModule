@@ -64,12 +64,7 @@ extension LXSwiftBasics where Base: UIButton {
         return base.sizeThatFits(CGSize.zero).height
     }
     
-    ///Provides a convenient way to set the properties of uibutton
-    ///
-    /// - Parameters:
-    ///- Font: set title font
-    ///- titlecolor: set title color
-    ///- Title: set title
+    /// 提供了一种设置uibutton属性的方便方法 （字体大小、字体颜色）
     public func set(font: UIFont, titleColor: UIColor?) {
         base.titleLabel?.font = font
         if let titleColor = titleColor {
@@ -77,12 +72,7 @@ extension LXSwiftBasics where Base: UIButton {
         }
     }
     
-    ///Provides a convenient way to set the properties of uibutton
-    ///
-    /// - Parameters:
-    ///- Title: set title
-    ///- image: set image
-    ///- state: set UIControl.State
+    /// 提供了一种设置uibutton属性的方便方法 （标题、图片、状态）
     public func set(title: String?, image: UIImage?,
                     state: UIControl.State = .normal) {
         if let title = title { base.setTitle(title, for: state) }

@@ -2,8 +2,8 @@
 //  LXTableView.swift
 //  LXSwiftFoundation
 //
-//  Created by Mac on 2020/4/23.
-//  Copyright © 2020 李响. All rights reserved.
+//  Created by Mac on 2018/4/23.
+//  Copyright © 2018 李响. All rights reserved.
 //
 
 import UIKit
@@ -20,7 +20,6 @@ open class LXSwiftTableView: UITableView{
     override public init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         backgroundColor = UIColor.white
-        ///cell
         var rect = CGRect.zero
         rect.size.width = LXSwiftApp.screenW
         rect.size.height = 0.01
@@ -41,10 +40,12 @@ open class LXSwiftTableView: UITableView{
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// 您是否支持多事件传递
     open func setShouldRecognizeSimultaneously(_ callBack: RecognizeSimultaneously?) {
         self.shouldRecognizeSimultaneously = callBack
     }
     
+    /// 是否允许开始手势
     open func setShouldBegin(_ callBack: ShouldBegin?) {
         self.shouldBegin = callBack
     }
@@ -66,7 +67,7 @@ public extension UITableView {
 //MARK: - UIGestureRecognizerDelegate
 extension LXSwiftTableView: UIGestureRecognizerDelegate {
     
-    /// Do you support multiple event delivery delegate
+    /// 您是否支持多事件传递代理
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
                                   shouldRecognizeSimultaneouslyWith
                                     otherGestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -75,7 +76,7 @@ extension LXSwiftTableView: UIGestureRecognizerDelegate {
         return outResult ?? false
     }
     
-    /// is can event
+    /// 是否允许开始手势
     open override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer)
     -> Bool {
         let outResult = shouldBegin?(gestureRecognizer)

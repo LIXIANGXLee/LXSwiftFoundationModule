@@ -38,10 +38,10 @@ open class LXSwiftImgView: UIImageView {
 /// private
 extension LXSwiftImgView {
     
-    ///action call
+    /// action call
     @objc private func swiftImgViewAction(_ gesture: UIGestureRecognizer) {
         gesture.view?.isUserInteractionEnabled = false
-        DispatchQueue.main.lx.delay(1) {
+        DispatchQueue.lx.delay(with: 1) {
             gesture.view?.isUserInteractionEnabled = true
         }
         self.imgViewCallBack?(gesture.view as? LXSwiftImgView)
@@ -51,7 +51,7 @@ extension LXSwiftImgView {
 //MARK: -  Extending properties and methods for UISwitch
 extension LXSwiftBasics where Base: LXSwiftImgView {
     
-    /// set handle for method call back
+    /// 设置方法回调的句柄
     public func setHandle(_ imgViewCallBack: LXSwiftImgView.ImgViewCallBack?) {
         base.imgViewCallBack = imgViewCallBack
     }

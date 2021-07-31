@@ -123,7 +123,7 @@ extension LXSwiftTextField: LXSwiftPropertyCompatible{
                                              &textFieldCallBackKey, newValue) }
     }
     
-    /// action
+    /// 文本改变调用
     @objc func textFieldTextChange(notification: Notification) {
         if let maxLength = self.lx.maxLength {
             if (text?.count ?? 0) > maxLength {
@@ -135,8 +135,8 @@ extension LXSwiftTextField: LXSwiftPropertyCompatible{
 }
 
 extension LXSwiftBasics where Base : UITextField {
-    ///Sets the color of the transient text
-    /// 设置暂位文字的颜色
+
+   /// 设置暂位文字的颜色
    public var placeholderColor: UIColor {
         get {
             let color = base.value(forKeyPath: "_placeholderLabel.textColor") as? UIColor
@@ -146,7 +146,6 @@ extension LXSwiftBasics where Base : UITextField {
         }
     }
 
-    ///Sets the font of the transient tex
     ///设置暂位文字的字体
     public var placeholderFont: UIFont {
         get {

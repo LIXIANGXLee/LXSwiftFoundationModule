@@ -35,10 +35,10 @@ public struct LXSwiftConvenienceBundle {
         self.bundleName = bundleName
     }
     
-    /// Load resources according to resource name and resource path
+    /// 根据资源名称和资源路径加载资源
     ///
-    /// - imageNamed: The name or path of the image
-    /// - path: bundle If specified, the default path is not used
+    /// -ImageName：图像的名称或路径
+    /// -path:bundle如果指定，则不使用默认路径
     public func imageNamed(_ imageName: String, path: String? = nil) -> UIImage? {
         var imagePath = "\(bundlePath)/\(bundleName)/"
         if let path = path {
@@ -70,7 +70,7 @@ fileprivate struct LXSwiftImageBuilder {
     }
 }
 
-///Declaration of responsibility chain node (responsibility chain design pattern)
+/// 责任链节点声明（责任链设计模式）
 fileprivate protocol LXSwiftImageAdaptNode {
     init(successor: LXSwiftImageAdaptNode?)
     func loadImage(_ imagePath: String) -> UIImage?

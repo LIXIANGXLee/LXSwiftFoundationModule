@@ -36,7 +36,7 @@ extension LXSwiftBasics where Base: UIDevice {
         return base.model.range(of: "Simulator") != nil
     }
     
-    ///is can call tel
+    /// is can call tel
     public static var isCanPhoneCalls: Bool {
         return UIApplication.lx.isCanOpen(URL(string: "tel://")!)
     }
@@ -45,7 +45,7 @@ extension LXSwiftBasics where Base: UIDevice {
 //MARK: -  Extending methods  for UIDevice is ipad or iphone
 extension LXSwiftBasics where Base: UIDevice {
     
-    ///get network type
+    /// 获取网络类型
     public static var netType: String {
         let type = LXObjcUtils.getNetWorkType()
         var netType: String
@@ -64,13 +64,13 @@ extension LXSwiftBasics where Base: UIDevice {
         return netType
     }
     
-    /// get system start date
+    /// 获取系统开始日期
     public static var systemUptime: Date {
         let time = ProcessInfo.processInfo.systemUptime
         return Date(timeIntervalSinceNow: 0 - time)
     }
     
-    //Disk Space
+    /// 磁盘空间
     public static var diskSpace: Int64 {
         guard let attrs = try? FileManager.default.attributesOfFileSystem(forPath:
                                                                             NSHomeDirectory()),
@@ -80,7 +80,7 @@ extension LXSwiftBasics where Base: UIDevice {
         return space
     }
     
-    /// disk space is can use size
+    /// 磁盘空间是可以使用的大小
     public static var diskSpaceFree: Int64 {
         guard let attrs = try? FileManager.default.attributesOfFileSystem(forPath:
                                                                             NSHomeDirectory()),
@@ -90,7 +90,7 @@ extension LXSwiftBasics where Base: UIDevice {
         return space
     }
     
-    /// disk space is used size
+    /// 磁盘空间是按大小使用的
     public static var diskSpaceUsed: Int64 {
         let total = diskSpace
         let free  = diskSpaceFree
@@ -105,17 +105,17 @@ extension LXSwiftBasics where Base: UIDevice {
         }
     }
     
-    /// get memory size
+    /// 获取内存大小
     public static var memoryTotal: UInt64 {
         return ProcessInfo.processInfo.physicalMemory
     }
     
-    /// device type
+    /// 设备类型
     public static var deviceType: String {
         return UIDevice.current.model
     }
     
-    ///systemVersion
+    /// 系统版本
     public static var deviceSyetemVersion: String {
         return UIDevice.current.systemVersion
     }

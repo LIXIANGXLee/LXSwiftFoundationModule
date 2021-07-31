@@ -53,9 +53,6 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     }
     
     ///  扩展字符串截取
-    ///
-    /// - Parameter index: start
-    /// - Return:  substring
     public func substring(from index: Int) -> String {
         let string = base as! String
         if index <= string.count && index >= 0 {
@@ -66,9 +63,6 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     }
     
     ///  扩展字符串截取
-    ///
-    /// - Parameter index: end
-    /// - Return:  substring
     public func substring(to index: Int) -> String {
         let string = base as! String
         if index <= string.count && index >= 0 {
@@ -78,7 +72,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         }
     }
     
-    /// Split 字符
+    /// 分割字符
     public func split(_ s: String) -> [String] {
         let string = base as! String
         if string.isEmpty {
@@ -96,7 +90,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
                                            range: nil)
     }
     
-    /// string transform bool
+    /// 字符串转bool
     public var strToBool: Bool? {
         let string = base as! String
         switch string {
@@ -109,7 +103,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         }
     }
     
-    /// Calculate the property and return the space before and after removing
+    /// 去除两边空格
     public var trim: String {
         let string = base as! String
         return string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
@@ -135,19 +129,13 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return false
     }
     
-    /// 版本比较大小
-    ///
-    /// - Parameters:
-    ///   - base: one version
-    ///   - v: two version
-    /// - Returns: big: base > two  ,small:two  < base, equal:base == two
+    /// 版本比较大小 Returns: big: base > two  ,small:two  < base, equal:base == two
     public func versionCompare(_ v: String) -> LXSwiftUtils.VersionCompareResult {
         let string = base as! String
         return LXSwiftUtils.lx.versionCompare(string, v)
     }
     
     /// 在小数点后保留几个有效数字
-    ///digits
     public func formatDecimalString(_ digits: Int) -> String {
         let string = base as! String
         guard let m =  Double(string) else { return string }
@@ -176,11 +164,6 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
 extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     
     /// 根据字体和宽度获取字体大小cgsize
-    ///
-    ///   - Parameters:
-    ///   - font: font size
-    ///   - width: width
-    ///   - lineSpace: lineSpace
     public func size(font: UIFont, width: CGFloat) -> CGSize {
         let string = base as! String
         let attrString = NSAttributedString(string: string,
@@ -189,19 +172,12 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     }
     
     /// 根据字体获取字体宽度
-    ///
-    /// - Parameters:
-    ///   - font: font size
     public func width(font: UIFont) -> CGFloat {
         let size = self.size(font: font, width: LXSwiftApp.screenW)
         return size.width
     }
     
     /// 根据字体和宽度获取字体高度
-    ///
-    /// - Parameters:
-    ///   - font: font size
-    ///   - width: with
     public func height(font: UIFont, width: CGFloat) -> CGFloat {
         let size = self.size(font: font, width: width)
         return size.height
@@ -212,9 +188,6 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
 extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     
     /// 基是包含字符串的
-    ///
-    /// - Parameters:
-    ///   - string: string
     public func contains(_ string: String) -> Bool {
         let string = base as! String
         return string.range(of: string) != nil
@@ -226,26 +199,24 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return string.rangeOfCharacter(from: characters) != nil
     }
     
-    /// base is json
+    /// 是否属于json字符串
     public var isValidJSON: Bool {
         return jsonObject != nil
     }
     
-    /// string to dic
+    /// json字符串转换成字典
     public var jsonStrToDic: [String: Any] {
         let string = base as! String
         return (string.lx.jsonObject as? [String: Any]) ?? [:]
     }
     
-    /// string to array
+    /// json字符串转换成数组
     public var jsonStrToArr: [Any] {
         let string = base as! String
         return (string.lx.jsonObject as? [Any]) ?? []
     }
+    
     /// 字符串转换plist字典
-    ///
-    /// - Parameter data: string
-    /// - Returns: Dictionary
     public var stringToPlistDictionary: Dictionary<String, Any>?  {
         let string = base as! String
         guard let data = string.data(using: .utf8) else { return nil }
@@ -266,10 +237,6 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
 extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
 
     /// 字符串匹配
-    ///
-    /// - Parameters:
-    ///   - regex: want to  string matching
-    ///   - usingBlock: callBack
     public func enumerateStringsMatchedByRegex(regex: String,
             usingBlock: (_ captureCount: Int, _ capturedStrings: String, _ range: NSRange) -> ()) {
         // regex is not nil
@@ -324,7 +291,6 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return size.lx.sizeFileToStr
     }
     
-    /// Retrieves the parameter from the URL String and converts it to the dictionary type
     /// 从URL String 中获取参数，并将参数转为字典类型
     public var getUrlParams1: [String: String]? {
         let string = base as! String
@@ -332,7 +298,6 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return url.lx.getUrlParams1
     }
     
-    /// Retrieves the parameter from the URL String and converts it to the dictionary type
     /// 从URL String 中获取参数，并将参数转为字典类型
     public var getUrlParams2: [String: String]? {
         let string = base as! String
@@ -340,8 +305,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return url.lx.getUrlParams2
     }
     
-    /// Encodes the original URL into a valid URL
-    ///将原始的url编码为合法的url
+    /// 将原始的url编码为合法的url
     public var urlEncoded: String {
         let string = base as! String
         let encodeUrlString = string.addingPercentEncoding(withAllowedCharacters:
@@ -349,8 +313,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return encodeUrlString ?? ""
     }
     
-    /// Converts the encoded URL back to the original URL
-    ///将编码后的url转换回原始的url
+    /// 将编码后的url转换回原始的url
     public var urlDecoded: String {
         let string = base as! String
         return string.removingPercentEncoding ?? ""
@@ -380,13 +343,13 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return digest.reduce(into: "") { $0 += String(format: "%02x", $1) }
     }
     
-    /// string transform utf8 data
+    /// 字符串转换utf8数据
     public var utf8Data: Data? {
         let string = base as! String
         return string.data(using: .utf8)
     }
     
-    /// string transform base64EncodedData
+    /// 字符串转换base64EncodedData
     public var base64EncodingString: String? {
         let string = base as! String
         guard let utf8EncodeData = string.data(using: .utf8,
@@ -397,7 +360,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
                                                     NSData.Base64EncodingOptions.init(rawValue: 0))
     }
     
-    /// base64EncodedData transform  string
+    /// base64EncodedData转换字符串
     public var base64DecodingString: String? {
         let string = base as! String
         guard  let utf8DecodedData =  Data(base64Encoded: string, options: Data.Base64DecodingOptions.init(rawValue: 0)) else {
@@ -406,7 +369,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return  String(data: utf8DecodedData, encoding: String.Encoding.utf8)
     }
     
-    /// string of  image base64 tranform uiimage
+    /// image base64格式uiimage的字符串
     public var base64EncodingImage: UIImage? {
         let string = base as! String
         guard let base64Data = Data(base64Encoded: string,
@@ -435,8 +398,6 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     }
     
     /// 它包含特殊字符吗
-    ///
-    ///- Returns: results
     public func isContainSpecialChar() -> Bool {
         let string = base as! String
         let emojiPattern = "[\\$\\(\\)\\*\\+\\[\\]\\?\\^\\{\\|]"
@@ -520,8 +481,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return string.verification(pattern: blank)
     }
     
-    ///返回字符串中的数字范围，
-    ///可以是一个或多个。如果没有数字，则返回一个空数组
+    ///返回字符串中的数字范围，可以是一个或多个。如果没有数字，则返回一个空数组
     public func numberRanges() -> [NSRange] {
         let string = base as! String
         guard let results = string.lx.matching(pattern: "[0-9]+(.[0-9]+)?") else {

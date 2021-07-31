@@ -14,7 +14,7 @@ extension UIView: LXSwiftCompatible { }
 //MARK: -  Extending properties for UIView
 extension LXSwiftBasics where Base: UIView {
     
-    /// presented root 的view
+    /// presented 根视图
     public var aboveView: UIView? {
         return UIApplication.lx.visiblePresentViewController?.view
     }
@@ -24,11 +24,12 @@ extension LXSwiftBasics where Base: UIView {
         return UIApplication.lx.visibleViewController?.view
     }
     
+    /// 导航跟控制器
     public var aboveNavVC: UINavigationController? {
         return UIApplication.lx.visibleNavRootViewController
     }
     
-    /// 截图
+    /// view截图
     public var snapShotImage: UIImage? {
         
         UIGraphicsBeginImageContextWithOptions(base.bounds.size,
@@ -102,7 +103,7 @@ extension LXSwiftBasics where Base: UIView {
         base.layer.shadowOffset = offset
     }
     
-    /// remove Shadow
+    /// 移除阴影
     public func removeShadow() {
         base.layer.shadowOpacity = 0.0
     }
@@ -154,7 +155,7 @@ extension LXSwiftBasics where Base: UIView {
 //MARK: -  Extending methods for UIView
 extension LXSwiftBasics where Base: UIView {
     
-    /// add gesture
+    /// add 手势直接闭包回调
     @discardableResult
     public func addGesture(_ viewCallBack: @escaping ((UIView?) -> ()))
     -> UITapGestureRecognizer {
@@ -169,7 +170,6 @@ extension LXSwiftBasics where Base: UIView {
 private var viewCallBackKey: Void?
 extension UIView {
     
-    /// can save callback
     var viewCallBack: ((UIView?) -> ())? {
         get { return lx_getAssociatedObject(self, &viewCallBackKey) }
         set { lx_setRetainedAssociatedObject(self,

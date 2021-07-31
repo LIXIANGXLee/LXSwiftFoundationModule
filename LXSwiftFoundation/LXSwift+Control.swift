@@ -11,7 +11,7 @@ import UIKit
 //MARK: -  Extending methods for UIControl
 extension LXSwiftBasics where Base: UIControl {
     
-    // repeat tap in 1s
+    /// 防连点击在1s内，时间可自行设置
     public func preventDoubleHit(_ hitTime: Double = 1) {
         base.hitDouble(hitTime)
     }
@@ -34,7 +34,7 @@ extension UIControl  {
     
     @objc func c_hitDouble(_ base: UIControl)  {
         base.isUserInteractionEnabled = false
-        DispatchQueue.main.lx.delay((hitTime ?? 1.0)) {
+        DispatchQueue.lx.delay(with: (hitTime ?? 1.0)) {
             base.isUserInteractionEnabled = true
         }
     }

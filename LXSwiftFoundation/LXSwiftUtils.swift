@@ -2,8 +2,8 @@
 //  LXSwiftUtil.swift
 //  LXSwiftFoundation
 //
-//  Created by Mac on 2020/9/25.
-//  Copyright © 2020 李响. All rights reserved.
+//  Created by Mac on 2018/4/23.
+//  Copyright © 2018 李响. All rights reserved.
 //
 
 import UIKit
@@ -143,7 +143,7 @@ extension LXSwiftBasics where Base == LXSwiftUtils {
         return feature?.messageString
     }
     
-    /// async get QR code information
+    /// 异步获取二维码信息
     public static func async_getQrCodeString(with image: UIImage?,
                                              complete: @escaping (String?) -> ()) {
         DispatchQueue.global().async{
@@ -154,7 +154,7 @@ extension LXSwiftBasics where Base == LXSwiftUtils {
         }
     }
     
-    /// create QR code image
+    /// 创建二维码图像
     public static func getQrCodeImage(with qrCodeStr: String?,
                                       size: CGFloat = 800) -> UIImage? {
         
@@ -168,7 +168,7 @@ extension LXSwiftBasics where Base == LXSwiftUtils {
         return createNonInterpolatedImage(with: qrImage, size: size)
     }
     
-    /// async create QR code image
+    /// 异步创建二维码图像
     public static func async_getQrCodeImage(with qrCodeStr: String?,
                                             size: CGFloat = 800,
                                             complete: @escaping (UIImage?) -> ()) {
@@ -181,8 +181,7 @@ extension LXSwiftBasics where Base == LXSwiftUtils {
         }
     }
     
-    /// After generating the QR code,
-    /// because it is not a real picture, it needs to be redrawn
+    /// 生成二维码后，因为它不是真实的图片，所以需要重新绘制
     private static func createNonInterpolatedImage(with ciImage: CIImage,
                                                    size: CGFloat) -> UIImage? {
         let extent = ciImage.extent.integral

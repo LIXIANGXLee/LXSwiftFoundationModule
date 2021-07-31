@@ -58,9 +58,8 @@ extension LXSwiftBasics where Base : LXSwiftTextView {
             textColor: UIColor.lx.color(hex: textColor))
     }
     
-    ///在set text或nsattributestring之后调用updateUI
-    ///调用此方法后，如果要调用回调函数setHandle，
-    ///请在设置句柄设置后调用。
+    /// 在set text或nsattributestring之后调用updateUI，调用此方法后，
+    /// 如果要调用回调函数setHandle，请在设置句柄设置后调用。
     public func updateUI() {
         base.textDidChange()
         base.textCallBack?(base.text)

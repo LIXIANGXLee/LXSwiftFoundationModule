@@ -2,7 +2,7 @@
 //  LXSwift+UIApplication.swift
 //  LXSwiftFoundation
 //
-//  Created by 李响 on 2021/4/29.
+//  Created by 李响 on 2019/4/29.
 //
 
 import UIKit
@@ -46,6 +46,7 @@ extension LXSwiftBasics where Base: UIApplication {
         return root
     }
     
+    /// 当前显示的控制器
     public static func getVisibleViewController(from vc: UIViewController?) -> UIViewController? {
         if let nav = vc as? UINavigationController {
             return getVisibleViewController(from: nav.visibleViewController)
@@ -65,6 +66,7 @@ extension LXSwiftBasics where Base: UIApplication {
         }
     }
     
+    /// 打开url
     public static func openUrl(_ url: URL,
                         completionHandler: ((Bool) -> Void)? = nil) {
         if isCanOpen(url) {

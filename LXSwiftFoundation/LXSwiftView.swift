@@ -51,7 +51,7 @@ open class LXSwiftView: UIView {
         }
     }
     
-    /// call  after dark and light change
+    /// 暗黑模式 和亮模式切换时调用
     open func setUIDidChange(_ style: LXSwiftUserInterfaceStyle) { }
 }
 

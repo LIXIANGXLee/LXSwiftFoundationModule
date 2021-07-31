@@ -2,13 +2,14 @@
 //  LXSwift+DispatchQueue.swift
 //  LXSwiftFoundation
 //
-//  Created by XL on 2020/9/24.
-//  Copyright © 2020 李响. All rights reserved.
+//  Created by XL on 20127/9/24.
+//  Copyright © 2017 李响. All rights reserved.
 //
 
 import UIKit
 
 extension DispatchQueue: LXSwiftCompatible {
+  
     /// Task callback function
     public typealias LXSwiftCallTask = (() -> Void)
 
@@ -19,9 +20,7 @@ extension DispatchQueue: LXSwiftCompatible {
 //MARK: -  Extending method for UIFont
 extension LXSwiftBasics where Base: DispatchQueue {
     
-    /// Double negation to prevent concurrent access
-    ///
-    /// - Parameter token: A string used to determine whether it is unique
+    /// 双重否定以防止并发访问 只执行一次任务
     public func once(token: String, closure: () -> Void) {
         if DispatchQueue.onceTracker.contains(token) == false {
             objc_sync_enter(base)
@@ -37,78 +36,51 @@ extension LXSwiftBasics where Base: DispatchQueue {
 //MARK: -  Extending method for UIFont
 extension LXSwiftBasics where Base: DispatchQueue {
     
-    /// 异步任务
-    ///
-    /// - Parameter task: Asynchronous callback function
-    public static func async(_ task: @escaping DispatchQueue.LXSwiftCallTask) {
-        _async(task)
-    }
-    
-    /// 异步任务
-    ///
-    /// - Parameter task: Asynchronous callback function
-    /// - Parameter mainTask: Main thread callback function
-    public static func async(_ task: @escaping DispatchQueue.LXSwiftCallTask,
-                             _ mainTask: @escaping DispatchQueue.LXSwiftCallTask) {
-        _async(task, mainTask)
-    }
-    
-    /// 异步任务
-    ///- parameter seconds: time to delay
-    ///- parameter block: asynchronous callback function
-    @discardableResult
-    public func delay(_ seconds: Double,
-                      _ block: @escaping DispatchQueue.LXSwiftCallTask)
+    /// 异步任务 主线程回调执行任务(主线程回调任务可不传，默认是nil)
+    public static func async(with task: @escaping DispatchQueue.LXSwiftCallTask,
+                               mainTask: DispatchQueue.LXSwiftCallTask? = nil)
     -> DispatchWorkItem {
-        let item = DispatchWorkItem(block: block)
-        base.asyncAfter(deadline: DispatchTime.now() + seconds,
-                        execute: item)
-        return item
-    }
-    
-    /// 异步任务
-    ///- parameter seconds: time to delay
-    ///- parameter task: asynchronous callback function
-    @discardableResult
-    public func asyncDelay(_ seconds: Double,
-                           _ task: @escaping DispatchQueue.LXSwiftCallTask)
-    -> DispatchWorkItem {
-        return _asyncDelay(seconds, task)
-    }
-    
-    /// 异步任务
-    ///- parameter seconds: time to delay
-    ///- parameter task: asynchronous callback function
-    ///- parameter maintask: asynchronous callback function
-    @discardableResult
-    public func asyncDelay(_ seconds: Double,
-                           _ task: @escaping DispatchQueue.LXSwiftCallTask,
-                           _ mainTask: @escaping DispatchQueue.LXSwiftCallTask)
-    -> DispatchWorkItem {
-        return _asyncDelay(seconds, task, mainTask)
-    }
-    
-    ///Asynchronous task private method
-    private static func _async(_ task: @escaping DispatchQueue.LXSwiftCallTask,
-                               _ mainTask: DispatchQueue.LXSwiftCallTask? = nil) {
         let item = DispatchWorkItem(block: task)
         DispatchQueue.global().async(execute: item)
         if let main = mainTask {
             item.notify(queue: DispatchQueue.main, execute: main)
         }
+        return item
     }
     
-    ///Private method of asynchronous delay task
-    private func _asyncDelay(_ seconds: Double,
-                             _ task: @escaping DispatchQueue.LXSwiftCallTask,
-                             _ mainTask: DispatchQueue.LXSwiftCallTask? = nil)
+    /// 主线程执行任务
+    @discardableResult
+    public static func async(with mainTask: @escaping DispatchQueue.LXSwiftCallTask)
+    -> DispatchWorkItem {
+        let item = DispatchWorkItem(block: mainTask)
+        DispatchQueue.main.async(execute: item)
+        return item
+    }
+    
+    /// 异步延时任务 主线程回调执行任务(主线程回调任务可不传，默认是nil)
+    @discardableResult
+    public static func asyncDelay(with seconds: Double,
+                           task: @escaping DispatchQueue.LXSwiftCallTask,
+                           mainTask: DispatchQueue.LXSwiftCallTask? = nil)
     -> DispatchWorkItem {
         let item = DispatchWorkItem(block: task)
-        base.asyncAfter(deadline: DispatchTime.now() + seconds,
-                        execute: item)
+        let s = DispatchTime.now() + seconds
+        DispatchQueue.global().asyncAfter(deadline: s, execute: item)
         if let main = mainTask {
             item.notify(queue: DispatchQueue.main, execute: main)
         }
         return item
     }
+    
+    /// 延时后主线程执行任务
+    @discardableResult
+    public static func delay(with seconds: Double,
+                             mainTask: @escaping DispatchQueue.LXSwiftCallTask)
+    -> DispatchWorkItem {
+        let item = DispatchWorkItem(block: mainTask)
+        let s = DispatchTime.now() + seconds
+        DispatchQueue.main.asyncAfter(deadline: s, execute: item)
+        return item
+    }
+    
 }

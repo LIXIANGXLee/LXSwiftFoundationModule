@@ -8,6 +8,7 @@
 import UIKit
 
 open class LXSwiftViewController: UIViewController {    
+   
     open override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -28,6 +29,6 @@ open class LXSwiftViewController: UIViewController {
         }
     }
     
-    /// call  after dark and light change
+    /// 暗黑模式 和亮模式切换时调用
     open func setUIDidChange(_ style: LXSwiftUserInterfaceStyle) { }
 }
