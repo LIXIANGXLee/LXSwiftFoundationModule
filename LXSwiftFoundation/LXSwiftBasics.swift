@@ -8,13 +8,13 @@
 
 import UIKit
 
-/// Extend the system method or properties. It is recommended to extend lxswiftbasics
+///扩展系统方法或属性。建议扩展lxswiftbasics
 public struct LXSwiftBasics<Base> {
     
     /// Base object to extend.
     public var base: Base
     
-    /// Creates extensions with base object.
+    /// 使用基本对象创建扩展。
     ///
     /// - parameter base: Base object.
     public init(_ base: Base) {

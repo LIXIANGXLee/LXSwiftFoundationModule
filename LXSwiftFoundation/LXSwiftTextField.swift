@@ -9,7 +9,7 @@
 import UIKit
 
 open class LXSwiftTextField: UITextField {
-    /// Configure the input position of text box and the space between left and right
+    /// 配置文本框的输入位置和左右间距
     open var textRectInsert: UIEdgeInsets?
     
     open override func textRect(forBounds bounds: CGRect) -> CGRect {

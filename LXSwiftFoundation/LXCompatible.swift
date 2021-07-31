@@ -25,7 +25,7 @@ public protocol LXSwiftCompatible {
 /// Extend calculation properties for protocol
 public extension LXSwiftCompatible {
     
-    /// In order to solve the problem of method in mutating struct, the static calculation property set is extended
+    /// 为了解决结构变异的方法问题，对静态计算属性集进行了扩展
     static var lx: LXSwiftBasics<Self>.Type {
         set {
              // this enables using LXSwiftBasics to "mutating" base type
@@ -36,7 +36,7 @@ public extension LXSwiftCompatible {
         }
     }
     
-    /// In order to solve the problem of method in mutating struct, the instance calculation property set is extended
+    /// 为了解决结构变异中的方法问题，对实例计算属性集进行了扩展
     var lx: LXSwiftBasics<Self> {
         set {
             // this enables using LXSwiftBasics to "mutating" base type

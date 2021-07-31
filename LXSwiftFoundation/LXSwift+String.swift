@@ -9,26 +9,26 @@
 import UIKit
 import CommonCrypto
 
-/// Switch de matching pattern, matching whether the first string contains
+/// Switch 的匹配模式，匹配字符串开头 是否包含此字符串
 public func has_prefix(_ prefix: String) -> ((String) -> (Bool)) {
      { $0.hasPrefix(prefix) }
 }
 
-/// Switch de matching pattern, matching whether the last string contains
+/// Switch 的匹配模式，匹配字符串结尾 是否包含此字符串
 public func has_suffix(_ suffix: String) -> ((String) -> (Bool)) {
      { $0.hasSuffix(suffix) }
 }
 
-/// Switch de matching pattern, matching whether the all string contains  text
+/// Switch 的匹配模式，匹配字符串被包含 是否包含此字符串
 public func has_contains(_ text: String) -> ((String) -> (Bool)) {
      { $0.contains(text) }
 }
 
 /// String and NSString compliance
 extension String: LXSwiftCompatible {
-    
-    /// Switch de matching pattern, matching
-    /// whether the first string contains or last string  contains
+   
+    ///开关反匹配模式，匹配
+    ///第一个字符串包含还是最后一个字符串包含
     public static func ~= (pattern: (String) -> Bool,
                            value: String) -> Bool {
         pattern(value)
@@ -38,7 +38,7 @@ extension String: LXSwiftCompatible {
 //MARK: -  Extending methods and properties for String and NSString interception
 extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     
-    /// Extend String interception
+    /// 扩展字符串截取
     ///
     /// - Parameter r: 0..<2 string range
     ///   let str = "abc" ，subString(with: 0..<2)  result is "ab"
@@ -52,7 +52,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         }
     }
     
-    /// Extend String interception
+    ///  扩展字符串截取
     ///
     /// - Parameter index: start
     /// - Return:  substring
@@ -65,7 +65,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         }
     }
     
-    /// Extend String interception
+    ///  扩展字符串截取
     ///
     /// - Parameter index: end
     /// - Return:  substring
@@ -78,7 +78,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         }
     }
     
-    /// Split character
+    /// Split 字符
     public func split(_ s: String) -> [String] {
         let string = base as! String
         if string.isEmpty {
@@ -87,7 +87,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return string.components(separatedBy: s)
     }
     
-    /// Replace string in string
+    /// 替换字符串中的字符串
     public func replace(_ old: String, new: String) -> String {
         let string = base as! String
         return string.replacingOccurrences(of: old,
@@ -115,7 +115,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     }
     
-    /// is contain Emoji expression
+    /// 是否包含表情符号表达式
     public var containsEmoji: Bool {
         let string = base as! String
         for scalar in string.unicodeScalars {
@@ -135,7 +135,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return false
     }
     
-    /// one version campare two version
+    /// 版本比较大小
     ///
     /// - Parameters:
     ///   - base: one version
@@ -146,7 +146,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return LXSwiftUtils.lx.versionCompare(string, v)
     }
     
-    /// Keep a few significant digits after the decimal point
+    /// 在小数点后保留几个有效数字
     ///digits
     public func formatDecimalString(_ digits: Int) -> String {
         let string = base as! String
@@ -156,17 +156,17 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
                                                   maxDigits: digits) ?? string
     }
     
-    ///Keep two valid digits after the decimal point.
+    /// 小数点后保留两个有效数字。
     public var formatDecimalStringTwo: String {
        return formatDecimalString(2)
     }
     
-    ///Keep three  valid digits after the decimal point.
+    /// 小数点后保留三个有效数字。
     public var formatDecimalStringThree: String {
        return formatDecimalString(3)
     }
     
-    ///Keep Four valid digits after the decimal point.
+    /// 小数点后保留四个有效数字。
     public var formatDecimalStringFour: String {
        return formatDecimalString(4)
     }
@@ -175,7 +175,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
 //MARK: - Extending methods for String and NSString size
 extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     
-    ///Get the font size cgsize according to the font and width
+    /// 根据字体和宽度获取字体大小cgsize
     ///
     ///   - Parameters:
     ///   - font: font size
@@ -188,7 +188,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return attrString.lx.size(width: width)
     }
     
-    ///Get the font width  according to the font
+    /// 根据字体获取字体宽度
     ///
     /// - Parameters:
     ///   - font: font size
@@ -197,7 +197,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return size.width
     }
     
-    ///Get the font height according to the font and width
+    /// 根据字体和宽度获取字体高度
     ///
     /// - Parameters:
     ///   - font: font size
@@ -211,7 +211,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
 //MARK: -  Extending properties for String and NSString tool
 extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     
-    /// base is contains string
+    /// 基是包含字符串的
     ///
     /// - Parameters:
     ///   - string: string
@@ -220,7 +220,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return string.range(of: string) != nil
     }
     
-    /// Whether the specified special characters are included
+    /// 是否包含指定的特殊字符
     func contains(characters: CharacterSet) -> Bool {
         let string = base as! String
         return string.rangeOfCharacter(from: characters) != nil
@@ -242,7 +242,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         let string = base as! String
         return (string.lx.jsonObject as? [Any]) ?? []
     }
-    /// string tranform plist Dictionary
+    /// 字符串转换plist字典
     ///
     /// - Parameter data: string
     /// - Returns: Dictionary
@@ -252,7 +252,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return data.lx.dataToPlistDictionary
     }
     
-    ///Convert to JSON object type
+    /// 转换为JSON对象类型
     public var jsonObject: Any? {
         let string = base as! String
         guard let data = string.data(using: .utf8) else {
@@ -264,7 +264,8 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
 
 //MARK: -  String matching (hyperlink, phone number, emoticon) 😊 Etc.)
 extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
-    ///string matching
+
+    /// 字符串匹配
     ///
     /// - Parameters:
     ///   - regex: want to  string matching
@@ -289,7 +290,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
 //MARK: -  Extending properties for String and NSString tool
 extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     
-    /// date  transform  string
+    /// 日期转换字符串
     public func stringTranformDate(_ ymd: String = "yyyy-MM-dd HH:mm:ss") -> Date? {
         let string = base as! String
         let fmt = DateFormatter()
@@ -297,7 +298,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return fmt.date(from: string)
     }
     
-    /// Methods of converting Chinese characters to Pinyin
+    /// 汉字拼音转换方法
     public var transformToPinYin: String {
         let string = base as! String
         let mutableString = NSMutableString(string: string)
@@ -308,15 +309,15 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return String(mutableString).replacingOccurrences(of: " ", with: "")
     }
     
-    ///String transcoding uft8
+    /// 字符串转码uft8
     public var utf8: String {
         let string = base as! String
         return string.addingPercentEncoding(withAllowedCharacters:
                                                 CharacterSet.urlQueryAllowed) ?? ""
     }
     
-    /// The extended calculation attribute displays the corresponding
-    ///  g m KB B format according to the file size
+    ///“扩展计算”属性显示相应的
+    ///g m KB B格式，根据文件大小而定
     public var fileSize: String {
         let string = base as! String
         guard let size = Double(string) else {  return "" }
@@ -419,7 +420,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
 //MARK: -  Extending methods for String and NSString md5
 extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     
-    ///Verify that the string is consistent with the regular expression pattern
+    /// 验证字符串是否与正则表达式模式一致
     public func isSuit(pattern: String) -> Bool {
         let string = base as! String
         return string.verification(pattern: pattern)
@@ -433,7 +434,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return string.verification(pattern: pattern)
     }
     
-    ///Does it contain special characters
+    /// 它包含特殊字符吗
     ///
     ///- Returns: results
     public func isContainSpecialChar() -> Bool {
@@ -442,85 +443,85 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return string.verification(pattern: emojiPattern)
     }
     
-    ///Verify legal email
+    /// 核实合法电子邮件
     public func isValidEmail() -> Bool {
         let string = base as! String
         let emailPattern = "^(\\w)+(\\.\\w+)*@(\\w)+((\\.\\w{1,}){1,3})$"
         return string.verification(pattern: emailPattern)
     }
     
-    ///Verify that it is a legitimate Web address
+    /// 验证它是否是合法的http或https地址
     public func isValidUrl() -> Bool {
         let string = base as! String
         let urlPattern = "^http(s)?://"
         return string.verification(pattern: urlPattern)
     }
     
-    ///Verify legal mobile phone number
+    /// 核实合法手机号码
     public func isValidPhoneNumber() -> Bool {
         let string = base as! String
         let phonePattern = "^1\\d{10}$"
         return string.verification(pattern: phonePattern)
     }
     
-    ///Verify legal ID number
+    /// 核实合法身份证号码
     public func isValidIDCard() -> Bool {
       let string = base as! String
       let iaCardPattern = "(^[1-9]\\d{5}(18|19|([23]\\d))\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx]$)|(^[1-9]\\d{5}\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{2}$)"
         return string.verification(pattern: iaCardPattern)
     }
     
-    ///Verify that it is a legitimate IP
+    /// 验证它是否为合法IP
     public func isValidIP() -> Bool {
         let string = base as! String
         let ipPattern = "^((2[0-4]\\d|25[0-5]|[01]?\\d\\d?).){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)$"
         return string.verification(pattern: ipPattern)
     }
     
-    ///Verify all Chinese characters
+    /// 验证所有中文字符
     public func isChinese() -> Bool {
         let string = base as! String
         let chinesePattern = "^[\\u0391-\\uFFE5]+$"
         return string.verification(pattern: chinesePattern)
     }
     
-    ///Validation is legal, pure numbers
+    /// 验证是合法的，纯数字
     public func isNumber() -> Bool {
         let string = base as! String
         let numberPattern = "^[0-9]+(.[0-9]+)?$"
         return string.verification(pattern: numberPattern)
     }
     
-    ///Validation is a positive integer
+    /// 验证是一个正整数
     public func isInteger() -> Bool {
         let string = base as! String
         let numberPattern = "^[0-9]+$"
         return string.verification(pattern: numberPattern)
     }
     
-    /// Determine whether it is a standard decimal (two decimal places)
+    /// 确定是否为标准小数（小数点后两位）
     public func isStandardDecimal() -> Bool {
         let string = base as! String
         let decimalPattern = "^[0-9]+(\\.[0-9]{2})$"
         return string.verification(pattern: decimalPattern)
     }
     
-    /// Determine whether it is a standard password
+    /// 确定它是否是标准密码
     public func isValidPasswd() -> Bool {
         let string = base as! String
         let passwdPattern = "^[a-zA-Z0-9]{6,18}$"
         return string.verification(pattern: passwdPattern)
     }
     
-    /// Verify that there are spaces or empty lines
+    /// 确认有空格或空行
     public func isContainBlank() -> Bool {
         let string = base as! String
         let blank = "[\\s]"
         return string.verification(pattern: blank)
     }
     
-    /// Returns the range of numbers in a string,
-    /// which can be one or more. If there are no numbers, an empty array is returned
+    ///返回字符串中的数字范围，
+    ///可以是一个或多个。如果没有数字，则返回一个空数组
     public func numberRanges() -> [NSRange] {
         let string = base as! String
         guard let results = string.lx.matching(pattern: "[0-9]+(.[0-9]+)?") else {
@@ -533,7 +534,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return ranges
     }
     
-    ///Gets an array of matching results
+    /// 获取匹配结果的数组
     public func matching(pattern: String,
                          options: NSRegularExpression.Options = .caseInsensitive) -> [NSTextCheckingResult]? {
         let string = base as! String
@@ -548,7 +549,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
 ///internal extension
 extension String {
     
-    ///internal String interception
+    /// internal 字符串截取
     subscript (_ r: Range<Int>) -> String {
         get {
             let startIndex = index(self.startIndex, offsetBy: r.lowerBound)
@@ -557,7 +558,7 @@ extension String {
         }
     }
     
-    ///Verify whether the string matching results meet the requirements, and return bool value
+    /// 验证字符串匹配结果是否符合要求，返回布尔值
     func verification(pattern: String) -> Bool {
         return (self.lx.matching(pattern: pattern)?.count ?? -1) > 0
     }

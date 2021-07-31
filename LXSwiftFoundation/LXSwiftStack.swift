@@ -11,55 +11,39 @@ import UIKit
 
 public struct LXSwiftStack<Element> {
     
-    /// Element set
-    private var list: [Element]
-    
-    /// NSLock
-    private let lock = NSLock()
-    public init() {
-        list = [Element]()
-    }
+    /// 链表
+    private var list = LXObjcLinkedList()
 }
 
 extension LXSwiftStack {
     
-    ///Put an element on the stack
-    public mutating func push(_ element: Element) {
-        lock.lock()
-        defer { lock.unlock() }
-        list.append(element)
+    /// 入栈一个元素
+    public func push(_ element: Element) {
+        list.add(element)
     }
     
-    ///get and remove Last element of the stack
-    public mutating func pop() -> Element?{
-        lock.lock()
-        defer { lock.unlock() }
-        let element = list.removeLast()
-        return element
+    /// 出栈一个数据
+    public func pop() -> Element? {
+        if isEmpty() {
+            return nil
+        } else {
+            return list.remove(self.size() - 1) as? Element
+        }
     }
     
-    ///Empty stack elements and  return list
-    @discardableResult
-    public mutating func clear() -> ([Element]) {
-        lock.lock()
-        defer { lock.unlock() }
-        list.removeAll()
-        return list
+    /// 清空栈所有数据
+    public func clear(){
+        list.clear()
     }
     
-    ///Number of stack elements
-    public func size() -> Int {
-        lock.lock()
-        defer { lock.unlock() }
-        let count = list.count
-        return count
+    /// 栈元素个数
+    public func size() -> Int32 {
+        return list.size()
     }
     
-    ///Is the stack element empty
+    /// 判断栈是否为空
     public func isEmpty() -> Bool {
-        lock.lock()
-        defer { lock.unlock() }
-        let isisEmpty = list.isEmpty
-        return isisEmpty
+        return list.isEmpty()
     }
+    
 }

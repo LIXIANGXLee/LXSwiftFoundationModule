@@ -14,12 +14,12 @@ extension UIView: LXSwiftCompatible { }
 //MARK: -  Extending properties for UIView
 extension LXSwiftBasics where Base: UIView {
     
-    /// presented root
+    /// presented root 的view
     public var aboveView: UIView? {
         return UIApplication.lx.visiblePresentViewController?.view
     }
     
-    /// current view
+    /// 当前的view
     public var currentVCView: UIView? {
         return UIApplication.lx.visibleViewController?.view
     }
@@ -28,7 +28,7 @@ extension LXSwiftBasics where Base: UIView {
         return UIApplication.lx.visibleNavRootViewController
     }
     
-    /// snapShot image
+    /// 截图
     public var snapShotImage: UIImage? {
         
         UIGraphicsBeginImageContextWithOptions(base.bounds.size,
@@ -44,7 +44,7 @@ extension LXSwiftBasics where Base: UIView {
         return snapImage
     }
     
-    /// chromium source - snapshot_manager, fix wkwebview screenshot bug.
+    /// -快照管理器，修复wkwebview屏幕截图错误。
     public func isContainsWKWebView() -> Bool {
         if base.isKind(of: WKWebView.self) {
             return true
@@ -60,7 +60,8 @@ extension LXSwiftBasics where Base: UIView {
 
 //MARK: -  Extending methods for UIView
 extension LXSwiftBasics where Base: UIView {
-    ///  view set Gradient
+  
+    ///  view 渐变色
     ///
     /// - Parameters:
     ///   - colors: [UIColor]
@@ -86,7 +87,7 @@ extension LXSwiftBasics where Base: UIView {
         }
     }
     
-    /// view set Shadow
+    /// view 的阴影
     ///
     /// - Parameters:
     ///   - color: Shadow color
@@ -106,7 +107,7 @@ extension LXSwiftBasics where Base: UIView {
         base.layer.shadowOpacity = 0.0
     }
     
-    /// view set border
+    /// view 边框
     public func setBorder(width: CGFloat,
                           color: UIColor,
                           cornerRadius: CGFloat? = nil) {
@@ -117,14 +118,14 @@ extension LXSwiftBasics where Base: UIView {
         }
     }
     
-    /// cornerRadius
+    /// 圆角
     public func setCornerRadius(radius: CGFloat = 4.0,
                                 clips: Bool = true) {
         base.layer.cornerRadius = radius
         base.layer.masksToBounds = clips
     }
     
-    /// cornerRadius(topLeft topRight bottomLeft bottomRight)
+    ///  圆角 cornerRadius(topLeft topRight bottomLeft bottomRight)
     ///
     /// - Parameters:
     ///   - cornerRadii: radius size

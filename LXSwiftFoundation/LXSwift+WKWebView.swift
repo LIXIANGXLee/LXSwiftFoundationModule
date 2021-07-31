@@ -10,8 +10,8 @@ import WebKit
 
 //MARK: -  Extending properties for UIScrollView
 extension LXSwiftBasics where Base: WKWebView {
-
-    ///Capture the long picture, you can capture the picture for Scrollview
+  
+    /// 捕获长图片，您可以捕获用于滚动查看的图片
     public func snapShotContentScroll(callBack: @escaping (UIImage?) -> ()) {
         base.scrollView.snapShotContentScroll { (image) in
             callBack(image)

@@ -33,7 +33,7 @@ extension LXSwiftBasics where Base: UILabel {
         return base.textRect(forBounds: rect, limitedToNumberOfLines: lines)
     }
     
-    /// Provides a convenient way to set the properties of the label
+    /// 提供了设置标签属性的方便方法
     ///
     /// - Parameters:
     /// - Font: set font
@@ -48,7 +48,7 @@ extension LXSwiftBasics where Base: UILabel {
         }
     }
     
-    /// Provides a convenient way to set the properties of the label
+    /// 提供了设置标签属性的方便方法
     ///
     /// - Parameters:
     /// - Font: set regularSize
@@ -61,7 +61,7 @@ extension LXSwiftBasics where Base: UILabel {
             textColor: color, alignment: alignment)
     }
     
-    /// Provides a convenient way to set the properties of the label
+    /// 提供了设置标签属性的方便方法
     ///
     /// - Parameters:
     /// - Font: set mediumSize
@@ -74,7 +74,7 @@ extension LXSwiftBasics where Base: UILabel {
             textColor: color, alignment: alignment)
     }
     
-   /// Provides a convenient way to set the properties of the label
+   /// 提供了设置标签属性的方便方法
    ///
    /// - Parameters:
    /// - Font: set boldSize

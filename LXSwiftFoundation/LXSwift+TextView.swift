@@ -11,12 +11,12 @@ import UIKit
 //MARK: -  Extending properties and methods for LXSwiftTextView
 extension LXSwiftBasics where Base : LXSwiftTextView {
     
-    /// public method call back
+    /// 公共方法回调
     public func setHandle(_ textCallBack: LXSwiftTextView.TextCallBack?) {
         base.textCallBack = textCallBack
     }
     
-    /// set placeholder and color
+    /// 设置占位符和颜色
     public func set(with placeholder: String?,
                     color: UIColor? = UIColor.lx.color(hex: "999999")) {
         base.placehoderLabel.text = placeholder
@@ -26,13 +26,13 @@ extension LXSwiftBasics where Base : LXSwiftTextView {
         base.setNeedsLayout()
     }
     
-    /// set placeholder and color string
+    /// 设置占位符和颜色字符串
     public func set(with placeholder: String?, color: String = "999999") {
         set(with: placeholder,
             color: UIColor.lx.color(hex: color))
     }
     
-    /// set font and textColor
+    /// 设置字体和文本颜色
     public func set(withFont font: UIFont, textColor: UIColor?) {
         base.font = font
         if let c = textColor {
@@ -40,33 +40,33 @@ extension LXSwiftBasics where Base : LXSwiftTextView {
         }
     }
     
-    /// set bold font and textColor
+    /// 设置粗体字体和文本颜色
     public func set(withBoldFont fontSize: CGFloat,textColor: String) {
         set(withFont: UIFont.lx.fontWithBold(fontSize),
             textColor: UIColor.lx.color(hex: textColor))
     }
     
-    /// set medium font and textColor
+    /// 设置中等字体和文本颜色
     public func set(withMediumFont fontSize: CGFloat, textColor: String) {
         set(withFont: UIFont.lx.fontWithMedium(fontSize),
             textColor: UIColor.lx.color(hex: textColor))
     }
     
-    /// set regular font and textColor
+    /// 设置常规字体和文本颜色
     public func set(withRegularFont fontSize: CGFloat, textColor: String) {
         set(withFont: UIFont.lx.fontWithRegular(fontSize),
             textColor: UIColor.lx.color(hex: textColor))
     }
     
-    /// call updateUI  after set text or NSAttributedString
-    ///After calling this method, if you want to call the callback function setHandle,
-    /// please call after setHandle settings.
+    ///在set text或nsattributestring之后调用updateUI
+    ///调用此方法后，如果要调用回调函数setHandle，
+    ///请在设置句柄设置后调用。
     public func updateUI() {
         base.textDidChange()
         base.textCallBack?(base.text)
     }
     
-    /// remove observer
+    /// 移除观察者
     public func removeObserver() {
         NotificationCenter.default.removeObserver(base)
     }

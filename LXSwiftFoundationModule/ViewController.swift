@@ -18,7 +18,8 @@ class ViewController: UIViewController {
         return true
      
     }
-    
+    let linkList = LXObjcLinkedList()
+
     
      override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +39,10 @@ class ViewController: UIViewController {
 //        btn.lx.horizontalCenterImageAndTitle(space: 20)
         btn.lx.verticalCenterImageAndTitle(space: 30, isLeftImage: false)
         view.addSubview(btn)
+        
+        
+        
+        
       }
     
  
@@ -45,7 +50,24 @@ class ViewController: UIViewController {
         
         
         
-   protocolUIShow()
+//   protocolUIShow()
+
+        linkList.add("dd")
+        print("-=-11=-=-=\(linkList)")
+        print("-=-=11-=-=\(linkList.contains("dd"))")
+
+        linkList.add("ww")
+        linkList.add("ee")
+        print("-=-22=-=-=\(linkList)")
+
+        linkList.insert(1, value: "fd")
+        print("-=-=33-=-=\(linkList)")
+        print("-=-=33-=-=\(linkList.size())")
+        
+        linkList.remove(0)
+        print("-=-=44-=-=\(linkList)")
+        print("-=-=44-=-=\(linkList.get(1))")
+        
     }
     
     

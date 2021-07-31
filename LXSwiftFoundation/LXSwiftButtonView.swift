@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// Add button horizontal layout and button vertical layout
+/// 添加按钮水平布局和按钮垂直布局
 open class LXSwiftButtonView: LXSwiftButton {
     
     public typealias ButtonCallBack = ((_ contentRect: CGRect) -> (CGRect))
@@ -39,8 +39,8 @@ open class LXSwiftButtonView: LXSwiftButton {
 
 //MARK: -  Extending properties for LXSwiftButtonView
 extension LXSwiftBasics where Base: LXSwiftButtonView {
-    
-    /// set cgrect of title and  cgrect of image
+ 
+    /// 设置标题的cgrect和图像的cgrect
     public func setHandle(titleCallBack: LXSwiftButtonView.ButtonCallBack?,
                           imageCallBack: LXSwiftButtonView.ButtonCallBack?) {
         base.titleCallBack = titleCallBack

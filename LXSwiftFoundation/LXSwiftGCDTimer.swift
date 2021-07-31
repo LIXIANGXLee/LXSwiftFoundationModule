@@ -13,13 +13,14 @@ public struct LXSwiftGCDTimer: LXSwiftCompatible {
     
     public typealias TaskCallBack = (() -> Void)
     
-    ///Timer set
+    /// Timer set
     fileprivate static var timers = [String: DispatchSourceTimer]()
 }
 
 //MARK: -  Extending methods for Date
 extension LXSwiftBasics where Base == LXSwiftGCDTimer {
-    /// start timer once
+  
+    /// 开启定时器 （延迟定时器） 任务只执行一次
     ///
     /// - Parameters:
     ///   - identified: save identified
@@ -29,17 +30,17 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
               identified: identified,  task: task)
     }
     
-    /// start timer repeats
+    /// 开启定时器 （延迟定时器） 任务重复执行
     ///
     /// - Parameters:
     ///   - identified: save identified
     public static func startDelayRepeats(_ timer: TimeInterval, identified: String?,
                                          task: LXSwiftGCDTimer.TaskCallBack?) {
-        start(with: timer, timeInterval: 1, repeats: false,
+        start(with: timer, timeInterval: 1, repeats: true,
               identified: identified, task: task)
     }
     
-    /// start timer repeats
+    /// 开启定时器 倒计时
     ///
     /// - Parameters:
     ///   - totalTimeInterval  total time
@@ -55,7 +56,7 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
         }
     }
     
-    /// start timer repeats
+    /// 开始定时器
     ///
     /// - Parameters:
     ///   - identified:  save identified
@@ -79,7 +80,7 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
         timer.resume()
     }
     
-    /// cancel timer repeats
+    /// 取消定时器
     ///
     /// - Parameters:
     ///   - identified: save identified

@@ -26,7 +26,7 @@ public prefix func ~<= (_ index: Int) -> (Int) -> (Bool) { { $0 <= index } }
 
 extension Int: LXSwiftCompatible {
     
-    /// Switch de matching pattern, matching
+    /// Switch 匹配模式
     /// - than or equal to,
     /// - greater than,
     /// - less than or equal to,
@@ -39,18 +39,18 @@ extension Int: LXSwiftCompatible {
 //MARK: -  Extending methods for Int
 extension LXSwiftBasics where Base == Int {
     
-    ///  Generating a random number of an interval
+    ///  生成区间的随机数
    public static func randomInt(lower: Int = 0,
                           upper: Int = Int(UInt32.max)) -> Int {
         return lower + Int(arc4random_uniform(UInt32(upper - lower)))
     }
     
-    ///  Generating a random number of an interval
+    /// 生成区间的随机数
     public static func randomInt(range: Range<Int>) -> Int {
         return randomInt(lower: range.lowerBound, upper: range.upperBound)
     }
     
-    /// Convert to string format
+    /// 转换为字符串格式
     public var intToStr: String {
         return String(base)
     }

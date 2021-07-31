@@ -14,19 +14,19 @@ typedef void (^ObjcRunloopBlock)(void);
 
 @interface UIView (LXObjcPerformance)
 
-//The current page displays the maximum number of pictures with tableviewcell max count or uicollectionviewcell max count
+/// 当前页面显示具有tableviewcell max count或uicollectionviewcell max count的最大图片数
 @property(nonatomic, assign)int lx_maxTaskPerformedCount;
 
-/// private timer
+/// 只读定时器属性
 @property(nonatomic, readonly, nullable)NSTimer *lx_timer;
 
-/// - Using this method, uitableview and uicollectionview performance can be optimized add Observer
+/// 使用此方法，可以优化uitableview和uicollectionview性能
 -(void)lx_addRunLoopObserverOfPerformance;
 
-/// Add task
+/// 添加任务
 -(void)lx_addTask:(ObjcRunloopBlock)task;
 
-/// remove Observer（Please call to remove the observer when you do not use the observer, otherwise it will cause memory leak）
+/// 移除观察者（请在不使用观察者时调用以移除观察者，否则将导致内存泄漏）
 -(void)lx_removeRunLoopObserver;
 
 @end

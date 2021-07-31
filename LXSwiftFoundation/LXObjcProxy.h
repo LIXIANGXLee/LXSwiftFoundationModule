@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LXObjcProxy : NSObject
 +(instancetype)proxyWithTarget:(id)target;
 
+/// 弱引用对象
 @property (weak, nonatomic) id target;
 
 @end

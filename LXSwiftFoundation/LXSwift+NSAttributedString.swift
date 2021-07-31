@@ -13,7 +13,7 @@ extension NSAttributedString: LXSwiftCompatible{ }
 //MARK: -  Extending properties and methods for NSAttributedString
 extension LXSwiftBasics where Base : NSAttributedString {
     
-    ///Get the font size based on the font size and width
+    /// 根据字体大小和宽度获取字体大小
     public func size(width: CGFloat) -> CGSize {
         let size = CGSize(width: width, height: CGFloat(MAXFLOAT))
         let rect = base.boundingRect(with: size,
@@ -21,17 +21,17 @@ extension LXSwiftBasics where Base : NSAttributedString {
         return rect.size
     }
     
-    /// Gets the height of the text based on the font and width
+    /// 获取基于字体和宽度的文本高度
     public func height(width: CGFloat) -> CGFloat {
         return size(width: width).height
     }
     
-    /// Gets the width of the text based on the font and width
+    /// 获取基于字体和宽度的文本宽度
     public var width: CGFloat {
         return size(width: LXSwiftApp.screenW).width
     }
     
-    /// Gets NSAttributedString Property dictionary for
+    /// 获取的NSAttributeString属性字典
     public var attributes: [NSAttributedString.Key: Any] {
         return base.attributes(at: 0, effectiveRange: nil)
     }

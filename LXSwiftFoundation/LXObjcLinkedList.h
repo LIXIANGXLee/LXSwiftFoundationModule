@@ -3,7 +3,8 @@
 //  LXSwiftFoundation
 //
 //  Created by 李响 on 2021/7/30.
-//
+
+// 双向链表
 
 #import <Foundation/Foundation.h>
 
@@ -30,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)add:(id)element;
 
 /**在index位置插入一个元素*/
-- (void)add:(int)index value:(id)element;
+- (void)insert:(int)index value:(id)element;
 
 /**设置index位置的元素*/
 - (id)set:(int)index value:(id)element;
@@ -43,6 +44,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**删除index位置的元素*/
 - (id)remove:(int)index;
+
+/**删除element的元素*/
+- (id)removeOf:(id)element;
 
 /**清除所有元素*/
 - (void)clear;

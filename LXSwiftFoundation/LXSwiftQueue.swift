@@ -9,67 +9,50 @@
 
 import UIKit
 
-public struct LXSwiftQueue<Element> {
+public class LXSwiftQueue<Element> {
     
-    /// Element set
-    private var list: [Element]
-    
-    /// NSLock
-    private let lock = NSLock()
-    
-    public init() {
-        list = [Element]()
-    }
+    /// 链表
+    private var list = LXObjcLinkedList()
 }
 
 extension LXSwiftQueue {
     
-    ///Put an element on the Queue
-    public mutating func enQueue(_ element: Element) {
-        lock.lock()
-        defer { lock.unlock() }
-        list.append(element)
+    /// 入队列一个元素
+    public func enQueue(_ element: Element) {
+        list.add(element)
     }
     
-    ///get and remove first element of the Queue
-    public mutating func deQueue() -> Element?{
-        lock.lock()
-        defer { lock.unlock() }
-        let element = list.removeFirst()
-        return element
+    /// 出队列一个元素
+    public func deQueue() -> Element? {
+        if isEmpty() {
+            return nil
+        } else {
+            return list.remove(0) as? Element
+        }
     }
     
-    ///get first element of the Queue
-    public func front() -> Element?{
-        lock.lock()
-        defer { lock.unlock() }
-        let element = list.first
-        return element
+    /// 获取队列第一个元素
+    public func front() -> Element? {
+        if isEmpty() {
+            return nil
+        } else {
+            return list.get(0) as? Element
+        }
     }
     
-    ///Empty Queue elements and  return list
-    @discardableResult
-    public mutating func clear() -> ([Element]) {
-        lock.lock()
-        defer { lock.unlock() }
-        list.removeAll()
-        return list
+    /// 清空队列所有元素
+    public func clear() {
+        list.clear()
     }
     
-    ///Number of Queue elements
+    /// 获取队列元素的个数
     public func size() -> Int {
-        lock.lock()
-        defer { lock.unlock() }
-        let count = list.count
-        return count
+        return Int(list.size())
     }
     
-    ///Is the Queue element empty
+    /// 判断队列是否为空
     public func isEmpty() -> Bool {
-        lock.lock()
-        defer { lock.unlock() }
-        let isisEmpty = list.isEmpty
-        return isisEmpty
+        return list.isEmpty()
     }
 }
 

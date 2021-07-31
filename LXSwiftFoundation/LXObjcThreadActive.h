@@ -13,19 +13,13 @@ typedef void (^LXObjcThreadActiveTask)(void);
 
 @interface LXObjcThreadActive : NSObject
 
-/**
- start thread
-*/
+/**开启线程（此线程生命周期跟随当前类生命周期*/
 - (void)start;
 
-/**
- Execute a task in the current child thread
- */
+/**在线程中执行任务*/
 - (void)executeTask:(LXObjcThreadActiveTask)task;
 
-/**
- End thread
- */
+/**主动结束线程*/
 - (void)stop;
 
 @end

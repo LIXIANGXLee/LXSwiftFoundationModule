@@ -13,5 +13,6 @@
 #import "LXObjcUtils.h"
 #import "LXObjcThreadActive.h"
 #import "CADisplayLink+Block.h"
+#import "LXObjcLinkedList.h"
 
 #endif /* LXSwiftFoundation_h */

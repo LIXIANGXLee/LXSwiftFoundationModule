@@ -26,13 +26,31 @@
     return self;
 }
 
+- (NSString *)description {
+    
+    NSMutableString *mStr = [NSMutableString string];
+    if (self.prev != nil) {
+        [mStr appendFormat:@"%@",self.prev.element];
+    } else {
+        [mStr appendString:@"nil"];
+    }
+    [mStr appendFormat:@"-%@-",self.element];
+
+    if (self.next != nil) {
+        [mStr appendFormat:@"%@",self.next.element];
+    } else {
+        [mStr appendString:@"nil"];
+    }
+    return mStr;
+}
+
 @end
 
 @interface LXObjcLinkedList()
 
 @property(nonatomic, strong) LXLinkedMapNode *first;
 @property(nonatomic, strong) LXLinkedMapNode *last;
-@property(nonatomic, assign) int size;
+@property(nonatomic, assign) int totalCount;
 
 @end
 
@@ -40,16 +58,16 @@
 
 /**添加元素到尾部*/
 - (void)add:(id)element {
-    [self add:self.size value:element];
+    [self insert:self.totalCount value:element];
 }
 
 /**在index位置插入一个元素*/
-- (void)add:(int)index value:(id)element {
+- (void)insert:(int)index value:(id)element {
     [self rangeCheckForAdd:index];
 
-    // size == 0
+    // totalCount == 0
     // index == 0
-    if (index == self.size) { // 往最后面添加元素
+    if (index == self.totalCount) { // 往最后面添加元素
         LXLinkedMapNode *oldLast = self.last;
         self.last = [LXLinkedMapNode nodeWithElement:element prev:oldLast next:nil];
         if (oldLast == nil) { // 这是链表添加的第一个元素
@@ -68,7 +86,7 @@
             prev.next = node;
         }
     }
-    self.size++;
+    self.totalCount++;
 }
 
 /**设置index位置的元素*/
@@ -88,13 +106,13 @@
 - (int)indexOf:(id)element {
     if (element == nil) {
         LXLinkedMapNode *node = self.first;
-        for (int i = 0; i < self.size; i++) {
+        for (int i = 0; i < self.totalCount; i++) {
             if (node.element == nil) return i;
             node = node.next;
         }
     } else {
         LXLinkedMapNode * node = self.first;
-        for (int i = 0; i < self.size; i++) {
+        for (int i = 0; i < self.totalCount; i++) {
             if ([element isEqual:node.element]) return i;
             node = node.next;
         }
@@ -115,31 +133,36 @@
     } else {
         prev.next = next;
     }
-    if (next == nil) { // index == size - 1
+    if (next == nil) { // index == totalCount - 1
         self.last = prev;
     } else {
         next.prev = prev;
     }
     
-    self.size--;
+    self.totalCount--;
     return node.element;
+}
+
+- (id)removeOf:(id)element {
+    int index = [self indexOf:element];
+    return [self remove:index];
 }
 
 /**清除所有元素*/
 - (void)clear {
-    self.size = 0;
+    self.totalCount = 0;
     self.first = nil;
     self.last = nil;
 }
 
 /**元素的数量*/
 - (int)size {
-    return self.size;
+    return self.totalCount;
 }
 
 /**是否为空*/
 - (BOOL)isEmpty {
-    return self.size == 0;
+    return self.totalCount == 0;
 }
 
 /**是否包含某个元素*/
@@ -151,7 +174,7 @@
 - (LXLinkedMapNode *)node:(int)index{
     [self rangeCheck:index];
             
-    if (index < (self.size >> 1)) {
+    if (index < (self.totalCount >> 1)) {
         LXLinkedMapNode *node = self.first;
         for (int i = 0; i < index; i++) {
             node = node.next;
@@ -159,23 +182,38 @@
         return node;
     } else {
         LXLinkedMapNode *node = self.last;
-        for (int i = self.size - 1; i > index; i--) {
+        for (int i = self.totalCount - 1; i > index; i--) {
             node = node.prev;
         }
         return node;
     }
 }
 
+- (NSString *)description{
+    NSMutableString *mStr = [NSMutableString string];
+    [mStr appendFormat:@"size=%d, [",self.totalCount];
+    LXLinkedMapNode *node = self.first;
+    for (int i = 0; i < self.totalCount; i++) {
+        if (i != 0) {
+            [mStr appendString:@", "];
+        }
+        [mStr appendFormat:@"%@",node];
+        node = node.next;
+    }
+    [mStr appendString:@"]"];
+    return mStr;
+}
+
 - (void)rangeCheck:(int)index {
   
-    NSString *errorStr = [NSString stringWithFormat:@"索引越界 index=%d, size=%d",index, self.size];
-    NSAssert((index > 0 && index < self.size), errorStr);
+    NSString *errorStr = [NSString stringWithFormat:@"索引越界 index=%d, totalCount=%d",index, self.totalCount];
+    NSAssert(!(index < 0 || index >= self.totalCount), errorStr);
 }
 
 - (void)rangeCheckForAdd:(int)index {
     
-    NSString *errorStr = [NSString stringWithFormat:@"索引越界 index=%d, size=%d",index, self.size];
-    NSAssert((index > 0 && index <= self.size), errorStr);
+    NSString *errorStr = [NSString stringWithFormat:@"索引越界 index=%d, totalCount=%d",index, self.totalCount];
+    NSAssert( (index < 0 || index > self.totalCount) , errorStr);
 }
 
 @end

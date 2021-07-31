@@ -19,7 +19,7 @@ extension DispatchQueue: LXSwiftCompatible {
 //MARK: -  Extending method for UIFont
 extension LXSwiftBasics where Base: DispatchQueue {
     
-    ///Double negation to prevent concurrent access
+    /// Double negation to prevent concurrent access
     ///
     /// - Parameter token: A string used to determine whether it is unique
     public func once(token: String, closure: () -> Void) {
@@ -36,14 +36,15 @@ extension LXSwiftBasics where Base: DispatchQueue {
 
 //MARK: -  Extending method for UIFont
 extension LXSwiftBasics where Base: DispatchQueue {
-    ///异步任务
+    
+    /// 异步任务
     ///
     /// - Parameter task: Asynchronous callback function
     public static func async(_ task: @escaping DispatchQueue.LXSwiftCallTask) {
         _async(task)
     }
     
-    ///Asynchronous task
+    /// 异步任务
     ///
     /// - Parameter task: Asynchronous callback function
     /// - Parameter mainTask: Main thread callback function
@@ -52,7 +53,7 @@ extension LXSwiftBasics where Base: DispatchQueue {
         _async(task, mainTask)
     }
     
-    ///Asynchronous task
+    /// 异步任务
     ///- parameter seconds: time to delay
     ///- parameter block: asynchronous callback function
     @discardableResult
@@ -65,7 +66,7 @@ extension LXSwiftBasics where Base: DispatchQueue {
         return item
     }
     
-    ///Asynchronous task
+    /// 异步任务
     ///- parameter seconds: time to delay
     ///- parameter task: asynchronous callback function
     @discardableResult
@@ -75,7 +76,7 @@ extension LXSwiftBasics where Base: DispatchQueue {
         return _asyncDelay(seconds, task)
     }
     
-    ///Asynchronous task
+    /// 异步任务
     ///- parameter seconds: time to delay
     ///- parameter task: asynchronous callback function
     ///- parameter maintask: asynchronous callback function
