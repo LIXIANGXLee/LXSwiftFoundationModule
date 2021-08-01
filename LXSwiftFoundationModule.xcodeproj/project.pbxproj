@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		044E559A26B68ECC00E79CCB /* lxQrCodeVoice.wav in Resources */ = {isa = PBXBuildFile; fileRef = 044E559926B68ECC00E79CCB /* lxQrCodeVoice.wav */; };
 		7607A07F251B1C0B0071B9AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A07E251B1C0B0071B9AD /* AppDelegate.swift */; };
 		7607A083251B1C0B0071B9AD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A082251B1C0B0071B9AD /* ViewController.swift */; };
 		7607A086251B1C0B0071B9AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7607A084251B1C0B0071B9AD /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		044E559926B68ECC00E79CCB /* lxQrCodeVoice.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = lxQrCodeVoice.wav; sourceTree = "<group>"; };
 		04E627F2251E55120033BBA5 /* LXSwiftFoundationModule-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LXSwiftFoundationModule-Bridging-Header.h"; sourceTree = "<group>"; };
 		6348DD709E89FD4FC09A35D6 /* Pods-LXSwiftFoundationModule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXSwiftFoundationModule.debug.xcconfig"; path = "Target Support Files/Pods-LXSwiftFoundationModule/Pods-LXSwiftFoundationModule.debug.xcconfig"; sourceTree = "<group>"; };
 		7607A07B251B1C0B0071B9AD /* LXSwiftFoundationModule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LXSwiftFoundationModule.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +98,7 @@
 				04E627F2251E55120033BBA5 /* LXSwiftFoundationModule-Bridging-Header.h */,
 				7607A07E251B1C0B0071B9AD /* AppDelegate.swift */,
 				7607A082251B1C0B0071B9AD /* ViewController.swift */,
+				044E559926B68ECC00E79CCB /* lxQrCodeVoice.wav */,
 				7607A084251B1C0B0071B9AD /* Main.storyboard */,
 				7607A087251B1C0D0071B9AD /* Assets.xcassets */,
 				7607A089251B1C0D0071B9AD /* LaunchScreen.storyboard */,
@@ -172,6 +175,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7607A08B251B1C0D0071B9AD /* LaunchScreen.storyboard in Resources */,
+				044E559A26B68ECC00E79CCB /* lxQrCodeVoice.wav in Resources */,
 				7607A094251B1CB70071B9AD /* LXSwiftFoundation.podspec in Resources */,
 				7607A088251B1C0D0071B9AD /* Assets.xcassets in Resources */,
 				7607A086251B1C0B0071B9AD /* Main.storyboard in Resources */,

@@ -108,7 +108,7 @@ static  CFRunLoopObserverRef currentObserver;
     
 }
 
-/// observer call back
+/// 事件监听回调
 static void CallBack(CFRunLoopObserverRef observer,
                      CFRunLoopActivity activity,
                      void *info){

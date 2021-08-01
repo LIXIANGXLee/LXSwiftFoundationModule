@@ -48,25 +48,36 @@ class ViewController: UIViewController {
  
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        
+        let str = Bundle.main.path(forResource: "lxQrCodeVoice", ofType: "wav")
+        LXSwiftUtils.lx.playSound(with: str) {
+            print("-=-=-=-=-=-=-=-=-=-=-=-=")
+        }
+        print("-=-=-=-=\( 232490454.lx.sizeFileToStr)")
+        print("-=-=-=-=\( 2324323.lx.sizeFileToStr)")
+
+        print("-=-=-=-=\( 23243.lx.sizeFileToStr)")
+        print("-=-=-=-=\( 232431.lx.sizeFileToStr)")
+        print("-=-=-=-=\( 232.lx.sizeFileToStr)")
+
+
         
 //   protocolUIShow()
 
-        linkList.add("dd")
-        print("-=-11=-=-=\(linkList)")
-        print("-=-=11-=-=\(linkList.contains("dd"))")
-
-        linkList.add("ww")
-        linkList.add("ee")
-        print("-=-22=-=-=\(linkList)")
-
-        linkList.insert(1, value: "fd")
-        print("-=-=33-=-=\(linkList)")
-        print("-=-=33-=-=\(linkList.size())")
-        
-        linkList.remove(0)
-        print("-=-=44-=-=\(linkList)")
-        print("-=-=44-=-=\(linkList.get(1))")
+//        linkList.add("dd")
+//        print("-=-11=-=-=\(linkList)")
+//        print("-=-=11-=-=\(linkList.contains("dd"))")
+//
+//        linkList.add("ww")
+//        linkList.add("ee")
+//        print("-=-22=-=-=\(linkList)")
+//
+//        linkList.insert(1, value: "fd")
+//        print("-=-=33-=-=\(linkList)")
+//        print("-=-=33-=-=\(linkList.size())")
+//
+//        linkList.remove(0)
+//        print("-=-=44-=-=\(linkList)")
+//        print("-=-=44-=-=\(linkList.get(1))")
         
     }
     

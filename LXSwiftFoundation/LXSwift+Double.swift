@@ -15,38 +15,18 @@ extension LXSwiftBasics where Base == Double {
     
     /// 保留小数点后的小数位
     public func roundTo(minDigits: Int = 0, maxDigits: Int = 2,
-                        mode: NumberFormatter.RoundingMode = .halfEven) -> String {
+                        mode: NumberFormatter.RoundingMode = .halfEven)
+    -> String {
         return NSNumber(value: base).lx.numberFormatter(with: mode,
-                                                        minDigits: minDigits,
-                                                        maxDigits: maxDigits) ?? ""
+                    minDigits: minDigits, maxDigits: maxDigits) ?? ""
     }
     
     /// 保留小数点后的小数位
     public func roundTo(digits: Int = 0,
-                        mode: NumberFormatter.RoundingMode = .halfEven) -> String {
+                        mode: NumberFormatter.RoundingMode = .halfEven)
+    -> String {
         return NSNumber(value: base).lx.numberFormatter(with: mode,
-                                                        minDigits: digits,
-                                                        maxDigits: digits) ?? ""
-    }
-    
-    /// 取余两位
-    public var leaveTwoFormat: String {
-        let num = base
-        let numberFormatter1 = NumberFormatter()
-        numberFormatter1.positiveFormat = "###,##0.00"
-        var str = String()
-        str = numberFormatter1.string(from: NSNumber(value: num as Double))!
-        return str
-    }
-    
-    /// 百分比显示 乘100
-    public var hundredPercentFormat: String {
-        let num = base * 100
-        let numberFormatter1 = NumberFormatter()
-        numberFormatter1.positiveFormat = "###,##0.00"
-        var str = String()
-        str = numberFormatter1.string(from: NSNumber(value: num as Double))!
-        return str+"%"
+                        minDigits: digits, maxDigits: digits) ?? ""
     }
     
     /// 用户显示容量 (G、M、KB)
@@ -59,7 +39,7 @@ extension LXSwiftBasics where Base == Double {
         } else if base > pow(unit, 1) {
             return String(format: "%.2fKB", base / pow(unit, 1))
         } else {
-            return String(format: "%dB", 0)
+            return String(format: "%dB", Int(base))
         }
     }
     

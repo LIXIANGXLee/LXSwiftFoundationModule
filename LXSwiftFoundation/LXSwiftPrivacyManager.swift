@@ -17,7 +17,7 @@ public class LXSwiftPrivacyManager: NSObject, LXSwiftCompatible { }
 //MARK: -  Extending methods for Privacy
 extension LXSwiftBasics where Base == LXSwiftPrivacyManager {
     
-    /// is support camera
+    /// 相机权限
     public static var isSupportCamera: Bool {
         
         let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
@@ -27,7 +27,7 @@ extension LXSwiftBasics where Base == LXSwiftPrivacyManager {
         return true
     }
     
-    /// is support Audio
+    /// 麦克风权限
     public static var isSupportAudio: Bool {
         
         let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.audio)
@@ -37,7 +37,7 @@ extension LXSwiftBasics where Base == LXSwiftPrivacyManager {
         return true
     }
     
-    /// is support PhotoAlbum
+    /// 相册权限
     public static var isSupportPhotoAlbum: Bool {
         
         let authStatus = PHPhotoLibrary.authorizationStatus()
@@ -47,7 +47,7 @@ extension LXSwiftBasics where Base == LXSwiftPrivacyManager {
         return true
     }
     
-    /// is support Location
+    /// 定位权限
     public static var isSupportLocation: Bool {
         
         let authStatus = CLLocationManager.authorizationStatus()

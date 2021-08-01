@@ -29,7 +29,8 @@ open class LXSwiftLineFlowLayout: UICollectionViewFlowLayout {
 //        sectionInset = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
     }
     
-    open override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    open override func layoutAttributesForElements(in rect: CGRect)
+    -> [UICollectionViewLayoutAttributes]? {
    
          guard let c = collectionView else { return [] }
          var attsArray: [UICollectionViewLayoutAttributes] = []
@@ -46,7 +47,8 @@ open class LXSwiftLineFlowLayout: UICollectionViewFlowLayout {
     }
     
     open override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint,
-                                      withScrollingVelocity velocity: CGPoint) -> CGPoint {
+                                      withScrollingVelocity velocity: CGPoint)
+    -> CGPoint {
         guard let c = collectionView else { return CGPoint.zero }
         var contentOffset = CGPoint(x: proposedContentOffset.x,
                                     y: proposedContentOffset.y)
@@ -72,9 +74,7 @@ open class LXSwiftLineFlowLayout: UICollectionViewFlowLayout {
     open override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         guard let c = collectionView else { return true }
         guard let pInViewPoint =  c.superview?.convert(c.center,
-                                                       to: self.collectionView) else {
-            return true
-        }
+            to: self.collectionView) else { return true }
         guard let indexPathNow = c.indexPathForItem(at: pInViewPoint) else {
             return true
         }

@@ -85,9 +85,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     public func replace(_ old: String, new: String) -> String {
         let string = base as! String
         return string.replacingOccurrences(of: old,
-                                           with: new,
-                                           options: NSString.CompareOptions.numeric,
-                                           range: nil)
+                with: new, options: NSString.CompareOptions.numeric, range: nil)
     }
     
     /// 字符串转bool
@@ -140,8 +138,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         let string = base as! String
         guard let m =  Double(string) else { return string }
         return NSNumber(value: m).numberFormatter(with: .down,
-                                                  minDigits: digits,
-                                                  maxDigits: digits) ?? string
+                       minDigits: digits, maxDigits: digits) ?? string
     }
     
     /// 小数点后保留两个有效数字。
@@ -167,7 +164,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     public func size(font: UIFont, width: CGFloat) -> CGSize {
         let string = base as! String
         let attrString = NSAttributedString(string: string,
-                                            attributes: [NSAttributedString.Key.font: font])
+                     attributes: [NSAttributedString.Key.font: font])
         return attrString.lx.size(width: width)
     }
     
@@ -353,11 +350,9 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     public var base64EncodingString: String? {
         let string = base as! String
         guard let utf8EncodeData = string.data(using: .utf8,
-                                               allowLossyConversion: true) else {
-            return nil
-        }
+                allowLossyConversion: true) else { return nil }
         return utf8EncodeData.base64EncodedString(options:
-                                                    NSData.Base64EncodingOptions.init(rawValue: 0))
+                                    NSData.Base64EncodingOptions.init(rawValue: 0))
     }
     
     /// base64EncodedData转换字符串
@@ -373,9 +368,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     public var base64EncodingImage: UIImage? {
         let string = base as! String
         guard let base64Data = Data(base64Encoded: string,
-                                    options: .ignoreUnknownCharacters) else {
-            return nil
-        }
+            options: .ignoreUnknownCharacters) else { return nil }
         return UIImage(data: base64Data)
     }
 }
@@ -496,11 +489,12 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     
     /// 获取匹配结果的数组
     public func matching(pattern: String,
-                         options: NSRegularExpression.Options = .caseInsensitive) -> [NSTextCheckingResult]? {
+                         options: NSRegularExpression.Options = .caseInsensitive)
+    -> [NSTextCheckingResult]? {
         let string = base as! String
         let regex = try? NSRegularExpression(pattern: pattern, options: [])
         let results = regex?.matches(in: string,
-                                     options: NSRegularExpression.MatchingOptions.init(rawValue: 0),
+               options: NSRegularExpression.MatchingOptions.init(rawValue: 0),
                                      range: NSMakeRange(0, string.count))
         return results
     }
@@ -509,7 +503,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
 ///internal extension
 extension String {
     
-    /// internal 字符串截取
+    /// internal 下标字符串截取
     subscript (_ r: Range<Int>) -> String {
         get {
             let startIndex = index(self.startIndex, offsetBy: r.lowerBound)

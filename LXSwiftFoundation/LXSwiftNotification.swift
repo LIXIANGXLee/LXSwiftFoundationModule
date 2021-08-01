@@ -47,7 +47,7 @@ public class LXSwiftNotification<T: Codable>: LXSwiftNotificationBase {
             return
         }
         guard let jsonObj = try? JSONSerialization.jsonObject(with: jsonData,
-                                                              options: []) else {
+                       options: []) else {
             postObject(nil)
             return
         }
@@ -57,30 +57,19 @@ public class LXSwiftNotification<T: Codable>: LXSwiftNotificationBase {
     
     public func decodeInfo(from notification: Notification) -> T? {
         let systemInfo = notification.userInfo
-        guard let notNilInfo = systemInfo else {
-            return nil
-        }
-        guard let jsonData = try? JSONSerialization.data(withJSONObject: notNilInfo,
-                                                         options: [])
-            else {
-            return nil
-        }
+        guard let notNilInfo = systemInfo else { return nil }
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: notNilInfo, options: []) else { return nil }
         guard let decodeObj = try? JSONDecoder().decode(T.self,
-                                                        from: jsonData) else {
-            return nil
-        }
+                    from: jsonData) else { return nil }
         return decodeObj
     }
 }
 
 extension NotificationCenter {
     public class func addObserver<T: Codable>(_ observer: Any,
-                                              selector aSelector: Selector,
-                                              notification: LXSwiftNotification<T>) {
+            selector aSelector: Selector, notification: LXSwiftNotification<T>) {
         NotificationCenter.default.addObserver(observer,
-                                               selector: aSelector,
-                                               name: notification.name,
-                                               object: nil)
+             selector: aSelector, name: notification.name, object: nil)
     }
     
     public class func removeObserver(_ observer: Any) {

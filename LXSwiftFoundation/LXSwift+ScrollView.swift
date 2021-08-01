@@ -2,8 +2,8 @@
 //  LXSwift+ScrollView.swift
 //  LXSwiftFoundation
 //
-//  Created by XL on 2020/9/24.
-//  Copyright © 2020 李响. All rights reserved.
+//  Created by XL on 2017/9/24.
+//  Copyright © 2017 李响. All rights reserved.
 //
 
 import UIKit
@@ -59,12 +59,12 @@ extension UIScrollView {
                                             @escaping (_ screenShotImage: UIImage?)
                                             -> Void) {
         
-        let snapShotView = self.snapshotView(afterScreenUpdates: true)
-        snapShotView?.frame = CGRect(x: self.frame.origin.x,
+        guard let snapShotView = self.snapshotView(afterScreenUpdates: true) else { return }
+        snapShotView.frame = CGRect(x: self.frame.origin.x,
                                      y: self.frame.origin.y,
-                                     width: (snapShotView?.frame.size.width)!,
-                                     height: (snapShotView?.frame.size.height)!)
-        self.superview?.addSubview(snapShotView!)
+                                     width: snapShotView.frame.size.width,
+                                     height: snapShotView.frame.size.height)
+        self.superview?.addSubview(snapShotView)
         
         let originOffset = self.contentOffset
         let page = floorf(Float(self.contentSize.height / self.bounds.height))
@@ -82,22 +82,19 @@ extension UIScrollView {
             
             /// 设置原点偏移
             strongSelf?.setContentOffset(originOffset, animated: false)
-            snapShotView?.removeFromSuperview()
+            snapShotView.removeFromSuperview()
             
             /// 取snapShotContentScroll时的回调图像
             completionHandler(screenShotImage)
         })
-        
     }
     
     /// 根据偏移量和页数绘制，此方法是一个图形，其中可能有递归调用
     func snapShotContentScrollPage(index: Int,
-                                            maxIndex: Int,
-                                            callback: @escaping () -> Void) {
+             maxIndex: Int, callback: @escaping () -> Void) {
         
         self.setContentOffset(CGPoint(x: 0,
-                                      y: CGFloat(index) * self.frame.size.height),
-                              animated: false)
+               y: CGFloat(index) * self.frame.size.height), animated: false)
         let splitFrame = CGRect(x: 0,
                                 y: CGFloat(index) * self.frame.size.height,
                                 width: bounds.size.width,
@@ -107,8 +104,7 @@ extension UIScrollView {
             self.drawHierarchy(in: splitFrame, afterScreenUpdates: true)
             if index < maxIndex {
                 self.snapShotContentScrollPage(index: index + 1,
-                                               maxIndex: maxIndex,
-                                               callback: callback)
+                            maxIndex: maxIndex, callback: callback)
             }else{
                 callback()
             }

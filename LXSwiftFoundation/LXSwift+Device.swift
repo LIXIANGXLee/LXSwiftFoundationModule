@@ -73,7 +73,7 @@ extension LXSwiftBasics where Base: UIDevice {
     /// 磁盘空间
     public static var diskSpace: Int64 {
         guard let attrs = try? FileManager.default.attributesOfFileSystem(forPath:
-                                                                            NSHomeDirectory()),
+                                                            NSHomeDirectory()),
               let space = attrs[FileAttributeKey.systemSize] as? Int64 else {
             return -1
         }
@@ -83,7 +83,7 @@ extension LXSwiftBasics where Base: UIDevice {
     /// 磁盘空间是可以使用的大小
     public static var diskSpaceFree: Int64 {
         guard let attrs = try? FileManager.default.attributesOfFileSystem(forPath:
-                                                                            NSHomeDirectory()),
+                                                             NSHomeDirectory()),
               let space = attrs[FileAttributeKey.systemFreeSize] as? Int64 else {
             return -1
         }

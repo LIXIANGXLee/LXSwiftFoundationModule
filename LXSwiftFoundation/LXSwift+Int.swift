@@ -2,8 +2,8 @@
 //  LXSwift+Int.swift
 //  LXSwiftFoundation
 //
-//  Created by Mac on 2020/9/25.
-//  Copyright © 2020 李响. All rights reserved.
+//  Created by Mac on 2017/9/25.
+//  Copyright © 2017 李响. All rights reserved.
 //
 
 import UIKit

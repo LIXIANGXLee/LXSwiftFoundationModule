@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 public struct LXSwiftUtils: LXSwiftCompatible {
     
@@ -130,7 +131,7 @@ extension LXSwiftBasics where Base == LXSwiftUtils {
 //MARK: -  Extending methods for LXSwiftTool
 extension LXSwiftBasics where Base == LXSwiftUtils {
         
-    /// get QR code information
+    /// 识别二维码图片
     public static func getQrCodeString(with image: UIImage?) -> String? {
         let context =  CIContext(options: nil)
         let detector = CIDetector(ofType: CIDetectorTypeQRCode,
@@ -185,6 +186,8 @@ extension LXSwiftBasics where Base == LXSwiftUtils {
     private static func createNonInterpolatedImage(with ciImage: CIImage,
                                                    size: CGFloat) -> UIImage? {
         let extent = ciImage.extent.integral
+        if extent.width == 0 || extent.height == 0 { return nil }
+        
         let scale = min(size / extent.width, size / extent.height)
         let width = extent.width * scale;
         let height = extent.height * scale;
@@ -198,15 +201,27 @@ extension LXSwiftBasics where Base == LXSwiftUtils {
                                         bitmapInfo: CGImageAlphaInfo.none.rawValue ) else { return nil }
         bitmapRef.interpolationQuality = CGInterpolationQuality.high
         bitmapRef.scaleBy(x: scale, y: scale)
-        let context =  CIContext(options: nil)
+        let context = CIContext(options: nil)
         guard let bitmapImage = context.createCGImage(ciImage,
-                                                      from: extent) else {
-            return nil
-        }
+                    from: extent) else { return nil }
         bitmapRef.draw(bitmapImage, in: extent)
-        guard let scaledImage = bitmapRef.makeImage() else {
-            return nil
-        }
+        guard let scaledImage = bitmapRef.makeImage() else { return nil }
         return UIImage(cgImage: scaledImage)
+    }
+    
+    /// 播放本地短暂的语音
+    @available(iOS 9.0, *)
+    public static func playSound(with filepath: String?,
+                          completion: (() -> ())? = nil) {
+
+        guard let string = filepath else { return }
+        var soundID: SystemSoundID = 0
+        let fileUrl = URL(fileURLWithPath: string)
+        AudioServicesCreateSystemSoundID(fileUrl as CFURL, &soundID)
+        AudioServicesPlaySystemSound(soundID)
+        AudioServicesPlaySystemSoundWithCompletion(soundID, {
+            completion?()
+            AudioServicesDisposeSystemSoundID(soundID)
+        })
     }
 }

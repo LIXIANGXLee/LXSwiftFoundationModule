@@ -19,16 +19,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LXObjcUtils : NSObject
 
-/**获取网络类型*/
+/// 获取网络类型
 + (int)getNetWorkType;
 
-/**是否在主线程*/
+/// 是否在主线程
 + (BOOL)isMainThread;
 
-/**主线程执行block*/
+/// 主线程执行block
 + (void)executeOnSafeMian:(void(^)(void)) block;
 
-/** 异步线程执行block*/
+/// 异步线程执行block
 + (void)executeOnSafeGlobal:(void(^)(void)) block;
 
 @end

@@ -62,8 +62,8 @@ extension LXSwiftWaterfallLayout {
                                                      width: itemW, indexPath: indexPath) ?? 1
             
             // 取出最小列的位置
-            var minH = colHeights.min()!
-            let index = colHeights.firstIndex(of: minH)!
+            var minH = colHeights.min() ?? 1
+            let index = colHeights.firstIndex(of: minH) ?? 1
             minH = minH + height + minimumLineSpacing
             colHeights[index] = minH
             
@@ -79,7 +79,7 @@ extension LXSwiftWaterfallLayout {
         }
         
         // 记录最大值
-        maxH = colHeights.max()!
+        maxH = colHeights.max() ?? 1
         
         // 给startIndex重新复制
         startIndex = itemCount

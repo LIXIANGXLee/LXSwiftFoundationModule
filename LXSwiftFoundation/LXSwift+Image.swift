@@ -16,7 +16,8 @@ extension UIImage: LXSwiftCompatible { }
 extension LXSwiftBasics where Base: UIImage {
     
     /// 暗黑模式 和 亮模式
-    public static func image(lightStr: String, darkStr: String) -> UIImage {
+    public static func image(lightStr: String, darkStr: String)
+    -> UIImage {
         
         let light = UIImage(named: lightStr)
         let dark = UIImage(named: lightStr)
@@ -28,18 +29,16 @@ extension LXSwiftBasics where Base: UIImage {
     }
     
     /// 暗黑模式 和 亮模式
-    public static func image(light: UIImage, dark: UIImage) -> UIImage {
+    public static func image(light: UIImage, dark: UIImage)
+    -> UIImage {
         if #available(iOS 13.0, *) {
-            guard let config = light.configuration else {
-                return light
-            }
+            guard let config = light.configuration else { return light }
             let lightImage = light.withConfiguration(
                 config.withTraitCollection(
                     UITraitCollection.init(userInterfaceStyle: UIUserInterfaceStyle.light)))
             lightImage.imageAsset?.register(dark,
-                                            with: config.withTraitCollection(
-                                                UITraitCollection.init(userInterfaceStyle:
-                                                                    UIUserInterfaceStyle.dark)))
+                 with: config.withTraitCollection(
+                        .init(userInterfaceStyle:.dark)))
             return lightImage.imageAsset?.image(with: UITraitCollection.current) ?? light
         } else {
             return light
@@ -92,7 +91,8 @@ extension LXSwiftBasics where Base: UIImage {
                                  corners: UIRectCorner,
                                  borderWidth: CGFloat = 0,
                                  borderColor: UIColor = UIColor.white,
-                                 borderLineJoin: CGLineJoin = .round) -> UIImage? {
+                                 borderLineJoin: CGLineJoin = .round)
+    -> UIImage? {
 
         UIGraphicsBeginImageContextWithOptions(base.size, false, base.scale)
         guard let context = UIGraphicsGetCurrentContext(),
@@ -108,11 +108,10 @@ extension LXSwiftBasics where Base: UIImage {
         
         var path: UIBezierPath? = nil
         if borderWidth < minSize / 2 {
-            path = UIBezierPath(roundedRect: rect.insetBy(dx: borderWidth,
-                                                          dy: borderWidth),
-                                byRoundingCorners: corners,
-                                cornerRadii: CGSize(width: radius,
-                                                    height: borderWidth))
+            path = UIBezierPath(roundedRect:
+                     rect.insetBy(dx: borderWidth, dy: borderWidth),
+                     byRoundingCorners: corners,
+                     cornerRadii: CGSize(width: radius,height: borderWidth))
         }
         path?.close()
         context.saveGState()
@@ -142,9 +141,9 @@ extension LXSwiftBasics where Base: UIImage {
     
     /// 框架截图（捕捉图片的任何部分）
     public func imageShot(byFrame frame: CGRect?) -> UIImage? {
-        
+        guard let rect = frame else { return nil }
         UIGraphicsBeginImageContextWithOptions(base.size, false, 0.0)
-        let path = UIBezierPath(rect: frame!)
+        let path = UIBezierPath(rect: rect)
         path.addClip()
         base.draw(at: CGPoint.zero)
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -153,19 +152,16 @@ extension LXSwiftBasics where Base: UIImage {
     }
     
     /// 分割更多图像
-    public func imageCut(withRow row:Int, col:Int) -> [UIImage] {
-        
-        guard let imageRef = base.cgImage else {return [UIImage()]}
-        var images: [UIImage] = [UIImage]()
+    public func imageCut(withRow row:Int, col:Int) -> [UIImage]? {
+        guard let imageRef = base.cgImage else { return nil }
+        var images = [UIImage]()
         for i in 0..<row {
             for j in 0..<col {
-                guard let subImageRef = imageRef.cropping(to:
-                                CGRect(x: CGFloat(j * imageRef.width / col),
-                                         y: CGFloat(i * imageRef.height / row),
-                                         width: CGFloat(imageRef.width / col),
-                                         height: CGFloat(imageRef.height / row))) else {
-                    return [UIImage()]
-                }
+                let rect = CGRect(x: CGFloat(j * imageRef.width / col),
+                                   y: CGFloat(i * imageRef.height / row),
+                                   width: CGFloat(imageRef.width / col),
+                                   height: CGFloat(imageRef.height / row))
+                guard let subImageRef = imageRef.cropping(to: rect) else { return nil }
                 images.append(UIImage(cgImage: subImageRef))
             }
         }
@@ -178,7 +174,8 @@ extension LXSwiftBasics where Base: UIImage {
     
     /// 创建图像返回newImage
     public static func image(WithColor color: UIColor,
-                             size: CGSize = CGSize(width: 10, height: 10)) -> UIImage? {
+                             size: CGSize = CGSize(width: 10, height: 10))
+    -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, 1.0)
         let context = UIGraphicsGetCurrentContext()
         context?.setFillColor(color.cgColor)
@@ -189,20 +186,22 @@ extension LXSwiftBasics where Base: UIImage {
     }
     
     /// 图像滤波处理
-    public func imageFilter(withFilterName filterName: String) -> UIImage? {
+    public func imageFilter(withFilterName filterName: String)
+    -> UIImage? {
         let inputImage = CIImage(image: base)
         let filter = CIFilter(name: filterName)
         filter?.setValue(inputImage, forKey: kCIInputImageKey)
-        let outputImage = filter?.outputImage!
+        guard let outputImage = filter?.outputImage else { return nil }
         let context: CIContext = CIContext(options: nil)
-        let cgImage = context.createCGImage(outputImage!,
-                                            from: (outputImage?.extent)!)
-        let newImage = UIImage(cgImage: cgImage!)
+        guard let cgImage = context.createCGImage(outputImage,
+                     from: outputImage.extent) else { return nil }
+        let newImage = UIImage(cgImage: cgImage)
         return newImage
     }
     
     /// 用手势擦除图片
-    public static func clearImage(withView view: UIView?, rect: CGRect) -> UIImage? {
+    public static func clearImage(withView view: UIView?, rect: CGRect)
+    -> UIImage? {
         guard let v = view else { return nil }
         UIGraphicsBeginImageContextWithOptions(v.bounds.size, false, 0.0)
         let imageCtx = UIGraphicsGetCurrentContext()
@@ -214,10 +213,11 @@ extension LXSwiftBasics where Base: UIImage {
     }
     
     /// 图片合成
-    public func imageCompose(withImages images:[UIImage], imageRect: [CGRect]) -> UIImage? {
-        let imageRef = base.cgImage
-        let w: CGFloat = CGFloat((imageRef?.width)!)
-        let h: CGFloat = CGFloat((imageRef?.height)!)
+    public func imageCompose(withImages images:[UIImage], imageRect: [CGRect])
+    -> UIImage? {
+        guard let imageRef = base.cgImage else { return nil }
+        let w = CGFloat(imageRef.width)
+        let h = CGFloat(imageRef.height)
         UIGraphicsBeginImageContext(CGSize(width: w, height: h))
         base.draw(in: CGRect(x: 0, y: 0, width: w, height: h))
         for i in 0..<images.count {
@@ -232,7 +232,8 @@ extension LXSwiftBasics where Base: UIImage {
     }
     
     /// 视频图像
-    public static func image(withVideoUrl videoUrl: URL?) -> UIImage? {
+    public static func image(withVideoUrl videoUrl: URL?)
+    -> UIImage? {
         guard let videoUrl = videoUrl else { return nil }
         
         let asset = AVURLAsset(url: videoUrl, options: nil)
@@ -256,7 +257,8 @@ extension LXSwiftBasics where Base: UIImage {
     
     /// 图像缩放大小，压缩
     public func zoomTo(size: CGSize,
-                       mode contentMode: UIView.ContentMode = .scaleAspectFill) -> UIImage {
+                       mode contentMode: UIView.ContentMode = .scaleAspectFill)
+    -> UIImage {
         let targetRect = CGRect(origin: CGPoint(x: 0, y: 0), size: size)
         UIGraphicsBeginImageContextWithOptions(targetRect.size, true, UIScreen.main.scale)
         let ctx = UIGraphicsGetCurrentContext()
@@ -275,7 +277,8 @@ extension LXSwiftBasics where Base: UIImage {
     }
     
     /// 图像旋转
-    public func rotation(_ orientation: UIImage.Orientation) -> UIImage {
+    public func rotation(_ orientation: UIImage.Orientation)
+    -> UIImage {
         guard let cgimage = base.cgImage else {
             return base
         }
@@ -285,9 +288,10 @@ extension LXSwiftBasics where Base: UIImage {
     
     /// 旋转图片（解决90度摄影问题）
     public func fixOrientation() -> UIImage {
-        if base.imageOrientation == .up {
-            return base
-        }
+        
+        guard let bgImage = base.cgImage else { return base }
+        if base.imageOrientation == .up { return base }
+        
         var transform = CGAffineTransform.identity
         switch base.imageOrientation {
         case .down, .downMirrored:
@@ -319,22 +323,22 @@ extension LXSwiftBasics where Base: UIImage {
         }
         let ctx = CGContext(data: nil, width: Int(base.size.width),
                             height: Int(base.size.height),
-                            bitsPerComponent: base.cgImage!.bitsPerComponent,
-                            bytesPerRow: 0, space: base.cgImage!.colorSpace!,
-                            bitmapInfo: base.cgImage!.bitmapInfo.rawValue)
+                            bitsPerComponent: bgImage.bitsPerComponent,
+                            bytesPerRow: 0, space: bgImage.colorSpace!,
+                            bitmapInfo: bgImage.bitmapInfo.rawValue)
         ctx?.concatenate(transform)
         switch base.imageOrientation {
         case .left, .leftMirrored, .right, .rightMirrored:
-            ctx?.draw(base.cgImage!, in: CGRect(x: CGFloat(0),
-                                                y: CGFloat(0),
-                                                width: CGFloat(base.size.height),
-                                                height: CGFloat(base.size.width)))
+            ctx?.draw(bgImage, in: CGRect(x: CGFloat(0),
+                                        y: CGFloat(0),
+                                        width: CGFloat(base.size.height),
+                                        height: CGFloat(base.size.width)))
             break
         default:
-            ctx?.draw(base.cgImage!, in: CGRect(x: CGFloat(0),
-                                                y: CGFloat(0),
-                                                width: CGFloat(base.size.width),
-                                                height: CGFloat(base.size.height)))
+            ctx?.draw(bgImage, in: CGRect(x: CGFloat(0),
+                                        y: CGFloat(0),
+                                        width: CGFloat(base.size.width),
+                                        height: CGFloat(base.size.height)))
             break
         }
         let cgimg: CGImage = (ctx?.makeImage())!

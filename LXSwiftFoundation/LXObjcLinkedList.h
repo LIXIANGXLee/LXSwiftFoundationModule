@@ -12,6 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// 节点类
 @interface LXLinkedMapNode : NSObject
 @property(nonatomic, strong) LXLinkedMapNode *prev;
 @property(nonatomic, strong) LXLinkedMapNode *next;

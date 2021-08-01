@@ -36,10 +36,8 @@
             }];
             
         } else {
-            self.innerThread = [[NSThread alloc]initWithTarget:[LXObjcProxy
-                                                                proxyWithTarget:self]
-                                                      selector:@selector(__saveThread)
-                                                        object:nil];
+            LXObjcProxy *proxy = [LXObjcProxy proxyWithTarget:self];
+            self.innerThread = [[NSThread alloc]initWithTarget:proxy selector:@selector(__saveThread) object:nil];
         }
         
         [self start];
@@ -79,7 +77,6 @@
 }
 
 #pragma mark - private methods
-
 -(void)__saveThread{
 
     CFRunLoopSourceContext context = {0};

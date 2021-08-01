@@ -11,24 +11,25 @@ import UIKit
 /// Define protocol
 public protocol LXSwiftCompatible {
     
-    /// Extended type
+    /// 协议扩展类型
     associatedtype T
     
-    /// LXSwiftBasics extensions.
+    /// 类型扩展属性
     static var lx: LXSwiftBasics<T>.Type { get set }
-
-    /// LXSwiftBasics extensions.
+    
+    /// 实例扩展属性
     var lx: LXSwiftBasics<T> { get set }
     
 }
 
-/// Extend calculation properties for protocol
+/// 扩展协议的计算属性
 public extension LXSwiftCompatible {
     
     /// 为了解决结构变异的方法问题，对静态计算属性集进行了扩展
     static var lx: LXSwiftBasics<Self>.Type {
         set {
-             // this enables using LXSwiftBasics to "mutating" base type
+            
+            /// 对于结构体修改属性时加"mutating" 类型后起作用
         }
         
         get {
@@ -39,7 +40,8 @@ public extension LXSwiftCompatible {
     /// 为了解决结构变异中的方法问题，对实例计算属性集进行了扩展
     var lx: LXSwiftBasics<Self> {
         set {
-            // this enables using LXSwiftBasics to "mutating" base type
+            
+            /// 对于结构体实例修改属性时加"mutating" 类型后起作用
         }
         
         get {
@@ -48,20 +50,19 @@ public extension LXSwiftCompatible {
     }
 }
 
-/// Define Property protocol
 protocol LXSwiftPropertyCompatible {
   
-    /// Extended type
+    /// 协议扩展类型
     associatedtype T
     
-    ///Alias for callback function
+    /// 类别扩展
     typealias SwiftCallBack = ((T?) -> ())
     
-    ///Define the calculated properties of the closure type
-    var swiftCallBack: SwiftCallBack?  { get set }
+    /// 定义闭包类型的计算属性
+    var swiftCallBack: SwiftCallBack? { get set }
 }
 
-/// cell protocol
+/// 任意类型协议
 public protocol LXSwiftCellCompatible: AnyObject {
     static var reusableSwiftIdentifier: String { get }
 }

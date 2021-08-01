@@ -24,8 +24,7 @@ extension UISlider: LXSwiftPropertyCompatible {
     typealias T = Float
     var swiftCallBack: SwiftCallBack? {
         get { return lx_getAssociatedObject(self, &sliderCallBackKey) }
-        set { lx_setRetainedAssociatedObject(self,
-                                             &sliderCallBackKey, newValue) }
+        set { lx_setRetainedAssociatedObject(self, &sliderCallBackKey, newValue) }
     }
     
     @objc func sliderSwitchAction(_ event: UISlider) {

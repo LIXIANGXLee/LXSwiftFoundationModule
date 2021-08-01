@@ -2,10 +2,12 @@
 //  LXSwift+Array.swift
 //  LXSwiftFoundation
 //
-//  Created by 李响 on 2021/5/5.
+//  Created by Mac on 2016/9/26.
+//  Copyright © 2016 李响. All rights reserved.
 //
 
 import UIKit
+
 extension Array: LXSwiftCompatible { }
 
 extension LXSwiftBasics where Base == Array<Any> {

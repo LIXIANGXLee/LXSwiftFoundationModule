@@ -88,7 +88,7 @@ public struct LXSwiftApp {
         var touchBarH: CGFloat = 0
         if #available(iOS 11.0, *) {
             touchBarH = UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0
-            if touchBarH == 0 && Int(statusbarH) >= 44 {
+            if touchBarH == 0 && Int(statusbarH) > 20 {
                 touchBarH = 34
             }
         }

@@ -94,7 +94,7 @@ extension LXSwiftBasics where Base : UIButton {
 private var buttonCallBackKey: Void?
 extension UIButton: LXSwiftPropertyCompatible {
     public typealias T = UIButton
-    var swiftCallBack: SwiftCallBack?{
+    var swiftCallBack: SwiftCallBack? {
         get { return lx_getAssociatedObject(self, &buttonCallBackKey) }
         set { lx_setRetainedAssociatedObject(self, &buttonCallBackKey, newValue) }
     }

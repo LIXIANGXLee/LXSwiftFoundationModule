@@ -2,7 +2,7 @@
 //  LXObjcLinkedList.m
 //  LXSwiftFoundation
 //
-//  Created by 李响 on 2021/7/30.
+//  Created by 李响 on 2017/7/30.
 //
 
 #import "LXObjcLinkedList.h"
@@ -213,7 +213,7 @@
 - (void)rangeCheckForAdd:(int)index {
     
     NSString *errorStr = [NSString stringWithFormat:@"索引越界 index=%d, totalCount=%d",index, self.totalCount];
-    NSAssert( (index < 0 || index > self.totalCount) , errorStr);
+    NSAssert(!(index < 0 || index > self.totalCount), errorStr);
 }
 
 @end

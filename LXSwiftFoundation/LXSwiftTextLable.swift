@@ -56,14 +56,14 @@ open class LXSwiftTextLable: UIView {
     
     fileprivate lazy var tagGesture: UITapGestureRecognizer = {
         let tagGesture = UITapGestureRecognizer(target: self,
-                                                action: #selector(gestureTag(gesture:)))
+                  action: #selector(gestureTag(gesture:)))
         tagGesture.numberOfTouchesRequired = 1
         return tagGesture
     }()
     
     fileprivate lazy var longGesture: UILongPressGestureRecognizer = {
         let longGesture = UILongPressGestureRecognizer(target: self,
-                                                       action: #selector(gestureLong(gesture:)))
+                   action: #selector(gestureLong(gesture:)))
         longGesture.minimumPressDuration = 0.8
         return longGesture
     }()
@@ -85,7 +85,7 @@ open class LXSwiftTextLable: UIView {
         
         textView.attributedText = attr
         attr.enumerateAttributes(in: NSRange(location: 0, length: attr.length),
-                                 options: NSAttributedString.EnumerationOptions(rawValue: 0))
+                 options: NSAttributedString.EnumerationOptions(rawValue: 0))
             { (objct, range, stop) in
                 let t = objct[NSAttributedString.Key(LXSwiftRegex.textLinkConst)]
                 guard let textM = t as? String else { return }

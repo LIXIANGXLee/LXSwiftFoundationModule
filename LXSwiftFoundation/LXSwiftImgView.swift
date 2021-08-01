@@ -9,7 +9,8 @@
 import UIKit
 
 open class LXSwiftImgView: UIImageView {
-    /// call back
+   
+    /// 回调函数别名
     public typealias ImgViewCallBack = ((_ imgView: LXSwiftImgView?) -> ())
 
     var imgViewCallBack: LXSwiftImgView.ImgViewCallBack?
@@ -26,7 +27,7 @@ open class LXSwiftImgView: UIImageView {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         let tapGesture = UITapGestureRecognizer(target: self,
-                                                action: #selector(swiftImgViewAction(_:)))
+                    action: #selector(swiftImgViewAction(_:)))
         addGestureRecognizer(tapGesture)
     }
     
@@ -35,7 +36,7 @@ open class LXSwiftImgView: UIImageView {
     }
 }
 
-/// private
+/// 私有函数扩展
 extension LXSwiftImgView {
     
     /// action call

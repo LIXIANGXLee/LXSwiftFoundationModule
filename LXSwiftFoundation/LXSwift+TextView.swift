@@ -33,7 +33,7 @@ extension LXSwiftBasics where Base : LXSwiftTextView {
     }
     
     /// 设置字体和文本颜色
-    public func set(withFont font: UIFont, textColor: UIColor?) {
+    public func set(with font: UIFont, textColor: UIColor?) {
         base.font = font
         if let c = textColor {
             base.textColor = c
@@ -41,20 +41,20 @@ extension LXSwiftBasics where Base : LXSwiftTextView {
     }
     
     /// 设置粗体字体和文本颜色
-    public func set(withBoldFont fontSize: CGFloat,textColor: String) {
-        set(withFont: UIFont.lx.fontWithBold(fontSize),
+    public func set(withBold fontSize: CGFloat,textColor: String) {
+        set(with: UIFont.lx.fontWithBold(fontSize),
             textColor: UIColor.lx.color(hex: textColor))
     }
     
     /// 设置中等字体和文本颜色
-    public func set(withMediumFont fontSize: CGFloat, textColor: String) {
-        set(withFont: UIFont.lx.fontWithMedium(fontSize),
+    public func set(withMedium fontSize: CGFloat, textColor: String) {
+        set(with: UIFont.lx.fontWithMedium(fontSize),
             textColor: UIColor.lx.color(hex: textColor))
     }
     
     /// 设置常规字体和文本颜色
-    public func set(withRegularFont fontSize: CGFloat, textColor: String) {
-        set(withFont: UIFont.lx.fontWithRegular(fontSize),
+    public func set(withRegular fontSize: CGFloat, textColor: String) {
+        set(with: UIFont.lx.fontWithRegular(fontSize),
             textColor: UIColor.lx.color(hex: textColor))
     }
     

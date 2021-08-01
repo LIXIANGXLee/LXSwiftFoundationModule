@@ -37,7 +37,9 @@ extension LXSwiftBasics where Base: UIView {
         if isContainsWKWebView() {
             base.drawHierarchy(in: base.bounds, afterScreenUpdates: true)
         }else{
-            base.layer.render(in: UIGraphicsGetCurrentContext()!)
+            if let ctx = UIGraphicsGetCurrentContext() {
+                base.layer.render(in: ctx)
+            }
         }
         
         let snapImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -45,7 +47,7 @@ extension LXSwiftBasics where Base: UIView {
         return snapImage
     }
     
-    /// -快照管理器，修复wkwebview屏幕截图错误。
+    /// 快照管理器，修复wkwebview屏幕截图错误。
     public func isContainsWKWebView() -> Bool {
         if base.isKind(of: WKWebView.self) {
             return true
@@ -62,14 +64,7 @@ extension LXSwiftBasics where Base: UIView {
 //MARK: -  Extending methods for UIView
 extension LXSwiftBasics where Base: UIView {
   
-    ///  view 渐变色
-    ///
-    /// - Parameters:
-    ///   - colors: [UIColor]
-    ///   - locations: []
-    ///   - startPoint: start
-    ///   - endPoint: end
-    ///   - size leyar 大小
+    /// view 渐变色
     public func setGradientLayer(with colors: [UIColor],
                                  locations: [NSNumber] = [0.0,1.0],
                                  startPoint: CGPoint = CGPoint(x: 0, y: 0.5),
@@ -89,12 +84,6 @@ extension LXSwiftBasics where Base: UIView {
     }
     
     /// view 的阴影
-    ///
-    /// - Parameters:
-    ///   - color: Shadow color
-    ///   - radius: shadowRadius
-    ///   - opacity: shadowOpacity
-    ///   - offset: shadowOffset
     public func setShadow(color: UIColor, radius: CGFloat,
                           opacity: Float, offset: CGSize = CGSize.zero) {
         base.layer.shadowColor = color.cgColor
@@ -126,7 +115,7 @@ extension LXSwiftBasics where Base: UIView {
         base.layer.masksToBounds = clips
     }
     
-    ///  圆角 cornerRadius(topLeft topRight bottomLeft bottomRight)
+    /// 圆角 cornerRadius(topLeft topRight bottomLeft bottomRight)
     ///
     /// - Parameters:
     ///   - cornerRadii: radius size

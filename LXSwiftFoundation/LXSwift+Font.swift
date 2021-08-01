@@ -13,7 +13,7 @@ extension UIFont: LXSwiftCompatible { }
 //MARK: -  Extending properties for UIFont
 extension LXSwiftBasics where Base: UIFont {
    
-    ///   获取字体斜体
+    /// 获取字体斜体
     ///
     /// - Parameters:
     /// - size: 字体大小

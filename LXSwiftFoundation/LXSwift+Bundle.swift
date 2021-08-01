@@ -13,12 +13,12 @@ extension Bundle: LXSwiftCompatible { }
 //MARK: -  Extending methods  for Bundle
 extension LXSwiftBasics where Base: Bundle {
     
-    /// Get namespace
+    /// 获取命名空间
     public static var namespace: String? {
         return Bundle.main.infoDictionary?["CFBundleExecutable"] as? String
     }
     
-    /// progect name
+    /// 项目名字
     public static var bundleName: String? {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String
     }
@@ -33,7 +33,7 @@ extension LXSwiftBasics where Base: Bundle {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
     }
     
-    /// build version
+    /// build 版本号
     public static var buildVersion: String? {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String
     }
@@ -43,13 +43,13 @@ extension LXSwiftBasics where Base: Bundle {
         return Bundle.main.localizedInfoDictionary?["CFBundleDisplayName"] as? String
     }
     
-    ///获取icon图标
+    /// 获取icon图标
     public static var appIcon: UIImage? {
         guard let lastIcon = appIconStrs?.last else { return nil }
         return UIImage(named: lastIcon)
     }
     
-    ///获取icon string 集合
+    /// 获取icon string 集合
     public static var appIconStrs: [String]? {
         guard let iconsDictionary = Bundle.main.infoDictionary?["CFBundleIcons"] as? [String: Any],
             let primaryIconsDictionary = iconsDictionary["CFBundlePrimaryIcon"] as? [String: Any],

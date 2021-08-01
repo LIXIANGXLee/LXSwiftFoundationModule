@@ -23,7 +23,7 @@ public struct LXSwiftRegexType {
     public var color: UIColor = UIColor.orange
     public var font: UIFont = UIFont.systemFont(ofSize: 15)
     
-    /// 是否匹配表达式true for expression match false for hyperlink，
+    /// 是否匹配表达式true 是匹配表情 
     public var isExpression: Bool = false
 }
 

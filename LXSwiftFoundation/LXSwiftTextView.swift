@@ -27,16 +27,14 @@ open class LXSwiftTextView: UITextView {
         font = UIFont.systemFont(ofSize: 14)
         
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(textDidChange),
-                                               name: UITextView.textDidChangeNotification,
-                                               object: self)
+            selector: #selector(textDidChange), name: UITextView.textDidChangeNotification, object: self)
     }
     
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    /// Destruction
+    /// 移除通知
     deinit { NotificationCenter.default.removeObserver(self) }
     
     open override var font: UIFont? {
@@ -53,7 +51,7 @@ open class LXSwiftTextView: UITextView {
         let labelX = textContainer.lineFragmentPadding
         let labelY = CGFloat(8)
         let size = self.placehoderLabel.text?.lx.size(font: placehoderLabel.font,
-                        width: self.frame.width - CGFloat(labelX * 2)) ?? CGSize.zero
+                width: self.frame.width - CGFloat(labelX * 2)) ?? CGSize.zero
         placehoderLabel.frame = CGRect(origin: CGPoint(x: labelX, y: labelY),
                                        size: size)
     }
@@ -63,7 +61,7 @@ open class LXSwiftTextView: UITextView {
 private var maxTextLengthKey: Void?
 extension LXSwiftTextView {
     
-    /// can save maxTextLength
+    /// 设置输入文本最大长度
     var maxTextLength: Int? {
         get { return lx_getAssociatedObject(self, &maxTextLengthKey) }
         set { lx_setRetainedAssociatedObject(self, &maxTextLengthKey,

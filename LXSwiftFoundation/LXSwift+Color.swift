@@ -16,14 +16,16 @@ extension LXSwiftBasics where Base: UIColor {
     
     /// 暗黑模式 和 亮模式
     public static func color(lightHex: String, darkHex: String,
-                             alpha: CGFloat = 1.0) -> UIColor {
+                             alpha: CGFloat = 1.0)
+    -> UIColor {
         let light = UIColor(lightHex, alpha: alpha)
         let dark =  UIColor(darkHex, alpha: alpha)
         return color(lightColor: light, darkColor: dark)
     }
     
     /// 暗黑模式 和 亮模式
-    public static func color(lightColor: UIColor, darkColor: UIColor) -> UIColor {
+    public static func color(lightColor: UIColor, darkColor: UIColor)
+    -> UIColor {
         if #available(iOS 13.0, *) {
             return UIColor { (traitCollection) -> UIColor in
                 if traitCollection.userInterfaceStyle == .dark {
@@ -38,17 +40,22 @@ extension LXSwiftBasics where Base: UIColor {
     }
     
     // MARK: - Constructor (hexadecimal)
-    public static func color(hex: String, alpha: CGFloat = 1.0) -> UIColor {
+    /// 根据字符串设置颜色
+    public static func color(hex: String, alpha: CGFloat = 1.0)
+    -> UIColor {
         return UIColor(hex, alpha: alpha)
     }
     
-    public static func color(hex: Int, alpha: CGFloat = 1.0) -> UIColor {
+    /// 根据十六进制数设置颜色
+    public static func color(hex: Int, alpha: CGFloat = 1.0)
+    -> UIColor {
         return UIColor(hex, alpha: alpha)
     }
     
-    ///Constructor r g b a
+    /// 根据R、G、B设置颜色
     public static func color(r : CGFloat, g : CGFloat, b : CGFloat,
-                             alpha : CGFloat = 1.0)  -> UIColor? {
+                             alpha : CGFloat = 1.0)
+    -> UIColor? {
         return  UIColor(r: r, g: g, b:  b, alpha: alpha)
     }
     
@@ -59,7 +66,7 @@ extension LXSwiftBasics where Base: UIColor {
                        b: CGFloat(Int.lx.randomInt(lower: 0, upper: 256)))
     }
     
-   /// 获取rgb颜色
+   /// 获取两个颜色rgb的差值的颜色值
     public static func getRGBDelta(_ firstColor: UIColor, _ seccondColor: UIColor)
     -> (CGFloat, CGFloat, CGFloat) {
         let firstRGB = firstColor.lx.getRGB()
@@ -69,7 +76,7 @@ extension LXSwiftBasics where Base: UIColor {
                 firstRGB.2 - secondRGB.2)
     }
     
-    /// r g b
+    /// 获取rgb颜色值
     public func getRGB() -> (CGFloat, CGFloat, CGFloat) {
         guard let cmps = base.cgColor.components else {
             fatalError("保证普通颜色是RGB方式传入")
@@ -81,11 +88,10 @@ extension LXSwiftBasics where Base: UIColor {
 //MARK: -  Extending Constructor methods for UIColor
 extension UIColor {
     
-    /// Constructor r g b a
+    /// 便利构造函数
     convenience init(r : CGFloat, g : CGFloat, b : CGFloat,
                      alpha : CGFloat = 1.0) {
-        self.init(red: r / 255.0,
-                  green: g / 255.0,
+        self.init(red: r / 255.0, green: g / 255.0,
                   blue: b / 255.0, alpha: alpha)
     }
     

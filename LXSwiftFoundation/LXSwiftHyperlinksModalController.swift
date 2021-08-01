@@ -235,10 +235,10 @@ public struct LXSwiftItem {
 // MARK: - LXItemView
 public class LXSwiftItemView: UIButton {
     //线的view
-    public var lineView: UIView!
+    public var lineView: UIView
     public override init(frame: CGRect) {
-        super.init(frame: frame)
         lineView = UIView()
+        super.init(frame: frame)
         addSubview(lineView)
     }
     

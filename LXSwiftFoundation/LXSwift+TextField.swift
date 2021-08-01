@@ -35,21 +35,21 @@ extension LXSwiftBasics where Base : LXSwiftTextField {
 extension LXSwiftBasics where Base : LXSwiftTextField {
     
     /// 设置文本字段左视图
-    public func setLeftView(_ view: UIView,
+    public func setLeftView(with view: UIView,
                             mode: UITextField.ViewMode = .always) {
         base.leftView = view
         base.leftViewMode = mode
     }
     
     /// 设置文本字段右视图
-    public func setRightView(_ view: UIView,
+    public func setRightView(with view: UIView,
                              mode: UITextField.ViewMode = .always) {
         base.rightView = view
         base.rightViewMode = mode
     }
     
     /// 设置占位符和颜色
-    public func set(withPlaceholder placeholder: String?,
+    public func set(with placeholder: String?,
                     color: UIColor? = UIColor.lx.color(hex: "999999")) {
         guard let placeholder = placeholder,
               let c = color else {  return  }
@@ -60,14 +60,13 @@ extension LXSwiftBasics where Base : LXSwiftTextField {
     }
     
     /// 设置占位符和颜色字符串
-    public func set(withPlaceholder placeholder: String?,
-                    color: String =  "999999") {
-        set(withPlaceholder: placeholder,
+    public func set(with placeholder: String?, color: String = "999999") {
+        set(with: placeholder,
             color: UIColor.lx.color(hex: color))
     }
     
     /// 设置字体和文本颜色
-    public func set(withFont font: UIFont, textColor: UIColor?) {
+    public func set(with font: UIFont, textColor: UIColor?) {
         base.font = font
         if let c = textColor{
             base.textColor = c
@@ -75,23 +74,20 @@ extension LXSwiftBasics where Base : LXSwiftTextField {
     }
     
     /// 设置粗体字体和文本颜色
-    public func set(withBoldFont fontSize: CGFloat,
-                    textColor: String) {
-        set(withFont: UIFont.lx.fontWithBold(fontSize),
+    public func set(withBold fontSize: CGFloat, textColor: String) {
+        set(with: UIFont.lx.fontWithBold(fontSize),
             textColor: UIColor.lx.color(hex: textColor))
     }
     
     /// 设置中等字体和文本颜色
-    public func set(withMediumFont fontSize: CGFloat,
-                    textColor: String) {
-        set(withFont: UIFont.lx.fontWithMedium(fontSize),
+    public func set(withMedium fontSize: CGFloat, textColor: String) {
+        set(with: UIFont.lx.fontWithMedium(fontSize),
             textColor: UIColor.lx.color(hex: textColor))
     }
     
     /// 设置常规字体和文本颜色
-    public func set(withRegularFont fontSize: CGFloat,
-                    textColor: String) {
-        set(withFont: UIFont.lx.fontWithRegular(fontSize),
+    public func set(withRegular fontSize: CGFloat, textColor: String) {
+        set(with: UIFont.lx.fontWithRegular(fontSize),
             textColor: UIColor.lx.color(hex: textColor))
     }
     
@@ -111,8 +107,7 @@ extension LXSwiftTextField: LXSwiftPropertyCompatible{
     /// 可以保存maxTextLength 最大长度
     var maxTextLength: Int? {
         get { return lx_getAssociatedObject(self, &maxTextLengthKey) }
-        set { lx_setRetainedAssociatedObject(self,
-                                             &maxTextLengthKey,
+        set { lx_setRetainedAssociatedObject(self, &maxTextLengthKey,
                                              newValue,.OBJC_ASSOCIATION_ASSIGN) }
     }
     

@@ -11,7 +11,7 @@ import UIKit
 ///扩展系统方法或属性。建议扩展lxswiftbasics
 public struct LXSwiftBasics<Base> {
     
-    /// Base object to extend.
+    /// 存储属性参数
     public var base: Base
     
     /// 使用基本对象创建扩展。

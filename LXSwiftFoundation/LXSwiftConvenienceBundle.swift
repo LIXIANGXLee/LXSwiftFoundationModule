@@ -2,8 +2,8 @@
 //  LXConvenienceBundle.swift
 //  LXSwiftFoundation
 //
-//  Created by Mac on 2020/4/23.
-//  Copyright © 2020 李响. All rights reserved.
+//  Created by Mac on 2017/4/23.
+//  Copyright © 2017 李响. All rights reserved.
 //
 
 

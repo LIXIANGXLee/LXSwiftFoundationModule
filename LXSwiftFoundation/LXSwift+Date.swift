@@ -65,7 +65,7 @@ extension LXSwiftBasics where Base == Date {
 //MARK: -  Extending properties  for NSData
 extension LXSwiftBasics where Base == Date {
     
-    /// is this year
+    /// 是否是今年
     public var isThisYear: Bool {
         let unit: Set<Calendar.Component> = [.year]
         let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(), unit: unit)
@@ -73,17 +73,19 @@ extension LXSwiftBasics where Base == Date {
         return result
     }
     
-    /// isYesterday
+    /// 是否是昨天
     public var isYesterday: Bool {
         let unit: Set<Calendar.Component> = [.day,.month,.year]
         let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(), unit: unit)
-        let count = nowComps.day! - selfCmps.day!
+
+        guard let nDay = nowComps.day,
+              let cDay = selfCmps.day else { return false }
         return (selfCmps.year == nowComps.year) &&
             (selfCmps.month == nowComps.month) &&
-            (count == 1)
+            ((nDay - cDay) == 1)
     }
     
-    /// is today
+    /// 是否是今天
     public var isToday: Bool{
         let unit: Set<Calendar.Component> = [.day,.month,.year]
         let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(), unit: unit)
@@ -92,7 +94,7 @@ extension LXSwiftBasics where Base == Date {
             (selfCmps.day == nowComps.day)
     }
     
-    /// An hour ago
+    /// 是否是一小时前
     public var isAnHourAgo: Bool{
         let unit: Set<Calendar.Component> = [.hour,.day,.month,.year]
         let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(), unit: unit)
@@ -102,7 +104,7 @@ extension LXSwiftBasics where Base == Date {
             (selfCmps.hour == nowComps.hour)
     }
     
-    /// An minute ago
+    /// 是否是一分钟内
     public var isJust: Bool{
         let unit: Set<Calendar.Component> = [.minute,.hour,.day,.month,.year]
         let (selfCmps,nowComps) = base.lx.dateCompare(with: Date(), unit: unit)
@@ -174,7 +176,6 @@ extension LXSwiftBasics where Base == Date {
          去年及以前：20XX-XX-XX
          */
         let now = Date()
-        //            let now = dateNow!
         let secDiff = now.timeIntervalSince1970 - base.timeIntervalSince1970
         let dayDiffSec = now.lx.noHourDate.timeIntervalSince1970 -
             base.lx.noHourDate.timeIntervalSince1970
