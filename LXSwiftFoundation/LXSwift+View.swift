@@ -150,7 +150,7 @@ extension LXSwiftBasics where Base: UIView {
     -> UITapGestureRecognizer {
         base.viewCallBack = viewCallBack
         let gesture = UITapGestureRecognizer(target: base,
-                                             action: #selector(base.gestureTap(_:)))
+                                  action: #selector(base.gestureTap(_:)))
         base.addGestureRecognizer(gesture)
         return gesture
     }

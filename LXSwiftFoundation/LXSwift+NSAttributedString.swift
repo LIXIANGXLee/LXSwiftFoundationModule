@@ -37,7 +37,6 @@ extension LXSwiftBasics where Base: NSAttributedString {
     }
 }
 
-
 //MARK: -  Extending properties and methods for NSMutableAttributedString
 extension LXSwiftBasics where Base: NSMutableAttributedString {
     
@@ -51,7 +50,6 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
         return base.attribute(key, at: index, effectiveRange: nil)
     }
     
-    /// Set font information
     @discardableResult
     public func set(with font: UIFont?, range: NSRange? = nil)
     -> NSMutableAttributedString {
@@ -60,7 +58,6 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
         return base
     }
     
-    /// Set font color information
     @discardableResult
     public func set(with textColor: UIColor?, range: NSRange? = nil)
     -> NSMutableAttributedString {
@@ -70,7 +67,6 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
         return base
     }
     
-    /// The background color of the font
     @discardableResult
     public func setBackgroundColor(with backgroundColor: UIColor?, range: NSRange? = nil)
     -> NSMutableAttributedString {
@@ -80,7 +76,7 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
         return base
     }
     
-    /// Underline
+    /// 添加下划线类型
     @discardableResult
     public func setUnderlineStyle(_ underlineStyle: NSUnderlineStyle, range: NSRange? = nil)
     -> NSMutableAttributedString {
@@ -89,7 +85,7 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
         return base
     }
     
-    /// Underline color
+    /// 添加下划线颜色
     @discardableResult
     public func setUnderlineColor(_ underlineColor: UIColor, range: NSRange? = nil)
     -> NSMutableAttributedString {
@@ -98,7 +94,6 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
         return base
     }
     
-    /// Word spacing
     @discardableResult
     public func setKern(_ kern: CGFloat, range: NSRange? = nil)
     -> NSMutableAttributedString {
@@ -107,7 +102,7 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
         return base
     }
     
-    /// Shadow of font
+    /// 阴影大小
     @discardableResult
     public func setShadow(_ shadow: NSShadow, range: NSRange? = nil)
     -> NSMutableAttributedString {
@@ -116,7 +111,7 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
         return base
     }
     
-    // Strikethrough
+    /// 内容横穿线
     @discardableResult
     public func setStrikethrough(_ style: NSUnderlineStyle, range: NSRange? = nil)
     -> NSMutableAttributedString {
@@ -125,7 +120,7 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
         return base
     }
     
-    /// Color of strikethrough
+    /// 内容横穿线颜色
     @discardableResult
     public func setStrikethroughColor(_ color: UIColor, range: NSRange? = nil)
     -> NSMutableAttributedString {
@@ -134,7 +129,7 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
         return base
     }
     
-    /// Set font alignment
+    /// 对齐方式
     @discardableResult
     public func setAlignment(_ alignment: NSTextAlignment)
     -> NSMutableAttributedString {
@@ -145,7 +140,7 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
         return base
     }
     
-    /// Row spacing
+    /// 行间距
     @discardableResult
     public func setLineSpace(_ lignSpace: CGFloat, range: NSRange? = nil)
     -> NSMutableAttributedString {
@@ -156,7 +151,7 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
         return base
     }
     
-    /// Segment spacing
+    /// 字间距
     @discardableResult
     public func setParagraphSpacing(_ paragraphSpacing: CGFloat,
                                     range: NSRange? = nil)

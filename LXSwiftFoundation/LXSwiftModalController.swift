@@ -32,8 +32,8 @@ open class LXSwiftModalController: UIViewController {
     
     /// 内容视图操作单击
     open lazy var contentGesture: UITapGestureRecognizer = {
-        return  UITapGestureRecognizer(target: self,
-                                       action: #selector(contentViewTaped(tap:)))
+        return UITapGestureRecognizer(target: self,
+                                      action: #selector(contentViewTaped(tap:)))
     }()
     
     /// allscreen UITapGestureRecognizer

@@ -47,7 +47,7 @@ extension LXSwiftBasics where Base: UILabel {
     public func set(regularSize: CGFloat, textColor: String,
                     alignment: NSTextAlignment? = nil) {
         let color = UIColor.lx.color(hex: textColor)
-        set(withFont: UIFont.lx.fontWithRegular(regularSize),
+        set(withFont: UIFont.lx.font(withRegular: regularSize),
             textColor: color, alignment: alignment)
     }
     
@@ -55,7 +55,7 @@ extension LXSwiftBasics where Base: UILabel {
     public func set(mediumSize: CGFloat, textColor: String,
                     alignment: NSTextAlignment? = nil) {
         let color = UIColor.lx.color(hex: textColor)
-        set(withFont: UIFont.lx.fontWithMedium(mediumSize),
+        set(withFont: UIFont.lx.font(withMedium: mediumSize),
             textColor: color, alignment: alignment)
     }
     
@@ -63,7 +63,7 @@ extension LXSwiftBasics where Base: UILabel {
    public func set(boldSize: CGFloat, textColor: String,
                    alignment: NSTextAlignment? = nil) {
        let color = UIColor.lx.color(hex: textColor)
-       set(withFont: UIFont.lx.fontWithBold(boldSize),
+       set(withFont: UIFont.lx.font(withBold: boldSize),
            textColor: color, alignment: alignment)
    }
 }

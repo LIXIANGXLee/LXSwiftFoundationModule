@@ -68,13 +68,11 @@ extension LXSwiftBasics where Base: UIImage {
     
     /// 返回图像是否包含alpha分量
     public var isContainsAlphaComponent: Bool {
-        let alphaInfo = base.cgImage?.alphaInfo
-        return (
-                alphaInfo == .first ||
-                alphaInfo == .last ||
-                alphaInfo == .premultipliedFirst ||
-                alphaInfo == .premultipliedLast
-        )
+        guard let alphaInfo = base.cgImage?.alphaInfo else { return false }
+        return ( alphaInfo == .first ||
+                 alphaInfo == .last ||
+                 alphaInfo == .premultipliedFirst ||
+                 alphaInfo == .premultipliedLast )
     }
 
     /// Returns whether the image is opaque.
@@ -97,7 +95,6 @@ extension LXSwiftBasics where Base: UIImage {
         UIGraphicsBeginImageContextWithOptions(base.size, false, base.scale)
         guard let context = UIGraphicsGetCurrentContext(),
               let cgImage = base.cgImage else { return nil }
-        
         let rect = CGRect(x: 0,
                           y: 0,
                           width: base.size.width,
@@ -140,7 +137,7 @@ extension LXSwiftBasics where Base: UIImage {
     }
     
     /// 框架截图（捕捉图片的任何部分）
-    public func imageShot(byFrame frame: CGRect?) -> UIImage? {
+    public func imageShot(by frame: CGRect?) -> UIImage? {
         guard let rect = frame else { return nil }
         UIGraphicsBeginImageContextWithOptions(base.size, false, 0.0)
         let path = UIBezierPath(rect: rect)
@@ -152,7 +149,7 @@ extension LXSwiftBasics where Base: UIImage {
     }
     
     /// 分割更多图像
-    public func imageCut(withRow row:Int, col:Int) -> [UIImage]? {
+    public func imageCut(with row:Int, col:Int) -> [UIImage]? {
         guard let imageRef = base.cgImage else { return nil }
         var images = [UIImage]()
         for i in 0..<row {
@@ -173,7 +170,7 @@ extension LXSwiftBasics where Base: UIImage {
 extension LXSwiftBasics where Base: UIImage {
     
     /// 创建图像返回newImage
-    public static func image(WithColor color: UIColor,
+    public static func image(with color: UIColor,
                              size: CGSize = CGSize(width: 10, height: 10))
     -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, 1.0)
@@ -186,7 +183,7 @@ extension LXSwiftBasics where Base: UIImage {
     }
     
     /// 图像滤波处理
-    public func imageFilter(withFilterName filterName: String)
+    public func imageFilter(with filterName: String)
     -> UIImage? {
         let inputImage = CIImage(image: base)
         let filter = CIFilter(name: filterName)
@@ -200,20 +197,20 @@ extension LXSwiftBasics where Base: UIImage {
     }
     
     /// 用手势擦除图片
-    public static func clearImage(withView view: UIView?, rect: CGRect)
+    public static func clearImage(with view: UIView?, rect: CGRect)
     -> UIImage? {
         guard let v = view else { return nil }
         UIGraphicsBeginImageContextWithOptions(v.bounds.size, false, 0.0)
-        let imageCtx = UIGraphicsGetCurrentContext()
-        view?.layer.render(in: imageCtx!)
-        imageCtx!.clear(rect)
+        guard let imageCtx = UIGraphicsGetCurrentContext() else { return nil }
+        view?.layer.render(in: imageCtx)
+        imageCtx.clear(rect)
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return newImage
     }
     
     /// 图片合成
-    public func imageCompose(withImages images:[UIImage], imageRect: [CGRect])
+    public func imageCompose(with images:[UIImage], imageRect: [CGRect])
     -> UIImage? {
         guard let imageRef = base.cgImage else { return nil }
         let w = CGFloat(imageRef.width)
@@ -232,7 +229,7 @@ extension LXSwiftBasics where Base: UIImage {
     }
     
     /// 视频图像
-    public static func image(withVideoUrl videoUrl: URL?)
+    public static func image(with videoUrl: URL?)
     -> UIImage? {
         guard let videoUrl = videoUrl else { return nil }
         
@@ -241,22 +238,20 @@ extension LXSwiftBasics where Base: UIImage {
         generator.appliesPreferredTrackTransform = true
         let time = CMTimeMakeWithSeconds(1, preferredTimescale: 600)
         guard let image = try? generator.copyCGImage(at: time,
-                                                     actualTime: nil) else {
-            return nil
-        }
+                    actualTime: nil) else { return nil }
         let shotImage = UIImage(cgImage: image)
         return shotImage;
     }
         
     /// 缩放返回图像 scale: (0~1)
-    public func zoomTo(scale: CGFloat) -> UIImage {
+    public func zoomTo(by scale: CGFloat) -> UIImage {
         let targetSize = CGSize(width: base.size.width * scale,
                                 height: base.size.height * scale)
-        return zoomTo(size: targetSize)
+        return zoomTo(by: targetSize)
     }
     
     /// 图像缩放大小，压缩
-    public func zoomTo(size: CGSize,
+    public func zoomTo(by size: CGSize,
                        mode contentMode: UIView.ContentMode = .scaleAspectFill)
     -> UIImage {
         let targetRect = CGRect(origin: CGPoint(x: 0, y: 0), size: size)
@@ -277,7 +272,7 @@ extension LXSwiftBasics where Base: UIImage {
     }
     
     /// 图像旋转
-    public func rotation(_ orientation: UIImage.Orientation)
+    public func rotation(with orientation: UIImage.Orientation)
     -> UIImage {
         guard let cgimage = base.cgImage else {
             return base
@@ -287,7 +282,7 @@ extension LXSwiftBasics where Base: UIImage {
     }
     
     /// 旋转图片（解决90度摄影问题）
-    public func fixOrientation() -> UIImage {
+    public var fixOrientation: UIImage? {
         
         guard let bgImage = base.cgImage else { return base }
         if base.imageOrientation == .up { return base }
@@ -321,10 +316,11 @@ extension LXSwiftBasics where Base: UIImage {
         default:
             break
         }
+        guard let space = bgImage.colorSpace else { return nil }
         let ctx = CGContext(data: nil, width: Int(base.size.width),
                             height: Int(base.size.height),
                             bitsPerComponent: bgImage.bitsPerComponent,
-                            bytesPerRow: 0, space: bgImage.colorSpace!,
+                            bytesPerRow: 0, space: space,
                             bitmapInfo: bgImage.bitmapInfo.rawValue)
         ctx?.concatenate(transform)
         switch base.imageOrientation {
@@ -341,13 +337,13 @@ extension LXSwiftBasics where Base: UIImage {
                                         height: CGFloat(base.size.height)))
             break
         }
-        let cgimg: CGImage = (ctx?.makeImage())!
+        guard let cgimg = ctx?.makeImage() else { return nil }
         let img = UIImage(cgImage: cgimg)
         return img
     }
     
     /// 如何将彩色图片转换成黑白图片
-    public func grayImage() -> UIImage? {
+    public var grayImage: UIImage? {
         guard let cgImage = base.cgImage else { return nil }
         
         let width = base.size.width
@@ -360,10 +356,15 @@ extension LXSwiftBasics where Base: UIImage {
                                 space: colorSpace,
                                 bitmapInfo: CGImageAlphaInfo.none.rawValue)
         context?.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
-        guard let targetCGImage = context?.makeImage() else {
-            return nil
-        }
+        guard let targetCGImage = context?.makeImage() else { return nil }
         return UIImage(cgImage: targetCGImage)
+    }
+    
+    /// 获取图片内存大小 单位字节bytes
+    public var imageCost: Int {
+        guard let cgImage = base.cgImage else { return 1 }
+        let cost = cgImage.height * cgImage.bytesPerRow
+        return max(cost, 1);
     }
 }
 
@@ -375,7 +376,7 @@ extension LXSwiftBasics where Base: UIImage {
                                    size: CGSize = CGSize(width: 10, height: 10),
                                    complete: @escaping (UIImage?) -> ()) {
         DispatchQueue.global().async{
-            let async_image = self.image(WithColor: color, size: size)
+            let async_image = self.image(with: color, size: size)
             DispatchQueue.main.async(execute: {
                 complete(async_image)
             })
@@ -415,7 +416,7 @@ extension LXSwiftBasics where Base: UIImage {
     public static func async_image(with videoUrl: URL?,
                                    complete: @escaping (UIImage?) -> ()) {
         DispatchQueue.global().async{
-            let async_image = self.image(withVideoUrl: videoUrl)
+            let async_image = self.image(with: videoUrl)
             DispatchQueue.main.async(execute: {
                 complete(async_image)
             })
@@ -427,7 +428,7 @@ extension LXSwiftBasics where Base: UIImage {
                              contentMode: UIView.ContentMode = .scaleAspectFill,
                              complete: @escaping (UIImage?) -> ()) {
         DispatchQueue.global().async{
-            let async_image = self.zoomTo(size: size, mode: contentMode)
+            let async_image = zoomTo(by: size, mode: contentMode)
             DispatchQueue.main.async(execute: {
                 complete(async_image)
             })
@@ -438,7 +439,7 @@ extension LXSwiftBasics where Base: UIImage {
     public func async_imageCompose(with images:[UIImage], imageRect: [CGRect],
                                    complete: @escaping (UIImage?) -> ()) {
         DispatchQueue.global().async{
-            let async_image = self.imageCompose(withImages: images, imageRect: imageRect)
+            let async_image = self.imageCompose(with: images, imageRect: imageRect)
             DispatchQueue.main.async(execute: {
                 complete(async_image)
             })
@@ -449,7 +450,7 @@ extension LXSwiftBasics where Base: UIImage {
     public func async_imageCut(with row:Int, col:Int,
                                complete: @escaping ([UIImage?]?) -> ()){
         DispatchQueue.global().async{
-            let async_images = self.imageCut(withRow: row, col: col)
+            let async_images = self.imageCut(with: row, col: col)
             DispatchQueue.main.async(execute: {
                 complete(async_images)
             })
@@ -460,7 +461,7 @@ extension LXSwiftBasics where Base: UIImage {
     public func async_imageShot(byFrame frame: CGRect?,
                                 complete: @escaping (UIImage?) -> ()){
         DispatchQueue.global().async{
-            let async_images = self.imageShot(byFrame: frame)
+            let async_images = self.imageShot(by: frame)
             DispatchQueue.main.async(execute: {
                 complete(async_images)
             })
@@ -471,7 +472,7 @@ extension LXSwiftBasics where Base: UIImage {
     public func async_imageFilter(withFilterName filterName: String,
                                   completed:@escaping (UIImage?) -> ()) -> Void {
         DispatchQueue.global().async{
-            let newImage = self.imageFilter(withFilterName: filterName)
+            let newImage = self.imageFilter(with: filterName)
             DispatchQueue.main.async(execute: {
                 completed(newImage)
             })
@@ -482,10 +483,11 @@ extension LXSwiftBasics where Base: UIImage {
     public static func async_clearImage(withView view: UIView?, rect: CGRect,
                                         complete: @escaping (UIImage?) -> ()) {
         DispatchQueue.global().async{
-            let async_image = self.clearImage(withView: view, rect: rect)
+            let async_image = self.clearImage(with: view, rect: rect)
             DispatchQueue.main.async(execute: {
                 complete(async_image)
             })
         }
     }
+
 }

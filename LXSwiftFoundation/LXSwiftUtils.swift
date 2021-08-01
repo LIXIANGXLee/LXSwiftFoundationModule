@@ -11,14 +11,11 @@ import AVFoundation
 
 public struct LXSwiftUtils: LXSwiftCompatible {
     
-    /// callBack after  call tell
     public typealias TellCallBack = ((Bool) -> ())
-    
-    /// version enum
     public enum VersionCompareResult {
-        case big
-        case equal
-        case small
+        case big /// 大于
+        case equal /// 等于
+        case small /// 小于
     }
 }
 
@@ -37,24 +34,14 @@ extension LXSwiftUtils.VersionCompareResult {
 //MARK: -  Extending methods for LXSwiftUtils
 extension LXSwiftBasics where Base == LXSwiftUtils {
     
-    /// one version campare two version
-    ///
-    /// - Parameters:
-    /// - v1: one version
-    /// - v2: two version
-    /// - Returns: big: one > two  ,small:two  < one,equal:one == two
+    /// 两个版本比较大小 big: one > two, small: two < one,equal: one == two
     public static func versionCompare(v1: String, v2: String)
     -> LXSwiftUtils.VersionCompareResult {
         let ret = _compareVersionInSwift(v1, v2)
         return LXSwiftUtils.VersionCompareResult(rawValue: ret)
     }
     
-    /// one version campare two version
-    ///
-    /// - Parameters:
-    /// - v1: one version
-    /// - v2: two version
-    /// - Returns: big: one > two  ,small:two  < one,equal:one == two
+    /// 两个版本比较大小 big: one > two, small: two < one,equal: one == two
     public static func versionCompare(_ v1: String, _ v2: String)
     -> LXSwiftUtils.VersionCompareResult {
 
@@ -73,7 +60,7 @@ extension LXSwiftBasics where Base == LXSwiftUtils {
         return temp
     }
     
-    /// call tel for all app
+    /// 打电话
     public static func openTel(with number: String?,
                                _ tellCallBack: LXSwiftUtils.TellCallBack? = nil) {
         if let number = number,
@@ -85,12 +72,6 @@ extension LXSwiftBasics where Base == LXSwiftUtils {
     }
     
     /// 在小数点后保留几个有效数字
-    ///
-    /// - Parameters:
-    /// - text: text string
-    /// - digits: digits Number of significant digits reserved
-    /// - mode: mode
-    /// - Returns: string
     public static func formatDecimalString(with text: String, _ digits: Int,
                                            _ mode: NumberFormatter.RoundingMode = .down)
     -> String {
@@ -100,25 +81,22 @@ extension LXSwiftBasics where Base == LXSwiftUtils {
                                                   maxDigits: digits) ?? text
     }
 
-    ///小数点后保留二位有效数字
+    /// 小数点后保留二位有效数字
     public static func formatDecimalStringTwo(with text: String) -> String {
        return formatDecimalString(with: text, 2)
     }
     
-    ///小数点后保留三位有效数字
+    /// 小数点后保留三位有效数字
     public static func formatDecimalStringThree(with text: String) -> String {
        return formatDecimalString(with: text, 3)
     }
     
-    ///小数点后保留四位有效数字
+    /// 小数点后保留四位有效数字
     public static func formatDecimalStringFour(with text: String) -> String {
        return formatDecimalString(with: text, 4)
     }
     
     /// 从路径看plist变换字典
-    ///
-    /// - Parameter data: path
-    /// - Returns: Dictionary
     public static func readDictionary(with path: String?) -> Dictionary<String, Any>? {
         guard let path = path else { return nil }
         let url = URL(fileURLWithPath: path)
@@ -133,13 +111,13 @@ extension LXSwiftBasics where Base == LXSwiftUtils {
         
     /// 识别二维码图片
     public static func getQrCodeString(with image: UIImage?) -> String? {
-        let context =  CIContext(options: nil)
+        let context = CIContext(options: nil)
         let detector = CIDetector(ofType: CIDetectorTypeQRCode,
                                   context: context, options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])
         guard let cgImage = image?.cgImage else {
             return nil
         }
-        let ciImage =  CIImage(cgImage: cgImage)
+        let ciImage = CIImage(cgImage: cgImage)
         let feature = detector?.features(in: ciImage).first as? CIQRCodeFeature
         return feature?.messageString
     }

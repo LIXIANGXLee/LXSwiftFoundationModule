@@ -192,7 +192,7 @@ public class LXSwiftModalConfig {
 
     /// 标题颜色和字体大小 距离顶部的距离
     public var titleTop: CGFloat = scale_ip6_width(20)
-    public var titleFont: UIFont = UIFont.lx.fontWithMedium(18)
+    public var titleFont: UIFont = UIFont.lx.font(withMedium: 18)
     public var titleColor: UIColor = UIColor.black
     
     /// 内容颜色和字体大小 距离title的距离
@@ -223,7 +223,7 @@ public struct LXSwiftItem {
    public var callBack: LXSwiftItem.LXSwiftModalItemCallBack?
     
    public init(title: String, titleColor: UIColor = UIColor.black,
-                titleFont: UIFont = UIFont.lx.fontWithMedium(16),
+                titleFont: UIFont = UIFont.lx.font(withMedium: 16),
                 callBack: LXSwiftItem.LXSwiftModalItemCallBack?) {
         self.title = title
         self.titleFont = titleFont

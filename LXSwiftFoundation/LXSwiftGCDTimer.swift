@@ -24,10 +24,9 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
                              repeats: Bool = true, identified: String?,
                              task: LXSwiftGCDTimer.TaskCallBack?) {
         guard let iden = identified, delaySeconds >= 0,
-              interval >= 0, task != nil else { return }
+                  interval >= 0, task != nil else { return }
         let timer = DispatchSource.makeTimerSource(queue: DispatchQueue.global())
-        timer.schedule(deadline: .now() + delaySeconds,
-                       repeating: interval)
+        timer.schedule(deadline: .now() + delaySeconds, repeating: interval)
         LXSwiftGCDTimer.timers[iden] = timer
         timer.setEventHandler(handler: {
             DispatchQueue.lx.async { task?() }

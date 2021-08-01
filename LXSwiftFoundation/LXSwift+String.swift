@@ -92,9 +92,9 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     public var strToBool: Bool? {
         let string = base as! String
         switch string {
-        case "True", "true", "yes", "1":
+        case "True", "true", "yes", "YES", "1":
             return true
-        case "False", "false", "no", "0":
+        case "False", "false", "no", "NO", "0":
             return false
         default:
             return nil
@@ -128,13 +128,13 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     }
     
     /// 版本比较大小 Returns: big: base > two  ,small:two  < base, equal:base == two
-    public func versionCompare(_ v: String) -> LXSwiftUtils.VersionCompareResult {
+    public func versionCompare(with v: String) -> LXSwiftUtils.VersionCompareResult {
         let string = base as! String
         return LXSwiftUtils.lx.versionCompare(string, v)
     }
     
     /// 在小数点后保留几个有效数字
-    public func formatDecimalString(_ digits: Int) -> String {
+    public func formatDecimalString(by digits: Int) -> String {
         let string = base as! String
         guard let m =  Double(string) else { return string }
         return NSNumber(value: m).numberFormatter(with: .down,
@@ -143,17 +143,17 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     
     /// 小数点后保留两个有效数字。
     public var formatDecimalStringTwo: String {
-       return formatDecimalString(2)
+        return formatDecimalString(by: 2)
     }
     
     /// 小数点后保留三个有效数字。
     public var formatDecimalStringThree: String {
-       return formatDecimalString(3)
+        return formatDecimalString(by: 3)
     }
     
     /// 小数点后保留四个有效数字。
     public var formatDecimalStringFour: String {
-       return formatDecimalString(4)
+        return formatDecimalString(by: 4)
     }
 }
 

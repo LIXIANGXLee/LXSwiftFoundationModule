@@ -21,9 +21,12 @@ extension LXSwiftBasics where Base: UIFont {
     /// - italics: 斜体成都大小 默认是10
     public static func fontMatrix(size: CGFloat, name: String,
                               italics: CGFloat = 10) -> UIFont {
-        let matrix = CGAffineTransform(a: 1, b: 0,
+        let matrix = CGAffineTransform(a: 1,
+                                       b: 0,
                                        c: CGFloat(tanf(Float(italics) * Float(Double.pi) / 180)),
-                                       d: 1, tx: 0, ty: 0)
+                                       d: 1,
+                                       tx: 0,
+                                       ty: 0)
         let desc = UIFontDescriptor(name: name, matrix: matrix)
         return UIFont(descriptor: desc,
                           size: size)
@@ -62,10 +65,8 @@ extension LXSwiftBasics where Base: UIFont {
     
     /// withBoldItalic
     public var withBoldItalic: UIFont {
-        guard let desc = base.fontDescriptor.withSymbolicTraits([.traitBold,
-                                                                 .traitItalic]) else {
-            return base
-        }
+        guard let desc = base.fontDescriptor.withSymbolicTraits(
+                [.traitBold,.traitItalic]) else { return base }
         return UIFont(descriptor: desc, size: base.pointSize)
     }
     
@@ -77,32 +78,32 @@ extension LXSwiftBasics where Base: UIFont {
         return UIFont(descriptor: desc, size: base.pointSize)
     }
     
-    public static func fontWithMedium(_ ofSize: CGFloat) -> UIFont {
-       return UIFont.systemFont(ofSize: ofSize, weight: .medium)
+    public static func font(withMedium size: CGFloat) -> UIFont {
+       return UIFont.systemFont(ofSize: size, weight: .medium)
     }
     
-    public static func fontWithRegular(_ ofSize: CGFloat) -> UIFont {
-       return UIFont.systemFont(ofSize: ofSize, weight: .regular)
+    public static func font(withRegular size: CGFloat) -> UIFont {
+       return UIFont.systemFont(ofSize: size, weight: .regular)
     }
     
-    public static func fontWithBold(_ ofSize: CGFloat) -> UIFont {
-       return UIFont.systemFont(ofSize: ofSize, weight: .bold)
+    public static func font(withBold size: CGFloat) -> UIFont {
+       return UIFont.systemFont(ofSize: size, weight: .bold)
     }
     
-    public static func fontWithSemibold(_ ofSize: CGFloat) -> UIFont {
-       return UIFont.systemFont(ofSize: ofSize, weight: .semibold)
+    public static func font(withSemibold size: CGFloat) -> UIFont {
+       return UIFont.systemFont(ofSize: size, weight: .semibold)
     }
     
-    public static func fontWithHeavy(_ ofSize: CGFloat) -> UIFont {
-       return UIFont.systemFont(ofSize: ofSize, weight: .heavy)
+    public static func font(withHeavy size: CGFloat) -> UIFont {
+       return UIFont.systemFont(ofSize: size, weight: .heavy)
     }
     
-    public static func fontWithLight(_ ofSize: CGFloat) -> UIFont {
-       return UIFont.systemFont(ofSize: ofSize, weight: .light)
+    public static func font(withLight size: CGFloat) -> UIFont {
+       return UIFont.systemFont(ofSize: size, weight: .light)
     }
     
-    public static func fontWithBlack(_ ofSize: CGFloat) -> UIFont {
-       return UIFont.systemFont(ofSize: ofSize, weight: .black)
+    public static func font(withBlack size: CGFloat) -> UIFont {
+       return UIFont.systemFont(ofSize: size, weight: .black)
     }
     
 }

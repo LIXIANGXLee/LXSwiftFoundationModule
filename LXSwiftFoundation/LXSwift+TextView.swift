@@ -28,8 +28,7 @@ extension LXSwiftBasics where Base : LXSwiftTextView {
     
     /// 设置占位符和颜色字符串
     public func set(with placeholder: String?, color: String = "999999") {
-        set(with: placeholder,
-            color: UIColor.lx.color(hex: color))
+        set(with: placeholder, color: UIColor.lx.color(hex: color))
     }
     
     /// 设置字体和文本颜色
@@ -42,19 +41,19 @@ extension LXSwiftBasics where Base : LXSwiftTextView {
     
     /// 设置粗体字体和文本颜色
     public func set(withBold fontSize: CGFloat,textColor: String) {
-        set(with: UIFont.lx.fontWithBold(fontSize),
+        set(with: UIFont.lx.font(withBold: fontSize),
             textColor: UIColor.lx.color(hex: textColor))
     }
     
     /// 设置中等字体和文本颜色
     public func set(withMedium fontSize: CGFloat, textColor: String) {
-        set(with: UIFont.lx.fontWithMedium(fontSize),
+        set(with: UIFont.lx.font(withMedium: fontSize),
             textColor: UIColor.lx.color(hex: textColor))
     }
     
     /// 设置常规字体和文本颜色
     public func set(withRegular fontSize: CGFloat, textColor: String) {
-        set(with: UIFont.lx.fontWithRegular(fontSize),
+        set(with: UIFont.lx.font(withRegular: fontSize),
             textColor: UIColor.lx.color(hex: textColor))
     }
     
@@ -73,9 +72,8 @@ extension LXSwiftBasics where Base : LXSwiftTextView {
     /// 配置文本可输入最长文本长度
     public var maxLength: Int? {
         get{ return base.maxTextLength }
-        set{
-            guard let newValue = newValue, newValue > 0 else { return }
-            base.maxTextLength = newValue
+        set{ guard let newValue = newValue, newValue > 0 else { return }
+             base.maxTextLength = newValue
         }
     }
 }

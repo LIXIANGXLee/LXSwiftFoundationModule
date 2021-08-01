@@ -28,8 +28,7 @@ extension UIControl  {
     
     func hitDouble(_ hitTime: Double) {
         self.hitTime = hitTime
-        addTarget(self, action: #selector(c_hitDouble(_:)),
-                  for: .touchUpInside)
+        addTarget(self, action: #selector(c_hitDouble(_:)), for: .touchUpInside)
     }
     
     @objc func c_hitDouble(_ base: UIControl)  {

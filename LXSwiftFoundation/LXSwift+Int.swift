@@ -38,7 +38,7 @@ extension LXSwiftBasics where Base == Int {
     }
     
     /// 生成区间的随机数
-    public static func randomInt(range: Range<Int>) -> Int {
+    public static func randomInt(with range: Range<Int>) -> Int {
         return randomInt(lower: range.lowerBound, upper: range.upperBound)
     }
     

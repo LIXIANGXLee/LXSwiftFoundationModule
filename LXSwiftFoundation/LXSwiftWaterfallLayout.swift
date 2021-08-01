@@ -59,7 +59,7 @@ extension LXSwiftWaterfallLayout {
             
             // 获取高度
             let height = dataSource?.waterfallLayout(self,
-                                                     width: itemW, indexPath: indexPath) ?? 1
+                            width: itemW, indexPath: indexPath) ?? 1
             
             // 取出最小列的位置
             var minH = colHeights.min() ?? 1
@@ -70,8 +70,7 @@ extension LXSwiftWaterfallLayout {
             // 设置item的属性
             attrs.frame = CGRect(x: self.sectionInset.left + (self.minimumInteritemSpacing + itemW) * CGFloat(index),
                                  y: minH - height - self.minimumLineSpacing,
-                                 width: itemW,
-                                 height: height)
+                                 width: itemW, height: height)
             
             if !attrsArray.contains(attrs) {
                 attrsArray.append(attrs)

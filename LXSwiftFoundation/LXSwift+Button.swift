@@ -14,9 +14,7 @@ extension LXSwiftBasics where Base: UIButton {
     /// 将文字级别设置为“居中” space 间距大小
     public func horizontalCenterImageAndTitle(space: CGFloat) {
         guard let imageView = base.imageView,
-              let titleLabel = base.titleLabel else {
-            return
-        }
+              let titleLabel = base.titleLabel else { return }
         let imageHeight = imageView.intrinsicContentSize.height
         let imageWidth = imageView.intrinsicContentSize.width
         let titleHeight = titleLabel.intrinsicContentSize.height
@@ -34,11 +32,9 @@ extension LXSwiftBasics where Base: UIButton {
     
     /// 将图像文本设置为垂直居中 space 间距大小
     public func verticalCenterImageAndTitle(space: CGFloat,
-                               isLeftImage: Bool = true) {
+                                            isLeftImage: Bool = true) {
         guard let imageView = base.imageView,
-              let titleLabel = base.titleLabel else {
-            return
-        }
+              let titleLabel = base.titleLabel else { return }
         let imageWidth = imageView.intrinsicContentSize.width
         let titleWitdh = titleLabel.intrinsicContentSize.width
         let imageSpace = isLeftImage ? space * 0.5 : (space * 0.5 + titleWitdh)

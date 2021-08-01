@@ -67,20 +67,16 @@ extension LXSwiftBasics where Base: UIColor {
     }
     
    /// 获取两个颜色rgb的差值的颜色值
-    public static func getRGBDelta(_ firstColor: UIColor, _ seccondColor: UIColor)
-    -> (CGFloat, CGFloat, CGFloat) {
-        let firstRGB = firstColor.lx.getRGB()
-        let secondRGB = seccondColor.lx.getRGB()
-        return (firstRGB.0 - secondRGB.0,
-                firstRGB.1 - secondRGB.1,
-                firstRGB.2 - secondRGB.2)
+    public static func getRGBDelta(withColor first: UIColor, seccond: UIColor)
+    -> (CGFloat, CGFloat, CGFloat)? {
+        guard let firstRGB = first.lx.getRGB,
+              let secondRGB = seccond.lx.getRGB else { return nil }
+        return (firstRGB.0 - secondRGB.0, firstRGB.1 - secondRGB.1, firstRGB.2 - secondRGB.2)
     }
     
-    /// 获取rgb颜色值
-    public func getRGB() -> (CGFloat, CGFloat, CGFloat) {
-        guard let cmps = base.cgColor.components else {
-            fatalError("保证普通颜色是RGB方式传入")
-        }
+    /// 获取rgb颜色值 请保证普通颜色是RGB方式传入
+    public var getRGB: (CGFloat, CGFloat, CGFloat)? {
+        guard let cmps = base.cgColor.components else { return nil }
         return (cmps[0] * 255, cmps[1] * 255, cmps[2] * 255)
     }
 }

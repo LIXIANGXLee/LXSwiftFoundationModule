@@ -30,19 +30,19 @@ extension LXSwiftBasics where Base == UIEdgeInsets {
         return UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
     }
 
-    public mutating func setTop(_ top: CGFloat) {
-        base.top = LXSwiftApp.flat(top)
+    public mutating func set(withTop size: CGFloat) {
+        base.top = LXSwiftApp.flat(size)
     }
 
-    public mutating func setLeft(_ left: CGFloat) {
-        base.left = LXSwiftApp.flat(left)
+    public mutating func set(withLeft size: CGFloat) {
+        base.left = LXSwiftApp.flat(size)
     }
 
-    public mutating func setBottom(_ bottom: CGFloat) {
-        base.bottom = LXSwiftApp.flat(bottom)
+    public mutating func set(withBottom size: CGFloat) {
+        base.bottom = LXSwiftApp.flat(size)
     }
 
-    public mutating func setRight(_ right: CGFloat) {
-        base.right = LXSwiftApp.flat(right)
+    public mutating func set(withRight size: CGFloat) {
+        base.right = LXSwiftApp.flat(size)
     }
 }

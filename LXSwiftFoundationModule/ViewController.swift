@@ -86,7 +86,7 @@ class ViewController: UIViewController {
         let config = LXSwiftModalConfig()
         config.isDismissBg = false
         config.contentMidViewH = scale_ip6_width(260)
-        config.titleFont = UIFont.lx.fontWithMedium(16)
+        config.titleFont = UIFont.lx.font(withMedium: 16)
         config.titleColor = UIColor.black
         let itemCancel = LXSwiftItem(title: "不同意",
                                          titleColor: UIColor.blue,

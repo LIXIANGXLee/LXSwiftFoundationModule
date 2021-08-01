@@ -102,7 +102,7 @@ extension LXSwiftWebViewController {
     }
     
     /// load webView h5
-    open func noticeWebviewShareResult(_ javaScriptString: String,
+    open func noticeWebviewShareResult(with javaScriptString: String,
                                        completionHandler: ((Any?, Error?) -> Void)? = nil) {
         webView.evaluateJavaScript(javaScriptString,
                                    completionHandler: completionHandler)
@@ -110,23 +110,22 @@ extension LXSwiftWebViewController {
     
     /// add js call back
     @available(iOS 8.0, *)
-    open func jsMethod(_ method: String, _ handel: @escaping (Any) -> ()) {
+    open func jsMethod(with method: String, handel: @escaping (Any) -> ()) {
         for methodT in methodTs {
             assert(methodT.method == method, "不能重复添加相同名称")
         }
         self.methodTs.append(LXSwiftMethodT(method: method, handel: handel))
-        let vc =  webView.configuration.userContentController
-        vc.add(LXSwiftWeakScriptMessageDelegate(self),
-                                                             name: method)
+        let vc = webView.configuration.userContentController
+        vc.add(LXSwiftWeakScriptMessageDelegate(self), name: method)
     }
     
     /// Snap Shot 截图
     @available(iOS 11.0, *)
-    open func takeSnapShot(_ rect: CGRect = CGRect(x: 0,
-                                                   y: 0,
-                                                   width: UIScreen.main.bounds.width,
-                                                   height: UIScreen.main.bounds.height),
-                           _ handel: @escaping (UIImage) -> ()) {
+    open func takeSnapShot(with rect: CGRect = CGRect(x: 0,
+                                                      y: 0,
+                                                      width: LXSwiftApp.screenW,
+                                                      height: LXSwiftApp.screenH),
+                           handel: @escaping (UIImage) -> ()) {
         let config = WKSnapshotConfiguration()
         config.rect = rect
         webView.takeSnapshot(with: config) { (image, error) in
@@ -158,8 +157,8 @@ extension LXSwiftWebViewController {
         let dataSouce = WKWebsiteDataStore.default()
         dataSouce.fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { (records) in
             for record in records {
-                WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes,
-                                                        for: [record]) {
+                let ds = WKWebsiteDataStore.default()
+                ds.removeData(ofTypes: record.dataTypes, for: [record]) {
                     handle?("清除成功\(record)")
                 }
             }
@@ -312,7 +311,7 @@ extension LXSwiftWebViewController: WKUIDelegate{
                                       message: message,
                                       preferredStyle: .alert)
         
-        alert.lx.action("确定", style: .default) { (_) in
+        alert.lx.action(with: "确定", style: .default) { (_) in
             completionHandler()
         }
 
@@ -327,10 +326,10 @@ extension LXSwiftWebViewController: WKUIDelegate{
         let alert = UIAlertController(title: nil,
                                       message: message,
                                       preferredStyle: .alert)
-        alert.lx.action("取消", style: .cancel) { (_) in
+        alert.lx.action(with: "取消", style: .cancel) { (_) in
             completionHandler(false)
         }
-        alert.lx.action("确定", style: .default) { (_) in
+        alert.lx.action(with: "确定", style: .default) { (_) in
             completionHandler(true)
         }
         present(alert, animated: true, completion: nil)
@@ -348,7 +347,7 @@ extension LXSwiftWebViewController: WKUIDelegate{
         alert.addTextField { (textField) in
             textField.placeholder = defaultText
         }
-        alert.lx.action("确定", style: .default) { (_) in
+        alert.lx.action(with: "确定", style: .default) { (_) in
             completionHandler(alert.textFields?.last?.text)
         }
         present(alert, animated: true, completion: nil)

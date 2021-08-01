@@ -104,7 +104,7 @@ extension LXSwiftRegex {
                 text.lx.enumerateStringsMatchedByRegex(regex: wordRegexType.link)
                 { (captureCount, capturedStrings, range) in
                     attributedStr.addAttributes([.foregroundColor : wordRegexType.color,
-                                                 .font: wordRegexType.font], range: range)
+                             .font: wordRegexType.font], range: range)
                     let key = NSAttributedString.Key(rawValue: LXSwiftRegex.textLinkConst)
                     attributedStr.addAttribute(key, value: capturedStrings, range: range)
                 }
