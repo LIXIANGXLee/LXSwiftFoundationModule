@@ -33,8 +33,7 @@ open class LXSwiftHyperlinksModalController: LXSwiftModalController {
             itemView.titleLabel?.font = modalItem.titleFont
             contentView.addSubview(itemView)
             itemViews.append(itemView)
-            itemView.addTarget(self,action: #selector(itemViewClick(_:)),
-                               for: UIControl.Event.touchUpInside)
+            itemView.addTarget(self,action: #selector(itemViewClick(_:)), for: UIControl.Event.touchUpInside)
         }
         
     }

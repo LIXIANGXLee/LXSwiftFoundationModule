@@ -10,40 +10,34 @@ import UIKit
 extension LXSwiftBasics where Base: UIView {
     
     public var x: CGFloat {
-        set(num) { base.frame = CGRect(x: LXSwiftApp.flat(num),
-            y: y, width: width, height: height) }
+        set(num) { base.frame = CGRect(x: LXSwiftApp.flat(num), y: y, width: width, height: height) }
         get { return base.frame.origin.x }
     }
     
     public var y: CGFloat {
-        set(num) { base.frame = CGRect(x: x,
-             y: LXSwiftApp.flat(num), width: width, height: height) }
+        set(num) { base.frame = CGRect(x: x, y: LXSwiftApp.flat(num), width: width, height: height) }
         get { return base.frame.origin.y }
     }
     
     public var width: CGFloat {
-        set(num) { base.frame = CGRect(x: x,
-            y: y, width: LXSwiftApp.flat(num), height: height) }
+        set(num) { base.frame = CGRect(x: x, y: y, width: LXSwiftApp.flat(num), height: height) }
         get { return base.frame.size.width }
     }
     
     public var height: CGFloat {
-        set(num) { base.frame = CGRect(x: x,
-             y: y, width: width, height: LXSwiftApp.flat(num)) }
+        set(num) { base.frame = CGRect(x: x, y: y, width: width, height: LXSwiftApp.flat(num)) }
         get { return base.frame.size.height }
     }
 
     /// 中心点横坐标
     public var centerX: CGFloat {
-        set(num) { base.frame = CGRect(x: LXSwiftApp.flat(num - width / 2),
-              y: y, width: width, height: height) }
+        set(num) { base.frame = CGRect(x: LXSwiftApp.flat(num - width / 2), y: y, width: width, height: height) }
         get { return x + LXSwiftApp.flat(width / 2) }
     }
     
     /// 中心点纵坐标
     public var centerY: CGFloat {
-        set(num) { base.frame = CGRect(x: x, y: LXSwiftApp.flat(num - height / 2),
-                                       width: width, height: height) }
+        set(num) { base.frame = CGRect(x: x, y: LXSwiftApp.flat(num - height / 2), width: width, height: height) }
         get { return y + LXSwiftApp.flat(height / 2) }
     }
 
