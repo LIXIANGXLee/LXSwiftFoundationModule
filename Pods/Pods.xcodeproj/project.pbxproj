@@ -38,7 +38,7 @@
 		76FEBAEEF578D99F82AB090B3D4A8839 /* LXSwiftUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D608C84404C45013DE10D028F681250F /* LXSwiftUtils.swift */; };
 		78068714DC06427F08B5F49247042D3C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 		798361A15EEB3994CE193878AE44B8F0 /* Pods-LXSwiftFoundationModule-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E093E81AA39BD512D225DADBDD07811 /* Pods-LXSwiftFoundationModule-dummy.m */; };
-		7C7759D4CFB1121294AD98BFFBCC3D8D /* LXSwiftPrivacyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D5070D1E921D3080389F906A11BC46 /* LXSwiftPrivacyManager.swift */; };
+		7C7759D4CFB1121294AD98BFFBCC3D8D /* LXSwiftPrivacyAuthor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D5070D1E921D3080389F906A11BC46 /* LXSwiftPrivacyAuthor.swift */; };
 		802BC9A2B8F9271703A78DFD0FD8A7C6 /* LXSwiftGCDTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD7DC8B205BDD21AE289DFD125274F5 /* LXSwiftGCDTimer.swift */; };
 		8059DD8E9DC35FC8C4D8014F64ADE47E /* LXSwift+Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55921C23A32B5D71EAC6D195E6BFE4C4 /* LXSwift+Button.swift */; };
 		807D71DB3D26A10794ADFF6E0B42D0D3 /* LXObjcProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = BAE89E5E4A58B2564AAADD35D54FA6BF /* LXObjcProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -115,12 +115,12 @@
 		28C2ED4456BF649453E11605022A1E47 /* LXSwiftRuntime.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftRuntime.swift; path = LXSwiftFoundation/LXSwiftRuntime.swift; sourceTree = "<group>"; };
 		291C87646C0B084499DDD674A17A3A0E /* LXSwiftFoundation-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LXSwiftFoundation-prefix.pch"; sourceTree = "<group>"; };
 		2BD415A811EC36DEE8BCBC0904581389 /* LXSwift+Data.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Data.swift"; path = "LXSwiftFoundation/LXSwift+Data.swift"; sourceTree = "<group>"; };
-		2D7670A6EA1C9DBE01A3C642666B75F8 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		2D7670A6EA1C9DBE01A3C642666B75F8 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		30E6FA6F0A415EC669D5B41844BC6B81 /* LXSwift+Int.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Int.swift"; path = "LXSwiftFoundation/LXSwift+Int.swift"; sourceTree = "<group>"; };
 		347B3B073C7D6AC70B3D39CF1A771492 /* LXSwift+Dictionary.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Dictionary.swift"; path = "LXSwiftFoundation/LXSwift+Dictionary.swift"; sourceTree = "<group>"; };
 		34FB58F87B4821A98182748764D81AC1 /* LXSwift+EdgeInsets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+EdgeInsets.swift"; path = "LXSwiftFoundation/LXSwift+EdgeInsets.swift"; sourceTree = "<group>"; };
 		3507C175AA59B9EDEC77084089B77AB7 /* Pods-LXSwiftFoundationModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LXSwiftFoundationModule.release.xcconfig"; sourceTree = "<group>"; };
-		35D5070D1E921D3080389F906A11BC46 /* LXSwiftPrivacyManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftPrivacyManager.swift; path = LXSwiftFoundation/LXSwiftPrivacyManager.swift; sourceTree = "<group>"; };
+		35D5070D1E921D3080389F906A11BC46 /* LXSwiftPrivacyAuthor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftPrivacyAuthor.swift; path = LXSwiftFoundation/LXSwiftPrivacyAuthor.swift; sourceTree = "<group>"; };
 		450F17C6726AD92C64EAEF5409AEE894 /* LXSwift+Font.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Font.swift"; path = "LXSwiftFoundation/LXSwift+Font.swift"; sourceTree = "<group>"; };
 		473DEC53161CF1A0EA7F114AA9031814 /* UIView+LXObjcPerformance.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+LXObjcPerformance.m"; path = "LXSwiftFoundation/UIView+LXObjcPerformance.m"; sourceTree = "<group>"; };
 		48B6652BC8FCAD920F2B77CD1149BC39 /* LXSwift+Rect.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Rect.swift"; path = "LXSwiftFoundation/LXSwift+Rect.swift"; sourceTree = "<group>"; };
@@ -155,21 +155,21 @@
 		8EC4B08554BC62C2BA2A4AD00B71FDE7 /* Pods-LXSwiftFoundationModule.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-LXSwiftFoundationModule.modulemap"; sourceTree = "<group>"; };
 		8F0EA16EE1EC27DB1DEAB334254F61F6 /* LXSwift+Double.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Double.swift"; path = "LXSwiftFoundation/LXSwift+Double.swift"; sourceTree = "<group>"; };
 		8F83470B80655385A107FF9FD3E76C14 /* LXSwift+Number.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Number.swift"; path = "LXSwiftFoundation/LXSwift+Number.swift"; sourceTree = "<group>"; };
-		91A4F3DDA382BE2E8A7F55E69898FCF0 /* LXSwiftFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = LXSwiftFoundation.framework; path = LXSwiftFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		91A4F3DDA382BE2E8A7F55E69898FCF0 /* LXSwiftFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LXSwiftFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92E8C33FAF896113F3740C615C54C49F /* LXSwiftFoundation-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LXSwiftFoundation-umbrella.h"; sourceTree = "<group>"; };
 		95B87A18FADBB01ED13D95D7605BB474 /* Pods-LXSwiftFoundationModule-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LXSwiftFoundationModule-acknowledgements.plist"; sourceTree = "<group>"; };
 		96668564AA135B15E609D8A20058B91A /* LXSwift+TextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+TextField.swift"; path = "LXSwiftFoundation/LXSwift+TextField.swift"; sourceTree = "<group>"; };
 		98FF4CFE3E039FDA2196102368B0BDDA /* LXSwift+Array.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Array.swift"; path = "LXSwiftFoundation/LXSwift+Array.swift"; sourceTree = "<group>"; };
 		9999A978883BE9CF88B3D74FC675F9C5 /* LXSwiftHyperlinksModalController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftHyperlinksModalController.swift; path = LXSwiftFoundation/LXSwiftHyperlinksModalController.swift; sourceTree = "<group>"; };
 		9A2B709BF2DFCF6EAE97F1F5B3A1F244 /* LXObjcUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LXObjcUtils.h; path = LXSwiftFoundation/LXObjcUtils.h; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9D9D5804906F6CAD0345162545ABDC08 /* LXSwiftButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftButton.swift; path = LXSwiftFoundation/LXSwiftButton.swift; sourceTree = "<group>"; };
 		9E093E81AA39BD512D225DADBDD07811 /* Pods-LXSwiftFoundationModule-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-LXSwiftFoundationModule-dummy.m"; sourceTree = "<group>"; };
 		9EDCEA461CA2E5E99206E598C07A2901 /* LXSwift+Switch.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+Switch.swift"; path = "LXSwiftFoundation/LXSwift+Switch.swift"; sourceTree = "<group>"; };
 		A1C08187C2949BF4D1EEA7BB05E1BF0E /* LXCompatible.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXCompatible.swift; path = LXSwiftFoundation/LXCompatible.swift; sourceTree = "<group>"; };
 		A934089D9A427324CECE5B5B0359544E /* LXSwiftApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftApp.swift; path = LXSwiftFoundation/LXSwiftApp.swift; sourceTree = "<group>"; };
 		A9EBB22B317BEB877C285B4F23AEFA7F /* LXObjcThreadActive.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LXObjcThreadActive.m; path = LXSwiftFoundation/LXObjcThreadActive.m; sourceTree = "<group>"; };
-		AB520CD132149910E44FA2B2654DBA13 /* Pods_LXSwiftFoundationModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_LXSwiftFoundationModule.framework; path = "Pods-LXSwiftFoundationModule.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB520CD132149910E44FA2B2654DBA13 /* Pods_LXSwiftFoundationModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LXSwiftFoundationModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1902EBBCC2150F4B84F48AE8F1E7CD9 /* LXSwift+String.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+String.swift"; path = "LXSwiftFoundation/LXSwift+String.swift"; sourceTree = "<group>"; };
 		B1A1E228E828686F972534DAA91E9F43 /* LXSwiftViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftViewController.swift; path = LXSwiftFoundation/LXSwiftViewController.swift; sourceTree = "<group>"; };
 		B3BA4CB47FBDB40D18CE8228448FB750 /* LXObjcThreadActive.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LXObjcThreadActive.h; path = LXSwiftFoundation/LXObjcThreadActive.h; sourceTree = "<group>"; };
@@ -187,7 +187,7 @@
 		D608C84404C45013DE10D028F681250F /* LXSwiftUtils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftUtils.swift; path = LXSwiftFoundation/LXSwiftUtils.swift; sourceTree = "<group>"; };
 		D7B4983C2D9DC39EE514B14E202F6EF9 /* LXSwiftFoundation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LXSwiftFoundation.h; path = LXSwiftFoundation/LXSwiftFoundation.h; sourceTree = "<group>"; };
 		D87A56C1DF3A4B22D11C65296F5DEB01 /* LXSwift+SegmentedControl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+SegmentedControl.swift"; path = "LXSwiftFoundation/LXSwift+SegmentedControl.swift"; sourceTree = "<group>"; };
-		DCF4E25BEA7C9E056C7A0EDD61495023 /* LXSwiftFoundation.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = LXSwiftFoundation.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		DCF4E25BEA7C9E056C7A0EDD61495023 /* LXSwiftFoundation.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = LXSwiftFoundation.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E021AEDB20E946FD871F92587F58CD4E /* LXSwiftStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LXSwiftStorage.swift; path = LXSwiftFoundation/LXSwiftStorage.swift; sourceTree = "<group>"; };
 		E33386BAA18DD5C1BBF55FC61DBD4E03 /* LXSwift+AlertController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LXSwift+AlertController.swift"; path = "LXSwiftFoundation/LXSwift+AlertController.swift"; sourceTree = "<group>"; };
 		E34EE040E0A9D2DDCBF75D99A0902B87 /* LXSwiftFoundation.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = LXSwiftFoundation.modulemap; sourceTree = "<group>"; };
@@ -339,7 +339,7 @@
 				CFB76C7C3261844BEA1550B94C8D83B1 /* LXSwiftLineFlowLayout.swift */,
 				677B4CF93519AC00094517372D27D1F8 /* LXSwiftModalController.swift */,
 				5E9E3D9D2303099D3847B75536520BA1 /* LXSwiftNotification.swift */,
-				35D5070D1E921D3080389F906A11BC46 /* LXSwiftPrivacyManager.swift */,
+				35D5070D1E921D3080389F906A11BC46 /* LXSwiftPrivacyAuthor.swift */,
 				C1CFAF0575D82524D29433837FD8CF6F /* LXSwiftQueue.swift */,
 				F6E69EBAC5A996E00B089B5735B2ED5A /* LXSwiftRegex.swift */,
 				28C2ED4456BF649453E11605022A1E47 /* LXSwiftRuntime.swift */,
@@ -578,7 +578,7 @@
 				1D9998083EC22F871DD270EB84A3FDE1 /* LXSwiftLineFlowLayout.swift in Sources */,
 				B739AE1C082215FA4C4F467DFCF8200A /* LXSwiftModalController.swift in Sources */,
 				A67556C58E3CF01A9F0BE89DB57668E8 /* LXSwiftNotification.swift in Sources */,
-				7C7759D4CFB1121294AD98BFFBCC3D8D /* LXSwiftPrivacyManager.swift in Sources */,
+				7C7759D4CFB1121294AD98BFFBCC3D8D /* LXSwiftPrivacyAuthor.swift in Sources */,
 				40597338FA1EDB32450FB843D9192102 /* LXSwiftQueue.swift in Sources */,
 				D650745BFD7C0D0C1234CC4CECF5D2FF /* LXSwiftRegex.swift in Sources */,
 				20AD8B3870324F37AC8299A190B364A6 /* LXSwiftRuntime.swift in Sources */,

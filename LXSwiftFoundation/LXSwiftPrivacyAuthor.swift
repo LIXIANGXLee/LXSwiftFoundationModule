@@ -12,10 +12,10 @@ import Photos
 import CoreTelephony
 
 /// PrivacyManager自动根据状态返回提示语
-public class LXSwiftPrivacyManager: NSObject, LXSwiftCompatible { }
+public class LXSwiftPrivacyAuthor: NSObject, LXSwiftCompatible { }
 
 //MARK: -  Extending methods for Privacy
-extension LXSwiftBasics where Base == LXSwiftPrivacyManager {
+extension LXSwiftBasics where Base == LXSwiftPrivacyAuthor {
     
     /// 相机权限
     public static var isSupportCamera: Bool {

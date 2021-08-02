@@ -8,6 +8,7 @@
 
 import UIKit
 import LXSwiftFoundation
+import Photos
 
 class ViewController: UIViewController {
     var  objc : LXObjcThreadActive! = nil
@@ -52,32 +53,28 @@ class ViewController: UIViewController {
         LXSwiftUtils.lx.playSound(with: str) {
             print("-=-=-=-=-=-=-=-=-=-=-=-=")
         }
-        print("-=-=-=-=\( 232490454.lx.sizeFileToStr)")
-        print("-=-=-=-=\( 2324323.lx.sizeFileToStr)")
-
-        print("-=-=-=-=\( 23243.lx.sizeFileToStr)")
-        print("-=-=-=-=\( 232431.lx.sizeFileToStr)")
-        print("-=-=-=-=\( 232.lx.sizeFileToStr)")
-
-
+ 
+        PHPhotoLibrary.requestAuthorization { (status) in
+            LXObjcUtils.writeImageToAbulm(with: UIImage(named: "tab_center")!, collectionTitle: "asadsadsfdsfdsfd") { (isSuccess, error) in
+                print("-=-=-=-=-=-=\(isSuccess)=====\(error)")
+            }
+        }
         
-//   protocolUIShow()
+        linkList.add("dd")
+        print("-=-11=-=-=\(linkList)")
+        print("-=-=11-=-=\(linkList.contains("dd"))")
 
-//        linkList.add("dd")
-//        print("-=-11=-=-=\(linkList)")
-//        print("-=-=11-=-=\(linkList.contains("dd"))")
-//
-//        linkList.add("ww")
-//        linkList.add("ee")
-//        print("-=-22=-=-=\(linkList)")
-//
-//        linkList.insert(1, value: "fd")
-//        print("-=-=33-=-=\(linkList)")
-//        print("-=-=33-=-=\(linkList.size())")
-//
-//        linkList.remove(0)
-//        print("-=-=44-=-=\(linkList)")
-//        print("-=-=44-=-=\(linkList.get(1))")
+        linkList.add("ww")
+        linkList.add("ee")
+        print("-=-22=-=-=\(linkList)")
+
+        linkList.insert(1, value: "fd")
+        print("-=-=33-=-=\(linkList)")
+        print("-=-=33-=-=\(linkList.size())")
+
+        linkList.remove(0)
+        print("-=-=44-=-=\(linkList)")
+        print("-=-=44-=-=\(linkList.get(1))")
         
     }
     
@@ -121,7 +118,7 @@ class ViewController: UIViewController {
                                   font: UIFont.systemFont(ofSize: 14),
                                   isExpression: false)
 
-        let str = "欢迎使用美术迎使用！我们非常重视您的隐私和个人信息安全。在您使用相框前，请认真阅读\(s1)及\(s2)，您同意并接受全部条款后方可开始使用。"
+        let str = "欢迎使用迎使用！我们非常重视您的隐私和个人信息安全。在您使用前，请认真阅读\(s1)及\(s2)，您同意并接受全部条款后方可开始使用。"
         
         guard let attr = modal.getAttributedString(with: str, textColor: UIColor.lx.color(hex: "666666"), textFont: UIFont.systemFont(ofSize: 14), regexTypes: [r1,r2]) else { return }
 

@@ -31,6 +31,25 @@ NS_ASSUME_NONNULL_BEGIN
 /// 异步线程执行block
 + (void)executeOnSafeGlobal:(void(^)(void)) block;
 
+/** 将视频写入相册
+ * - parameter:
+ * - url 视频资源
+ * - collectionTitle 相册名称，相册名称为nil或者@"",则相册名是项目名
+ */
++ (void)writeVideoToAbulmWithUrl:(NSURL *)url collectionTitle:(NSString * _Nullable)collectionTitle completionHandler:(void (^)(BOOL isSuccess, NSString * _Nonnull ))completionHandler API_AVAILABLE(ios(9.0));
+
++ (void)writeVideoToAbulmWithUrl:(NSURL *)url completionHandler:(void (^)(BOOL isSuccess, NSString * _Nonnull ))completionHandler API_AVAILABLE(ios(9.0));
+
+
+/** 将图片写入相册
+ * - parameter:
+ * - image 图片资源
+ * - collectionTitle 相册名称，相册名称为nil或者@"",则相册名是项目名
+ */
++ (void)writeImageToAbulmWithImage:(UIImage *)image collectionTitle:(NSString * _Nullable)collectionTitle completionHandler:(void (^)(BOOL isSuccess, NSString * _Nonnull ))completionHandler API_AVAILABLE(ios(9.0));
+
++ (void)writeImageToAbulmWithImage:(UIImage *)image completionHandler:(void (^)(BOOL isSuccess, NSString * _Nonnull ))completionHandler API_AVAILABLE(ios(9.0));
+
 @end
 
 NS_ASSUME_NONNULL_END
