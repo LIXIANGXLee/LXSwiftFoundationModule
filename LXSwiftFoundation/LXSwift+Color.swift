@@ -16,8 +16,8 @@ extension LXSwiftBasics where Base: UIColor {
     
     /// 暗黑模式 和 亮模式
     public static func color(lightHex: String, darkHex: String, alpha: CGFloat = 1.0) -> UIColor {
-        let light = UIColor(lightHex, alpha: alpha)
-        let dark =  UIColor(darkHex, alpha: alpha)
+        let light = UIColor(hex: lightHex, alpha: alpha)
+        let dark =  UIColor(hex: darkHex, alpha: alpha)
         return color(lightColor: light, darkColor: dark)
     }
     
@@ -39,12 +39,12 @@ extension LXSwiftBasics where Base: UIColor {
     // MARK: - Constructor (hexadecimal)
     /// 根据字符串设置颜色
     public static func color(hex: String, alpha: CGFloat = 1.0) -> UIColor {
-        return UIColor(hex, alpha: alpha)
+        return UIColor(hex: hex, alpha: alpha)
     }
     
     /// 根据十六进制数设置颜色
     public static func color(hex: Int, alpha: CGFloat = 1.0) -> UIColor {
-        return UIColor(hex, alpha: alpha)
+        return UIColor(hex: hex, alpha: alpha)
     }
     
     /// 根据R、G、B设置颜色
@@ -77,18 +77,18 @@ extension LXSwiftBasics where Base: UIColor {
 extension UIColor {
     
     /// 便利构造函数
-    convenience init(r : CGFloat, g : CGFloat, b : CGFloat, alpha : CGFloat = 1.0) {
+    convenience init(r: CGFloat, g: CGFloat, b: CGFloat, alpha: CGFloat = 1.0) {
         self.init(red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: alpha)
     }
     
-    convenience init(_ hex: Int, alpha: CGFloat = 1) {
+    convenience init(hex: Int, alpha: CGFloat = 1) {
         let red = CGFloat((hex & 0xFF0000) >> 16) / 255
         let green = CGFloat((hex & 0xFF00) >> 8) / 255
         let blue = CGFloat(hex & 0xFF) / 255
         self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
 
-    convenience init(_ hex: String, alpha: CGFloat = 1.0) {
+    convenience init(hex: String, alpha: CGFloat = 1.0) {
         var cHex: String = hex.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
         switch hex {
         case has_prefix("0X"), has_prefix("0x"):
@@ -100,10 +100,10 @@ extension UIColor {
             break
         }
         if cHex.count > 6 || cHex.isEmpty {
-            self.init(0xFFFFFF)
+            self.init(hex: 0xFFFFFF)
         }
         var color: UInt32 = 0x0
         Scanner.init(string: cHex).scanHexInt32(&color)
-        self.init(Int(color), alpha: alpha)
+        self.init(hex: Int(color), alpha: alpha)
     }
 }
