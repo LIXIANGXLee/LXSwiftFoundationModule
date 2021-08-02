@@ -23,8 +23,7 @@ extension LXSwiftBasics where Base: UILabel {
    
     /// size 大小
     public func size(height: CGFloat, width: CGFloat, lines: Int) -> CGSize {
-        let r = CGRect(origin: CGPoint.zero,
-                          size: CGSize(width: width, height: height))
+        let r = CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: height))
         return rect(rect: r, lines: lines).size
     }
     
@@ -34,8 +33,7 @@ extension LXSwiftBasics where Base: UILabel {
     }
     
     /// 提供了设置标签属性的方便方法（颜色、字体大小、对齐方式）
-    public func set(withFont font: UIFont, textColor: UIColor,
-                    alignment: NSTextAlignment? = nil) {
+    public func set(withFont font: UIFont, textColor: UIColor, alignment: NSTextAlignment? = nil) {
         base.font = font
         base.textColor = textColor
         if let alignment = alignment {
@@ -44,24 +42,21 @@ extension LXSwiftBasics where Base: UILabel {
     }
     
     /// 提供了设置标签属性的方便方法（颜色、字体大小、对齐方式）
-    public func set(regularSize: CGFloat, textColor: String,
-                    alignment: NSTextAlignment? = nil) {
+    public func set(regularSize: CGFloat, textColor: String, alignment: NSTextAlignment? = nil) {
         let color = UIColor.lx.color(hex: textColor)
         set(withFont: UIFont.lx.font(withRegular: regularSize),
             textColor: color, alignment: alignment)
     }
     
     /// 提供了设置标签属性的方便方法（颜色、字体大小、对齐方式）
-    public func set(mediumSize: CGFloat, textColor: String,
-                    alignment: NSTextAlignment? = nil) {
+    public func set(mediumSize: CGFloat, textColor: String, alignment: NSTextAlignment? = nil) {
         let color = UIColor.lx.color(hex: textColor)
         set(withFont: UIFont.lx.font(withMedium: mediumSize),
             textColor: color, alignment: alignment)
     }
     
     /// 提供了设置标签属性的方便方法（颜色、字体大小、对齐方式）
-   public func set(boldSize: CGFloat, textColor: String,
-                   alignment: NSTextAlignment? = nil) {
+   public func set(boldSize: CGFloat, textColor: String, alignment: NSTextAlignment? = nil) {
        let color = UIColor.lx.color(hex: textColor)
        set(withFont: UIFont.lx.font(withBold: boldSize),
            textColor: color, alignment: alignment)

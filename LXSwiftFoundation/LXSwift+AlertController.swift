@@ -11,9 +11,7 @@ public extension LXSwiftBasics where Base: UIAlertController{
 
     /// 便捷添加Action
     @discardableResult
-    func action(with title: String, style: UIAlertAction.Style = .`default`,
-                       handle: ((UIAlertAction) -> Void)? = nil)
-    -> UIAlertController {
+    func action(with title: String, style: UIAlertAction.Style = .`default`, handle: ((UIAlertAction) -> Void)? = nil) -> UIAlertController {
         let action = UIAlertAction(title: title, style: style, handler: handle)
         base.addAction(action)
         return base

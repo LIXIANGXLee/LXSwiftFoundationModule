@@ -58,17 +58,13 @@
 - (void)executeTask:(LXObjcThreadActiveTask)task{
     if (!self.innerThread || !task) return;
     
-    [self performSelector:@selector(__executeTask:)
-                 onThread:self.innerThread
-               withObject:task waitUntilDone:NO];
+    [self performSelector:@selector(__executeTask:) onThread:self.innerThread withObject:task waitUntilDone:NO];
 }
 
 - (void)stop{
     if (!self.innerThread) return;
     
-    [self performSelector:@selector(__stop)
-                 onThread:self.innerThread
-               withObject:nil waitUntilDone:YES];
+    [self performSelector:@selector(__stop) onThread:self.innerThread withObject:nil waitUntilDone:YES];
 }
 
 - (void)dealloc{
@@ -80,12 +76,8 @@
 -(void)__saveThread{
 
     CFRunLoopSourceContext context = {0};
-    CFRunLoopSourceRef source = CFRunLoopSourceCreate(kCFAllocatorDefault,
-                                                      0,
-                                                      &context);
-    CFRunLoopAddSource(CFRunLoopGetCurrent(),
-                       source,
-                       kCFRunLoopDefaultMode);
+    CFRunLoopSourceRef source = CFRunLoopSourceCreate(kCFAllocatorDefault, 0, &context);
+    CFRunLoopAddSource(CFRunLoopGetCurrent(), source, kCFRunLoopDefaultMode);
     CFRelease(source);
     CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1.0e10, false);
 }

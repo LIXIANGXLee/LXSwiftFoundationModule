@@ -59,20 +59,17 @@ extension LXSwiftBasics where Base: UIApplication {
     }
       
     /// 打开url
-    public static func openUrl(_ urlStr: String,
-                        completionHandler: ((Bool) -> Void)? = nil) {
+    public static func openUrl(_ urlStr: String, completionHandler: ((Bool) -> Void)? = nil) {
         if let url = URL(string: urlStr) {
             openUrl(url, completionHandler: completionHandler)
         }
     }
     
     /// 打开url
-    public static func openUrl(_ url: URL,
-                        completionHandler: ((Bool) -> Void)? = nil) {
+    public static func openUrl(_ url: URL, completionHandler: ((Bool) -> Void)? = nil) {
         if isCanOpen(url) {
             if #available(iOS 10.0, *) {
-                UIApplication.shared.open(url, options: [:],
-                                          completionHandler: completionHandler)
+                UIApplication.shared.open(url, options: [:], completionHandler: completionHandler)
             } else {
                 UIApplication.shared.openURL(url)
             }

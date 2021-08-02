@@ -14,19 +14,13 @@ extension Double: LXSwiftCompatible { }
 extension LXSwiftBasics where Base == Double {
     
     /// 保留小数点后的小数位
-    public func roundTo(minDigits: Int = 0, maxDigits: Int = 2,
-                        mode: NumberFormatter.RoundingMode = .halfEven)
-    -> String {
-        return NSNumber(value: base).lx.numberFormatter(with: mode,
-                    minDigits: minDigits, maxDigits: maxDigits) ?? ""
+    public func roundTo(minDigits: Int = 0, maxDigits: Int = 2, mode: NumberFormatter.RoundingMode = .halfEven) -> String {
+        return NSNumber(value: base).lx.numberFormatter(with: mode, minDigits: minDigits, maxDigits: maxDigits) ?? ""
     }
     
     /// 保留小数点后的小数位
-    public func roundTo(digits: Int = 0,
-                        mode: NumberFormatter.RoundingMode = .halfEven)
-    -> String {
-        return NSNumber(value: base).lx.numberFormatter(with: mode,
-                        minDigits: digits, maxDigits: digits) ?? ""
+    public func roundTo(digits: Int = 0, mode: NumberFormatter.RoundingMode = .halfEven) -> String {
+        return NSNumber(value: base).lx.numberFormatter(with: mode, minDigits: digits, maxDigits: digits) ?? ""
     }
     
     /// 用户显示容量 (G、M、KB)

@@ -11,8 +11,7 @@ import UIKit
 @objc public protocol LXSwiftWaterfallLayoutDataSource: AnyObject {
     
     /// 根据给出的宽度计算高度
-    func waterfallLayout(_ layout: LXSwiftWaterfallLayout,
-                         width: CGFloat, indexPath: IndexPath) -> CGFloat
+    func waterfallLayout(_ layout: LXSwiftWaterfallLayout, width: CGFloat, indexPath: IndexPath) -> CGFloat
     
     /// 每一行的列数
     func numberOfColsInWaterfallLayout(_ layout: LXSwiftWaterfallLayout) -> Int
@@ -45,9 +44,7 @@ extension LXSwiftWaterfallLayout {
         // 获取列数
         let cols = dataSource?.numberOfColsInWaterfallLayout(self) ?? 2
         // 计算Item的宽度
-        let itemW = (c.bounds.width - self.sectionInset.left -
-                        self.sectionInset.right -
-                        self.minimumInteritemSpacing) / CGFloat(cols)
+        let itemW = (c.bounds.width - self.sectionInset.left - self.sectionInset.right - self.minimumInteritemSpacing) / CGFloat(cols)
         
         // 计算所有的item的属性
         for i in startIndex..<itemCount {
@@ -58,8 +55,7 @@ extension LXSwiftWaterfallLayout {
             let attrs = UICollectionViewLayoutAttributes(forCellWith: indexPath)
             
             // 获取高度
-            let height = dataSource?.waterfallLayout(self,
-                            width: itemW, indexPath: indexPath) ?? 1
+            let height = dataSource?.waterfallLayout(self, width: itemW, indexPath: indexPath) ?? 1
             
             // 取出最小列的位置
             var minH = colHeights.min() ?? 1
@@ -68,9 +64,7 @@ extension LXSwiftWaterfallLayout {
             colHeights[index] = minH
             
             // 设置item的属性
-            attrs.frame = CGRect(x: self.sectionInset.left + (self.minimumInteritemSpacing + itemW) * CGFloat(index),
-                                 y: minH - height - self.minimumLineSpacing,
-                                 width: itemW, height: height)
+            attrs.frame = CGRect(x: self.sectionInset.left + (self.minimumInteritemSpacing + itemW) * CGFloat(index), y: minH - height - self.minimumLineSpacing, width: itemW, height: height)
             
             if !attrsArray.contains(attrs) {
                 attrsArray.append(attrs)
@@ -89,8 +83,7 @@ extension LXSwiftWaterfallLayout {
     }
     
     open override var collectionViewContentSize: CGSize {
-        return CGSize(width: 0,
-                      height: maxH + sectionInset.bottom - minimumLineSpacing)
+        return CGSize(width: 0, height: maxH + sectionInset.bottom - minimumLineSpacing)
     }
 }
 

@@ -16,8 +16,7 @@ extension LXSwiftBasics where Base: NSAttributedString {
     /// 根据字体大小和宽度获取字体大小
     public func size(width: CGFloat) -> CGSize {
         let size = CGSize(width: width, height: CGFloat(MAXFLOAT))
-        let rect = base.boundingRect(with: size,
-               options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil)
+        let rect = base.boundingRect(with: size, options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil)
         return rect.size
     }
     
@@ -40,8 +39,7 @@ extension LXSwiftBasics where Base: NSAttributedString {
 //MARK: -  Extending properties and methods for NSMutableAttributedString
 extension LXSwiftBasics where Base: NSMutableAttributedString {
     
-    func setAttribute(_ attribute: NSAttributedString.Key,
-                               value: Any?, range: NSRange) {
+    func setAttribute(_ attribute: NSAttributedString.Key, value: Any?, range: NSRange) {
         guard let value = value else { return }
         base.addAttribute(attribute, value: value, range: range)
     }
@@ -51,16 +49,14 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
     }
     
     @discardableResult
-    public func set(with font: UIFont?, range: NSRange? = nil)
-    -> NSMutableAttributedString {
+    public func set(with font: UIFont?, range: NSRange? = nil) -> NSMutableAttributedString {
         let range = range ?? NSMakeRange(0, base.length)
         setAttribute(.font, value: font, range: range)
         return base
     }
     
     @discardableResult
-    public func set(with textColor: UIColor?, range: NSRange? = nil)
-    -> NSMutableAttributedString {
+    public func set(with textColor: UIColor?, range: NSRange? = nil) -> NSMutableAttributedString {
         guard let color = textColor else { return base }
         let range = range ?? NSMakeRange(0, base.length)
         setAttribute(.foregroundColor, value: color, range: range)
@@ -68,8 +64,7 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
     }
     
     @discardableResult
-    public func setBackgroundColor(with backgroundColor: UIColor?, range: NSRange? = nil)
-    -> NSMutableAttributedString {
+    public func setBackgroundColor(with backgroundColor: UIColor?, range: NSRange? = nil) -> NSMutableAttributedString {
         guard let backgroundColor = backgroundColor else { return base }
         let range = range ?? NSMakeRange(0, base.length)
         setAttribute(.backgroundColor, value: backgroundColor, range: range)
@@ -78,8 +73,7 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
     
     /// 添加下划线类型
     @discardableResult
-    public func setUnderlineStyle(_ underlineStyle: NSUnderlineStyle, range: NSRange? = nil)
-    -> NSMutableAttributedString {
+    public func setUnderlineStyle(_ underlineStyle: NSUnderlineStyle, range: NSRange? = nil) -> NSMutableAttributedString {
         let range = range ?? NSMakeRange(0, base.length)
         setAttribute(.underlineStyle, value: underlineStyle.rawValue, range: range)
         return base
@@ -87,16 +81,14 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
     
     /// 添加下划线颜色
     @discardableResult
-    public func setUnderlineColor(_ underlineColor: UIColor, range: NSRange? = nil)
-    -> NSMutableAttributedString {
+    public func setUnderlineColor(_ underlineColor: UIColor, range: NSRange? = nil) -> NSMutableAttributedString {
         let range = range ?? NSMakeRange(0, base.length)
         setAttribute(.underlineColor, value: underlineColor, range: range)
         return base
     }
     
     @discardableResult
-    public func setKern(_ kern: CGFloat, range: NSRange? = nil)
-    -> NSMutableAttributedString {
+    public func setKern(_ kern: CGFloat, range: NSRange? = nil) -> NSMutableAttributedString {
         let range = range ?? NSMakeRange(0, base.length)
         setAttribute(.kern, value: kern, range: range)
         return base
@@ -104,8 +96,7 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
     
     /// 阴影大小
     @discardableResult
-    public func setShadow(_ shadow: NSShadow, range: NSRange? = nil)
-    -> NSMutableAttributedString {
+    public func setShadow(_ shadow: NSShadow, range: NSRange? = nil) -> NSMutableAttributedString {
         let range = range ?? NSMakeRange(0, base.length)
         setAttribute(.shadow, value: shadow, range: range)
         return base
@@ -113,8 +104,7 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
     
     /// 内容横穿线
     @discardableResult
-    public func setStrikethrough(_ style: NSUnderlineStyle, range: NSRange? = nil)
-    -> NSMutableAttributedString {
+    public func setStrikethrough(_ style: NSUnderlineStyle, range: NSRange? = nil) -> NSMutableAttributedString {
         let range = range ?? NSMakeRange(0, base.length)
         setAttribute(.strikethroughStyle, value: style.rawValue, range: range)
         return base
@@ -122,8 +112,7 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
     
     /// 内容横穿线颜色
     @discardableResult
-    public func setStrikethroughColor(_ color: UIColor, range: NSRange? = nil)
-    -> NSMutableAttributedString {
+    public func setStrikethroughColor(_ color: UIColor, range: NSRange? = nil) -> NSMutableAttributedString {
         let range = range ?? NSMakeRange(0, base.length)
         setAttribute(.strikethroughColor, value: color, range: range)
         return base
@@ -131,8 +120,7 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
     
     /// 对齐方式
     @discardableResult
-    public func setAlignment(_ alignment: NSTextAlignment)
-    -> NSMutableAttributedString {
+    public func setAlignment(_ alignment: NSTextAlignment) -> NSMutableAttributedString {
         let paragraphStyle = self.paragraphStyle
         let range = NSRange(location: 0, length: base.length)
         paragraphStyle.alignment = alignment
@@ -142,8 +130,7 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
     
     /// 行间距
     @discardableResult
-    public func setLineSpace(_ lignSpace: CGFloat, range: NSRange? = nil)
-    -> NSMutableAttributedString {
+    public func setLineSpace(_ lignSpace: CGFloat, range: NSRange? = nil) -> NSMutableAttributedString {
         let paragraphStyle = self.paragraphStyle
         let range = range ?? NSMakeRange(0, base.length)
         paragraphStyle.lineSpacing = lignSpace
@@ -154,8 +141,7 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
     /// 字间距
     @discardableResult
     public func setParagraphSpacing(_ paragraphSpacing: CGFloat,
-                                    range: NSRange? = nil)
-    -> NSMutableAttributedString {
+                                    range: NSRange? = nil) -> NSMutableAttributedString {
         let paragraphStyle = self.paragraphStyle
         let range = range ?? NSMakeRange(0, base.length)
         paragraphStyle.paragraphSpacing = paragraphSpacing
@@ -166,8 +152,7 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
     /// Ellipsis pattern of ellipsis
     @discardableResult
     public func setLineBreakMode(_ lineBreakMode: NSLineBreakMode,
-                                 range: NSRange? = nil)
-    -> NSMutableAttributedString {
+                                 range: NSRange? = nil) -> NSMutableAttributedString {
         let range = range ?? NSMakeRange(0, base.length)
         paragraphStyle.lineBreakMode = lineBreakMode
         setAttribute(.paragraphStyle, value: paragraphStyle, range: range)

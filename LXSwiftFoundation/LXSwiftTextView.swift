@@ -24,7 +24,7 @@ open class LXSwiftTextView: UITextView {
         addSubview(placehoderLabel)
         
         /// call after placehoderLabel
-        font = UIFont.systemFont(ofSize: 14)
+        font = UIFont.lx.font(withRegular: 14)
         
         NotificationCenter.default.addObserver(self,
             selector: #selector(textDidChange), name: UITextView.textDidChangeNotification, object: self)
@@ -52,8 +52,7 @@ open class LXSwiftTextView: UITextView {
         let labelY = CGFloat(8)
         let size = self.placehoderLabel.text?.lx.size(font: placehoderLabel.font,
                 width: self.frame.width - CGFloat(labelX * 2)) ?? CGSize.zero
-        placehoderLabel.frame = CGRect(origin: CGPoint(x: labelX, y: labelY),
-                                       size: size)
+        placehoderLabel.frame = CGRect(origin: CGPoint(x: labelX, y: labelY), size: size)
     }
 }
 

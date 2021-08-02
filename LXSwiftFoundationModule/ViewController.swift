@@ -112,11 +112,11 @@ class ViewController: UIViewController {
         
         let s1 = "《用户服务协议》"
         let s2 = "《隐私政策》"
-        let r1 = LXSwiftRegexType(s1,
+        let r1 = LXSwiftRegexType(with: s1,
                                   color: UIColor.lx.color(hex: "36acff"),
                                   font: UIFont.systemFont(ofSize: 14),
                                   isExpression: false)
-        let r2 = LXSwiftRegexType(s2,
+        let r2 = LXSwiftRegexType(with: s2,
                                   color: UIColor.lx.color(hex: "36acff"),
                                   font: UIFont.systemFont(ofSize: 14),
                                   isExpression: false)

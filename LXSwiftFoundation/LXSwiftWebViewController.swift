@@ -24,10 +24,8 @@ open class LXSwiftWeakScriptMessageDelegate:NSObject, WKScriptMessageHandler {
         super.init()
     }
     
-    open func userContentController(_ userContentController: WKUserContentController,
-                                    didReceive message: WKScriptMessage) {
-        self.delegate?.userContentController(userContentController,
-                                             didReceive: message)
+    open func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        self.delegate?.userContentController(userContentController, didReceive: message)
     }
 }
 
@@ -102,10 +100,8 @@ extension LXSwiftWebViewController {
     }
     
     /// load webView h5
-    open func noticeWebviewShareResult(with javaScriptString: String,
-                                       completionHandler: ((Any?, Error?) -> Void)? = nil) {
-        webView.evaluateJavaScript(javaScriptString,
-                                   completionHandler: completionHandler)
+    open func noticeWebviewShareResult(with javaScriptString: String, completionHandler: ((Any?, Error?) -> Void)? = nil) {
+        webView.evaluateJavaScript(javaScriptString, completionHandler: completionHandler)
     }
     
     /// add js call back
@@ -121,11 +117,7 @@ extension LXSwiftWebViewController {
     
     /// Snap Shot 截图
     @available(iOS 11.0, *)
-    open func takeSnapShot(with rect: CGRect = CGRect(x: 0,
-                                                      y: 0,
-                                                      width: LXSwiftApp.screenW,
-                                                      height: LXSwiftApp.screenH),
-                           handel: @escaping (UIImage) -> ()) {
+    open func takeSnapShot(with rect: CGRect = CGRect(x: 0, y: 0, width: LXSwiftApp.screenW, height: LXSwiftApp.screenH), handel: @escaping (UIImage) -> ()) {
         let config = WKSnapshotConfiguration()
         config.rect = rect
         webView.takeSnapshot(with: config) { (image, error) in
@@ -136,8 +128,7 @@ extension LXSwiftWebViewController {
     
     /// 删除cookie HTTPCookie
     @available(iOS 11.0, *)
-    open func handleCookie(_ string: String,
-                           handle: @escaping ([HTTPCookie]) -> ()) {
+    open func handleCookie(_ string: String, handle: @escaping ([HTTPCookie]) -> ()) {
         webView.configuration.websiteDataStore.httpCookieStore.getAllCookies {
             cookies in
             var results = [HTTPCookie]()
@@ -168,8 +159,7 @@ extension LXSwiftWebViewController {
 
 // MARK: - WKScriptMessageHandler
 extension LXSwiftWebViewController: WKScriptMessageHandler {
-    open func userContentController(_ userContentController: WKUserContentController,
-                                    didReceive message: WKScriptMessage) {
+    open func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         for methodT in methodTs {
             if methodT.method == message.name {
                 methodT.handel(message.body)
@@ -204,20 +194,14 @@ extension LXSwiftWebViewController {
     ///observer
     fileprivate func addObserver() {
         /// 添加观察者--实时监视“估计进度”属性的值
-        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress),
-                            options: .new, context: nil)
-        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.title),
-                            options: .new, context: nil)
-        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.url),
-                            options: .new, context: nil)
+        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
+        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.title), options: .new, context: nil)
+        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.url), options: .new, context: nil)
         
     }
     
     /// 实时获取加载进度的值
-    override open func observeValue(forKeyPath keyPath: String?,
-                                    of object: Any?,
-                                    change: [NSKeyValueChangeKey : Any]?,
-                                    context: UnsafeMutableRawPointer?) {
+    override open func observeValue(forKeyPath keyPath: String?,of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == #keyPath(WKWebView.estimatedProgress){
             progressView.progress = Float(webView.estimatedProgress)
         }else if keyPath == #keyPath(WKWebView.title) {
@@ -242,9 +226,7 @@ extension LXSwiftWebViewController {
 extension LXSwiftWebViewController: WKNavigationDelegate{
     
     ///决定是否在当前文件夹中加载网站，WebView（例如，当加载包含动态URL时），主要基于一级信息的请求
-    open func webView(_ webView: WKWebView,
-                      decidePolicyFor navigationAction: WKNavigationAction,
-                      decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    open func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         
         //        For example, all Google pages will be opened in an external browser, and the rest will be opened in the WebView of this app
         //        if let url = navigationAction.request.url{
@@ -258,24 +240,20 @@ extension LXSwiftWebViewController: WKNavigationDelegate{
     }
     
     /// 从web服务器请求数据时调用（网页开始加载）
-    open func webView(_ webView: WKWebView,
-                      didStartProvisionalNavigation navigation: WKNavigation!) {
+    open func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         spinner.startAnimating()
     }
     
     /// 收到服务器响应后，主要根据响应头信息决定是否在当前WebView中加载网站
-    open func webView(_ webView: WKWebView,
-                      decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
+    open func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
         decisionHandler(.allow)
     }
     
     /// 开始从web服务器接收数据时调用
-    open func webView(_ webView: WKWebView,
-                      didCommit navigation: WKNavigation!) { }
+    open func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) { }
     
     /// 从web服务器接收数据时调用（页面加载完成）
-    open func webView(_ webView: WKWebView,
-                      didFinish navigation: WKNavigation!) {
+    open func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print(#function)
         spinner.stopAnimating()
         spinner.removeFromSuperview()
@@ -285,9 +263,7 @@ extension LXSwiftWebViewController: WKNavigationDelegate{
         handleJS()
     }
     /// 当网页加载失败时调用
-    open func webView(_ webView: WKWebView,
-                      didFail navigation: WKNavigation!,
-                      withError error: Error) {
+    open func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         print(#function)
         spinner.stopAnimating()
         spinner.removeFromSuperview()
@@ -303,29 +279,17 @@ extension LXSwiftWebViewController: WKUIDelegate{
     /// 闭包：用作参数的函数，非转义关闭-默认：执行后释放外围功能，Escape closure-@escaping:执行外围功能后，其引用仍由其他对象保留，
     /// 不会被释放，失控的闭包对于内存管理是有风险的——除非您知道，否则请谨慎使用
     /// [JS]警报（）警告框
-    open func webView(_ webView: WKWebView,
-                      runJavaScriptAlertPanelWithMessage message: String,
-                      initiatedByFrame frame: WKFrameInfo,
-                      completionHandler: @escaping () -> Void) {
-        let alert = UIAlertController(title: nil,
-                                      message: message,
-                                      preferredStyle: .alert)
-        
+    open func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         alert.lx.action(with: "确定", style: .default) { (_) in
             completionHandler()
         }
-
         present(alert, animated: true, completion: nil)
     }
     
     // [js]confirm()
-    open func webView(_ webView: WKWebView,
-                      runJavaScriptConfirmPanelWithMessage message: String,
-                      initiatedByFrame frame: WKFrameInfo,
-                      completionHandler: @escaping (Bool) -> Void) {
-        let alert = UIAlertController(title: nil,
-                                      message: message,
-                                      preferredStyle: .alert)
+    open func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         alert.lx.action(with: "取消", style: .cancel) { (_) in
             completionHandler(false)
         }
@@ -336,14 +300,8 @@ extension LXSwiftWebViewController: WKUIDelegate{
     }
     
     // [js]prompt()
-    open func webView(_ webView: WKWebView,
-                      runJavaScriptTextInputPanelWithPrompt prompt: String,
-                      defaultText: String?,
-                      initiatedByFrame frame: WKFrameInfo,
-                      completionHandler: @escaping (String?) -> Void) {
-        let alert = UIAlertController(title: nil,
-                                      message: prompt,
-                                      preferredStyle: .alert)
+    open func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void) {
+        let alert = UIAlertController(title: nil, message: prompt, preferredStyle: .alert)
         alert.addTextField { (textField) in
             textField.placeholder = defaultText
         }

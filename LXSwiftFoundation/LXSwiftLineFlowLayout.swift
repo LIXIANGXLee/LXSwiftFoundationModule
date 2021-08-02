@@ -10,8 +10,7 @@ import UIKit
 @objc public protocol LXSwiftLineFlowLayoutDelegate: AnyObject {
     
     /// 滑动到的中心view的索引的回调
-    @objc optional func lineFlowLayout(_ lineFlowLayout: LXSwiftLineFlowLayout,
-                                       _ index: Int)
+    @objc optional func lineFlowLayout(_ lineFlowLayout: LXSwiftLineFlowLayout, _ index: Int)
 }
 
 // MARK: - 线性布局
@@ -29,8 +28,7 @@ open class LXSwiftLineFlowLayout: UICollectionViewFlowLayout {
 //        sectionInset = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
     }
     
-    open override func layoutAttributesForElements(in rect: CGRect)
-    -> [UICollectionViewLayoutAttributes]? {
+    open override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
    
          guard let c = collectionView else { return [] }
          var attsArray: [UICollectionViewLayoutAttributes] = []
@@ -46,9 +44,7 @@ open class LXSwiftLineFlowLayout: UICollectionViewFlowLayout {
         return attsArray
     }
     
-    open override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint,
-                                      withScrollingVelocity velocity: CGPoint)
-    -> CGPoint {
+    open override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         guard let c = collectionView else { return CGPoint.zero }
         var contentOffset = CGPoint(x: proposedContentOffset.x,
                                     y: proposedContentOffset.y)

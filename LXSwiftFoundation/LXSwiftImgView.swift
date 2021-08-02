@@ -26,8 +26,7 @@ open class LXSwiftImgView: UIImageView {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        let tapGesture = UITapGestureRecognizer(target: self,
-                    action: #selector(swiftImgViewAction(_:)))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(swiftImgViewAction(_:)))
         addGestureRecognizer(tapGesture)
     }
     

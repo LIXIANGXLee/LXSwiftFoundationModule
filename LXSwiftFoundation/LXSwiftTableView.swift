@@ -59,8 +59,7 @@ public extension UITableView {
 
     func dequeueSwiftReusableCell<T: UITableViewCell>(indexPath: IndexPath)
     -> T where T: LXSwiftCellCompatible {
-        return self.dequeueReusableCell(withIdentifier: T.reusableSwiftIdentifier,
-                                        for: indexPath) as! T
+        return self.dequeueReusableCell(withIdentifier: T.reusableSwiftIdentifier, for: indexPath) as! T
     }
 }
 
@@ -68,30 +67,22 @@ public extension UITableView {
 extension LXSwiftTableView: UIGestureRecognizerDelegate {
     
     /// 您是否支持多事件传递代理
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
-                                  shouldRecognizeSimultaneouslyWith
-                                    otherGestureRecognizer: UIGestureRecognizer)
-    -> Bool {
-        let outResult = shouldRecognizeSimultaneously?(gestureRecognizer,
-                                                       otherGestureRecognizer)
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,  shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        let outResult = shouldRecognizeSimultaneously?(gestureRecognizer, otherGestureRecognizer)
         return outResult ?? false
     }
     
     /// 是否允许开始手势
-    open override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer)
-    -> Bool {
+    open override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         let outResult = shouldBegin?(gestureRecognizer)
-        return outResult ??
-            super.gestureRecognizerShouldBegin(gestureRecognizer)
+        return outResult ?? super.gestureRecognizerShouldBegin(gestureRecognizer)
     }
 }
 
 //MARK: - LXTableViewCell
-open class LXSwiftTableViewCell: UITableViewCell,
-                                    LXSwiftCellCompatible {
+open class LXSwiftTableViewCell: UITableViewCell, LXSwiftCellCompatible {
 
-    public override init(style: UITableViewCell.CellStyle,
-                         reuseIdentifier: String?) {
+    public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
         setupViewModel()

@@ -69,8 +69,7 @@ extension LXSwiftBasics where Base: UIButton {
     }
     
     /// 提供了一种设置uibutton属性的方便方法 （标题、图片、状态）
-    public func set(title: String?, image: UIImage?,
-                    state: UIControl.State = .normal) {
+    public func set(title: String?, image: UIImage?, state: UIControl.State = .normal) {
         if let title = title { base.setTitle(title, for: state) }
         if let image = image { base.setImage(image, for: state) }
     }
@@ -81,9 +80,7 @@ extension LXSwiftBasics where Base : UIButton {
     
     public func setHandle(buttonCallBack: ((_ button: UIButton?) -> ())?){
         base.swiftCallBack = buttonCallBack
-        base.addTarget(base,
-                       action: #selector(base.swiftButtonAction(_:)),
-                       for: .touchUpInside)
+        base.addTarget(base, action: #selector(base.swiftButtonAction(_:)), for: .touchUpInside)
     }
 }
 

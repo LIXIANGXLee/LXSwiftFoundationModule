@@ -22,8 +22,7 @@ extension UIControl  {
     
     private var hitTime: Double? {
         get { return lx_getAssociatedObject(self, &hitTimerKey) }
-        set { lx_setRetainedAssociatedObject(self, &hitTimerKey,
-                                             newValue, .OBJC_ASSOCIATION_ASSIGN) }
+        set { lx_setRetainedAssociatedObject(self, &hitTimerKey, newValue, .OBJC_ASSOCIATION_ASSIGN) }
     }
     
     func hitDouble(_ hitTime: Double) {

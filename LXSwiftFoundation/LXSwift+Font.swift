@@ -19,8 +19,7 @@ extension LXSwiftBasics where Base: UIFont {
     /// - size: 字体大小
     /// - name: 字体类型
     /// - italics: 斜体成都大小 默认是10
-    public static func fontMatrix(size: CGFloat, name: String,
-                              italics: CGFloat = 10) -> UIFont {
+    public static func font(withMatrix size: CGFloat, name: String, italics: CGFloat = 10) -> UIFont {
         let matrix = CGAffineTransform(a: 1,
                                        b: 0,
                                        c: CGFloat(tanf(Float(italics) * Float(Double.pi) / 180)),

@@ -11,7 +11,11 @@ import UIKit
 ///用于区分背景色的唯一标识符
 private let linkBgTag = 1234994321
 @objc public protocol LXTextLableDelegate: AnyObject {
+    
+    /// 点击长链接时回调
     @objc optional func lxTextLable(_ textView: LXSwiftTextLable, didSelect text: String)
+    
+    /// 长按时回调（回调字符串是全部内容）
     @objc optional func lxTextLable(_ textView: LXSwiftTextLable, longPress text: String)
 }
 
@@ -20,8 +24,7 @@ public struct LXSwiftTextLableConfig {
     public var bgColor: UIColor
     public var bgRadius: CGFloat
     
-    public init(bgRadius: CGFloat = 6,
-                bgColor: UIColor = UIColor.black.withAlphaComponent(0.1)) {
+    public init(bgRadius: CGFloat = 6, bgColor: UIColor = UIColor.black.withAlphaComponent(0.1)) {
         self.bgColor = bgColor
         self.bgRadius = bgRadius
     }
@@ -55,15 +58,13 @@ open class LXSwiftTextLable: UIView {
     }()
     
     fileprivate lazy var tagGesture: UITapGestureRecognizer = {
-        let tagGesture = UITapGestureRecognizer(target: self,
-                  action: #selector(gestureTag(gesture:)))
+        let tagGesture = UITapGestureRecognizer(target: self, action: #selector(gestureTag(gesture:)))
         tagGesture.numberOfTouchesRequired = 1
         return tagGesture
     }()
     
     fileprivate lazy var longGesture: UILongPressGestureRecognizer = {
-        let longGesture = UILongPressGestureRecognizer(target: self,
-                   action: #selector(gestureLong(gesture:)))
+        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(gestureLong(gesture:)))
         longGesture.minimumPressDuration = 0.8
         return longGesture
     }()
@@ -84,9 +85,7 @@ open class LXSwiftTextLable: UIView {
         guard let attr = self.attributedText else { return }
         
         textView.attributedText = attr
-        attr.enumerateAttributes(in: NSRange(location: 0, length: attr.length),
-                 options: NSAttributedString.EnumerationOptions(rawValue: 0))
-            { (objct, range, stop) in
+        attr.enumerateAttributes(in: NSRange(location: 0, length: attr.length), options: NSAttributedString.EnumerationOptions(rawValue: 0)) { (objct, range, stop) in
                 let t = objct[NSAttributedString.Key(LXSwiftRegex.textLinkConst)]
                 guard let textM = t as? String else { return }
                 textView.selectedRange = range

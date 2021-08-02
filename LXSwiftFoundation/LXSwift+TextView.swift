@@ -17,8 +17,7 @@ extension LXSwiftBasics where Base : LXSwiftTextView {
     }
     
     /// 设置占位符和颜色
-    public func set(with placeholder: String?,
-                    color: UIColor? = UIColor.lx.color(hex: "999999")) {
+    public func set(with placeholder: String?, color: UIColor? = UIColor.lx.color(hex: "999999")) {
         base.placehoderLabel.text = placeholder
         if let c = color {
             base.placehoderLabel.textColor = c
@@ -41,20 +40,17 @@ extension LXSwiftBasics where Base : LXSwiftTextView {
     
     /// 设置粗体字体和文本颜色
     public func set(withBold fontSize: CGFloat,textColor: String) {
-        set(with: UIFont.lx.font(withBold: fontSize),
-            textColor: UIColor.lx.color(hex: textColor))
+        set(with: UIFont.lx.font(withBold: fontSize), textColor: UIColor.lx.color(hex: textColor))
     }
     
     /// 设置中等字体和文本颜色
     public func set(withMedium fontSize: CGFloat, textColor: String) {
-        set(with: UIFont.lx.font(withMedium: fontSize),
-            textColor: UIColor.lx.color(hex: textColor))
+        set(with: UIFont.lx.font(withMedium: fontSize), textColor: UIColor.lx.color(hex: textColor))
     }
     
     /// 设置常规字体和文本颜色
     public func set(withRegular fontSize: CGFloat, textColor: String) {
-        set(with: UIFont.lx.font(withRegular: fontSize),
-            textColor: UIColor.lx.color(hex: textColor))
+        set(with: UIFont.lx.font(withRegular: fontSize), textColor: UIColor.lx.color(hex: textColor))
     }
     
     /// 在set text或nsattributestring之后调用updateUI，调用此方法后，

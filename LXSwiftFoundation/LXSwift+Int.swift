@@ -15,9 +15,9 @@ prefix operator ~<  /// 大于
 prefix operator ~>= /// 小于等于
 prefix operator ~<= /// 大于等于
 
-public prefix func ~> (_ index: Int) -> (Int) -> (Bool) { { $0 > index } }
+public prefix func ~>  (_ index: Int) -> (Int) -> (Bool) { { $0 >  index } }
 public prefix func ~>= (_ index: Int) -> (Int) -> (Bool) { { $0 >= index } }
-public prefix func ~< (_ index: Int) -> (Int) -> (Bool) { { $0 < index } }
+public prefix func ~<  (_ index: Int) -> (Int) -> (Bool) { { $0 <  index } }
 public prefix func ~<= (_ index: Int) -> (Int) -> (Bool) { { $0 <= index } }
 
 extension Int: LXSwiftCompatible {
@@ -32,8 +32,7 @@ extension Int: LXSwiftCompatible {
 extension LXSwiftBasics where Base == Int {
     
     ///  生成区间的随机数
-   public static func randomInt(lower: Int = 0,
-                          upper: Int = Int(UInt32.max)) -> Int {
+   public static func randomInt(lower: Int = 0, upper: Int = Int(UInt32.max)) -> Int {
         return lower + Int(arc4random_uniform(UInt32(upper - lower)))
     }
     

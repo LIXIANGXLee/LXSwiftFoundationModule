@@ -40,10 +40,8 @@ open class LXSwiftLabel: UILabel {
        super.drawText(in: rect.inset(by: padding))
     }
 
-    open override func textRect(forBounds bounds: CGRect,
-                                limitedToNumberOfLines numberOfLines: Int) -> CGRect {
-     var rect = super.textRect(forBounds: bounds.inset(by: self.padding),
-                               limitedToNumberOfLines: numberOfLines)
+    open override func textRect(forBounds bounds: CGRect, limitedToNumberOfLines numberOfLines: Int) -> CGRect {
+     var rect = super.textRect(forBounds: bounds.inset(by: self.padding), limitedToNumberOfLines: numberOfLines)
         rect.origin.x    -= self.padding.left
         rect.origin.y    -= self.padding.top
         rect.size.width  += (self.padding.left + self.padding.right)

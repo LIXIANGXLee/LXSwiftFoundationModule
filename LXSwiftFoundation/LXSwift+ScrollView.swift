@@ -55,9 +55,7 @@ extension LXSwiftBasics where Base: UIScrollView {
 extension UIScrollView {
     
     /// 获取ScrollView的contentScroll长图像
-    func snapShotContentScroll(_ completionHandler:
-                                            @escaping (_ screenShotImage: UIImage?)
-                                            -> Void) {
+    func snapShotContentScroll(_ completionHandler: @escaping (_ screenShotImage: UIImage?)  -> Void) {
         
         guard let snapShotView = self.snapshotView(afterScreenUpdates: true) else { return }
         snapShotView.frame = CGRect(x: self.frame.origin.x,
@@ -73,9 +71,7 @@ extension UIScrollView {
         UIGraphicsBeginImageContextWithOptions(self.contentSize, false, UIScreen.main.scale)
         
         /// 此方法是一个图形，其中可能有递归调用
-        self.snapShotContentScrollPage(index: 0,
-                                       maxIndex: Int(page),
-                                       callback: { [weak self] () -> Void in
+        self.snapShotContentScrollPage(index: 0,  maxIndex: Int(page), callback: { [weak self] () -> Void in
             let strongSelf = self
             let screenShotImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
@@ -90,8 +86,7 @@ extension UIScrollView {
     }
     
     /// 根据偏移量和页数绘制，此方法是一个图形，其中可能有递归调用
-    func snapShotContentScrollPage(index: Int,
-             maxIndex: Int, callback: @escaping () -> Void) {
+    func snapShotContentScrollPage(index: Int, maxIndex: Int, callback: @escaping () -> Void) {
         
         self.setContentOffset(CGPoint(x: 0,
                y: CGFloat(index) * self.frame.size.height), animated: false)
@@ -103,8 +98,7 @@ extension UIScrollView {
         DispatchQueue.lx.delay(with: Double(Int64(0.3*Double(NSEC_PER_SEC)))/Double(NSEC_PER_SEC)) {
             self.drawHierarchy(in: splitFrame, afterScreenUpdates: true)
             if index < maxIndex {
-                self.snapShotContentScrollPage(index: index + 1,
-                            maxIndex: maxIndex, callback: callback)
+                self.snapShotContentScrollPage(index: index + 1, maxIndex: maxIndex, callback: callback)
             }else{
                 callback()
             }

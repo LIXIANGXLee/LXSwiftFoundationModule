@@ -38,12 +38,9 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
     }
     
     /// 开启定时器 倒计时
-    public static func startCountDown(maxInterval: TimeInterval = 60,
-                                      interval: TimeInterval = 1,
-                                      identified: String?, task: ((Int)->())?){
+    public static func startCountDown(maxInterval: TimeInterval = 60,  interval: TimeInterval = 1, identified: String?, task: ((Int)->())?){
         var total = maxInterval
-        startTimer(with: 0, interval: interval,
-                   repeats: true, identified: identified) {
+        startTimer(with: 0, interval: interval, repeats: true, identified: identified) {
             total -= 1
             if total <= 0 { cancel(with: identified) }
             task?(Int(total))

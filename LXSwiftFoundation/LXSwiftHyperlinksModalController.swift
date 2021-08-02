@@ -105,14 +105,8 @@ extension LXSwiftHyperlinksModalController {
         self.callBack = callBack
     }
     
-    public func getAttributedString(with text: String,
-                                    textColor: UIColor = UIColor.lx.color(hex: "666666"),
-                                    textFont: UIFont = UIFont.systemFont(ofSize: 14),
-                                    regexTypes: [LXSwiftRegexType])
-    -> NSAttributedString? {
-        return LXSwiftRegex.regex(of: text, textColor: textColor,
-                                            textFont: textFont,
-                                            wordRegexTypes: regexTypes)
+    public func getAttributedString(with text: String, textColor: UIColor = UIColor.lx.color(hex: "666666"), textFont: UIFont = UIFont.systemFont(ofSize: 14), regexTypes: [LXSwiftRegexType]) -> NSAttributedString? {
+        return LXSwiftRegex.regex(of: text, textColor: textColor, textFont: textFont, wordRegexTypes: regexTypes)
     }
     
     public func show(with title: String, content: NSAttributedString) {
@@ -166,8 +160,7 @@ extension LXSwiftHyperlinksModalController {
     
     func getTitleH() -> CGFloat {
         if let text = titleLabel.text {
-            return text.lx.height(font: modaConfig.titleFont,
-                                  width: contentView.frame.width - modaConfig.contentViewSubViewX * 2)
+            return text.lx.height(font: modaConfig.titleFont, width: contentView.frame.width - modaConfig.contentViewSubViewX * 2)
         }else{
             return 0
         }
@@ -222,9 +215,7 @@ public struct LXSwiftItem {
    public var titleFont: UIFont
    public var callBack: LXSwiftItem.LXSwiftModalItemCallBack?
     
-   public init(title: String, titleColor: UIColor = UIColor.black,
-                titleFont: UIFont = UIFont.lx.font(withMedium: 16),
-                callBack: LXSwiftItem.LXSwiftModalItemCallBack?) {
+   public init(title: String, titleColor: UIColor = UIColor.black, titleFont: UIFont = UIFont.lx.font(withMedium: 16), callBack: LXSwiftItem.LXSwiftModalItemCallBack?) {
         self.title = title
         self.titleFont = titleFont
         self.titleColor = titleColor

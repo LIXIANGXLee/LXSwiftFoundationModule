@@ -29,8 +29,7 @@ extension String: LXSwiftCompatible {
    
     ///开关反匹配模式，匹配
     ///第一个字符串包含还是最后一个字符串包含
-    public static func ~= (pattern: (String) -> Bool,
-                           value: String) -> Bool {
+    public static func ~= (pattern: (String) -> Bool, value: String) -> Bool {
         pattern(value)
     }
 }
@@ -84,8 +83,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     /// 替换字符串中的字符串
     public func replace(_ old: String, new: String) -> String {
         let string = base as! String
-        return string.replacingOccurrences(of: old,
-                with: new, options: NSString.CompareOptions.numeric, range: nil)
+        return string.replacingOccurrences(of: old, with: new, options: NSString.CompareOptions.numeric, range: nil)
     }
     
     /// 字符串转bool
@@ -137,8 +135,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     public func formatDecimalString(by digits: Int) -> String {
         let string = base as! String
         guard let m =  Double(string) else { return string }
-        return NSNumber(value: m).numberFormatter(with: .down,
-                       minDigits: digits, maxDigits: digits) ?? string
+        return NSNumber(value: m).numberFormatter(with: .down, minDigits: digits, maxDigits: digits) ?? string
     }
     
     /// 小数点后保留两个有效数字。
@@ -163,8 +160,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     /// 根据字体和宽度获取字体大小cgsize
     public func size(font: UIFont, width: CGFloat) -> CGSize {
         let string = base as! String
-        let attrString = NSAttributedString(string: string,
-                     attributes: [NSAttributedString.Key.font: font])
+        let attrString = NSAttributedString(string: string, attributes: [NSAttributedString.Key.font: font])
         return attrString.lx.size(width: width)
     }
     
@@ -223,9 +219,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     /// 转换为JSON对象类型
     public var jsonObject: Any? {
         let string = base as! String
-        guard let data = string.data(using: .utf8) else {
-            return nil
-        }
+        guard let data = string.data(using: .utf8) else { return nil }
         return try? JSONSerialization.jsonObject(with:data, options: .allowFragments)
     }
 }
@@ -234,16 +228,13 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
 extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
 
     /// 字符串匹配
-    public func enumerateStringsMatchedByRegex(regex: String,
-            usingBlock: (_ captureCount: Int, _ capturedStrings: String, _ range: NSRange) -> ()) {
+    public func enumerateStringsMatchedByRegex(regex: String, usingBlock: (_ captureCount: Int, _ capturedStrings: String, _ range: NSRange) -> ()) {
         // regex is not nil
         if regex.count <= 0 { return }
         let string = base as! String
         
         guard let regex = try? NSRegularExpression(pattern: regex.lx.trim, options: []) else { return }
-        let results = regex.matches(in: string,
-                                    options: [],
-                                    range: NSRange(location: 0, length: string.count))
+        let results = regex.matches(in: string, options: [], range: NSRange(location: 0, length: string.count))
         //can matching more string
         for result in results.reversed() {
             usingBlock(results.count, string[result.range.location..<(result.range.location + result.range.length)], result.range)
@@ -266,18 +257,15 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     public var transformToPinYin: String {
         let string = base as! String
         let mutableString = NSMutableString(string: string)
-        CFStringTransform(mutableString, nil,
-                          kCFStringTransformToLatin, false)
-        CFStringTransform(mutableString, nil,
-                          kCFStringTransformStripDiacritics, false)
+        CFStringTransform(mutableString, nil, kCFStringTransformToLatin, false)
+        CFStringTransform(mutableString, nil, kCFStringTransformStripDiacritics, false)
         return String(mutableString).replacingOccurrences(of: " ", with: "")
     }
     
     /// 字符串转码uft8
     public var utf8: String {
         let string = base as! String
-        return string.addingPercentEncoding(withAllowedCharacters:
-                                                CharacterSet.urlQueryAllowed) ?? ""
+        return string.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) ?? ""
     }
     
     ///“扩展计算”属性显示相应的
@@ -323,10 +311,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     /// MD5
     public var md5: String {
         let string = base as! String
-        guard let data = string.data(using: .utf8,
-                                     allowLossyConversion: true) else {
-            return string
-        }
+        guard let data = string.data(using: .utf8, allowLossyConversion: true) else { return string }
         var digest = [UInt8](repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))
         #if swift(>=5.0)
         _ = data.withUnsafeBytes { (bytes: UnsafeRawBufferPointer) in
@@ -351,24 +336,20 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         let string = base as! String
         guard let utf8EncodeData = string.data(using: .utf8,
                 allowLossyConversion: true) else { return nil }
-        return utf8EncodeData.base64EncodedString(options:
-                                    NSData.Base64EncodingOptions.init(rawValue: 0))
+        return utf8EncodeData.base64EncodedString(options: NSData.Base64EncodingOptions.init(rawValue: 0))
     }
     
     /// base64EncodedData转换字符串
     public var base64DecodingString: String? {
         let string = base as! String
-        guard  let utf8DecodedData =  Data(base64Encoded: string, options: Data.Base64DecodingOptions.init(rawValue: 0)) else {
-            return nil
-        }
+        guard  let utf8DecodedData =  Data(base64Encoded: string, options: Data.Base64DecodingOptions.init(rawValue: 0)) else { return nil }
         return  String(data: utf8DecodedData, encoding: String.Encoding.utf8)
     }
     
     /// image base64格式uiimage的字符串
     public var base64EncodingImage: UIImage? {
         let string = base as! String
-        guard let base64Data = Data(base64Encoded: string,
-            options: .ignoreUnknownCharacters) else { return nil }
+        guard let base64Data = Data(base64Encoded: string, options: .ignoreUnknownCharacters) else { return nil }
         return UIImage(data: base64Data)
     }
 }
@@ -488,14 +469,10 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     }
     
     /// 获取匹配结果的数组
-    public func matching(pattern: String,
-                         options: NSRegularExpression.Options = .caseInsensitive)
-    -> [NSTextCheckingResult]? {
+    public func matching(pattern: String, options: NSRegularExpression.Options = .caseInsensitive) -> [NSTextCheckingResult]? {
         let string = base as! String
         let regex = try? NSRegularExpression(pattern: pattern, options: [])
-        let results = regex?.matches(in: string,
-               options: NSRegularExpression.MatchingOptions.init(rawValue: 0),
-                                     range: NSMakeRange(0, string.count))
+        let results = regex?.matches(in: string, options: NSRegularExpression.MatchingOptions.init(rawValue: 0), range: NSMakeRange(0, string.count))
         return results
     }
 }

@@ -51,11 +51,7 @@ extension LXSwiftBasics where Base: Bundle {
     
     /// 获取icon string 集合
     public static var appIconStrs: [String]? {
-        guard let iconsDictionary = Bundle.main.infoDictionary?["CFBundleIcons"] as? [String: Any],
-            let primaryIconsDictionary = iconsDictionary["CFBundlePrimaryIcon"] as? [String: Any],
-            let iconFiles = primaryIconsDictionary["CFBundleIconFiles"] as? [String] else {
-            return nil
-        }
+        guard let iconsDictionary = Bundle.main.infoDictionary?["CFBundleIcons"] as? [String: Any], let primaryIconsDictionary = iconsDictionary["CFBundlePrimaryIcon"] as? [String: Any], let iconFiles = primaryIconsDictionary["CFBundleIconFiles"] as? [String] else { return nil }
         return iconFiles
     }
 }

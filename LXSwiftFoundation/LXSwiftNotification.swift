@@ -38,16 +38,14 @@ public class LXSwiftNotification<T: Codable>: LXSwiftNotificationBase {
     public func post(with object: T?) {
       
         let postObject = { (result: [AnyHashable: Any]?) in
-            NotificationCenter.default.post(name: self.name,
-                                            object: self, userInfo: result)
+            NotificationCenter.default.post(name: self.name, object: self, userInfo: result)
         }
         
         guard let jsonData = try? JSONEncoder().encode(object) else {
             postObject(nil)
             return
         }
-        guard let jsonObj = try? JSONSerialization.jsonObject(with: jsonData,
-                       options: []) else {
+        guard let jsonObj = try? JSONSerialization.jsonObject(with: jsonData, options: []) else {
             postObject(nil)
             return
         }
@@ -59,8 +57,7 @@ public class LXSwiftNotification<T: Codable>: LXSwiftNotificationBase {
         let systemInfo = notification.userInfo
         guard let notNilInfo = systemInfo else { return nil }
         guard let jsonData = try? JSONSerialization.data(withJSONObject: notNilInfo, options: []) else { return nil }
-        guard let decodeObj = try? JSONDecoder().decode(T.self,
-                    from: jsonData) else { return nil }
+        guard let decodeObj = try? JSONDecoder().decode(T.self, from: jsonData) else { return nil }
         return decodeObj
     }
 }

@@ -11,11 +11,8 @@ import UIKit
 extension LXSwiftBasics where Base : UISlider {
     
     public func setHandle(sliderCallBack: ((Float?) -> ())?){
-        
         base.swiftCallBack = sliderCallBack
-        base.addTarget(base,
-                       action: #selector(base.sliderSwitchAction(_:)),
-                       for: .touchUpInside)
+        base.addTarget(base, action: #selector(base.sliderSwitchAction(_:)), for: .touchUpInside)
     }
 }
 

@@ -32,18 +32,14 @@ extension LXSwiftBasics where Base == Dictionary<String, Any> {
     /// 字典到json字符串
     public var dicToJsonStr: String? {
         guard JSONSerialization.isValidJSONObject(base) else { return nil }
-        guard let jsonData = try? JSONSerialization.data(withJSONObject: base,
-                                                         options: []),
-            let json = String(data: jsonData, encoding: .utf8) else { return nil }
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: base, options: []), let json = String(data: jsonData, encoding: .utf8) else { return nil }
         return json
     }
 
     /// 字典到json字符串
     public var dicToPrettyStr: String? {
         guard JSONSerialization.isValidJSONObject(base) else { return nil }
-        guard let jsonData = try? JSONSerialization.data(withJSONObject: base,
-                                                         options: .prettyPrinted),
-            let json = String(data: jsonData, encoding: .utf8) else { return nil }
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: base, options: .prettyPrinted), let json = String(data: jsonData, encoding: .utf8) else { return nil }
         return json
     }
 }

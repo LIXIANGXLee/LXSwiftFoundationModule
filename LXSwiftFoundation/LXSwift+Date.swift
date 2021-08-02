@@ -14,8 +14,7 @@ extension Date: LXSwiftCompatible { }
 extension LXSwiftBasics where Base == Date {
     
     /// 日期转换字符串 yyyy-MM-dd HH:mm:ss
-    public func dateTranformString(with ymd: String = "yyyy-MM-dd HH:mm:ss")
-    -> String {
+    public func dateTranformString(with ymd: String = "yyyy-MM-dd HH:mm:ss") -> String {
         let fmt = DateFormatter()
         fmt.dateFormat = ymd
         let selfStr = fmt.string(from: base)
@@ -23,9 +22,7 @@ extension LXSwiftBasics where Base == Date {
     }
     
     /// 日期和日期比较
-    public func dateCompare(with date: Date,
-                            unit: Set<Calendar.Component> = [.year,.month,.day])
-    -> (DateComponents,DateComponents) {
+    public func dateCompare(with date: Date, unit: Set<Calendar.Component> = [.year,.month,.day]) -> (DateComponents,DateComponents) {
         let calendar = Calendar.current
         let dateComps = calendar.dateComponents(unit, from: date)
         let selfCmps = calendar.dateComponents(unit, from: base)
@@ -33,9 +30,7 @@ extension LXSwiftBasics where Base == Date {
     }
     
     /// 获取两个日期之间的数据
-    public func omponentCompare(from date: Date,
-                              unit: Set<Calendar.Component> = [.year,.month,.day])
-    -> DateComponents {
+    public func omponentCompare(from date: Date, unit: Set<Calendar.Component> = [.year,.month,.day]) -> DateComponents {
         let calendar = Calendar.current
         let comp = calendar.dateComponents(unit, from: date, to: base)
         return comp

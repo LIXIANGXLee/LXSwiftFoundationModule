@@ -44,8 +44,7 @@ extension LXSwiftBasics where Base == Data {
     
     /// 数据传输uiimage的base64
     public var base64DecodingImage: UIImage? {
-        guard let base64Data = Data(base64Encoded: base,
-              options: .ignoreUnknownCharacters) else { return nil }
+        guard let base64Data = Data(base64Encoded: base, options: .ignoreUnknownCharacters) else { return nil }
         return UIImage(data: base64Data)
     }
     
@@ -58,8 +57,7 @@ extension LXSwiftBasics where Base == Data {
     
     /// data转换字典
     public var dataToPlistDictionary: Dictionary<String, Any>? {
-        guard let propertyList = try? PropertyListSerialization.propertyList(from: base,
-                options: .init(rawValue: 0),format: nil) else { return nil }
+        guard let propertyList = try? PropertyListSerialization.propertyList(from: base,  options: .init(rawValue: 0),format: nil) else { return nil }
         return propertyList as? Dictionary<String, Any>
     }
 }

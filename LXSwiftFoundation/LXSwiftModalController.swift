@@ -11,8 +11,7 @@ import UIKit
 // MARK: - public
 open class LXSwiftModalController: UIViewController {
     
-    public override init(nibName nibNameOrNil: String?,
-                         bundle nibBundleOrNil: Bundle?) {
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         modalTransitionStyle = .crossDissolve
         modalPresentationStyle = .overCurrentContext
@@ -32,14 +31,12 @@ open class LXSwiftModalController: UIViewController {
     
     /// 内容视图操作单击
     open lazy var contentGesture: UITapGestureRecognizer = {
-        return UITapGestureRecognizer(target: self,
-                                      action: #selector(contentViewTaped(tap:)))
+        return UITapGestureRecognizer(target: self, action: #selector(contentViewTaped(tap:)))
     }()
     
     /// allscreen UITapGestureRecognizer
     open lazy var tapGesture: UITapGestureRecognizer = {
-        return UITapGestureRecognizer(target: self,
-                                      action: #selector(backgroundViewTap))
+        return UITapGestureRecognizer(target: self, action: #selector(backgroundViewTap))
     }()
     
     /// 内容视图

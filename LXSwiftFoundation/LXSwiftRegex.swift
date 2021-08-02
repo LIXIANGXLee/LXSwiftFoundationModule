@@ -11,8 +11,7 @@ import UIKit
 // MARK: public LXRegexType Hyperlink type
 public struct LXSwiftRegexType {
     
-    public init(_ link: String, color: UIColor = UIColor.orange,
-                font: UIFont = UIFont.systemFont(ofSize: 15), isExpression: Bool = false) {
+    public init(with link: String, color: UIColor = UIColor.orange, font: UIFont = UIFont.lx.font(withRegular: 15), isExpression: Bool = false) {
         self.link = link
         self.color = color
         self.font = font
@@ -46,9 +45,9 @@ public class LXSwiftRegex {
     
     /// 默认匹配集合（超链接、电话号码、表情）
     public static let wordRegexTypes = [
-        LXSwiftRegexType(httpRegex, isExpression: false),
-        LXSwiftRegexType(phoneRegex, isExpression: false),
-        LXSwiftRegexType(expressionRegex, isExpression: true)
+        LXSwiftRegexType(with: httpRegex, isExpression: false),
+        LXSwiftRegexType(with: phoneRegex, isExpression: false),
+        LXSwiftRegexType(with: expressionRegex, isExpression: true)
     ]
 }
 
@@ -64,13 +63,7 @@ extension LXSwiftRegex {
     /// - lineSpaceing：行间距
     /// - wordSpaceing：字间距
     /// - wordregextypes:超链接文本配置信息
-    public class func regex(of text: String,
-                            textColor: UIColor = UIColor.black,
-                            textFont: UIFont = UIFont.systemFont(ofSize: 15),
-                            lineSpaceing: CGFloat = 4,
-                            wordSpaceing: CGFloat = 0,
-                            wordRegexTypes: [LXSwiftRegexType] = wordRegexTypes)
-        -> NSAttributedString? {
+    public class func regex(of text: String, textColor: UIColor = UIColor.black,textFont: UIFont = UIFont.systemFont(ofSize: 15),  lineSpaceing: CGFloat = 4, wordSpaceing: CGFloat = 0, wordRegexTypes: [LXSwiftRegexType] = wordRegexTypes) -> NSAttributedString? {
             
         if text.count <= 0 { return nil }
         let style = NSMutableParagraphStyle()

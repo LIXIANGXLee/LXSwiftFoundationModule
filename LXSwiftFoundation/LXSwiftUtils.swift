@@ -35,15 +35,13 @@ extension LXSwiftUtils.VersionCompareResult {
 extension LXSwiftBasics where Base == LXSwiftUtils {
     
     /// 两个版本比较大小 big: one > two, small: two < one,equal: one == two
-    public static func versionCompare(v1: String, v2: String)
-    -> LXSwiftUtils.VersionCompareResult {
+    public static func versionCompare(v1: String, v2: String) -> LXSwiftUtils.VersionCompareResult {
         let ret = _compareVersionInSwift(v1, v2)
         return LXSwiftUtils.VersionCompareResult(rawValue: ret)
     }
     
-    /// 两个版本比较大小 big: one > two, small: two < one,equal: one == two
-    public static func versionCompare(_ v1: String, _ v2: String)
-    -> LXSwiftUtils.VersionCompareResult {
+    /// 两个版本比较大小 big: one > two, small: two < one, equal: one == two
+    public static func versionCompare(_ v1: String, _ v2: String) -> LXSwiftUtils.VersionCompareResult {
 
         let com = v1.compare(v2)
         var temp: LXSwiftUtils.VersionCompareResult
@@ -61,10 +59,8 @@ extension LXSwiftBasics where Base == LXSwiftUtils {
     }
     
     /// 打电话
-    public static func openTel(with number: String?,
-                               _ tellCallBack: LXSwiftUtils.TellCallBack? = nil) {
-        if let number = number,
-            let url = URL(string: "tel:" + number) {
+    public static func openTel(with number: String?, _ tellCallBack: LXSwiftUtils.TellCallBack? = nil) {
+        if let number = number, let url = URL(string: "tel:" + number) {
             if UIApplication.lx.isCanOpen(url) {
                 UIApplication.lx.openUrl(url)
             }
@@ -72,28 +68,25 @@ extension LXSwiftBasics where Base == LXSwiftUtils {
     }
     
     /// 在小数点后保留几个有效数字
-    public static func formatDecimalString(with text: String, _ digits: Int,
-                                           _ mode: NumberFormatter.RoundingMode = .down)
-    -> String {
+    public static func formatDecimalString(with text: String, digits: Int,  mode: NumberFormatter.RoundingMode = .down) -> String {
         guard let m = Double(text) else { return text }
-        return NSNumber(value: m).numberFormatter(with: .down,
-                                                  minDigits: digits,
-                                                  maxDigits: digits) ?? text
+        let number = NSNumber(value: m)
+        return number.numberFormatter(with: .down, minDigits: digits, maxDigits: digits) ?? text
     }
 
     /// 小数点后保留二位有效数字
     public static func formatDecimalStringTwo(with text: String) -> String {
-       return formatDecimalString(with: text, 2)
+       return formatDecimalString(with: text, digits: 2)
     }
     
     /// 小数点后保留三位有效数字
     public static func formatDecimalStringThree(with text: String) -> String {
-       return formatDecimalString(with: text, 3)
+        return formatDecimalString(with: text, digits: 3)
     }
     
     /// 小数点后保留四位有效数字
     public static func formatDecimalStringFour(with text: String) -> String {
-       return formatDecimalString(with: text, 4)
+        return formatDecimalString(with: text, digits: 4)
     }
     
     /// 从路径看plist变换字典
@@ -112,19 +105,15 @@ extension LXSwiftBasics where Base == LXSwiftUtils {
     /// 识别二维码图片
     public static func getQrCodeString(with image: UIImage?) -> String? {
         let context = CIContext(options: nil)
-        let detector = CIDetector(ofType: CIDetectorTypeQRCode,
-                                  context: context, options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])
-        guard let cgImage = image?.cgImage else {
-            return nil
-        }
+        let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: context, options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])
+        guard let cgImage = image?.cgImage else { return nil }
         let ciImage = CIImage(cgImage: cgImage)
         let feature = detector?.features(in: ciImage).first as? CIQRCodeFeature
         return feature?.messageString
     }
     
     /// 异步获取二维码信息
-    public static func async_getQrCodeString(with image: UIImage?,
-                                             complete: @escaping (String?) -> ()) {
+    public static func async_getQrCodeString(with image: UIImage?, complete: @escaping (String?) -> ()) {
         DispatchQueue.global().async{
             let async_qrString = self.getQrCodeString(with: image)
             DispatchQueue.main.async(execute: {
@@ -134,8 +123,7 @@ extension LXSwiftBasics where Base == LXSwiftUtils {
     }
     
     /// 创建二维码图像
-    public static func getQrCodeImage(with qrCodeStr: String?,
-                                      size: CGFloat = 800) -> UIImage? {
+    public static func getQrCodeImage(with qrCodeStr: String?, size: CGFloat = 800) -> UIImage? {
         
         let filter = CIFilter(name: "CIQRCodeGenerator")
         filter?.setDefaults()
@@ -148,9 +136,7 @@ extension LXSwiftBasics where Base == LXSwiftUtils {
     }
     
     /// 异步创建二维码图像
-    public static func async_getQrCodeImage(with qrCodeStr: String?,
-                                            size: CGFloat = 800,
-                                            complete: @escaping (UIImage?) -> ()) {
+    public static func async_getQrCodeImage(with qrCodeStr: String?, size: CGFloat = 800, complete: @escaping (UIImage?) -> ()) {
         DispatchQueue.global().async{
             let async_qrImage = self.getQrCodeImage(with: qrCodeStr,
                                                     size: size)
@@ -161,15 +147,13 @@ extension LXSwiftBasics where Base == LXSwiftUtils {
     }
     
     /// 生成二维码后，因为它不是真实的图片，所以需要重新绘制
-    private static func createNonInterpolatedImage(with ciImage: CIImage,
-                                                   size: CGFloat) -> UIImage? {
+    private static func createNonInterpolatedImage(with ciImage: CIImage, size: CGFloat) -> UIImage? {
         let extent = ciImage.extent.integral
         if extent.width == 0 || extent.height == 0 { return nil }
         
         let scale = min(size / extent.width, size / extent.height)
         let width = extent.width * scale;
         let height = extent.height * scale;
-        
         let colorSpace = CGColorSpaceCreateDeviceGray();
         guard let bitmapRef = CGContext(data: nil, width: Int(width),
                                         height: Int(height),
@@ -180,8 +164,7 @@ extension LXSwiftBasics where Base == LXSwiftUtils {
         bitmapRef.interpolationQuality = CGInterpolationQuality.high
         bitmapRef.scaleBy(x: scale, y: scale)
         let context = CIContext(options: nil)
-        guard let bitmapImage = context.createCGImage(ciImage,
-                    from: extent) else { return nil }
+        guard let bitmapImage = context.createCGImage(ciImage, from: extent) else { return nil }
         bitmapRef.draw(bitmapImage, in: extent)
         guard let scaledImage = bitmapRef.makeImage() else { return nil }
         return UIImage(cgImage: scaledImage)
@@ -189,9 +172,7 @@ extension LXSwiftBasics where Base == LXSwiftUtils {
     
     /// 播放本地短暂的语音
     @available(iOS 9.0, *)
-    public static func playSound(with filepath: String?,
-                          completion: (() -> ())? = nil) {
-
+    public static func playSound(with filepath: String?, completion: (() -> ())? = nil) {
         guard let string = filepath else { return }
         var soundID: SystemSoundID = 0
         let fileUrl = URL(fileURLWithPath: string)
