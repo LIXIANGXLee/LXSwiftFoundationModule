@@ -40,6 +40,7 @@ extension LXSwiftBasics where Base: UIView {
             }
         }
         let snapImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
         return snapImage
     }
     
@@ -70,7 +71,7 @@ extension LXSwiftBasics where Base: UIView {
         let s = size ?? base.bounds.size
         if !s.equalTo(CGSize.zero) {
             let gradientLayer = CAGradientLayer()
-            gradientLayer.frame =  CGRect(origin: CGPoint.zero, size: s)
+            gradientLayer.frame = CGRect(origin: base.bounds.origin, size: s)
             base.layer.insertSublayer(gradientLayer, at: 0)
             gradientLayer.colors = colors.map{ $0.cgColor }
             gradientLayer.locations = locations
@@ -118,16 +119,73 @@ extension LXSwiftBasics where Base: UIView {
         
         let s = viewSize ?? base.bounds.size
         let rect = CGRect(origin: CGPoint.zero, size: s)
-        let fieldPath = UIBezierPath(roundedRect: rect,
-                                      byRoundingCorners: roundingCorners,
-                                      cornerRadii: CGSize(width: radius,
-                                                          height: radius))
+        let bezierPath = UIBezierPath(roundedRect: rect,
+                                     byRoundingCorners: roundingCorners,
+                                     cornerRadii: CGSize(width: radius, height: radius))
         if !s.equalTo(CGSize.zero) {
-            let fieldLayer = CAShapeLayer()
-            fieldLayer.frame = base.bounds
-            fieldLayer.path = fieldPath.cgPath
-            base.layer.mask = fieldLayer
+            let rect = CGRect(origin: base.bounds.origin, size: s)
+            base.layer.mask = bezierPath.lx.layer(with: rect)
         }
+    }
+}
+
+//MARK: -  快捷设置view尺寸
+extension LXSwiftBasics where Base: UIView {
+    
+    public var x: CGFloat {
+        set(num) { base.frame = CGRect(x: LXSwiftApp.flat(num), y: y, width: width, height: height) }
+        get { return base.frame.origin.x }
+    }
+    
+    public var y: CGFloat {
+        set(num) { base.frame = CGRect(x: x, y: LXSwiftApp.flat(num), width: width, height: height) }
+        get { return base.frame.origin.y }
+    }
+    
+    public var width: CGFloat {
+        set(num) { base.frame = CGRect(x: x, y: y, width: LXSwiftApp.flat(num), height: height) }
+        get { return base.frame.size.width }
+    }
+    
+    public var height: CGFloat {
+        set(num) { base.frame = CGRect(x: x, y: y, width: width, height: LXSwiftApp.flat(num)) }
+        get { return base.frame.size.height }
+    }
+
+    /// 中心点横坐标
+    public var centerX: CGFloat {
+        set(num) { base.frame = CGRect(x: LXSwiftApp.flat(num - width / 2), y: y, width: width, height: height) }
+        get { return x + LXSwiftApp.flat(width / 2) }
+    }
+    
+    /// 中心点纵坐标
+    public var centerY: CGFloat {
+        set(num) { base.frame = CGRect(x: x, y: LXSwiftApp.flat(num - height / 2), width: width, height: height) }
+        get { return y + LXSwiftApp.flat(height / 2) }
+    }
+
+    /// 左边缘
+    public var left: CGFloat {
+        set(num) { x = LXSwiftApp.flat(num) }
+        get { return base.frame.origin.x }
+    }
+
+    /// 右边缘
+    public var right: CGFloat {
+        set(num) { x =  LXSwiftApp.flat(num - width) }
+        get { return x + width }
+    }
+
+    /// 上边缘
+    public var top: CGFloat {
+        set(num) { y = LXSwiftApp.flat(num) }
+        get { return y }
+    }
+
+    /// 下边缘
+    public var bottom: CGFloat {
+        set(num) { y = LXSwiftApp.flat(num - height) }
+        get { return y + height }
     }
 }
 

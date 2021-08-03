@@ -26,7 +26,7 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
         timer.schedule(deadline: .now() + delaySeconds, repeating: interval)
         LXSwiftGCDTimer.timers[iden] = timer
         timer.setEventHandler(handler: {
-            DispatchQueue.lx.async { task?() }
+            DispatchQueue.lx.asyncMain { task?() }
             if !repeats && !timer.isCancelled{
                 timer.cancel()
             }

@@ -54,12 +54,10 @@ class ViewController: UIViewController {
             print("-=-=-=-=-=-=-=-=-=-=-=-=")
         }
  
-        PHPhotoLibrary.requestAuthorization { (status) in
-            LXObjcUtils.writeImageToAbulm(with: UIImage(named: "tab_center")!, collectionTitle: "asadsadsfdsfdsfd") { (isSuccess, error) in
-                print("-=-=-=-=-=-=\(isSuccess)=====\(error)")
-            }
-        }
         
+        print("-=-=-=-=-=\(FileManager.lx.fileSize(path: str!))")
+        
+
         linkList.add("dd")
         print("-=-11=-=-=\(linkList)")
         print("-=-=11-=-=\(linkList.contains("dd"))")

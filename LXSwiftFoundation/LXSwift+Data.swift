@@ -54,7 +54,7 @@ extension LXSwiftBasics where Base == Data {
         base.copyBytes(to: &c, count: 1)
         return Data.mimeTypeSignatures[c] ?? "application/octet-stream"
     }
-    
+
     /// data转换字典
     public var dataToPlistDictionary: Dictionary<String, Any>? {
         guard let propertyList = try? PropertyListSerialization.propertyList(from: base,  options: .init(rawValue: 0),format: nil) else { return nil }
@@ -64,6 +64,11 @@ extension LXSwiftBasics where Base == Data {
 
 //MARK: -  Extending properties  for NSData
 extension LXSwiftBasics where Base == NSData {
+  
+    /// 判断data是不是gif类型图片
+    public var isGIF: Bool {
+        return base.lx.imageType == .GIF
+    }
     
     /// data类型
     public var imageType: LXSwiftImageDataType {

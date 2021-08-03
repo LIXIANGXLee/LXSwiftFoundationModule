@@ -112,4 +112,8 @@ extension LXSwiftBasics where Base: UIDevice {
         return UIDevice.current.systemVersion
     }
 
+    /// 当前系统版本
+    public static var currentSystemVersion: String {
+        return UIDevice.current.systemVersion
+    }
 }

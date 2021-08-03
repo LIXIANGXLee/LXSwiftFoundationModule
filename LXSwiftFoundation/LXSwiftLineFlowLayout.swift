@@ -46,16 +46,15 @@ open class LXSwiftLineFlowLayout: UICollectionViewFlowLayout {
     
     open override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         guard let c = collectionView else { return CGPoint.zero }
-        var contentOffset = CGPoint(x: proposedContentOffset.x,
-                                    y: proposedContentOffset.y)
+        var contentOffset = CGPoint(x: proposedContentOffset.x, y: proposedContentOffset.y)
         var rect = CGRect.zero
         rect.origin.y = 0
         rect.origin.x = contentOffset.x
         rect.size = c.frame.size
         
         if let attsArray = super.layoutAttributesForElements(in: rect) {
-            let  centerX = contentOffset.x + c.frame.size.width / 2
-            var  minSpace = MAXFLOAT
+            let centerX = contentOffset.x + c.frame.size.width / 2
+            var minSpace = MAXFLOAT
             for attrs in attsArray {
                 if abs(minSpace) > Float(abs(attrs.center.x - centerX)) {
                     minSpace = Float(attrs.center.x - centerX)

@@ -16,19 +16,15 @@
 static  CFRunLoopObserverRef currentObserver;
 
 -(void)setLx_maxTaskPerformedCount:(int)lx_maxTaskPerformedCount {
-    objc_setAssociatedObject(self, @selector(lx_maxTaskPerformedCount),
-                             @(lx_maxTaskPerformedCount), OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, @selector(lx_maxTaskPerformedCount), @(lx_maxTaskPerformedCount), OBJC_ASSOCIATION_ASSIGN);
 }
-
 
 - (int)lx_maxTaskPerformedCount {
     return (int)objc_getAssociatedObject(self, _cmd);
 }
 
-
 - (void)setLx_timer:(NSTimer * _Nullable)lx_timer {
-    objc_setAssociatedObject(self, @selector(lx_timer),
-                             lx_timer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(lx_timer), lx_timer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (NSTimer *)lx_timer {
@@ -41,8 +37,7 @@ static  CFRunLoopObserverRef currentObserver;
     NSMutableArray * taskArr = objc_getAssociatedObject(self, @selector(tasks));
     if (!taskArr) {
         taskArr = [NSMutableArray array];
-        objc_setAssociatedObject(self, @selector(tasks),
-                                 taskArr, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self, @selector(tasks), taskArr, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return taskArr;
 }

@@ -8,18 +8,18 @@
 import UIKit
 
 /// 例子
-//extension LXSwiftNotifications {
+//extension LXSwiftNotificationBase {
 //     static let shared = LXSwiftNotification<Model>("aa")
 //     struct Model: Codable {
 //         var id: Int64
 //     }
 // }
 //
-//LXSwiftNotifications.shared.post(with: LXSwiftNotifications.Model.init(id: 0))
+//LXSwiftNotificationBase.shared.post(with: LXSwiftNotificationBase.Model.init(id: 0))
 //
-//NotificationCenter.addObserver(self, selector: #selector(aa(_:)), notification: LXSwiftNotifications.shared)
+//NotificationCenter.addObserver(self, selector: #selector(aa(_:)), notification: LXSwiftNotificationBase.shared)
 //@objc func aa(_ notification: Notification) {
-//    let noti = LXSwiftNotifications.shared
+//    let noti = LXSwiftNotificationBase.shared
 //    guard let config = noti.decodeInfo(from: notification) else {
 //        return
 //    }
@@ -40,7 +40,6 @@ public class LXSwiftNotification<T: Codable>: LXSwiftNotificationBase {
         let postObject = { (result: [AnyHashable: Any]?) in
             NotificationCenter.default.post(name: self.name, object: self, userInfo: result)
         }
-        
         guard let jsonData = try? JSONEncoder().encode(object) else {
             postObject(nil)
             return

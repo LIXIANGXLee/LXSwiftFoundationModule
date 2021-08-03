@@ -61,8 +61,7 @@ extension LXSwiftCollectionView: UIGestureRecognizerDelegate {
     
     /// 您是否支持多事件传递代理
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        let outResult = shouldRecognizeSimultaneously?(gestureRecognizer,
-                                                       otherGestureRecognizer)
+        let outResult = shouldRecognizeSimultaneously?(gestureRecognizer, otherGestureRecognizer)
         return outResult ?? false
     }
     

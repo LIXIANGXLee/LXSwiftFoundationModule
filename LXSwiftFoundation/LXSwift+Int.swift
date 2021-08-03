@@ -51,7 +51,7 @@ extension LXSwiftBasics where Base == Int {
         return base > 0 ? true : false
     }
     
-    /// 用户显示容量 (G、M、KB)
+    /// 用户显示容量 (G、M、KB、B)
     public var sizeFileToStr: String {
        return Double(base).lx.sizeFileToStr
     }

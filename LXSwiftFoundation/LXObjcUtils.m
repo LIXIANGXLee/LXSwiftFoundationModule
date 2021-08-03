@@ -9,6 +9,8 @@
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <SystemConfiguration/SystemConfiguration.h>
 #import <Photos/Photos.h>
+#import <CoreData/CoreData.h>
+#import <objc/runtime.h>
 
 /**
 version campare
@@ -139,17 +141,93 @@ int _compareVersionInSwift(const char * _Nullable v1,
     });
 }
 
++ (BOOL)isClassFromFoundation:(Class)c {
+    
+    /// 属于则直接返回 是属于Foundation的类
+    if (c == [NSObject class] || c == [NSManagedObject class]) return YES;
+    
+    static NSSet *fClasses;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        // 集合中没有NSObject，因为几乎所有的类都是继承自NSObject，具体是不是NSObject需要特殊判断
+        fClasses = [NSSet setWithObjects:
+                      [NSURL class],
+                      [NSDate class],
+                      [NSValue class],
+                      [NSData class],
+                      [NSError class],
+                      [NSArray class],
+                      [NSDictionary class],
+                      [NSString class],
+                      [NSAttributedString class], nil];
+    });
+    __block BOOL result = NO;
+    [fClasses enumerateObjectsUsingBlock:^(Class foundationClass, BOOL *stop) {
+        if ([c isSubclassOfClass:foundationClass]) {
+            result = YES;
+            *stop = YES;
+        }
+    }];
+    return result;
+}
+
++ (BOOL)isSystemClass:(Class)c {
+    const char * _Nonnull name = class_getName(c);
+    if (!name) { return NO; }
+    
+    NSString *className = [NSString stringWithCString:name encoding: NSUTF8StringEncoding];
+
+    // 再检查黑名单
+    if ([className hasPrefix:@"NS"] ||
+        [className hasPrefix:@"_NS"] ||
+        [className hasPrefix:@"__NS"] ||
+        [className hasPrefix:@"OS_"] ||
+        [className hasPrefix:@"CA"] ||
+        [className hasPrefix:@"UI"] ||
+        [className hasPrefix:@"_UI"]) {
+        return true;
+    }
+    
+    return false;
+}
+
++ (void)swizzleMethod:(SEL)originSel withNewMethod:(SEL)dstSel {
+    Class cls = [self class];
+    
+    // 获取原方法和方法实现
+    Method oriMethod = class_getInstanceMethod(cls, originSel);
+    IMP oriImp = method_getImplementation(oriMethod);
+    const char *oriReturnType = method_getTypeEncoding(oriMethod);
+    
+    // 获取即将要交换的方法和实现
+    Method dstMethod = class_getInstanceMethod(cls, dstSel);
+    IMP dstImp = method_getImplementation(dstMethod);
+    const char *dstReturnType = method_getTypeEncoding(dstMethod);
+    
+    // 方法交换
+    if (class_addMethod([self class], originSel, dstImp, dstReturnType)) {
+        class_replaceMethod(cls, dstSel, oriImp, oriReturnType);
+    } else {
+        method_exchangeImplementations(oriMethod, dstMethod);
+    }
+}
+
 + (void)writeVideoToAbulmWithUrl:(NSURL *)url completionHandler:(void (^)(BOOL, NSString * _Nonnull))completionHandler {
-    [self writeVideoToAbulmWithUrl:url collectionTitle:nil completionHandler:completionHandler];
+    [self writeVideoToAbulmWithUrl:url
+                   collectionTitle:nil
+                 completionHandler:completionHandler];
 }
 
 + (void)writeVideoToAbulmWithUrl:(NSURL *)url collectionTitle:(NSString *)collectionTitle completionHandler:(void (^)(BOOL isSuccess, NSString * _Nonnull ))completionHandler {
     
     __weak typeof(self)weakSelf = self;
-    [self saveVideoToSystemWithUrl:url completionHandler:^(BOOL success, NSError *error, NSString *assetUrlLocalIdentifier) {
+    [self saveVideoToSystemWithUrl:url
+                 completionHandler:^(BOOL success, NSError *error, NSString *assetUrlLocalIdentifier) {
         __strong typeof(weakSelf)strongSelf = weakSelf;
         if (success) {
-            [strongSelf saveAssetToCustomCollection:collectionTitle assetLocalIdentifier:assetUrlLocalIdentifier completionHandler:completionHandler];
+            [strongSelf saveAssetToCustomCollection:collectionTitle
+                               assetLocalIdentifier:assetUrlLocalIdentifier
+                                  completionHandler:completionHandler];
         }else{
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (completionHandler) {
@@ -162,16 +240,21 @@ int _compareVersionInSwift(const char * _Nullable v1,
 }
 
 + (void)writeImageToAbulmWithImage:(UIImage *)image completionHandler:(void (^)(BOOL, NSString * _Nonnull))completionHandler {
-    [self writeImageToAbulmWithImage:image collectionTitle:nil completionHandler:completionHandler];
+    [self writeImageToAbulmWithImage:image
+                     collectionTitle:nil
+                   completionHandler:completionHandler];
 }
 
 + (void)writeImageToAbulmWithImage:(UIImage *)image collectionTitle:(NSString *)collectionTitle completionHandler:(void (^)(BOOL isSuccess, NSString * _Nonnull ))completionHandler {
     
     __weak typeof(self)weakSelf = self;
-    [self saveImageToSystemWithImage:image completionHandler:^(BOOL success, NSError *error, NSString *assetImageLocalIdentifier) {
+    [self saveImageToSystemWithImage:image
+                   completionHandler:^(BOOL success, NSError *error, NSString *assetImageLocalIdentifier) {
         __strong typeof(weakSelf)strongSelf = weakSelf;
         if (success){
-            [strongSelf saveAssetToCustomCollection:collectionTitle assetLocalIdentifier:assetImageLocalIdentifier completionHandler:completionHandler];
+            [strongSelf saveAssetToCustomCollection:collectionTitle
+                               assetLocalIdentifier:assetImageLocalIdentifier
+                                  completionHandler:completionHandler];
         }else{
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (completionHandler) {
@@ -186,10 +269,13 @@ int _compareVersionInSwift(const char * _Nullable v1,
 + (void)saveAssetToCustomCollection:(NSString * _Nullable)collectionTitle assetLocalIdentifier:(NSString *)assetLocalIdentifier completionHandler:(void (^)(BOOL isSuccess, NSString * _Nonnull error))completionHandler {
     // 获得相簿
     __weak typeof(self)weakSelf = self;
-    [self getAssetCollection:collectionTitle callBack:^(PHAssetCollection * _Nullable assetCollection) {
+    [self getAssetCollection:collectionTitle
+                    callBack:^(PHAssetCollection * _Nullable assetCollection) {
         __strong typeof(weakSelf)strongSelf = weakSelf;
         if (assetCollection){
-            [strongSelf addCameraAssetToAlbum:assetLocalIdentifier assetCollection:assetCollection completionHandler:^(BOOL success, NSError *error) {
+            [strongSelf addCameraAssetToAlbum:assetLocalIdentifier
+                              assetCollection:assetCollection
+                            completionHandler:^(BOOL success, NSError *error) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (completionHandler) {
                         completionHandler(success, error.localizedDescription);

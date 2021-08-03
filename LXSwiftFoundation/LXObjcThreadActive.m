@@ -37,7 +37,8 @@
             
         } else {
             LXObjcProxy *proxy = [LXObjcProxy proxyWithTarget:self];
-            self.innerThread = [[NSThread alloc]initWithTarget:proxy selector:@selector(__saveThread) object:nil];
+            self.innerThread = [[NSThread alloc]initWithTarget:proxy
+                                                      selector:@selector(__saveThread) object:nil];
         }
         
         [self start];
@@ -58,13 +59,19 @@
 - (void)executeTask:(LXObjcThreadActiveTask)task{
     if (!self.innerThread || !task) return;
     
-    [self performSelector:@selector(__executeTask:) onThread:self.innerThread withObject:task waitUntilDone:NO];
+    [self performSelector:@selector(__executeTask:)
+                 onThread:self.innerThread
+               withObject:task
+            waitUntilDone:NO];
 }
 
 - (void)stop{
     if (!self.innerThread) return;
     
-    [self performSelector:@selector(__stop) onThread:self.innerThread withObject:nil waitUntilDone:YES];
+    [self performSelector:@selector(__stop)
+                 onThread:self.innerThread
+               withObject:nil
+            waitUntilDone:YES];
 }
 
 - (void)dealloc{

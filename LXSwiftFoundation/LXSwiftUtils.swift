@@ -13,7 +13,7 @@ public struct LXSwiftUtils: LXSwiftCompatible {
     
     public typealias TellCallBack = ((Bool) -> ())
     public enum VersionCompareResult {
-        case big /// 大于
+        case big   /// 大于
         case equal /// 等于
         case small /// 小于
     }
@@ -23,10 +23,10 @@ public struct LXSwiftUtils: LXSwiftCompatible {
 extension LXSwiftUtils.VersionCompareResult {
     fileprivate init(rawValue: Int32) {
         switch rawValue {
-        case 0: self = .equal
-        case Int32.min ... -1: self = .small
-        case 1 ... Int32.max: self = .big
-        default: self = .equal
+            case 0: self = .equal
+            case Int32.min ... -1: self = .small
+            case 1 ... Int32.max: self = .big
+            default: self = .equal
         }
     }
 }
@@ -124,22 +124,18 @@ extension LXSwiftBasics where Base == LXSwiftUtils {
     
     /// 创建二维码图像
     public static func getQrCodeImage(with qrCodeStr: String?, size: CGFloat = 800) -> UIImage? {
-        
         let filter = CIFilter(name: "CIQRCodeGenerator")
         filter?.setDefaults()
         let qrData = qrCodeStr?.data(using: String.Encoding.utf8)
         filter?.setValue(qrData, forKey: "inputMessage")
-        guard let qrImage = filter?.outputImage else {
-            return nil
-        }
+        guard let qrImage = filter?.outputImage else { return nil }
         return createNonInterpolatedImage(with: qrImage, size: size)
     }
     
     /// 异步创建二维码图像
     public static func async_getQrCodeImage(with qrCodeStr: String?, size: CGFloat = 800, complete: @escaping (UIImage?) -> ()) {
         DispatchQueue.global().async{
-            let async_qrImage = self.getQrCodeImage(with: qrCodeStr,
-                                                    size: size)
+            let async_qrImage = self.getQrCodeImage(with: qrCodeStr, size: size)
             DispatchQueue.main.async(execute: {
                 complete(async_qrImage)
             })

@@ -180,6 +180,13 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
 //MARK: -  Extending properties for String and NSString tool
 extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     
+    /// 判断路径下是不是gif图片
+    public var isGIFFile: Bool {
+        let string = base as! String
+        guard let data = NSData(contentsOfFile: string) else { return false }
+        return data.lx.imageType == .GIF
+    }
+    
     /// 基是包含字符串的
     public func contains(_ string: String) -> Bool {
         let string = base as! String
@@ -222,6 +229,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         guard let data = string.data(using: .utf8) else { return nil }
         return try? JSONSerialization.jsonObject(with:data, options: .allowFragments)
     }
+
 }
 
 //MARK: -  String matching (hyperlink, phone number, emoticon) 😊 Etc.)
@@ -458,9 +466,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     ///返回字符串中的数字范围，可以是一个或多个。如果没有数字，则返回一个空数组
     public func numberRanges() -> [NSRange] {
         let string = base as! String
-        guard let results = string.lx.matching(pattern: "[0-9]+(.[0-9]+)?") else {
-            return []
-        }
+        guard let results = string.lx.matching(pattern: "[0-9]+(.[0-9]+)?") else { return [] }
         var ranges = [NSRange]()
         for item in results {
             ranges.append(item.range)

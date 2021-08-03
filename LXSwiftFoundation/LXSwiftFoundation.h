@@ -8,11 +8,14 @@
 #ifndef LXSwiftFoundation_h
 #define LXSwiftFoundation_h
 
+#import "UIGestureRecognizer+LXObjcAdd.h"
 #import "UIView+LXObjcPerformance.h"
+#import "CADisplayLink+Block.h"
+#import "UIControl+LXObjcAdd.h"
+#import "LXObjcThreadActive.h"
+#import "NSObject+LXObjcKVO.h"
+#import "LXObjcLinkedList.h"
 #import "LXObjcProxy.h"
 #import "LXObjcUtils.h"
-#import "LXObjcThreadActive.h"
-#import "CADisplayLink+Block.h"
-#import "LXObjcLinkedList.h"
 
 #endif /* LXSwiftFoundation_h */

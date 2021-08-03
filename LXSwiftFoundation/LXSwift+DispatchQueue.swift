@@ -48,8 +48,8 @@ extension LXSwiftBasics where Base: DispatchQueue {
     
     /// 主线程执行任务
     @discardableResult
-    public static func async(with mainTask: @escaping DispatchQueue.LXSwiftCallTask) -> DispatchWorkItem {
-        let item = DispatchWorkItem(block: mainTask)
+    public static func asyncMain(with task: @escaping DispatchQueue.LXSwiftCallTask) -> DispatchWorkItem {
+        let item = DispatchWorkItem(block: task)
         DispatchQueue.main.async(execute: item)
         return item
     }
@@ -75,4 +75,8 @@ extension LXSwiftBasics where Base: DispatchQueue {
         return item
     }
     
+    /// 延时后主线程执行任务 (自定义线程类型，例如：DispatchQueue.main主线程、DispatchQueue.global()全局线程等等)
+    public func after(_ delay: TimeInterval, execute closure: @escaping () -> Void) {
+        base.asyncAfter(deadline: .now() + delay, execute: closure)
+    }
 }

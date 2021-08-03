@@ -26,8 +26,7 @@ open class LXSwiftTextView: UITextView {
         /// call after placehoderLabel
         font = UIFont.lx.font(withRegular: 14)
         
-        NotificationCenter.default.addObserver(self,
-            selector: #selector(textDidChange), name: UITextView.textDidChangeNotification, object: self)
+        NotificationCenter.default.addObserver(self, selector: #selector(textDidChange), name: UITextView.textDidChangeNotification, object: self)
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -39,8 +38,8 @@ open class LXSwiftTextView: UITextView {
     
     open override var font: UIFont? {
         didSet {
-            guard let f = font else { return }
-            placehoderLabel.font = f
+            guard let pFont = font else { return }
+            placehoderLabel.font = pFont
             setNeedsLayout()
         }
     }
@@ -62,8 +61,7 @@ extension LXSwiftTextView {
     /// 设置输入文本最大长度
     var maxTextLength: Int? {
         get { return lx_getAssociatedObject(self, &maxTextLengthKey) }
-        set { lx_setRetainedAssociatedObject(self, &maxTextLengthKey,
-                                             newValue,.OBJC_ASSOCIATION_ASSIGN) }
+        set { lx_setRetainedAssociatedObject(self, &maxTextLengthKey, newValue,.OBJC_ASSOCIATION_ASSIGN) }
     }
     
     /// 事件监听

@@ -105,4 +105,77 @@ extension LXSwiftBasics where Base: UIFont {
        return UIFont.systemFont(ofSize: size, weight: .black)
     }
     
+    // 斜体只对数字和字母有效，中文无效
+    public static func font(withItalic size: CGFloat) -> UIFont {
+        return UIFont.italicSystemFont(ofSize: size)
+    }
+    
+    public static func regular(size: CGFloat) -> UIFont {
+        if #available(iOS 9.0, OSX 10.11, *),
+            let outFont = UIFont(name: "PingFangSC-Regular", size: size) {
+            return outFont
+        }
+        return UIFont.lx.font(withRegular: size)
+    }
+    
+    public static func semibold(size: CGFloat) -> UIFont {
+        if #available(iOS 9.0, OSX 10.11, *),
+            let outFount = UIFont(name: "PingFangSC-Semibold", size: size) {
+            return outFount
+        }
+        return UIFont.lx.font(withRegular: size)
+    }
+    
+    public static func light(size: CGFloat) -> UIFont {
+        if #available(iOS 9.0, OSX 10.11, *),
+            let outFont = UIFont(name: "PingFangSC-Light", size: size) {
+            return outFont
+        }
+        return UIFont.lx.font(withRegular: size)
+    }
+    
+    public static func medium(size: CGFloat) -> UIFont {
+        if #available(iOS 9.0, OSX 10.11, *),
+            let outFount = UIFont(name: "PingFangSC-Medium", size: size) {
+            return outFount
+        }
+        return UIFont.lx.font(withRegular: size)
+    }
+    
+    public static func harmattan(size: CGFloat) -> UIFont {
+        if let font = UIFont(name: "Harmattan-Regular", size: size) {
+            return font
+        }
+        return UIFont.lx.font(withRegular: size)
+    }
+    
+    public static func workSans(size: CGFloat) -> UIFont {
+        if let font = UIFont(name: "WorkSans-Regular", size: size) {
+            return font
+        }
+        return UIFont.lx.font(withRegular: size)
+    }
+    
+    public static func dinAlternateBold(size: CGFloat) -> UIFont {
+        if let font = UIFont(name: "DINAlternate-Bold", size: size) {
+            return font
+        }
+        return UIFont.lx.font(withRegular: size)
+    }
+
+    /**
+     *  返回系统字体的细体
+     *
+     * @param fontSize 字体大小
+     * @return 变细的系统字体的UIFont对象
+     */
+    public static func lightSystemFont(size: CGFloat) -> UIFont {
+        let version = Double(UIDevice.lx.currentSystemVersion) ?? 0
+        let name = version >= 9.0 ? ".SFUIText-Light" : "HelveticaNeue-Light"
+        if let outFount = UIFont(name: name, size: size) {
+            return outFount
+        }
+        return UIFont.lx.font(withRegular: size)
+    }
 }
+

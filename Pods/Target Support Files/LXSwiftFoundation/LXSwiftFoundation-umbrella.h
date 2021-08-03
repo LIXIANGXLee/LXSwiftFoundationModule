@@ -16,6 +16,9 @@
 #import "LXObjcThreadActive.h"
 #import "LXObjcUtils.h"
 #import "LXSwiftFoundation.h"
+#import "NSObject+LXObjcKVO.h"
+#import "UIControl+LXObjcAdd.h"
+#import "UIGestureRecognizer+LXObjcAdd.h"
 #import "UIView+LXObjcPerformance.h"
 
 FOUNDATION_EXPORT double LXSwiftFoundationVersionNumber;

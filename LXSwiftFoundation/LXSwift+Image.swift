@@ -73,7 +73,6 @@ extension LXSwiftBasics where Base: UIImage {
 
     /// Returns whether the image is opaque.
     public var isOpaque: Bool { return !isContainsAlphaComponent }
-
     
     /// 用图像截取圆角
     public func imageByRound(with radius: CGFloat) -> UIImage? {
@@ -378,8 +377,8 @@ extension LXSwiftBasics where Base: UIImage {
     
     /// 图像缩放大小，压缩
     public func async_zoomTo(size: CGSize, contentMode: UIView.ContentMode = .scaleAspectFill, complete: @escaping (UIImage?) -> ()) {
-        DispatchQueue.global().async {
-            let async_image = zoomTo(by: size, mode: contentMode)
+        DispatchQueue.global().async { 
+            let async_image = self.zoomTo(by: size, mode: contentMode)
             DispatchQueue.main.async(execute: {
                 complete(async_image)
             })

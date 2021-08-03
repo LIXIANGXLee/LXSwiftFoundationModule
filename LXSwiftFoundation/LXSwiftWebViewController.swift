@@ -11,12 +11,13 @@
 import UIKit
 import WebKit
 
-public struct LXSwiftMethodT {
+public struct LXSwiftMethod {
     public var method: String
     public var handel: (Any) -> ()
 }
 
 // MARK: - Solving circular references
+/// 解决强引用问题
 open class LXSwiftWeakScriptMessageDelegate:NSObject, WKScriptMessageHandler {
     fileprivate weak var delegate: WKScriptMessageHandler?
     init(_ delegate: WKScriptMessageHandler) {
@@ -38,7 +39,7 @@ open class LXSwiftWebViewController: UIViewController {
     
     fileprivate var spinner: UIActivityIndicatorView!
     fileprivate var progressView: UIProgressView!
-    fileprivate var methodTs = [LXSwiftMethodT]()
+    fileprivate var methodTs = [LXSwiftMethod]()
     
     // MARK: - Customize the root view -- recommended when the entire page is a WebView or image
     public fileprivate(set) lazy var webView: WKWebView = {
@@ -110,7 +111,7 @@ extension LXSwiftWebViewController {
         for methodT in methodTs {
             assert(methodT.method == method, "不能重复添加相同名称")
         }
-        self.methodTs.append(LXSwiftMethodT(method: method, handel: handel))
+        self.methodTs.append(LXSwiftMethod(method: method, handel: handel))
         let vc = webView.configuration.userContentController
         vc.add(LXSwiftWeakScriptMessageDelegate(self), name: method)
     }
@@ -281,7 +282,7 @@ extension LXSwiftWebViewController: WKUIDelegate{
     /// [JS]警报（）警告框
     open func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        alert.lx.action(with: "确定", style: .default) { (_) in
+        alert.lx.addAction(with: "确定", style: .default) { (_) in
             completionHandler()
         }
         present(alert, animated: true, completion: nil)
@@ -290,10 +291,10 @@ extension LXSwiftWebViewController: WKUIDelegate{
     // [js]confirm()
     open func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        alert.lx.action(with: "取消", style: .cancel) { (_) in
+        alert.lx.addAction(with: "取消", style: .cancel) { (_) in
             completionHandler(false)
         }
-        alert.lx.action(with: "确定", style: .default) { (_) in
+        alert.lx.addAction(with: "确定", style: .default) { (_) in
             completionHandler(true)
         }
         present(alert, animated: true, completion: nil)
@@ -305,7 +306,7 @@ extension LXSwiftWebViewController: WKUIDelegate{
         alert.addTextField { (textField) in
             textField.placeholder = defaultText
         }
-        alert.lx.action(with: "确定", style: .default) { (_) in
+        alert.lx.addAction(with: "确定", style: .default) { (_) in
             completionHandler(alert.textFields?.last?.text)
         }
         present(alert, animated: true, completion: nil)

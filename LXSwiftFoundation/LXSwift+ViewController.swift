@@ -13,6 +13,19 @@ extension UIViewController: LXSwiftCompatible { }
 //MARK: -  Extending properties for UIViewController
 extension LXSwiftBasics where Base: UIViewController {
     
+    /// 状态栏颜色
+    public var statusBarStyle: UIStatusBarStyle {
+        var lightContent: Bool = false
+        if let _ = base as? LXSwiftLightStatusBarProtocol {
+            lightContent = true
+        }
+        if #available(iOS 13.0, *) {
+            return lightContent ? .lightContent : .darkContent
+        } else {
+            return .default
+        }
+    }
+
     /// 当前视图是否可见
     public var isVisible: Bool {
         return base.isViewLoaded && (base.view.window != nil)

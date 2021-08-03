@@ -47,8 +47,8 @@ extension LXSwiftBasics where Base : LXSwiftTextField {
     
     /// 设置占位符和颜色
     public func set(with placeholder: String?, color: UIColor? = UIColor.lx.color(hex: "999999")) {
-        guard let placeholder = placeholder, let c = color else { return }
-        let att = NSMutableAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: c])
+        guard let placeholder = placeholder, let pColor = color else { return }
+        let att = NSMutableAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: pColor])
         base.attributedPlaceholder = att
     }
     
@@ -60,7 +60,7 @@ extension LXSwiftBasics where Base : LXSwiftTextField {
     /// 设置字体和文本颜色
     public func set(with font: UIFont, textColor: UIColor?) {
         base.font = font
-        if let c = textColor { base.textColor = c }
+        if let color = textColor { base.textColor = color }
     }
     
     /// 设置粗体字体和文本颜色

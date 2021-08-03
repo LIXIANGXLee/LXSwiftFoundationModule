@@ -29,7 +29,7 @@ public extension LXSwiftCompatible {
     static var lx: LXSwiftBasics<Self>.Type {
         set {
             
-            /// 对于结构体修改属性时加"mutating" 类型后起作用
+            /// 对于结构体修改属性时加"mutating" 类型后起作用可以写改struct的属性值
         }
         
         get {
@@ -41,7 +41,7 @@ public extension LXSwiftCompatible {
     var lx: LXSwiftBasics<Self> {
         set {
             
-            /// 对于结构体实例修改属性时加"mutating" 类型后起作用
+            /// 对于结构体实例修改属性时加"mutating" 类型后起作用可以写改struct的属性值
         }
         
         get {
@@ -71,3 +71,6 @@ public extension LXSwiftCellCompatible {
         return "\(self)"
     }
 }
+
+/// 状态栏颜色 协议
+protocol LXSwiftLightStatusBarProtocol { }
