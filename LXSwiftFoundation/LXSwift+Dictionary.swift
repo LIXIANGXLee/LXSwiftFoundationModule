@@ -49,8 +49,7 @@ extension LXSwiftBasics where Base == Dictionary<String, Any> {
     
     /// dic到plist数据类型
     public var plistData: Data? {
-        return try? PropertyListSerialization.data(fromPropertyList: base,
-                                                   format: .xml, options: 0)
+        return try? PropertyListSerialization.data(fromPropertyList: base, format: .xml, options: 0)
     }
     
     /// plist 字典到字符串类型

@@ -98,7 +98,6 @@ extension LXSwiftBasics where Base == LXSwiftUtils {
     }
 }
 
-
 //MARK: -  Extending methods for LXSwiftTool
 extension LXSwiftBasics where Base == LXSwiftUtils {
         
@@ -169,7 +168,7 @@ extension LXSwiftBasics where Base == LXSwiftUtils {
     /// 播放本地短暂的语音
     @available(iOS 9.0, *)
     public static func playSound(with filepath: String?, completion: (() -> ())? = nil) {
-        guard let string = filepath else { return }
+        guard let string = filepath, string.count <= 0 else { return }
         var soundID: SystemSoundID = 0
         let fileUrl = URL(fileURLWithPath: string)
         AudioServicesCreateSystemSoundID(fileUrl as CFURL, &soundID)

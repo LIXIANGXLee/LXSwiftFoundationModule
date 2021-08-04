@@ -37,7 +37,7 @@ extension LXSwiftBasics where Base: UIDevice {
     }
     
     /// is can call tel
-    public static var isCanPhoneCalls: Bool {
+    public static var isCanCallTel: Bool {
         return UIApplication.lx.isCanOpen(URL(string: "tel://")!)
     }
 }

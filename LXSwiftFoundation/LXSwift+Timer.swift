@@ -20,13 +20,17 @@ extension Timer: LXSwiftCompatible {
 extension LXSwiftBasics where Base: Timer {
     
     @discardableResult
-    public func scheduledTimer(with Interval: TimeInterval, block: @escaping (Timer) -> Void) -> Timer {
-        return Timer.scheduledTimer(timeInterval: Interval, target: base, selector: #selector(base._execBlock(timer:)), userInfo: block, repeats: true)
+    public func scheduledTimer(with Interval: TimeInterval, repeats: Bool = true, block: @escaping (Timer) -> Void) -> Timer {
+        let timer = Timer.scheduledTimer(timeInterval: Interval, target: base, selector: #selector(base._execBlock(timer:)), userInfo: block, repeats: repeats)
+        RunLoop.current.add(timer, forMode: .common)
+        return timer
     }
     
     @discardableResult
-    public func timer(with Interval: TimeInterval, block: @escaping (Timer) -> ()) -> Timer {
-        return Timer(timeInterval: Interval, target: base, selector:  #selector(base._execBlock(timer:)), userInfo: block, repeats: true)
+    public func timer(with Interval: TimeInterval, repeats: Bool = true, block: @escaping (Timer) -> ()) -> Timer {
+        let timer = Timer(timeInterval: Interval, target: base, selector:  #selector(base._execBlock(timer:)), userInfo: block, repeats: repeats)
+        RunLoop.current.add(timer, forMode: .common)
+        return timer
     }
 
     

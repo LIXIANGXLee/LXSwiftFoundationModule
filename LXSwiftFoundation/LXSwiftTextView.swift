@@ -16,7 +16,7 @@ open class LXSwiftTextView: UITextView {
     
     /// 显示文案的标签
     var placehoderLabel: UILabel!
-    override init(frame: CGRect, textContainer: NSTextContainer?) {
+    override init(frame: CGRect, textContainer: NSTextContainer? = nil) {
         super.init(frame: frame, textContainer: textContainer)
         placehoderLabel = UILabel()
         placehoderLabel.numberOfLines = 0
