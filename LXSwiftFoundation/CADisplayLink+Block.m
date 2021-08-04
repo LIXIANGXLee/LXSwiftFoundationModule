@@ -13,7 +13,6 @@
 
 - (void)setLx_executeBlock:(LXDisplayLinkBlock)lx_executeBlock {
     objc_setAssociatedObject(self, @selector(lx_executeBlock), lx_executeBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
-
 }
 
 - (LXDisplayLinkBlock)lx_executeBlock {

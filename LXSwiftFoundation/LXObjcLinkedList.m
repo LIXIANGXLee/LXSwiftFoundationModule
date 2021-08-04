@@ -69,8 +69,7 @@
     // index == 0
     if (index == self.totalCount) { // 往最后面添加元素
         LXLinkedMapNode *oldLast = self.last;
-        self.last = [LXLinkedMapNode nodeWithElement:element
-                                                prev:oldLast next:nil];
+        self.last = [LXLinkedMapNode nodeWithElement:element prev:oldLast next:nil];
         if (oldLast == nil) { // 这是链表添加的第一个元素
             self.first = self.last;
         } else {
@@ -79,8 +78,7 @@
     } else {
         LXLinkedMapNode *next = [self node:index];
         LXLinkedMapNode *prev = next.prev;
-        LXLinkedMapNode *node = [LXLinkedMapNode nodeWithElement:element
-                                                            prev:prev next:next];
+        LXLinkedMapNode *node = [LXLinkedMapNode nodeWithElement:element prev:prev next:next];
         next.prev = node;
         if (prev == nil) { // index == 0
             self.first = node;

@@ -36,7 +36,7 @@ extension LXSwiftBasics where Base == LXSwiftUtils {
     
     /// 两个版本比较大小 big: one > two, small: two < one,equal: one == two
     public static func versionCompare(v1: String, v2: String) -> LXSwiftUtils.VersionCompareResult {
-        let ret = _compareVersionInSwift(v1, v2)
+        let ret = LXCompareVersionInSwift(v1, v2)
         return LXSwiftUtils.VersionCompareResult(rawValue: ret)
     }
     

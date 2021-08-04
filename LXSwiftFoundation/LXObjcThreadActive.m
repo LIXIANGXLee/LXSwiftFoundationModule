@@ -37,8 +37,7 @@
             
         } else {
             LXObjcProxy *proxy = [LXObjcProxy proxyWithTarget:self];
-            self.innerThread = [[NSThread alloc]initWithTarget:proxy
-                                                      selector:@selector(__saveThread) object:nil];
+            self.innerThread = [[NSThread alloc]initWithTarget:proxy selector:@selector(__saveThread) object:nil];
         }
         
         [self start];

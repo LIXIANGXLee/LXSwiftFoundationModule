@@ -12,6 +12,9 @@
 #import <CoreData/CoreData.h>
 #import <objc/runtime.h>
 
+
+#define OBJC_PROJECT_NAME [NSBundle mainBundle].infoDictionary[@"CFBundleName"]
+
 /**
 version campare
 
@@ -19,8 +22,7 @@ version campare
 @param v2 two version
 @return 0:eque,-1:one small,1:two small
 */
-int _compareVersionInSwift(const char * _Nullable v1,
-                           const char * _Nullable v2) {
+int LXCompareVersionInSwift(const char * _Nullable v1, const char * _Nullable v2) {
     assert(v1);
     assert(v2);
     const char *p_v1 = v1;
@@ -54,8 +56,25 @@ int _compareVersionInSwift(const char * _Nullable v1,
     return 0;
 }
 
+/// 将度换为弧度转
+CGFloat LXObjcDegreesToRadians(CGFloat degrees) {
+    return degrees * M_PI / 180;
+}
+
+/// 将弧度转换为度
+CGFloat LXObjcRadiansToDegrees(CGFloat radians) {
+    return radians * 180 / M_PI;
+}
 
 @implementation LXObjcUtils
+
++ (CGFloat)degreesToRadians:(CGFloat)degrees {
+    return LXObjcDegreesToRadians(degrees);
+}
+
++ (CGFloat)radiansToDegrees:(CGFloat)radians {
+    return LXObjcRadiansToDegrees(radians);
+}
 
 + (int)getNetWorkType {
     int NetworkType = 0; // UNKNOWN
@@ -212,6 +231,162 @@ int _compareVersionInSwift(const char * _Nullable v1,
     }
 }
 
+/// 检查权限
++ (void)checkAuth:(LXObjcAuthType)type isAlert:(BOOL)isAlert callBack:(void (*)(BOOL isPass))callBack {
+    
+    [self executeOnSafeMian:^{
+        switch (type) {
+            case LXObjcAuthTypePhoto:
+                [self checkPhotoAuth:isAlert callBack:callBack];
+                break;
+            case LXObjcAuthTypeVideo:
+                [self checkCameraAuth:AVMediaTypeVideo isAlert:isAlert callBack:callBack];
+                break;
+            case LXObjcAuthTypeAudio:
+                [self checkCameraAuth:AVMediaTypeAudio isAlert:isAlert callBack:callBack];
+                break;
+            default:
+                [self checkPhotoAuth:isAlert callBack:callBack];
+                break;
+        }
+    }];
+}
+
++ (void)checkAuth:(LXObjcAuthType)type callBack:(void (*)(BOOL))callBack {
+   
+    [self executeOnSafeMian:^{
+        [self checkAuth:type isAlert:YES callBack:callBack];
+    }];
+    
+}
+
+/// 检查相册权限
++ (void)checkPhotoAuth:(BOOL)isAlert callBack:(void (*)(BOOL isPass))callBack {
+    PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+    if (status == PHAuthorizationStatusRestricted) {
+        if (callBack) { callBack(NO); }
+        if (isAlert) {
+           [self unableAccessPermissions:@"无法访问您的相册权限"];
+        }
+    } else if (status == PHAuthorizationStatusDenied) {
+        if (callBack) { callBack(NO); }
+        if (isAlert) {
+            [self expectAccessPermissions:@"开启相册权限" message:[NSString stringWithFormat:@"“%@”想访问您的照片，开启后即可使用相册图片", OBJC_PROJECT_NAME]];
+        }
+    } else if (status == PHAuthorizationStatusAuthorized) {
+        if (callBack) { callBack(YES); }
+    } else if (status == PHAuthorizationStatusNotDetermined) {
+        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+            if (callBack) { callBack(status == PHAuthorizationStatusAuthorized); }
+        }];
+    }
+}
+
+/// 检查相机权限
++ (void)checkCameraAuth:(AVMediaType)type isAlert:(BOOL)isAlert callBack:(void (*)(BOOL isPass))callBack {
+     AVAuthorizationStatus status = [AVCaptureDevice authorizationStatusForMediaType:type];
+    if (status == AVAuthorizationStatusRestricted) {
+        if (callBack) { callBack(NO); }
+        if (isAlert) {
+            if (type == AVMediaTypeAudio) {
+                [self unableAccessPermissions:@"无法访问您的麦克风权限"];
+            }else if (type == AVMediaTypeVideo){
+                [self unableAccessPermissions:@"无法访问您的相机权限"];
+            }
+        }
+    } else if (status == AVAuthorizationStatusDenied) {
+        if (callBack) { callBack(NO); }
+
+        if (isAlert) {
+            if (type == AVMediaTypeAudio) {
+                [self expectAccessPermissions:@"开启麦克风权限" message:[NSString stringWithFormat:@"“%@”想访问您的麦克风，开启之后即可录音或播音", OBJC_PROJECT_NAME] ];
+            }else if (type == AVMediaTypeVideo){
+                [self expectAccessPermissions:@"开启相机权限" message:[NSString stringWithFormat:@"“%@”想访问您的相机，开启之后即可拍照或者拍摄", OBJC_PROJECT_NAME]];
+            }
+        }
+    } else if (status == AVAuthorizationStatusAuthorized) {
+        if (callBack) { callBack(YES); }
+    } else if (status == AVAuthorizationStatusNotDetermined) {
+        [AVCaptureDevice requestAccessForMediaType:type completionHandler:^(BOOL granted) {
+            if (callBack) { callBack(granted); }
+        }];
+    }
+}
+/// 无法访问您的权限
++ (void)unableAccessPermissions:(NSString *)title {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:@"" preferredStyle: UIAlertControllerStyleAlert];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"确定"  style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    }]];
+    [[self getCurrentController] presentViewController:alertController animated:YES completion:nil];
+}
+
+/// 推荐打开权限
++(void)expectAccessPermissions:(NSString *)title message:(NSString *)message {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"以后再说" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"设置"  style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self jumpToSetting];
+    }]];
+    [[self getCurrentController] presentViewController:alertController animated:YES completion:nil];
+}
+
++ (void)jumpToSetting {
+    NSURL *url = [NSURL URLWithString: UIApplicationOpenSettingsURLString];
+    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+        if (@available(iOS 10.0, *)){
+            [[UIApplication sharedApplication] openURL:url options:@{ } completionHandler:nil];
+        }else{
+            #pragma clang diagnostic push
+            #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+            [[UIApplication sharedApplication] openURL:url];
+            #pragma clang diagnostic pop
+        }
+    }
+}
+
+/// 获取当前显示的视图控制器
++ (UIViewController *)getCurrentController {
+    UIViewController *rootVC = [self getKeyWindow].rootViewController;
+    UIViewController *currentVC = [self getCurrentVCFrom:rootVC];
+    return currentVC;
+}
+
++ (UIWindow*)getKeyWindow {
+    UIWindow *mainWindow = nil;
+    if ( @available(iOS 13.0, *) ) {
+        //如果是多场景，可以遍历windows,检查window.isKeyWindow获取
+        NSArray *windows = UIApplication.sharedApplication.windows;
+        for (UIWindow *window in windows) {
+            if (window.isKeyWindow) {
+                mainWindow = window;
+                break;
+            }
+        }
+        if (!mainWindow) {
+            mainWindow = windows.firstObject;
+        }
+    } else {
+        mainWindow = UIApplication.sharedApplication.keyWindow;
+    }
+    return mainWindow;
+}
+
++ (UIViewController *)getCurrentVCFrom:(UIViewController *)rootVC {
+    UIViewController *currentVC;
+    while (rootVC.presentedViewController) {
+        rootVC = rootVC.presentedViewController;
+    }
+    if ([rootVC isKindOfClass:UITabBarController.class]) {
+        currentVC = [self getCurrentVCFrom:[(UITabBarController *)rootVC selectedViewController]];
+    }else if ([rootVC isKindOfClass:UINavigationController.class]){
+        currentVC = [self getCurrentVCFrom:[(UINavigationController *)rootVC visibleViewController]];
+    }else{
+        currentVC = rootVC;
+    }
+    return currentVC;;
+}
+
 + (void)writeVideoToAbulmWithUrl:(NSURL *)url completionHandler:(void (^)(BOOL, NSString * _Nonnull))completionHandler {
     [self writeVideoToAbulmWithUrl:url
                    collectionTitle:nil
@@ -229,11 +404,11 @@ int _compareVersionInSwift(const char * _Nullable v1,
                                assetLocalIdentifier:assetUrlLocalIdentifier
                                   completionHandler:completionHandler];
         }else{
-            dispatch_async(dispatch_get_main_queue(), ^{
+            [self executeOnSafeMian:^{
                 if (completionHandler) {
                     completionHandler(NO, error.localizedDescription);
                 }
-            });
+            }];
         }
     }];
 
@@ -256,11 +431,11 @@ int _compareVersionInSwift(const char * _Nullable v1,
                                assetLocalIdentifier:assetImageLocalIdentifier
                                   completionHandler:completionHandler];
         }else{
-            dispatch_async(dispatch_get_main_queue(), ^{
+            [self executeOnSafeMian:^{
                 if (completionHandler) {
                     completionHandler(NO, error.localizedDescription);
                 }
-            });
+            }];
         }
     }];
 }
@@ -276,18 +451,19 @@ int _compareVersionInSwift(const char * _Nullable v1,
             [strongSelf addCameraAssetToAlbum:assetLocalIdentifier
                               assetCollection:assetCollection
                             completionHandler:^(BOOL success, NSError *error) {
-                dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [self executeOnSafeMian:^{
                     if (completionHandler) {
                         completionHandler(success, error.localizedDescription);
                     }
-                });
+                }];
             }];
         }else{
-            dispatch_async(dispatch_get_main_queue(), ^{
+            [self executeOnSafeMian:^{
                 if (completionHandler) {
                     completionHandler(NO, @"获取相册失败");
                 }
-            });
+            }];
         }
     }];
 }
