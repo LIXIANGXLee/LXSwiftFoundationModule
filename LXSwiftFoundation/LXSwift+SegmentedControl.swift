@@ -11,7 +11,7 @@ import UIKit
 //MARK: -  Extending properties and methods for UISegmentedControl
 extension LXSwiftBasics where Base : UISegmentedControl {
     
-    public func setHandle(segmentedControlCallBack: ((Int?) -> ())?){
+    public func setHandle(segmentedControlCallBack: ((Int) -> ())?){
         base.swiftCallBack = segmentedControlCallBack
         base.addTarget(base,action: #selector(base.segmentedControlAction(_:)), for: .valueChanged)
     }

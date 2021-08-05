@@ -2,27 +2,12 @@
 //  LXObjcUtils.h
 //  LXSwiftFoundation
 //
-//  Created by 李响 on 2021/6/8.
+//  Created by 李响 on 2019/6/8.
 //
 
 #import <Foundation/Foundation.h>
 
-/** 版本升级 版本比较大小
- 
- @param v1 one version
- @param v2 two version
- @return 0:eque,-1:one small,1:two small
- */
-int LXCompareVersionInSwift(const char * _Nullable v1, const char * _Nullable v2);
-
-/// 将度换为弧度转
-CGFloat LXObjcDegreesToRadians(CGFloat degrees);
-
-/// 将弧度转换为度
-CGFloat LXObjcRadiansToDegrees(CGFloat radians);
-
 NS_ASSUME_NONNULL_BEGIN
-
 
 typedef enum : NSUInteger {
     LXObjcAuthTypePhoto = 0, /// 图片（相册）
@@ -30,7 +15,24 @@ typedef enum : NSUInteger {
     LXObjcAuthTypeVideo,     /// 视频（相机）
 } LXObjcAuthType;
 
+// 1 = "wifi", 2 = "4G", 3 = "3G", 4 = "2G", default = "未知"
+typedef enum : NSUInteger {
+    LXNetWorkTypeWifi = 1,
+    LXNetWorkType4G,
+    LXNetWorkType3G,
+    LXNetWorkType2G,
+    LXNetWorkTypeUnknow
+} LXNetWorkType;
+
 @interface LXObjcUtils : NSObject
+
+/** 版本升级 版本比较大小
+ 
+ @param v1 version
+ @param v2 version
+ @return 0: v1 == v2, -1: v1 < v2 , 1: v1 > v2
+ */
++ (int)compareVersionWithV1:(const char * _Nullable)v1 v2:(const char * _Nullable) v2;
 
 /// 将度换为弧度转
 + (CGFloat)degreesToRadians:(CGFloat)degrees;
@@ -38,17 +40,20 @@ typedef enum : NSUInteger {
 /// 将弧度转换为度
 + (CGFloat)radiansToDegrees:(CGFloat)radians;
 
-/// 获取网络类型
-+ (int)getNetWorkType;
+/// 获取网络类型 1 = "wifi", 2 = "4G", 3 = "3G", 4 = "2G", default = "未知"
++ (LXNetWorkType)getNetWorkType;
+
+///  是否包含表情符号
+- (BOOL)isContainsEmoji:(NSString *)string;
 
 /// 是否在主线程
 + (BOOL)isMainThread;
 
 /// 主线程执行block
-+ (void)executeOnSafeMian:(void(^)(void)) block;
++ (void)executeMainForSafe:(void(^)(void)) block;
 
 /// 异步线程执行block
-+ (void)executeOnSafeGlobal:(void(^)(void)) block;
++ (void)executeGlobalForSafe:(void(^)(void)) block;
 
 /// 是否属于Foundation里的类 [NSURL class],[NSDate class],[NSValue class],[NSData class],[NSError class],[NSArray class],[NSDictionary class],[NSString class],[NSAttributedString class]
 + (BOOL)isClassFromFoundation:(Class)c;
@@ -59,12 +64,18 @@ typedef enum : NSUInteger {
 /// 方法交换 主要是交换方法的实现
 + (void)swizzleMethod:(SEL)originSel withNewMethod:(SEL)dstSel;
 
+/// 获取类的所有成员变量名字
++ (NSArray<NSString *> *)getAllIvarName:(Class)c;
+
+/// 获取类的所有方法名字
++ (NSArray<NSString *> *)getAllMethodName:(Class)c;
+
 /// 去设置权限（相机、相册）
 + (void)jumpToSetting;
 
 /// 获取keyWindow,适配iOS13.0+ PS:如果需要实现iPad多屏处理
 /// 最好是使用SceneDelegate管理Window
-+ (UIWindow*)getKeyWindow;
++ (UIWindow *)getKeyWindow;
 
 /// 获取当前显示的视图控制器
 + (UIViewController *)getCurrentController;
@@ -105,6 +116,9 @@ typedef enum : NSUInteger {
 + (void)writeImageToAbulmWithImage:(UIImage *)image collectionTitle:(NSString * _Nullable)collectionTitle completionHandler:(void (^)(BOOL isSuccess, NSString * _Nonnull))completionHandler API_AVAILABLE(ios(9.0));
 
 + (void)writeImageToAbulmWithImage:(UIImage *)image completionHandler:(void (^)(BOOL isSuccess, NSString * _Nonnull))completionHandler API_AVAILABLE(ios(9.0));
+
+/// 转换小写数字为大写数字 1 到 壹，2 到 贰 长度要小于19个，否则会crash闪退
++ (NSString *)convertToUppercaseNumbers:(double)number;
 
 @end
 

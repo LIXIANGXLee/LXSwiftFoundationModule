@@ -15,14 +15,9 @@
 
 #define OBJC_PROJECT_NAME [NSBundle mainBundle].infoDictionary[@"CFBundleName"]
 
-/**
-version campare
+@implementation LXObjcUtils
 
-@param v1 one version
-@param v2 two version
-@return 0:eque,-1:one small,1:two small
-*/
-int LXCompareVersionInSwift(const char * _Nullable v1, const char * _Nullable v2) {
++ (int)compareVersionWithV1:(const char *)v1 v2:(const char *)v2 {
     assert(v1);
     assert(v2);
     const char *p_v1 = v1;
@@ -56,27 +51,15 @@ int LXCompareVersionInSwift(const char * _Nullable v1, const char * _Nullable v2
     return 0;
 }
 
-/// 将度换为弧度转
-CGFloat LXObjcDegreesToRadians(CGFloat degrees) {
-    return degrees * M_PI / 180;
-}
-
-/// 将弧度转换为度
-CGFloat LXObjcRadiansToDegrees(CGFloat radians) {
-    return radians * 180 / M_PI;
-}
-
-@implementation LXObjcUtils
-
 + (CGFloat)degreesToRadians:(CGFloat)degrees {
-    return LXObjcDegreesToRadians(degrees);
+    return degrees * M_PI / 180;;
 }
 
 + (CGFloat)radiansToDegrees:(CGFloat)radians {
-    return LXObjcRadiansToDegrees(radians);
+    return radians * 180 / M_PI;
 }
 
-+ (int)getNetWorkType {
++ (LXNetWorkType)getNetWorkType {
     int NetworkType = 0; // UNKNOWN
     
     //创建零地址，0.0.0.0的地址表示查询本机的网络连接状态
@@ -137,14 +120,49 @@ CGFloat LXObjcRadiansToDegrees(CGFloat radians) {
             }
         }
     }
-    return NetworkType;
+    return (LXNetWorkType)NetworkType;
+}
+
+///  是否包含表情符号
+- (BOOL)isContainsEmoji:(NSString *)string {
+    __block BOOL returnValue = NO;
+    [string enumerateSubstringsInRange:NSMakeRange(0, [string length]) options:NSStringEnumerationByComposedCharacterSequences  usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+       const unichar hs = [substring characterAtIndex:0];
+       if (0xd800 <= hs && hs <= 0xdbff) {
+           if (substring.length > 1) {
+               const unichar ls = [substring characterAtIndex:1];
+               const int uc = ((hs - 0xd800) * 0x400) + (ls - 0xdc00) + 0x10000;
+               if (0x1d000 <= uc && uc <= 0x1f77f) {
+                   returnValue = YES;
+               }
+           }
+       } else if (substring.length > 1) {
+           const unichar ls = [substring characterAtIndex:1];
+           if (ls == 0x20e3) {
+               returnValue = YES;
+           }
+       } else {
+           if (0x2100 <= hs && hs <= 0x27ff) {
+               returnValue = YES;
+           } else if (0x2B05 <= hs && hs <= 0x2b07) {
+               returnValue = YES;
+           } else if (0x2934 <= hs && hs <= 0x2935) {
+               returnValue = YES;
+           } else if (0x3297 <= hs && hs <= 0x3299) {
+               returnValue = YES;
+           } else if (hs == 0xa9 || hs == 0xae || hs == 0x303d || hs == 0x3030 || hs == 0x2b55 || hs == 0x2b1c || hs == 0x2b1b || hs == 0x2b50) {
+               returnValue = YES;
+           }
+       }
+   }];
+   return returnValue;
 }
 
 + (BOOL)isMainThread {
     return [[NSThread currentThread] isMainThread];
 }
 
-+ (void)executeOnSafeMian:(void (^)(void))block {
++ (void)executeMainForSafe:(void (^)(void))block {
     if([self isMainThread]) {
         block();
     } else {
@@ -154,7 +172,7 @@ CGFloat LXObjcRadiansToDegrees(CGFloat radians) {
     }
 }
 
-+ (void)executeOnSafeGlobal:(void (^)(void))block {
++ (void)executeGlobalForSafe:(void (^)(void))block {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         block();
     });
@@ -231,10 +249,39 @@ CGFloat LXObjcRadiansToDegrees(CGFloat radians) {
     }
 }
 
++ (NSArray<NSString *> *)getAllIvarName:(Class)c {
+    
+    unsigned int outCount = 0;
+    Ivar *ivars = class_copyIvarList([c class], &outCount);
+    NSMutableArray *mArr = [NSMutableArray array];
+    for (unsigned int i = 0; i < outCount; ++i) {
+      Ivar ivar = ivars[i];
+      const void *name = ivar_getName(ivar);
+      NSString *ivarName = [NSString stringWithUTF8String:name];
+        [mArr addObject:ivarName];
+    }
+    // 释放资源
+    free(ivars);
+    return mArr;
+}
+
++ (NSArray<NSString *> *)getAllMethodName:(Class)c {
+    unsigned int outCount = 0;
+    Method *methods = class_copyMethodList([c class], &outCount);
+    NSMutableArray *mArr = [NSMutableArray array];
+    for (unsigned int i = 0; i < outCount; ++i) {
+      Method method = methods[i];
+      SEL methodName = method_getName(method);
+      [mArr addObject:NSStringFromSelector(methodName)];
+    }
+    // 释放资源
+    free(methods);
+    return mArr;
+}
+
 /// 检查权限
 + (void)checkAuth:(LXObjcAuthType)type isAlert:(BOOL)isAlert callBack:(void (*)(BOOL isPass))callBack {
-    
-    [self executeOnSafeMian:^{
+    [self executeMainForSafe:^{
         switch (type) {
             case LXObjcAuthTypePhoto:
                 [self checkPhotoAuth:isAlert callBack:callBack];
@@ -254,7 +301,7 @@ CGFloat LXObjcRadiansToDegrees(CGFloat radians) {
 
 + (void)checkAuth:(LXObjcAuthType)type callBack:(void (*)(BOOL))callBack {
    
-    [self executeOnSafeMian:^{
+    [self executeMainForSafe:^{
         [self checkAuth:type isAlert:YES callBack:callBack];
     }];
     
@@ -352,7 +399,7 @@ CGFloat LXObjcRadiansToDegrees(CGFloat radians) {
     return currentVC;
 }
 
-+ (UIWindow*)getKeyWindow {
++ (UIWindow *)getKeyWindow {
     UIWindow *mainWindow = nil;
     if ( @available(iOS 13.0, *) ) {
         //如果是多场景，可以遍历windows,检查window.isKeyWindow获取
@@ -404,7 +451,7 @@ CGFloat LXObjcRadiansToDegrees(CGFloat radians) {
                                assetLocalIdentifier:assetUrlLocalIdentifier
                                   completionHandler:completionHandler];
         }else{
-            [self executeOnSafeMian:^{
+            [self executeMainForSafe:^{
                 if (completionHandler) {
                     completionHandler(NO, error.localizedDescription);
                 }
@@ -431,7 +478,7 @@ CGFloat LXObjcRadiansToDegrees(CGFloat radians) {
                                assetLocalIdentifier:assetImageLocalIdentifier
                                   completionHandler:completionHandler];
         }else{
-            [self executeOnSafeMian:^{
+            [self executeMainForSafe:^{
                 if (completionHandler) {
                     completionHandler(NO, error.localizedDescription);
                 }
@@ -452,14 +499,14 @@ CGFloat LXObjcRadiansToDegrees(CGFloat radians) {
                               assetCollection:assetCollection
                             completionHandler:^(BOOL success, NSError *error) {
                 
-                [self executeOnSafeMian:^{
+                [self executeMainForSafe:^{
                     if (completionHandler) {
                         completionHandler(success, error.localizedDescription);
                     }
                 }];
             }];
         }else{
-            [self executeOnSafeMian:^{
+            [self executeMainForSafe:^{
                 if (completionHandler) {
                     completionHandler(NO, @"获取相册失败");
                 }
@@ -538,6 +585,120 @@ CGFloat LXObjcRadiansToDegrees(CGFloat radians) {
         PHAssetCollection *assetCollection = [PHAssetCollection fetchAssetCollectionsWithLocalIdentifiers:@[assetCollectionLocalIdentifier] options:nil].lastObject;
         callBack(assetCollection);
     }
+}
+
++ (NSString *)convertToUppercaseNumbers:(double)number {
+    
+    // 首先转化成标准格式 “200.23”，为了后面操作不报错
+    NSString *numberStr = [NSString stringWithFormat:@"%.2f",number];
+    NSMutableString *tempStr = [[NSMutableString alloc] initWithString: numberStr];
+    // 位
+    NSArray *carryArr1 = @[
+                           @"元",
+                           @"拾",
+                           @"佰",
+                           @"仟",
+                           @"万",
+                           @"拾",
+                           @"佰",
+                           @"仟",
+                           @"亿",
+                           @"拾",
+                           @"佰",
+                           @"仟",
+                           @"兆",
+                           @"拾",
+                           @"佰",
+                           @"仟"
+                        ];
+    NSArray *carryArr2 = @[
+        @"分",
+        @"角"
+    ];
+    // 数字
+    NSArray *numArr = @[
+                        @"零",
+                        @"壹",
+                        @"贰",
+                        @"叁",
+                        @"肆",
+                        @"伍",
+                        @"陆",
+                        @"柒",
+                        @"捌",
+                        @"玖"
+                    ];
+    
+    NSArray *temarr = [tempStr componentsSeparatedByString:@"."];
+    // 小数点前的数值字符串
+    NSString *firstStr = [NSString stringWithFormat:@"%@",temarr[0]];
+    // 小数点后的数值字符串
+    NSString *secondStr = [NSString stringWithFormat:@"%@",temarr[1]];
+    
+    // 是否拼接了“零”，做标记
+    bool zero = NO;
+    // 拼接数据的可变字符串
+    NSMutableString *endMStr = [[NSMutableString alloc] init];
+    
+    // 首先遍历firstStr，从最高位往个位遍历，高位----->个位
+    for(int i = (int)firstStr.length; i > 0; i--) {
+        // 取最高位数
+        NSInteger MyData = [[firstStr substringWithRange:NSMakeRange(firstStr.length - i, 1)] integerValue];
+        if ([numArr[MyData] isEqualToString:@"零"]) {
+            if ([carryArr1[i - 1] isEqualToString:@"万"] ||
+                [carryArr1[i - 1] isEqualToString:@"亿"] ||
+                [carryArr1[i - 1] isEqualToString:@"元"] ||
+                [carryArr1[i - 1] isEqualToString:@"兆"]) {
+                // 去除有“零万”
+                if (zero) {
+                    endMStr = [NSMutableString stringWithFormat:@"%@", [endMStr substringToIndex:(endMStr.length - 1)]];
+                    [endMStr appendString:carryArr1[i - 1]];
+                    zero = NO;
+                }else{
+                    [endMStr appendString:carryArr1[i - 1]];
+                    zero = NO;
+                }
+                // 去除有“亿万”、"兆万"的情况
+                if ([carryArr1[i - 1] isEqualToString:@"万"]) {
+                    if ([[endMStr substringWithRange:NSMakeRange(endMStr.length - 2, 1)] isEqualToString:@"亿"]) {
+                        endMStr = [NSMutableString stringWithFormat:@"%@",[endMStr substringToIndex:endMStr.length - 1]];
+                    }
+                    
+                    if ([[endMStr substringWithRange:NSMakeRange(endMStr.length - 2, 1)] isEqualToString:@"兆"]) {
+                        endMStr = [NSMutableString stringWithFormat:@"%@",[endMStr substringToIndex:endMStr.length - 1]];
+                    }
+                }
+                // 去除“兆亿”
+                if ([carryArr1[i - 1] isEqualToString:@"亿"]) {
+                    if ([[endMStr substringWithRange:NSMakeRange(endMStr.length - 2, 1)] isEqualToString:@"兆"]) {
+                        endMStr = [NSMutableString stringWithFormat:@"%@",[endMStr substringToIndex:endMStr.length - 1]];
+                    }
+                }
+            }else{
+                if (!zero) {
+                    [endMStr appendString:numArr[MyData]];
+                    zero=YES;
+                }
+            }
+        }else{
+            [endMStr appendString:numArr[MyData]];
+            [endMStr appendString:carryArr1[i - 1]];
+            zero = NO;
+        }
+    }
+    
+    // 再遍历secondStr 角位----->分位
+    if ([secondStr isEqualToString:@"00"]) {
+        [endMStr appendString:@"整"];
+    }else{
+        for(int i = (int)secondStr.length; i > 0; i--) {
+            // 取最高位数
+            NSInteger MyData = [[secondStr substringWithRange:NSMakeRange(secondStr.length - i, 1)] integerValue];
+            [endMStr appendString:numArr[MyData]];
+            [endMStr appendString:carryArr2[i - 1]];
+        }
+    }
+    return endMStr;
 }
 
 @end

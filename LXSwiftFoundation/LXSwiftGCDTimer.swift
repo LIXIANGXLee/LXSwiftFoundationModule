@@ -20,8 +20,7 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
        
     /// 开始GCD定时器
     public static func startTimer(with delaySeconds: TimeInterval = 0, interval: TimeInterval = 1,repeats: Bool = true, identified: String?, task: LXSwiftGCDTimer.TaskCallBack?) {
-        guard let iden = identified, delaySeconds >= 0,
-                  interval >= 0, task != nil else { return }
+        guard let iden = identified, delaySeconds >= 0, interval >= 0, task != nil else { return }
         let timer = DispatchSource.makeTimerSource(queue: DispatchQueue.global())
         timer.schedule(deadline: .now() + delaySeconds, repeating: interval)
         LXSwiftGCDTimer.timers[iden] = timer

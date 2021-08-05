@@ -39,7 +39,7 @@ open class LXSwiftModalController: UIViewController {
         return UITapGestureRecognizer(target: self, action: #selector(backgroundViewTap))
     }()
     
-    /// 内容视图
+    /// 内容视图 注意：⚠️子类继承后需要设置尺寸后才能显示出来
     open lazy var contentView: UIView = {
         let contentView = UIView()
         contentView.backgroundColor = UIColor.white

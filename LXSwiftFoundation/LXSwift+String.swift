@@ -72,16 +72,16 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     }
     
     /// 分割字符
-    public func split(_ s: String) -> [String] {
+    public func split(with character: String) -> [String] {
         let string = base as! String
         if string.isEmpty {
             return []
         }
-        return string.components(separatedBy: s)
+        return string.components(separatedBy: character)
     }
     
     /// 替换字符串中的字符串
-    public func replace(_ old: String, new: String) -> String {
+    public func replace(old: String, new: String) -> String {
         let string = base as! String
         return string.replacingOccurrences(of: old, with: new, options: NSString.CompareOptions.numeric, range: nil)
     }
@@ -106,7 +106,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     }
     
     /// 是否包含表情符号表达式
-    public var containsEmoji: Bool {
+    public var isContainsEmoji: Bool {
         let string = base as! String
         for scalar in string.unicodeScalars {
             switch scalar.value {
@@ -126,9 +126,9 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     }
     
     /// 版本比较大小 Returns: big: base > two  ,small:two  < base, equal:base == two
-    public func versionCompare(with v: String) -> LXSwiftUtils.VersionCompareResult {
+    public func compareVersion(with version: String) -> LXSwiftUtils.VersionCompareResult {
         let string = base as! String
-        return LXSwiftUtils.lx.versionCompare(string, v)
+        return LXSwiftUtils.lx.versionCompareSwift(v1: string, v2: version)
     }
     
     /// 在小数点后保留几个有效数字

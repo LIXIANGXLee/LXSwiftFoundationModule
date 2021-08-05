@@ -35,7 +35,6 @@ open class LXSwiftHyperlinksModalController: LXSwiftModalController {
             itemViews.append(itemView)
             itemView.addTarget(self,action: #selector(itemViewClick(_:)), for: UIControl.Event.touchUpInside)
         }
-        
     }
     
     required public init?(coder: NSCoder) {

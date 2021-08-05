@@ -9,15 +9,11 @@
 
 @implementation LXLinkedMapNode
 
-+ (LXLinkedMapNode *)nodeWithElement:(id)element
-                                prev:(LXLinkedMapNode *)prev
-                                next:(LXLinkedMapNode *)next {
++ (LXLinkedMapNode *)nodeWithElement:(id)element prev:(LXLinkedMapNode *)prev next:(LXLinkedMapNode *)next {
     return [[self alloc] initWithElement:element prev:prev next:next];
 }
 
-- (instancetype)initWithElement:(id)element
-                           prev:(LXLinkedMapNode *)prev
-                           next:(LXLinkedMapNode *)next {
+- (instancetype)initWithElement:(id)element prev:(LXLinkedMapNode *)prev next:(LXLinkedMapNode *)next {
     if (self = [super init]) {
         self.element = element;
         self.prev = prev;

@@ -41,8 +41,7 @@ open class LXSwiftButtonView: LXSwiftButton {
 extension LXSwiftBasics where Base: LXSwiftButtonView {
  
     /// 设置标题的cgrect和图像的cgrect
-    public func setHandle(titleCallBack: LXSwiftButtonView.ButtonCallBack?,
-                          imageCallBack: LXSwiftButtonView.ButtonCallBack?) {
+    public func setHandle(titleCallBack: LXSwiftButtonView.ButtonCallBack?, imageCallBack: LXSwiftButtonView.ButtonCallBack?) {
         base.titleCallBack = titleCallBack
         base.imageCallBack = imageCallBack
     }

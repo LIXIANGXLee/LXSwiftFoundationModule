@@ -13,7 +13,7 @@
 @implementation UIView (LXObjcPerformance)
 
 // Global observer object
-static  CFRunLoopObserverRef currentObserver;
+static CFRunLoopObserverRef currentObserver;
 
 -(void)setLx_maxTaskPerformedCount:(int)lx_maxTaskPerformedCount {
     objc_setAssociatedObject(self, @selector(lx_maxTaskPerformedCount), @(lx_maxTaskPerformedCount), OBJC_ASSOCIATION_ASSIGN);

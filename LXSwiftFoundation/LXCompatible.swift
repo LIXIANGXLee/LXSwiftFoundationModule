@@ -56,10 +56,16 @@ protocol LXSwiftPropertyCompatible {
     associatedtype T
     
     /// 类别扩展
-    typealias SwiftCallBack = ((T?) -> ())
+    typealias SwiftCallBack = ((T) -> ())
     
     /// 定义闭包类型的计算属性
     var swiftCallBack: SwiftCallBack? { get set }
+}
+
+/// view 遵守的协议
+public protocol LXViewSetup: AnyObject {
+    func setupUI()
+    func setupViewModel()
 }
 
 /// 任意类型协议

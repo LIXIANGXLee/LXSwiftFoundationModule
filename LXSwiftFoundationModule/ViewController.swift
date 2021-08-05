@@ -21,11 +21,21 @@ class ViewController: UIViewController {
     }
     let linkList = LXObjcLinkedList()
 
+    @objc func ss() {
+        print("======进入")
+
+    }
     
+    @objc func aa() {
+        print("======退出")
+    }
      override func viewDidLoad() {
         super.viewDidLoad()
+
         
-        print("===--------======\( 3606.lx.timeToStr)");
+        LXSwiftUtils.lx.didBecomeActive(self, selector: #selector(ss))
+        LXSwiftUtils.lx.willResignActive(self, selector: #selector(aa))
+
         
         self.view.backgroundColor = UIColor.red
         
@@ -42,10 +52,19 @@ class ViewController: UIViewController {
         view.addSubview(btn)
         
         
+        let swicha = UISwitch(frame: CGRect(x: 10, y: 200, width: 30, height: 40))
         
+        swicha.lx.setHandle { (isOn) in
+            print("-=-=-=-=-=-=-=\(isOn)")
+        }
+        self.view.addSubview(swicha)
         
       }
     
+    
+    class func aa() {
+        
+    }
  
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -54,8 +73,7 @@ class ViewController: UIViewController {
 //            print("-=-=-=-=-=-=-=-=-=-=-=-=")
 //        }
 //
-        
-                
+  
         DispatchQueue.global().async {
             LXObjcUtils.check(LXObjcAuthTypePhoto, isAlert: true) { (ispass) in
                 print("-=-=-=--=\(ispass)")

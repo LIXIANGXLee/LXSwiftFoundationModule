@@ -23,7 +23,7 @@ extension LXSwiftBasics where Base: Bundle {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String
     }
     
-    /// bundleID
+    /// bundleID 唯一标识
     public static var bundleID: String? {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String
     }
@@ -38,7 +38,7 @@ extension LXSwiftBasics where Base: Bundle {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String
     }
     
-    /// AppName - APP装到手机里之后显示的名称
+    /// 获取APP装到手机里之后显示的名称
     static var displayName: String? {
         return Bundle.main.localizedInfoDictionary?["CFBundleDisplayName"] as? String
     }

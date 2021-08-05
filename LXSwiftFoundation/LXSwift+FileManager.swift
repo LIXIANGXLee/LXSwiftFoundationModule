@@ -37,7 +37,6 @@ extension LXSwiftBasics where Base: FileManager {
         return NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first
     }
     
-    
     /// 计算单个文件的大小
     public static func fileSize(path: String) -> Double {
         var fileSize: Double = 0

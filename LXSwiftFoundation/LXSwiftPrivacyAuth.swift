@@ -60,7 +60,7 @@ extension LXSwiftBasics where Base == LXSwiftPrivacyAuth {
             }
         }
     }
-    
+
     /// 定位权限
     public static var isCheckLocation: Bool {
         let authStatus = CLLocationManager.authorizationStatus()

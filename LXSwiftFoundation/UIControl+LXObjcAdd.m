@@ -43,8 +43,7 @@ static const int block_key_control;
 
 - (void)lx_addBlockForControlEvents:(UIControlEvents)controlEvents block:(void (^)(id sender))block {
     if (!controlEvents) return;
-    _LXObjcControlBlockTarget *target = [[_LXObjcControlBlockTarget alloc]
-                                       initWithBlock:block events:controlEvents];
+    _LXObjcControlBlockTarget *target = [[_LXObjcControlBlockTarget alloc] initWithBlock:block events:controlEvents];
     [self addTarget:target action:@selector(invokeTarget:)
    forControlEvents:controlEvents];
     NSMutableArray *targets = [self _lxAllObjcControlBlockTargets];
@@ -55,8 +54,7 @@ static const int block_key_control;
     if (!target || !action || !controlEvents) return;
     NSSet *targets = [self allTargets];
     for (id currentTarget in targets) {
-        NSArray *actions = [self actionsForTarget:currentTarget
-                                  forControlEvent:controlEvents];
+        NSArray *actions = [self actionsForTarget:currentTarget forControlEvent:controlEvents];
         for (NSString *currentAction in actions) {
             [self removeTarget:currentTarget
                         action:NSSelectorFromString(currentAction)
@@ -112,10 +110,7 @@ static const int block_key_control;
     NSMutableArray *targets = objc_getAssociatedObject(self, &block_key_control);
     if (!targets) {
         targets = [NSMutableArray array];
-        objc_setAssociatedObject(self,
-                                 &block_key_control,
-                                 targets,
-                                 OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self, &block_key_control, targets, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return targets;
 }

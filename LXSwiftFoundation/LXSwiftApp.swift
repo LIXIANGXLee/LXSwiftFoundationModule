@@ -27,14 +27,13 @@ public func scale_ipad129_height(_ distance: CGFloat) -> CGFloat {
 }
 
 /// 居中运算
-public func CGFloatGetCenter(_ parent: CGFloat,
-                             _ child: CGFloat) -> CGFloat {
+public func scale_get_center(_ parent: CGFloat, _ child: CGFloat) -> CGFloat {
     return LXSwiftApp.flat((parent - child) / 2.0)
 }
 
 /// 屏幕宽高
-public var SCREEN_WIDTH_APP = LXSwiftApp.screenW
-public var SCREEN_HEIGHT_APP = LXSwiftApp.screenH
+public let SCREEN_WIDTH_IOS = LXSwiftApp.screenW
+public let SCREEN_HEIGHT_IOS = LXSwiftApp.screenH
 
 // MARK: - LXSwftApp const
 /// define app const
@@ -47,10 +46,10 @@ public struct LXSwiftApp {
     public static let bounds = UIScreen.main.bounds
     
     /// 屏幕宽度 Gets the width of the screen
-    public static let screenW = CGFloat(UIScreen.main.bounds.width)
+    public static let screenW = CGFloat(bounds.width)
     
     /// 屏幕高度 Gets the height of the screen
-    public static let screenH = CGFloat(UIScreen.main.bounds.height)
+    public static let screenH = CGFloat(bounds.height)
 
     /// 状态栏高度
     public static let statusbarH: CGFloat = statusBarHeight

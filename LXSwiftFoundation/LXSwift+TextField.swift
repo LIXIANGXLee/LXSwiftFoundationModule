@@ -24,7 +24,7 @@ extension LXSwiftBasics where Base : LXSwiftTextField {
     }
     
     /// 公共方法回调
-    public func setHandle(_ textFieldCallBack: ((String?) -> Void)?) {
+    public func setHandle(_ textFieldCallBack: ((String) -> Void)?) {
         base.swiftCallBack = textFieldCallBack
     }
     
@@ -110,7 +110,7 @@ extension LXSwiftTextField: LXSwiftPropertyCompatible{
                 text = text?.lx.substring(to: maxLength)
             }
         }
-        self.swiftCallBack?(text)
+        self.swiftCallBack?(text ?? "")
     }
 }
 

@@ -76,7 +76,7 @@ extension LXSwiftBasics where Base: DispatchQueue {
     }
     
     /// 延时后主线程执行任务 (自定义线程类型，例如：DispatchQueue.main主线程、DispatchQueue.global()全局线程等等)
-    public func after(_ delay: TimeInterval, execute closure: @escaping () -> Void) {
+    public func after(with delay: TimeInterval, execute closure: @escaping () -> Void) {
         base.asyncAfter(deadline: .now() + delay, execute: closure)
     }
 }

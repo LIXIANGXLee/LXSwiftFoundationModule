@@ -13,11 +13,6 @@ public enum LXSwiftUserInterfaceStyle {
     case light
 }
 
-public protocol LXViewSetup: AnyObject {
-    func setupUI()
-    func setupViewModel()
-}
-
 public extension LXViewSetup {
     func setupUI() { }
     func setupViewModel() { }

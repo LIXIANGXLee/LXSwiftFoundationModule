@@ -18,12 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) LXLinkedMapNode *next;
 @property(nonatomic, strong) id element;
 
-+ (LXLinkedMapNode *)nodeWithElement:(id)element
-                                prev:(LXLinkedMapNode * __nullable)prev
-                                next:(LXLinkedMapNode * __nullable)next;
-- (instancetype)initWithElement:(id)element
-                        prev:(LXLinkedMapNode * __nullable)prev
-                        next:(LXLinkedMapNode * __nullable)next;
++ (LXLinkedMapNode *)nodeWithElement:(id)element prev:(LXLinkedMapNode * __nullable)prev next:(LXLinkedMapNode * __nullable)next;
+- (instancetype)initWithElement:(id)element prev:(LXLinkedMapNode * __nullable)prev next:(LXLinkedMapNode * __nullable)next;
 @end
 
 @interface LXObjcLinkedList : NSObject

@@ -24,6 +24,7 @@ extension LXSwiftBasics where Base: CALayer {
         return image
     }
     
+    /// 添加边框
     public func addBorder(_ edge: UIRectEdge, color: UIColor = UIColor.lx.color(hex: "999999"), side: CGFloat = 0.5) {
         let border = CALayer()
         switch edge {

@@ -44,20 +44,19 @@ public class LXSwiftNotification<T: Codable>: LXSwiftNotificationBase {
             postObject(nil)
             return
         }
-        guard let jsonObj = try? JSONSerialization.jsonObject(with: jsonData, options: []) else {
+        guard let jsonObjc = try? JSONSerialization.jsonObject(with: jsonData, options: []) else {
             postObject(nil)
             return
         }
-        let keyValue = jsonObj as? [AnyHashable: Any]
-        postObject(keyValue)
+        postObject(jsonObjc as? [AnyHashable: Any])
     }
     
     public func decodeInfo(from notification: Notification) -> T? {
         let systemInfo = notification.userInfo
         guard let notNilInfo = systemInfo else { return nil }
         guard let jsonData = try? JSONSerialization.data(withJSONObject: notNilInfo, options: []) else { return nil }
-        guard let decodeObj = try? JSONDecoder().decode(T.self, from: jsonData) else { return nil }
-        return decodeObj
+        guard let decodeObjc = try? JSONDecoder().decode(T.self, from: jsonData) else { return nil }
+        return decodeObjc
     }
 }
 

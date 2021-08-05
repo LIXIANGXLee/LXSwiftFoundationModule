@@ -17,6 +17,7 @@ public struct LXSwiftUtils: LXSwiftCompatible {
         case equal /// 等于
         case small /// 小于
     }
+    
 }
 
 /// version  init
@@ -34,14 +35,19 @@ extension LXSwiftUtils.VersionCompareResult {
 //MARK: -  Extending methods for LXSwiftUtils
 extension LXSwiftBasics where Base == LXSwiftUtils {
     
+    /// 获取网络类型
+    public static var getNetWorkType: String {
+        return UIDevice.lx.getNetWorkType
+    }
+    
     /// 两个版本比较大小 big: one > two, small: two < one,equal: one == two
-    public static func versionCompare(v1: String, v2: String) -> LXSwiftUtils.VersionCompareResult {
-        let ret = LXCompareVersionInSwift(v1, v2)
+    public static func versionCompareOc(v1: String, v2: String) -> LXSwiftUtils.VersionCompareResult {
+        let ret = LXObjcUtils.compareVersion(withV1: v1, v2: v2)
         return LXSwiftUtils.VersionCompareResult(rawValue: ret)
     }
     
     /// 两个版本比较大小 big: one > two, small: two < one, equal: one == two
-    public static func versionCompare(_ v1: String, _ v2: String) -> LXSwiftUtils.VersionCompareResult {
+    public static func versionCompareSwift(v1: String, v2: String) -> LXSwiftUtils.VersionCompareResult {
 
         let com = v1.compare(v2)
         var temp: LXSwiftUtils.VersionCompareResult
@@ -66,7 +72,16 @@ extension LXSwiftBasics where Base == LXSwiftUtils {
             }
         }
     }
+    /// 将度换为弧度转
+    public static func degreesToRadians(_ radians: CGFloat) -> CGFloat {
+        return LXObjcUtils.degrees(toRadians: radians)
+    }
     
+    /// 将弧度转换为度
+    public static func radiansToDegrees(_ toDegrees: CGFloat) -> CGFloat  {
+        return LXObjcUtils.radians(toDegrees: toDegrees)
+    }
+
     /// 在小数点后保留几个有效数字
     public static func formatDecimalString(with text: String, digits: Int,  mode: NumberFormatter.RoundingMode = .down) -> String {
         guard let m = Double(text) else { return text }
@@ -95,6 +110,11 @@ extension LXSwiftBasics where Base == LXSwiftUtils {
         let url = URL(fileURLWithPath: path)
         guard let data = try? Data(contentsOf: url) else { return nil }
         return data.lx.dataToPlistDictionary
+    }
+    
+    /// 转换小写数字为大写数字 1 到 壹，2 到 贰 长度要小于19个，否则会crash闪退
+    public static func convert(toUppercaseNumbers number: Double) -> String {
+        return LXObjcUtils.convert(toUppercaseNumbers: number)
     }
 }
 
@@ -177,5 +197,35 @@ extension LXSwiftBasics where Base == LXSwiftUtils {
             completion?()
             AudioServicesDisposeSystemSoundID(soundID)
         })
+    }
+    
+    /// 已经进入
+    public static func didBecomeActive(_ observer: Any, selector aSelector: Selector) {
+        NotificationCenter.default.addObserver(observer, selector: aSelector, name: UIApplication.didBecomeActiveNotification, object: nil)
+    }
+    
+    /// 即将退出
+    public static func willResignActive(_ observer: Any, selector aSelector: Selector) {
+        NotificationCenter.default.addObserver(observer, selector: aSelector, name: UIApplication.willResignActiveNotification, object: nil)
+    }
+    
+    /// 监听键盘即将弹起
+    public static func keyboardWillShow(_ observer: Any, selector aSelector: Selector) {
+        NotificationCenter.default.addObserver(observer, selector: aSelector, name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+    
+    /// 监听键盘已经弹起
+    public static func keyboardDidShow(_ observer: Any, selector aSelector: Selector) {
+        NotificationCenter.default.addObserver(observer, selector: aSelector, name: UIResponder.keyboardDidShowNotification, object: nil)
+    }
+    
+    /// 监听键盘即将退下
+    public static func keyboardWillHide(_ observer: Any, selector aSelector: Selector) {
+        NotificationCenter.default.addObserver(observer, selector: aSelector, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    /// 监听键盘已经退下
+    public static func keyboardDidHide(_ observer: Any, selector aSelector: Selector) {
+        NotificationCenter.default.addObserver(observer, selector: aSelector, name: UIResponder.keyboardDidHideNotification, object: nil)
     }
 }

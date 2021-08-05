@@ -9,7 +9,6 @@ import UIKit
 
 
 extension UIBezierPath: LXSwiftCompatible { }
-
 extension LXSwiftBasics where Base: UIBezierPath {
   
     /// 返回cglayer

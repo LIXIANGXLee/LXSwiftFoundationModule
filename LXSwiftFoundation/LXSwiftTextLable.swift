@@ -68,7 +68,6 @@ open class LXSwiftTextLable: UIView {
         longGesture.minimumPressDuration = 0.8
         return longGesture
     }()
-    
 
     /// 外部调用以观察存储属性设置大小注释⚠️请在AttributeText之前设置viewframe大小
     public var viewFrame: CGRect? {

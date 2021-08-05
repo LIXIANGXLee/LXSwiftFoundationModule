@@ -45,25 +45,6 @@ extension LXSwiftBasics where Base: UIDevice {
 //MARK: -  Extending methods  for UIDevice is ipad or iphone
 extension LXSwiftBasics where Base: UIDevice {
     
-    /// 获取网络类型
-    public static var netType: String {
-        let type = LXObjcUtils.getNetWorkType()
-        var netType: String
-        switch type {
-        case 1:
-            netType = "wifi"
-        case 2:
-            netType = "4G"
-        case 3:
-            netType = "3G"
-        case 4:
-            netType = "2G"
-        default:
-            netType = "未知"
-        }
-        return netType
-    }
-    
     /// 获取系统开始日期
     public static var systemUptime: Date {
         let time = ProcessInfo.processInfo.systemUptime
@@ -80,6 +61,25 @@ extension LXSwiftBasics where Base: UIDevice {
     public static var diskSpaceFree: Int64 {
         guard let attrs = try? FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory()), let space = attrs[FileAttributeKey.systemFreeSize] as? Int64 else { return -1 }
         return space
+    }
+    
+    /// 获取网络类型字符串
+    public static var getNetWorkType: String {
+        let type = LXObjcUtils.getNetWorkType()
+        var netType: String
+        switch type {
+        case LXNetWorkTypeWifi:
+            netType = "wifi"
+        case LXNetWorkType4G:
+            netType = "4G"
+        case LXNetWorkType3G:
+            netType = "3G"
+        case LXNetWorkType2G:
+            netType = "2G"
+        default:
+            netType = "未知"
+        }
+        return netType
     }
     
     /// 磁盘空间是按大小使用的

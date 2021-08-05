@@ -65,19 +65,27 @@ extension LXSwiftBasics where Base: UIApplication {
         }
     }
     
-    /// 打开url
-    public static func openUrl(_ url: URL, completionHandler: ((Bool) -> Void)? = nil) {
-        if isCanOpen(url) {
+    /// 打开url (特别注意：ios 10 以下版本没有回调)
+    public static func openUrl(_ url: URL?, completionHandler: ((Bool) -> Void)? = nil) {
+        
+        guard let u = url else {
+            completionHandler?(false)
+            return
+        }
+        
+        if isCanOpen(u) {
             if #available(iOS 10.0, *) {
-                UIApplication.shared.open(url, options: [:], completionHandler: completionHandler)
+                UIApplication.shared.open(u, options: [:], completionHandler: completionHandler)
             } else {
-                UIApplication.shared.openURL(url)
+                UIApplication.shared.openURL(u)
             }
         }
     }
     
     /// 判断是否能打开url
-    public static func isCanOpen(_ url: URL) -> Bool {
-       return UIApplication.shared.canOpenURL(url)
+    public static func isCanOpen(_ url: URL?) -> Bool {
+        
+       guard let u = url else { return false }
+       return UIApplication.shared.canOpenURL(u)
     }
 }

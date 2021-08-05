@@ -64,10 +64,7 @@ static const int block_key_kvo;
         dic[keyPath] = arr;
     }
     [arr addObject:target];
-    [self addObserver:target
-           forKeyPath:keyPath
-              options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
-              context:NULL];
+    [self addObserver:target forKeyPath:keyPath options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
 }
 
 - (void)lx_removeObserverBlocksForKeyPath:(NSString *)keyPath {

@@ -11,9 +11,9 @@ import UIKit
 //MARK: -  Extending properties and methods for UISwitch
 extension LXSwiftBasics where Base : UISwitch {
     
-    public func setHandle(switchCallBack: ((_ isOn: Bool?) -> ())?){
+    public func setHandle(switchCallBack: ((_ isOn: Bool) -> ())?){
         base.swiftCallBack = switchCallBack
-        base.addTarget(base, action: #selector(base.swiftSwitchAction(_:)),for: .touchUpInside)
+        base.addTarget(base, action: #selector(base.swiftSwitchAction(_:)),for: .valueChanged)
     }   
 }
 

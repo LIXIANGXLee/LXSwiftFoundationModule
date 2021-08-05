@@ -78,7 +78,7 @@ extension LXSwiftBasics where Base: UIButton {
 //MARK: -  Extending properties and methods for UIButton
 extension LXSwiftBasics where Base : UIButton {
     
-    public func setHandle(buttonCallBack: ((_ button: UIButton?) -> ())?){
+    public func setHandle(buttonCallBack: ((_ button: UIButton) -> ())?){
         base.swiftCallBack = buttonCallBack
         base.addTarget(base, action: #selector(base.swiftButtonAction(_:)), for: .touchUpInside)
     }
