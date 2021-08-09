@@ -561,7 +561,7 @@
 + (void)getAssetCollection:(NSString * _Nullable)collectionTitle callBack:(void(^)(PHAssetCollection * __nullable assetCollection))callBack {
     
     if (!collectionTitle || collectionTitle.length == 0) {
-        collectionTitle = [NSBundle mainBundle].infoDictionary[@"CFBundleName"];
+        collectionTitle = OBJC_PROJECT_NAME;
     }
     
     /// 查找相册
@@ -699,6 +699,12 @@
         }
     }
     return endMStr;
+}
+
++ (NSString *)stringByTrim:(NSString *)string {
+    
+    NSCharacterSet *set = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    return [string stringByTrimmingCharactersInSet:set];
 }
 
 @end

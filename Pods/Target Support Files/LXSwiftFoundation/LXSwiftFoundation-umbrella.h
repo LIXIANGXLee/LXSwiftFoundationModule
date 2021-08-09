@@ -17,8 +17,10 @@
 #import "LXObjcUtils.h"
 #import "LXSwiftFoundation.h"
 #import "NSObject+LXObjcKVO.h"
+#import "UIColor+LXObjcAdd.h"
 #import "UIControl+LXObjcAdd.h"
 #import "UIGestureRecognizer+LXObjcAdd.h"
+#import "UIImage+LXObjcAdd.h"
 #import "UIView+LXObjcPerformance.h"
 
 FOUNDATION_EXPORT double LXSwiftFoundationVersionNumber;

@@ -120,6 +120,9 @@ typedef enum : NSUInteger {
 /// 转换小写数字为大写数字 1 到 壹，2 到 贰 长度要小于19个，否则会crash闪退
 + (NSString *)convertToUppercaseNumbers:(double)number;
 
+/// 去两边空格
++ (NSString *)stringByTrim:(NSString *)string;
+
 @end
 
 NS_ASSUME_NONNULL_END
