@@ -10,7 +10,7 @@
 
 @implementation UIColor (LXObjcAdd)
 
-+ (instancetype)colorWithHexString:(NSString *)hexStr {
++ (instancetype)lx_colorWithHexString:(NSString *)hexStr {
     CGFloat r, g, b, a;
     if (hexStringToRGBA(hexStr, &r, &g, &b, &a)) {
         return [UIColor colorWithRed:r green:g blue:b alpha:a];
@@ -50,21 +50,21 @@ static BOOL hexStringToRGBA(NSString *str, CGFloat *r, CGFloat *g, CGFloat *b, C
     return YES;
 }
 
-+ (UIColor *)colorWithRGB:(uint32_t)rgbValue {
++ (UIColor *)lx_colorWithRGB:(uint32_t)rgbValue {
     return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16) / 255.0f
                            green:((rgbValue & 0xFF00) >> 8) / 255.0f
                             blue:(rgbValue & 0xFF) / 255.0f
                            alpha:1];
 }
 
-+ (UIColor *)colorWithRGBA:(uint32_t)rgbaValue {
++ (UIColor *)lx_colorWithRGBA:(uint32_t)rgbaValue {
     return [UIColor colorWithRed:((rgbaValue & 0xFF000000) >> 24) / 255.0f
                            green:((rgbaValue & 0xFF0000) >> 16) / 255.0f
                             blue:((rgbaValue & 0xFF00) >> 8) / 255.0f
                            alpha:(rgbaValue & 0xFF) / 255.0f];
 }
 
-+ (UIColor *)colorWithRGB:(uint32_t)rgbValue alpha:(CGFloat)alpha {
++ (UIColor *)lx_colorWithRGB:(uint32_t)rgbValue alpha:(CGFloat)alpha {
     return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16) / 255.0f
                            green:((rgbValue & 0xFF00) >> 8) / 255.0f
                             blue:(rgbValue & 0xFF) / 255.0f

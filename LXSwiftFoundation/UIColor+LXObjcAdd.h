@@ -10,11 +10,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UIColor (LXObjcAdd)
-+ (nullable UIColor *)colorWithHexString:(NSString *)hexStr;
 
-+ (UIColor *)colorWithRGB:(uint32_t)rgbValue;
-+ (UIColor *)colorWithRGBA:(uint32_t)rgbaValue;
-+ (UIColor *)colorWithRGB:(uint32_t)rgbValue alpha:(CGFloat)alpha;
++ (nullable UIColor *)lx_colorWithHexString:(NSString *)hexStr;
+
++ (UIColor *)lx_colorWithRGB:(uint32_t)rgbValue;
++ (UIColor *)lx_colorWithRGBA:(uint32_t)rgbaValue;
++ (UIColor *)lx_colorWithRGB:(uint32_t)rgbValue alpha:(CGFloat)alpha;
 
 @end
 
