@@ -2,7 +2,6 @@
 # platform :ios, '9.0'
 
 source 'git://github.com/CocoaPods/Specs.git'
-source 'http://gitlab.yinyuebao.com/xxyy/client/ios/ArtPods/ArtPodRepo.git'
 
 target 'LXSwiftFoundationModule' do
   # Comment the next line if you don't want to use dynamic frameworks

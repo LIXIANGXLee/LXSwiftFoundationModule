@@ -136,6 +136,9 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (nullable UIImage *)lx_imageByTintColor:(UIColor *)color;
 
+/// 擦除图片
+- (UIImage *)lx_imageWithClearView:(UIView *)view rect:(CGRect)rect;
+
 /**
  *  合成后的图片 (以坐标为参考点，准确)
  *  @param mainImage        背景图
@@ -195,6 +198,9 @@ NS_ASSUME_NONNULL_BEGIN
  * @param fitSize YES：新图像的大小扩展到适合所有内容，否：图像的大小不会改变，内容可能会被剪辑。
 */
 - (nullable UIImage *)lx_imageByRotate:(CGFloat)radians fitSize:(BOOL)fitSize;
+
+/// 拍照后 上传90度问题
+- (UIImage *)lx_imageWithOrientation;
 
 /**
  * 返回一个新的垂直或者水平图像
