@@ -53,15 +53,14 @@ static const int block_key_control;
 - (void)lx_setTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {
     if (!target || !action || !controlEvents) return;
     NSSet *targets = [self allTargets];
-    for (id currentTarget in targets) {
-        NSArray *actions = [self actionsForTarget:currentTarget forControlEvent:controlEvents];
+    [targets enumerateObjectsUsingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
+        NSArray *actions = [self actionsForTarget:obj forControlEvent:controlEvents];
         for (NSString *currentAction in actions) {
-            [self removeTarget:currentTarget
+            [self removeTarget:obj
                         action:NSSelectorFromString(currentAction)
               forControlEvents:controlEvents];
         }
-    }
-    
+    }];
     /// 添加任务对象
     [self addTarget:target action:action forControlEvents:controlEvents];
 }
@@ -75,7 +74,7 @@ static const int block_key_control;
     if (!controlEvents) return;
     NSMutableArray *targets = [self _lxAllObjcControlBlockTargets];
     NSMutableArray *removes = [NSMutableArray array];
-    for (_LXObjcControlBlockTarget *target in targets) {
+    [targets enumerateObjectsUsingBlock:^(_LXObjcControlBlockTarget *target, NSUInteger idx, BOOL * _Nonnull stop) {
         if (target.events & controlEvents) {
             UIControlEvents newEvent = target.events & (~controlEvents);
             if (newEvent) {
@@ -93,15 +92,13 @@ static const int block_key_control;
                 [removes addObject:target];
             }
         }
-    }
+    }];
     [targets removeObjectsInArray:removes];
 }
 
 - (void)lx_removeAllTargets {
     [[self allTargets] enumerateObjectsUsingBlock: ^(id object, BOOL *stop) {
-        [self removeTarget:object
-                    action:nil
-          forControlEvents:UIControlEventAllEvents];
+        [self removeTarget:object action:nil forControlEvents:UIControlEventAllEvents];
     }];
     [[self _lxAllObjcControlBlockTargets] removeAllObjects];
 }

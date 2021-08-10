@@ -3,4 +3,4 @@
 //
 
 #import "LXObjcThreadActive.h"
-#import "UIView+LXObjcPerformance.h"
+#import "LXSwiftFoundation.h"

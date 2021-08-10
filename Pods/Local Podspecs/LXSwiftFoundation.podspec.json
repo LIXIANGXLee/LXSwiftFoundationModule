@@ -16,9 +16,20 @@
     "git": "https://github.com/LIXIANGXLee/LXSwiftFoundationModule.git",
     "tag": "8.2.0"
   },
-  "source_files": [
-    "LXSwiftFoundation/*.swift",
-    "LXSwiftFoundation/*.{h,m}"
+  "subspecs": [
+    {
+      "name": "OCTools",
+      "source_files": "LXSwiftFoundation/ocTools/*.{h,m}"
+    },
+    {
+      "name": "SwiftTools",
+      "source_files": "LXSwiftFoundation/swiftTools/*.swift",
+      "dependencies": {
+        "LXSwiftFoundation/OCTools": [
+
+        ]
+      }
+    }
   ],
   "swift_version": "5.0"
 }

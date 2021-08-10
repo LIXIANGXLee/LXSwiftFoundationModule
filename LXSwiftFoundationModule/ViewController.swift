@@ -51,14 +51,8 @@ class ViewController: UIViewController {
         btn.lx.verticalCenterImageAndTitle(space: 30, isLeftImage: false)
         view.addSubview(btn)
         
-        
-        let swicha = UISwitch(frame: CGRect(x: 10, y: 200, width: 30, height: 40))
-        
-        swicha.lx.setHandle { (isOn) in
-            print("-=-=-=-=-=-=-=\(isOn)")
-        }
-        self.view.addSubview(swicha)
-        
+
+                
       }
     
     

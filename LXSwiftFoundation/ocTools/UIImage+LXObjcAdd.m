@@ -19,9 +19,7 @@
 
 #define LX_OBJC_NIL_ISEMPTY(a) (a == nil || [a isEqual:[NSNull null]])
 
-static CGRect _LXCGRectFitWithContentMode(CGRect rect,
-                                          CGSize size,
-                                          UIViewContentMode mode) {
+static CGRect _LXCGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode mode) {
     rect = CGRectStandardize(rect);
     size.width = size.width < 0 ? -size.width : size.width;
     size.height = size.height < 0 ? -size.height : size.height;
@@ -226,10 +224,7 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
     if (LX_OBJC_NIL_ISEMPTY(self)) { return nil; }
 
     UIGraphicsBeginImageContextWithOptions(self.size, NO, 0.0);
-    UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0,
-                                                                           0,
-                                                                           self.size.width,
-                                                                           self.size.height)];
+    UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0,self.size.width,self.size.height)];
     [path addClip];
     [self drawAtPoint:CGPointZero];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -247,10 +242,7 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
     CGSize scaledSize = [self sizeOfScaleToFit:size];
     //压缩大小，调整转向
     UIGraphicsBeginImageContextWithOptions(scaledSize, NO, 0);
-    [self drawInRect:CGRectMake(0,
-                                0,
-                                scaledSize.width,
-                                scaledSize.height)];
+    [self drawInRect:CGRectMake(0,  0, scaledSize.width, scaledSize.height)];
     UIImage *compressedImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return compressedImage;
@@ -635,7 +627,6 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
    CGImageRelease(newImageRef);
    free(inputPixels);
    return newImage;
-  
 }
 
 - (UIImage *)lx_imageByRoundCornerRadius:(CGFloat)radius {
@@ -696,6 +687,71 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return image;
+}
+
+- (UIImage *)lx_imageWithOrientation {
+    
+    if (self.imageOrientation == UIImageOrientationUp)
+        return self;
+    CGAffineTransform transform = CGAffineTransformIdentity;
+    switch (self.imageOrientation) {
+        case UIImageOrientationDown:
+        case UIImageOrientationDownMirrored:
+            transform = CGAffineTransformTranslate(transform, self.size.width, self.size.height);
+            transform = CGAffineTransformRotate(transform, M_PI);
+            break;
+        case UIImageOrientationLeft:
+        case UIImageOrientationLeftMirrored:
+            transform = CGAffineTransformTranslate(transform, self.size.width, 0);
+            transform = CGAffineTransformRotate(transform, M_PI_2);
+            break;
+        case UIImageOrientationRight:
+        case UIImageOrientationRightMirrored:
+            transform = CGAffineTransformTranslate(transform, 0, self.size.height);
+            transform = CGAffineTransformRotate(transform, -M_PI_2);
+            break;
+        default:
+            break;
+    }
+    
+    switch (self.imageOrientation) {
+        case UIImageOrientationUpMirrored:
+        case UIImageOrientationDownMirrored:
+            transform = CGAffineTransformTranslate(transform, self.size.width, 0);
+            transform = CGAffineTransformScale(transform, -1, 1);
+            break;
+        case UIImageOrientationLeftMirrored:
+        case UIImageOrientationRightMirrored:
+            transform = CGAffineTransformTranslate(transform, self.size.height, 0);
+            transform = CGAffineTransformScale(transform, -1, 1);
+            break;
+        default:
+            break;
+    }
+    
+    CGContextRef ctx = CGBitmapContextCreate(NULL, self.size.width, self.size.height,
+                                             CGImageGetBitsPerComponent(self.CGImage), 0,
+                                             CGImageGetColorSpace(self.CGImage),
+                                             CGImageGetBitmapInfo(self.CGImage));
+    CGContextConcatCTM(ctx, transform);
+    switch (self.imageOrientation) {
+        case UIImageOrientationLeft:
+        case UIImageOrientationLeftMirrored:
+        case UIImageOrientationRight:
+        case UIImageOrientationRightMirrored:
+            CGContextDrawImage(ctx, CGRectMake(0,0,self.size.height,self.size.width), self.CGImage);
+            break;
+        default:
+            CGContextDrawImage(ctx, CGRectMake(0,0,self.size.width,self.size.height), self.CGImage);
+            break;
+    }
+    
+    // And now we just create a new UIImage from the drawing context
+    CGImageRef cgimg = CGBitmapContextCreateImage(ctx);
+    UIImage *img = [UIImage imageWithCGImage:cgimg];
+    CGContextRelease(ctx);
+    CGImageRelease(cgimg);
+    return img;
 }
 
 - (UIImage *)lx_imageByRotate:(CGFloat)radians fitSize:(BOOL)fitSize {
@@ -783,72 +839,6 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
     UIGraphicsEndImageContext();
     return newImage;
 }
-
-- (UIImage *)lx_imageWithOrientation {
-    
-    if (self.imageOrientation == UIImageOrientationUp)
-        return self;
-    CGAffineTransform transform = CGAffineTransformIdentity;
-    switch (self.imageOrientation) {
-        case UIImageOrientationDown:
-        case UIImageOrientationDownMirrored:
-            transform = CGAffineTransformTranslate(transform, self.size.width, self.size.height);
-            transform = CGAffineTransformRotate(transform, M_PI);
-            break;
-        case UIImageOrientationLeft:
-        case UIImageOrientationLeftMirrored:
-            transform = CGAffineTransformTranslate(transform, self.size.width, 0);
-            transform = CGAffineTransformRotate(transform, M_PI_2);
-            break;
-        case UIImageOrientationRight:
-        case UIImageOrientationRightMirrored:
-            transform = CGAffineTransformTranslate(transform, 0, self.size.height);
-            transform = CGAffineTransformRotate(transform, -M_PI_2);
-            break;
-        default:
-            break;
-    }
-    
-    switch (self.imageOrientation) {
-        case UIImageOrientationUpMirrored:
-        case UIImageOrientationDownMirrored:
-            transform = CGAffineTransformTranslate(transform, self.size.width, 0);
-            transform = CGAffineTransformScale(transform, -1, 1);
-            break;
-        case UIImageOrientationLeftMirrored:
-        case UIImageOrientationRightMirrored:
-            transform = CGAffineTransformTranslate(transform, self.size.height, 0);
-            transform = CGAffineTransformScale(transform, -1, 1);
-            break;
-        default:
-            break;
-    }
-    
-    CGContextRef ctx = CGBitmapContextCreate(NULL, self.size.width, self.size.height,
-                                             CGImageGetBitsPerComponent(self.CGImage), 0,
-                                             CGImageGetColorSpace(self.CGImage),
-                                             CGImageGetBitmapInfo(self.CGImage));
-    CGContextConcatCTM(ctx, transform);
-    switch (self.imageOrientation) {
-        case UIImageOrientationLeft:
-        case UIImageOrientationLeftMirrored:
-        case UIImageOrientationRight:
-        case UIImageOrientationRightMirrored:
-            CGContextDrawImage(ctx, CGRectMake(0,0,self.size.height,self.size.width), self.CGImage);
-            break;
-        default:
-            CGContextDrawImage(ctx, CGRectMake(0,0,self.size.width,self.size.height), self.CGImage);
-            break;
-    }
-    
-    // And now we just create a new UIImage from the drawing context
-    CGImageRef cgimg = CGBitmapContextCreateImage(ctx);
-    UIImage *img = [UIImage imageWithCGImage:cgimg];
-    CGContextRelease(ctx);
-    CGImageRelease(cgimg);
-    return img;
-}
-
 
 - (NSUInteger)lx_imageCost {
     

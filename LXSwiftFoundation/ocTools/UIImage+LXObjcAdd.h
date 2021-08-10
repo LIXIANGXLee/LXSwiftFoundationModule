@@ -191,6 +191,11 @@ NS_ASSUME_NONNULL_BEGIN
                                       borderWidth:(CGFloat)borderWidth
                                       borderColor:(nullable UIColor *)borderColor
                                    borderLineJoin:(CGLineJoin)borderLineJoin;
+
+
+/// 拍照后 上传90度问题
+- (UIImage *)lx_imageWithOrientation;
+
 /**
  * 返回一个新的旋转图像（相对于中心
  
@@ -198,9 +203,6 @@ NS_ASSUME_NONNULL_BEGIN
  * @param fitSize YES：新图像的大小扩展到适合所有内容，否：图像的大小不会改变，内容可能会被剪辑。
 */
 - (nullable UIImage *)lx_imageByRotate:(CGFloat)radians fitSize:(BOOL)fitSize;
-
-/// 拍照后 上传90度问题
-- (UIImage *)lx_imageWithOrientation;
 
 /**
  * 返回一个新的垂直或者水平图像

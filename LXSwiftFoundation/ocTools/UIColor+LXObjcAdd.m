@@ -26,14 +26,11 @@ static BOOL hexStringToRGBA(NSString *str, CGFloat *r, CGFloat *g, CGFloat *b, C
     } else if ([str hasPrefix:@"0X"]) {
         str = [str substringFromIndex:2];
     }
-    
     NSUInteger length = [str length];
-    //         RGB            RGBA          RRGGBB        RRGGBBAA
     if (length != 3 && length != 4 && length != 6 && length != 8) {
         return NO;
     }
     
-    //RGB,RGBA,RRGGBB,RRGGBBAA
     if (length < 5) {
         *r = hexStringToInt([str substringWithRange:NSMakeRange(0, 1)]) / 255.0f;
         *g = hexStringToInt([str substringWithRange:NSMakeRange(1, 1)]) / 255.0f;

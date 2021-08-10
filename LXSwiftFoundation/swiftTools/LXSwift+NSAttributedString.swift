@@ -39,19 +39,19 @@ extension LXSwiftBasics where Base: NSAttributedString {
 //MARK: -  Extending properties and methods for NSMutableAttributedString
 extension LXSwiftBasics where Base: NSMutableAttributedString {
     
-    func setAttribute(_ attribute: NSAttributedString.Key, value: Any?, range: NSRange) {
+    func setAttribute(with attribute: NSAttributedString.Key, value: Any?, range: NSRange) {
         guard let value = value else { return }
         base.addAttribute(attribute, value: value, range: range)
     }
     
-    func attribute(_ key: NSAttributedString.Key, index: Int) -> Any? {
+    func attribute(with key: NSAttributedString.Key, index: Int) -> Any? {
         return base.attribute(key, at: index, effectiveRange: nil)
     }
     
     @discardableResult
     public func set(with font: UIFont?, range: NSRange? = nil) -> NSMutableAttributedString {
         let range = range ?? NSMakeRange(0, base.length)
-        setAttribute(.font, value: font, range: range)
+        setAttribute(with: .font, value: font, range: range)
         return base
     }
     
@@ -59,7 +59,7 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
     public func set(with textColor: UIColor?, range: NSRange? = nil) -> NSMutableAttributedString {
         guard let color = textColor else { return base }
         let range = range ?? NSMakeRange(0, base.length)
-        setAttribute(.foregroundColor, value: color, range: range)
+        setAttribute(with: .foregroundColor, value: color, range: range)
         return base
     }
     
@@ -67,107 +67,107 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
     public func setBackgroundColor(with backgroundColor: UIColor?, range: NSRange? = nil) -> NSMutableAttributedString {
         guard let backgroundColor = backgroundColor else { return base }
         let range = range ?? NSMakeRange(0, base.length)
-        setAttribute(.backgroundColor, value: backgroundColor, range: range)
+        setAttribute(with: .backgroundColor, value: backgroundColor, range: range)
         return base
     }
     
     /// 添加下划线类型
     @discardableResult
-    public func setUnderlineStyle(_ underlineStyle: NSUnderlineStyle, range: NSRange? = nil) -> NSMutableAttributedString {
+    public func setUnderlineStyle(with underlineStyle: NSUnderlineStyle, range: NSRange? = nil) -> NSMutableAttributedString {
         let range = range ?? NSMakeRange(0, base.length)
-        setAttribute(.underlineStyle, value: underlineStyle.rawValue, range: range)
+        setAttribute(with: .underlineStyle, value: underlineStyle.rawValue, range: range)
         return base
     }
     
     /// 添加下划线颜色
     @discardableResult
-    public func setUnderlineColor(_ underlineColor: UIColor, range: NSRange? = nil) -> NSMutableAttributedString {
+    public func setUnderlineColor(with underlineColor: UIColor, range: NSRange? = nil) -> NSMutableAttributedString {
         let range = range ?? NSMakeRange(0, base.length)
-        setAttribute(.underlineColor, value: underlineColor, range: range)
+        setAttribute(with: .underlineColor, value: underlineColor, range: range)
         return base
     }
     
     @discardableResult
-    public func setKern(_ kern: CGFloat, range: NSRange? = nil) -> NSMutableAttributedString {
+    public func setKern(with kern: CGFloat, range: NSRange? = nil) -> NSMutableAttributedString {
         let range = range ?? NSMakeRange(0, base.length)
-        setAttribute(.kern, value: kern, range: range)
+        setAttribute(with: .kern, value: kern, range: range)
         return base
     }
     
     /// 阴影大小
     @discardableResult
-    public func setShadow(_ shadow: NSShadow, range: NSRange? = nil) -> NSMutableAttributedString {
+    public func setShadow(with shadow: NSShadow, range: NSRange? = nil) -> NSMutableAttributedString {
         let range = range ?? NSMakeRange(0, base.length)
-        setAttribute(.shadow, value: shadow, range: range)
+        setAttribute(with: .shadow, value: shadow, range: range)
         return base
     }
     
     /// 内容横穿线
     @discardableResult
-    public func setStrikethrough(_ style: NSUnderlineStyle, range: NSRange? = nil) -> NSMutableAttributedString {
+    public func setStrikethrough(with style: NSUnderlineStyle, range: NSRange? = nil) -> NSMutableAttributedString {
         let range = range ?? NSMakeRange(0, base.length)
-        setAttribute(.strikethroughStyle, value: style.rawValue, range: range)
+        setAttribute(with: .strikethroughStyle, value: style.rawValue, range: range)
         return base
     }
     
     /// 内容横穿线颜色
     @discardableResult
-    public func setStrikethroughColor(_ color: UIColor, range: NSRange? = nil) -> NSMutableAttributedString {
+    public func setStrikethroughColor(with color: UIColor, range: NSRange? = nil) -> NSMutableAttributedString {
         let range = range ?? NSMakeRange(0, base.length)
-        setAttribute(.strikethroughColor, value: color, range: range)
+        setAttribute(with: .strikethroughColor, value: color, range: range)
         return base
     }
     
     /// 对齐方式
     @discardableResult
-    public func setAlignment(_ alignment: NSTextAlignment) -> NSMutableAttributedString {
+    public func setAlignment(with alignment: NSTextAlignment) -> NSMutableAttributedString {
         let paragraphStyle = self.paragraphStyle
         let range = NSRange(location: 0, length: base.length)
         paragraphStyle.alignment = alignment
-        setAttribute(.paragraphStyle, value: paragraphStyle, range: range)
+        setAttribute(with: .paragraphStyle, value: paragraphStyle, range: range)
         return base
     }
     
     /// 行间距
     @discardableResult
-    public func setLineSpace(_ lignSpace: CGFloat, range: NSRange? = nil) -> NSMutableAttributedString {
+    public func setLineSpace(with lignSpace: CGFloat, range: NSRange? = nil) -> NSMutableAttributedString {
         let paragraphStyle = self.paragraphStyle
         let range = range ?? NSMakeRange(0, base.length)
         paragraphStyle.lineSpacing = lignSpace
-        setAttribute(.paragraphStyle, value: paragraphStyle, range: range)
+        setAttribute(with: .paragraphStyle, value: paragraphStyle, range: range)
         return base
     }
     
     /// 字间距
     @discardableResult
-    public func setParagraphSpacing(_ paragraphSpacing: CGFloat,
+    public func setParagraphSpacing(with paragraphSpacing: CGFloat,
                                     range: NSRange? = nil) -> NSMutableAttributedString {
         let paragraphStyle = self.paragraphStyle
         let range = range ?? NSMakeRange(0, base.length)
         paragraphStyle.paragraphSpacing = paragraphSpacing
-        setAttribute(.paragraphStyle, value: paragraphStyle, range: range)
+        setAttribute(with: .paragraphStyle, value: paragraphStyle, range: range)
         return base
     }
     
     /// Ellipsis pattern of ellipsis
     @discardableResult
-    public func setLineBreakMode(_ lineBreakMode: NSLineBreakMode,
+    public func setLineBreakMode(with lineBreakMode: NSLineBreakMode,
                                  range: NSRange? = nil) -> NSMutableAttributedString {
         let range = range ?? NSMakeRange(0, base.length)
         paragraphStyle.lineBreakMode = lineBreakMode
-        setAttribute(.paragraphStyle, value: paragraphStyle, range: range)
+        setAttribute(with: .paragraphStyle, value: paragraphStyle, range: range)
         return base
     }
     
     var paragraphStyle: NSMutableParagraphStyle {
-        if let paraStyle = attribute(.paragraphStyle, index: 0) as? NSParagraphStyle,
+        if let paraStyle = attribute(with: .paragraphStyle, index: 0) as? NSParagraphStyle,
             let mulParaStyle = paraStyle.mutableCopy() as? NSMutableParagraphStyle {
-            setAttribute(.paragraphStyle, value: mulParaStyle,
+            setAttribute(with: .paragraphStyle, value: mulParaStyle,
                          range: NSMakeRange(0, base.length))
             return mulParaStyle
         }else{
             let mulParaStyle = NSMutableParagraphStyle()
-            setAttribute(.paragraphStyle, value: mulParaStyle,
+            setAttribute(with: .paragraphStyle, value: mulParaStyle,
                          range: NSMakeRange(0, base.length))
             return mulParaStyle
         }

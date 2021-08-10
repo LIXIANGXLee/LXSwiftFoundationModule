@@ -11,16 +11,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIControl (LXObjcAdd)
 
-/// 将特定事件的block添加到内部调度表中，它将导致对@a块的强引用
+/// 将特定事件的block添加到内部调度表中
 - (void)lx_addBlockForControlEvents:(UIControlEvents)controlEvents block:(void (^)(id sender))block;
 
 /// 添加或替换特定事件的目标对象
 - (void)lx_setTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents;
 
-/// 将特定事件的块添加或替换到内部事件中调度台
+/// 将事件的块添加或替换到内部事件中
 - (void)lx_setBlockForControlEvents:(UIControlEvents)controlEvents block:(void (^)(id sender))block;
 
-/// 从内部数据库中删除特定事件的所有块调度台
+/// 从数组中删除特定事件的所有块
 - (void)lx_removeAllBlocksForControlEvents:(UIControlEvents)controlEvents;
 
 /// 移除所有Target监听对象

@@ -35,7 +35,16 @@ Pod::Spec.new do |spec|
 
     spec.source = { :git => "https://github.com/LIXIANGXLee/LXSwiftFoundationModule.git", :tag => "#{spec.version}" }
     
-    spec.source_files  = "LXSwiftFoundation/*.swift","LXSwiftFoundation/*.{h,m}"
-
+#    spec.source_files  = "LXSwiftFoundation/swiftTools/*.swift","LXSwiftFoundation/ocTools/*.{h,m}"
+    
+        spec.subspec 'OCTools' do |octools|
+            octools.source_files = "LXSwiftFoundation/ocTools/*.{h,m}"
+        end
+        
+        spec.subspec 'SwiftTools' do |swifttools|
+            swifttools.source_files = "LXSwiftFoundation/swiftTools/*.swift"
+            swifttools.dependency 'LXSwiftFoundation/OCTools'
+        end
+            
   end
 

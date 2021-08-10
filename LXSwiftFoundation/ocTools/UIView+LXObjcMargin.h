@@ -2,7 +2,7 @@
 //  UIView+LXObjcMargin.h
 //  LXSwiftFoundation
 //
-//  Created by 李响 on 2021/8/9.
+//  Created by 李响 on 2018/8/9.
 //
 
 #import <UIKit/UIKit.h>
@@ -17,8 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat lx_center_y;
 @property (nonatomic, assign) CGFloat lx_width;
 @property (nonatomic, assign) CGFloat lx_height;
-@property (nonatomic, assign) CGSize lx_size;
-
+@property (nonatomic, assign) CGSize  lx_size;
 @property (nonatomic, assign) CGPoint lx_Origin;
 @property (nonatomic, assign) CGFloat lx_Right;
 @property (nonatomic, assign) CGFloat lx_Bottom;
