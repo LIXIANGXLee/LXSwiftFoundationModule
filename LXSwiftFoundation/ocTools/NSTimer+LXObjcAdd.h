@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSTimer (LXObjcAdd)
 
 + (instancetype)lx_scheduleTimerWithTimeInterval:(NSTimeInterval)interval repeats:(BOOL)repeat block:(void(^)(NSTimer * _Nullable))block;
+
 @end
 
 NS_ASSUME_NONNULL_END

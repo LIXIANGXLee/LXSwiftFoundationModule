@@ -94,11 +94,21 @@
 }
 
 - (id)lx_jsonStringToId {
-    if (!self || self.length == 0) { return nil; }
     
+    if (!self || self.length == 0) { return nil; }
     NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
     return [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
 }
+
+- (NSString *)lx_jsonStringWithId:(id)objc {
+    if (!self) return nil;
+
+    NSError* error = nil;
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:objc options:0 error:&error];
+    if (error) { return nil; }
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+}
+
 
 - (NSString *)lx_documentFile {
     

@@ -21,7 +21,6 @@
 #import "LXObjcLinkedList.h"
 #import "LXLineFlowLayout.h"
 #import "LXWaterFlowLayout.h"
-#import "NSData+LXObjcAdd.h"
 #import "UIImage+LXObjcAdd.h"
 #import "NSTimer+LXObjcAdd.h"
 #import "LXObjcGCDTimer.h"

@@ -25,7 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// 首字母大写
 - (NSString *)lx_firstCharUpper;
 
-
 /// 首字母小写
 - (NSString *)lx_firstCharLower;
 
@@ -37,6 +36,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// string -> id 类型
 - (nullable id)lx_jsonStringToId;
+
+/// id -> string
+- (nullable NSString *)lx_jsonStringWithId:(id)objc;
 
 /// cache 沙盒路径及创建
 - (NSString *)lx_cacheFile;
