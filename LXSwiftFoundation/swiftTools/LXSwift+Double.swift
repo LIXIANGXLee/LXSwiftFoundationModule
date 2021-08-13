@@ -27,9 +27,9 @@ extension LXSwiftBasics where Base == Double {
     public var sizeFileToStr: String {
         let unit = 1000.0
         if base > pow(unit, 3) {
-            return String(format: "%.2fG", base / pow(unit, 3))
+            return String(format: "%.2fGB", base / pow(unit, 3))
         } else if base > pow(unit, 2) {
-            return String(format: "%.2fM", base / pow(unit, 2))
+            return String(format: "%.2fMB", base / pow(unit, 2))
         } else if base > pow(unit, 1) {
             return String(format: "%.2fKB", base / pow(unit, 1))
         } else {
