@@ -10,10 +10,10 @@ import UIKit
 
 
 /// 自定义运算符
-prefix operator ~>  /// 小于
-prefix operator ~<  /// 大于
-prefix operator ~>= /// 小于等于
-prefix operator ~<= /// 大于等于
+prefix operator ~>  /// 大于
+prefix operator ~<  /// 小于
+prefix operator ~>= /// 大于等于
+prefix operator ~<= /// 小于等于
 
 public prefix func ~>  (_ index: Int) -> (Int) -> (Bool) { { $0 >  index } }
 public prefix func ~>= (_ index: Int) -> (Int) -> (Bool) { { $0 >= index } }
@@ -59,5 +59,50 @@ extension LXSwiftBasics where Base == Int {
     /// 时间（秒数）转换字符串
     public var timeToStr: String {
         return Double(base).lx.timeToStr
+    }
+    
+    ///  时间戳转时间字符串 base: 时间戳（单位：s） ymd: 转换手的字符串格式， 转换后得到的字符串
+    public func timeStampToString(with ymd: String = "yyyy-MM-dd HH:mm:ss") -> String {
+        let date = base.lx.timeStampToDate()
+        return date.lx.dateTranformString()
+    }
+    
+    public func timeStampToDate(with ymd: String = "yyyy-MM-dd HH:mm:ss") -> Date {
+        let timeInterval = TimeInterval(base)
+        return Date(timeIntervalSince1970: timeInterval)
+    }
+    
+    /**
+     特备注意：传进来的时间戳base的单位是秒
+     60秒内：刚刚
+     1-60分钟 ：5分钟前
+     60以上 - 今天0点之后：几小时以前，
+     前1-7日前，在今年内：X天前
+     7日前-今年1.1：XX-XX XX:XX
+     去年及以前：20XX-XX-XX XX:XX
+     */
+    public var timeDateDescription: String {
+        let current = Date().lx.timeInterval
+        let timeDiff = Int(current) - base
+        switch timeDiff {
+        case ~<60:
+            return "刚刚"
+        case ~<3600:
+            return "\(timeDiff / 60)分钟前"
+        case ~<(24 * 3600):
+            return "\(timeDiff / 3600)小时前"
+        default:
+            let days = timeDiff / (24 * 3600)
+            if days > 7 {
+                let date = base.lx.timeStampToDate()
+                if date.lx.isThisYear {
+                    return date.lx.dateTranformString(with: "MM月dd日 HH:mm")
+                }else{
+                    return date.lx.dateTranformString(with: "yyyy年MM月dd日 HH:mm")
+                }
+            }else{
+                return "\(days)天前"
+            }
+        }
     }
 }

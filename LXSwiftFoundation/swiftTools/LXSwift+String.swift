@@ -261,6 +261,13 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return fmt.date(from: string)
     }
     
+    ///  时间戳转时间字符串 base: 时间戳（单位：s） ymd: 转换手的字符串格式， 转换后得到的字符串
+    public func timeStamp(with ymd: String = "yyyy-MM-dd HH:mm:ss") -> String {
+        let string = base as! String
+        guard let iTime = Int(string) else { return string }
+        return iTime.lx.timeStampToString(with: ymd)
+    }
+    
     /// 汉字拼音转换方法
     public var transformToPinYin: String {
         let string = base as! String
@@ -310,6 +317,21 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     public var urlDecoded: String {
         let string = base as! String
         return string.removingPercentEncoding ?? ""
+    }
+    
+    /**
+     特备注意：传进来的时间戳base的单位是秒
+     60秒内：刚刚
+     1-60分钟 ：5分钟前
+     60以上 - 今天0点之后：几小时以前，
+     前1-7日前，在今年内：X天前
+     7日前-今年1.1：XX-XX XX:XX
+     去年及以前：20XX-XX-XX XX:XX
+     */
+    var timeDateDescription: String {
+        let string = base as! String
+        guard let intTime = Int(string) else { return string }
+        return intTime.lx.timeDateDescription
     }
 }
 
