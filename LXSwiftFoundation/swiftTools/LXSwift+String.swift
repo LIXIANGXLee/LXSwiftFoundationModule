@@ -284,10 +284,10 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     }
     
     ///“扩展计算”属性显示相应的
-    ///g m KB B格式，根据文件大小而定
+    ///GB、MB、KB、B格式，根据文件大小而定
     public var fileSize: String {
         let string = base as! String
-        guard let size = Double(string) else {  return "" }
+        guard let size = Double(string) else { return "" }
         return size.lx.sizeFileToStr
     }
     

@@ -23,7 +23,7 @@ extension LXSwiftBasics where Base == Double {
         return NSNumber(value: base).lx.numberFormatter(with: mode, minDigits: digits, maxDigits: digits) ?? ""
     }
     
-    /// 用户显示容量 (G、M、KB)
+    /// 用户显示容量 (GB、MB、KB、B)
     public var sizeFileToStr: String {
         let unit = 1000.0
         if base > pow(unit, 3) {

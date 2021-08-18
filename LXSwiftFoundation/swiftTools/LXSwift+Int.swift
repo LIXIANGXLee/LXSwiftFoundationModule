@@ -51,7 +51,7 @@ extension LXSwiftBasics where Base == Int {
         return base > 0 ? true : false
     }
     
-    /// 用户显示容量 (G、M、KB、B)
+    /// 用户显示容量 (GB、MB、KB、B)
     public var sizeFileToStr: String {
        return Double(base).lx.sizeFileToStr
     }
@@ -64,10 +64,10 @@ extension LXSwiftBasics where Base == Int {
     ///  时间戳转时间字符串 base: 时间戳（单位：s） ymd: 转换手的字符串格式， 转换后得到的字符串
     public func timeStampToString(with ymd: String = "yyyy-MM-dd HH:mm:ss") -> String {
         let date = base.lx.timeStampToDate()
-        return date.lx.dateTranformString()
+        return date.lx.dateTranformString(with: ymd)
     }
     
-    public func timeStampToDate(with ymd: String = "yyyy-MM-dd HH:mm:ss") -> Date {
+    public func timeStampToDate() -> Date {
         let timeInterval = TimeInterval(base)
         return Date(timeIntervalSince1970: timeInterval)
     }
