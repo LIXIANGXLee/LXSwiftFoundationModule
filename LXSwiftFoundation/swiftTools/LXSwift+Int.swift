@@ -67,6 +67,7 @@ extension LXSwiftBasics where Base == Int {
         return date.lx.dateTranformString(with: ymd)
     }
     
+    ///  时间戳转时间字符串 base: 时间戳（单位：s） ymd: 转换手的字符串格式， 转换后得到的字符串
     public func timeStampToDate() -> Date {
         let timeInterval = TimeInterval(base)
         return Date(timeIntervalSince1970: timeInterval)

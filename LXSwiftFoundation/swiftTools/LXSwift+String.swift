@@ -262,10 +262,17 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     }
     
     ///  时间戳转时间字符串 base: 时间戳（单位：s） ymd: 转换手的字符串格式， 转换后得到的字符串
-    public func timeStamp(with ymd: String = "yyyy-MM-dd HH:mm:ss") -> String {
+    public func timeStampToString(with ymd: String = "yyyy-MM-dd HH:mm:ss") -> String {
         let string = base as! String
         guard let iTime = Int(string) else { return string }
         return iTime.lx.timeStampToString(with: ymd)
+    }
+    
+    ///  时间戳转时间字符串 base: 时间戳（单位：s） ymd: 转换手的字符串格式， 转换后得到的字符串
+    public func timeStampToDate() -> Date? {
+        let string = base as! String
+        guard let iTime = Int(string) else { return nil }
+        return iTime.lx.timeStampToDate()
     }
     
     /// 汉字拼音转换方法
