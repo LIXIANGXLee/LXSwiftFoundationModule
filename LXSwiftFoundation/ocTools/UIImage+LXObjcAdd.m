@@ -269,7 +269,7 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
 
 + (UIImage *)lx_imageWithSmallGIFData:(NSData *)data scale:(CGFloat)scale {
     CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFTypeRef)(data), NULL);
-    if (!source) return nil;
+    if (!source) { return nil; }
     size_t count = CGImageSourceGetCount(source);
     if (count <= 1) {
         CFRelease(source);
@@ -376,9 +376,8 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
     return image;
 }
 
-+ (UIImage *)lx_imageWithSize:(CGSize)size
-                    drawBlock:(void (^)(CGContextRef context))drawBlock {
-    if (!drawBlock) return nil;
++ (UIImage *)lx_imageWithSize:(CGSize)size drawBlock:(void (^)(CGContextRef context))drawBlock {
+    if (!drawBlock) { return nil; }
     UIGraphicsBeginImageContextWithOptions(size, NO, 0);
     CGContextRef context = UIGraphicsGetCurrentContext();
     if (!context) return nil;
@@ -389,7 +388,7 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
 }
 
 - (BOOL)lx_hasAlphaChannel {
-    if (self.CGImage == NULL) return NO;
+    if (self.CGImage == NULL) { return NO; }
     CGImageAlphaInfo alpha = CGImageGetAlphaInfo(self.CGImage) & kCGBitmapAlphaInfoMask;
     return (alpha == kCGImageAlphaFirst ||
             alpha == kCGImageAlphaLast ||
@@ -445,9 +444,7 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
 }
 
 - (UIImage *)lx_imageWithGrary {
-    if (LX_OBJC_NIL_ISEMPTY(self)) {
-        return nil;
-    }
+    if (LX_OBJC_NIL_ISEMPTY(self)) { return nil; }
     
     CGImageRef imageRef = self.CGImage;
     NSInteger width = CGImageGetWidth(imageRef);
@@ -470,9 +467,7 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
 }
 
 -(UIImage *)lx_imageWithWhiteness:(int)whiteness {
-    if (LX_OBJC_NIL_ISEMPTY(self)) {
-        return nil;
-    }
+    if (LX_OBJC_NIL_ISEMPTY(self)) { return nil; }
     CGImageRef imageRef = self.CGImage;
     NSInteger width = CGImageGetWidth(imageRef);
     NSInteger height = CGImageGetHeight(imageRef);
@@ -570,9 +565,7 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
 }
 
 -(UIImage *)lx_dermabrasionImageWithTouch:(UITouch *)touch view:(UIView *)view {
-    if (LX_OBJC_NIL_ISEMPTY(self)) {
-        return nil;
-    }
+    if (LX_OBJC_NIL_ISEMPTY(self)) { return nil; }
    
    int whiteness = 2000;
    CGImageRef imageRef = self.CGImage;
@@ -691,8 +684,7 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
 
 - (UIImage *)lx_imageWithOrientation {
     
-    if (self.imageOrientation == UIImageOrientationUp)
-        return self;
+    if (self.imageOrientation == UIImageOrientationUp) { return self; }
     CGAffineTransform transform = CGAffineTransformIdentity;
     switch (self.imageOrientation) {
         case UIImageOrientationDown:
@@ -746,7 +738,6 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
             break;
     }
     
-    // And now we just create a new UIImage from the drawing context
     CGImageRef cgimg = CGBitmapContextCreateImage(ctx);
     UIImage *img = [UIImage imageWithCGImage:cgimg];
     CGContextRelease(ctx);

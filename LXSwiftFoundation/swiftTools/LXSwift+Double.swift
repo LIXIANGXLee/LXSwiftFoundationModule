@@ -8,7 +8,18 @@
 
 import UIKit
 
-extension Double: LXSwiftCompatible { }
+public prefix func ~>  (_ index: Double) -> (Double) -> (Bool) { { $0 >  index } }
+public prefix func ~>= (_ index: Double) -> (Double) -> (Bool) { { $0 >= index } }
+public prefix func ~<  (_ index: Double) -> (Double) -> (Bool) { { $0 <  index } }
+public prefix func ~<= (_ index: Double) -> (Double) -> (Bool) { { $0 <= index } }
+
+extension Double: LXSwiftCompatible {
+    
+    /// Switch 匹配模式
+    public static func ~= (pattern: (Double) -> (Bool), value: Double) -> Bool {
+         pattern(value)
+    }
+}
 
 //MARK: -  Extending methods for Double
 extension LXSwiftBasics where Base == Double {

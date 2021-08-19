@@ -12,7 +12,7 @@ extension URL: LXSwiftCompatible { }
 extension LXSwiftBasics where Base == URL {
     
     /// 取出Get请求中的参数，结果是一个大字典
-    public var getUrlParams1: [String: String] {
+    public var urlParams1: [String: String] {
         let components = NSURLComponents(url: base, resolvingAgainstBaseURL: false)
         let queryItems = components?.queryItems ?? []
         return queryItems.reduce([String: String]()) {
@@ -23,7 +23,7 @@ extension LXSwiftBasics where Base == URL {
     }
     
     /// 从URL String 中获取参数，并将参数转为字典类型
-    public var getUrlParams2: [String: String] {
+    public var urlParams2: [String: String] {
         let string = base.absoluteString
         var params: [String: String] = [:]
         let array = string.components(separatedBy: "?")
@@ -43,7 +43,7 @@ extension LXSwiftBasics where Base == URL {
     }
     
     ///  按照原顺序 取出Get请求中的参数，结果是一个大字典，结果是一个数组，每个元素是一个字典
-    public var getUrlParamsWithOrder: [[String: String]] {
+    public var urlParamsWithOrder: [[String: String]] {
         var queries = [[String: String]]()
         guard let query = base.query else { return queries }
 

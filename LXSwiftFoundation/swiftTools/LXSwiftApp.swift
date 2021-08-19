@@ -32,8 +32,14 @@ public func scale_get_center(_ parent: CGFloat, _ child: CGFloat) -> CGFloat {
 }
 
 /// 屏幕宽高
-public let SCREEN_WIDTH_IOS = LXSwiftApp.screenW
-public let SCREEN_HEIGHT_IOS = LXSwiftApp.screenH
+public let SCREEN_WIDTH_TO_APP = LXSwiftApp.screenW
+public let SCREEN_HEIGHT_TO_APP = LXSwiftApp.screenH
+
+public let SCREEN_HEIGHT_TO_TOUCHBARHEIGHT = LXSwiftApp.touchBarH
+public let SCREEN_HEIGHT_TO_STATUSHEIGHT = LXSwiftApp.statusbarH
+
+public let SCREEN_HEIGHT_TO_TABBARHEIGHT = LXSwiftApp.tabbarH
+public let SCREEN_HEIGHT_TO_NAVBARHEIGHT = LXSwiftApp.navbarH
 
 // MARK: - LXSwftApp const
 /// define app const

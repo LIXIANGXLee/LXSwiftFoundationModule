@@ -17,7 +17,6 @@ public struct LXSwiftUtils: LXSwiftCompatible {
         case equal /// 等于
         case small /// 小于
     }
-    
 }
 
 /// version  init

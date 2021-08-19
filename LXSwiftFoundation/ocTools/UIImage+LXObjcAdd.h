@@ -207,7 +207,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * 返回一个新的垂直或者水平图像
 */
-- (UIImage *)lx_flipHorizontal:(BOOL)horizontal vertical:(BOOL)vertical;
+- (nullable UIImage *)lx_flipHorizontal:(BOOL)horizontal vertical:(BOOL)vertical;
 
 /*
  * 占用的内存开销Memory

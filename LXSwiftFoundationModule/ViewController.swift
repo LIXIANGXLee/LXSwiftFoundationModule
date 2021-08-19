@@ -10,6 +10,7 @@ import UIKit
 import LXSwiftFoundation
 import Photos
 
+
 class ViewController: UIViewController {
     var  objc : LXObjcThreadActive! = nil
     //隐藏状态栏
@@ -32,7 +33,6 @@ class ViewController: UIViewController {
      override func viewDidLoad() {
         super.viewDidLoad()
 
-        
         LXSwiftUtils.lx.didBecomeActive(self, selector: #selector(ss))
         LXSwiftUtils.lx.willResignActive(self, selector: #selector(aa))
 
@@ -52,7 +52,6 @@ class ViewController: UIViewController {
         view.addSubview(btn)
         
 
-                
       }
     
     
@@ -61,20 +60,27 @@ class ViewController: UIViewController {
     }
  
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+
         
+        print("-=-=-=-=--=\("12332243.76432".lx.moneyFormat1)")
+        print("-=-=-=-=--=\("1233".lx.moneyFormat1)")
+        print("-=-=-=-=--=\("1243243.323".lx.moneyFormat1)")
+        print("-=-=-=-=--=\("0.323".lx.moneyFormat1)")
+        print("-=-=-=-=--=\("40280.02".lx.moneyFormat2)")
+
 //        let str = Bundle.main.path(forResource: "lxQrCodeVoice", ofType: "wav")
 //        LXSwiftUtils.lx.playSound(with: str) {
 //            print("-=-=-=-=-=-=-=-=-=-=-=-=")
 //        }
 //
   
-        DispatchQueue.global().async {
-            LXObjcUtils.check(LXObjcAuthTypePhoto, isAlert: true) { (ispass) in
-                print("-=-=-=--=\(ispass)")
-
-            }
-        }
-    
+//        DispatchQueue.global().async {
+//            LXObjcUtils.check(LXObjcAuthTypePhoto, isAlert: true) { (ispass) in
+//                print("-=-=-=--=\(ispass)")
+//
+//            }
+//        }
+//
         
 //        LXObjcUtils.check(LXObjcAuthTypePhoto, isAlert: false) { (ispass) in
 //            print("-=-=-=--=\(ispass)")

@@ -30,7 +30,7 @@ extension LXSwiftBasics where Base == Date {
     }
     
     /// 获取两个日期之间的数据
-    public func omponentCompare(from date: Date, unit: Set<Calendar.Component> = [.year,.month,.day]) -> DateComponents {
+    public func componentCompare(from date: Date, unit: Set<Calendar.Component> = [.year,.month,.day]) -> DateComponents {
         let calendar = Calendar.current
         let comp = calendar.dateComponents(unit, from: date, to: base)
         return comp
@@ -38,22 +38,22 @@ extension LXSwiftBasics where Base == Date {
     
     /// 获取两个日期之间的天数
     public func numberOfDays(from date: Date) -> Int? {
-       return omponentCompare(from: date, unit: [.day]).day
+       return componentCompare(from: date, unit: [.day]).day
     }
     
     /// 获取两个日期之间的小时
     public func numberOfHours(from date: Date) -> Int? {
-       return omponentCompare(from: date, unit: [.hour]).hour
+       return componentCompare(from: date, unit: [.hour]).hour
     }
     
     /// 获取两个日期之间的分钟
     public func numberOfMinutes(from date: Date) -> Int? {
-       return omponentCompare(from: date, unit: [.minute]).minute
+       return componentCompare(from: date, unit: [.minute]).minute
     }
     
     /// 获取两个日期之间的秒数
     public func numberOfSeconds(from date: Date) -> Int? {
-       return omponentCompare(from: date, unit: [.second]).second
+       return componentCompare(from: date, unit: [.second]).second
     }
 }
 

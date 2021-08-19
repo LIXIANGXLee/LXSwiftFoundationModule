@@ -35,6 +35,7 @@ public class LXSwiftNotification<T: Codable>: LXSwiftNotificationBase {
         self.name = Notification.Name(name)
     }
     
+    /// 发送通知
     public func post(with object: T?) {
       
         let postObject = { (result: [AnyHashable: Any]?) in
@@ -51,6 +52,8 @@ public class LXSwiftNotification<T: Codable>: LXSwiftNotificationBase {
         postObject(jsonObjc as? [AnyHashable: Any])
     }
     
+    
+    /// 数据解析操作
     public func decodeInfo(from notification: Notification) -> T? {
         let systemInfo = notification.userInfo
         guard let notNilInfo = systemInfo else { return nil }
@@ -60,15 +63,19 @@ public class LXSwiftNotification<T: Codable>: LXSwiftNotificationBase {
     }
 }
 
+private var notificationCallBackKey: Void?
 extension NotificationCenter {
+    
+    /// 添加观察者 Selector
     public class func addObserver<T: Codable>(_ observer: Any,
             selector aSelector: Selector, notification: LXSwiftNotification<T>) {
         NotificationCenter.default.addObserver(observer,
              selector: aSelector, name: notification.name, object: nil)
     }
     
-    public class func removeObserver(_ observer: Any) {
+    /// 移除通知监听
+    public class func lx_removeObserver(_ observer: Any) {
         NotificationCenter.default.removeObserver(observer)
     }
-
+ 
 }

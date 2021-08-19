@@ -34,7 +34,7 @@ open class LXSwiftTextView: UITextView {
     }
     
     /// 移除通知
-    deinit { NotificationCenter.default.removeObserver(self) }
+    deinit { NotificationCenter.lx_removeObserver(self) }
     
     open override var font: UIFont? {
         didSet {

@@ -37,7 +37,7 @@ extension LXSwiftBasics where Base: UIViewController {
     }
     
     /// 模态 presented root
-    public var aboveViewController: UIViewController? {
+    public var presentViewController: UIViewController? {
         return UIApplication.lx.visiblePresentViewController
     }
     

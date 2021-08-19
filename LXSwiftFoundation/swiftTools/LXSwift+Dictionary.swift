@@ -30,14 +30,14 @@ public func - (left: [String: Any], right: [String: Any]) -> [String: Any] {
 extension LXSwiftBasics where Base == Dictionary<String, Any> {
     
     /// 字典到json字符串
-    public var dicToJsonStr: String? {
+    public var toJsonString: String? {
         guard JSONSerialization.isValidJSONObject(base) else { return nil }
         guard let jsonData = try? JSONSerialization.data(withJSONObject: base, options: []), let json = String(data: jsonData, encoding: .utf8) else { return nil }
         return json
     }
 
     /// 字典到json字符串
-    public var dicToPrettyStr: String? {
+    public var toPrettyString: String? {
         guard JSONSerialization.isValidJSONObject(base) else { return nil }
         guard let jsonData = try? JSONSerialization.data(withJSONObject: base, options: .prettyPrinted), let json = String(data: jsonData, encoding: .utf8) else { return nil }
         return json
@@ -48,12 +48,12 @@ extension LXSwiftBasics where Base == Dictionary<String, Any> {
 extension LXSwiftBasics where Base == Dictionary<String, Any> {
     
     /// dic到plist数据类型
-    public var plistData: Data? {
+    public var toPlistData: Data? {
         return try? PropertyListSerialization.data(fromPropertyList: base, format: .xml, options: 0)
     }
     
     /// plist 字典到字符串类型
-    public var plistString: String {
-        return plistData?.lx.utf8String ?? ""
+    public var toPlistString: String {
+        return toPlistData?.lx.utf8String ?? ""
     }
 }

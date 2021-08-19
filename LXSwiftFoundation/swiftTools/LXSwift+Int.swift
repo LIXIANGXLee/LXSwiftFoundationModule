@@ -31,8 +31,8 @@ extension Int: LXSwiftCompatible {
 //MARK: -  Extending methods for Int
 extension LXSwiftBasics where Base == Int {
     
-    ///  生成区间的随机数
-   public static func randomInt(lower: Int = 0, upper: Int = Int(UInt32.max)) -> Int {
+    /// 生成区间的随机数
+    public static func randomInt(lower: Int = 0, upper: Int = Int(UInt32.max)) -> Int {
         return lower + Int(arc4random_uniform(UInt32(upper - lower)))
     }
     
@@ -42,13 +42,18 @@ extension LXSwiftBasics where Base == Int {
     }
     
     /// 转换为字符串格式
-    public var intToStr: String {
+    public var toString: String {
         return String(base)
     }
     
-    /// int 转 bool
-    public var intToBool: Bool {
+    /// int转bool
+    public var toBool: Bool {
         return base > 0 ? true : false
+    }
+    
+    /// int转Int64
+    public var toInt64: Int64 {
+        return Int64(base)
     }
     
     /// 用户显示容量 (GB、MB、KB、B)

@@ -17,7 +17,6 @@ extension LXSwiftBasics where Base: UIImage {
     
     /// 暗黑模式 和 亮模式
     public static func image(lightStr: String, darkStr: String) -> UIImage {
-        
         let light = UIImage(named: lightStr)
         let dark = UIImage(named: lightStr)
         if light != nil && dark != nil {

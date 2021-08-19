@@ -38,7 +38,7 @@ static const int block_key_kvo;
     NSKeyValueChange changeKind = [[change objectForKey:NSKeyValueChangeKindKey] integerValue];
     if (changeKind != NSKeyValueChangeSetting) return;
     
-    /// 旧值
+    /// 被替换的旧值
     id oldVal = [change objectForKey:NSKeyValueChangeOldKey];
     if (oldVal == [NSNull null]) oldVal = nil;
     

@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// 可设置文字内边距
 open class LXSwiftLabel: UILabel {
     open var swiftModel: Any?
    
@@ -41,7 +42,7 @@ open class LXSwiftLabel: UILabel {
     }
 
     open override func textRect(forBounds bounds: CGRect, limitedToNumberOfLines numberOfLines: Int) -> CGRect {
-     var rect = super.textRect(forBounds: bounds.inset(by: self.padding), limitedToNumberOfLines: numberOfLines)
+        var rect = super.textRect(forBounds: bounds.inset(by: self.padding), limitedToNumberOfLines: numberOfLines)
         rect.origin.x    -= self.padding.left
         rect.origin.y    -= self.padding.top
         rect.size.width  += (self.padding.left + self.padding.right)

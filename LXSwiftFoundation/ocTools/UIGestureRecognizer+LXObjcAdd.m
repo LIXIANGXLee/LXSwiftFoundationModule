@@ -42,19 +42,19 @@ static const int block_key_gesture;
 - (void)lx_addActionBlock:(void (^)(id sender))block {
     _LXGestureRecognizerBlockTarget *target = [[_LXGestureRecognizerBlockTarget alloc] initWithBlock:block];
     [self addTarget:target action:@selector(invokeTarget:)];
-    NSMutableArray *targets = [self _lx_allGestureRecognizerBlockTargets];
+    NSMutableArray *targets = [self _lx_allBlockTargets];
     [targets addObject:target];
 }
 
 - (void)lx_removeAllActionBlocks{
-    NSMutableArray *targets = [self _lx_allGestureRecognizerBlockTargets];
+    NSMutableArray *targets = [self _lx_allBlockTargets];
     [targets enumerateObjectsUsingBlock:^(id target, NSUInteger idx, BOOL *stop) {
         [self removeTarget:target action:@selector(invokeTarget:)];
     }];
     [targets removeAllObjects];
 }
 
-- (NSMutableArray *)_lx_allGestureRecognizerBlockTargets {
+- (NSMutableArray *)_lx_allBlockTargets {
     NSMutableArray *targets = objc_getAssociatedObject(self, &block_key_gesture);
     if (!targets) {
         targets = [NSMutableArray array];

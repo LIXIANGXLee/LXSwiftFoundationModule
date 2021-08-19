@@ -35,6 +35,25 @@
     return CGSizeMake(sizeWidth, sizeHieght);
 }
 
+- (CGSize)lx_sizeWithWidth:(CGFloat)maxWidth withTextFont:(UIFont *)font withLineSpacing:(CGFloat)lineSpacing {
+    CGSize maxSize = CGSizeMake(maxWidth, CGFLOAT_MAX);
+    //段落样式
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:lineSpacing];
+    //计算文字尺寸
+    return [self boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font, NSParagraphStyleAttributeName:paragraphStyle} context:nil].size;
+}
+
+- (CGSize)lx_sizeWithHeight:(CGFloat)maxHeight withTextFont:(UIFont *)font withLineSpacing:(CGFloat)lineSpacing {
+    CGSize maxSize = CGSizeMake(CGFLOAT_MAX, maxHeight);
+    //段落样式
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    //设置行间距
+    [paragraphStyle setLineSpacing:lineSpacing];
+    //计算文字尺寸
+    return [self boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font, NSParagraphStyleAttributeName:paragraphStyle} context:nil].size;
+}
+
 - (BOOL)lx_containsString:(NSString *)string {
     if (string == nil) return NO;
     return [self rangeOfString:string].location != NSNotFound;

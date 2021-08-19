@@ -19,6 +19,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (CGSize)lx_sizeWithpreferHeight:(CGFloat)height font:(UIFont *)font;
 - (CGSize)lx_sizeWithpreferHeight:(CGFloat)height attribute:(NSDictionary *)attr;
 
+/// 根据文字内容动态计算UILabel高度 lineSpacing 行间距
+- (CGSize)lx_sizeWithWidth:(CGFloat)maxWidth withTextFont:(UIFont *)font withLineSpacing:(CGFloat)lineSpacing;
+
+/// 根据文字内容动态计算UILabel宽高 lineSpacing  行间距
+- (CGSize)lx_sizeWithHeight:(CGFloat)maxHeight withTextFont:(UIFont *)font withLineSpacing:(CGFloat)lineSpacing;
+
 /// 判断字符是否包含字符串
 - (BOOL)lx_containsString:(NSString *)string;
 

@@ -15,12 +15,12 @@ extension UIView: LXSwiftCompatible { }
 extension LXSwiftBasics where Base: UIView {
     
     /// presented 根视图
-    public var aboveView: UIView? {
+    public var presentView: UIView? {
         return UIApplication.lx.visiblePresentViewController?.view
     }
     
     /// 当前的view
-    public var currentVCView: UIView? {
+    public var visibleVCView: UIView? {
         return UIApplication.lx.visibleViewController?.view
     }
     
