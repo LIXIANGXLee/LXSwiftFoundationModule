@@ -64,8 +64,8 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
     }
     
     @discardableResult
-    public func setBackgroundColor(with backgroundColor: UIColor?, range: NSRange? = nil) -> NSMutableAttributedString {
-        guard let backgroundColor = backgroundColor else { return base }
+    public func setBackgroundColor(with color: UIColor?, range: NSRange? = nil) -> NSMutableAttributedString {
+        guard let backgroundColor = color else { return base }
         let range = range ?? NSMakeRange(0, base.length)
         setAttribute(with: .backgroundColor, value: backgroundColor, range: range)
         return base
@@ -73,17 +73,17 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
     
     /// 添加下划线类型
     @discardableResult
-    public func setUnderlineStyle(with underlineStyle: NSUnderlineStyle, range: NSRange? = nil) -> NSMutableAttributedString {
+    public func setUnderlineStyle(with style: NSUnderlineStyle, range: NSRange? = nil) -> NSMutableAttributedString {
         let range = range ?? NSMakeRange(0, base.length)
-        setAttribute(with: .underlineStyle, value: underlineStyle.rawValue, range: range)
+        setAttribute(with: .underlineStyle, value: style.rawValue, range: range)
         return base
     }
     
     /// 添加下划线颜色
     @discardableResult
-    public func setUnderlineColor(with underlineColor: UIColor, range: NSRange? = nil) -> NSMutableAttributedString {
+    public func setUnderlineColor(with color: UIColor, range: NSRange? = nil) -> NSMutableAttributedString {
         let range = range ?? NSMakeRange(0, base.length)
-        setAttribute(with: .underlineColor, value: underlineColor, range: range)
+        setAttribute(with: .underlineColor, value: color, range: range)
         return base
     }
     
@@ -130,31 +130,29 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
     
     /// 行间距
     @discardableResult
-    public func setLineSpace(with lignSpace: CGFloat, range: NSRange? = nil) -> NSMutableAttributedString {
+    public func setLineSpace(with size: CGFloat, range: NSRange? = nil) -> NSMutableAttributedString {
         let paragraphStyle = self.paragraphStyle
         let range = range ?? NSMakeRange(0, base.length)
-        paragraphStyle.lineSpacing = lignSpace
+        paragraphStyle.lineSpacing = size
         setAttribute(with: .paragraphStyle, value: paragraphStyle, range: range)
         return base
     }
     
     /// 字间距
     @discardableResult
-    public func setParagraphSpacing(with paragraphSpacing: CGFloat,
-                                    range: NSRange? = nil) -> NSMutableAttributedString {
+    public func setParagraphSpacing(with size: CGFloat, range: NSRange? = nil) -> NSMutableAttributedString {
         let paragraphStyle = self.paragraphStyle
         let range = range ?? NSMakeRange(0, base.length)
-        paragraphStyle.paragraphSpacing = paragraphSpacing
+        paragraphStyle.paragraphSpacing = size
         setAttribute(with: .paragraphStyle, value: paragraphStyle, range: range)
         return base
     }
     
     /// Ellipsis pattern of ellipsis
     @discardableResult
-    public func setLineBreakMode(with lineBreakMode: NSLineBreakMode,
-                                 range: NSRange? = nil) -> NSMutableAttributedString {
+    public func setLineBreakMode(with mode: NSLineBreakMode, range: NSRange? = nil) -> NSMutableAttributedString {
         let range = range ?? NSMakeRange(0, base.length)
-        paragraphStyle.lineBreakMode = lineBreakMode
+        paragraphStyle.lineBreakMode = mode
         setAttribute(with: .paragraphStyle, value: paragraphStyle, range: range)
         return base
     }

@@ -15,10 +15,37 @@ prefix operator ~<  /// 小于
 prefix operator ~>= /// 大于等于
 prefix operator ~<= /// 小于等于
 
+public prefix func ~>  (_ index: Int32) -> (Int32) -> (Bool) { { $0 >  index } }
+public prefix func ~>= (_ index: Int32) -> (Int32) -> (Bool) { { $0 >= index } }
+public prefix func ~<  (_ index: Int32) -> (Int32) -> (Bool) { { $0 <  index } }
+public prefix func ~<= (_ index: Int32) -> (Int32) -> (Bool) { { $0 <= index } }
+
+public prefix func ~>  (_ index: Int64) -> (Int64) -> (Bool) { { $0 >  index } }
+public prefix func ~>= (_ index: Int64) -> (Int64) -> (Bool) { { $0 >= index } }
+public prefix func ~<  (_ index: Int64) -> (Int64) -> (Bool) { { $0 <  index } }
+public prefix func ~<= (_ index: Int64) -> (Int64) -> (Bool) { { $0 <= index } }
+
+
 public prefix func ~>  (_ index: Int) -> (Int) -> (Bool) { { $0 >  index } }
 public prefix func ~>= (_ index: Int) -> (Int) -> (Bool) { { $0 >= index } }
 public prefix func ~<  (_ index: Int) -> (Int) -> (Bool) { { $0 <  index } }
 public prefix func ~<= (_ index: Int) -> (Int) -> (Bool) { { $0 <= index } }
+
+extension Int32 {
+   
+    /// Switch 匹配模式
+    public static func ~= (pattern: (Int32) -> (Bool), value: Int32) -> Bool {
+         pattern(value)
+    }
+}
+
+extension Int64 {
+   
+    /// Switch 匹配模式
+    public static func ~= (pattern: (Int64) -> (Bool), value: Int64) -> Bool {
+         pattern(value)
+    }
+}
 
 extension Int: LXSwiftCompatible {
     

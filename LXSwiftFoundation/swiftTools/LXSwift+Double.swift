@@ -8,10 +8,23 @@
 
 import UIKit
 
+public prefix func ~>  (_ index: CGFloat) -> (CGFloat) -> (Bool) { { $0 >  index } }
+public prefix func ~>= (_ index: CGFloat) -> (CGFloat) -> (Bool) { { $0 >= index } }
+public prefix func ~<  (_ index: CGFloat) -> (CGFloat) -> (Bool) { { $0 <  index } }
+public prefix func ~<= (_ index: CGFloat) -> (CGFloat) -> (Bool) { { $0 <= index } }
+
 public prefix func ~>  (_ index: Double) -> (Double) -> (Bool) { { $0 >  index } }
 public prefix func ~>= (_ index: Double) -> (Double) -> (Bool) { { $0 >= index } }
 public prefix func ~<  (_ index: Double) -> (Double) -> (Bool) { { $0 <  index } }
 public prefix func ~<= (_ index: Double) -> (Double) -> (Bool) { { $0 <= index } }
+
+extension CGFloat: LXSwiftCompatible {
+ 
+    /// Switch 匹配模式
+    public static func ~= (pattern: (CGFloat) -> (Bool), value: CGFloat) -> Bool {
+         pattern(value)
+    }
+}
 
 extension Double: LXSwiftCompatible {
     

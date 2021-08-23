@@ -46,6 +46,11 @@ open class LXSwiftModalController: UIViewController {
         return contentView
     }()
     
+    /// 关闭当前窗口
+    open func dismiss() {
+        lx.dismissViewController()
+    }
+    
 }
 
 // MARK: - public

@@ -19,8 +19,7 @@ import UIKit
 //
 //NotificationCenter.addObserver(self, selector: #selector(aa(_:)), notification: LXSwiftNotificationBase.shared)
 //@objc func aa(_ notification: Notification) {
-//    let noti = LXSwiftNotificationBase.shared
-//    guard let config = noti.decodeInfo(from: notification) else {
+//   guard let config = LXSwiftNotificationBase.shared.decodeInfo(from: notification)  else {
 //        return
 //    }
 //    print("-------\(config.id)")

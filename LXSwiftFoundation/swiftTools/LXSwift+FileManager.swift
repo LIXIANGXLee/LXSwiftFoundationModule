@@ -44,7 +44,7 @@ extension LXSwiftBasics where Base: FileManager {
         fileSize = Double(attr[FileAttributeKey.size] as? UInt64 ?? 0)
         return fileSize
     }
-
+    
     /// 遍历所有子目录， 并计算文件大小
     public static func folderSizeAtPath(folderPath: String) -> Double {
         var fileSize: Double = 0
@@ -55,6 +55,16 @@ extension LXSwiftBasics where Base: FileManager {
             fileSize += self.fileSize(path: tPath)
         }
         return fileSize
+    }
+    
+    /// 计算单个文件的大小 显示格式GB、MB、KB、B 返回字符串
+    public static func fileSizeToStr(path: String) -> String {
+        return fileSize(path: path).lx.sizeFileToStr
+    }
+    
+    /// 计算单个文件的大小 显示格式GB、MB、KB、B 返回字符串
+    public static func folderSizeAtPath(path: String) -> String {
+        return fileSize(path: path).lx.sizeFileToStr
     }
     
 }
