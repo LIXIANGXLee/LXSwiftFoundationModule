@@ -13,33 +13,13 @@ open class LXSwiftHyperlinksModalController: LXSwiftModalController {
     public typealias CallBack = ((String) -> (Void))
     public var callBack: LXSwiftHyperlinksModalController.CallBack?
     
-    private var modaConfig: LXSwiftModalConfig
-    public init(_ modaConfig: LXSwiftModalConfig, modalItems: LXSwiftItem...) {
-        self.modaConfig = modaConfig
-        self.modalItems = modalItems
-        super.init(nibName: nil, bundle: nil)
-        
-        view.addSubview(contentView)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(scrollView)
-        scrollView.addSubview(textLabel)
-        contentView.addSubview(lineView)
-        
-        for modalItem in modalItems {
-            let itemView = LXSwiftItemView()
-            itemView.lineView.backgroundColor = modaConfig.lineColor
-            itemView.setTitle(modalItem.title, for:.normal)
-            itemView.setTitleColor(modalItem.titleColor, for: .normal)
-            itemView.titleLabel?.font = modalItem.titleFont
-            contentView.addSubview(itemView)
-            itemViews.append(itemView)
-            itemView.addTarget(self,action: #selector(itemViewClick(_:)), for: UIControl.Event.touchUpInside)
-        }
-    }
+    private var modaConfig = LXSwiftModalConfig()
     
-    required public init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    /// modaItems 集合
+    private var itemViews = [LXSwiftItemView]()
+    
+    /// ModalItem事件集合
+    private var modalItems = [LXSwiftItem]()
     
     lazy var titleLabel: UILabel = {
        let titleLabel = UILabel()
@@ -70,12 +50,6 @@ open class LXSwiftHyperlinksModalController: LXSwiftModalController {
         return lineView
     }()
     
-    /// modaItems 集合
-    var itemViews = [LXSwiftItemView]()
-    
-    /// ModalItem事件集合
-    var modalItems = [LXSwiftItem]()
-
     public override func backgroundViewTap() {
         if modaConfig.isDismissBg {
             super.backgroundViewTap()
@@ -107,6 +81,30 @@ extension LXSwiftHyperlinksModalController {
         return LXSwiftRegex.regex(of: text, textColor: textColor, textFont: textFont, wordRegexTypes: regexTypes)
     }
     
+    /// 设置UI信息
+    public func setModa(_ modaConfig: LXSwiftModalConfig, modalItems: [LXSwiftItem]) {
+        self.modaConfig = modaConfig
+        self.modalItems = modalItems
+        
+        view.addSubview(contentView)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(scrollView)
+        scrollView.addSubview(textLabel)
+        contentView.addSubview(lineView)
+        
+        for modalItem in modalItems {
+            let itemView = LXSwiftItemView()
+            itemView.lineView.backgroundColor = modaConfig.lineColor
+            itemView.setTitle(modalItem.title, for:.normal)
+            itemView.setTitleColor(modalItem.titleColor, for: .normal)
+            itemView.titleLabel?.font = modalItem.titleFont
+            contentView.addSubview(itemView)
+            itemViews.append(itemView)
+            itemView.addTarget(self,action: #selector(itemViewClick(_:)), for: UIControl.Event.touchUpInside)
+        }
+    }
+    
+    /// 显示UI图层
     public func show(with title: String, content: NSAttributedString) {
         titleLabel.text = title
         contentView.layer.cornerRadius = self.modaConfig.contentViewRadius

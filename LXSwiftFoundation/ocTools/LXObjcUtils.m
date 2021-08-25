@@ -401,9 +401,11 @@
 
 + (UIWindow *)getKeyWindow {
     UIWindow *mainWindow = nil;
-    if ( @available(iOS 13.0, *) ) {
-        //如果是多场景，可以遍历windows,检查window.isKeyWindow获取
-        NSArray *windows = UIApplication.sharedApplication.windows;
+    // 如果是多场景，可以遍历windows,检查window.isKeyWindow获取
+    UIApplication *application = UIApplication.sharedApplication;
+    NSArray *windows = application.windows;
+    
+    if (@available(iOS 13.0, *)) {
         for (UIWindow *window in windows) {
             if (window.isKeyWindow) {
                 mainWindow = window;
@@ -414,7 +416,10 @@
             mainWindow = windows.firstObject;
         }
     } else {
-        mainWindow = UIApplication.sharedApplication.keyWindow;
+        mainWindow = application.keyWindow;
+        if (!mainWindow) {
+            mainWindow =  windows.firstObject;
+        }
     }
     return mainWindow;
 }

@@ -31,7 +31,7 @@ public prefix func ~>= (_ index: Int) -> (Int) -> (Bool) { { $0 >= index } }
 public prefix func ~<  (_ index: Int) -> (Int) -> (Bool) { { $0 <  index } }
 public prefix func ~<= (_ index: Int) -> (Int) -> (Bool) { { $0 <= index } }
 
-extension Int32 {
+extension Int32: LXSwiftCompatible {
    
     /// Switch 匹配模式
     public static func ~= (pattern: (Int32) -> (Bool), value: Int32) -> Bool {
@@ -39,7 +39,7 @@ extension Int32 {
     }
 }
 
-extension Int64 {
+extension Int64: LXSwiftCompatible {
    
     /// Switch 匹配模式
     public static func ~= (pattern: (Int64) -> (Bool), value: Int64) -> Bool {
@@ -52,6 +52,26 @@ extension Int: LXSwiftCompatible {
     /// Switch 匹配模式
     public static func ~= (pattern: (Int) -> (Bool), value: Int) -> Bool {
          pattern(value)
+    }
+}
+
+extension LXSwiftBasics where Base == Int64 {
+
+    /**
+     特备注意：传进来的时间戳base的单位是秒
+     60秒内：刚刚
+     1-60分钟 ：5分钟前
+     60以上 - 今天0点之后：几小时以前，
+     前1-7日前，在今年内：X天前
+     7日前-今年1.1：XX-XX XX:XX
+     去年及以前：20XX-XX-XX XX:XX
+     */
+    public var timeDateDescription: String {
+        return base.lx.toInt.lx.timeDateDescription
+    }
+    
+    public var toInt: Int {
+         return Int(base)
     }
 }
 

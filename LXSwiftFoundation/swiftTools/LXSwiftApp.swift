@@ -41,6 +41,9 @@ public let SCREEN_HEIGHT_TO_STATUSHEIGHT = LXSwiftApp.statusbarH
 public let SCREEN_HEIGHT_TO_TABBARHEIGHT = LXSwiftApp.tabbarH
 public let SCREEN_HEIGHT_TO_NAVBARHEIGHT = LXSwiftApp.navbarH
 
+/// 扩展名
+public let LXApplication = UIApplication.shared
+
 // MARK: - LXSwftApp const
 /// define app const
 public struct LXSwiftApp {
@@ -77,13 +80,13 @@ public struct LXSwiftApp {
     
     /// 获取状态栏高度
     private static var statusBarHeight: CGFloat {
-        var statusH: CGFloat = UIApplication.shared.statusBarFrame.height
+        var statusH: CGFloat = LXApplication.statusBarFrame.height
         if statusH == 0, #available(iOS 13.0, *) {
-            statusH = UIApplication.shared.windows.first?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+            statusH = UIApplication.lx.rootWindow?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
         }
         
         if  statusH == 0, #available(iOS 11.0, *)  {
-            statusH = UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0
+            statusH = UIApplication.lx.rootWindow?.safeAreaInsets.top ?? 0
         }
         
         return statusH
@@ -92,7 +95,8 @@ public struct LXSwiftApp {
     private static var touchBarHeight: CGFloat {
         var touchBarH: CGFloat = 0
         if #available(iOS 11.0, *) {
-            touchBarH = UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0
+            touchBarH =
+                UIApplication.lx.rootWindow?.safeAreaInsets.bottom ?? 0
             if touchBarH == 0 && Int(statusbarH) > 20 {
                 touchBarH = 34
             }

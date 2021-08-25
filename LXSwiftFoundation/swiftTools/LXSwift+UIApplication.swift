@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 extension UIApplication: LXSwiftCompatible { }
 
 extension LXSwiftBasics where Base: UIApplication {
@@ -39,11 +40,7 @@ extension LXSwiftBasics where Base: UIApplication {
     
     /// root跟控制器
     public static var visibleRootViewController: UIViewController? {
-        var root = UIApplication.shared.delegate?.window??.rootViewController
-        if root == nil {
-            root = UIApplication.shared.keyWindow?.rootViewController
-        }
-        return root
+        return rootWindow?.rootViewController
     }
     
     /// 当前显示的控制器
@@ -56,6 +53,24 @@ extension LXSwiftBasics where Base: UIApplication {
             return getVisibleViewController(from: pvc)
         }
         return vc
+    }
+    
+    /// 获取跟窗口
+    public static var rootWindow: UIWindow? {
+        if #available(iOS 13.0, *) {
+            if let window = LXApplication.connectedScenes
+                   .filter({$0.activationState == .foregroundActive})
+                   .map({$0 as? UIWindowScene})
+                   .compactMap({$0})
+                   .first?.windows
+                   .filter({$0.isKeyWindow}).first {
+                   return window
+            }else {
+                return LXApplication.delegate?.window ?? LXApplication.windows.first
+            }
+        } else {
+               return LXApplication.delegate?.window ?? LXApplication.windows.first
+        }
     }
       
     /// 打开url
@@ -75,9 +90,9 @@ extension LXSwiftBasics where Base: UIApplication {
         
         if isCanOpen(u) {
             if #available(iOS 10.0, *) {
-                UIApplication.shared.open(u, options: [:], completionHandler: completionHandler)
+                LXApplication.open(u, options: [:], completionHandler: completionHandler)
             } else {
-                UIApplication.shared.openURL(u)
+                LXApplication.openURL(u)
             }
         }
     }
@@ -86,6 +101,6 @@ extension LXSwiftBasics where Base: UIApplication {
     public static func isCanOpen(_ url: URL?) -> Bool {
         
        guard let u = url else { return false }
-       return UIApplication.shared.canOpenURL(u)
+       return LXApplication.canOpenURL(u)
     }
 }

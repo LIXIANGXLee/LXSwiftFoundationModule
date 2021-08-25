@@ -73,7 +73,7 @@ typedef enum : NSUInteger {
 /// 去设置权限（相机、相册）
 + (void)jumpToSetting;
 
-/// 获取keyWindow,适配iOS13.0+ PS:如果需要实现iPad多屏处理
+/// 获取跟窗口,适配iOS13.0+ PS:如果需要实现iPad多屏处理
 /// 最好是使用SceneDelegate管理Window
 + (UIWindow *)getKeyWindow;
 

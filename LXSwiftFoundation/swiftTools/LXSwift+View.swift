@@ -29,6 +29,11 @@ extension LXSwiftBasics where Base: UIView {
         return UIApplication.lx.visibleNavRootViewController
     }
     
+    /// 获取跟窗口
+    public var rootWindow: UIWindow? {
+        return UIApplication.lx.rootWindow
+    }
+    
     /// view截图
     public var snapShotImage: UIImage? {
         UIGraphicsBeginImageContextWithOptions(base.bounds.size, base.isOpaque, 0)

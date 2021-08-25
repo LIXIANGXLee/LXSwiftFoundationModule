@@ -62,11 +62,17 @@ class ViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 
         
-        print("-=-=-=-=--=\("12332243.76432".lx.moneyFormat1)")
-        print("-=-=-=-=--=\("1233".lx.moneyFormat1)")
-        print("-=-=-=-=--=\("1243243.323".lx.moneyFormat1)")
-        print("-=-=-=-=--=\("0.323".lx.moneyFormat1)")
-        print("-=-=-=-=--=\("40280.02".lx.moneyFormat2)")
+//        print("-=-=-=-=--=\("12332243.76432".lx.moneyFormat1)")
+//        print("-=-=-=-=--=\("1233".lx.moneyFormat1)")
+//        print("-=-=-=-=--=\("1243243.323".lx.moneyFormat1)")
+//        print("-=-=-=-=--=\("0.323".lx.moneyFormat1)")
+        print("-=-=-=-=--=\(view.lx.rootWindow)")
+        
+        protocolUIShow()
+        
+        
+        Int64(1).lx.to
+        
 
 //        let str = Bundle.main.path(forResource: "lxQrCodeVoice", ofType: "wav")
 //        LXSwiftUtils.lx.playSound(with: str) {
@@ -134,8 +140,10 @@ class ViewController: UIViewController {
             UserDefaults.standard.synchronize()
        }
         
-        let modal = LXSwiftHyperlinksModalController(config,modalItems:  itemCancel,itemTrue)
+        let modal = LXSwiftHyperlinksModalController()
 
+        modal.setModa(config, modalItems: [itemCancel,itemTrue])
+        
         modal.setHandle { (text) -> (Void) in
            
             print("-=-=-=-=-=\(text)")

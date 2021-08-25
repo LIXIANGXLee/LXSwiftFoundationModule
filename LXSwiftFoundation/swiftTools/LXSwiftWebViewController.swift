@@ -232,7 +232,7 @@ extension LXSwiftWebViewController: WKNavigationDelegate{
         //        For example, all Google pages will be opened in an external browser, and the rest will be opened in the WebView of this app
         //        if let url = navigationAction.request.url{
         //            if url.host == "www.google.com"{
-        //                UIApplication.shared.open(url)
+        //                LXApplication.open(url)
         //                decisionHandler(.cancel)
         //                return
         //            }
