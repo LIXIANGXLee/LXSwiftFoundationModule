@@ -61,7 +61,7 @@ typedef enum : NSUInteger {
 /// 是否为系统类
 + (BOOL)isSystemClass:(Class)c;
 
-/// 方法交换 主要是交换方法的实现
+/// 方法交换 主要是交换方法的实现 method_getImplementation
 + (void)swizzleMethod:(SEL)originSel withNewMethod:(SEL)dstSel;
 
 /// 获取类的所有成员变量名字
@@ -75,7 +75,10 @@ typedef enum : NSUInteger {
 
 /// 获取跟窗口,适配iOS13.0+ PS:如果需要实现iPad多屏处理
 /// 最好是使用SceneDelegate管理Window
-+ (UIWindow *)getKeyWindow;
++ (UIWindow *)getRootWindow;
+
+/// 获取最外层窗口
++ (UIWindow *)getLastWindow;
 
 /// 获取当前显示的视图控制器
 + (UIViewController *)getCurrentController;

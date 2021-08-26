@@ -4,7 +4,7 @@
 //
 //  Created by 李响 on 2017/7/30.
 
-/// 双向链表
+/// 双向链表 数据结构
 
 #import "LXObjcLinkedList.h"
 

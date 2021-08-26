@@ -24,9 +24,7 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
                                   repeats: Bool = true,
                                   identified: String?,
                                   task: LXSwiftGCDTimer.TaskCallBack?) {
-        guard let iden = identified,
-              delaySeconds >= 0,
-              interval >= 0,
+        guard let iden = identified, delaySeconds >= 0, interval >= 0,
               task != nil else { return }
         let timer = DispatchSource.makeTimerSource(queue: DispatchQueue.global())
         timer.schedule(deadline: .now() + delaySeconds, repeating: interval)
@@ -46,9 +44,7 @@ extension LXSwiftBasics where Base == LXSwiftGCDTimer {
                                       identified: String?,
                                       task: ((Int)->())?){
         var total = maxInterval
-        startTimer(with: 0,
-                   interval: interval,
-                   repeats: true,
+        startTimer(with: 0, interval: interval, repeats: true,
                    identified: identified) {
             total -= 1
             if total <= 0 { cancel(with: identified) }

@@ -72,20 +72,16 @@ extension LXSwiftHyperlinksModalController: LXTextLableDelegate {
 
 extension LXSwiftHyperlinksModalController {
 
-    /// 设置回调
-    public func setHandle(_ callBack: LXSwiftHyperlinksModalController.CallBack?) {
-        self.callBack = callBack
-    }
-    
     public func getAttributedString(with text: String, textColor: UIColor = UIColor.lx.color(hex: "666666"), textFont: UIFont = UIFont.systemFont(ofSize: 14), regexTypes: [LXSwiftRegexType]) -> NSAttributedString? {
         return LXSwiftRegex.regex(of: text, textColor: textColor, textFont: textFont, wordRegexTypes: regexTypes)
     }
     
-    /// 设置UI信息
-    public func setModa(_ modaConfig: LXSwiftModalConfig, modalItems: [LXSwiftItem]) {
+    /// 设置UI信息 和超链接点击回调
+    public func setModa(_ modaConfig: LXSwiftModalConfig, modalItems: [LXSwiftItem], callBack: LXSwiftHyperlinksModalController.CallBack?) {
         self.modaConfig = modaConfig
         self.modalItems = modalItems
-        
+        self.callBack = callBack
+
         view.addSubview(contentView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(scrollView)
@@ -109,7 +105,7 @@ extension LXSwiftHyperlinksModalController {
         titleLabel.text = title
         contentView.layer.cornerRadius = self.modaConfig.contentViewRadius
         contentView.lx.width = modaConfig.contentViewW
-        contentView.lx.x = (UIScreen.main.bounds.width - modaConfig.contentViewW) * 0.5
+        contentView.lx.x = (SCREEN_WIDTH_TO_APP - modaConfig.contentViewW) * 0.5
        
         self.titleLabel.frame = CGRect(x: modaConfig.contentViewSubViewX,
                                   y: modaConfig.titleTop,
@@ -149,8 +145,7 @@ extension LXSwiftHyperlinksModalController {
         } else {
             contentView.lx.height = lineView.frame.maxY
         }
-        contentView.lx.y = (UIScreen.main.bounds.height -  contentView.lx.height) * 0.5 + modaConfig.contentViewOffSet
-        
+        contentView.lx.y = (SCREEN_HEIGHT_TO_APP -  contentView.lx.height) * 0.5 + modaConfig.contentViewOffSet
         UIApplication.lx.visibleViewController?.present(self, animated: true, completion: nil)
     }
     

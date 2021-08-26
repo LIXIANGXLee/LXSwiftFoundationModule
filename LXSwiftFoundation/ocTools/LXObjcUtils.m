@@ -13,7 +13,7 @@
 #import <objc/runtime.h>
 
 
-#define OBJC_PROJECT_NAME [NSBundle mainBundle].infoDictionary[@"CFBundleName"]
+#define OBJC_PROJECT_NAME [NSBundle mainBundle].infoDictionary[@"CFBundleDisplayName"]
 
 @implementation LXObjcUtils
 
@@ -281,19 +281,21 @@
 
 /// 检查权限
 + (void)checkAuth:(LXObjcAuthType)type isAlert:(BOOL)isAlert callBack:(void (*)(BOOL isPass))callBack {
-    [self executeMainForSafe:^{
+    __weak typeof(self)weakSelf = self;
+    [LXObjcUtils executeMainForSafe:^{
+        __strong typeof(weakSelf)strongSelf = weakSelf;
         switch (type) {
             case LXObjcAuthTypePhoto:
-                [self checkPhotoAuth:isAlert callBack:callBack];
+                [strongSelf checkPhotoAuth:isAlert callBack:callBack];
                 break;
             case LXObjcAuthTypeVideo:
-                [self checkCameraAuth:AVMediaTypeVideo isAlert:isAlert callBack:callBack];
+                [strongSelf checkCameraAuth:AVMediaTypeVideo isAlert:isAlert callBack:callBack];
                 break;
             case LXObjcAuthTypeAudio:
-                [self checkCameraAuth:AVMediaTypeAudio isAlert:isAlert callBack:callBack];
+                [strongSelf checkCameraAuth:AVMediaTypeAudio isAlert:isAlert callBack:callBack];
                 break;
             default:
-                [self checkPhotoAuth:isAlert callBack:callBack];
+                [strongSelf checkPhotoAuth:isAlert callBack:callBack];
                 break;
         }
     }];
@@ -301,8 +303,10 @@
 
 + (void)checkAuth:(LXObjcAuthType)type callBack:(void (*)(BOOL))callBack {
    
-    [self executeMainForSafe:^{
-        [self checkAuth:type isAlert:YES callBack:callBack];
+    __weak typeof(self)weakSelf = self;
+    [LXObjcUtils executeMainForSafe:^{
+        __strong typeof(weakSelf)strongSelf = weakSelf;
+        [strongSelf checkAuth:type isAlert:YES callBack:callBack];
     }];
     
 }
@@ -361,21 +365,31 @@
 }
 /// 无法访问您的权限
 + (void)unableAccessPermissions:(NSString *)title {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:@"" preferredStyle: UIAlertControllerStyleAlert];
-    [alertController addAction:[UIAlertAction actionWithTitle:@"确定"  style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    }]];
-    [[self getCurrentController] presentViewController:alertController animated:YES completion:nil];
+    __weak typeof(self)weakSelf = self;
+    [LXObjcUtils executeMainForSafe:^{
+        __strong typeof(weakSelf)strongSelf = weakSelf;
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:@"" preferredStyle: UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"确定"  style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }]];
+        [[strongSelf getCurrentController] presentViewController:alertController animated:YES completion:nil];
+    }];
 }
 
 /// 推荐打开权限
 +(void)expectAccessPermissions:(NSString *)title message:(NSString *)message {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addAction:[UIAlertAction actionWithTitle:@"以后再说" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    }]];
-    [alertController addAction:[UIAlertAction actionWithTitle:@"设置"  style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self jumpToSetting];
-    }]];
-    [[self getCurrentController] presentViewController:alertController animated:YES completion:nil];
+  
+    __weak typeof(self)weakSelf = self;
+    [LXObjcUtils executeMainForSafe:^{
+        __strong typeof(weakSelf)strongSelf = weakSelf;
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"以后再说" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }]];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"设置"  style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [strongSelf jumpToSetting];
+        }]];
+        [[strongSelf getCurrentController] presentViewController:alertController animated:YES completion:nil];
+    }];
+
 }
 
 + (void)jumpToSetting {
@@ -394,17 +408,17 @@
 
 /// 获取当前显示的视图控制器
 + (UIViewController *)getCurrentController {
-    UIViewController *rootVC = [self getKeyWindow].rootViewController;
+    UIViewController *rootVC = [self getRootWindow].rootViewController;
     UIViewController *currentVC = [self getCurrentVCFrom:rootVC];
     return currentVC;
 }
 
-+ (UIWindow *)getKeyWindow {
+/// 获取跟窗口,适配iOS13.0+ PS:如果需要实现iPad多屏处理
+/// 最好是使用SceneDelegate管理Window
++ (UIWindow *)getRootWindow {
     UIWindow *mainWindow = nil;
     // 如果是多场景，可以遍历windows,检查window.isKeyWindow获取
-    UIApplication *application = UIApplication.sharedApplication;
-    NSArray *windows = application.windows;
-    
+    NSArray *windows = [self getAllWindows];
     if (@available(iOS 13.0, *)) {
         for (UIWindow *window in windows) {
             if (window.isKeyWindow) {
@@ -416,12 +430,21 @@
             mainWindow = windows.firstObject;
         }
     } else {
-        mainWindow = application.keyWindow;
+        mainWindow = [UIApplication sharedApplication].keyWindow;
         if (!mainWindow) {
             mainWindow =  windows.firstObject;
         }
     }
     return mainWindow;
+}
+
+/// 获取最外层窗口
++ (UIWindow *)getLastWindow {
+    return [self getAllWindows].lastObject;
+}
+
++ (NSArray<UIWindow *> *)getAllWindows{
+    return [UIApplication sharedApplication].windows;
 }
 
 + (UIViewController *)getCurrentVCFrom:(UIViewController *)rootVC {
@@ -440,9 +463,7 @@
 }
 
 + (void)writeVideoToAbulmWithUrl:(NSURL *)url completionHandler:(void (^)(BOOL, NSString * _Nonnull))completionHandler {
-    [self writeVideoToAbulmWithUrl:url
-                   collectionTitle:nil
-                 completionHandler:completionHandler];
+    [self writeVideoToAbulmWithUrl:url collectionTitle:nil completionHandler:completionHandler];
 }
 
 + (void)writeVideoToAbulmWithUrl:(NSURL *)url collectionTitle:(NSString *)collectionTitle completionHandler:(void (^)(BOOL isSuccess, NSString * _Nonnull ))completionHandler {

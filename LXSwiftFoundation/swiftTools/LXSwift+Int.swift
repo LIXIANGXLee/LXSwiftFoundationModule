@@ -70,8 +70,14 @@ extension LXSwiftBasics where Base == Int64 {
         return base.lx.toInt.lx.timeDateDescription
     }
     
+    /// Int64转int
     public var toInt: Int {
          return Int(base)
+    }
+    
+    /// 转换为字符串格式
+    public var toString: String {
+        return String(base)
     }
 }
 

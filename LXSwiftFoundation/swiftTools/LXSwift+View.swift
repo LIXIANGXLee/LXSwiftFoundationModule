@@ -16,7 +16,7 @@ extension LXSwiftBasics where Base: UIView {
     
     /// presented 根视图
     public var presentView: UIView? {
-        return UIApplication.lx.visiblePresentViewController?.view
+        return UIApplication.lx.presentViewController?.view
     }
     
     /// 当前的view

@@ -11,6 +11,7 @@
 
 + (instancetype)lx_scheduleTimerWithTimeInterval:(NSTimeInterval)interval repeats:(BOOL)repeat block:(void(^)(NSTimer *))block {
     NSTimer *timer = [self scheduledTimerWithTimeInterval:interval target:self selector:@selector(excuteTimerBlock:) userInfo:[block copy] repeats:repeat];
+    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
     return timer;
 }
 

@@ -66,13 +66,11 @@ class ViewController: UIViewController {
 //        print("-=-=-=-=--=\("1233".lx.moneyFormat1)")
 //        print("-=-=-=-=--=\("1243243.323".lx.moneyFormat1)")
 //        print("-=-=-=-=--=\("0.323".lx.moneyFormat1)")
-        print("-=-=-=-=--=\(view.lx.rootWindow)")
+          print("-=-=-=-=--=\(view.lx.rootWindow)")
         
         protocolUIShow()
         
-        
-        Int64(1).lx.to
-        
+                
 
 //        let str = Bundle.main.path(forResource: "lxQrCodeVoice", ofType: "wav")
 //        LXSwiftUtils.lx.playSound(with: str) {
@@ -80,12 +78,12 @@ class ViewController: UIViewController {
 //        }
 //
   
-//        DispatchQueue.global().async {
-//            LXObjcUtils.check(LXObjcAuthTypePhoto, isAlert: true) { (ispass) in
-//                print("-=-=-=--=\(ispass)")
-//
-//            }
-//        }
+        DispatchQueue.global().async {
+            LXObjcUtils.check(LXObjcAuthTypePhoto, isAlert: true) { (ispass) in
+                print("-=-=-=--=\(ispass)")
+
+            }
+        }
 //
         
 //        LXObjcUtils.check(LXObjcAuthTypePhoto, isAlert: false) { (ispass) in
@@ -100,21 +98,21 @@ class ViewController: UIViewController {
 //        print("-=-=-=-=-=\(FileManager.lx.fileSize(path: str!))")
 //
 //
-//        linkList.add("dd")
-//        print("-=-11=-=-=\(linkList)")
-//        print("-=-=11-=-=\(linkList.contains("dd"))")
-//
-//        linkList.add("ww")
-//        linkList.add("ee")
-//        print("-=-22=-=-=\(linkList)")
-//
-//        linkList.insert(1, value: "fd")
-//        print("-=-=33-=-=\(linkList)")
-//        print("-=-=33-=-=\(linkList.size())")
-//
-//        linkList.remove(0)
-//        print("-=-=44-=-=\(linkList)")
-//        print("-=-=44-=-=\(linkList.get(1))")
+        linkList.add("dd")
+        print("-=-11=-=-=\(linkList)")
+        print("-=-=11-=-=\(linkList.contains("dd"))")
+
+        linkList.add("ww")
+        linkList.add("ee")
+        print("-=-22=-=-=\(linkList)")
+
+        linkList.insert(1, value: "fd")
+        print("-=-=33-=-=\(linkList)")
+        print("-=-=33-=-=\(linkList.size())")
+
+        linkList.remove(0)
+        print("-=-=44-=-=\(linkList)")
+        print("-=-=44-=-=\(linkList.get(1))")
 //
     }
     
@@ -135,17 +133,11 @@ class ViewController: UIViewController {
                                          titleColor: UIColor.blue,
                                         titleFont: UIFont.systemFont(ofSize: 17, weight: .medium))
         {
-//            guard let b = Int(Bundle.lx.buildVersion ?? "0") else { return  }
-            UserDefaults.standard.setValue(true, forKey: "isProtocolMark")
-            UserDefaults.standard.synchronize()
+
        }
         
         let modal = LXSwiftHyperlinksModalController()
-
-        modal.setModa(config, modalItems: [itemCancel,itemTrue])
-        
-        modal.setHandle { (text) -> (Void) in
-           
+        modal.setModa(config, modalItems: [itemCancel,itemTrue]) { (text) -> (Void) in
             print("-=-=-=-=-=\(text)")
         }
         
@@ -161,7 +153,6 @@ class ViewController: UIViewController {
                                   isExpression: false)
 
         let str = "欢迎使用迎使用！我们非常重视您的隐私和个人信息安全。在您使用前，请认真阅读\(s1)及\(s2)，您同意并接受全部条款后方可开始使用。"
-        
         guard let attr = modal.getAttributedString(with: str, textColor: UIColor.lx.color(hex: "666666"), textFont: UIFont.systemFont(ofSize: 14), regexTypes: [r1,r2]) else { return }
 
         modal.show(with: "温馨提示", content: attr)

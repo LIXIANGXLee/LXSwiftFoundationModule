@@ -30,7 +30,7 @@ extension LXSwiftBasics where Base: UIApplication {
     }
 
     /// 获取present 控制器
-    public static var visiblePresentViewController: UIViewController? {
+    public static var presentViewController: UIViewController? {
         var aboveController = visibleRootViewController
         while aboveController?.presentedViewController != nil {
             aboveController = aboveController?.presentedViewController
@@ -54,7 +54,7 @@ extension LXSwiftBasics where Base: UIApplication {
         }
         return vc
     }
-    
+
     /// 获取跟窗口
     public static var rootWindow: UIWindow? {
         if #available(iOS 13.0, *) {
@@ -72,7 +72,12 @@ extension LXSwiftBasics where Base: UIApplication {
                return LXApplication.delegate?.window ?? LXApplication.windows.first
         }
     }
-      
+    
+    /// 获取最外层窗口
+    public static var lastWindow: UIWindow? {
+        return LXApplication.windows.last
+    }
+    
     /// 打开url
     public static func openUrl(_ urlStr: String, completionHandler: ((Bool) -> Void)? = nil) {
         if let url = URL(string: urlStr) {
