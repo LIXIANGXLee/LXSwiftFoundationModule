@@ -73,9 +73,19 @@ extension LXSwiftBasics where Base: UIApplication {
         }
     }
     
-    /// 获取最外层窗口
+    /// 获取最外层窗口 需要判断不是UIRemoteKeyboardWindow才行，否则在ipad会存在问题
     public static var lastWindow: UIWindow? {
-        return LXApplication.windows.last
+        let windows = LXApplication.windows
+        var window: UIWindow?
+        for i in (0..<windows.count).reversed() {
+            if let c = NSClassFromString("UIRemoteKeyboardWindow") {
+                if !windows[i].isKind(of: c) {
+                    window = windows[i]
+                    break
+                }
+             }
+        }
+        return window
     }
     
     /// 打开url
