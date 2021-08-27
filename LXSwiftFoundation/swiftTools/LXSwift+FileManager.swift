@@ -52,11 +52,11 @@ extension LXSwiftBasics where Base: FileManager {
     
     /// 创建文件夹(蓝色的，文件夹和文件是不一样的)
     @discardableResult
-    public static func createFolder(folderPath: String, block: ((_ isSuccess: Bool) -> Void)? = nil) -> Bool {
-        if !isFileExists(atPath: folderPath) { // 不存在的路径才会创建
+    public static func createFolder(atPath path: String, block: ((_ isSuccess: Bool) -> Void)? = nil) -> Bool {
+        if !isFileExists(atPath: path) { // 不存在的路径才会创建
             do {
                 // withIntermediateDirectories为ture表示路径中间如果有不存在的文件夹都会创建
-                try LXFileManager.createDirectory(atPath: folderPath, withIntermediateDirectories: true, attributes: nil)
+                try LXFileManager.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
                 block?(true)
                 return true
             } catch _ {
@@ -84,11 +84,11 @@ extension LXSwiftBasics where Base: FileManager {
     
     /// 移除文件目录
     @discardableResult
-    public static func removefolder(folderPath: String, block: ((_ isSuccess: Bool) -> Void)? = nil) -> Bool {
-        if isFileExists(atPath: folderPath) {
+    public static func removefolder(atPath path: String, block: ((_ isSuccess: Bool) -> Void)? = nil) -> Bool {
+        if isFileExists(atPath: path) {
             do {
                 // 开始移除文件目录
-                try LXFileManager.removeItem(atPath: folderPath)
+                try LXFileManager.removeItem(atPath: path)
                 block?(true)
                 return true
             } catch _ {
@@ -132,7 +132,9 @@ extension LXSwiftBasics where Base: FileManager {
         }else{
             // 判断拷贝后的文件路径的前一个文件路径是否存在，如果不存在就进行创建
             let toFileFolderPath = directory(atPath: toFilePath)
-            if !isFileExists(atPath: toFilePath) && fileType == .file ? !createFile(atPath: toFilePath) : !createFolder(folderPath: toFileFolderPath)  {
+            if !isFileExists(atPath: toFilePath) && fileType == .file ?
+                !createFile(atPath: toFilePath) :
+                !createFolder(atPath: toFileFolderPath)  {
                 block?(false)
             }else{
                 if isOverwrite && isFileExists(atPath: toFilePath) {
@@ -181,7 +183,7 @@ extension LXSwiftBasics where Base: FileManager {
     }
     
     /// 获取所有文件路径
-    public static func getAllFiles(atPath folderPath: String) -> Array<Any>? {
+    public static func getAllFiles(atPath folderPath: String) -> [Any]? {
          // 查看文件夹是否存在，如果存在就直接读取，不存在就直接反空
          if isFileExists(atPath: folderPath) {
              guard let allFile = LXFileManager.enumerator(atPath: folderPath) else {
@@ -194,7 +196,7 @@ extension LXSwiftBasics where Base: FileManager {
      }
     
     /// 获取所有文件名（性能要比getAllFiles差一些）
-    static func getAllFileNames(atPath folderPath: String) -> Array<String>? {
+    static func getAllFileNames(atPath folderPath: String) -> [String]? {
         // 查看文件夹是否存在，如果存在就直接读取，不存在就直接反空
         if (isFileExists(atPath: folderPath)) {
             guard let subPaths = LXFileManager.subpaths(atPath: folderPath) else {
@@ -207,7 +209,7 @@ extension LXSwiftBasics where Base: FileManager {
     }
     
     /// 获取目录下所有文件的全路径
-    public static func getAllTotalFiles(atPath folderPath: String) -> Array<String>? {
+    public static func getAllTotalFiles(atPath folderPath: String) -> [String]? {
         guard let files = getAllFiles(atPath: folderPath) else {
             return nil
         }

@@ -69,29 +69,7 @@ class ViewController: UIViewController {
           print("-=-=-=-=--=\(view.lx.rootWindow)")
         
 //        protocolUIShow()
-        
-        
-         let fileStr = FileManager.lx.documentPath ?? ""
-                
-        FileManager.lx.createFile(atPath: "\(fileStr)/dsa.mp4") { (isS) in
-            print("-=-111==-=-=--=\(isS)")
-        }
-        
-        FileManager.lx.createFolder(folderPath: "\(fileStr)/gfgfds") { (isS) in
-            print("-=-222==-=-=--=\(isS)")
-
-        }
-        FileManager.lx.createFile(atPath: "\(fileStr)/gfgfds/dsa.mp4") { (isS) in
-            print("-=-111==-=-=--=\(isS)")
-        }
-        FileManager.lx.moveFile(fromFilePath: "\(fileStr)/gfgfds", toFilePath: "\(fileStr)/gfgfwds/ww", type: .directory)
-        
-        print("-=-32323232==-=-=--=\(FileManager.lx.getAllFiles(atPath: fileStr))")
-
-        print("-=-545454545==-=-=--=\(FileManager.lx.fileFolderSize(atPath: fileStr))")
-
-        
-        
+           
 //        let str = Bundle.main.path(forResource: "lxQrCodeVoice", ofType: "wav")
 //        LXSwiftUtils.lx.playSound(with: str) {
 //            print("-=-=-=-=-=-=-=-=-=-=-=-=")
@@ -106,10 +84,10 @@ class ViewController: UIViewController {
 //        }
 //
         
-//        LXObjcUtils.check(LXObjcAuthTypePhoto, isAlert: false) { (ispass) in
-//            print("-=-=-=--=\(ispass)")
-//
-//        }
+        LXObjcUtils.check(LXObjcAuthTypePhoto, isAlert: false) { (ispass) in
+            print("-=-=-=--=\(ispass)")
+
+        }
 //        LXObjcUtils.check(LXObjcAuthTypeVideo) { (ispass) in
 //            print("-=-=-=--=\(ispass)")
 //        }
