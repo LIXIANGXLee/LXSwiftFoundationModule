@@ -39,12 +39,12 @@ extension LXSwiftBasics where Base: NSAttributedString {
 //MARK: -  Extending properties and methods for NSMutableAttributedString
 extension LXSwiftBasics where Base: NSMutableAttributedString {
     
-    func setAttribute(with attribute: NSAttributedString.Key, value: Any?, range: NSRange) {
+    public func setAttribute(with attribute: NSAttributedString.Key, value: Any?, range: NSRange) {
         guard let value = value else { return }
         base.addAttribute(attribute, value: value, range: range)
     }
     
-    func attribute(with key: NSAttributedString.Key, index: Int) -> Any? {
+    public func attribute(with key: NSAttributedString.Key, index: Int) -> Any? {
         return base.attribute(key, at: index, effectiveRange: nil)
     }
     
