@@ -34,6 +34,25 @@ extension Double: LXSwiftCompatible {
     }
 }
 
+//MARK: -  Extending methods for CGFloat
+extension LXSwiftBasics where Base == CGFloat {
+    
+    ///CGFloat转Double
+    public var toDouble: Double {
+        return Double(base)
+    }
+    
+    /// 用户显示容量 (GB、MB、KB、B)
+    public var sizeFileToStr: String {
+        return base.lx.toDouble.lx.sizeFileToStr
+    }
+    
+    /// 时间字符串
+    public var timeToStr: String {
+        return base.lx.toDouble.lx.timeToStr
+    }
+}
+
 //MARK: -  Extending methods for Double
 extension LXSwiftBasics where Base == Double {
     

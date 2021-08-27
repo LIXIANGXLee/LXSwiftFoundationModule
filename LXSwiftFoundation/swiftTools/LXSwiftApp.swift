@@ -43,6 +43,7 @@ public let SCREEN_HEIGHT_TO_NAVBARHEIGHT = LXSwiftApp.navbarH
 
 /// 扩展名
 public let LXApplication = UIApplication.shared
+public let LXFileManager = FileManager.default
 
 // MARK: - LXSwftApp const
 /// define app const

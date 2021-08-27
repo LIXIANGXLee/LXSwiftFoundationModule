@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 /// 自定义运算符
 prefix operator ~>  /// 大于
 prefix operator ~<  /// 小于
@@ -55,6 +54,41 @@ extension Int: LXSwiftCompatible {
     }
 }
 
+extension LXSwiftBasics where Base == Int32 {
+    
+    /**
+     特备注意：传进来的时间戳base的单位是秒
+     60秒内：刚刚
+     1-60分钟 ：5分钟前
+     60以上 - 今天0点之后：几小时以前，
+     前1-7日前，在今年内：X天前
+     7日前-今年1.1：XX-XX XX:XX
+     去年及以前：20XX-XX-XX XX:XX
+     */
+    public var timeDateDescription: String {
+        return base.lx.toInt.lx.timeDateDescription
+    }
+    
+    /// Int32转Int64
+    public var toInt64: Int64 {
+         return Int64(base)
+    }
+    
+    /// Int32转Int
+    public var toInt: Int {
+         return Int(base)
+    }
+    
+    /// int转bool
+    public var toBool: Bool {
+        return base > 0 ? true : false
+    }
+    /// 转换为字符串格式
+    public var toString: String {
+        return String(base)
+    }
+}
+
 extension LXSwiftBasics where Base == Int64 {
 
     /**
@@ -70,11 +104,15 @@ extension LXSwiftBasics where Base == Int64 {
         return base.lx.toInt.lx.timeDateDescription
     }
     
-    /// Int64转int
+    /// Int64转Int
     public var toInt: Int {
          return Int(base)
     }
     
+    /// int转bool
+    public var toBool: Bool {
+        return base > 0 ? true : false
+    }
     /// 转换为字符串格式
     public var toString: String {
         return String(base)
