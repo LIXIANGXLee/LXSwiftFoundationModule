@@ -241,8 +241,8 @@ extension LXSwiftBasics where Base: FileManager {
         return fileSize(atPath: path).lx.sizeFileToStr
     }
     
-    /// 计算单个文件的大小 显示格式GB、MB、KB、B 返回字符串
-    public static func folderSizeAtPath(atPath path: String) -> String {
-        return fileSize(atPath: path).lx.sizeFileToStr
+    /// 计算目录下所有文件的大小 显示格式GB、MB、KB、B 返回字符串
+    public static func fileFolderSizeToStr(atPath path: String) -> String {
+        return fileFolderSize(atPath: path).lx.sizeFileToStr
     }
 }
