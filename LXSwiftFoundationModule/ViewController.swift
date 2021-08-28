@@ -10,6 +10,10 @@ import UIKit
 import LXSwiftFoundation
 import Photos
 
+class Model: Codable {
+    var aa: String = "fd"
+    var dd: Int = 10
+}
 
 class ViewController: UIViewController {
     var  objc : LXObjcThreadActive! = nil
@@ -61,6 +65,12 @@ class ViewController: UIViewController {
  
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 
+        let model = Model()
+        LXSwiftStorage.set(model, key: "ss")
+        
+        let m = LXSwiftStorage<Model>.get(for: "ss")
+        print("-=-=-=--=\(m?.aa)==\(m?.dd)")
+        
         
 //        print("-=-=-=-=--=\("12332243.76432".lx.moneyFormat1)")
 //        print("-=-=-=-=--=\("1233".lx.moneyFormat1)")

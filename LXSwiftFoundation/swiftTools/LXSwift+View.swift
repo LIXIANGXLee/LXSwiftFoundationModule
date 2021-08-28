@@ -25,7 +25,7 @@ extension LXSwiftBasics where Base: UIView {
     }
     
     /// 导航跟控制器
-    public var aboveNavVC: UINavigationController? {
+    public var visibleNavVC: UINavigationController? {
         return UIApplication.lx.visibleNavRootViewController
     }
     

@@ -18,6 +18,9 @@ public func has_suffix(_ suffix: String) -> ((String) -> (Bool)) {{$0.hasSuffix(
 /// Switch 的匹配模式，匹配字符串被包含 是否包含此字符串
 public func has_contains(_ text: String) -> ((String) -> (Bool)) {{$0.contains(text)}}
 
+/// Switch 的匹配模式，匹配字符串被包含 字符串是否相等
+public func has_equal(_ text: String) -> ((String) -> (Bool)) {{$0 == text}}
+
 //MARK: -  重载~=运算符，也是swich操作
 extension String: LXSwiftCompatible {
    

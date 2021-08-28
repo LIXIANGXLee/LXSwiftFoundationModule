@@ -12,15 +12,15 @@ extension Bundle: LXSwiftCompatible { }
 
 //MARK: -  Extending methods  for Bundle
 extension LXSwiftBasics where Base: Bundle {
-    
-    /// 获取命名空间
-    public static var namespace: String? {
-        return Bundle.main.infoDictionary?["CFBundleExecutable"] as? String
-    }
-    
+
     /// 项目名字
     public static var bundleName: String? {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String
+    }
+    
+    /// 获取APP装到手机里之后显示的名称
+    static var bundleDisplayName: String? {
+        return Bundle.main.localizedInfoDictionary?["CFBundleDisplayName"] as? String
     }
     
     /// bundleID 唯一标识
@@ -38,9 +38,9 @@ extension LXSwiftBasics where Base: Bundle {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String
     }
     
-    /// 获取APP装到手机里之后显示的名称
-    static var displayName: String? {
-        return Bundle.main.localizedInfoDictionary?["CFBundleDisplayName"] as? String
+    /// 获取命名空间
+    public static var namespace: String? {
+        return Bundle.main.infoDictionary?["CFBundleExecutable"] as? String
     }
     
     /// 获取icon图标
