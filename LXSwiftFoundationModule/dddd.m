@@ -16,7 +16,6 @@
 {
     self = [super init];
     if (self) {
-        [dddd lx_swizzleMethod:<#(nonnull SEL)#> withNewMethod:<#(nonnull SEL)#>]
 
     }
     return self;

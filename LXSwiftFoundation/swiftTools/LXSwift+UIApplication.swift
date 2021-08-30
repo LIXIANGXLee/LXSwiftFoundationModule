@@ -8,6 +8,7 @@
 import UIKit
 
 
+private let applicationShared = UIApplication.shared
 extension UIApplication: LXSwiftCompatible { }
 
 extension LXSwiftBasics where Base: UIApplication {
@@ -58,7 +59,7 @@ extension LXSwiftBasics where Base: UIApplication {
     /// 获取跟窗口
     public static var rootWindow: UIWindow? {
         if #available(iOS 13.0, *) {
-            if let window = LXApplication.connectedScenes
+            if let window = applicationShared.connectedScenes
                    .filter({$0.activationState == .foregroundActive})
                    .map({$0 as? UIWindowScene})
                    .compactMap({$0})
@@ -66,16 +67,16 @@ extension LXSwiftBasics where Base: UIApplication {
                    .filter({$0.isKeyWindow}).first {
                    return window
             }else {
-                return LXApplication.delegate?.window ?? LXApplication.windows.first
+                return applicationShared.delegate?.window ?? applicationShared.windows.first
             }
         } else {
-               return LXApplication.delegate?.window ?? LXApplication.windows.first
+               return applicationShared.delegate?.window ?? applicationShared.windows.first
         }
     }
     
     /// 获取最外层窗口 需要判断不是UIRemoteKeyboardWindow才行，否则在ipad会存在问题
     public static var lastWindow: UIWindow? {
-        let windows = LXApplication.windows
+        let windows = applicationShared.windows
         var window: UIWindow?
         for i in (0..<windows.count).reversed() {
             if let c = NSClassFromString("UIRemoteKeyboardWindow") {
@@ -105,9 +106,9 @@ extension LXSwiftBasics where Base: UIApplication {
         
         if isCanOpen(u) {
             if #available(iOS 10.0, *) {
-                LXApplication.open(u, options: [:], completionHandler: completionHandler)
+                applicationShared.open(u, options: [:], completionHandler: completionHandler)
             } else {
-                LXApplication.openURL(u)
+                applicationShared.openURL(u)
             }
         }
     }
@@ -116,6 +117,6 @@ extension LXSwiftBasics where Base: UIApplication {
     public static func isCanOpen(_ url: URL?) -> Bool {
         
        guard let u = url else { return false }
-       return LXApplication.canOpenURL(u)
+       return applicationShared.canOpenURL(u)
     }
 }

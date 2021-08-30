@@ -8,6 +8,7 @@
 
 import UIKit
 
+private let fileManagerDefault = FileManager.default
 extension UIDevice: LXSwiftCompatible { }
 
 //MARK: -  Extending methods  for UIDevice is ipad or iphone
@@ -53,13 +54,13 @@ extension LXSwiftBasics where Base: UIDevice {
     
     /// 磁盘空间
     public static var diskSpace: Int64 {
-        guard let attrs = try? LXFileManager.attributesOfFileSystem(forPath: NSHomeDirectory()), let space = attrs[FileAttributeKey.systemSize] as? Int64 else { return -1 }
+        guard let attrs = try? fileManagerDefault.attributesOfFileSystem(forPath: NSHomeDirectory()), let space = attrs[FileAttributeKey.systemSize] as? Int64 else { return -1 }
         return space
     }
     
     /// 磁盘空间是可以使用的大小
     public static var diskSpaceFree: Int64 {
-        guard let attrs = try? LXFileManager.attributesOfFileSystem(forPath: NSHomeDirectory()), let space = attrs[FileAttributeKey.systemFreeSize] as? Int64 else { return -1 }
+        guard let attrs = try? fileManagerDefault.attributesOfFileSystem(forPath: NSHomeDirectory()), let space = attrs[FileAttributeKey.systemFreeSize] as? Int64 else { return -1 }
         return space
     }
     

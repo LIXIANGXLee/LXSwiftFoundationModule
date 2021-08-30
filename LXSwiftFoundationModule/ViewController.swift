@@ -44,7 +44,7 @@ class ViewController: UIViewController {
     func protocolUIShow() {
         let config = LXSwiftModalConfig()
         config.isDismissBg = false
-        config.contentMidViewH = scale_ip6_width(260)
+        config.contentMidViewH = SCALE_IP6_WIDTH_TO_WIDTH(260)
         config.titleFont = UIFont.lx.font(withMedium: 16)
         config.titleColor = UIColor.black
         let itemCancel = LXSwiftItem(title: "不同意",
@@ -115,11 +115,17 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate  {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = UITableViewHeaderFooterView(frame: CGRect(x: 0, y: 0, width: LXSwiftApp.screenW, height: 60))
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: LXSwiftApp.screenW, height: 60))
         tableView.roundSwiftSectionFooter(view, forSection: section, cornerRadius: 30, backgroundColor: UIColor.purple)
         
         
         return view
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    
     }
     
 }

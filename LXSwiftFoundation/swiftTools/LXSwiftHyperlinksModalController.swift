@@ -105,7 +105,7 @@ extension LXSwiftHyperlinksModalController {
         titleLabel.text = title
         contentView.layer.cornerRadius = self.modaConfig.contentViewRadius
         contentView.lx.width = modaConfig.contentViewW
-        contentView.lx.x = (SCREEN_WIDTH_TO_APP - modaConfig.contentViewW) * 0.5
+        contentView.lx.x = (SCREEN_WIDTH_TO_WIDTH - modaConfig.contentViewW) * 0.5
        
         self.titleLabel.frame = CGRect(x: modaConfig.contentViewSubViewX,
                                   y: modaConfig.titleTop,
@@ -125,7 +125,7 @@ extension LXSwiftHyperlinksModalController {
         lineView.frame = CGRect(x: 0,
                                 y: scrollView.frame.maxY + modaConfig.lineTop,
                                 width: contentView.frame.width,
-                                height: scale_ip6_width(0.5))
+                                height: SCALE_IP6_WIDTH_TO_WIDTH(0.5))
       
         if itemViews.count > 0 {
             let colW = contentView.frame.width / CGFloat(itemViews.count)
@@ -145,7 +145,7 @@ extension LXSwiftHyperlinksModalController {
         } else {
             contentView.lx.height = lineView.frame.maxY
         }
-        contentView.lx.y = (SCREEN_HEIGHT_TO_APP -  contentView.lx.height) * 0.5 + modaConfig.contentViewOffSet
+        contentView.lx.y = (SCREEN_HEIGHT_TO_HEIGHT -  contentView.lx.height) * 0.5 + modaConfig.contentViewOffSet
         UIApplication.lx.visibleViewController?.present(self, animated: true, completion: nil)
     }
     
@@ -168,29 +168,29 @@ public class LXSwiftModalConfig {
     public init(){ }
     
     /// 内容圆角
-    public var contentViewRadius: CGFloat = scale_ip6_width(10)
-    public var contentViewW: CGFloat = scale_ip6_width(288)
+    public var contentViewRadius: CGFloat = SCALE_IP6_WIDTH_TO_WIDTH(10)
+    public var contentViewW: CGFloat = SCALE_IP6_WIDTH_TO_WIDTH(288)
     //  距离中间位置的偏移量
     public var contentViewOffSet: CGFloat = 0
-    public var contentViewSubViewX: CGFloat = scale_ip6_width(20)
+    public var contentViewSubViewX: CGFloat = SCALE_IP6_WIDTH_TO_WIDTH(20)
 
     /// 标题颜色和字体大小 距离顶部的距离
-    public var titleTop: CGFloat = scale_ip6_width(20)
+    public var titleTop: CGFloat = SCALE_IP6_WIDTH_TO_WIDTH(20)
     public var titleFont: UIFont = UIFont.lx.font(withMedium: 18)
     public var titleColor: UIColor = UIColor.black
     
     /// 内容颜色和字体大小 距离title的距离
-    public var contentMidViewTop: CGFloat = scale_ip6_width(13)
-    public var contentMidViewH: CGFloat = scale_ip6_width(200)
+    public var contentMidViewTop: CGFloat = SCALE_IP6_WIDTH_TO_WIDTH(13)
+    public var contentMidViewH: CGFloat = SCALE_IP6_WIDTH_TO_WIDTH(200)
     public var isContentMidViewScrollEnabled: Bool = true
     public var isshowsVerticalScrollIndicator: Bool = true
     
     /// 线颜色 和 距离内容的距离
-    public var lineTop: CGFloat =  scale_ip6_width(13)
+    public var lineTop: CGFloat =  SCALE_IP6_WIDTH_TO_WIDTH(13)
     public var lineColor: UIColor = UIColor.lx.color(hex: "EFEFEF")
     
     /// item 高度
-    public var itemH: CGFloat = scale_ip6_width(55)
+    public var itemH: CGFloat = SCALE_IP6_WIDTH_TO_WIDTH(55)
     
     /// 点击背景是否关闭弹窗
     public var isDismissBg: Bool = true
@@ -226,9 +226,9 @@ public class LXSwiftItemView: UIButton {
     
     ///布局线的尺寸
     public func setLineViewFrame() {
-        lineView.frame = CGRect(x: frame.width - scale_ip6_width(0.5),
+        lineView.frame = CGRect(x: frame.width - SCALE_IP6_WIDTH_TO_WIDTH(0.5),
                                 y: 0,
-                                width: scale_ip6_width(0.5),
+                                width: SCALE_IP6_WIDTH_TO_WIDTH(0.5),
                                 height: frame.height)
     }
     

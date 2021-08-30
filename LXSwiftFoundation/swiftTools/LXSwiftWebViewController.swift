@@ -179,8 +179,8 @@ extension LXSwiftWebViewController {
         
         spinner.centerXAnchor.constraint(equalTo: webView.centerXAnchor).isActive = true
         spinner.centerYAnchor.constraint(equalTo: webView.centerYAnchor).isActive = true
-        spinner.widthAnchor.constraint(equalToConstant:scale_ip6_width(60)).isActive = true
-        spinner.heightAnchor.constraint(equalToConstant: scale_ip6_width(60)).isActive = true
+        spinner.widthAnchor.constraint(equalToConstant:SCALE_IP6_WIDTH_TO_WIDTH(60)).isActive = true
+        spinner.heightAnchor.constraint(equalToConstant: SCALE_IP6_WIDTH_TO_WIDTH(60)).isActive = true
         
         progressView = UIProgressView(progressViewStyle: .default)
         progressView.translatesAutoresizingMaskIntoConstraints = false
@@ -188,7 +188,7 @@ extension LXSwiftWebViewController {
         
         progressView.centerXAnchor.constraint(equalTo: webView.centerXAnchor).isActive = true
         progressView.widthAnchor.constraint(equalTo: webView.widthAnchor).isActive = true
-        progressView.heightAnchor.constraint(equalToConstant: scale_ip6_width(2)).isActive = true
+        progressView.heightAnchor.constraint(equalToConstant: SCALE_IP6_WIDTH_TO_WIDTH(2)).isActive = true
         
     }
     
@@ -232,7 +232,7 @@ extension LXSwiftWebViewController: WKNavigationDelegate{
         //        For example, all Google pages will be opened in an external browser, and the rest will be opened in the WebView of this app
         //        if let url = navigationAction.request.url{
         //            if url.host == "www.google.com"{
-        //                LXApplication.open(url)
+        //                LXApplicationShared.open(url)
         //                decisionHandler(.cancel)
         //                return
         //            }

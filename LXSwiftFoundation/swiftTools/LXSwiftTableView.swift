@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let tag = 19920423
+private let tag = 19920688
 
 open class LXSwiftTableView: UITableView {
         
@@ -149,18 +149,6 @@ extension LXCustomRoundbackground {
 }
 
 extension LXCustomRoundbackground where Self: UITableViewCell {
-    var associatedView: UIView {
-        if backgroundView?.tag != tag {
-            let roundView = UIView(frame: bounds)
-            roundView.backgroundColor = UIColor.clear
-            roundView.tag = tag
-            backgroundView = roundView
-        }
-        return backgroundView!
-    }
-}
-
-extension LXCustomRoundbackground where Self: UITableViewHeaderFooterView {
     var associatedView: UIView {
         if backgroundView?.tag != tag {
             let roundView = UIView(frame: bounds)

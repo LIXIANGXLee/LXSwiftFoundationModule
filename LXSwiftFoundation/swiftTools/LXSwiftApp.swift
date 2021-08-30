@@ -9,41 +9,47 @@
 import UIKit
 
 /// 标准iphone6适配宽度
-public func scale_ip6_width(_ distance: CGFloat) -> CGFloat {
+public func SCALE_IP6_WIDTH_TO_WIDTH(_ distance: CGFloat) -> CGFloat {
     return LXSwiftApp.flat(distance * (LXSwiftApp.screenW / 375))
 }
 
 /// 标准iphone6适配高度
-public func scale_ip6_height(_ distance: CGFloat) -> CGFloat {
+public func SCALE_IP6_HEIGHT_TO_HEIGHT(_ distance: CGFloat) -> CGFloat {
     return LXSwiftApp.flat(distance * (LXSwiftApp.screenH / 667))
 }
 
-public func scale_ipad129_width(_ distance: CGFloat) -> CGFloat {
+/// 标准ipad129适配宽度
+public func SCALE_IPAD129_WIDTH_TO_WIDTH(_ distance: CGFloat) -> CGFloat {
     return LXSwiftApp.flat(distance * (LXSwiftApp.screenW / 1024))
 }
 
-public func scale_ipad129_height(_ distance: CGFloat) -> CGFloat {
+/// 标准ipad129适配高度
+public func SCALE_IPAD129_HEIGHT_TO_HEIGHT(_ distance: CGFloat) -> CGFloat {
     return LXSwiftApp.flat(distance * (LXSwiftApp.screenH / 1366))
 }
 
 /// 居中运算
-public func scale_get_center(_ parent: CGFloat, _ child: CGFloat) -> CGFloat {
+public func SCALE_GET_CENTER_WIDTH_AND_WIDTH(_ parent: CGFloat, _ child: CGFloat) -> CGFloat {
     return LXSwiftApp.flat((parent - child) / 2.0)
 }
 
-/// 屏幕宽高
-public let SCREEN_WIDTH_TO_APP = LXSwiftApp.screenW
-public let SCREEN_HEIGHT_TO_APP = LXSwiftApp.screenH
+/// 屏幕宽度
+public let SCREEN_WIDTH_TO_WIDTH = LXSwiftApp.screenW
 
+/// 屏幕高度
+public let SCREEN_HEIGHT_TO_HEIGHT = LXSwiftApp.screenH
+
+/// 顶部刘海
 public let SCREEN_HEIGHT_TO_TOUCHBARHEIGHT = LXSwiftApp.touchBarH
+
+/// 底部刘海
 public let SCREEN_HEIGHT_TO_STATUSHEIGHT = LXSwiftApp.statusbarH
 
+/// tabbar高度
 public let SCREEN_HEIGHT_TO_TABBARHEIGHT = LXSwiftApp.tabbarH
-public let SCREEN_HEIGHT_TO_NAVBARHEIGHT = LXSwiftApp.navbarH
 
-/// 扩展名
-public let LXApplication = UIApplication.shared
-public let LXFileManager = FileManager.default
+/// 导航栏高度
+public let SCREEN_HEIGHT_TO_NAVBARHEIGHT = LXSwiftApp.navbarH
 
 // MARK: - LXSwftApp const
 /// define app const
@@ -81,7 +87,7 @@ public struct LXSwiftApp {
     
     /// 获取状态栏高度
     private static var statusBarHeight: CGFloat {
-        var statusH: CGFloat = LXApplication.statusBarFrame.height
+        var statusH: CGFloat = UIApplication.shared.statusBarFrame.height
         if statusH == 0, #available(iOS 13.0, *) {
             statusH = UIApplication.lx.rootWindow?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
         }

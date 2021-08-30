@@ -29,6 +29,7 @@ public extension LXUserDefaultsProtocol where Self: RawRepresentable, Self.RawVa
      case key
  }
 */
+private let defaultStandard = UserDefaults.standard
 public struct LXSwiftStorage: LXSwiftCompatible {
    
     private static let defaultStandard = UserDefaults.standard
@@ -48,13 +49,13 @@ extension LXSwiftBasics where Base == LXSwiftStorage {
 
     /// 存储
     public static func set(with value: Any?, key: String) {
-        UserDefaults.standard.set(value, forKey: key)
-        UserDefaults.standard.synchronize()
+        defaultStandard.set(value, forKey: key)
+        defaultStandard.synchronize()
     }
     
     /// 取值
     public static func get(for key: String) -> Any? {
-        return UserDefaults.standard.object(forKey: key)
+        return defaultStandard.object(forKey: key)
     }
     
 }

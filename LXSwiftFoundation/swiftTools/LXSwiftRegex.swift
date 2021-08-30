@@ -84,7 +84,7 @@ extension LXSwiftRegex {
                     let attachment = NSTextAttachment()
                     attachment.image = UIImage(named: capturedStrings)
                     attachment.bounds = CGRect(x: 0,
-                                               y: scale_ip6_width(-3),
+                                               y: SCALE_IP6_WIDTH_TO_WIDTH(-3),
                                                width: wordRegexType.font.lineHeight,
                                                height: wordRegexType.font.lineHeight)
                     let imageAttr = NSAttributedString(attachment: attachment)

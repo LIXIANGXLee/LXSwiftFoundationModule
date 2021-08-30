@@ -8,6 +8,7 @@
 
 import UIKit
 
+private let fileManagerDefault = FileManager.default
 extension FileManager: LXSwiftCompatible {
     
     /// 文件类型
@@ -28,7 +29,7 @@ extension LXSwiftBasics where Base: FileManager {
     
     /// Caches
     public static var cachesURL: URL? {
-        return LXFileManager.urls(for: .cachesDirectory, in: .userDomainMask).last
+        return fileManagerDefault.urls(for: .cachesDirectory, in: .userDomainMask).last
     }
     public static var cachesPath: String? {
         return NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first
@@ -36,7 +37,7 @@ extension LXSwiftBasics where Base: FileManager {
     
     /// Documents
     public static var documentURL: URL? {
-        return LXFileManager.urls(for: .documentDirectory, in: .userDomainMask).last
+        return fileManagerDefault.urls(for: .documentDirectory, in: .userDomainMask).last
     }
     public static var documentPath: String? {
         return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
@@ -44,7 +45,7 @@ extension LXSwiftBasics where Base: FileManager {
     
     /// Library
     public static var libraryURL: URL? {
-        return LXFileManager.urls(for: .libraryDirectory, in: .userDomainMask).last
+        return fileManagerDefault.urls(for: .libraryDirectory, in: .userDomainMask).last
     }
     public static var libraryPath: String? {
         return NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first
@@ -56,7 +57,7 @@ extension LXSwiftBasics where Base: FileManager {
         if !isFileExists(atPath: path) { // 不存在的路径才会创建
             do {
                 // withIntermediateDirectories为ture表示路径中间如果有不存在的文件夹都会创建
-                try LXFileManager.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+                try fileManagerDefault.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
                 block?(true)
                 return true
             } catch _ {
@@ -73,7 +74,7 @@ extension LXSwiftBasics where Base: FileManager {
     @discardableResult
     public static func createFile(atPath path: String, block: ((_ isSuccess: Bool) -> Void)? = nil) -> Bool {
         if !isFileExists(atPath: path) { // 不存在的路径才会创建
-            let isSuccess = LXFileManager.createFile(atPath: path, contents: nil, attributes: nil)
+            let isSuccess = fileManagerDefault.createFile(atPath: path, contents: nil, attributes: nil)
             block?(isSuccess)
             return isSuccess
         }else{
@@ -88,7 +89,7 @@ extension LXSwiftBasics where Base: FileManager {
         if isFileExists(atPath: path) {
             do {
                 // 开始移除文件目录
-                try LXFileManager.removeItem(atPath: path)
+                try fileManagerDefault.removeItem(atPath: path)
                 block?(true)
                 return true
             } catch _ {
@@ -107,7 +108,7 @@ extension LXSwiftBasics where Base: FileManager {
         if isFileExists(atPath: path) {
             do {
                 // 开始移除文件
-                try LXFileManager.removeItem(atPath: path)
+                try fileManagerDefault.removeItem(atPath: path)
                 block?(true)
                 return true
             } catch _ {
@@ -140,7 +141,7 @@ extension LXSwiftBasics where Base: FileManager {
                 if isOverwrite && isFileExists(atPath: toFilePath) {
                     // 如果被移动的件夹或者文件，如果已存在，先删除，否则拷贝不了
                     do {
-                        try LXFileManager.removeItem(atPath: toFilePath)
+                        try fileManagerDefault.removeItem(atPath: toFilePath)
                         block?(true)
                     } catch _ {
                         block?(false)
@@ -150,9 +151,9 @@ extension LXSwiftBasics where Base: FileManager {
                 // 移动文件夹或者文件
                 do {
                     if moveType == .move {
-                        try LXFileManager.moveItem(atPath: fromFilePath, toPath: toFilePath)
+                        try fileManagerDefault.moveItem(atPath: fromFilePath, toPath: toFilePath)
                     }else{
-                        try LXFileManager.copyItem(atPath: fromFilePath, toPath: toFilePath)
+                        try fileManagerDefault.copyItem(atPath: fromFilePath, toPath: toFilePath)
                     }
                     block?(true)
                 } catch _ {
@@ -164,7 +165,7 @@ extension LXSwiftBasics where Base: FileManager {
     
     /// 判断文件是否存在
     public static func isFileExists(atPath path: String) -> Bool {
-        let exist = LXFileManager.fileExists(atPath: path)
+        let exist = fileManagerDefault.fileExists(atPath: path)
         // 查看文件夹是否存在，如果存在就直接读取，不存在就直接反空
         guard exist else {
             return false
@@ -186,7 +187,7 @@ extension LXSwiftBasics where Base: FileManager {
     public static func getAllFiles(atPath folderPath: String) -> [Any]? {
          // 查看文件夹是否存在，如果存在就直接读取，不存在就直接反空
          if isFileExists(atPath: folderPath) {
-             guard let allFile = LXFileManager.enumerator(atPath: folderPath) else {
+             guard let allFile = fileManagerDefault.enumerator(atPath: folderPath) else {
                  return nil
              }
             return allFile.allObjects
@@ -199,7 +200,7 @@ extension LXSwiftBasics where Base: FileManager {
     static func getAllFileNames(atPath folderPath: String) -> [String]? {
         // 查看文件夹是否存在，如果存在就直接读取，不存在就直接反空
         if (isFileExists(atPath: folderPath)) {
-            guard let subPaths = LXFileManager.subpaths(atPath: folderPath) else {
+            guard let subPaths = fileManagerDefault.subpaths(atPath: folderPath) else {
                 return nil
             }
             return subPaths
@@ -219,7 +220,7 @@ extension LXSwiftBasics where Base: FileManager {
     /// 计算单个文件的大小
     public static func fileSize(atPath path: String) -> Double {
         var fileSize: Double = 0
-        guard let attr = try? LXFileManager.attributesOfItem(atPath: path) else { return fileSize }
+        guard let attr = try? fileManagerDefault.attributesOfItem(atPath: path) else { return fileSize }
         fileSize = Double(attr[FileAttributeKey.size] as? UInt64 ?? 0)
         return fileSize
     }
