@@ -11,27 +11,28 @@
 
 @implementation NSObject (LXObjcAdd)
 
-+ (BOOL)lx_swizzleMethod:(SEL)originSel withNewMethod:(SEL)dstSel {
++ (void)lx_swizzleMethod:(SEL)originSel withNewMethod:(SEL)dstSel {
     
-    Class c = [self class];
+    Class class = [self class];
+
+    Method originalMethod = class_getInstanceMethod(class, originSel);
+    Method swizzledMethod = class_getInstanceMethod(class, dstSel);
     
-    // 获取原方法和方法实现
-    Method oriMethod = class_getInstanceMethod(c, originSel);
-    IMP oriImp = method_getImplementation(oriMethod);
-    const char *oriReturnType = method_getTypeEncoding(oriMethod);
+    // 若已经存在，则添加会失败
+    BOOL didAddMethod = class_addMethod(class,
+                                        originSel,
+                                        method_getImplementation(swizzledMethod),
+                                        method_getTypeEncoding(swizzledMethod));
     
-    // 获取即将要交换的方法和实现
-    Method dstMethod = class_getInstanceMethod(c, dstSel);
-    IMP dstImp = method_getImplementation(dstMethod);
-    const char *dstReturnType = method_getTypeEncoding(dstMethod);
-    
-    // 方法交换
-    if (class_addMethod([self class], originSel, dstImp, dstReturnType)) {
-        class_replaceMethod(c, dstSel, oriImp, oriReturnType);
+    // 若原来的方法并不存在，则添加即可
+    if (didAddMethod) {
+      class_replaceMethod(class,
+                          dstSel,
+                          method_getImplementation(originalMethod),
+                          method_getTypeEncoding(originalMethod));
     } else {
-        method_exchangeImplementations(oriMethod, dstMethod);
+      method_exchangeImplementations(originalMethod, swizzledMethod);
     }
-    return YES;
 }
 
 /// 是否属于Foundation里的类 [NSURL class],[NSDate class],[NSValue class],[NSData class],[NSError class],[NSArray class],[NSDictionary class],[NSString class],[NSAttributedString class]

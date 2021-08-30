@@ -8,6 +8,24 @@
 
 import UIKit
 
+/// 屏幕宽度
+public let SCREEN_WIDTH_TO_WIDTH = LXSwiftApp.screenW
+
+/// 屏幕高度
+public let SCREEN_HEIGHT_TO_HEIGHT = LXSwiftApp.screenH
+
+/// 顶部刘海
+public let SCREEN_HEIGHT_TO_TOUCHBARHEIGHT = LXSwiftApp.touchBarH
+
+/// 底部刘海
+public let SCREEN_HEIGHT_TO_STATUSHEIGHT = LXSwiftApp.statusbarH
+
+/// tabbar高度
+public let SCREEN_HEIGHT_TO_TABBARHEIGHT = LXSwiftApp.tabbarH
+
+/// 导航栏高度
+public let SCREEN_HEIGHT_TO_NAVBARHEIGHT = LXSwiftApp.navbarH
+
 /// 标准iphone6适配宽度
 public func SCALE_IP6_WIDTH_TO_WIDTH(_ distance: CGFloat) -> CGFloat {
     return LXSwiftApp.flat(distance * (LXSwiftApp.screenW / 375))
@@ -32,24 +50,6 @@ public func SCALE_IPAD129_HEIGHT_TO_HEIGHT(_ distance: CGFloat) -> CGFloat {
 public func SCALE_GET_CENTER_WIDTH_AND_WIDTH(_ parent: CGFloat, _ child: CGFloat) -> CGFloat {
     return LXSwiftApp.flat((parent - child) / 2.0)
 }
-
-/// 屏幕宽度
-public let SCREEN_WIDTH_TO_WIDTH = LXSwiftApp.screenW
-
-/// 屏幕高度
-public let SCREEN_HEIGHT_TO_HEIGHT = LXSwiftApp.screenH
-
-/// 顶部刘海
-public let SCREEN_HEIGHT_TO_TOUCHBARHEIGHT = LXSwiftApp.touchBarH
-
-/// 底部刘海
-public let SCREEN_HEIGHT_TO_STATUSHEIGHT = LXSwiftApp.statusbarH
-
-/// tabbar高度
-public let SCREEN_HEIGHT_TO_TABBARHEIGHT = LXSwiftApp.tabbarH
-
-/// 导航栏高度
-public let SCREEN_HEIGHT_TO_NAVBARHEIGHT = LXSwiftApp.navbarH
 
 // MARK: - LXSwftApp const
 /// define app const

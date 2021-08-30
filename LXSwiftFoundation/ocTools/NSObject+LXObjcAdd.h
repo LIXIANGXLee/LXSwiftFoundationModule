@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSObject (LXObjcAdd)
 
 /// 方法交换 主要是交换方法的实现 method_getImplementation
-+ (BOOL)lx_swizzleMethod:(SEL)originSel withNewMethod:(SEL)dstSel;
++ (void)lx_swizzleMethod:(SEL)originSel withNewMethod:(SEL)dstSel;
 
 /// 是否属于Foundation里的类 [NSURL class],[NSDate class],[NSValue class],[NSData class],[NSError class],[NSArray class],[NSDictionary class],[NSString class],[NSAttributedString class]
 + (BOOL)lx_isClassFromFoundation;
