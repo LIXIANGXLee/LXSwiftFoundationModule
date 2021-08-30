@@ -10,118 +10,34 @@ import UIKit
 import LXSwiftFoundation
 import Photos
 
-class Model: Codable {
-    var aa: String = "fd"
-    var dd: Int = 10
-}
 
 class ViewController: UIViewController {
-    var  objc : LXObjcThreadActive! = nil
-    //隐藏状态栏
-     
-    override var prefersStatusBarHidden: Bool {
-        
-        return true
-     
-    }
-    let linkList = LXObjcLinkedList()
-
-    @objc func ss() {
-        print("======进入")
-
-    }
     
-    @objc func aa() {
-        print("======退出")
-    }
+    
+    fileprivate lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: CGRect.zero, style: UITableView.Style.plain)
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.registSwiftCell(LXTableViewViewCell.self)
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never
+        }else{
+            tableView.translatesAutoresizingMaskIntoConstraints = false
+        }
+        return tableView
+    }()
+    
      override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.frame = CGRect(x: 0, y: LXSwiftApp.navbarH, width: LXSwiftApp.screenW, height: LXSwiftApp.screenH - LXSwiftApp.navbarH - LXSwiftApp.touchBarH)
 
-        LXSwiftUtils.lx.didBecomeActive(self, selector: #selector(ss))
-        LXSwiftUtils.lx.willResignActive(self, selector: #selector(aa))
-
-        
-        self.view.backgroundColor = UIColor.red
-        
-        var btn = UIButton(type: .custom)
-        btn.backgroundColor = UIColor.orange
-        btn.frame = CGRect(x: 100, y: 100, width: 260, height: 100)
-        btn.lx.y = 20
-
-        btn.setTitle("首页tab_center", for: .normal)
-        btn.setTitleColor(UIColor.blue, for: .normal)
-        btn.setImage(UIImage(named: "tab_center"), for: .normal)
-//        btn.lx.horizontalCenterImageAndTitle(space: 20)
-        btn.lx.verticalCenterImageAndTitle(space: 30, isLeftImage: false)
-        view.addSubview(btn)
-        
-
+        view.addSubview(tableView)
+    
       }
-    
-    
-    class func aa() {
-        
-    }
- 
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 
-        let model = Model()
-        LXSwiftStorage.set(model, key: "ss")
         
-        let m = LXSwiftStorage<Model>.get(for: "ss")
-        print("-=-=-=--=\(m?.aa)==\(m?.dd)")
-        
-        
-//        print("-=-=-=-=--=\("12332243.76432".lx.moneyFormat1)")
-//        print("-=-=-=-=--=\("1233".lx.moneyFormat1)")
-//        print("-=-=-=-=--=\("1243243.323".lx.moneyFormat1)")
-//        print("-=-=-=-=--=\("0.323".lx.moneyFormat1)")
-          print("-=-=-=-=--=\(view.lx.rootWindow)")
-        
-//        protocolUIShow()
-           
-//        let str = Bundle.main.path(forResource: "lxQrCodeVoice", ofType: "wav")
-//        LXSwiftUtils.lx.playSound(with: str) {
-//            print("-=-=-=-=-=-=-=-=-=-=-=-=")
-//        }
-//
-  
-//        DispatchQueue.global().async {
-//            LXObjcUtils.check(LXObjcAuthTypePhoto, isAlert: true) { (ispass) in
-//                print("-=-=-=--=\(ispass)")
-//
-//            }
-//        }
-//
-        
-        LXObjcUtils.check(LXObjcAuthTypePhoto, isAlert: false) { (ispass) in
-            print("-=-=-=--=\(ispass)")
-
-        }
-//        LXObjcUtils.check(LXObjcAuthTypeVideo) { (ispass) in
-//            print("-=-=-=--=\(ispass)")
-//        }
-        
-//
-//        print("-=-=-=-=-=\(FileManager.lx.fileSize(path: str!))")
-//
-//
-        linkList.add("dd")
-        print("-=-11=-=-=\(linkList)")
-        print("-=-=11-=-=\(linkList.contains("dd"))")
-
-        linkList.add("ww")
-        linkList.add("ee")
-        print("-=-22=-=-=\(linkList)")
-
-        linkList.insert(1, value: "fd")
-        print("-=-=33-=-=\(linkList)")
-        print("-=-=33-=-=\(linkList.size())")
-
-        linkList.remove(0)
-        print("-=-=44-=-=\(linkList)")
-        print("-=-=44-=-=\(linkList.get(1))")
-//
     }
     
     
@@ -167,3 +83,43 @@ class ViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDataSource
+extension ViewController: UITableViewDataSource, UITableViewDelegate  {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 60
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueSwiftReusableCell(indexPath: indexPath) as LXTableViewViewCell
+
+        tableView.roundSwiftSectionCell(cell, forRowAt: indexPath, cornerRadius: 20, backgroundColor: UIColor.red)
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: LXSwiftApp.screenW, height: 60))
+        tableView.roundSwiftSectionHeader(view, forSection: section, cornerRadius: 30, backgroundColor: UIColor.blue)
+        
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UITableViewHeaderFooterView(frame: CGRect(x: 0, y: 0, width: LXSwiftApp.screenW, height: 60))
+        tableView.roundSwiftSectionFooter(view, forSection: section, cornerRadius: 30, backgroundColor: UIColor.purple)
+        
+        
+        return view
+    }
+    
+}

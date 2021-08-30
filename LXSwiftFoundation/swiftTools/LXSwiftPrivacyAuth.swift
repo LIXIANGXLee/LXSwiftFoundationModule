@@ -67,4 +67,22 @@ extension LXSwiftBasics where Base == LXSwiftPrivacyAuth {
         return authStatus == .authorizedAlways || authStatus == .authorizedWhenInUse
     }
 
+    
+    /// 判断系统是否支持消息推送能力
+    @available(iOS 10.0, *)
+    public static func isSupportNotications(_ callback: @escaping (_ isSupport: Bool) -> Void) {
+        UNUserNotificationCenter.current().getNotificationSettings { (setting) in
+            callback(setting.authorizationStatus != .denied)
+        }
+    }
+    
+    /// 请求推送权限
+    @available(iOS 10.0, *)
+    public static func regisiterRemoteNotications(_ completion: @escaping (Bool) -> ()) {
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .badge, .sound], completionHandler: { (isSuccess, error) in
+            completion(isSuccess)
+        })
+        UIApplication.shared.registerForRemoteNotifications()
+    }
 }

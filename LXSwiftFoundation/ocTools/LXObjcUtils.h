@@ -55,21 +55,6 @@ typedef enum : NSUInteger {
 /// 异步线程执行block
 + (void)executeGlobalForSafe:(void(^)(void)) block;
 
-/// 是否属于Foundation里的类 [NSURL class],[NSDate class],[NSValue class],[NSData class],[NSError class],[NSArray class],[NSDictionary class],[NSString class],[NSAttributedString class]
-+ (BOOL)isClassFromFoundation:(Class)c;
-
-/// 是否为系统类
-+ (BOOL)isSystemClass:(Class)c;
-
-/// 方法交换 主要是交换方法的实现 method_getImplementation
-+ (void)swizzleMethod:(SEL)originSel withNewMethod:(SEL)dstSel;
-
-/// 获取类的所有成员变量名字
-+ (NSArray<NSString *> *)getAllIvarName:(Class)c;
-
-/// 获取类的所有方法名字
-+ (NSArray<NSString *> *)getAllMethodName:(Class)c;
-
 /// 去设置权限（相机、相册）
 + (void)jumpToSetting;
 

@@ -73,4 +73,5 @@ static BOOL hexStringToRGBA(NSString *str, CGFloat *r, CGFloat *g, CGFloat *b, C
     }
     return YES;
 }
+
 @end

@@ -20,6 +20,7 @@
 #import "LXObjcUtils.h"
 #import "LXSwiftFoundation.h"
 #import "LXWaterFlowLayout.h"
+#import "NSObject+LXObjcAdd.h"
 #import "NSObject+LXObjcKVO.h"
 #import "NSString+LXObjcAdd.h"
 #import "NSTimer+LXObjcAdd.h"

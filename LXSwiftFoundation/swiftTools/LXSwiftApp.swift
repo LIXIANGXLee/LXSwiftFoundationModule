@@ -93,6 +93,7 @@ public struct LXSwiftApp {
         return statusH
     }
     
+    /// 底部圆弧高度
     private static var touchBarHeight: CGFloat {
         var touchBarH: CGFloat = 0
         if #available(iOS 11.0, *) {
@@ -106,12 +107,8 @@ public struct LXSwiftApp {
     }
     
     /**
-     *  基于当前设备的屏幕倍数，对传进来的 floatValue 进行像素取整。
-     *  注意如果在 Core Graphic 绘图里使用时，要注意当前画布的倍数是否和设备屏幕倍数一致，
-     *  若不一致，不可使用 flat() 函数，而应该用
-     *  基于指定的倍数，对传进来的 floatValue进行像素取整。若指定倍数为0，则表示以当前设备的屏幕倍数为准。
-     *  例如传进来 “2.1”，在 2x 倍数下会返回 2.5（0.5pt 对应 1px），
-     *  在 3x 倍数下会返回 2.333（0.333pt 对应 1px）。
+     *  当前设备的屏幕倍数，对传进来的 value 进行像素根据屏幕比例取整
+     *  例如传进来 “2.1”，在 2x 倍数下会返回 2.5（0.5pt 对应 1px）在 3x 倍数下会返回 2.333（0.333pt 对应 1px）。
      */
     public static func flat(_ value: CGFloat) -> CGFloat {
         return ceil(value * LXSwiftApp.screen_scale) / LXSwiftApp.screen_scale
