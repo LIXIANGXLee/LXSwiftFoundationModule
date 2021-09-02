@@ -61,7 +61,6 @@ open class LXSwiftHyperlinksModalController: LXSwiftModalController {
         modalItems[itemView.tag].callBack?()
         lx.dismissViewController()
     }
-
 }
 
 extension LXSwiftHyperlinksModalController: LXTextLableDelegate {

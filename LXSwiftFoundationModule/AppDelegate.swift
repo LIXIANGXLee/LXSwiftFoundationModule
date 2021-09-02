@@ -20,8 +20,11 @@ var window: UIWindow?
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
 
-        self.window?.rootViewController = UINavigationController(rootViewController: ViewController())
+//        self.window?.rootViewController = UINavigationController(rootViewController: ViewController())
+        
+        self.window?.rootViewController = PickerViewController()
 
+        
         self.window?.makeKeyAndVisible()
         
         return true

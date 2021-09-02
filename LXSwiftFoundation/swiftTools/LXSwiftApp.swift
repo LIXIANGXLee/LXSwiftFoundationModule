@@ -14,10 +14,10 @@ public let SCREEN_WIDTH_TO_WIDTH = LXSwiftApp.screenW
 /// 屏幕高度
 public let SCREEN_HEIGHT_TO_HEIGHT = LXSwiftApp.screenH
 
-/// 顶部刘海
+/// 底部刘海
 public let SCREEN_HEIGHT_TO_TOUCHBARHEIGHT = LXSwiftApp.touchBarH
 
-/// 底部刘海
+/// 顶部刘海
 public let SCREEN_HEIGHT_TO_STATUSHEIGHT = LXSwiftApp.statusbarH
 
 /// tabbar高度
