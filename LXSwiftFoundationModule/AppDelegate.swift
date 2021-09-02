@@ -22,6 +22,9 @@ var window: UIWindow?
 
 //        self.window?.rootViewController = UINavigationController(rootViewController: ViewController())
         
+        
+        let a = dddd()
+        
         self.window?.rootViewController = PickerViewController()
 
         
