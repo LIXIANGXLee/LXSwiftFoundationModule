@@ -242,7 +242,6 @@ extension LXSwiftPickerView {
         
         /// 添加手势 给tableView
         tableView.addGestureRecognizer(panGesture)
-               
        
         /// 设置底部偏移量
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: SCREEN_HEIGHT_TO_TOUCHBARHEIGHT, right: 0)

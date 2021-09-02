@@ -17,10 +17,9 @@ class PickerViewController: UIViewController {
         self.view.backgroundColor = UIColor.red
         
     }
-    
-    let picker = LXSwiftPickerView(style: .grouped)
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let picker = LXSwiftPickerView(style: .grouped)
 
         picker.delegate = self
         picker.dataSource = self
@@ -69,7 +68,7 @@ extension PickerViewController: LXSwiftPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: LXSwiftPickerView, didSelectRowAt indexPath: IndexPath) {
-        picker.dismiss()
+        pickerView.dismiss()
         print("-=-=-=-=-=didSelectRowAt-=-=-=-=\(indexPath)")
 
     }
