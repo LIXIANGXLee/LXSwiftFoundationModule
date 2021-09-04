@@ -61,7 +61,7 @@ class ViewController: UIViewController {
        }
         
         let modal = LXSwiftHyperlinksModalController()
-        modal.setModa(config, modalItems: [itemCancel,itemTrue]) { (text) -> (Void) in
+        modal.setModal(config, modalItems: [itemCancel,itemTrue]) { (text) -> (Void) in
             print("-=-=-=-=-=\(text)")
         }
         

@@ -27,7 +27,7 @@ class PickerViewController: UIViewController {
         picker.minHeight = 400
         picker.maxHeight = SCREEN_HEIGHT_TO_HEIGHT
         
-        picker.setTViewAllCornerRadii = 20
+        picker.tViewAllCornerRadii = 20
         
 //        picker.isDismissOfDidSelectBgView = false
         
@@ -35,13 +35,13 @@ class PickerViewController: UIViewController {
         tableheader.isUserInteractionEnabled = true
         tableheader.image = UIImage(named: "timg")
         picker.tHeaderView = tableheader
-        picker.setTHeaderViewTopCornerRadii = 20
+        picker.tHeaderViewTopCornerRadii = 20
 
         let tableFooter = UIImageView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 80))
         tableFooter.isUserInteractionEnabled = true
         tableFooter.image = UIImage(named: "timg")
         picker.tFooterView = tableFooter
-        picker.setTFooterViewBottomCornerRadii = 20
+        picker.tFooterViewBottomCornerRadii = 20
 
         picker.show {
             print("-=-=-=-=--=-=show-----===")
