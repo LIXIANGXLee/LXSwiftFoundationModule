@@ -8,7 +8,7 @@
 
 import UIKit
 
-public enum LXSwiftUserInterfaceStyle {
+@objc public enum LXSwiftUserInterfaceStyle: Int {
     case dark
     case light
 }
@@ -47,7 +47,8 @@ open class LXSwiftView: UIView {
     }
     
     /// 暗黑模式 和亮模式切换时调用
-    open func setUIDidChange(_ style: LXSwiftUserInterfaceStyle) { }
+  @objc open func setUIDidChange(_ style: LXSwiftUserInterfaceStyle) { }
+    
 }
 
 extension LXSwiftView: LXViewSetup {

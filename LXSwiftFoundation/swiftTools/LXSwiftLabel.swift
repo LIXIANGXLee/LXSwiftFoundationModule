@@ -9,30 +9,31 @@
 import UIKit
 
 /// 可设置文字内边距
-open class LXSwiftLabel: UILabel {
+@objc(LXObjcLabel)
+@objcMembers open class LXSwiftLabel: UILabel {
     open var swiftModel: Any?
    
     private var padding = UIEdgeInsets.zero
     @IBInspectable
-    public var paddingLeft: CGFloat {
+    open var paddingLeft: CGFloat {
        get { return padding.left }
        set { padding.left = newValue }
     }
    
     @IBInspectable
-    public var paddingRight: CGFloat {
+    open var paddingRight: CGFloat {
        get { return padding.right }
        set { padding.right = newValue }
     }
    
     @IBInspectable
-    public var paddingTop: CGFloat {
+    open var paddingTop: CGFloat {
        get { return padding.top }
        set { padding.top = newValue }
     }
    
     @IBInspectable
-    public var paddingBottom: CGFloat {
+    open var paddingBottom: CGFloat {
        get { return padding.bottom }
        set { padding.bottom = newValue }
     }

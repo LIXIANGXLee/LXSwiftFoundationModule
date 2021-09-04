@@ -9,21 +9,19 @@
 import UIKit
 
 // MARK: - timer（GCD）
-public struct LXSwiftGCDTimer: LXSwiftCompatible {
+@objc(LXOCGCDTimer)
+@objcMembers open class LXSwiftGCDTimer: NSObject {
     
     public typealias TaskCallBack = (() -> Void)
     fileprivate static var timers = [String: DispatchSourceTimer]()
-}
 
-//MARK: -  Extending methods for Date
-extension LXSwiftBasics where Base == LXSwiftGCDTimer {
-       
     /// 开始GCD定时器
     public static func startTimer(with delaySeconds: TimeInterval = 0,
                                   interval: TimeInterval = 1,
                                   repeats: Bool = true,
                                   identified: String?,
                                   task: LXSwiftGCDTimer.TaskCallBack?) {
+        
         guard let iden = identified, delaySeconds >= 0, interval >= 0,
               task != nil else { return }
         let timer = DispatchSource.makeTimerSource(queue: DispatchQueue.global())

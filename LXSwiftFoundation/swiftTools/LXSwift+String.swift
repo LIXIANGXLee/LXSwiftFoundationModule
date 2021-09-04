@@ -235,7 +235,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     /// 版本比较大小 Returns: big: base > two  ,small:two  < base, equal:base == two
     public func compareVersion(with version: String) -> LXSwiftUtils.VersionCompareResult {
         let string = base as! String
-        return LXSwiftUtils.lx.versionCompareSwift(v1: string, v2: version)
+        return LXSwiftUtils.versionCompareSwift(v1: string, v2: version)
     }
     
     /// 在小数点后保留几个有效数字

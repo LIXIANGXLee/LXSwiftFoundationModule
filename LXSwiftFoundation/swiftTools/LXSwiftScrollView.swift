@@ -8,10 +8,11 @@
 
 import UIKit
 
-open class LXSwiftScrollView: UIScrollView {
+@objc(LXObjcScrollView)
+@objcMembers open class LXSwiftScrollView: UIScrollView {
     
     public typealias RecognizeSimultaneously = ((UIGestureRecognizer, UIGestureRecognizer) -> Bool)
-    public typealias ShouldBegin =  ((UIGestureRecognizer) -> Bool?)
+    public typealias ShouldBegin =  ((UIGestureRecognizer) -> Bool)
 
     public var shouldRecognizeSimultaneously: RecognizeSimultaneously?
     public var shouldBegin: ShouldBegin?
@@ -30,11 +31,13 @@ open class LXSwiftScrollView: UIScrollView {
     }
     
     /// 您是否支持多事件传递
+    @objc(setObjcShouldRecognizeSimultaneously:)
     open func setShouldRecognizeSimultaneously(_ callBack: RecognizeSimultaneously?) {
         self.shouldRecognizeSimultaneously = callBack
     }
     
     /// 是否允许开始手势
+    @objc(setObjcShouldBegin:)
     open func setShouldBegin(_ callBack: ShouldBegin?) {
         self.shouldBegin = callBack
     }

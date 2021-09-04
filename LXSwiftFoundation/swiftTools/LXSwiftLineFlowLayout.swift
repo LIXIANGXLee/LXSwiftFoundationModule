@@ -7,16 +7,18 @@
 
 import UIKit
 
-@objc public protocol LXSwiftLineFlowLayoutDelegate: AnyObject {
+@objc(LXObjcLineFlowLayoutDelegate)
+public protocol LXSwiftLineFlowLayoutDelegate: AnyObject {
     
     /// 滑动到的中心view的索引的回调
     @objc optional func lineFlowLayout(_ lineFlowLayout: LXSwiftLineFlowLayout, _ index: Int)
 }
 
 // MARK: - 线性布局
-open class LXSwiftLineFlowLayout: UICollectionViewFlowLayout {
+@objc(LXObjcLineFlowLayout)
+@objcMembers open class LXSwiftLineFlowLayout: UICollectionViewFlowLayout {
    
-    public weak var delegate: LXSwiftLineFlowLayoutDelegate?
+    open weak var delegate: LXSwiftLineFlowLayoutDelegate?
     private var index: Int = 0
     open override func prepare() {
         super.prepare()

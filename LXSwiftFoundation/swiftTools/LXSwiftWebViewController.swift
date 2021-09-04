@@ -18,7 +18,7 @@ public struct LXSwiftMethod {
 
 // MARK: - Solving circular references
 /// 解决强引用问题
-open class LXSwiftWeakScriptMessageDelegate:NSObject, WKScriptMessageHandler {
+open class LXSwiftWeakScriptMessageDelegate: NSObject, WKScriptMessageHandler {
     fileprivate weak var delegate: WKScriptMessageHandler?
     init(_ delegate: WKScriptMessageHandler) {
         self.delegate = delegate
@@ -81,20 +81,20 @@ open class LXSwiftWebViewController: UIViewController {
 extension LXSwiftWebViewController {
     
     /// load webview 的网络连接
-    open func load(with string: String) {
+   open func load(with string: String) {
         if let url = URL(string: string){
             webView.load(URLRequest(url: url))
         }
     }
     
     /// load HTML
-    open func loadHTML(with string: String) {
+   open func loadHTML(with string: String) {
         if string.count == 0 { return }
         webView.loadHTMLString(string, baseURL: Bundle.main.resourceURL)
     }
     
     /// load HTMLFile
-    open func loadHTMLFile(with string: String,_ type: String) {
+   open func loadHTMLFile(with string: String,_ type: String) {
         if string.count == 0 { return }
         let url = Bundle.main.url(forResource: string, withExtension: type)!
         webView.loadFileURL(url, allowingReadAccessTo: url.deletingLastPathComponent())

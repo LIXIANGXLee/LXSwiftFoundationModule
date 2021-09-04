@@ -11,16 +11,17 @@ import UIKit
 @objc public protocol LXSwiftWaterfallLayoutDataSource: AnyObject {
     
     /// 根据给出的宽度计算高度
-    func waterfallLayout(_ layout: LXSwiftWaterfallLayout, width: CGFloat, indexPath: IndexPath) -> CGFloat
+    @objc func waterfallLayout(_ layout: LXSwiftWaterfallLayout, width: CGFloat, indexPath: IndexPath) -> CGFloat
     
     /// 每一行的列数
-    func numberOfColsInWaterfallLayout(_ layout: LXSwiftWaterfallLayout) -> Int
+    @objc func numberOfColsInWaterfallLayout(_ layout: LXSwiftWaterfallLayout) -> Int
 }
 
 // MARK: - 瀑布流
-open class LXSwiftWaterfallLayout: UICollectionViewFlowLayout {
+@objc(LXObjcWaterfallLayout)
+@objcMembers open class LXSwiftWaterfallLayout: UICollectionViewFlowLayout {
     
-    public weak var dataSource: LXSwiftWaterfallLayoutDataSource?
+    open weak var dataSource: LXSwiftWaterfallLayoutDataSource?
     
     // MARK: 私有延时属性
     private lazy var attrsArray = [UICollectionViewLayoutAttributes]()

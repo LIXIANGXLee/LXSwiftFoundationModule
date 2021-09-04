@@ -81,7 +81,7 @@ public extension LXSwiftCellCompatible {
 }
 
 /// 定义圆角背景色协议
-public protocol LXCustomRoundbackground: NSObjectProtocol {
+public protocol LXCustomRoundbackground: AnyObject {
     
     /// 获取view的计算属性
     var associatedView: UIView { get }

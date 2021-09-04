@@ -8,15 +8,16 @@
 
 import UIKit
 
-open class LXSwiftImgView: UIImageView {
+@objc(LXObjcImgView)
+@objcMembers open class LXSwiftImgView: UIImageView {
    
     /// 回调函数别名
     public typealias ImgViewCallBack = ((_ imgView: LXSwiftImgView?) -> ())
 
-    var imgViewCallBack: LXSwiftImgView.ImgViewCallBack?
+    open var imgViewCallBack: LXSwiftImgView.ImgViewCallBack?
     
     /// 是否允许交互
-    public var isInteractionEnabled: Bool = false {
+    open var isInteractionEnabled: Bool = false {
         didSet { isUserInteractionEnabled = isInteractionEnabled }
     }
     

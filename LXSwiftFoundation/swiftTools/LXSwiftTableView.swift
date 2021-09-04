@@ -9,11 +9,11 @@
 import UIKit
 
 private let tag = 19920688
-
-open class LXSwiftTableView: UITableView {
+@objc(LXObjcTableView)
+@objcMembers open class LXSwiftTableView: UITableView {
         
     public typealias RecognizeSimultaneously = ((UIGestureRecognizer, UIGestureRecognizer) -> Bool)
-    public typealias ShouldBegin =  ((UIGestureRecognizer) -> Bool?)
+    public typealias ShouldBegin =  ((UIGestureRecognizer) -> Bool)
 
     public var shouldRecognizeSimultaneously: RecognizeSimultaneously?
     public var shouldBegin: ShouldBegin?
@@ -42,11 +42,13 @@ open class LXSwiftTableView: UITableView {
     }
     
     /// 您是否支持多事件传递
+    @objc(setObjcShouldRecognizeSimultaneously:)
     open func setShouldRecognizeSimultaneously(_ callBack: RecognizeSimultaneously?) {
         self.shouldRecognizeSimultaneously = callBack
     }
     
     /// 是否允许开始手势
+    @objc(setObjcShouldBegin:)
     open func setShouldBegin(_ callBack: ShouldBegin?) {
         self.shouldBegin = callBack
     }
@@ -55,7 +57,7 @@ open class LXSwiftTableView: UITableView {
 public extension UITableView {
    
     /*
-     注册cell扩展
+     注册cell扩展 
      示例代码:
      public class LXTableViewViewCell: LXSwiftTableViewCell { }
      或者
@@ -89,7 +91,7 @@ public extension UITableView {
         tableView.roundSwiftSectionCell(cell, forRowAt: indexPath, cornerRadius: 6.0)
      }
      */
-    func roundSwiftSectionCell(_ cell: UITableViewCell, forRowAt indexPath: IndexPath, cornerRadius: CGFloat, backgroundColor: UIColor = .white) {
+   @objc func roundSwiftSectionCell(_ cell: UITableViewCell, forRowAt indexPath: IndexPath, cornerRadius: CGFloat, backgroundColor: UIColor = .white) {
         let hasSectionHeader = (self.delegate?.tableView?(self, viewForHeaderInSection: indexPath.section)) != nil
         let hasSectionFooter = (self.delegate?.tableView?(self, viewForFooterInSection: indexPath.section)) != nil
         let numberOfRows = self.numberOfRows(inSection: indexPath.section)
@@ -105,7 +107,7 @@ public extension UITableView {
     }
     
     /// 给sectionHeader扩展圆角和背景色
-    func roundSwiftSectionHeader(_ sectionHeader: UIView, forSection section: Int, cornerRadius: CGFloat, backgroundColor: UIColor = .white) {
+    @objc func roundSwiftSectionHeader(_ sectionHeader: UIView, forSection section: Int, cornerRadius: CGFloat, backgroundColor: UIColor = .white) {
         OperationQueue.main.addOperation {
             let numberOfRows = self.numberOfRows(inSection: section)
             let hasSectionFooter = (self.delegate?.tableView?(self, viewForFooterInSection: section)) != nil
@@ -118,7 +120,7 @@ public extension UITableView {
     }
     
     /// 给sectionFooter扩展圆角和背景色
-    func roundSwiftSectionFooter(_ sectionFooter: UIView, forSection section: Int, cornerRadius: CGFloat, backgroundColor: UIColor = .white) {
+    @objc func roundSwiftSectionFooter(_ sectionFooter: UIView, forSection section: Int, cornerRadius: CGFloat, backgroundColor: UIColor = .white) {
         let numberOfRows = self.numberOfRows(inSection: section)
         let hasSectionHeader = (self.delegate?.tableView?(self, viewForHeaderInSection: section)) != nil
         if numberOfRows == 0 && hasSectionHeader == false {
@@ -177,7 +179,7 @@ extension LXSwiftTableView: UIGestureRecognizerDelegate {
 }
 
 //MARK: - LXTableViewCell
-open class LXSwiftTableViewCell: UITableViewCell, LXSwiftCellCompatible {
+@objcMembers open class LXSwiftTableViewCell: UITableViewCell, LXSwiftCellCompatible {
 
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

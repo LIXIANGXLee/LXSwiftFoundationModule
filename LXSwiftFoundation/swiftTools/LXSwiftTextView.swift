@@ -9,19 +9,22 @@
 import UIKit
 
 // MARK: - TextView class
-open class LXSwiftTextView: UITextView {
+@objc(LXObjcTextView)
+@objcMembers open class LXSwiftTextView: UITextView {
     
     public typealias TextCallBack = (String) -> Void
     public var textCallBack: LXSwiftTextView.TextCallBack?
     
     /// 显示文案的标签
-    var placehoderLabel: UILabel!
-    override init(frame: CGRect, textContainer: NSTextContainer? = nil) {
+    var placehoderLabel: UILabel?
+    public override init(frame: CGRect, textContainer: NSTextContainer? = nil) {
         super.init(frame: frame, textContainer: textContainer)
         placehoderLabel = UILabel()
-        placehoderLabel.numberOfLines = 0
-        placehoderLabel.backgroundColor = UIColor.clear
-        addSubview(placehoderLabel)
+        placehoderLabel?.numberOfLines = 0
+        placehoderLabel?.backgroundColor = UIColor.clear
+        if placehoderLabel != nil {
+            addSubview(placehoderLabel!)
+        }
         
         /// call after placehoderLabel
         font = UIFont.lx.font(withRegular: 14)
@@ -36,21 +39,28 @@ open class LXSwiftTextView: UITextView {
     /// 移除通知
     deinit { NotificationCenter.lx_removeObserver(self) }
     
+    /// 外部调用方法
+    open func setHandle(_ textCallBack: LXSwiftTextView.TextCallBack?) {
+        self.textCallBack = textCallBack
+    }
+    
     open override var font: UIFont? {
         didSet {
             guard let pFont = font else { return }
-            placehoderLabel.font = pFont
+            placehoderLabel?.font = pFont
             setNeedsLayout()
         }
     }
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-        
+        guard let label = self.placehoderLabel else { return }
+     
         let labelX = textContainer.lineFragmentPadding
         let labelY = CGFloat(8)
-        let size = self.placehoderLabel.text?.lx.size(font: placehoderLabel.font, width: self.frame.width - CGFloat(labelX * 2)) ?? CGSize.zero
-        placehoderLabel.frame = CGRect(origin: CGPoint(x: labelX, y: labelY), size: size)
+   
+        let size = label.text?.lx.size(font: label.font, width: self.frame.width - CGFloat(labelX * 2)) ?? CGSize.zero
+        label.frame = CGRect(origin: CGPoint(x: labelX, y: labelY), size: size)
     }
 }
 
@@ -66,7 +76,7 @@ extension LXSwiftTextView {
     
     /// 事件监听
     @objc func textDidChange() {
-        placehoderLabel.isHidden = self.hasText
+        placehoderLabel?.isHidden = self.hasText
         
         if let maxLength = self.maxTextLength,
            (text?.count ?? 0) > maxLength {

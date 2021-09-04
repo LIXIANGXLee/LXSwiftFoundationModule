@@ -11,13 +11,11 @@ import AVFoundation
 import Photos
 
 /// PrivacyManager自动根据状态返回提示语
-public class LXSwiftPrivacyAuth: NSObject, LXSwiftCompatible { }
-
-//MARK: -  Extending methods for Privacy
-extension LXSwiftBasics where Base == LXSwiftPrivacyAuth {
-    
+@objc(LXObjcPrivacyAuth)
+@objcMembers open class LXSwiftPrivacyAuth: NSObject {
+ 
     /// 相机权限
-    public static var isCheckCamera: Bool {
+    public static var isSupportCamera: Bool {
         let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
         return authStatus == .authorized
     }
@@ -32,7 +30,7 @@ extension LXSwiftBasics where Base == LXSwiftPrivacyAuth {
     }
     
     /// 相册权限
-    public static var isCheckPhotoAlbum: Bool {
+    public static var isSupportPhotoAlbum: Bool {
         let authStatus = PHPhotoLibrary.authorizationStatus()
         return authStatus == .authorized
     }
@@ -47,7 +45,7 @@ extension LXSwiftBasics where Base == LXSwiftPrivacyAuth {
     }
     
     /// 麦克风权限
-    public static var isCheckAudio: Bool {
+    public static var isSupportAudio: Bool {
         let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.audio)
         return authStatus == .authorized
     }
@@ -62,7 +60,7 @@ extension LXSwiftBasics where Base == LXSwiftPrivacyAuth {
     }
 
     /// 定位权限
-    public static var isCheckLocation: Bool {
+    public static var isSupportLocation: Bool {
         let authStatus = CLLocationManager.authorizationStatus()
         return authStatus == .authorizedAlways || authStatus == .authorizedWhenInUse
     }

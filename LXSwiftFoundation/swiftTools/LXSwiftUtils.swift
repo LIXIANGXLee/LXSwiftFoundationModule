@@ -9,30 +9,14 @@
 import UIKit
 import AVFoundation
 
-public struct LXSwiftUtils: LXSwiftCompatible {
-    
+@objc(LXOCUtils)
+@objcMembers open class LXSwiftUtils: NSObject {
     public typealias TellCallBack = ((Bool) -> ())
     public enum VersionCompareResult {
         case big   /// 大于
         case equal /// 等于
         case small /// 小于
     }
-}
-
-/// version  init
-extension LXSwiftUtils.VersionCompareResult {
-    fileprivate init(rawValue: Int32) {
-        switch rawValue {
-            case 0: self = .equal
-            case Int32.min ... -1: self = .small
-            case 1 ... Int32.max: self = .big
-            default: self = .equal
-        }
-    }
-}
-
-//MARK: -  Extending methods for LXSwiftUtils
-extension LXSwiftBasics where Base == LXSwiftUtils {
     
     /// 获取网络类型
     public static var getNetWorkType: String {
@@ -115,11 +99,7 @@ extension LXSwiftBasics where Base == LXSwiftUtils {
     public static func convert(toUppercaseNumbers number: Double) -> String {
         return LXObjcUtils.convert(toUppercaseNumbers: number)
     }
-}
-
-//MARK: -  Extending methods for LXSwiftTool
-extension LXSwiftBasics where Base == LXSwiftUtils {
-        
+    
     /// 识别二维码图片
     public static func getQrCodeString(with image: UIImage?) -> String? {
         let context = CIContext(options: nil)
@@ -226,5 +206,17 @@ extension LXSwiftBasics where Base == LXSwiftUtils {
     /// 监听键盘已经退下
     public static func keyboardDidHide(_ observer: Any, selector aSelector: Selector) {
         NotificationCenter.default.addObserver(observer, selector: aSelector, name: UIResponder.keyboardDidHideNotification, object: nil)
+    }
+}
+
+/// version  init
+extension LXSwiftUtils.VersionCompareResult {
+    public init(rawValue: Int32) {
+        switch rawValue {
+            case 0: self = .equal
+            case Int32.min ... -1: self = .small
+            case 1 ... Int32.max: self = .big
+            default: self = .equal
+        }
     }
 }

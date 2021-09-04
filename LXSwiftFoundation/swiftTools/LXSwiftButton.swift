@@ -9,15 +9,16 @@
 import UIKit
 
 /// 添加按钮水平布局和按钮垂直布局
-open class LXSwiftButton: UIButton {
+@objc(LXObjcButton)
+@objcMembers open class LXSwiftButton: UIButton {
     
     /// 方便携带的参数 有的时候可能想自定义一些参数，做为传参作用
     open var swiftModel: Any?
     
     /// 回调函数别名
     public typealias ButtonCallBack = ((_ contentRect: CGRect) -> (CGRect))
-    public var titleCallBack: ButtonCallBack?
-    public var imageCallBack: ButtonCallBack?
+    open var titleCallBack: ButtonCallBack?
+    open var imageCallBack: ButtonCallBack?
     
     open override func imageRect(forContentRect contentRect: CGRect) -> CGRect {
         return self.imageCallBack?(contentRect) ?? contentRect

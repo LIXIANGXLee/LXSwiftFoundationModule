@@ -8,10 +8,11 @@
 
 import UIKit
 
-open class LXSwiftCollectionView: UICollectionView {
+@objc(LXObjcCollectionView)
+@objcMembers open class LXSwiftCollectionView: UICollectionView {
     
     public typealias RecognizeSimultaneously = ((UIGestureRecognizer, UIGestureRecognizer) -> Bool)
-    public typealias ShouldBegin = ((UIGestureRecognizer) -> Bool?)
+    public typealias ShouldBegin = ((UIGestureRecognizer) -> Bool)
 
     public var shouldRecognizeSimultaneously: RecognizeSimultaneously?
     public var shouldBegin: ShouldBegin?
@@ -34,11 +35,13 @@ open class LXSwiftCollectionView: UICollectionView {
     }
     
     /// 您是否支持多事件传递
+    @objc(setObjcShouldRecognizeSimultaneously:)
     open func setShouldRecognizeSimultaneously(_ callBack: RecognizeSimultaneously?) {
         self.shouldRecognizeSimultaneously = callBack
     }
     
     /// 是否允许开始手势
+    @objc(setObjcShouldBegin:)
     open func setShouldBegin(_ callBack: ShouldBegin?) {
         self.shouldBegin = callBack
     }
@@ -72,7 +75,7 @@ extension LXSwiftCollectionView: UIGestureRecognizerDelegate {
     }
 }
 
-open class LXSwiftCollectionViewCell: UICollectionViewCell, LXSwiftCellCompatible {
+@objcMembers open class LXSwiftCollectionViewCell: UICollectionViewCell, LXSwiftCellCompatible {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()

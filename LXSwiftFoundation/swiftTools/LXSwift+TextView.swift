@@ -18,9 +18,9 @@ extension LXSwiftBasics where Base : LXSwiftTextView {
     
     /// 设置占位符和颜色
     public func set(with placeholder: String?, color: UIColor? = UIColor.lx.color(hex: "999999")) {
-        base.placehoderLabel.text = placeholder
+        base.placehoderLabel?.text = placeholder
         if let c = color {
-            base.placehoderLabel.textColor = c
+            base.placehoderLabel?.textColor = c
         }
         base.setNeedsLayout()
     }

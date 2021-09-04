@@ -8,10 +8,11 @@
 
 import UIKit
 
-open class LXSwiftHyperlinksModalController: LXSwiftModalController {
+@objc(LXObjcHyperlinksModalController)
+@objcMembers open class LXSwiftHyperlinksModalController: LXSwiftModalController {
     
     public typealias CallBack = ((String) -> (Void))
-    public var callBack: LXSwiftHyperlinksModalController.CallBack?
+    open var callBack: LXSwiftHyperlinksModalController.CallBack?
     
     private var modaConfig = LXSwiftModalConfig()
     
@@ -50,7 +51,7 @@ open class LXSwiftHyperlinksModalController: LXSwiftModalController {
         return lineView
     }()
     
-    public override func backgroundViewTap() {
+    open override func backgroundViewTap() {
         if modaConfig.isDismissBg {
             super.backgroundViewTap()
         }
@@ -61,7 +62,6 @@ open class LXSwiftHyperlinksModalController: LXSwiftModalController {
         modalItems[itemView.tag].callBack?()
         lx.dismissViewController()
     }
-
 }
 
 extension LXSwiftHyperlinksModalController: LXTextLableDelegate {
@@ -72,12 +72,12 @@ extension LXSwiftHyperlinksModalController: LXTextLableDelegate {
 
 extension LXSwiftHyperlinksModalController {
 
-    public func getAttributedString(with text: String, textColor: UIColor = UIColor.lx.color(hex: "666666"), textFont: UIFont = UIFont.systemFont(ofSize: 14), regexTypes: [LXSwiftRegexType]) -> NSAttributedString? {
+    open func getAttributedString(with text: String, textColor: UIColor = UIColor.lx.color(hex: "666666"), textFont: UIFont = UIFont.systemFont(ofSize: 14), regexTypes: [LXSwiftRegexType]) -> NSAttributedString? {
         return LXSwiftRegex.regex(of: text, textColor: textColor, textFont: textFont, wordRegexTypes: regexTypes)
     }
     
     /// 设置UI信息 和超链接点击回调
-    public func setModa(_ modaConfig: LXSwiftModalConfig, modalItems: [LXSwiftItem], callBack: LXSwiftHyperlinksModalController.CallBack?) {
+    @objc open func setModal(_ modaConfig: LXSwiftModalConfig, modalItems: [LXSwiftItem], callBack: LXSwiftHyperlinksModalController.CallBack?) {
         self.modaConfig = modaConfig
         self.modalItems = modalItems
         self.callBack = callBack
@@ -101,7 +101,7 @@ extension LXSwiftHyperlinksModalController {
     }
     
     /// 显示UI图层
-    public func show(with title: String, content: NSAttributedString) {
+    @objc open func show(with title: String, content: NSAttributedString) {
         titleLabel.text = title
         contentView.layer.cornerRadius = self.modaConfig.contentViewRadius
         contentView.lx.width = modaConfig.contentViewW
@@ -163,48 +163,50 @@ extension LXSwiftHyperlinksModalController {
 
 }
 
-public class LXSwiftModalConfig {
+@objc(LXObjcModalConfig)
+@objcMembers open class LXSwiftModalConfig: NSObject {
 
-    public init(){ }
+    public override init() { }
     
     /// 内容圆角
-    public var contentViewRadius: CGFloat = SCALE_IP6_WIDTH_TO_WIDTH(10)
-    public var contentViewW: CGFloat = SCALE_IP6_WIDTH_TO_WIDTH(288)
+    open var contentViewRadius: CGFloat = SCALE_IP6_WIDTH_TO_WIDTH(10)
+    open var contentViewW: CGFloat = SCALE_IP6_WIDTH_TO_WIDTH(288)
     //  距离中间位置的偏移量
-    public var contentViewOffSet: CGFloat = 0
-    public var contentViewSubViewX: CGFloat = SCALE_IP6_WIDTH_TO_WIDTH(20)
+    open var contentViewOffSet: CGFloat = 0
+    open var contentViewSubViewX: CGFloat = SCALE_IP6_WIDTH_TO_WIDTH(20)
 
     /// 标题颜色和字体大小 距离顶部的距离
-    public var titleTop: CGFloat = SCALE_IP6_WIDTH_TO_WIDTH(20)
-    public var titleFont: UIFont = UIFont.lx.font(withMedium: 18)
-    public var titleColor: UIColor = UIColor.black
+    open var titleTop: CGFloat = SCALE_IP6_WIDTH_TO_WIDTH(20)
+    open var titleFont: UIFont = UIFont.lx.font(withMedium: 18)
+    open var titleColor: UIColor = UIColor.black
     
     /// 内容颜色和字体大小 距离title的距离
-    public var contentMidViewTop: CGFloat = SCALE_IP6_WIDTH_TO_WIDTH(13)
-    public var contentMidViewH: CGFloat = SCALE_IP6_WIDTH_TO_WIDTH(200)
-    public var isContentMidViewScrollEnabled: Bool = true
-    public var isshowsVerticalScrollIndicator: Bool = true
+    open var contentMidViewTop: CGFloat = SCALE_IP6_WIDTH_TO_WIDTH(13)
+    open var contentMidViewH: CGFloat = SCALE_IP6_WIDTH_TO_WIDTH(200)
+    open var isContentMidViewScrollEnabled: Bool = true
+    open var isshowsVerticalScrollIndicator: Bool = true
     
     /// 线颜色 和 距离内容的距离
-    public var lineTop: CGFloat =  SCALE_IP6_WIDTH_TO_WIDTH(13)
-    public var lineColor: UIColor = UIColor.lx.color(hex: "EFEFEF")
+    open var lineTop: CGFloat =  SCALE_IP6_WIDTH_TO_WIDTH(13)
+    open var lineColor: UIColor = UIColor.lx.color(hex: "EFEFEF")
     
     /// item 高度
-    public var itemH: CGFloat = SCALE_IP6_WIDTH_TO_WIDTH(55)
+    open var itemH: CGFloat = SCALE_IP6_WIDTH_TO_WIDTH(55)
     
     /// 点击背景是否关闭弹窗
-    public var isDismissBg: Bool = true
+    open var isDismissBg: Bool = true
     
-    public var selectBgColor: UIColor = UIColor.black.withAlphaComponent(0.1)
+    open var selectBgColor: UIColor = UIColor.black.withAlphaComponent(0.1)
 }
 
-public struct LXSwiftItem {
+@objc(LXObjcItem)
+@objcMembers open class LXSwiftItem: NSObject {
     
-   public typealias LXSwiftModalItemCallBack = (() -> Void)
-   public var title: String
-   public var titleColor: UIColor
-   public var titleFont: UIFont
-   public var callBack: LXSwiftItem.LXSwiftModalItemCallBack?
+    public typealias LXSwiftModalItemCallBack = (() -> Void)
+    open var title: String
+    open var titleColor: UIColor
+    open var titleFont: UIFont
+    open var callBack: LXSwiftItem.LXSwiftModalItemCallBack?
     
    public init(title: String, titleColor: UIColor = UIColor.black, titleFont: UIFont = UIFont.lx.font(withMedium: 16), callBack: LXSwiftItem.LXSwiftModalItemCallBack?) {
         self.title = title
@@ -215,9 +217,10 @@ public struct LXSwiftItem {
 }
 
 // MARK: - LXItemView
-public class LXSwiftItemView: UIButton {
+@objc(LXObjcItemView)
+@objcMembers open class LXSwiftItemView: UIButton {
     //线的view
-    public var lineView: UIView
+    open var lineView: UIView
     public override init(frame: CGRect) {
         lineView = UIView()
         super.init(frame: frame)
@@ -225,14 +228,14 @@ public class LXSwiftItemView: UIButton {
     }
     
     ///布局线的尺寸
-    public func setLineViewFrame() {
+    open func setLineViewFrame() {
         lineView.frame = CGRect(x: frame.width - SCALE_IP6_WIDTH_TO_WIDTH(0.5),
                                 y: 0,
                                 width: SCALE_IP6_WIDTH_TO_WIDTH(0.5),
                                 height: frame.height)
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
