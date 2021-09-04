@@ -10,12 +10,12 @@
 #endif
 #endif
 
-#import "LXDrawerViewController.h"
 #import "LXObjcLinkedList.h"
 #import "LXObjcProxy.h"
 #import "LXObjcThreadActive.h"
 #import "LXObjcUtils.h"
 #import "CADisplayLink+Block.h"
+#import "LXDrawerViewController.h"
 #import "LXLineFlowLayout.h"
 #import "LXObjcFoundation.h"
 #import "LXObjcGCDTimer.h"
