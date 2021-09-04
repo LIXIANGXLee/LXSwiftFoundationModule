@@ -18,12 +18,4 @@ class LXCollectionViewCell: LXSwiftCollectionViewCell {
     
     
 }
-class LXTableViewViewCell: LXSwiftTableViewCell {
-    
-    
-    override func setupUI() {
-        
-    }
-    
-    
-}
+

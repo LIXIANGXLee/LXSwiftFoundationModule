@@ -14,7 +14,9 @@ class PickerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = UIColor.red
+        self.title = "两段式滑动弹窗,点击屏幕显示弹窗"
+        
+        self.view.backgroundColor = UIColor.white
         
     }
 
@@ -24,8 +26,8 @@ class PickerViewController: UIViewController {
         picker.delegate = self
         picker.dataSource = self
         
-        picker.minHeight = 400
-        picker.maxHeight = SCREEN_HEIGHT_TO_HEIGHT
+        picker.minHeight = SCREEN_HEIGHT_TO_HEIGHT * 0.4
+        picker.maxHeight = SCREEN_HEIGHT_TO_HEIGHT * 0.8
         
         picker.tViewAllCornerRadii = 20
         

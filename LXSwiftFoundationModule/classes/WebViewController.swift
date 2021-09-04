@@ -9,11 +9,10 @@
 import UIKit
 import LXSwiftFoundation
 
-class Test1ViewController: LXSwiftWebViewController {
+class WebViewController: LXSwiftWebViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
         self.webView.frame = CGRect(x: 0, y: 0, width: LXSwiftApp.screenW, height: LXSwiftApp.screenH)
         
@@ -29,14 +28,6 @@ class Test1ViewController: LXSwiftWebViewController {
                 imgView.image = image
 
             }
-            
-//            imgView.image = self.webView.lx.snapShotImage
-           
-//
-//            UIImage(named: "0gO3")?.lx.async_imageWithCircle(complete: { (image) in
-//                 imgView.image = image
-//            })
-//
         }
     }
 
@@ -44,9 +35,5 @@ class Test1ViewController: LXSwiftWebViewController {
     deinit {
         print("-=-=-=-=-=-=")
     }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        self.present(Test1ViewController(), animated: true, completion: nil)
 
-    }
 }

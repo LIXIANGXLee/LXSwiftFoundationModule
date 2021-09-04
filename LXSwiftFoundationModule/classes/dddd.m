@@ -10,7 +10,7 @@
 #import <LXSwiftFoundation/LXObjcProxy.h>
 #import <LXSwiftFoundation-Swift.h>
 
-#import <LXSwiftFoundation/LXSwiftFoundation.h>
+#import <LXSwiftFoundation/LXObjcFoundation.h>
 
 @implementation dddd
 

@@ -5,8 +5,8 @@
 //  Created by 李响 on 2021/4/29.
 //
 
-#ifndef LXSwiftFoundation_h
-#define LXSwiftFoundation_h
+#ifndef LXObjcFoundation_h
+#define LXObjcFoundation_h
 
 #define SCREEN_WIDTH_TO_WIDTH LXObjcApp.screenWidth
 #define SCREEN_HEIGHT_TO_HEIGHT LXObjcApp.screenHeight

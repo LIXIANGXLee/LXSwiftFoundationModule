@@ -33,7 +33,7 @@ open class LXSwiftWeakScriptMessageDelegate: NSObject, WKScriptMessageHandler {
 /// MARK: - WKWebView
 open class LXSwiftWebViewController: UIViewController {
     
-    open var loadWebViewContentH: ((Float) -> ())?
+    open var loadWebViewContentHeight: ((Float) -> ())?
     open var loadWebViewTitle: ((String) -> ())?
     open var loadWebViewUrl: ((URL) -> ())?
     
@@ -218,7 +218,7 @@ extension LXSwiftWebViewController {
     fileprivate func handleJS(){
         webView.evaluateJavaScript("document.body.offsetHeight") { (res, error) in
             guard let h = res as? Int else { return }
-            self.loadWebViewContentH?(Float(h))
+            self.loadWebViewContentHeight?(Float(h))
         }
     }
 }

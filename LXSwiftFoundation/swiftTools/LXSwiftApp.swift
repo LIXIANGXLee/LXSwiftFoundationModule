@@ -106,14 +106,16 @@ public func SCALE_GET_CENTER_WIDTH_AND_WIDTH(_ parent: CGFloat, _ child: CGFloat
     /// 获取状态栏高度
     private static var statusBarHeight: CGFloat {
         var statusH: CGFloat = UIApplication.shared.statusBarFrame.height
-        if statusH == 0, #available(iOS 13.0, *) {
-            statusH = UIApplication.lx.rootWindow?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+        if statusH == 0 {
+            if #available(iOS 13.0, *) {
+                statusH = UIApplication.lx.rootWindow?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+
+            }else if #available(iOS 11.0, *) {
+                statusH = UIApplication.lx.rootWindow?.safeAreaInsets.top ?? 0
+            }else {
+                return 20
+            }
         }
-        
-        if  statusH == 0, #available(iOS 11.0, *)  {
-            statusH = UIApplication.lx.rootWindow?.safeAreaInsets.top ?? 0
-        }
-        
         return statusH
     }
     
