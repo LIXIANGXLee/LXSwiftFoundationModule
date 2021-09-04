@@ -9,25 +9,56 @@
 
 import UIKit
 
+/******************oc写法********************/
 /*
+ 
  从bundle中加载图片 文件 资源
  for example:
- fileprivate class LXSwiftConvenienceBundlePath {}
- extension UIImage {
- static let convenienceBundle = LXSwiftConvenienceBundle(bundlePath: Bundle(for: LXSwiftConvenienceBundlePath.self).bundlePath, bundleName: "Login.bundle", path: nil)
+ @interface LXBundleImage : NSObject
+ + (LXBundleImage *)shared;
+ - (LXObjcConvenienceBundle *)bundle;
+ @end
+
+ @implementation LXBundleImage
+ static LXBundleImage *instance;
+ + (LXBundleImage *)shared {
+ static dispatch_once_t oneToken;
+     dispatch_once(&oneToken, ^{
+         instance = [[self alloc]init];
+     });
+     return instance;
+ }
+ - (LXObjcConvenienceBundle *)bundle {
+     NSString *bundlePath = [NSBundle bundleForClass:self.class].bundlePath;
+     return [[LXObjcConvenienceBundle alloc] initWithBundlePath:bundlePath bundleName:@"" path:nil];
+ }
+ @end
+ @implementation UIImage (add)
+ + (nullable UIImage *)imageName:(NSString *)imageName {
+     return [[LXBundleImage shared].bundle imageNamed:imageName path:@""];
+ }
  
- static func named(_ imageNamed: String?) -> UIImage? {
- guard let imageNamed = imageNamed else { return nil }
- return convenienceBundle.imageNamed(imageNamed)
- }
- }
+ /******************swift写法********************/
+ 
+ 从bundle中加载图片 文件 资源
+ for example:
+     fileprivate class LXSwiftConvenienceBundlePath {}
+     extension UIImage {
+         static let convenienceBundle = LXSwiftConvenienceBundle(bundlePath: Bundle(for: LXSwiftConvenienceBundlePath.self).bundlePath, bundleName: "Login.bundle", path: nil)
+         
+         static func named(_ imageNamed: String?) -> UIImage? {
+         guard let imageNamed = imageNamed else { return nil }
+         return convenienceBundle.imageNamed(imageNamed)
+         }
+     }
  */
 
 //MARK: - bundle @1x @2x @3x image
-public struct LXSwiftConvenienceBundle {
-    private let path: String?           //bundle name
-    private let bundlePath: String     //bundle  path
-    private let bundleName: String
+@objc(LXObjcConvenienceBundle)
+@objcMembers open class LXSwiftConvenienceBundle: NSObject {
+    private let path: String?
+    private let bundlePath: String     // bundle  path
+    private let bundleName: String     // bundle name
     
     public init(bundlePath: String, bundleName: String, path: String? = nil) {
         self.bundlePath = bundlePath
@@ -39,7 +70,7 @@ public struct LXSwiftConvenienceBundle {
     ///
     /// -ImageName：图像的名称或路径
     /// -path:bundle如果指定，则不使用默认路径
-    public func imageNamed(_ imageName: String, path: String? = nil) -> UIImage? {
+    open func imageNamed(_ imageName: String, path: String? = nil) -> UIImage? {
         var imagePath = "\(bundlePath)/\(bundleName)/"
         if let path = path {
             imagePath = imagePath + "\(path)/"
@@ -51,7 +82,7 @@ public struct LXSwiftConvenienceBundle {
     }
 }
 
-fileprivate struct LXSwiftImageBuilder {
+fileprivate class LXSwiftImageBuilder: NSObject {
     static var x1ImageBuilder: LXSwiftImageAdaptNode = LXSwiftX1ImageBuilder(successor:
                                 LXSwiftX2ImageBuilder(successor: LXSwiftX3ImageBuilder()))
     static var x2ImageBuilder: LXSwiftImageAdaptNode = LXSwiftX2ImageBuilder(successor:

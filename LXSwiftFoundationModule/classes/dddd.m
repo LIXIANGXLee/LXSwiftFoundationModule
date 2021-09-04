@@ -30,6 +30,8 @@
         NSLog(@"-=-=-=-=-=-%f",SCALE_IPAD129_WIDTH_TO_WIDTH(20));
         NSLog(@"-=-=-=-=-=-%f",SCALE_IPAD129_HEIGHT_TO_HEIGHT(20));
 
+        
+        
     }
     return self;
 }

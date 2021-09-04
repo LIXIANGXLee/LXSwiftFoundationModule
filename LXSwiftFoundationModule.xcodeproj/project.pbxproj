@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0447CA3726E366BB00F46B63 /* UIImage+add.m in Sources */ = {isa = PBXBuildFile; fileRef = 0447CA3626E366BB00F46B63 /* UIImage+add.m */; };
 		044E559A26B68ECC00E79CCB /* lxQrCodeVoice.wav in Resources */ = {isa = PBXBuildFile; fileRef = 044E559926B68ECC00E79CCB /* lxQrCodeVoice.wav */; };
 		7607A07F251B1C0B0071B9AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A07E251B1C0B0071B9AD /* AppDelegate.swift */; };
 		7607A086251B1C0B0071B9AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7607A084251B1C0B0071B9AD /* Main.storyboard */; };
@@ -22,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0447CA3526E366BB00F46B63 /* UIImage+add.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+add.h"; sourceTree = "<group>"; };
+		0447CA3626E366BB00F46B63 /* UIImage+add.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+add.m"; sourceTree = "<group>"; };
 		044E559926B68ECC00E79CCB /* lxQrCodeVoice.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = lxQrCodeVoice.wav; sourceTree = "<group>"; };
 		04E627F2251E55120033BBA5 /* LXSwiftFoundationModule-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LXSwiftFoundationModule-Bridging-Header.h"; sourceTree = "<group>"; };
 		6348DD709E89FD4FC09A35D6 /* Pods-LXSwiftFoundationModule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXSwiftFoundationModule.debug.xcconfig"; path = "Target Support Files/Pods-LXSwiftFoundationModule/Pods-LXSwiftFoundationModule.debug.xcconfig"; sourceTree = "<group>"; };
@@ -62,6 +65,8 @@
 				8493CB9B263A7B72000769A1 /* dddd.m */,
 				84EF37DC266483620087E578 /* LXCollectionViewCell.swift */,
 				848B4FDB26DF67240068893A /* PickerViewController.swift */,
+				0447CA3526E366BB00F46B63 /* UIImage+add.h */,
+				0447CA3626E366BB00F46B63 /* UIImage+add.m */,
 			);
 			path = classes;
 			sourceTree = "<group>";
@@ -242,6 +247,7 @@
 				8493CB9C263A7B72000769A1 /* dddd.m in Sources */,
 				8471063326DC752E0089EB73 /* ViewController.swift in Sources */,
 				7607A07F251B1C0B0071B9AD /* AppDelegate.swift in Sources */,
+				0447CA3726E366BB00F46B63 /* UIImage+add.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
