@@ -15,8 +15,8 @@ private let tag = 19920688
     public typealias RecognizeSimultaneously = ((UIGestureRecognizer, UIGestureRecognizer) -> Bool)
     public typealias ShouldBegin =  ((UIGestureRecognizer) -> Bool)
 
-    public var shouldRecognizeSimultaneously: RecognizeSimultaneously?
-    public var shouldBegin: ShouldBegin?
+    open var shouldRecognizeSimultaneously: RecognizeSimultaneously?
+    open var shouldBegin: ShouldBegin?
 
     override public init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -192,12 +192,12 @@ extension LXSwiftTableView: UIGestureRecognizerDelegate {
     }
 }
 
-extension LXSwiftTableView: LXViewSetup {
+extension LXSwiftTableView: LXSwiftUIProtocol {
     @objc open func setupUI() { }
     @objc open func setupViewModel() { }
 }
 
-extension LXSwiftTableViewCell: LXViewSetup {
+extension LXSwiftTableViewCell: LXSwiftUIProtocol {
     @objc open func setupUI() { }
     @objc open func setupViewModel() { }
 }

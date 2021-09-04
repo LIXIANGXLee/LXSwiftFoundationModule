@@ -14,8 +14,8 @@ import UIKit
     public typealias RecognizeSimultaneously = ((UIGestureRecognizer, UIGestureRecognizer) -> Bool)
     public typealias ShouldBegin = ((UIGestureRecognizer) -> Bool)
 
-    public var shouldRecognizeSimultaneously: RecognizeSimultaneously?
-    public var shouldBegin: ShouldBegin?
+    open var shouldRecognizeSimultaneously: RecognizeSimultaneously?
+    open var shouldBegin: ShouldBegin?
 
     public override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
@@ -87,12 +87,12 @@ extension LXSwiftCollectionView: UIGestureRecognizerDelegate {
     }
 }
 
-extension LXSwiftCollectionView: LXViewSetup {
+extension LXSwiftCollectionView: LXSwiftUIProtocol {
     @objc open func setupUI() { }
     @objc open func setupViewModel() { }
 }
 
-extension LXSwiftCollectionViewCell: LXViewSetup {
+extension LXSwiftCollectionViewCell: LXSwiftUIProtocol {
     @objc open func setupUI() { }
     @objc open func setupViewModel() { }
 }

@@ -18,13 +18,13 @@ public let SCREEN_HEIGHT_TO_HEIGHT = LXSwiftApp.screenH
 public let SCREEN_HEIGHT_TO_TOUCHBARHEIGHT = LXSwiftApp.touchBarH
 
 /// 顶部刘海
-public let SCREEN_HEIGHT_TO_STATUSHEIGHT = LXSwiftApp.statusbarH
+public let SCREEN_HEIGHT_TO_STATUSHEIGHT = LXSwiftApp.statusBarH
 
 /// tabbar高度
-public let SCREEN_HEIGHT_TO_TABBARHEIGHT = LXSwiftApp.tabbarH
+public let SCREEN_HEIGHT_TO_TABBARHEIGHT = LXSwiftApp.tabBarH
 
 /// 导航栏高度
-public let SCREEN_HEIGHT_TO_NAVBARHEIGHT = LXSwiftApp.navbarH
+public let SCREEN_HEIGHT_TO_NAVBARHEIGHT = LXSwiftApp.navBarH
 
 /// 标准iphone6适配宽度
 public func SCALE_IP6_WIDTH_TO_WIDTH(_ distance: CGFloat) -> CGFloat {
@@ -71,19 +71,19 @@ public func SCALE_GET_CENTER_WIDTH_AND_WIDTH(_ parent: CGFloat, _ child: CGFloat
     public static let screenH = CGFloat(bounds.height)
 
     /// 状态栏高度
-    @objc(statusbarHeight)
-    public static let statusbarH: CGFloat = statusBarHeight
+    @objc(statusBarHeight)
+    public static let statusBarH: CGFloat = statusBarHeight
     
     /// 屏幕底部刘海高度
     @objc(touchBarHeight)
     public static let touchBarH: CGFloat = touchBarHeight
         
     /// Gets the height of the Navigation bar
-    @objc(navbarHeight)
-    public static let navbarH: CGFloat = statusbarH + 44
+    @objc(navBarHeight)
+    public static let navBarH: CGFloat = statusBarH + 44
     
-    @objc(tabbarHeight)
-    public static let tabbarH: CGFloat = touchBarH + 49
+    @objc(tabBarHeight)
+    public static let tabBarH: CGFloat = touchBarH + 49
     
     /// 系统版本号(swift调用version，oc代码调用version_objc)
     @objc(version_objc)
@@ -108,10 +108,10 @@ public func SCALE_GET_CENTER_WIDTH_AND_WIDTH(_ parent: CGFloat, _ child: CGFloat
         var statusH: CGFloat = UIApplication.shared.statusBarFrame.height
         if statusH == 0 {
             if #available(iOS 13.0, *) {
-                statusH = UIApplication.lx.rootWindow?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+                statusH = rootWindow?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
 
             }else if #available(iOS 11.0, *) {
-                statusH = UIApplication.lx.rootWindow?.safeAreaInsets.top ?? 0
+                statusH = rootWindow?.safeAreaInsets.top ?? 0
             }else {
                 return 20
             }
@@ -124,12 +124,29 @@ public func SCALE_GET_CENTER_WIDTH_AND_WIDTH(_ parent: CGFloat, _ child: CGFloat
         var touchBarH: CGFloat = 0
         if #available(iOS 11.0, *) {
             touchBarH =
-                UIApplication.lx.rootWindow?.safeAreaInsets.bottom ?? 0
-            if touchBarH == 0 && Int(statusbarH) > 20 {
+               rootWindow?.safeAreaInsets.bottom ?? 0
+            if touchBarH == 0 && Int(statusBarH) > 20 {
                 touchBarH = 34
             }
         }
         return touchBarH
     }
+    
+    /// 获取跟窗口
+    public static var rootWindow: UIWindow? {
+        if #available(iOS 13.0, *) {
+            if let window = UIApplication.shared.connectedScenes
+                   .filter({$0.activationState == .foregroundActive})
+                   .map({$0 as? UIWindowScene})
+                   .compactMap({$0})
+                   .first?.windows
+                   .filter({$0.isKeyWindow}).first {
+                   return window
+            }else {
+                return UIApplication.shared.delegate?.window ?? UIApplication.shared.windows.first
+            }
+        } else {
+               return UIApplication.shared.delegate?.window ?? UIApplication.shared.windows.first
+        }
+    }
 }
-

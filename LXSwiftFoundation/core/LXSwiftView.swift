@@ -8,12 +8,14 @@
 
 import UIKit
 
+extension UIView: LXCustomRoundbackground { }
+
 @objc public enum LXSwiftUserInterfaceStyle: Int {
     case dark
     case light
 }
 
-public extension LXViewSetup {
+public extension LXSwiftUIProtocol {
     func setupUI() { }
     func setupViewModel() { }
 }
@@ -51,7 +53,7 @@ open class LXSwiftView: UIView {
     
 }
 
-extension LXSwiftView: LXViewSetup {
+extension LXSwiftView: LXSwiftUIProtocol {
     @objc open func setupUI() { }
     @objc open func setupViewModel() { }
 }

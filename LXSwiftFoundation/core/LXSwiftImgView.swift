@@ -11,10 +11,14 @@ import UIKit
 @objc(LXObjcImgView)
 @objcMembers open class LXSwiftImgView: UIImageView {
    
+    /// 方便携带的参数 有的时候可能想自定义一些参数，做为传参作用
+    @objc(objcModel) open var swiftModel: Any?
+   
     /// 回调函数别名
-    public typealias ImgViewCallBack = ((_ imgView: LXSwiftImgView?) -> ())
+    public typealias CallBack = ((_ imgView: LXSwiftImgView?) -> ())
 
-    open var imgViewCallBack: LXSwiftImgView.ImgViewCallBack?
+    ///
+    open var callBack: LXSwiftImgView.CallBack?
     
     /// 是否允许交互
     open var isInteractionEnabled: Bool = false {
@@ -34,26 +38,13 @@ import UIKit
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-}
-
-/// 私有函数扩展
-extension LXSwiftImgView {
     
     /// action call
     @objc private func swiftImgViewAction(_ gesture: UIGestureRecognizer) {
         gesture.view?.isUserInteractionEnabled = false
-        DispatchQueue.lx.delay(with: 1) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
             gesture.view?.isUserInteractionEnabled = true
         }
-        self.imgViewCallBack?(gesture.view as? LXSwiftImgView)
-    }
-}
-
-//MARK: -  Extending properties and methods for UISwitch
-extension LXSwiftBasics where Base: LXSwiftImgView {
-    
-    /// 设置方法回调的句柄
-    public func setHandle(_ imgViewCallBack: LXSwiftImgView.ImgViewCallBack?) {
-        base.imgViewCallBack = imgViewCallBack
+        self.callBack?(gesture.view as? LXSwiftImgView)
     }
 }

@@ -31,5 +31,5 @@ import UIKit
         }
     }
     
-    deinit { NotificationCenter.lx_removeObserver(self) }
+    deinit { NotificationCenter.default.removeObserver(self) }
 }

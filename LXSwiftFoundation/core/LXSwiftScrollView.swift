@@ -14,8 +14,8 @@ import UIKit
     public typealias RecognizeSimultaneously = ((UIGestureRecognizer, UIGestureRecognizer) -> Bool)
     public typealias ShouldBegin =  ((UIGestureRecognizer) -> Bool)
 
-    public var shouldRecognizeSimultaneously: RecognizeSimultaneously?
-    public var shouldBegin: ShouldBegin?
+    open var shouldRecognizeSimultaneously: RecognizeSimultaneously?
+    open var shouldBegin: ShouldBegin?
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -63,7 +63,7 @@ extension LXSwiftScrollView: UIGestureRecognizerDelegate {
     }
 }
 
-extension LXSwiftScrollView: LXViewSetup {
+extension LXSwiftScrollView: LXSwiftUIProtocol {
     @objc open func setupUI() { }
     @objc open func setupViewModel() { }
 }

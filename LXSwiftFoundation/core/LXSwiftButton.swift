@@ -13,7 +13,7 @@ import UIKit
 @objcMembers open class LXSwiftButton: UIButton {
     
     /// 方便携带的参数 有的时候可能想自定义一些参数，做为传参作用
-    open var swiftModel: Any?
+    @objc(objcModel) open var swiftModel: Any?
     
     /// 回调函数别名
     public typealias ButtonCallBack = ((_ contentRect: CGRect) -> (CGRect))
@@ -39,16 +39,5 @@ import UIKit
     
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-}
-
-//MARK: -  Extending properties for LXSwiftButtonView
-extension LXSwiftBasics where Base: LXSwiftButton {
- 
-    /// 设置标题的cgrect和图像的cgrect
-    public func setHandle(titleCallBack: LXSwiftButton.ButtonCallBack?,
-                          imageCallBack: LXSwiftButton.ButtonCallBack?) {
-        base.titleCallBack = titleCallBack
-        base.imageCallBack = imageCallBack
     }
 }
