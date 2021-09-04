@@ -89,13 +89,13 @@
     return self.frame.size.height;
 }
 
--(void)setLx_Origin:(CGPoint)lx_Origin {
+-(void)setLx_origin:(CGPoint)lx_origin {
     CGRect frame = self.frame;
-    frame.origin = lx_Origin;
+    frame.origin = lx_origin;
     self.frame = frame;
 }
 
--(CGPoint)lx_Origin {
+-(CGPoint)lx_origin {
     return self.frame.origin;
 }
 
@@ -109,43 +109,43 @@
     return self.frame.size;
 }
 
--(void)setLx_Right:(CGFloat)lx_Right {
+-(void)setLx_right:(CGFloat)lx_right {
     CGRect frame = self.frame;
-    frame.origin.x = lx_Right - frame.size.width;
+    frame.origin.x = lx_right - frame.size.width;
     self.frame = frame;
 }
 
--(CGFloat)lx_Right {
+-(CGFloat)lx_right {
     return CGRectGetMaxX(self.frame);
 }
 
--(void)setLx_Bottom:(CGFloat)lx_Bottom {
+-(void)setLx_bottom:(CGFloat)lx_bottom {
     CGRect frame = self.frame;
-    frame.origin.y = lx_Bottom - frame.size.height;
+    frame.origin.y = lx_bottom - frame.size.height;
     self.frame = frame;
 }
 
--(CGFloat)lx_Bottom {
+-(CGFloat)lx_bottom {
     return CGRectGetMaxY(self.frame);
 }
 
--(void)setLx_Top:(CGFloat)lx_Top {
+-(void)setLx_top:(CGFloat)lx_top {
     CGRect frame = self.frame;
-    frame.origin.y = lx_Top;
+    frame.origin.y = lx_top;
     self.frame = frame;
 }
 
--(CGFloat)lx_Top {
+-(CGFloat)lx_top {
     return self.frame.origin.y;
 }
 
-- (void)setLx_Left:(CGFloat)lx_Left {
+- (void)setLx_left:(CGFloat)lx_left {
     CGRect frame = self.frame;
-    frame.origin.x = lx_Left;
+    frame.origin.x = lx_left;
     self.frame = frame;
 }
 
-- (CGFloat)lx_Left {
+- (CGFloat)lx_left {
     return self.frame.origin.x;
 }
 

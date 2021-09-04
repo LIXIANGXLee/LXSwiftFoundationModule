@@ -20,11 +20,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat lx_width;
 @property (nonatomic, assign) CGFloat lx_height;
 @property (nonatomic, assign) CGSize  lx_size;
-@property (nonatomic, assign) CGPoint lx_Origin;
-@property (nonatomic, assign) CGFloat lx_Right;
-@property (nonatomic, assign) CGFloat lx_Bottom;
-@property (nonatomic, assign) CGFloat lx_Left;
-@property (nonatomic, assign) CGFloat lx_Top;
+@property (nonatomic, assign) CGPoint lx_origin;
+@property (nonatomic, assign) CGFloat lx_right;
+@property (nonatomic, assign) CGFloat lx_bottom;
+@property (nonatomic, assign) CGFloat lx_left;
+@property (nonatomic, assign) CGFloat lx_top;
 
 @end
 
