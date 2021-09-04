@@ -13,10 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) CGFloat lx_x;
 @property (nonatomic, assign) CGFloat lx_y;
-@property (nonatomic, assign) CGFloat lx_centerX;
-@property (nonatomic, assign) CGFloat lx_center_x __attribute__((deprecated("请使用#lx_centerX")));
-@property (nonatomic, assign) CGFloat lx_centerY;
-@property (nonatomic, assign) CGFloat lx_center_y __attribute__((deprecated("请使用#lx_centerY")));
+@property (nonatomic, assign) CGFloat lx_center_x;
+@property (nonatomic, assign) CGFloat lx_center_y;
 @property (nonatomic, assign) CGFloat lx_width;
 @property (nonatomic, assign) CGFloat lx_height;
 @property (nonatomic, assign) CGSize  lx_size;

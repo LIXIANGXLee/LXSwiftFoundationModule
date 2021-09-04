@@ -39,16 +39,6 @@
     return self.center.x;
 }
 
-- (void)setLx_centerX:(CGFloat)lx_centerX {
-    CGPoint center = self.center;
-    center.x = lx_centerX;
-    self.center = center;
-}
-
-- (CGFloat)lx_centerX {
-    return self.center.x;
-}
-
 - (void)setLx_center_y:(CGFloat)lx_center_y {
     CGPoint center = self.center;
     center.y = lx_center_y;
@@ -56,16 +46,6 @@
 }
 
 - (CGFloat)lx_center_y {
-    return self.center.y;
-}
-
--(void)setLx_centerY:(CGFloat)lx_centerY {
-    CGPoint center = self.center;
-    center.y = lx_centerY;
-    self.center = center;
-}
-
--(CGFloat)lx_centerY {
     return self.center.y;
 }
 
