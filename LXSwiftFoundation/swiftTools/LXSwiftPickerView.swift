@@ -220,7 +220,7 @@ extension LXSwiftPickerView {
         if rootView != nil {
             rootView?.addSubview(self)
         }else{
-            lx.visibleVCView?.addSubview(self)
+            lx.presentView?.addSubview(self)
         }
         
         /// 开始动画

@@ -62,39 +62,5 @@ protocol LXSwiftPropertyCompatible {
     var swiftCallBack: SwiftCallBack? { get set }
 }
 
-/// view 遵守的协议
-public protocol LXViewSetup: AnyObject {
-    func setupUI()
-    func setupViewModel()
-}
-
-/// 任意类型协议
-public protocol LXSwiftCellCompatible: AnyObject {
-    static var reusableSwiftIdentifier: String { get }
-}
-
-/// 默认实现协议扩展
-public extension LXSwiftCellCompatible {
-    static var reusableSwiftIdentifier: String {
-        return "\(self)"
-    }
-}
-
-/// 定义圆角背景色协议
-public protocol LXCustomRoundbackground: AnyObject {
-    
-    /// 获取view的计算属性
-    var associatedView: UIView { get }
-    
-    /// 设置背景色和圆角
-    func roundSwiftBackground(roundingCorners: UIRectCorner, cornerRadius: CGFloat, backgroundColor: UIColor)
-}
-
-extension LXCustomRoundbackground where Self: UIView {
-    
-    /// 默认实现计算属性
-    public var associatedView: UIView { return self }
-}
-
 /// 状态栏颜色 协议
 protocol LXSwiftLightStatusBarProtocol { }

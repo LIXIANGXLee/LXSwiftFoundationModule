@@ -58,20 +58,7 @@ extension LXSwiftBasics where Base: UIApplication {
 
     /// 获取跟窗口
     public static var rootWindow: UIWindow? {
-        if #available(iOS 13.0, *) {
-            if let window = applicationShared.connectedScenes
-                   .filter({$0.activationState == .foregroundActive})
-                   .map({$0 as? UIWindowScene})
-                   .compactMap({$0})
-                   .first?.windows
-                   .filter({$0.isKeyWindow}).first {
-                   return window
-            }else {
-                return applicationShared.delegate?.window ?? applicationShared.windows.first
-            }
-        } else {
-               return applicationShared.delegate?.window ?? applicationShared.windows.first
-        }
+       return LXSwiftApp.rootWindow
     }
     
     /// 获取最外层窗口 需要判断不是UIRemoteKeyboardWindow才行，否则在ipad会存在问题

@@ -10,7 +10,6 @@ import UIKit
 import WebKit
 
 extension UIView: LXSwiftCompatible { }
-extension UIView: LXCustomRoundbackground { }
 
 //MARK: -  Extending properties for UIView
 extension LXSwiftBasics where Base: UIView {

@@ -3,4 +3,4 @@
 //
 
 #import "LXObjcThreadActive.h"
-#import "dddd.h"
+#import "TestObjcView.h"

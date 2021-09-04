@@ -11,9 +11,10 @@
 #define SCREEN_WIDTH_TO_WIDTH LXObjcApp.screenWidth
 #define SCREEN_HEIGHT_TO_HEIGHT LXObjcApp.screenHeight
 #define SCREEN_HEIGHT_TO_TOUCHBARHEIGHT LXObjcApp.touchBarHeight
-#define SCREEN_HEIGHT_TO_STATUSHEIGHT LXObjcApp.statusbarHeight
-#define SCREEN_HEIGHT_TO_TABBARHEIGHT LXObjcApp.tabbarHeight
-#define SCREEN_HEIGHT_TO_NAVBARHEIGHT LXObjcApp.navbarHeight
+#define SCREEN_HEIGHT_TO_STATUSHEIGHT LXObjcApp.statusBarHeight
+#define SCREEN_HEIGHT_TO_TABBARHEIGHT LXObjcApp.tabBarHeight
+#define SCREEN_HEIGHT_TO_NAVBARHEIGHT LXObjcApp.navBarHeight
+
 #define SCALE_IP6_WIDTH_TO_WIDTH(w) [LXObjcApp flat:w * (SCREEN_WIDTH_TO_WIDTH / 375)]
 #define SCALE_IP6_HEIGHT_TO_HEIGHT(h) [LXObjcApp flat:h * (SCREEN_HEIGHT_TO_HEIGHT / 667)]
 #define SCALE_IPAD129_WIDTH_TO_WIDTH(w) [LXObjcApp flat:w * (SCREEN_WIDTH_TO_WIDTH / 1024)]

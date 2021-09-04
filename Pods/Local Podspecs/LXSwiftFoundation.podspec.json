@@ -18,8 +18,17 @@
   },
   "subspecs": [
     {
+      "name": "Core",
+      "source_files": "LXSwiftFoundation/core/*.{swift,h,m}"
+    },
+    {
       "name": "OCTools",
-      "source_files": "LXSwiftFoundation/ocTools/*.{h,m}"
+      "source_files": "LXSwiftFoundation/ocTools/*.{h,m}",
+      "dependencies": {
+        "LXSwiftFoundation/Core": [
+
+        ]
+      }
     },
     {
       "name": "SwiftTools",

@@ -30,11 +30,32 @@ class ViewController: UIViewController {
         datas.append("两段式滑动弹窗")
         datas.append("戴超链接的弹窗")
         datas.append("wkwebview加载网页，截取长图")
+        datas.append("上拉弹窗")
 
-        tableView.frame = CGRect(x: 0, y: LXSwiftApp.navbarH, width: LXSwiftApp.screenW, height: LXSwiftApp.screenH - LXSwiftApp.navbarH - LXSwiftApp.touchBarH)
+        tableView.frame = CGRect(x: 0,
+                                 y: SCREEN_HEIGHT_TO_NAVBARHEIGHT,
+                                 width: LXSwiftApp.screenW,
+                                 height: LXSwiftApp.screenH - SCREEN_HEIGHT_TO_NAVBARHEIGHT - SCREEN_HEIGHT_TO_TOUCHBARHEIGHT)
         view.addSubview(tableView)
+        
+        
+        let btn = UIButton(type: .custom)
+        btn.backgroundColor = UIColor.red
+        btn.frame = CGRect(x: SCREEN_WIDTH_TO_WIDTH - 100, y: SCREEN_HEIGHT_TO_NAVBARHEIGHT, width: 60, height: 60)
+        view.addSubview(btn)
+        btn.addTarget(self, action: #selector(btnClick(_:)), for: UIControl.Event.touchUpInside)
      }
-
+    
+    @objc func btnClick(_ btn: UIButton) {
+        
+       let menu = LXSwiftMenuDownView()
+        menu.animateDuration = 0.25
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 400))
+        view.backgroundColor = UIColor.green
+        menu.content = view
+        menu.show(from: btn)
+    
+    }
     func showModal() {
         let config = LXSwiftModalConfig()
         config.isDismissBg = false
@@ -99,6 +120,12 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate  {
             let vc = WebViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         default:
+            
+            let menu = LXSwiftMenuUpView()
+            let view = UIView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH_TO_WIDTH, height: 500))
+            view.backgroundColor = UIColor.purple
+            menu.content = view
+            menu.show()
             break
         }    
     }
@@ -123,5 +150,5 @@ class LXTableViewViewCell: LXSwiftTableViewCell {
             titleLabel.text = textStr
         }
     }
-    
+//    
 }
