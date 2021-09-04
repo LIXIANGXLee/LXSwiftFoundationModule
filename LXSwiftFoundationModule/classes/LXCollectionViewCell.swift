@@ -11,11 +11,9 @@ import LXSwiftFoundation
 
 class LXCollectionViewCell: LXSwiftCollectionViewCell {
     
-    
     override func setupUI() {
         
     }
-    
     
 }
 

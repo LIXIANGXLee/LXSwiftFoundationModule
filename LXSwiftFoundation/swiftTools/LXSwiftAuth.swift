@@ -11,8 +11,8 @@ import AVFoundation
 import Photos
 
 /// PrivacyManager自动根据状态返回提示语
-@objc(LXObjcPrivacyAuth)
-@objcMembers open class LXSwiftPrivacyAuth: NSObject {
+@objc(LXObjcAuth)
+@objcMembers open class LXSwiftAuth: NSObject {
  
     /// 相机权限
     public static var isSupportCamera: Bool {

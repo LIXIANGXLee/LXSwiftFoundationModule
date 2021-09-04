@@ -39,8 +39,8 @@
         self.view.backgroundColor = [UIColor whiteColor];
         [self.view addSubview:leftViewController.view];
         [self addChildViewController:leftViewController];
-        self.lelfViewController.view.lx_Left = -self.maxWidth * maxOffSet;
-        self.lelfViewController.view.lx_Top = 0;
+        self.lelfViewController.view.lx_left = -self.maxWidth * maxOffSet;
+        self.lelfViewController.view.lx_top = 0;
         self.lelfViewController.view.lx_width = maxWidth;
         self.lelfViewController.view.lx_height = [UIScreen mainScreen].bounds.size.height;
         

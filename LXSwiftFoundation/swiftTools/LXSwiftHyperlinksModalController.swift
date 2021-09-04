@@ -145,7 +145,7 @@ extension LXSwiftHyperlinksModalController {
         } else {
             contentView.lx.height = lineView.frame.maxY
         }
-        contentView.lx.y = (SCREEN_HEIGHT_TO_HEIGHT -  contentView.lx.height) * 0.5 + modaConfig.contentViewOffSet
+        contentView.lx.y = (SCREEN_HEIGHT_TO_HEIGHT - contentView.lx.height) * 0.5 + modaConfig.contentViewOffSet
         UIApplication.lx.visibleViewController?.present(self, animated: true, completion: nil)
     }
     

@@ -32,10 +32,8 @@ class ViewController: UIViewController {
         datas.append("wkwebview加载网页，截取长图")
 
         tableView.frame = CGRect(x: 0, y: LXSwiftApp.navbarH, width: LXSwiftApp.screenW, height: LXSwiftApp.screenH - LXSwiftApp.navbarH - LXSwiftApp.touchBarH)
-
         view.addSubview(tableView)
-    
-      }
+     }
 
     func showModal() {
         let config = LXSwiftModalConfig()
@@ -83,7 +81,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate  {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueSwiftReusableCell(indexPath: indexPath) as LXTableViewViewCell
         tableView.roundSwiftSectionCell(cell, forRowAt: indexPath, cornerRadius: 20, backgroundColor: UIColor.blue)
         
@@ -92,7 +89,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate  {
     }
        
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         switch indexPath.row {
         case 0:
             let vc = PickerViewController()
@@ -106,7 +102,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate  {
             break
         }    
     }
-    
 }
 
 class LXTableViewViewCell: LXSwiftTableViewCell {
@@ -122,7 +117,6 @@ class LXTableViewViewCell: LXSwiftTableViewCell {
     override func setupUI() {
         contentView.addSubview(titleLabel)
     }
-    
     
     public var textStr: String? {
         didSet {
