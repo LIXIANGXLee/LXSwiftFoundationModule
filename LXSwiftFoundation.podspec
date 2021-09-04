@@ -39,6 +39,7 @@ Pod::Spec.new do |spec|
     
         spec.subspec 'OCTools' do |octools|
             octools.source_files = "LXSwiftFoundation/ocTools/*.{h,m}"
+            octools.dependency 'LXSwiftFoundation/SwiftTools'
         end
         
         spec.subspec 'SwiftTools' do |swifttools|

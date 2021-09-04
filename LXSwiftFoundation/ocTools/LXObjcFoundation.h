@@ -18,7 +18,7 @@
 #define SCALE_IP6_HEIGHT_TO_HEIGHT(h) [LXObjcApp flat:h * (SCREEN_HEIGHT_TO_HEIGHT / 667)]
 #define SCALE_IPAD129_WIDTH_TO_WIDTH(w) [LXObjcApp flat:w * (SCREEN_WIDTH_TO_WIDTH / 1024)]
 #define SCALE_IPAD129_HEIGHT_TO_HEIGHT(h) [LXObjcApp flat:h * (SCREEN_HEIGHT_TO_HEIGHT / 1366)]
-#define SCALE_GET_CENTER_WIDTH_AND_WIDTH(p,c) [LXObjcApp flat:(p - c) / 2.0]
+#define SCALE_GET_CENTER_WIDTH_AND_WIDTH(p , c) [LXObjcApp flat:(p - c) / 2.0]
 
 #import "UIGestureRecognizer+LXObjcAdd.h"
 #import "UIView+LXObjcPerformance.h"
