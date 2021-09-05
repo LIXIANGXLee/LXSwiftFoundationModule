@@ -29,13 +29,16 @@ extension LXSwiftMenuUpView {
    
     /// 显示视图
     open func show(_ rootView: UIView? = nil) {
+      
+        guard let content = content else { return }
+
         if rootView != nil {
             rootView?.addSubview(self)
         }else{
             lx.presentView?.addSubview(self)
         }
 
-        self.content?.lx_y = SCREEN_HEIGHT_TO_HEIGHT
+        content.lx_y = SCREEN_HEIGHT_TO_HEIGHT
         
         /// 开始动画
         startAnimation()

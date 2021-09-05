@@ -35,9 +35,9 @@ private let linkBgTag = 1234994321
 @objc(LXObjcTextLable)
 @objcMembers open class LXSwiftTextLable: UIView {
     @objc open class TextLink: NSObject {
-        var text: String
-        var rang: NSRange
-        var rects: [CGRect]
+        open var text: String
+        open var rang: NSRange
+        open var rects: [CGRect]
         public init(text: String, rang: NSRange, rects:  [CGRect]) {
             self.text = text
             self.rang = rang

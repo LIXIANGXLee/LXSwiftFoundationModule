@@ -10,7 +10,7 @@ import UIKit
 @objc(LXObjcMenuDownView)
 @objcMembers open class LXSwiftMenuDownView: LXSwiftMenuView {
   
-    public enum MenuXType {
+   @objc public enum MenuXType: Int {
         case left
         case mid
         case right
@@ -68,6 +68,7 @@ extension LXSwiftMenuDownView {
         content.layer.anchorPoint = point
         content.lx_origin = CGPoint(x: x, y: rect.maxY + topMargin)
     
+        /// 开始动画
         startAnimation()
     }
 }
