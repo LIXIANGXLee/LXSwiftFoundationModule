@@ -10,8 +10,17 @@ import UIKit
 @objc(LXObjcMenuDownView)
 @objcMembers open class LXSwiftMenuDownView: LXSwiftMenuView {
   
+    public enum MenuXType {
+        case left
+        case mid
+        case right
+    }
+    
     /// 距顶部间距
-    open var topMargin: CGFloat = 10
+    open var topMargin: CGFloat = SCALE_IP6_WIDTH_TO_WIDTH(10)
+    
+    /// 布局位置，相对于传进来的按钮位置的布局摆放
+    open var xType: LXSwiftMenuDownView.MenuXType = .mid
     
     open override var content: UIView? {
         didSet {
@@ -41,8 +50,23 @@ extension LXSwiftMenuDownView {
         }
         
         let rect = view.convert(view.bounds, to: rootView)
-        content.layer.anchorPoint = CGPoint(x: 1, y: 0)
-        content.lx_origin = CGPoint(x: rect.midX - content.lx_width, y: rect.maxY + topMargin)
+    
+        var x: CGFloat = 0
+        var point: CGPoint = CGPoint.zero
+        switch xType {
+        case .left:
+            x = rect.minX - content.lx_width
+            point = CGPoint(x: 1, y: 0)
+        case .mid:
+            x = rect.midX - content.lx_width
+            point = CGPoint(x: 1, y: 0)
+        case .right:
+            x = rect.maxX - content.lx_width
+            point = CGPoint(x: 1 - (rect.width * 0.5 / content.lx_width), y: 0)
+        }
+    
+        content.layer.anchorPoint = point
+        content.lx_origin = CGPoint(x: x, y: rect.maxY + topMargin)
     
         startAnimation()
     }

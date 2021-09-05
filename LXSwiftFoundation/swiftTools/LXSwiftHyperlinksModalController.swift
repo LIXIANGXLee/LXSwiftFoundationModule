@@ -160,7 +160,6 @@ extension LXSwiftHyperlinksModalController {
     func getContentH(_ attr: NSAttributedString) -> CGFloat {
         return attr.lx.height(width: contentView.frame.width - self.modaConfig.contentViewSubViewX * 2)
     }
-
 }
 
 @objc(LXObjcModalConfig)

@@ -51,7 +51,6 @@ public class LXSwiftNotification<T: Codable>: LXSwiftNotificationBase {
         postObject(jsonObjc as? [AnyHashable: Any])
     }
     
-    
     /// 数据解析操作
     public func decodeInfo(from notification: Notification) -> T? {
         let systemInfo = notification.userInfo
