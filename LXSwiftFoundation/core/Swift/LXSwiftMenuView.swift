@@ -8,7 +8,7 @@
 import UIKit
 
 @objc(LXObjcMenuViewDelegate)
-public protocol LXSwiftMenuViewDelegate: AnyObject { } 
+public protocol LXSwiftMenuViewDelegate: AnyObject { }
 
 @objc(LXObjcMenuView)
 @objcMembers open class LXSwiftMenuView: LXSwiftView, LXSwiftMenuViewDelegate {

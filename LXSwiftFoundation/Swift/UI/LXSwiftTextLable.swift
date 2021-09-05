@@ -19,10 +19,11 @@ private let linkBgTag = 1234994321
     @objc optional func lxTextLable(_ textView: LXSwiftTextLable, longPress text: String)
 }
 
-public struct LXSwiftTextLableConfig {
+@objc(LXObjcTextLableConfig)
+@objcMembers open class LXSwiftTextLableConfig: NSObject {
     
-    public var bgColor: UIColor
-    public var bgRadius: CGFloat
+    open var bgColor: UIColor
+    open var bgRadius: CGFloat
     
     public init(bgRadius: CGFloat = 6, bgColor: UIColor = UIColor.black.withAlphaComponent(0.1)) {
         self.bgColor = bgColor
@@ -31,14 +32,20 @@ public struct LXSwiftTextLableConfig {
 }
 
 // MARK: - LXSwiftTextLable
-open class LXSwiftTextLable: UIView {
-    struct TextLink {
+@objc(LXObjcTextLable)
+@objcMembers open class LXSwiftTextLable: UIView {
+    @objc open class TextLink: NSObject {
         var text: String
         var rang: NSRange
         var rects: [CGRect]
+        public init(text: String, rang: NSRange, rects:  [CGRect]) {
+            self.text = text
+            self.rang = rang
+            self.rects = rects
+        }
     }
     
-    public weak var delegate: LXTextLableDelegate?
+    open weak var delegate: LXTextLableDelegate?
     private lazy var links = [LXSwiftTextLable.TextLink]()
     private var config: LXSwiftTextLableConfig
     
@@ -70,7 +77,7 @@ open class LXSwiftTextLable: UIView {
     }()
 
     /// 外部调用以观察存储属性设置大小注释⚠️请在AttributeText之前设置viewframe大小
-    public var viewFrame: CGRect? {
+    open var viewFrame: CGRect? {
         didSet {
             guard let frame = viewFrame else { return }
             self.frame = frame
@@ -79,7 +86,7 @@ open class LXSwiftTextLable: UIView {
     }
     
     /// 外部调用以观察存储属性富文本内容⚠️请在AttributeText之前设置viewframe大小
-    public var attributedText: NSAttributedString? {
+    open var attributedText: NSAttributedString? {
         didSet {
         guard let attr = self.attributedText else { return }
         

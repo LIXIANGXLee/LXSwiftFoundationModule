@@ -24,6 +24,12 @@ typedef enum : NSUInteger {
     LXNetWorkTypeUnknow
 } LXNetWorkType;
 
+typedef enum : NSUInteger {
+    LXVersionTypeSmall = -1,
+    LXVersionTypeEqual = 0,
+    LXVersionTypeBig = 1
+} LXVersionType;
+
 @interface LXObjcUtils : NSObject
 
 /** 版本升级 版本比较大小
@@ -32,7 +38,17 @@ typedef enum : NSUInteger {
  @param v2 version
  @return 0: v1 == v2, -1: v1 < v2 , 1: v1 > v2
  */
-+ (int)compareVersionWithV1:(const char * _Nullable)v1 v2:(const char * _Nullable) v2;
++ (int)compareVersionWithV1:(const char * _Nullable)v1 v2:(const char * _Nullable)v2;
+
+/** 版本升级 版本比较大小
+ 
+ @param v1 version
+ @param v2 version
+ @return LXVersionTypeEqual: v1 == v2,
+         LXVersionTypeSmall: v1 < v2,
+         LXVersionTypeBig:   v1 > v2
+ */
++ (LXVersionType)compareWithV1:(const char * _Nullable)v1 v2:(const char * _Nullable)v2;
 
 /// 将度换为弧度转
 + (CGFloat)degreesToRadians:(CGFloat)degrees;

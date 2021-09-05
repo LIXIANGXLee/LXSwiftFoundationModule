@@ -8,7 +8,8 @@
 
 import UIKit
 
-@objc public protocol LXSwiftWaterfallLayoutDataSource: AnyObject {
+@objc(LXObjcWaterfallLayoutDataSource)
+public protocol LXSwiftWaterfallLayoutDataSource: AnyObject {
     
     /// 根据给出的宽度计算高度
     @objc func waterfallLayout(_ layout: LXSwiftWaterfallLayout, width: CGFloat, indexPath: IndexPath) -> CGFloat

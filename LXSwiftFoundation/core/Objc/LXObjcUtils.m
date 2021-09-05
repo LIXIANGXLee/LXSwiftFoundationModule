@@ -50,6 +50,10 @@
     return 0;
 }
 
++ (LXVersionType)compareWithV1:(const char * _Nullable)v1 v2:(const char * _Nullable)v2 {
+    return [self compareWithV1:v1 v2:v1];
+}
+
 + (CGFloat)degreesToRadians:(CGFloat)degrees {
     return degrees * M_PI / 180;;
 }
