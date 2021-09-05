@@ -8,6 +8,9 @@
 
 import UIKit
 
+// MARK: - private
+private var maxTextLengthKey: Void?
+
 // MARK: - TextView class
 @objc(LXObjcTextView)
 @objcMembers open class LXSwiftTextView: UITextView {
@@ -62,17 +65,6 @@ import UIKit
         let size = label.text?.lx.size(font: label.font, width: self.frame.width - CGFloat(labelX * 2)) ?? CGSize.zero
         label.frame = CGRect(origin: CGPoint(x: labelX, y: labelY), size: size)
     }
-}
-
-// MARK: - private
-private var maxTextLengthKey: Void?
-extension LXSwiftTextView {
-    
-    /// 设置输入文本最大长度
-    var maxTextLength: Int? {
-        get { return lx_getAssociatedObject(self, &maxTextLengthKey) }
-        set { lx_setRetainedAssociatedObject(self, &maxTextLengthKey, newValue,.OBJC_ASSOCIATION_ASSIGN) }
-    }
     
     /// 事件监听
     @objc func textDidChange() {
@@ -84,5 +76,10 @@ extension LXSwiftTextView {
         }else{
             textCallBack?(self.text)
         }
+    }
+    /// 设置输入文本最大长度
+    var maxTextLength: Int? {
+        get { return lx_getAssociatedObject(self, &maxTextLengthKey) }
+        set { lx_setRetainedAssociatedObject(self, &maxTextLengthKey, newValue,.OBJC_ASSOCIATION_ASSIGN) }
     }
 }

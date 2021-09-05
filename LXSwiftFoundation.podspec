@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "LXSwiftFoundation"
-  spec.version      = "8.7.1"
+  spec.version      = "8.7.2"
   spec.summary      = "Extend more user-friendly functions for system classes"
 
   
@@ -36,17 +36,17 @@ Pod::Spec.new do |spec|
     spec.source = { :git => "https://github.com/LIXIANGXLee/LXSwiftFoundationModule.git", :tag => "#{spec.version}" }
     
         spec.subspec 'Core' do |core|
-            core.source_files = "LXSwiftFoundation/core/*.{swift,h,m}"
+            core.source_files = "LXSwiftFoundation/Core/**/*.{swift,h,m}"
         end
         
-        spec.subspec 'OCTools' do |octools|
-            octools.source_files = "LXSwiftFoundation/ocTools/*.{h,m}"
+        spec.subspec 'Objc' do |octools|
+            octools.source_files = "LXSwiftFoundation/Objc/**/*.{h,m}"
             octools.dependency 'LXSwiftFoundation/Core'
         end
         
-        spec.subspec 'SwiftTools' do |swifttools|
-            swifttools.source_files = "LXSwiftFoundation/swiftTools/*.swift"
-            swifttools.dependency 'LXSwiftFoundation/OCTools'
+        spec.subspec 'Swift' do |swifttools|
+            swifttools.source_files = "LXSwiftFoundation/Swift/**/*.swift"
+            swifttools.dependency 'LXSwiftFoundation/Objc'
         end
             
   end

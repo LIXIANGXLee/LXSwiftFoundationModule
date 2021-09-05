@@ -1,6 +1,6 @@
 {
   "name": "LXSwiftFoundation",
-  "version": "8.7.1",
+  "version": "8.7.2",
   "summary": "Extend more user-friendly functions for system classes",
   "description": "LXSwiftFoundation is Extend more user-friendly functions for system classes",
   "homepage": "https://github.com/LIXIANGXLee/LXSwiftFoundationModule",
@@ -14,16 +14,16 @@
   "swift_versions": "5.0",
   "source": {
     "git": "https://github.com/LIXIANGXLee/LXSwiftFoundationModule.git",
-    "tag": "8.7.1"
+    "tag": "8.7.2"
   },
   "subspecs": [
     {
       "name": "Core",
-      "source_files": "LXSwiftFoundation/core/*.{swift,h,m}"
+      "source_files": "LXSwiftFoundation/Core/**/*.{swift,h,m}"
     },
     {
-      "name": "OCTools",
-      "source_files": "LXSwiftFoundation/ocTools/*.{h,m}",
+      "name": "Objc",
+      "source_files": "LXSwiftFoundation/Objc/**/*.{h,m}",
       "dependencies": {
         "LXSwiftFoundation/Core": [
 
@@ -31,10 +31,10 @@
       }
     },
     {
-      "name": "SwiftTools",
-      "source_files": "LXSwiftFoundation/swiftTools/*.swift",
+      "name": "Swift",
+      "source_files": "LXSwiftFoundation/Swift/**/*.swift",
       "dependencies": {
-        "LXSwiftFoundation/OCTools": [
+        "LXSwiftFoundation/Objc": [
 
         ]
       }

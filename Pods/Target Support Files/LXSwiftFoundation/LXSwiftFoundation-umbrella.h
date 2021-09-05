@@ -15,11 +15,6 @@
 #import "LXObjcThreadActive.h"
 #import "LXObjcUtils.h"
 #import "CADisplayLink+Block.h"
-#import "LXDrawerViewController.h"
-#import "LXLineFlowLayout.h"
-#import "LXObjcFoundation.h"
-#import "LXObjcGCDTimer.h"
-#import "LXWaterFlowLayout.h"
 #import "NSObject+LXObjcAdd.h"
 #import "NSObject+LXObjcKVO.h"
 #import "NSString+LXObjcAdd.h"
@@ -30,6 +25,11 @@
 #import "UIImage+LXObjcAdd.h"
 #import "UIView+LXObjcMargin.h"
 #import "UIView+LXObjcPerformance.h"
+#import "LXObjcFoundation.h"
+#import "LXObjcGCDTimer.h"
+#import "LXDrawerViewController.h"
+#import "LXLineFlowLayout.h"
+#import "LXWaterFlowLayout.h"
 
 FOUNDATION_EXPORT double LXSwiftFoundationVersionNumber;
 FOUNDATION_EXPORT const unsigned char LXSwiftFoundationVersionString[];
