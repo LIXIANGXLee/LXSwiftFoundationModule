@@ -39,14 +39,14 @@ Pod::Spec.new do |spec|
             core.source_files = "LXSwiftFoundation/Core/**/*.{swift,h,m}"
         end
         
-        spec.subspec 'Objc' do |octools|
-            octools.source_files = "LXSwiftFoundation/Objc/**/*.{h,m}"
-            octools.dependency 'LXSwiftFoundation/Core'
+        spec.subspec 'Objc' do |oc|
+            oc.source_files = "LXSwiftFoundation/Objc/**/*.{h,m}"
+            oc.dependency 'LXSwiftFoundation/Core'
         end
         
-        spec.subspec 'Swift' do |swifttools|
-            swifttools.source_files = "LXSwiftFoundation/Swift/**/*.swift"
-            swifttools.dependency 'LXSwiftFoundation/Objc'
+        spec.subspec 'Swift' do |swift|
+            swift.source_files = "LXSwiftFoundation/Swift/**/*.swift"
+            swift.dependency 'LXSwiftFoundation/Objc'
         end
             
   end

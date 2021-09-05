@@ -7,8 +7,8 @@ target 'LXSwiftFoundationModule' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  
   pod 'LXSwiftFoundation', :path => './'
+
 #  pod 'SDWebImage'
   # Pods for LXSwiftFoundationModule
   

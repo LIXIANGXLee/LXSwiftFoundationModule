@@ -48,7 +48,7 @@ class ViewController: UIViewController {
     
     @objc func btnClick(_ btn: UIButton) {
         
-       let menu = LXSwiftMenuDownView()
+        let menu = LXSwiftMenuDownView()
         menu.xType = .right
         menu.animateDuration = 0.25
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 400))
