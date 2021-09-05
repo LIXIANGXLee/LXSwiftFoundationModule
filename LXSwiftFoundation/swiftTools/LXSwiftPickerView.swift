@@ -55,7 +55,7 @@ public protocol LXSwiftPickerViewDataSource: AnyObject {
 }
 
 @objc(LXObjcPickerView)
-@objcMembers public class LXSwiftPickerView: UIView, LXSwiftPickerViewCommomDelegate {
+@objcMembers open class LXSwiftPickerView: UIView, LXSwiftPickerViewCommomDelegate {
     
     @objc public enum ScrollType: Int {
         case change // 持续滚动
@@ -72,26 +72,26 @@ public protocol LXSwiftPickerViewDataSource: AnyObject {
     }
     
     /// 内容的最大高度
-    public var maxHeight: CGFloat = SCREEN_HEIGHT_TO_HEIGHT * 0.6 {
+    open var maxHeight: CGFloat = SCREEN_HEIGHT_TO_HEIGHT * 0.6 {
         didSet {
             tableView.lx_height = maxHeight
         }
     }
     
     /// 内容的最小高度
-    public var minHeight: CGFloat = SCREEN_HEIGHT_TO_HEIGHT * 0.2
+    open var minHeight: CGFloat = SCREEN_HEIGHT_TO_HEIGHT * 0.2
         
     /// 默认弹出来时的原始Y坐标
     private var defaultOriginY: CGFloat = SCREEN_HEIGHT_TO_HEIGHT * 0.6
     
     /// 背景透明度
-    public var bgOpaque: CGFloat = 0.6
+    open var bgOpaque: CGFloat = 0.6
     
     /// 动画之行时间
-    public var animationDuration: TimeInterval = 0.15
+    open var animationDuration: TimeInterval = 0.15
 
     /// 点击背景事件是否触发dismiss事件
-    public var isDismissOfDidSelectBgView: Bool = true
+    open var isDismissOfDidSelectBgView: Bool = true
        
     /// 记录默认 tableView 滚动偏移量
     private var tableViewOriginOffSetY: CGFloat = 0
@@ -105,8 +105,8 @@ public protocol LXSwiftPickerViewDataSource: AnyObject {
     ///滑动的事bgView的头部时 isScrollTHeaderView == true
     private var isScrollTHeaderView: Bool = false
     
-    public weak var delegate: LXSwiftPickerViewDelegate?
-    public weak var dataSource: LXSwiftPickerViewDataSource? {
+    open weak var delegate: LXSwiftPickerViewDelegate?
+    open weak var dataSource: LXSwiftPickerViewDataSource? {
         didSet {
             /// 注册tableViewCell
             dataSource?.pickerView(self, registerClass: tableView)
@@ -114,7 +114,7 @@ public protocol LXSwiftPickerViewDataSource: AnyObject {
     }
     
     /// 设置整体圆角 上、下、左、右
-    public var tViewAllCornerRadii: CGFloat? {
+    open var tViewAllCornerRadii: CGFloat? {
         didSet {
             guard let cornerRadii = self.tViewAllCornerRadii else { return }
             self.tableView.lx.setCornerRadius(radius: cornerRadii, clips: true)
@@ -123,7 +123,7 @@ public protocol LXSwiftPickerViewDataSource: AnyObject {
     
     ///设置内容顶部圆角, 特别注意：设置圆角之前tHeaderView必须有尺寸，否则圆角设置不成功，
     /// 如果此方法在tHeaderView设置之前调用设置圆角也是起作用的，但是赋值tHeaderView的view之前必须有尺寸
-    public var tHeaderViewTopCornerRadii: CGFloat? {
+    open var tHeaderViewTopCornerRadii: CGFloat? {
         didSet {
             guard let tHeaderView = self.tHeaderView else { return }
             setCornerRadii(tHeaderView, isHeader: true)
@@ -132,7 +132,7 @@ public protocol LXSwiftPickerViewDataSource: AnyObject {
     
     /// 头view tHeaderView 特别注意：设置圆角之前tHeaderView必须有尺寸，否则圆角设置不成功，
     /// 如果此方法在tHeaderView设置之前调用设置圆角也是起作用的，但是赋值tHeaderView的view之前必须有尺寸，如果单独设置圆角就不要设置setTHeaderViewTopCornerRadii的值了
-    public var tHeaderView: UIView? {
+    open var tHeaderView: UIView? {
         didSet {
             guard let tHeaderView = tHeaderView else { return }
             setCornerRadii(tHeaderView, isHeader: true)
@@ -142,7 +142,7 @@ public protocol LXSwiftPickerViewDataSource: AnyObject {
     
     ///设置内容顶部圆角, 特别注意：设置圆角之前tFooterView必须有尺寸，否则圆角设置不成功，
     /// 如果此方法在tFooterView设置之前调用设置圆角也是起作用的，但是赋值tFooterView的view之前必须有尺寸
-    public var tFooterViewBottomCornerRadii: CGFloat? {
+    open var tFooterViewBottomCornerRadii: CGFloat? {
         didSet {
             guard let tFooterView = self.tFooterView else { return }
             setCornerRadii(tFooterView, isHeader: false)
@@ -151,7 +151,7 @@ public protocol LXSwiftPickerViewDataSource: AnyObject {
     
     /// 尾view tFooterView 特别注意：设置圆角之前tFooterView必须有尺寸，否则圆角设置不成功，
     /// 如果此方法在tFooterView设置之前调用设置圆角也是起作用的，但是赋值tFooterView的view之前必须有尺寸，如果单独设置圆角就不要设置setTFooterViewBottomCornerRadii的值了
-    public var tFooterView: UIView? {
+    open var tFooterView: UIView? {
         didSet {
             guard let tFooterView = tFooterView else { return }
             setCornerRadii(tFooterView, isHeader: false)
@@ -210,13 +210,13 @@ public protocol LXSwiftPickerViewDataSource: AnyObject {
 extension LXSwiftPickerView {
   
     /// 退出pickerView
-   @objc public func dismiss(_ completion:(() -> Void)? = nil) {
+   @objc open func dismiss(_ completion:(() -> Void)? = nil) {
         /// 结束动画
         endAnimation(CGFloat(Int(minHeight) >> 2), completion: completion)
     }
     
     /// 展示pickerView
-   @objc public func show(_ rootView: UIView? = nil, completion:(() -> Void)? = nil) {
+   @objc open func show(_ rootView: UIView? = nil, completion:(() -> Void)? = nil) {
         if rootView != nil {
             rootView?.addSubview(self)
         }else{
@@ -232,7 +232,7 @@ extension LXSwiftPickerView {
     }
     
     /// 刷新内容数据
-    @objc public func reloadData() {
+    @objc open func reloadData() {
         self.tableView.reloadData()
     }
 }
