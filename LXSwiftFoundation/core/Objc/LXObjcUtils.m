@@ -210,7 +210,6 @@
         __strong typeof(weakSelf)strongSelf = weakSelf;
         [strongSelf checkAuth:type isAlert:YES callBack:callBack];
     }];
-    
 }
 
 /// 检查相册权限
@@ -265,6 +264,7 @@
         }];
     }
 }
+
 /// 无法访问您的权限
 + (void)unableAccessPermissions:(NSString *)title {
     __weak typeof(self)weakSelf = self;
@@ -342,10 +342,17 @@
 
 /// 获取最外层窗口
 + (UIWindow *)getLastWindow {
-    return [self getAllWindows].lastObject;
+    NSArray *windows = [self getAllWindows];
+    for (NSInteger i = windows.count - 1; i > 0; i--) {
+        Class c = NSClassFromString(@"UIRemoteKeyboardWindow");
+        if (![windows[i] isKindOfClass:c]) {
+            return windows[i];
+        }
+    }
+    return windows.lastObject;
 }
 
-+ (NSArray<UIWindow *> *)getAllWindows{
++ (NSArray<UIWindow *> *)getAllWindows {
     return [UIApplication sharedApplication].windows;
 }
 
