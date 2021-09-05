@@ -9,7 +9,7 @@
 import UIKit
 
 //MARK: -  Extending properties and methods for UISegmentedControl
-extension LXSwiftBasics where Base : UISegmentedControl {
+extension LXSwiftBasics where Base: UISegmentedControl {
     
     public func setHandle(segmentedControlCallBack: ((Int) -> ())?){
         base.swiftCallBack = segmentedControlCallBack

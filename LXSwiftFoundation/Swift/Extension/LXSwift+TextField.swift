@@ -9,7 +9,7 @@
 import UIKit
 
 //MARK: -  Extending properties for LXSwiftTextField
-extension LXSwiftBasics where Base : LXSwiftTextField {
+extension LXSwiftBasics where Base: LXSwiftTextField {
     
     /// 配置文本可输入最长文本长度
     public var maxLength: Int? {
@@ -31,7 +31,7 @@ extension LXSwiftBasics where Base : LXSwiftTextField {
 }
 
 //MARK: -  Extending methods for LXSwiftTextField
-extension LXSwiftBasics where Base : LXSwiftTextField {
+extension LXSwiftBasics where Base: LXSwiftTextField {
     
     /// 设置文本字段左视图
     public func setLeftView(with view: UIView, mode: UITextField.ViewMode = .always) {
@@ -89,7 +89,7 @@ extension LXSwiftBasics where Base : LXSwiftTextField {
 private var maxTextLengthKey: Void?
 private var textFieldCallBackKey: Void?
 
-extension LXSwiftTextField: LXSwiftPropertyCompatible{
+extension LXSwiftTextField: LXSwiftPropertyCompatible {
     
     /// 可以保存maxTextLength 最大长度
     var maxTextLength: Int? {

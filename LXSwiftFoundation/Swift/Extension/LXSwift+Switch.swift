@@ -9,7 +9,7 @@
 import UIKit
 
 //MARK: -  Extending properties and methods for UISwitch
-extension LXSwiftBasics where Base : UISwitch {
+extension LXSwiftBasics where Base: UISwitch {
     
     public func setHandle(switchCallBack: ((_ isOn: Bool) -> ())?){
         base.swiftCallBack = switchCallBack
