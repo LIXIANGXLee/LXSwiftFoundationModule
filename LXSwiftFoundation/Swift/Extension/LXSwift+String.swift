@@ -232,10 +232,16 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         return false
     }
     
-    /// 版本比较大小 Returns: big: base > two  ,small:two  < base, equal:base == two
-    public func compareVersion(with version: String) -> LXSwiftUtils.VersionCompareResult {
+    /// 版本比较大小 Returns: big: base > two, small: two < base, equal: base == two
+    public func compareVersionSwift(with version: String) -> LXSwiftUtils.CompareResult {
         let string = base as! String
         return LXSwiftUtils.versionCompareSwift(v1: string, v2: version)
+    }
+    
+    /// 版本比较大小 Returns: big: base > two  ,small:two < base, equal:base == two
+    public func compareVersionOc(with version: String) -> LXSwiftUtils.CompareResult {
+        let string = base as! String
+        return LXSwiftUtils.versionCompareOc(v1: string, v2: version)
     }
     
     /// 在小数点后保留几个有效数字

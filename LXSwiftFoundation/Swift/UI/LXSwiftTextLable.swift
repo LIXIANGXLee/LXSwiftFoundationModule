@@ -121,7 +121,7 @@ private let linkBgTag = 1234994321
     }
 }
 
-// MARK: private method
+// MARK: - private method
 extension LXSwiftTextLable {
     
     @objc private func gestureLong(gesture: UIGestureRecognizer) {

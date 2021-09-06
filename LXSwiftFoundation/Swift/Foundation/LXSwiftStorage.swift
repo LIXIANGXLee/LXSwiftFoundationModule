@@ -35,18 +35,13 @@ public struct LXSwiftStorage: LXSwiftCompatible {
     private static let defaultStandard = UserDefaults.standard
     public static subscript(key: LXUserDefaultsProtocol) -> Any? {
         set {
-            defaultStandard.set(newValue, forKey: key.uniqueKey)
-            defaultStandard.synchronize()
+            set(with: newValue, key: key.uniqueKey)
         }
         get {
-            return defaultStandard.value(forKey: key.uniqueKey)
+            return get(for: key.uniqueKey)
         }
     }
-}
-
-/// 扩展存储 并且加密
-extension LXSwiftBasics where Base == LXSwiftStorage {
-
+    
     /// 存储
     public static func set(with value: Any?, key: String) {
         defaultStandard.set(value, forKey: key)
@@ -56,6 +51,20 @@ extension LXSwiftBasics where Base == LXSwiftStorage {
     /// 取值
     public static func get(for key: String) -> Any? {
         return defaultStandard.object(forKey: key)
+    }
+}
+
+/// 扩展存储 并且加密
+extension LXSwiftBasics where Base == LXSwiftStorage {
+
+    /// 存储
+    public static func set(with value: Any?, key: String) {
+        Base.set(with: value, key: key)
+    }
+    
+    /// 取值
+    public static func get(for key: String) -> Any? {
+        return Base.get(for: key)
     }
     
 }

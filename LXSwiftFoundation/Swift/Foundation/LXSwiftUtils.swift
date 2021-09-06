@@ -14,10 +14,10 @@ import AVFoundation
     public typealias TellCallBack = ((Bool) -> ())
     
     /// 注意：枚举不暴漏给oc使用，和用到此枚举的函数也不暴漏给oc使用
-    public enum VersionCompareResult {
-        case big   /// 大于
-        case equal /// 等于
-        case small /// 小于
+    @objc public enum CompareResult: Int {
+        case big = 1     /// 大于
+        case equal = 0   /// 等于
+        case small = -1  /// 小于
     }
     
     /// 获取网络类型
@@ -26,27 +26,15 @@ import AVFoundation
     }
     
     /// 两个版本比较大小 big: one > two, small: two < one,equal: one == two
-    public static func versionCompareOc(v1: String, v2: String) -> LXSwiftUtils.VersionCompareResult {
+    public static func versionCompareOc(v1: String, v2: String) -> LXSwiftUtils.CompareResult {
         let ret = LXObjcUtils.compareVersion(withV1: v1, v2: v2)
-        return LXSwiftUtils.VersionCompareResult(rawValue: ret)
+        return LXSwiftUtils.compareResult(Int(ret))
     }
     
     /// 两个版本比较大小 big: one > two, small: two < one, equal: one == two
-    public static func versionCompareSwift(v1: String, v2: String) -> LXSwiftUtils.VersionCompareResult {
-
+    public static func versionCompareSwift(v1: String, v2: String) -> LXSwiftUtils.CompareResult {
         let com = v1.compare(v2)
-        var temp: LXSwiftUtils.VersionCompareResult
-        switch com {
-        case .orderedSame:
-            temp = LXSwiftUtils.VersionCompareResult.equal
-        case .orderedAscending:
-            temp = LXSwiftUtils.VersionCompareResult.small
-        case .orderedDescending:
-            temp = LXSwiftUtils.VersionCompareResult.big
-        default:
-            temp = LXSwiftUtils.VersionCompareResult.small
-        }
-        return temp
+        return LXSwiftUtils.compareResult(com.rawValue)
     }
     
     /// 打电话
@@ -142,30 +130,6 @@ import AVFoundation
         }
     }
     
-    /// 生成二维码后，因为它不是真实的图片，所以需要重新绘制
-    private static func createNonInterpolatedImage(with ciImage: CIImage, size: CGFloat) -> UIImage? {
-        let extent = ciImage.extent.integral
-        if extent.width == 0 || extent.height == 0 { return nil }
-        
-        let scale = min(size / extent.width, size / extent.height)
-        let width = extent.width * scale;
-        let height = extent.height * scale;
-        let colorSpace = CGColorSpaceCreateDeviceGray();
-        guard let bitmapRef = CGContext(data: nil, width: Int(width),
-                                        height: Int(height),
-                                        bitsPerComponent: 8,
-                                        bytesPerRow: 0,
-                                        space: colorSpace,
-                                        bitmapInfo: CGImageAlphaInfo.none.rawValue ) else { return nil }
-        bitmapRef.interpolationQuality = CGInterpolationQuality.high
-        bitmapRef.scaleBy(x: scale, y: scale)
-        let context = CIContext(options: nil)
-        guard let bitmapImage = context.createCGImage(ciImage, from: extent) else { return nil }
-        bitmapRef.draw(bitmapImage, in: extent)
-        guard let scaledImage = bitmapRef.makeImage() else { return nil }
-        return UIImage(cgImage: scaledImage)
-    }
-    
     /// 播放本地短暂的语音
     @available(iOS 9.0, *)
     public static func playSound(with filepath: String?, completion: (() -> ())? = nil) {
@@ -212,13 +176,43 @@ import AVFoundation
 }
 
 /// version  init
-extension LXSwiftUtils.VersionCompareResult {
-    public init(rawValue: Int32) {
-        switch rawValue {
-            case 0: self = .equal
-            case Int32.min ... -1: self = .small
-            case 1 ... Int32.max: self = .big
-            default: self = .equal
+extension LXSwiftUtils {
+    
+    /// 根据int值获取枚举值
+    private static func compareResult(_ ret: Int) -> LXSwiftUtils.CompareResult {
+        switch ret {
+        case 0:
+            return .equal
+        case -1:
+            return .small
+        case 1:
+            return .big
+        default:
+            return .small
         }
+    }
+    
+    /// 生成二维码后，因为它不是真实的图片，所以需要重新绘制
+    private static func createNonInterpolatedImage(with ciImage: CIImage, size: CGFloat) -> UIImage? {
+        let extent = ciImage.extent.integral
+        if extent.width == 0 || extent.height == 0 { return nil }
+        
+        let scale = min(size / extent.width, size / extent.height)
+        let width = extent.width * scale;
+        let height = extent.height * scale;
+        let colorSpace = CGColorSpaceCreateDeviceGray();
+        guard let bitmapRef = CGContext(data: nil, width: Int(width),
+                                        height: Int(height),
+                                        bitsPerComponent: 8,
+                                        bytesPerRow: 0,
+                                        space: colorSpace,
+                                        bitmapInfo: CGImageAlphaInfo.none.rawValue ) else { return nil }
+        bitmapRef.interpolationQuality = CGInterpolationQuality.high
+        bitmapRef.scaleBy(x: scale, y: scale)
+        let context = CIContext(options: nil)
+        guard let bitmapImage = context.createCGImage(ciImage, from: extent) else { return nil }
+        bitmapRef.draw(bitmapImage, in: extent)
+        guard let scaledImage = bitmapRef.makeImage() else { return nil }
+        return UIImage(cgImage: scaledImage)
     }
 }

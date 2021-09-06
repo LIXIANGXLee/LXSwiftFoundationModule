@@ -8,7 +8,7 @@
 import UIKit
 
 //MARK: -  Extending properties and methods for UISlider
-extension LXSwiftBasics where Base : UISlider {
+extension LXSwiftBasics where Base: UISlider {
     
     public func setHandle(sliderCallBack: ((Float) -> ())?){
         base.swiftCallBack = sliderCallBack

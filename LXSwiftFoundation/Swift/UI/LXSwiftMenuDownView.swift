@@ -92,8 +92,7 @@ extension LXSwiftMenuDownView {
     private func startAnimation() {
         self.content?.transform = CGAffineTransform(scaleX: 0, y: 0)
         backgroundColor = UIColor.black.withAlphaComponent(0)
-        UIView.animate(withDuration: animateDuration) { [weak self] in
-            guard let `self` = self else { return }
+        UIView.animate(withDuration: animateDuration) {
             self.content?.transform = CGAffineTransform.identity
             self.backgroundColor = UIColor.black.withAlphaComponent(self.viewOpaque)
         }

@@ -8,30 +8,32 @@
 
 import UIKit
 
-//MARK: -  Extending properties for LXSwiftTextField
-extension LXSwiftBasics where Base: LXSwiftTextField {
-    
-    /// 配置文本可输入最长文本长度
-    public var maxLength: Int? {
-        get{ return base.maxTextLength }
-        set{ guard let newValue = newValue, newValue > 0 else { return }
-             base.maxTextLength = newValue
-             NotificationCenter.default.addObserver(base,
-                               selector:#selector(base.textFieldTextChange(notification:)),
-                               name: UITextField.textDidChangeNotification,
-                               object: base)
+//MARK: -  Extending methods for UITextField
+extension LXSwiftBasics where Base: UITextField {
+
+   /// 设置暂位文字的颜色
+   public var placeholderColor: UIColor {
+        get {
+            let color = base.value(forKeyPath: "_placeholderLabel.textColor") as? UIColor
+            return color ?? .white
+        } set {
+            base.setValue(newValue, forKeyPath: "_placeholderLabel.textColor")
         }
     }
-    
-    /// 公共方法回调
-    public func setHandle(_ textFieldCallBack: ((String) -> Void)?) {
-        base.swiftCallBack = textFieldCallBack
+
+    ///设置暂位文字的字体
+    public var placeholderFont: UIFont {
+        get {
+            let font = base.value(forKeyPath: "_placeholderLabel.font") as? UIFont
+            return font ?? UIFont.lx.font(withRegular: 14)
+        } set {
+            base.setValue(newValue, forKeyPath: "_placeholderLabel.font")
+        }
     }
-    
 }
 
-//MARK: -  Extending methods for LXSwiftTextField
-extension LXSwiftBasics where Base: LXSwiftTextField {
+//MARK: -  Extending methods for UITextField
+extension LXSwiftBasics where Base: UITextField {
     
     /// 设置文本字段左视图
     public func setLeftView(with view: UIView, mode: UITextField.ViewMode = .always) {
@@ -76,63 +78,5 @@ extension LXSwiftBasics where Base: LXSwiftTextField {
     /// 设置常规字体和文本颜色
     public func set(withRegular fontSize: CGFloat, textColor: String) {
         set(with: UIFont.lx.font(withRegular: fontSize), textColor: UIColor.lx.color(hex: textColor))
-    }
-    
-    /// 移除观察者
-    public func removeObserver() {
-        NotificationCenter.default.removeObserver(base)
-    }
-}
-
-
-//MARK: -  Extending methods for LXSwiftTextField
-private var maxTextLengthKey: Void?
-private var textFieldCallBackKey: Void?
-
-extension LXSwiftTextField: LXSwiftPropertyCompatible {
-    
-    /// 可以保存maxTextLength 最大长度
-    var maxTextLength: Int? {
-        get { return lx_getAssociatedObject(self, &maxTextLengthKey) }
-        set { lx_setRetainedAssociatedObject(self, &maxTextLengthKey, newValue,.OBJC_ASSOCIATION_ASSIGN) }
-    }
-    
-    typealias T = String
-    var swiftCallBack: SwiftCallBack? {
-        get { return lx_getAssociatedObject(self, &textFieldCallBackKey) }
-        set { lx_setRetainedAssociatedObject(self, &textFieldCallBackKey, newValue) }
-    }
-    
-    /// 文本改变调用
-    @objc func textFieldTextChange(notification: Notification) {
-        if let maxLength = self.lx.maxLength {
-            if (text?.count ?? 0) > maxLength {
-                text = text?.lx.substring(to: maxLength)
-            }
-        }
-        self.swiftCallBack?(text ?? "")
-    }
-}
-
-extension LXSwiftBasics where Base : UITextField {
-
-   /// 设置暂位文字的颜色
-   public var placeholderColor: UIColor {
-        get {
-            let color = base.value(forKeyPath: "_placeholderLabel.textColor") as? UIColor
-            return color ?? .white
-        } set {
-            base.setValue(newValue, forKeyPath: "_placeholderLabel.textColor")
-        }
-    }
-
-    ///设置暂位文字的字体
-    public var placeholderFont: UIFont {
-        get {
-            let font = base.value(forKeyPath: "_placeholderLabel.font") as? UIFont
-            return font ?? UIFont.lx.font(withRegular: 14)
-        } set {
-            base.setValue(newValue, forKeyPath: "_placeholderLabel.font")
-        }
     }
 }

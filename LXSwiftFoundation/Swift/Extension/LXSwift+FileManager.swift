@@ -12,16 +12,16 @@ private let fileManagerDefault = FileManager.default
 extension FileManager: LXSwiftCompatible {
     
     /// 文件类型
-   public enum FileType {
+    public enum FileType {
         case file
         case directory
     }
     
-    /// 移动类型
+     /// 移动类型
     public enum MoveFileType {
-         case move
-         case copy
-     }
+        case move
+        case copy
+    }
 }
 
 //MARK: -  Extending properties for Date

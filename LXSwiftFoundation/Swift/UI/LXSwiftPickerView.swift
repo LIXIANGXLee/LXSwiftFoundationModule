@@ -131,7 +131,7 @@ public protocol LXSwiftPickerViewDataSource: AnyObject {
     }
     
     /// 头view tHeaderView 特别注意：设置圆角之前tHeaderView必须有尺寸，否则圆角设置不成功，
-    /// 如果此方法在tHeaderView设置之前调用设置圆角也是起作用的，但是赋值tHeaderView的view之前必须有尺寸，如果单独设置圆角就不要设置setTHeaderViewTopCornerRadii的值了
+    /// 如果此方法在tHeaderView设置之前调用设置圆角也是起作用的，但是赋值tHeaderView的view之前必须有尺寸，如果单独设置圆角就不要设置tHeaderViewTopCornerRadii的值了
     open var tHeaderView: UIView? {
         didSet {
             guard let tHeaderView = tHeaderView else { return }
@@ -150,7 +150,7 @@ public protocol LXSwiftPickerViewDataSource: AnyObject {
     }
     
     /// 尾view tFooterView 特别注意：设置圆角之前tFooterView必须有尺寸，否则圆角设置不成功，
-    /// 如果此方法在tFooterView设置之前调用设置圆角也是起作用的，但是赋值tFooterView的view之前必须有尺寸，如果单独设置圆角就不要设置setTFooterViewBottomCornerRadii的值了
+    /// 如果此方法在tFooterView设置之前调用设置圆角也是起作用的，但是赋值tFooterView的view之前必须有尺寸，如果单独设置圆角就不要设置tFooterViewBottomCornerRadii的值了
     open var tFooterView: UIView? {
         didSet {
             guard let tFooterView = tFooterView else { return }

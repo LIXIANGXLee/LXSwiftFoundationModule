@@ -61,8 +61,8 @@ extension LXSwiftMenuUpView {
     /// 开始动画
     private func startAnimation() {
         self.backgroundColor = UIColor.black.withAlphaComponent(0)
-        UIView.animate(withDuration:animateDuration) { [weak self] in
-            guard let `self` = self, let content = self.content else { return }
+        UIView.animate(withDuration:animateDuration) { 
+            guard let content = self.content else { return }
             self.backgroundColor = UIColor.black.withAlphaComponent(self.viewOpaque)
             self.content?.lx_y = SCREEN_HEIGHT_TO_HEIGHT - content.lx_height
         }
