@@ -71,6 +71,12 @@ typedef enum : NSUInteger {
 /// 异步线程执行block
 + (void)executeGlobalForSafe:(void(^)(void)) block;
 
+/// 获取类的所有成员变量名字
++ (NSArray<NSString *> *)lx_getAllIvars:(Class)cls;
+
+/// 获取类的所有方法名字
++ (NSArray<NSString *> *)lx_getAllMethods:(Class)cls;
+
 /// 去设置权限（相机、相册）
 + (void)jumpToSetting;
 
@@ -80,6 +86,9 @@ typedef enum : NSUInteger {
 
 /// 获取最外层窗口
 + (UIWindow *)getLastWindow;
+
+/// 获取所有窗口
++ (NSArray<UIWindow *> *)getAllWindows;
 
 /// 获取当前显示的视图控制器
 + (UIViewController *)getCurrentController;

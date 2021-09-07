@@ -181,6 +181,37 @@
     });
 }
 
+/// 获取类的所有成员变量名字
++ (NSArray<NSString *> *)lx_getAllIvars:(Class)cls {
+    unsigned int outCount = 0;
+    Ivar *ivars = class_copyIvarList(cls, &outCount);
+    NSMutableArray *mArr = [NSMutableArray array];
+    for (unsigned int i = 0; i < outCount; ++i) {
+      Ivar ivar = ivars[i];
+      const void *name = ivar_getName(ivar);
+      NSString *ivarName = [NSString stringWithUTF8String:name];
+        [mArr addObject:ivarName];
+    }
+    // 释放资源
+    free(ivars);
+    return mArr;
+}
+
+/// 获取类的所有方法名字
++ (NSArray<NSString *> *)lx_getAllMethods:(Class)cls {
+    unsigned int outCount = 0;
+    Method *methods = class_copyMethodList(cls, &outCount);
+    NSMutableArray *mArr = [NSMutableArray array];
+    for (unsigned int i = 0; i < outCount; ++i) {
+      Method method = methods[i];
+      SEL methodName = method_getName(method);
+      [mArr addObject:NSStringFromSelector(methodName)];
+    }
+    // 释放资源
+    free(methods);
+    return mArr;
+}
+
 /// 检查权限
 + (void)checkAuth:(LXObjcAuthType)type isAlert:(BOOL)isAlert callBack:(void (*)(BOOL isPass))callBack {
     __weak typeof(self)weakSelf = self;
@@ -352,6 +383,7 @@
     return windows.lastObject;
 }
 
+/// 获取所有窗口
 + (NSArray<UIWindow *> *)getAllWindows {
     return [UIApplication sharedApplication].windows;
 }

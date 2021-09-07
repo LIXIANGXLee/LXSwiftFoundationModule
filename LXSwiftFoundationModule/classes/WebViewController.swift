@@ -31,7 +31,6 @@ class WebViewController: LXSwiftWebViewController {
         }
     }
 
-
     deinit {
         print("-=-=-=-=-=-=")
     }

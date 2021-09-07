@@ -8,6 +8,7 @@
 #import "NSObject+LXObjcAdd.h"
 #import <objc/runtime.h>
 #import <CoreData/CoreData.h>
+#import "LXObjcUtils.h"
 
 @implementation NSObject (LXObjcAdd)
 
@@ -92,36 +93,71 @@
 /// 获取类的所有成员变量名字
 + (NSArray<NSString *> *)lx_getAllIvarNames {
     Class c = [self class];
-
-    unsigned int outCount = 0;
-    Ivar *ivars = class_copyIvarList(c, &outCount);
-    NSMutableArray *mArr = [NSMutableArray array];
-    for (unsigned int i = 0; i < outCount; ++i) {
-      Ivar ivar = ivars[i];
-      const void *name = ivar_getName(ivar);
-      NSString *ivarName = [NSString stringWithUTF8String:name];
-        [mArr addObject:ivarName];
-    }
-    // 释放资源
-    free(ivars);
-    return mArr;
+    return [LXObjcUtils lx_getAllIvars:c];
 }
 
 /// 获取类的所有方法名字
-+ (NSArray<NSString *> *)lx_getAllMethodNames {
++ (NSArray<NSString *> *)lx_getAllMethodNames{
     Class c = [self class];
+    return [LXObjcUtils lx_getAllMethods:c];
+}
 
-    unsigned int outCount = 0;
-    Method *methods = class_copyMethodList(c, &outCount);
-    NSMutableArray *mArr = [NSMutableArray array];
-    for (unsigned int i = 0; i < outCount; ++i) {
-      Method method = methods[i];
-      SEL methodName = method_getName(method);
-      [mArr addObject:NSStringFromSelector(methodName)];
+/// 获取类的所有类方法名字
++ (NSArray<NSString *> *)lx_getAllClassMethodNames {
+    Class c = object_getClass([self class]);
+    return [LXObjcUtils lx_getAllMethods:c];
+}
+
+/// 判断实例方法和类方法是否响应，如果是类调用则是判断是否响应类方法，实例对象调用则是判断是否响应对象方法，注意⚠️，类也是能掉此方法的，不理解的自己看一下isa指针问题就懂了
+- (BOOL)lx_respondsToSelector:(SEL)sel {
+    if (sel == (SEL)0) { return NO; }
+    
+    /// 获取类对象或者元类对象
+    Class cls = object_getClass(self);
+    if (class_respondsToSelector(cls, sel)) {
+        return YES;
     }
-    // 释放资源
-    free(methods);
-    return mArr;
+
+    /// 判断是否为元类
+    if (class_isMetaClass(cls)) {
+        return [(Class)self resolveClassMethod: sel];
+    } else {
+        return [cls resolveInstanceMethod: sel];
+    }
+}
+
+/// 判断是否响应实例对象
++ (BOOL)lx_instancesRespondToSelector:(SEL)sel {
+    if (sel == (SEL)0) { return NO; }
+
+    if (class_respondsToSelector(self, sel)) {
+        return YES;
+    }
+    
+    /// 判断是否为元类
+    if (class_isMetaClass(self)) {
+        return NO;
+    } else {
+        return [self resolveInstanceMethod: sel];
+    }
+}
+
+/// 获取实例方法的实现
++ (IMP)lx_instanceMethodForSelector:(_Nonnull SEL)sel {
+    if (sel == (SEL)0) { return (IMP)0; }
+    return class_getMethodImplementation((Class)self, sel);
+}
+
+/// 判断是否为子类
++ (BOOL)lx_isSubclassOfClass:(Class)aClass {
+    Class cls = self;
+    while (cls != Nil) {
+        if (cls == aClass) {
+            return YES;
+        }
+        cls = class_getSuperclass(cls);
+    }
+    return NO;
 }
 
 @end
