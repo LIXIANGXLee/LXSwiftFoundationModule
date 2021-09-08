@@ -23,7 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// 唯一标识符取消定时任务
 + (void)cancelTimerTask:(NSString *)identified;
 
-
 @end
 
 NS_ASSUME_NONNULL_END

@@ -27,7 +27,7 @@ import UIKit
 //}
 
 open class LXSwiftNotificationBase { }
-public class LXSwiftNotification<T: Codable>: LXSwiftNotificationBase {
+public final class LXSwiftNotification<T: Codable>: LXSwiftNotificationBase {
     
     let name: Notification.Name
     public init(_ name: String) {

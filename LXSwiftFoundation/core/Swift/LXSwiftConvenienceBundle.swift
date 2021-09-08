@@ -55,7 +55,7 @@ import UIKit
 
 //MARK: - bundle @1x @2x @3x image
 @objc(LXObjcConvenienceBundle)
-@objcMembers open class LXSwiftConvenienceBundle: NSObject {
+@objcMembers public final class LXSwiftConvenienceBundle: NSObject {
     private let path: String?
     private let bundlePath: String     // bundle  path
     private let bundleName: String     // bundle name
@@ -70,7 +70,7 @@ import UIKit
     ///
     /// -ImageName：图像的名称或路径
     /// -path:bundle如果指定，则不使用默认路径
-    open func imageNamed(_ imageName: String, path: String? = nil) -> UIImage? {
+    public func imageNamed(_ imageName: String, path: String? = nil) -> UIImage? {
         var imagePath = "\(bundlePath)/\(bundleName)/"
         if let path = path {
             imagePath = imagePath + "\(path)/"

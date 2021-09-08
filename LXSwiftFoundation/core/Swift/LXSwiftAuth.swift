@@ -12,7 +12,7 @@ import Photos
 
 /// PrivacyManager自动根据状态返回提示语
 @objc(LXObjcAuth)
-@objcMembers open class LXSwiftAuth: NSObject {
+@objcMembers public final class LXSwiftAuth: NSObject {
  
     /// 相机权限
     public static var isSupportCamera: Bool {

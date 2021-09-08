@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: - timer（GCD）
 @objc(LXOCGCDTimer)
-@objcMembers open class LXSwiftGCDTimer: NSObject {
+@objcMembers public final class LXSwiftGCDTimer: NSObject {
     
     public typealias TaskCallBack = (() -> Void)
     fileprivate static var timers = [String: DispatchSourceTimer]()

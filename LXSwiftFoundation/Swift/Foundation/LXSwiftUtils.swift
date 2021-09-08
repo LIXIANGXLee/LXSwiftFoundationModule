@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 
 @objc(LXOCUtils)
-@objcMembers open class LXSwiftUtils: NSObject {
+@objcMembers public final class LXSwiftUtils: NSObject {
     public typealias TellCallBack = ((Bool) -> ())
     
     /// 注意：枚举不暴漏给oc使用，和用到此枚举的函数也不暴漏给oc使用

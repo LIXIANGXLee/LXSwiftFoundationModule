@@ -27,7 +27,7 @@ public struct LXSwiftRegexType {
 }
 
 // MARK: public
-public class LXSwiftRegex {
+public final class LXSwiftRegex {
     
     public static let textLinkConst = "textLinkConst__"
     public static let imageLinkConst = "imageLinkConst__"
@@ -63,7 +63,7 @@ extension LXSwiftRegex {
     /// - lineSpaceing：行间距
     /// - wordSpaceing：字间距
     /// - wordregextypes:超链接文本配置信息
-    public class func regex(of text: String, textColor: UIColor = UIColor.black,textFont: UIFont = UIFont.systemFont(ofSize: 15),  lineSpaceing: CGFloat = 4, wordSpaceing: CGFloat = 0, wordRegexTypes: [LXSwiftRegexType] = wordRegexTypes) -> NSAttributedString? {
+    public static func regex(of text: String, textColor: UIColor = UIColor.black,textFont: UIFont = UIFont.systemFont(ofSize: 15),  lineSpaceing: CGFloat = 4, wordSpaceing: CGFloat = 0, wordRegexTypes: [LXSwiftRegexType] = wordRegexTypes) -> NSAttributedString? {
             
         if text.count <= 0 { return nil }
         let style = NSMutableParagraphStyle()
