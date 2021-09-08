@@ -27,6 +27,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         self.title = "UI展示"
         
+        ViewController.lx_classRespond(to: #selector(btnClick(_:)))
+        
+        
         datas.append("两段式滑动弹窗")
         datas.append("戴超链接的弹窗")
         datas.append("wkwebview加载网页，截取长图")

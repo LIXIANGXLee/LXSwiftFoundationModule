@@ -22,8 +22,7 @@
 {
     self = [super init];
     if (self) {
-               
-        
+                
         NSLog(@"-=-=-=-=-=-%f",SCREEN_HEIGHT_TO_HEIGHT);
         NSLog(@"-=-=-=-=-=-%f",SCREEN_WIDTH_TO_WIDTH);
         NSLog(@"-=-=-=-=-=-%f",SCREEN_HEIGHT_TO_NAVBARHEIGHT);

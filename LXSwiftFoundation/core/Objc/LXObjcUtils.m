@@ -16,6 +16,182 @@
 
 @implementation LXObjcUtils
 
++ (void)swizzleMethod:(SEL)originSel withNewMethod:(SEL)dstSel with:(Class)cls {
+    Class class = [cls class];
+    if (class_isMetaClass(class)) { return; }
+    
+    Method originalMethod = class_getInstanceMethod(class, originSel);
+    Method swizzledMethod = class_getInstanceMethod(class, dstSel);
+    
+    // 若已经存在，则添加会失败
+    BOOL didAddMethod = class_addMethod(class,
+                                        originSel,
+                                        method_getImplementation(swizzledMethod),
+                                        method_getTypeEncoding(swizzledMethod));
+    
+    // 若原来的方法并不存在，则添加即可
+    if (didAddMethod) {
+       class_replaceMethod(class,
+                          dstSel,
+                          method_getImplementation(originalMethod),
+                          method_getTypeEncoding(originalMethod));
+    } else {
+       method_exchangeImplementations(originalMethod, swizzledMethod);
+    }
+}
+
+/// 获取类的所有成员变量名字
++ (NSArray<NSString *> *)getAllIvars:(Class)cls {
+    unsigned int outCount = 0;
+    Ivar *ivars = class_copyIvarList(cls, &outCount);
+    NSMutableArray *mArr = [NSMutableArray array];
+    for (unsigned int i = 0; i < outCount; ++i) {
+      Ivar ivar = ivars[i];
+      const void *name = ivar_getName(ivar);
+      NSString *ivarName = [NSString stringWithUTF8String:name];
+        [mArr addObject:ivarName];
+    }
+    // 释放资源
+    free(ivars);
+    return mArr;
+}
+
+/// 获取类的所有方法名字
++ (NSArray<NSString *> *)getAllMethods:(Class)cls {
+    unsigned int outCount = 0;
+    Method *methods = class_copyMethodList(cls, &outCount);
+    NSMutableArray *mArr = [NSMutableArray array];
+    for (unsigned int i = 0; i < outCount; ++i) {
+      Method method = methods[i];
+      SEL methodName = method_getName(method);
+      [mArr addObject:NSStringFromSelector(methodName)];
+    }
+    // 释放资源
+    free(methods);
+    return mArr;
+}
+
+/// 是否属于Foundation里的类 [NSURL class],[NSDate class],[NSValue class],[NSData class],[NSError class],[NSArray class],[NSDictionary class],[NSString class],[NSAttributedString class]
++ (BOOL)isClassFromFoundation:(Class)cls {
+    
+    if (class_isMetaClass(cls)) { return NO; }
+    
+    /// 属于则直接返回 是属于Foundation的类
+    if (cls == [NSObject class] || cls == [NSManagedObject class]) return YES;
+    
+    static NSSet *fClasses;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        // 集合中没有NSObject，因为几乎所有的类都是继承自NSObject，具体是不是NSObject需要特殊判断
+        fClasses = [NSSet setWithObjects:
+                      [NSURL class],
+                      [NSDate class],
+                      [NSValue class],
+                      [NSData class],
+                      [NSError class],
+                      [NSArray class],
+                      [NSDictionary class],
+                      [NSString class],
+                      [NSAttributedString class], nil];
+    });
+    __block BOOL result = NO;
+    [fClasses enumerateObjectsUsingBlock:^(Class foundationClass, BOOL *stop) {
+        if ([cls isSubclassOfClass:foundationClass]) {
+            result = YES;
+            *stop = YES;
+        }
+    }];
+    return result;
+}
+
+/// 是否为系统类
++ (BOOL)isSystemClass:(Class)cls {
+    if (class_isMetaClass(cls)) { return NO; }
+
+    const char * _Nonnull name = class_getName(cls);
+    if (!name) { return NO; }
+    NSString *className = [NSString stringWithCString:name encoding: NSUTF8StringEncoding];
+
+    // 再检查黑名单
+    if ([className hasPrefix:@"NS"] ||
+        [className hasPrefix:@"_NS"] ||
+        [className hasPrefix:@"__NS"] ||
+        [className hasPrefix:@"OS_"] ||
+        [className hasPrefix:@"CA"] ||
+        [className hasPrefix:@"UI"] ||
+        [className hasPrefix:@"_UI"]) {
+        return true;
+    }
+    
+    return false;
+}
+
+/// 判断实例方法和类方法是否响应，如果是类调用则是判断是否响应类方法，实例对象调用则是判断是否响应对象方法，注意⚠️，类也是能掉此方法的，不理解的自己看一下isa指针问题就懂了
++ (BOOL)isRespondsToSelector:(SEL)sel with:(Class)cls {
+    if (!sel) { return NO; }
+    
+    /// 获取类对象或者元类对象
+    if (class_respondsToSelector(cls, sel)) {
+        return YES;
+    }
+
+    /// 判断是否为元类
+    if (class_isMetaClass(cls)) {
+        return [cls resolveClassMethod: sel];
+    } else {
+        return [cls resolveInstanceMethod: sel];
+    }
+}
+
+/// 判断是否响应实例对象
++ (BOOL)isInstancesRespondToSelector:(SEL)sel with:(Class)cls {
+    if (!sel) { return NO; }
+
+    if (class_respondsToSelector(cls, sel)) {
+        return YES;
+    }
+    
+    /// 判断是否为元类
+    if (class_isMetaClass(cls)) {
+        return NO;
+    } else {
+        return [cls resolveInstanceMethod: sel];
+    }
+}
+
+/// 判断是否响应类方法
++ (BOOL)isClassRespondToSelector:(SEL)sel with:(Class)cls {
+    if (!sel) { return NO; }
+    
+    /// 获取类对象或者元类对象
+    if (class_respondsToSelector(cls, sel)) {
+        return YES;
+    }
+
+    /// 判断是否为元类
+    if (class_isMetaClass(cls)) {
+        return [cls resolveClassMethod: sel];
+    } else {
+        return NO;
+    }
+}
+
+/// 获取实例方法的实现
++ (IMP)getInstanceMethodForSelector:(SEL)sel with:(Class)cls {
+    if (!sel || class_isMetaClass(cls)) { return (IMP)0; }
+    return class_getMethodImplementation(cls, sel);
+}
+
+/// 获得类方法的实现
++ (IMP)getClassMethodForSelector:(SEL)sel with:(Class)cls {
+    if (!sel) { return (IMP)0; }
+    
+    if (!class_isMetaClass(cls)) {
+        cls = object_getClass(cls);
+    }
+    return class_getMethodImplementation(cls, sel);
+}
+
 + (int)compareVersionWithV1:(const char *)v1 v2:(const char *)v2 {
     assert(v1);
     assert(v2);
@@ -179,37 +355,6 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         block();
     });
-}
-
-/// 获取类的所有成员变量名字
-+ (NSArray<NSString *> *)lx_getAllIvars:(Class)cls {
-    unsigned int outCount = 0;
-    Ivar *ivars = class_copyIvarList(cls, &outCount);
-    NSMutableArray *mArr = [NSMutableArray array];
-    for (unsigned int i = 0; i < outCount; ++i) {
-      Ivar ivar = ivars[i];
-      const void *name = ivar_getName(ivar);
-      NSString *ivarName = [NSString stringWithUTF8String:name];
-        [mArr addObject:ivarName];
-    }
-    // 释放资源
-    free(ivars);
-    return mArr;
-}
-
-/// 获取类的所有方法名字
-+ (NSArray<NSString *> *)lx_getAllMethods:(Class)cls {
-    unsigned int outCount = 0;
-    Method *methods = class_copyMethodList(cls, &outCount);
-    NSMutableArray *mArr = [NSMutableArray array];
-    for (unsigned int i = 0; i < outCount; ++i) {
-      Method method = methods[i];
-      SEL methodName = method_getName(method);
-      [mArr addObject:NSStringFromSelector(methodName)];
-    }
-    // 释放资源
-    free(methods);
-    return mArr;
 }
 
 /// 检查权限

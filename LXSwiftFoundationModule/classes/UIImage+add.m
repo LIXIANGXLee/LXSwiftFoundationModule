@@ -7,8 +7,9 @@
 //
 
 #import "UIImage+add.h"
-#import <LXSwiftFoundation-Swift.h>
+#import <LXSwiftFoundation/LXObjcFoundation.h>
 
+#import <LXSwiftFoundation-Swift.h>
 @interface LXBundleImage : NSObject
 + (LXBundleImage *)shared;
 - (LXObjcConvenienceBundle *)bundle;

@@ -35,8 +35,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// 判断是否响应实例对象
 + (BOOL)lx_instancesRespondToSelector:(SEL)sel;
 
+/// 判断是否响应类方法
++ (BOOL)lx_classRespondToSelector:(SEL)sel;
+
 /// 获取实例方法的实现
 + (IMP)lx_instanceMethodForSelector:(SEL)sel;
+
+/// 获得类方法的实现
++ (IMP)lx_classMethodForSelector:(SEL)sel;
 
 /// 判断是否为子类
 + (BOOL)lx_isSubclassOfClass:(Class)aClass;

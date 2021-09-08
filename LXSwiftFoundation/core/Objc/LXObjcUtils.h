@@ -32,6 +32,36 @@ typedef enum : NSUInteger {
 
 @interface LXObjcUtils : NSObject
 
+/// 方法交换 主要是交换方法的实现 method_getImplementation
++ (void)swizzleMethod:(SEL)originSel withNewMethod:(SEL)dstSel with:(Class)cls;
+
+/// 获取类的所有成员变量名字
++ (NSArray<NSString *> *)getAllIvars:(Class)cls;
+
+/// 获取类的所有方法名字
++ (NSArray<NSString *> *)getAllMethods:(Class)cls;
+
+/// 是否属于Foundation里的类，cls要传类对象，不是元类对象 [NSURL class],[NSDate class],[NSValue class],[NSData class],[NSError class],[NSArray class],[NSDictionary class],[NSString class],[NSAttributedString class]
++ (BOOL)isClassFromFoundation:(Class)cls;
+
+/// 是否为系统类，cls要传类对象，不是元类对象
++ (BOOL)isSystemClass:(Class)cls;
+
+/// 判断实例方法和类方法是否响应，cls如果是类对象，则判断是否响应实例方法，cls如果是元类对象，则判断是否响应类方法
++ (BOOL)isRespondsToSelector:(SEL)sel with:(Class)cls;
+
+/// 判断是否响应实例方法
++ (BOOL)isInstancesRespondToSelector:(SEL)sel with:(Class)cls;
+
+/// 判断是否响应类方法
++ (BOOL)isClassRespondToSelector:(SEL)sel with:(Class)cls;
+
+/// 获取实例方法的实现
++ (IMP)getInstanceMethodForSelector:(SEL)sel with:(Class)cls;
+
+/// 获得类方法的实现
++ (IMP)getClassMethodForSelector:(SEL)sel with:(Class)cls;
+
 /** 版本升级 版本比较大小
  
  @param v1 version
@@ -70,12 +100,6 @@ typedef enum : NSUInteger {
 
 /// 异步线程执行block
 + (void)executeGlobalForSafe:(void(^)(void)) block;
-
-/// 获取类的所有成员变量名字
-+ (NSArray<NSString *> *)lx_getAllIvars:(Class)cls;
-
-/// 获取类的所有方法名字
-+ (NSArray<NSString *> *)lx_getAllMethods:(Class)cls;
 
 /// 去设置权限（相机、相册）
 + (void)jumpToSetting;
