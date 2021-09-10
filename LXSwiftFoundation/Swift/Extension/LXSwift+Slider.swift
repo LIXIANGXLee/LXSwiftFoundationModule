@@ -20,7 +20,7 @@ private var sliderCallBackKey: Void?
 extension UISlider: LXSwiftPropertyCompatible {
     typealias T = Float
     var swiftCallBack: SwiftCallBack? {
-        get { return lx_getAssociatedObject(self, &sliderCallBackKey) }
+        get { lx_getAssociatedObject(self, &sliderCallBackKey) }
         set { lx_setRetainedAssociatedObject(self, &sliderCallBackKey, newValue) }
     }
     

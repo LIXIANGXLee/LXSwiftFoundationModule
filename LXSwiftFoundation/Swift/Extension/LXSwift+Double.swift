@@ -66,6 +66,11 @@ extension LXSwiftBasics where Base == Double {
         return NSNumber(value: base).lx.numberFormatter(with: mode, minDigits: digits, maxDigits: digits) ?? ""
     }
     
+    /// 转换小写数字为大写数字 1 到 壹，2 到 贰 长度要小于19个，否则会crash闪退
+    public var convertToUppercaseNumbers: String? {
+       return LXSwiftUtils.convert(toUppercaseNumbers: base)
+    }
+    
     /// 用户显示容量 (GB、MB、KB、B)
     public var sizeFileToStr: String {
         let unit = 1000.0

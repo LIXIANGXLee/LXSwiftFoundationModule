@@ -21,7 +21,7 @@ private var hitTimerKey: Void?
 extension UIControl  {
     
     private var hitTime: Double? {
-        get { return lx_getAssociatedObject(self, &hitTimerKey) }
+        get { lx_getAssociatedObject(self, &hitTimerKey) }
         set { lx_setRetainedAssociatedObject(self, &hitTimerKey, newValue, .OBJC_ASSOCIATION_ASSIGN) }
     }
     

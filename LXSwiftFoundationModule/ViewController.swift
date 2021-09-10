@@ -23,10 +23,13 @@ class ViewController: UIViewController {
         return tableView
     }()
     
+    private var switchCallBackKey: Void?
+    private var switchCallBacka: Void?
+
      override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "UI展示"
-        
+            
         ViewController.lx_classRespond(to: #selector(btnClick(_:)))
         
         

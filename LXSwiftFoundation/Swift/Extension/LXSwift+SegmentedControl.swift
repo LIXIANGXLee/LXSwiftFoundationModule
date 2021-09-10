@@ -22,7 +22,7 @@ extension UISegmentedControl: LXSwiftPropertyCompatible {
     
     typealias T = Int
     var swiftCallBack: SwiftCallBack? {
-        get { return lx_getAssociatedObject(self, &segmentedControlCallBackKey) }
+        get { lx_getAssociatedObject(self, &segmentedControlCallBackKey) }
         set { lx_setRetainedAssociatedObject(self, &segmentedControlCallBackKey, newValue) }
     }
     

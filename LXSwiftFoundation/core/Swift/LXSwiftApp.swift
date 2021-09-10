@@ -102,6 +102,24 @@ public func SCALE_GET_CENTER_WIDTH_AND_WIDTH(_ parent: CGFloat, _ child: CGFloat
     public static func flat(_ value: CGFloat) -> CGFloat {
         return ceil(value * LXSwiftApp.screenScale) / LXSwiftApp.screenScale
     }
+
+    /// 获取跟窗口
+    public static var rootWindow: UIWindow? {
+        if #available(iOS 13.0, *) {
+            if let window = UIApplication.shared.connectedScenes
+                   .filter({$0.activationState == .foregroundActive})
+                   .map({$0 as? UIWindowScene})
+                   .compactMap({$0})
+                   .first?.windows
+                   .filter({$0.isKeyWindow}).first {
+                   return window
+            }else {
+                return UIApplication.shared.delegate?.window ?? UIApplication.shared.windows.first
+            }
+        } else {
+               return UIApplication.shared.delegate?.window ?? UIApplication.shared.windows.first
+        }
+    }
     
     /// 获取状态栏高度
     private static var statusBarHeight: CGFloat {
@@ -130,23 +148,5 @@ public func SCALE_GET_CENTER_WIDTH_AND_WIDTH(_ parent: CGFloat, _ child: CGFloat
             }
         }
         return touchBarH
-    }
-    
-    /// 获取跟窗口
-    public static var rootWindow: UIWindow? {
-        if #available(iOS 13.0, *) {
-            if let window = UIApplication.shared.connectedScenes
-                   .filter({$0.activationState == .foregroundActive})
-                   .map({$0 as? UIWindowScene})
-                   .compactMap({$0})
-                   .first?.windows
-                   .filter({$0.isKeyWindow}).first {
-                   return window
-            }else {
-                return UIApplication.shared.delegate?.window ?? UIApplication.shared.windows.first
-            }
-        } else {
-               return UIApplication.shared.delegate?.window ?? UIApplication.shared.windows.first
-        }
     }
 }

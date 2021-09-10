@@ -20,8 +20,8 @@ extension LXSwiftBasics where Base: UISwitch {
 private var switchCallBackKey: Void?
 extension UISwitch: LXSwiftPropertyCompatible {
     typealias T = Bool
-    var swiftCallBack: SwiftCallBack? {
-        get { return lx_getAssociatedObject(self, &switchCallBackKey) }
+   @objc var swiftCallBack: SwiftCallBack? {
+        get { lx_getAssociatedObject(self, &switchCallBackKey) }
         set { lx_setRetainedAssociatedObject(self, &switchCallBackKey, newValue) }
     }
     

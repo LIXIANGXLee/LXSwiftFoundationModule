@@ -211,7 +211,7 @@ private var viewCallBackKey: Void?
 extension UIView {
     
     var viewCallBack: ((UIView?) -> ())? {
-        get { return lx_getAssociatedObject(self, &viewCallBackKey) }
+        get { lx_getAssociatedObject(self, &viewCallBackKey) }
         set { lx_setRetainedAssociatedObject(self, &viewCallBackKey, newValue) }
     }
     

@@ -10,8 +10,8 @@ import UIKit
 
 @objc(LXObjcTextField)
 @objcMembers open class LXSwiftTextField: UITextField {
+   
     public typealias TextCallBack = (String) -> Void
- 
     /// 配置文本框的输入位置和左右间距
     open var textRectInsert: UIEdgeInsets?
     
