@@ -13,9 +13,7 @@ extension LXSwiftBasics where Base: UIScrollView {
  
     /// 抓拍长图片，可以抓拍图片进行滚动查看 截取长图
     public func snapShotContentScroll(callBack: @escaping (UIImage?) -> ()) {
-        base.snapShotContentScroll { (image) in
-            callBack(image)
-        }
+        base.snapShotContentScroll { (image) in callBack(image) }
     }
 }
 
@@ -25,7 +23,7 @@ extension LXSwiftBasics where Base: UIScrollView {
     /// 将内容滚动到顶部
     public func scrollToTop(animated: Bool = true) {
         var off = base.contentOffset
-        off.y = 0 - base.contentInset.top
+        off.y = -base.contentInset.top
         base.setContentOffset(off, animated: animated)
     }
     
@@ -39,7 +37,7 @@ extension LXSwiftBasics where Base: UIScrollView {
     /// 向左滚动内容
     public func scrollToLeft(animated: Bool = true) {
         var off = base.contentOffset
-        off.x = 0 - base.contentInset.left
+        off.x = -base.contentInset.left
         base.setContentOffset(off, animated: animated)
     }
     
@@ -63,19 +61,16 @@ extension UIScrollView {
                                      width: snapShotView.frame.size.width,
                                      height: snapShotView.frame.size.height)
         self.superview?.addSubview(snapShotView)
-        
         let originOffset = self.contentOffset
         let page = floorf(Float(self.contentSize.height / self.bounds.height))
         
         /// 将位图上下文大小启用为屏幕截图的大小
         UIGraphicsBeginImageContextWithOptions(self.contentSize, false, UIScreen.main.scale)
-        
         /// 此方法是一个图形，其中可能有递归调用
         self.snapShotContentScrollPage(index: 0,  maxIndex: Int(page), callback: { [weak self] () -> Void in
             let strongSelf = self
             let screenShotImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
-            
             /// 设置原点偏移
             strongSelf?.setContentOffset(originOffset, animated: false)
             snapShotView.removeFromSuperview()
@@ -94,14 +89,11 @@ extension UIScrollView {
                                 y: CGFloat(index) * self.frame.size.height,
                                 width: bounds.size.width,
                                 height: bounds.size.height)
-        
         DispatchQueue.lx.delay(with: Double(Int64(0.3*Double(NSEC_PER_SEC)))/Double(NSEC_PER_SEC)) {
             self.drawHierarchy(in: splitFrame, afterScreenUpdates: true)
             if index < maxIndex {
                 self.snapShotContentScrollPage(index: index + 1, maxIndex: maxIndex, callback: callback)
-            }else{
-                callback()
-            }
+            }else{ callback() }
         }
     }
 }

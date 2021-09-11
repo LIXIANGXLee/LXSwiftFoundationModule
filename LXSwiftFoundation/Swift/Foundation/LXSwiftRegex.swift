@@ -64,7 +64,6 @@ extension LXSwiftRegex {
     /// - wordSpaceing：字间距
     /// - wordregextypes:超链接文本配置信息
     public static func regex(of text: String, textColor: UIColor = UIColor.black,textFont: UIFont = UIFont.systemFont(ofSize: 15),  lineSpaceing: CGFloat = 4, wordSpaceing: CGFloat = 0, wordRegexTypes: [LXSwiftRegexType] = wordRegexTypes) -> NSAttributedString? {
-            
         if text.count <= 0 { return nil }
         let style = NSMutableParagraphStyle()
         style.lineSpacing = lineSpaceing
@@ -75,7 +74,6 @@ extension LXSwiftRegex {
             NSAttributedString.Key.kern: wordSpaceing
         ] as [NSAttributedString.Key : Any]
         let attributedStr = NSMutableAttributedString(string: text, attributes:attributes)
-        
         // Start text matching
         for wordRegexType in wordRegexTypes {
             if wordRegexType.isExpression { // Expression matching

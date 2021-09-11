@@ -48,8 +48,6 @@ extension LXSwiftBasics where Base == CGRect {
     }
 
     /// 获取中心点
-    public var center: CGPoint {
-        return CGPoint(x: LXSwiftApp.flat(base.midX), y: LXSwiftApp.flat(base.midY))
-    }
+    public var center: CGPoint { CGPoint(x: LXSwiftApp.flat(base.midX), y: LXSwiftApp.flat(base.midY)) }
     
 }

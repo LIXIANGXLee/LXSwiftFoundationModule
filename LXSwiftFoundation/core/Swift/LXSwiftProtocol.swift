@@ -20,9 +20,7 @@ public protocol LXSwiftCellCompatible: AnyObject {
 
 /// 默认实现协议扩展
 public extension LXSwiftCellCompatible {
-    static var reusableSwiftIdentifier: String {
-        return "\(self)"
-    }
+    static var reusableSwiftIdentifier: String { "\(self)" }
 }
 
 /// 定义圆角背景色协议

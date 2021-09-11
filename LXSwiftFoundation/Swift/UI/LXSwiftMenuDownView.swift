@@ -20,7 +20,7 @@ import UIKit
     open var topMargin: CGFloat = SCALE_IP6_WIDTH_TO_WIDTH(10)
     
     /// 布局位置，相对于传进来的按钮位置的布局摆放
-    open var xType: LXSwiftMenuDownView.MenuXType = .mid
+    open var xType: LXSwiftMenuDownView.MenuXType = .right
     
     open override var content: UIView? {
         didSet {

@@ -60,7 +60,6 @@
 }
 
 - (NSString *)lx_firstCharLower {
-    
     if (self.length == 0) return self;
     NSMutableString *string = [NSMutableString string];
     [string appendString:[NSString stringWithFormat:@"%c", [self characterAtIndex:0]].lowercaseString];
@@ -69,7 +68,6 @@
 }
 
 - (NSString *)lx_firstCharUpper {
-    
     if (self.length == 0) return self;
     NSMutableString *string = [NSMutableString string];
     [string appendString:[NSString stringWithFormat:@"%c", [self characterAtIndex:0]].uppercaseString];
@@ -78,7 +76,6 @@
 }
 
 - (NSString *)lx_underlineFromCamel {
-    
     if (self.length == 0) return self;
     NSMutableString *string = [NSMutableString string];
     for (NSUInteger i = 0; i<self.length; i++) {
@@ -96,7 +93,6 @@
 }
 
 - (NSString *)lx_camelFromUnderline {
-    
     if (self.length == 0) return self;
     NSMutableString *string = [NSMutableString string];
     NSArray *cmps = [self componentsSeparatedByString:@"_"];
@@ -113,7 +109,6 @@
 }
 
 - (id)lx_jsonStringToId {
-    
     if (!self || self.length == 0) { return nil; }
     NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
     return [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
@@ -121,7 +116,6 @@
 
 - (NSString *)lx_jsonStringWithId:(id)objc {
     if (!self) return nil;
-
     NSError* error = nil;
     NSData* jsonData = [NSJSONSerialization dataWithJSONObject:objc options:0 error:&error];
     if (error) { return nil; }
@@ -130,15 +124,13 @@
 
 
 - (NSString *)lx_documentFile {
-    
     NSString * docsdir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     return [self createFilePath:[docsdir stringByAppendingPathComponent:self]];
 }
 
 - (NSString *)lx_cacheFile {
-    
   NSString * docsdir = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-  return  [self createFilePath:[docsdir stringByAppendingPathComponent:self]];
+  return [self createFilePath:[docsdir stringByAppendingPathComponent:self]];
 }
 
 - (NSString *)createFilePath:(NSString *)filePath{

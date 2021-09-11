@@ -42,7 +42,7 @@ extension LXSwiftBasics where Base == URL {
         return params
     }
     
-    ///  按照原顺序 取出Get请求中的参数，结果是一个大字典，结果是一个数组，每个元素是一个字典
+    ///  按照原顺序 取出Get请求中的参数，结果是一个数组，每个元素是一个字典
     public var urlParamsWithOrder: [[String: String]] {
         var queries = [[String: String]]()
         guard let query = base.query else { return queries }

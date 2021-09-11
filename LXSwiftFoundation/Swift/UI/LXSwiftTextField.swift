@@ -33,9 +33,7 @@ import UIKit
         let newBounds = super.textRect(forBounds: bounds)
         if let textRectInsert = textRectInsert {
             return newBounds.inset(by: textRectInsert)
-        }else{
-            return newBounds
-        }
+        }else{ return newBounds }
     }
     
     public override init(frame: CGRect) {
@@ -55,19 +53,13 @@ import UIKit
 extension LXSwiftTextField {
     
     /// 公共方法回调
-    open func setHandle(_ textCallBack: LXSwiftTextView.TextCallBack?) {
-        self.textCallBack = textCallBack
-    }
+    open func setHandle(_ textCallBack: LXSwiftTextView.TextCallBack?) { self.textCallBack = textCallBack }
     
     /// 设置文本最大长度
-    @objc open func setMaxTextLength(_ length: Int) {
-        self.maxTextLength = length
-    }
+    @objc open func setMaxTextLength(_ length: Int) { self.maxTextLength = length }
     
     /// 配置文本框的输入位置和左右间距
-    @objc open func textRectInsert(_ edgeInsets: UIEdgeInsets) {
-        self.textRectInsert = edgeInsets
-    }
+    @objc open func textRectInsert(_ edgeInsets: UIEdgeInsets) { self.textRectInsert = edgeInsets }
 
 }
 
@@ -77,9 +69,7 @@ extension LXSwiftTextField {
     /// 文本改变调用
     @objc func textDidChange() {
         if let maxLength = self.maxTextLength, let count = text?.count {
-            if count > maxLength {
-                text = text?.lx.substring(to: maxLength)
-            }
+            if count > maxLength { text = text?.lx.substring(to: maxLength) }
         }
         self.textCallBack?(text ?? "")
     }

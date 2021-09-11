@@ -257,7 +257,7 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
     return image;
 }
 
-- (CGSize)sizeOfScaleToFit:(CGSize)scaledSize{
+- (CGSize)sizeOfScaleToFit:(CGSize)scaledSize {
     CGFloat scaleFactor = scaledSize.width / scaledSize.height;
     CGFloat imageFactor = self.size.width / self.size.height;
     if (scaleFactor <= imageFactor) {//图片横向填充
@@ -396,7 +396,7 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
             alpha == kCGImageAlphaPremultipliedLast);
 }
 
-- (void)lx_drawInRect:(CGRect)rect withContentMode:(UIViewContentMode)contentMode clipsToBounds:(BOOL)clips{
+- (void)lx_drawInRect:(CGRect)rect withContentMode:(UIViewContentMode)contentMode clipsToBounds:(BOOL)clips {
     CGRect drawRect = _LXCGRectFitWithContentMode(rect, self.size, contentMode);
     if (drawRect.size.width == 0 || drawRect.size.height == 0) return;
     if (clips) {

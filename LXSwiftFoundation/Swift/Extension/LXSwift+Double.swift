@@ -38,33 +38,31 @@ extension Double: LXSwiftCompatible {
 extension LXSwiftBasics where Base == CGFloat {
     
     ///CGFloat转Double
-    public var toDouble: Double {
-        return Double(base)
-    }
+    public var toDouble: Double { Double(base) }
     
     /// 用户显示容量 (GB、MB、KB、B)
-    public var sizeFileToStr: String {
-        return base.lx.toDouble.lx.sizeFileToStr
-    }
+    @available(*, deprecated, renamed: "sizeFileToString")
+    public var sizeFileToStr: String { sizeFileToString }
+    
+    /// 用户显示容量 (GB、MB、KB、B)
+    public var sizeFileToString: String { base.lx.toDouble.lx.sizeFileToString }
     
     /// 时间字符串
-    public var timeToStr: String {
-        return base.lx.toDouble.lx.timeToStr
-    }
+    @available(*, deprecated, renamed: "timeToString")
+    public var timeToStr: String { timeToString }
+    
+    /// 时间字符串
+    public var timeToString: String { base.lx.toDouble.lx.timeToString }
 }
 
 //MARK: -  Extending methods for Double
 extension LXSwiftBasics where Base == Double {
     
     /// 保留小数点后的小数位
-    public func roundTo(minDigits: Int = 0, maxDigits: Int = 2, mode: NumberFormatter.RoundingMode = .halfEven) -> String {
-        return NSNumber(value: base).lx.numberFormatter(with: mode, minDigits: minDigits, maxDigits: maxDigits) ?? ""
-    }
+    public func roundTo(minDigits: Int = 0, maxDigits: Int = 2, mode: NumberFormatter.RoundingMode = .halfEven) -> String { NSNumber(value: base).lx.numberFormatter(with: mode, minDigits: minDigits, maxDigits: maxDigits) ?? "" }
     
     /// 保留小数点后的小数位
-    public func roundTo(digits: Int = 0, mode: NumberFormatter.RoundingMode = .halfEven) -> String {
-        return NSNumber(value: base).lx.numberFormatter(with: mode, minDigits: digits, maxDigits: digits) ?? ""
-    }
+    public func roundTo(digits: Int = 0, mode: NumberFormatter.RoundingMode = .halfEven) -> String { NSNumber(value: base).lx.numberFormatter(with: mode, minDigits: digits, maxDigits: digits) ?? "" }
     
     /// 转换小写数字为大写数字 1 到 壹，2 到 贰 长度要小于19个，否则会crash闪退
     public var convertToUppercaseNumbers: String? {
@@ -72,7 +70,11 @@ extension LXSwiftBasics where Base == Double {
     }
     
     /// 用户显示容量 (GB、MB、KB、B)
-    public var sizeFileToStr: String {
+    @available(*, deprecated, renamed: "sizeFileToString")
+    public var sizeFileToStr: String { sizeFileToString }
+    
+    /// 用户显示容量 (GB、MB、KB、B)
+    public var sizeFileToString: String {
         let unit = 1000.0
         if base > pow(unit, 3) {
             return String(format: "%.2fGB", base / pow(unit, 3))
@@ -86,7 +88,11 @@ extension LXSwiftBasics where Base == Double {
     }
     
     /// 时间字符串
-    public var timeToStr: String {
+    @available(*, deprecated, renamed: "timeToString")
+    public var timeToStr: String { timeToString }
+    
+    /// 时间字符串
+    public var timeToString: String {
         let dur = Int(round(base))
         switch dur {
         case ~>=3600:

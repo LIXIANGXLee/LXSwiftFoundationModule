@@ -19,3 +19,7 @@ public func lx_setRetainedAssociatedObject<T>(_ object: Any,
                                                 .OBJC_ASSOCIATION_RETAIN_NONATOMIC) {
     objc_setAssociatedObject(object, key, value, policy)
 }
+
+public func lx_removeAssociatedObjects(_ object: Any) {
+    objc_removeAssociatedObjects(object)
+}

@@ -27,7 +27,6 @@ dispatch_semaphore_t _semaphore;
 }
 
 + (void)timerTask:(NSTimeInterval)start interval:(NSTimeInterval)interval repeats:(BOOL)repeats async:(BOOL)async identified:(NSString *)identified task:(void (^)(void))task{
-    
     if (!task || start < 0 || (interval <= 0 && repeats)) return;
     dispatch_queue_t queue = async ? dispatch_get_global_queue(0, 0) : dispatch_get_main_queue();
     dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
@@ -37,15 +36,13 @@ dispatch_semaphore_t _semaphore;
     dispatch_semaphore_signal(_semaphore);
     dispatch_source_set_event_handler(timer, ^{
         task();
-        if (!repeats) { // 不重复的任务
-            [self cancelTimerTask:identified];
-        }
+        // 不重复的任务
+        if (!repeats) { [self cancelTimerTask:identified]; }
     });
     dispatch_resume(timer);
 }
 
 + (void)timerTask:(id)target selector:(SEL)selector start:(NSTimeInterval)start interval:(NSTimeInterval)interval repeats:(BOOL)repeats async:(BOOL)async identified:(NSString *)identified{
-    
     if (!target || !selector) return;
     [self timerTask:start interval:interval repeats:repeats async:async identified:identified task:^{
         if ([target respondsToSelector:selector]) {

@@ -14,26 +14,20 @@ extension NSAttributedString: LXSwiftCompatible{ }
 extension LXSwiftBasics where Base: NSAttributedString {
     
     /// 根据字体大小和宽度获取字体大小
-    public func size(width: CGFloat) -> CGSize {
+    public func size(_ width: CGFloat) -> CGSize {
         let size = CGSize(width: width, height: CGFloat(MAXFLOAT))
         let rect = base.boundingRect(with: size, options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil)
         return rect.size
     }
     
     /// 获取基于字体和宽度的文本高度
-    public func height(width: CGFloat) -> CGFloat {
-        return size(width: width).height
-    }
+    public func height(_ width: CGFloat) -> CGFloat { size(width).height }
     
     /// 获取基于字体和宽度的文本宽度
-    public var width: CGFloat {
-        return size(width: LXSwiftApp.screenW).width
-    }
+    public var width: CGFloat { size(LXSwiftApp.screenW).width }
     
     /// 获取的NSAttributeString属性字典
-    public var attributes: [NSAttributedString.Key: Any] {
-        return base.attributes(at: 0, effectiveRange: nil)
-    }
+    public var attributes: [NSAttributedString.Key: Any] { base.attributes(at: 0, effectiveRange: nil) }
 }
 
 //MARK: -  Extending properties and methods for NSMutableAttributedString
@@ -44,9 +38,7 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
         base.addAttribute(attribute, value: value, range: range)
     }
     
-    public func attribute(with key: NSAttributedString.Key, index: Int) -> Any? {
-        return base.attribute(key, at: index, effectiveRange: nil)
-    }
+    public func attribute(with key: NSAttributedString.Key, index: Int) -> Any? { base.attribute(key, at: index, effectiveRange: nil) }
     
     @discardableResult
     public func set(with font: UIFont?, range: NSRange? = nil) -> NSMutableAttributedString {

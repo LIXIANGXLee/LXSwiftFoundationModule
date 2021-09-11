@@ -27,19 +27,13 @@ extension LXSwiftBasics where Base: UIViewController {
     }
 
     /// 当前视图是否可见
-    public var isVisible: Bool {
-        return base.isViewLoaded && (base.view.window != nil)
-    }
+    public var isVisible: Bool { base.isViewLoaded && (base.view.window != nil) }
     
     /// 当前视图控制器
-    public var visibleViewController: UIViewController? {
-        return UIApplication.lx.visibleViewController
-    }
+    public var visibleViewController: UIViewController? { UIApplication.lx.visibleViewController }
     
     /// 模态 presented root
-    public var presentViewController: UIViewController? {
-        return UIApplication.lx.presentViewController
-    }
+    public var presentViewController: UIViewController? { UIApplication.lx.presentViewController }
     
     /// 控制器 dismiss 销毁
     public func dismissViewController() {

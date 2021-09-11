@@ -38,9 +38,7 @@ extension NSData: LXSwiftCompatible { }
 extension LXSwiftBasics where Base == Data {
     
     /// 数据转换utf8字符串
-    public var utf8String: String? {
-        return String(data: base, encoding: .utf8)
-    }
+    public var utf8String: String? { String(data: base, encoding: .utf8) }
     
     /// 数据传输uiimage的base64
     public var base64DecodingImage: UIImage? {
@@ -66,9 +64,7 @@ extension LXSwiftBasics where Base == Data {
 extension LXSwiftBasics where Base == NSData {
   
     /// 判断data是不是gif类型图片
-    public var isGIF: Bool {
-        return base.lx.imageType == .GIF
-    }
+    public var isGIF: Bool { base.lx.imageType == .GIF }
     
     /// data类型
     public var imageType: LXSwiftImageDataType {

@@ -14,9 +14,7 @@ extension UIApplication: LXSwiftCompatible { }
 extension LXSwiftBasics where Base: UIApplication {
     
     /// 当前显示的控制器
-    public static var visibleViewController: UIViewController? {
-        return UIApplication.lx.getVisibleViewController(from: visibleRootViewController)
-    }
+    public static var visibleViewController: UIViewController? { UIApplication.lx.getVisibleViewController(from: visibleRootViewController) }
     
     /// 获取当前的导航控制器
     public static var visibleNavRootViewController: UINavigationController? {
@@ -25,9 +23,7 @@ extension LXSwiftBasics where Base: UIApplication {
             return navVC
         }else if let tabBar = rootVC as? UITabBarController {
             return tabBar.children[tabBar.selectedIndex] as? UINavigationController
-        } else {
-            return nil
-        }
+        } else { return nil }
     }
 
     /// 获取present 控制器
@@ -40,9 +36,7 @@ extension LXSwiftBasics where Base: UIApplication {
     }
     
     /// root跟控制器
-    public static var visibleRootViewController: UIViewController? {
-        return rootWindow?.rootViewController
-    }
+    public static var visibleRootViewController: UIViewController? { rootWindow?.rootViewController }
     
     /// 当前显示的控制器
     public static func getVisibleViewController(from vc: UIViewController?) -> UIViewController? {
@@ -57,9 +51,7 @@ extension LXSwiftBasics where Base: UIApplication {
     }
 
     /// 获取跟窗口
-    public static var rootWindow: UIWindow? {
-       return LXSwiftApp.rootWindow
-    }
+    public static var rootWindow: UIWindow? { LXSwiftApp.rootWindow }
     
     /// 获取最外层窗口 需要判断不是UIRemoteKeyboardWindow才行，否则在ipad会存在问题
     public static var lastWindow: UIWindow? {
@@ -78,14 +70,11 @@ extension LXSwiftBasics where Base: UIApplication {
     
     /// 打开url
     public static func openUrl(_ urlStr: String, completionHandler: ((Bool) -> Void)? = nil) {
-        if let url = URL(string: urlStr) {
-            openUrl(url, completionHandler: completionHandler)
-        }
+        if let url = URL(string: urlStr) { openUrl(url, completionHandler: completionHandler) }
     }
     
     /// 打开url (特别注意：ios 10 以下版本没有回调)
     public static func openUrl(_ url: URL?, completionHandler: ((Bool) -> Void)? = nil) {
-        
         guard let u = url else {
             completionHandler?(false)
             return
@@ -102,7 +91,6 @@ extension LXSwiftBasics where Base: UIApplication {
     
     /// 判断是否能打开url
     public static func isCanOpen(_ url: URL?) -> Bool {
-        
        guard let u = url else { return false }
        return applicationShared.canOpenURL(u)
     }

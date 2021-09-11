@@ -21,13 +21,13 @@ import UIKit
     open var callBack: LXSwiftImgView.CallBack?
     
     /// 是否允许交互
-    open var isInteractionEnabled: Bool = false {
-        didSet { isUserInteractionEnabled = isInteractionEnabled }
-    }
+    open var isInteractionEnabled: Bool = false { didSet { isUserInteractionEnabled = isInteractionEnabled } }
     
-    public convenience init() {
-        self.init(frame: CGRect.zero)
-    }
+    /// 设置回调函数
+    @objc(setObjcCallBack:)
+    open func setCallBack(_ callBack: LXSwiftImgView.CallBack?) { self.callBack = callBack }
+    
+    public convenience init() { self.init(frame: CGRect.zero) }
     
     public override init(frame: CGRect) {
         super.init(frame: frame)

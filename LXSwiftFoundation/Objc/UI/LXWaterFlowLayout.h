@@ -33,5 +33,4 @@
 /// 代理
 @property(nonatomic,weak) id<LXWaterFlowLayoutDelegate>delegate;
 
-
 @end

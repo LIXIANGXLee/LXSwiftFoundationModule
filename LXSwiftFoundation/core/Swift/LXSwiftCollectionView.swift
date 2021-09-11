@@ -36,43 +36,28 @@ import UIKit
     
     /// 您是否支持多事件传递
     @objc(setObjcShouldRecognizeSimultaneously:)
-    open func setShouldRecognizeSimultaneously(_ callBack: RecognizeSimultaneously?) {
-        self.shouldRecognizeSimultaneously = callBack
-    }
+    open func setShouldRecognizeSimultaneously(_ callBack: RecognizeSimultaneously?) { self.shouldRecognizeSimultaneously = callBack }
     
     /// 是否允许开始手势
     @objc(setObjcShouldBegin:)
-    open func setShouldBegin(_ callBack: ShouldBegin?) {
-        self.shouldBegin = callBack
-    }
+    open func setShouldBegin(_ callBack: ShouldBegin?) { self.shouldBegin = callBack }
 }
 
 public extension UICollectionView {
 
-    func registSwiftCell<T: UICollectionViewCell>(_ cell: T.Type) where T: LXSwiftCellCompatible {
-        self.register(cell, forCellWithReuseIdentifier: cell.reusableSwiftIdentifier)
-    }
+    func registSwiftCell<T: UICollectionViewCell>(_ cell: T.Type) where T: LXSwiftCellCompatible { self.register(cell, forCellWithReuseIdentifier: cell.reusableSwiftIdentifier) }
 
-    func dequeueSwiftReusableCell<T: UICollectionViewCell>(indexPath: IndexPath) -> T where T: LXSwiftCellCompatible {
-        return self.dequeueReusableCell(withReuseIdentifier: T.reusableSwiftIdentifier, for: indexPath) as! T
-    }
+    func dequeueSwiftReusableCell<T: UICollectionViewCell>(indexPath: IndexPath) -> T where T: LXSwiftCellCompatible { self.dequeueReusableCell(withReuseIdentifier: T.reusableSwiftIdentifier, for: indexPath) as! T }
 }
 
 //MARK: - UIGestureRecognizerDelegate
 extension LXSwiftCollectionView: UIGestureRecognizerDelegate {
     
     /// 您是否支持多事件传递代理
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        let outResult = shouldRecognizeSimultaneously?(gestureRecognizer, otherGestureRecognizer)
-        return outResult ?? false
-    }
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool { shouldRecognizeSimultaneously?(gestureRecognizer, otherGestureRecognizer) ?? false }
     
     /// 是否允许开始手势
-    open override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        let outResult = shouldBegin?(gestureRecognizer)
-        return outResult ??
-            super.gestureRecognizerShouldBegin(gestureRecognizer)
-    }
+    open override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool { shouldBegin?(gestureRecognizer) ?? super.gestureRecognizerShouldBegin(gestureRecognizer) }
 }
 
 @objcMembers open class LXSwiftCollectionViewCell: UICollectionViewCell, LXSwiftCellCompatible {

@@ -27,29 +27,19 @@ public let SCREEN_HEIGHT_TO_TABBARHEIGHT = LXSwiftApp.tabBarH
 public let SCREEN_HEIGHT_TO_NAVBARHEIGHT = LXSwiftApp.navBarH
 
 /// 标准iphone6适配宽度
-public func SCALE_IP6_WIDTH_TO_WIDTH(_ distance: CGFloat) -> CGFloat {
-    return LXSwiftApp.flat(distance * (SCREEN_WIDTH_TO_WIDTH / 375))
-}
+public func SCALE_IP6_WIDTH_TO_WIDTH(_ distance: CGFloat) -> CGFloat { LXSwiftApp.flat(distance * (SCREEN_WIDTH_TO_WIDTH / 375)) }
 
 /// 标准iphone6适配高度
-public func SCALE_IP6_HEIGHT_TO_HEIGHT(_ distance: CGFloat) -> CGFloat {
-    return LXSwiftApp.flat(distance * (SCREEN_HEIGHT_TO_HEIGHT / 667))
-}
+public func SCALE_IP6_HEIGHT_TO_HEIGHT(_ distance: CGFloat) -> CGFloat { LXSwiftApp.flat(distance * (SCREEN_HEIGHT_TO_HEIGHT / 667)) }
 
 /// 标准ipad129适配宽度
-public func SCALE_IPAD129_WIDTH_TO_WIDTH(_ distance: CGFloat) -> CGFloat {
-    return LXSwiftApp.flat(distance * (SCREEN_WIDTH_TO_WIDTH / 1024))
-}
+public func SCALE_IPAD129_WIDTH_TO_WIDTH(_ distance: CGFloat) -> CGFloat { LXSwiftApp.flat(distance * (SCREEN_WIDTH_TO_WIDTH / 1024)) }
 
 /// 标准ipad129适配高度
-public func SCALE_IPAD129_HEIGHT_TO_HEIGHT(_ distance: CGFloat) -> CGFloat {
-    return LXSwiftApp.flat(distance * (SCREEN_HEIGHT_TO_HEIGHT / 1366))
-}
+public func SCALE_IPAD129_HEIGHT_TO_HEIGHT(_ distance: CGFloat) -> CGFloat { LXSwiftApp.flat(distance * (SCREEN_HEIGHT_TO_HEIGHT / 1366)) }
 
 /// 居中运算
-public func SCALE_GET_CENTER_WIDTH_AND_WIDTH(_ parent: CGFloat, _ child: CGFloat) -> CGFloat {
-    return LXSwiftApp.flat((parent - child) / 2.0)
-}
+public func SCALE_GET_CENTER_WIDTH_AND_WIDTH(_ parent: CGFloat, _ child: CGFloat) -> CGFloat { LXSwiftApp.flat((parent - child) / 2.0) }
 
 // MARK: - LXSwftApp const
 /// define app const
@@ -99,9 +89,7 @@ public func SCALE_GET_CENTER_WIDTH_AND_WIDTH(_ parent: CGFloat, _ child: CGFloat
      *  当前设备的屏幕倍数，对传进来的 value 进行像素根据屏幕比例取整
      *  例如传进来 “2.1”，在 2x 倍数下会返回 2.5（0.5pt 对应 1px）在 3x 倍数下会返回 2.333（0.333pt 对应 1px）。
      */
-    public static func flat(_ value: CGFloat) -> CGFloat {
-        return ceil(value * LXSwiftApp.screenScale) / LXSwiftApp.screenScale
-    }
+    public static func flat(_ value: CGFloat) -> CGFloat { ceil(value * LXSwiftApp.screenScale) / LXSwiftApp.screenScale }
 
     /// 获取跟窗口
     public static var rootWindow: UIWindow? {
@@ -127,12 +115,9 @@ public func SCALE_GET_CENTER_WIDTH_AND_WIDTH(_ parent: CGFloat, _ child: CGFloat
         if statusH == 0 {
             if #available(iOS 13.0, *) {
                 statusH = rootWindow?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
-
             }else if #available(iOS 11.0, *) {
                 statusH = rootWindow?.safeAreaInsets.top ?? 0
-            }else {
-                return 20
-            }
+            }else { return 20 }
         }
         return statusH
     }
@@ -143,9 +128,7 @@ public func SCALE_GET_CENTER_WIDTH_AND_WIDTH(_ parent: CGFloat, _ child: CGFloat
         if #available(iOS 11.0, *) {
             touchBarH =
                rootWindow?.safeAreaInsets.bottom ?? 0
-            if touchBarH == 0 && Int(statusBarH) > 20 {
-                touchBarH = 34
-            }
+            if touchBarH == 0 && Int(statusBarH) > 20 { touchBarH = 34 }
         }
         return touchBarH
     }

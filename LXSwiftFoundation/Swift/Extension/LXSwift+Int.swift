@@ -24,7 +24,6 @@ public prefix func ~>= (_ index: Int64) -> (Int64) -> (Bool) { { $0 >= index } }
 public prefix func ~<  (_ index: Int64) -> (Int64) -> (Bool) { { $0 <  index } }
 public prefix func ~<= (_ index: Int64) -> (Int64) -> (Bool) { { $0 <= index } }
 
-
 public prefix func ~>  (_ index: Int) -> (Int) -> (Bool) { { $0 >  index } }
 public prefix func ~>= (_ index: Int) -> (Int) -> (Bool) { { $0 >= index } }
 public prefix func ~<  (_ index: Int) -> (Int) -> (Bool) { { $0 <  index } }
@@ -65,28 +64,19 @@ extension LXSwiftBasics where Base == Int32 {
      7日前-今年1.1：XX-XX XX:XX
      去年及以前：20XX-XX-XX XX:XX
      */
-    public var timeDateDescription: String {
-        return base.lx.toInt.lx.timeDateDescription
-    }
+    public var timeDateDescription: String { base.lx.toInt.lx.timeDateDescription }
     
     /// Int32转Int64
-    public var toInt64: Int64 {
-         return Int64(base)
-    }
+    public var toInt64: Int64 { Int64(base) }
     
     /// Int32转Int
-    public var toInt: Int {
-         return Int(base)
-    }
+    public var toInt: Int { Int(base) }
     
     /// int转bool
-    public var toBool: Bool {
-        return base > 0 ? true : false
-    }
+    public var toBool: Bool { base > 0 ? true : false }
+    
     /// 转换为字符串格式
-    public var toString: String {
-        return String(base)
-    }
+    public var toString: String { String(base) }
 }
 
 extension LXSwiftBasics where Base == Int64 {
@@ -100,74 +90,56 @@ extension LXSwiftBasics where Base == Int64 {
      7日前-今年1.1：XX-XX XX:XX
      去年及以前：20XX-XX-XX XX:XX
      */
-    public var timeDateDescription: String {
-        return base.lx.toInt.lx.timeDateDescription
-    }
+    public var timeDateDescription: String { base.lx.toInt.lx.timeDateDescription }
     
     /// Int64转Int
-    public var toInt: Int {
-         return Int(base)
-    }
+    public var toInt: Int { Int(base) }
     
     /// int转bool
-    public var toBool: Bool {
-        return base > 0 ? true : false
-    }
+    public var toBool: Bool { base > 0 ? true : false }
+    
     /// 转换为字符串格式
-    public var toString: String {
-        return String(base)
-    }
+    public var toString: String { String(base) }
+    
 }
 
 //MARK: -  Extending methods for Int
 extension LXSwiftBasics where Base == Int {
     
     /// 生成区间的随机数
-    public static func randomInt(lower: Int = 0, upper: Int = Int(UInt32.max)) -> Int {
-        return lower + Int(arc4random_uniform(UInt32(upper - lower)))
-    }
+    public static func randomInt(lower: Int = 0, upper: Int = Int(UInt32.max)) -> Int { lower + Int(arc4random_uniform(UInt32(upper - lower))) }
     
     /// 生成区间的随机数
-    public static func randomInt(with range: Range<Int>) -> Int {
-        return randomInt(lower: range.lowerBound, upper: range.upperBound)
-    }
+    public static func randomInt(with range: Range<Int>) -> Int { randomInt(lower: range.lowerBound, upper: range.upperBound) }
     
     /// 转换为字符串格式
-    public var toString: String {
-        return String(base)
-    }
+    public var toString: String { String(base) }
     
     /// int转bool
-    public var toBool: Bool {
-        return base > 0 ? true : false
-    }
+    public var toBool: Bool { base > 0 ? true : false }
     
     /// int转Int64
-    public var toInt64: Int64 {
-        return Int64(base)
-    }
+    public var toInt64: Int64 { Int64(base) }
     
     /// 用户显示容量 (GB、MB、KB、B)
-    public var sizeFileToStr: String {
-       return Double(base).lx.sizeFileToStr
-    }
+    @available(*, deprecated, renamed: "sizeFileToString")
+    public var sizeFileToStr: String { sizeFileToString }
+    
+    /// 用户显示容量 (GB、MB、KB、B)
+    public var sizeFileToString: String { Double(base).lx.sizeFileToString }
     
     /// 时间（秒数）转换字符串
-    public var timeToStr: String {
-        return Double(base).lx.timeToStr
-    }
+    @available(*, deprecated, renamed: "timeToString")
+    public var timeToStr: String { timeToString }
+    
+    /// 时间（秒数）转换字符串
+    public var timeToString: String { Double(base).lx.timeToString }
     
     ///  时间戳转时间字符串 base: 时间戳（单位：s） ymd: 转换手的字符串格式， 转换后得到的字符串
-    public func timeStampToString(with ymd: String = "yyyy-MM-dd HH:mm:ss") -> String {
-        let date = base.lx.timeStampToDate()
-        return date.lx.dateTranformString(with: ymd)
-    }
+    public func timeStampToString(with ymd: String = "yyyy-MM-dd HH:mm:ss") -> String { base.lx.timeStampToDate().lx.dateTranformString(with: ymd) }
     
     ///  时间戳转时间字符串 base: 时间戳（单位：s） ymd: 转换手的字符串格式， 转换后得到的字符串
-    public func timeStampToDate() -> Date {
-        let timeInterval = TimeInterval(base)
-        return Date(timeIntervalSince1970: timeInterval)
-    }
+    public func timeStampToDate() -> Date { Date(timeIntervalSince1970: TimeInterval(base)) }
     
     /**
      特备注意：传进来的时间戳base的单位是秒
@@ -197,9 +169,7 @@ extension LXSwiftBasics where Base == Int {
                 }else{
                     return date.lx.dateTranformString(with: "yyyy年MM月dd日 HH:mm")
                 }
-            }else{
-                return "\(days)天前"
-            }
+            } else { return "\(days)天前" }
         }
     }
 }

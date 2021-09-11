@@ -18,31 +18,29 @@ import UIKit
     private var padding = UIEdgeInsets.zero
     @IBInspectable
     open var paddingLeft: CGFloat {
-       get { return padding.left }
+       get { padding.left }
        set { padding.left = newValue }
     }
    
     @IBInspectable
     open var paddingRight: CGFloat {
-       get { return padding.right }
+       get { padding.right }
        set { padding.right = newValue }
     }
    
     @IBInspectable
     open var paddingTop: CGFloat {
-       get { return padding.top }
+       get { padding.top }
        set { padding.top = newValue }
     }
    
     @IBInspectable
     open var paddingBottom: CGFloat {
-       get { return padding.bottom }
+       get { padding.bottom }
        set { padding.bottom = newValue }
     }
    
-    open override func drawText(in rect: CGRect) {
-       super.drawText(in: rect.inset(by: padding))
-    }
+    open override func drawText(in rect: CGRect) { super.drawText(in: rect.inset(by: padding)) }
 
     open override func textRect(forBounds bounds: CGRect, limitedToNumberOfLines numberOfLines: Int) -> CGRect {
         var rect = super.textRect(forBounds: bounds.inset(by: self.padding), limitedToNumberOfLines: numberOfLines)

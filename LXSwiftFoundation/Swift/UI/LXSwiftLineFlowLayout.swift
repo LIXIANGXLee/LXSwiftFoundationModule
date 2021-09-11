@@ -31,7 +31,6 @@ public protocol LXSwiftLineFlowLayoutDelegate: AnyObject {
     }
     
     open override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-   
          guard let c = collectionView else { return [] }
          var attsArray: [UICollectionViewLayoutAttributes] = []
          if let aArray = super.layoutAttributesForElements(in: rect) {
@@ -53,7 +52,6 @@ public protocol LXSwiftLineFlowLayoutDelegate: AnyObject {
         rect.origin.y = 0
         rect.origin.x = contentOffset.x
         rect.size = c.frame.size
-        
         if let attsArray = super.layoutAttributesForElements(in: rect) {
             let centerX = contentOffset.x + c.frame.size.width / 2
             var minSpace = MAXFLOAT
@@ -72,9 +70,7 @@ public protocol LXSwiftLineFlowLayoutDelegate: AnyObject {
         guard let c = collectionView else { return true }
         guard let pInViewPoint =  c.superview?.convert(c.center,
             to: self.collectionView) else { return true }
-        guard let indexPathNow = c.indexPathForItem(at: pInViewPoint) else {
-            return true
-        }
+        guard let indexPathNow = c.indexPathForItem(at: pInViewPoint) else { return true }
         if index != indexPathNow.row {
             index = indexPathNow.row
             delegate?.lineFlowLayout?(self, index)

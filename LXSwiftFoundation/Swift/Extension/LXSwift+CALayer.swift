@@ -36,8 +36,7 @@ extension LXSwiftBasics where Base: CALayer {
             border.frame = CGRect(x: 0, y: 0, width: side, height: base.frame.height)
         case UIRectEdge.right:
             border.frame = CGRect(x: base.frame.width - side, y: 0, width: side, height: base.frame.height)
-        default:
-            break
+        default: break
         }
         border.backgroundColor = color.cgColor
         base.addSublayer(border)

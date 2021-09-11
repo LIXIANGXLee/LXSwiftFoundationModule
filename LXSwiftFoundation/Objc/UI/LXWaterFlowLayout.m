@@ -37,14 +37,12 @@
 }
 
 - (void)prepareLayout {
-    
     [super prepareLayout];
     NSInteger count = [self.collectionView numberOfItemsInSection:0];
     //初始化好每列的高度
     for (NSInteger i = 0; i < self.colNumber ; i++) {
         [_dicOfheight setObject:@(self.sectionInset.top) forKey:[NSString stringWithFormat:@"%ld",i]];
     }
-
     for (NSInteger i = 0 ; i < count; i ++) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
         [self.itemArray addObject:[self layoutAttributesForItemAtIndexPath:indexPath]];
@@ -52,7 +50,6 @@
 }
 
 - (CGSize)collectionViewContentSize {
-    
     __weak __typeof(self)weakSelf = self;
     __block NSString *maxHeightline = @"0";
     [_dicOfheight enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSNumber *obj, BOOL *stop) {
@@ -61,7 +58,6 @@
         }
     }];
     return CGSizeMake(self.collectionView.bounds.size.width, [_dicOfheight[maxHeightline] floatValue] + self.sectionInset.bottom);
-    
 }
 
 - (NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
@@ -69,7 +65,6 @@
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
-
     UICollectionViewLayoutAttributes *attr = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
     //计算item宽
     CGFloat itemW = (self.collectionView.bounds.size.width - (self.sectionInset.left + self.sectionInset.right) - (self.colNumber - 1) * self.colSpacing) / self.colNumber;
@@ -91,9 +86,7 @@
     CGPoint itemOrigin = CGPointMake(self.sectionInset.left + line * (itemW + self.colSpacing), [_dicOfheight[lineMinHeight] floatValue]);
     _dicOfheight[lineMinHeight] = @(itemSize.height + self.rowSpacing + [_dicOfheight[lineMinHeight] floatValue]);
     attr.frame = (CGRect){itemOrigin,itemSize};
-    
     return attr;
- 
 }
 
 @end

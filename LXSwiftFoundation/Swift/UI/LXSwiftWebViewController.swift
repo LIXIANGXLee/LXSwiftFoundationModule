@@ -82,9 +82,7 @@ extension LXSwiftWebViewController {
     
     /// load webview 的网络连接
    open func load(with string: String) {
-        if let url = URL(string: string){
-            webView.load(URLRequest(url: url))
-        }
+        if let url = URL(string: string) { webView.load(URLRequest(url: url)) }
     }
     
     /// load HTML
@@ -108,9 +106,7 @@ extension LXSwiftWebViewController {
     /// add js call back
     @available(iOS 8.0, *)
     open func jsMethod(with method: String, handel: @escaping (Any) -> ()) {
-        for methodT in methodTs {
-            assert(methodT.method == method, "不能重复添加相同名称")
-        }
+        for methodT in methodTs { assert(methodT.method == method, "不能重复添加相同名称") }
         self.methodTs.append(LXSwiftMethod(method: method, handel: handel))
         let vc = webView.configuration.userContentController
         vc.add(LXSwiftWeakScriptMessageDelegate(self), name: method)
@@ -136,9 +132,7 @@ extension LXSwiftWebViewController {
             for cookie in cookies{
                 if cookie.name == string{
                     self.webView.configuration.websiteDataStore.httpCookieStore.delete(cookie)
-                }else{
-                    results.append(cookie)
-                }
+                }else{ results.append(cookie) }
             }
             handle(results)
         }
@@ -150,9 +144,7 @@ extension LXSwiftWebViewController {
         dataSouce.fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { (records) in
             for record in records {
                 let ds = WKWebsiteDataStore.default()
-                ds.removeData(ofTypes: record.dataTypes, for: [record]) {
-                    handle?("清除成功\(record)")
-                }
+                ds.removeData(ofTypes: record.dataTypes, for: [record]) { handle?("清除成功\(record)") }
             }
         }
     }
@@ -162,9 +154,7 @@ extension LXSwiftWebViewController {
 extension LXSwiftWebViewController: WKScriptMessageHandler {
     open func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         for methodT in methodTs {
-            if methodT.method == message.name {
-                methodT.handel(message.body)
-            }
+            if methodT.method == message.name { methodT.handel(message.body) }
         }
     }
 }
@@ -189,7 +179,6 @@ extension LXSwiftWebViewController {
         progressView.centerXAnchor.constraint(equalTo: webView.centerXAnchor).isActive = true
         progressView.widthAnchor.constraint(equalTo: webView.widthAnchor).isActive = true
         progressView.heightAnchor.constraint(equalToConstant: SCALE_IP6_WIDTH_TO_WIDTH(2)).isActive = true
-        
     }
     
     ///observer
@@ -198,7 +187,6 @@ extension LXSwiftWebViewController {
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.title), options: .new, context: nil)
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.url), options: .new, context: nil)
-        
     }
     
     /// 实时获取加载进度的值
@@ -217,8 +205,8 @@ extension LXSwiftWebViewController {
     /// 执行JS代码——也称为注入JavaScript
     fileprivate func handleJS(){
         webView.evaluateJavaScript("document.body.offsetHeight") { (res, error) in
-            guard let h = res as? Int else { return }
-            self.loadWebViewContentHeight?(Float(h))
+            guard let height = res as? Int else { return }
+            self.loadWebViewContentHeight?(Float(height))
         }
     }
 }
@@ -241,14 +229,10 @@ extension LXSwiftWebViewController: WKNavigationDelegate{
     }
     
     /// 从web服务器请求数据时调用（网页开始加载）
-    open func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        spinner.startAnimating()
-    }
+    open func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) { spinner.startAnimating() }
     
     /// 收到服务器响应后，主要根据响应头信息决定是否在当前WebView中加载网站
-    open func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
-        decisionHandler(.allow)
-    }
+    open func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) { decisionHandler(.allow) }
     
     /// 开始从web服务器接收数据时调用
     open func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) { }
@@ -282,33 +266,23 @@ extension LXSwiftWebViewController: WKUIDelegate{
     /// [JS]警报（）警告框
     open func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        alert.lx.addAction(with: "确定", style: .default) { (_) in
-            completionHandler()
-        }
+        alert.lx.addAction(with: "确定", style: .default) { (_) in completionHandler() }
         present(alert, animated: true, completion: nil)
     }
     
     // [js]confirm()
     open func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        alert.lx.addAction(with: "取消", style: .cancel) { (_) in
-            completionHandler(false)
-        }
-        alert.lx.addAction(with: "确定", style: .default) { (_) in
-            completionHandler(true)
-        }
+        alert.lx.addAction(with: "取消", style: .cancel) { (_) in completionHandler(false) }
+        alert.lx.addAction(with: "确定", style: .default) { (_) in completionHandler(true) }
         present(alert, animated: true, completion: nil)
     }
     
     // [js]prompt()
     open func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void) {
         let alert = UIAlertController(title: nil, message: prompt, preferredStyle: .alert)
-        alert.addTextField { (textField) in
-            textField.placeholder = defaultText
-        }
-        alert.lx.addAction(with: "确定", style: .default) { (_) in
-            completionHandler(alert.textFields?.last?.text)
-        }
+        alert.addTextField { (textField) in textField.placeholder = defaultText }
+        alert.lx.addAction(with: "确定", style: .default) { (_) in completionHandler(alert.textFields?.last?.text) }
         present(alert, animated: true, completion: nil)
     }
 }

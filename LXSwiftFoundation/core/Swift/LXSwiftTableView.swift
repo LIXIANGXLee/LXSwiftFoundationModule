@@ -43,15 +43,11 @@ private let tag = 19920688
     
     /// 您是否支持多事件传递
     @objc(setObjcShouldRecognizeSimultaneously:)
-    open func setShouldRecognizeSimultaneously(_ callBack: RecognizeSimultaneously?) {
-        self.shouldRecognizeSimultaneously = callBack
-    }
+    open func setShouldRecognizeSimultaneously(_ callBack: RecognizeSimultaneously?) { self.shouldRecognizeSimultaneously = callBack }
     
     /// 是否允许开始手势
     @objc(setObjcShouldBegin:)
-    open func setShouldBegin(_ callBack: ShouldBegin?) {
-        self.shouldBegin = callBack
-    }
+    open func setShouldBegin(_ callBack: ShouldBegin?) { self.shouldBegin = callBack }
 }
 
 public extension UITableView {
@@ -73,15 +69,11 @@ public extension UITableView {
         tableView.dequeueSwiftReusableCell(indexPath: indexPath) as LXTableViewViewCell
      }
      */
-    func registSwiftCell<T: UITableViewCell>(_ cell: T.Type) where T: LXSwiftCellCompatible {
-        self.register(cell, forCellReuseIdentifier: cell.reusableSwiftIdentifier)
-    }
+    func registSwiftCell<T: UITableViewCell>(_ cell: T.Type) where T: LXSwiftCellCompatible { register(cell, forCellReuseIdentifier: cell.reusableSwiftIdentifier) }
 
     /// 获取注册的cell的扩展
     func dequeueSwiftReusableCell<T: UITableViewCell>(indexPath: IndexPath)
-    -> T where T: LXSwiftCellCompatible {
-        return self.dequeueReusableCell(withIdentifier: T.reusableSwiftIdentifier, for: indexPath) as! T
-    }
+    -> T where T: LXSwiftCellCompatible { dequeueReusableCell(withIdentifier: T.reusableSwiftIdentifier, for: indexPath) as! T }
     
     /*
      给cell扩展圆角和背景色
@@ -166,16 +158,10 @@ extension LXCustomRoundbackground where Self: UITableViewCell {
 extension LXSwiftTableView: UIGestureRecognizerDelegate {
     
     /// 您是否支持多事件传递代理
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,  shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        let outResult = shouldRecognizeSimultaneously?(gestureRecognizer, otherGestureRecognizer)
-        return outResult ?? false
-    }
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,  shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool { shouldRecognizeSimultaneously?(gestureRecognizer, otherGestureRecognizer) ?? false }
     
     /// 是否允许开始手势
-    open override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        let outResult = shouldBegin?(gestureRecognizer)
-        return outResult ?? super.gestureRecognizerShouldBegin(gestureRecognizer)
-    }
+    open override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool { shouldBegin?(gestureRecognizer) ?? super.gestureRecognizerShouldBegin(gestureRecognizer) }
 }
 
 //MARK: - LXTableViewCell

@@ -20,13 +20,16 @@ import UIKit
     open var titleCallBack: ButtonCallBack?
     open var imageCallBack: ButtonCallBack?
     
-    open override func imageRect(forContentRect contentRect: CGRect) -> CGRect {
-        return self.imageCallBack?(contentRect) ?? contentRect
+    /// 设置回调函数去设置T=title相对尺寸和I=image相对尺寸
+    open func setTILayout(_ titleCallBack: LXSwiftButton.ButtonCallBack?,
+                          _ imageCallBack: LXSwiftButton.ButtonCallBack?) {
+        self.titleCallBack = titleCallBack
+        self.imageCallBack = imageCallBack
     }
     
-    open override func titleRect(forContentRect contentRect: CGRect) -> CGRect {
-        return self.titleCallBack?(contentRect) ?? contentRect
-    }
+    open override func imageRect(forContentRect contentRect: CGRect) -> CGRect { imageCallBack?(contentRect) ?? contentRect }
+    
+    open override func titleRect(forContentRect contentRect: CGRect) -> CGRect { titleCallBack?(contentRect) ?? contentRect }
     
     public override init(frame: CGRect) {
         super.init(frame: frame)

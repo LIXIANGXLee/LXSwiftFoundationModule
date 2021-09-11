@@ -52,9 +52,7 @@ import UIKit
     }()
     
     open override func backgroundViewTap() {
-        if modaConfig.isDismissBg {
-            super.backgroundViewTap()
-        }
+        if modaConfig.isDismissBg { super.backgroundViewTap() }
     }
     
     ///事件监听 及回调
@@ -65,16 +63,12 @@ import UIKit
 }
 
 extension LXSwiftHyperlinksModalController: LXTextLableDelegate {
-    public func lxTextLable(_ textView: LXSwiftTextLable, didSelect text: String) {
-        self.callBack?(text)
-    }
+    public func lxTextLable(_ textView: LXSwiftTextLable, didSelect text: String) { callBack?(text) }
 }
 
 extension LXSwiftHyperlinksModalController {
 
-    open func getAttributedString(with text: String, textColor: UIColor = UIColor.lx.color(hex: "666666"), textFont: UIFont = UIFont.systemFont(ofSize: 14), regexTypes: [LXSwiftRegexType]) -> NSAttributedString? {
-        return LXSwiftRegex.regex(of: text, textColor: textColor, textFont: textFont, wordRegexTypes: regexTypes)
-    }
+    open func getAttributedString(with text: String, textColor: UIColor = UIColor.lx.color(hex: "666666"), textFont: UIFont = UIFont.systemFont(ofSize: 14), regexTypes: [LXSwiftRegexType]) -> NSAttributedString? { LXSwiftRegex.regex(of: text, textColor: textColor, textFont: textFont, wordRegexTypes: regexTypes) }
     
     /// 设置UI信息 和超链接点击回调
     @objc open func setModal(_ modaConfig: LXSwiftModalConfig, modalItems: [LXSwiftItem], callBack: LXSwiftHyperlinksModalController.CallBack?) {
@@ -152,14 +146,10 @@ extension LXSwiftHyperlinksModalController {
     func getTitleH() -> CGFloat {
         if let text = titleLabel.text {
             return text.lx.height(font: modaConfig.titleFont, width: contentView.frame.width - modaConfig.contentViewSubViewX * 2)
-        }else{
-            return 0
-        }
+        }else{ return 0 }
     }
     
-    func getContentH(_ attr: NSAttributedString) -> CGFloat {
-        return attr.lx.height(width: contentView.frame.width - self.modaConfig.contentViewSubViewX * 2)
-    }
+    func getContentH(_ attr: NSAttributedString) -> CGFloat { attr.lx.height(contentView.frame.width - self.modaConfig.contentViewSubViewX * 2) }
 }
 
 @objc(LXObjcModalConfig)

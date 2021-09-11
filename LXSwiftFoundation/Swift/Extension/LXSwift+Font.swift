@@ -27,38 +27,27 @@ extension LXSwiftBasics where Base: UIFont {
                                        tx: 0,
                                        ty: 0)
         let desc = UIFontDescriptor(name: name, matrix: matrix)
-        return UIFont(descriptor: desc,
-                          size: size)
+        return UIFont(descriptor: desc, size: size)
     }
 
     /// isBold
-    public var isBold: Bool {
-        return base.fontDescriptor.symbolicTraits == .traitBold
-    }
+    public var isBold: Bool { base.fontDescriptor.symbolicTraits == .traitBold }
     
     /// isItalic
-    public var isItalic: Bool {
-        return base.fontDescriptor.symbolicTraits == .traitItalic
-    }
+    public var isItalic: Bool { base.fontDescriptor.symbolicTraits == .traitItalic }
     
     /// isMonoSpace
-    public var isMonoSpace: Bool {
-        return base.fontDescriptor.symbolicTraits == .traitMonoSpace
-    }
+    public var isMonoSpace: Bool { base.fontDescriptor.symbolicTraits == .traitMonoSpace }
     
     /// withBold
     public var withBold: UIFont {
-        guard let desc = base.fontDescriptor.withSymbolicTraits(.traitBold) else {
-            return base
-        }
+        guard let desc = base.fontDescriptor.withSymbolicTraits(.traitBold) else { return base }
         return UIFont(descriptor: desc, size: base.pointSize)
     }
     
     /// withItalic
     public var withItalic: UIFont {
-        guard let desc = base.fontDescriptor.withSymbolicTraits(.traitItalic) else {
-            return base
-        }
+        guard let desc = base.fontDescriptor.withSymbolicTraits(.traitItalic) else { return base }
         return UIFont(descriptor: desc, size: base.pointSize)
     }
     
@@ -71,44 +60,20 @@ extension LXSwiftBasics where Base: UIFont {
     
     /// withNormal
     public var withNormal: UIFont {
-        guard let desc = base.fontDescriptor.withSymbolicTraits([]) else {
-            return base
-        }
+        guard let desc = base.fontDescriptor.withSymbolicTraits([]) else { return base }
         return UIFont(descriptor: desc, size: base.pointSize)
     }
     
-    public static func font(withMedium size: CGFloat) -> UIFont {
-       return UIFont.systemFont(ofSize: size, weight: .medium)
-    }
-    
-    public static func font(withRegular size: CGFloat) -> UIFont {
-       return UIFont.systemFont(ofSize: size, weight: .regular)
-    }
-    
-    public static func font(withBold size: CGFloat) -> UIFont {
-       return UIFont.systemFont(ofSize: size, weight: .bold)
-    }
-    
-    public static func font(withSemibold size: CGFloat) -> UIFont {
-       return UIFont.systemFont(ofSize: size, weight: .semibold)
-    }
-    
-    public static func font(withHeavy size: CGFloat) -> UIFont {
-       return UIFont.systemFont(ofSize: size, weight: .heavy)
-    }
-    
-    public static func font(withLight size: CGFloat) -> UIFont {
-       return UIFont.systemFont(ofSize: size, weight: .light)
-    }
-    
-    public static func font(withBlack size: CGFloat) -> UIFont {
-       return UIFont.systemFont(ofSize: size, weight: .black)
-    }
+    public static func font(withMedium size: CGFloat) -> UIFont { UIFont.systemFont(ofSize: size, weight: .medium) }
+    public static func font(withRegular size: CGFloat) -> UIFont { UIFont.systemFont(ofSize: size, weight: .regular) }
+    public static func font(withBold size: CGFloat) -> UIFont { UIFont.systemFont(ofSize: size, weight: .bold) }
+    public static func font(withSemibold size: CGFloat) -> UIFont { UIFont.systemFont(ofSize: size, weight: .semibold) }
+    public static func font(withHeavy size: CGFloat) -> UIFont { UIFont.systemFont(ofSize: size, weight: .heavy) }
+    public static func font(withLight size: CGFloat) -> UIFont { UIFont.systemFont(ofSize: size, weight: .light) }
+    public static func font(withBlack size: CGFloat) -> UIFont { UIFont.systemFont(ofSize: size, weight: .black) }
     
     // 斜体只对数字和字母有效，中文无效
-    public static func font(withItalic size: CGFloat) -> UIFont {
-        return UIFont.italicSystemFont(ofSize: size)
-    }
+    public static func font(withItalic size: CGFloat) -> UIFont { UIFont.italicSystemFont(ofSize: size) }
     
     public static func regular(size: CGFloat) -> UIFont {
         if #available(iOS 9.0, OSX 10.11, *),
@@ -143,23 +108,17 @@ extension LXSwiftBasics where Base: UIFont {
     }
     
     public static func harmattan(size: CGFloat) -> UIFont {
-        if let font = UIFont(name: "Harmattan-Regular", size: size) {
-            return font
-        }
+        if let font = UIFont(name: "Harmattan-Regular", size: size) { return font }
         return UIFont.lx.font(withRegular: size)
     }
     
     public static func workSans(size: CGFloat) -> UIFont {
-        if let font = UIFont(name: "WorkSans-Regular", size: size) {
-            return font
-        }
+        if let font = UIFont(name: "WorkSans-Regular", size: size) { return font }
         return UIFont.lx.font(withRegular: size)
     }
     
     public static func dinAlternateBold(size: CGFloat) -> UIFont {
-        if let font = UIFont(name: "DINAlternate-Bold", size: size) {
-            return font
-        }
+        if let font = UIFont(name: "DINAlternate-Bold", size: size) { return font }
         return UIFont.lx.font(withRegular: size)
     }
 
@@ -172,9 +131,7 @@ extension LXSwiftBasics where Base: UIFont {
     public static func lightSystemFont(size: CGFloat) -> UIFont {
         let version = Double(UIDevice.lx.currentSystemVersion) ?? 0
         let name = version >= 9.0 ? ".SFUIText-Light" : "HelveticaNeue-Light"
-        if let outFount = UIFont(name: name, size: size) {
-            return outFount
-        }
+        if let outFount = UIFont(name: name, size: size) { return outFount }
         return UIFont.lx.font(withRegular: size)
     }
 }

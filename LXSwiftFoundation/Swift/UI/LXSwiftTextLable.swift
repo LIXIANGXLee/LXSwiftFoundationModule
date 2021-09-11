@@ -89,7 +89,6 @@ private let linkBgTag = 1234994321
     open var attributedText: NSAttributedString? {
         didSet {
         guard let attr = self.attributedText else { return }
-        
         textView.attributedText = attr
         attr.enumerateAttributes(in: NSRange(location: 0, length: attr.length), options: NSAttributedString.EnumerationOptions(rawValue: 0)) { (objct, range, stop) in
                 let t = objct[NSAttributedString.Key(LXSwiftRegex.textLinkConst)]
@@ -149,9 +148,7 @@ extension LXSwiftTextLable {
     
     private func linkWithPoint(point: CGPoint) -> LXSwiftTextLable.TextLink? {
         for link in links {
-            for rect in link.rects {
-                if rect.contains(point) { return link }
-            }
+            for rect in link.rects { if rect.contains(point) { return link } }
         }
         return nil
     }
@@ -168,9 +165,7 @@ extension LXSwiftTextLable {
     
     @objc fileprivate func removeAllLinkBackground() {
         for view in subviews {
-            if view.tag == linkBgTag {
-                view.removeFromSuperview()
-            }
+            if view.tag == linkBgTag { view.removeFromSuperview() }
         }
     }
 }

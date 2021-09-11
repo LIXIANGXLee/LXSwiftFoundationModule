@@ -22,16 +22,13 @@ import UIKit
                                   identified: String?,
                                   task: LXSwiftGCDTimer.TaskCallBack?) {
         
-        guard let iden = identified, delaySeconds >= 0, interval >= 0,
-              task != nil else { return }
+        guard let iden = identified, delaySeconds >= 0, interval >= 0, task != nil else { return }
         let timer = DispatchSource.makeTimerSource(queue: DispatchQueue.global())
         timer.schedule(deadline: .now() + delaySeconds, repeating: interval)
         LXSwiftGCDTimer.timers[iden] = timer
         timer.setEventHandler(handler: {
             DispatchQueue.lx.asyncMain { task?() }
-            if !repeats && !timer.isCancelled{
-                timer.cancel()
-            }
+            if !repeats && !timer.isCancelled { timer.cancel() }
         })
         timer.resume()
     }
@@ -42,8 +39,7 @@ import UIKit
                                       identified: String?,
                                       task: ((Int)->())?){
         var total = maxInterval
-        startTimer(with: 0, interval: interval, repeats: true,
-                   identified: identified) {
+        startTimer(with: 0, interval: interval, repeats: true, identified: identified) {
             total -= 1
             if total <= 0 { cancel(with: identified) }
             task?(Int(total))

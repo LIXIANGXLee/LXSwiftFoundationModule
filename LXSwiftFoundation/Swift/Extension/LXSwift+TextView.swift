@@ -18,18 +18,12 @@ extension LXSwiftBasics where Base: LXSwiftTextView {
     }
     
     /// 设置粗体字体和文本颜色
-    public func set(withBold fontSize: CGFloat, textColor: String) {
-        set(with: UIFont.lx.font(withBold: fontSize), textColor: UIColor.lx.color(hex: textColor))
-    }
+    public func set(withBold fontSize: CGFloat, textColor: String) { set(with: UIFont.lx.font(withBold: fontSize), textColor: UIColor.lx.color(hex: textColor)) }
     
     /// 设置中等字体和文本颜色
-    public func set(withMedium fontSize: CGFloat, textColor: String) {
-        set(with: UIFont.lx.font(withMedium: fontSize), textColor: UIColor.lx.color(hex: textColor))
-    }
+    public func set(withMedium fontSize: CGFloat, textColor: String) { set(with: UIFont.lx.font(withMedium: fontSize), textColor: UIColor.lx.color(hex: textColor)) }
     
     /// 设置常规字体和文本颜色
-    public func set(withRegular fontSize: CGFloat, textColor: String) {
-        set(with: UIFont.lx.font(withRegular: fontSize), textColor: UIColor.lx.color(hex: textColor))
-    }
+    public func set(withRegular fontSize: CGFloat, textColor: String) { set(with: UIFont.lx.font(withRegular: fontSize), textColor: UIColor.lx.color(hex: textColor)) }
 
 }

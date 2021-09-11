@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIControl (LXObjcAdd)
 
-/// 将特定事件的block添加到内部调度表中
+/// 将特定事件的block添加到内部调度表中，block回调方
 - (void)lx_addBlockForControlEvents:(UIControlEvents)controlEvents block:(void (^)(id sender))block;
 
 /// 移除所有Target监听对象

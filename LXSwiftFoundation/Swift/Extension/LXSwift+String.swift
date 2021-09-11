@@ -43,9 +43,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         let string = base as! String
         if r.lowerBound < r.upperBound && r.upperBound <= string.count && r.lowerBound >= 0 {
             return string[r]
-        }else{
-            return string
-        }
+        }else{ return string }
     }
     
     ///  扩展字符串截取
@@ -53,9 +51,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         let string = base as! String
         if index <= string.count && index >= 0 {
             return subString(with: index..<string.count)
-        }else{
-            return string
-        }
+        }else{ return string }
     }
     
     ///  扩展字符串截取
@@ -63,54 +59,38 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         let string = base as! String
         if index <= string.count && index >= 0 {
             return subString(with: 0..<index)
-        }else{
-            return string
-        }
+        }else{ return string }
     }
+
+    /// 分割字符方法已过期
+    @available(*, deprecated, message:"Use split(by character: String) -> [String]")
+    public func split(with character: String) -> [String] { split(by: character) }
     
     /// 分割字符
-    public func split(with character: String) -> [String] {
+    public func split(by character: String) -> [String] {
         let string = base as! String
-        if string.isEmpty {
-            return []
-        }
+        if string.isEmpty { return [] }
         return string.components(separatedBy: character)
     }
     
     /// 替换字符串中的字符串
-    public func replace(old: String, new: String) -> String {
-        let string = base as! String
-        return string.replacingOccurrences(of: old, with: new, options: NSString.CompareOptions.numeric, range: nil)
-    }
+    public func replace(old: String, new: String) -> String { (base as! String).replacingOccurrences(of: old, with: new, options: NSString.CompareOptions.numeric, range: nil) }
 
     /// 去除两边空格
-    public var trim: String {
-        let string = base as! String
-        return string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-    }
+    public var trim: String { (base as! String).trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) }
 }
 
 //MARK: - 字符串尺寸计算
 extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     
     /// 根据字体和宽度获取字体大小cgsize
-    public func size(font: UIFont, width: CGFloat) -> CGSize {
-        let string = base as! String
-        let attrString = NSAttributedString(string: string, attributes: [NSAttributedString.Key.font: font])
-        return attrString.lx.size(width: width)
-    }
+    public func size(font: UIFont, width: CGFloat) -> CGSize { NSAttributedString(string:  base as! String, attributes: [NSAttributedString.Key.font: font]).lx.size(width) }
     
     /// 根据字体获取字体宽度
-    public func width(font: UIFont) -> CGFloat {
-        let size = self.size(font: font, width: LXSwiftApp.screenW)
-        return size.width
-    }
+    public func width(font: UIFont) -> CGFloat { self.size(font: font, width: LXSwiftApp.screenW).width }
     
     /// 根据字体和宽度获取字体高度
-    public func height(font: UIFont, width: CGFloat) -> CGFloat {
-        let size = self.size(font: font, width: width)
-        return size.height
-    }
+    public func height(font: UIFont, width: CGFloat) -> CGFloat { self.size(font: font, width: width).height }
 }
 
 //MARK: -  字符串转换
@@ -118,51 +98,34 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     
     /// 判断路径下是不是gif图片
     public var isGIFFile: Bool {
-        let string = base as! String
-        guard let data = NSData(contentsOfFile: string) else { return false }
+        guard let data = NSData(contentsOfFile: (base as! String)) else { return false }
         return data.lx.imageType == .GIF
     }
     
     /// 基是包含字符串的
-    public func isContains(_ string: String) -> Bool {
-        let string = base as! String
-        return string.range(of: string) != nil
-    }
+    public func isContains(_ string: String) -> Bool { (base as! String).range(of: string) != nil }
     
     /// 是否包含指定的特殊字符
-    public func isContains(characters: CharacterSet) -> Bool {
-        let string = base as! String
-        return string.rangeOfCharacter(from: characters) != nil
-    }
+    public func isContains(characters: CharacterSet) -> Bool { (base as! String).rangeOfCharacter(from: characters) != nil }
     
     /// 是否属于json字符串
-    public var isValidJSON: Bool {
-        return jsonObject != nil
-    }
+    public var isValidJSON: Bool { jsonObject != nil }
     
     /// json字符串转换成字典
-    public var toDictionary: [String: Any] {
-        let string = base as! String
-        return (string.lx.jsonObject as? [String: Any]) ?? [:]
-    }
+    public var toDictionary: [String: Any] { ((base as! String).lx.jsonObject as? [String: Any]) ?? [:] }
     
     /// json字符串转换成数组
-    public var toArray: [Any] {
-        let string = base as! String
-        return (string.lx.jsonObject as? [Any]) ?? []
-    }
+    public var toArray: [Any] { ((base as! String).lx.jsonObject as? [Any]) ?? [] }
     
     /// 字符串转换plist字典
     public var toPlistDictionary: Dictionary<String, Any>?  {
-        let string = base as! String
-        guard let data = string.data(using: .utf8) else { return nil }
+        guard let data = (base as! String).data(using: .utf8) else { return nil }
         return data.lx.dataToPlistDictionary
     }
     
     /// 转换为JSON对象类型
     public var jsonObject: Any? {
-        let string = base as! String
-        guard let data = string.data(using: .utf8) else { return nil }
+        guard let data = (base as! String).data(using: .utf8) else { return nil }
         return try? JSONSerialization.jsonObject(with:data, options: .allowFragments)
     }
     
@@ -174,43 +137,29 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
             return true
         case "False", "false", "no", "NO", "0":
             return false
-        default:
-            return nil
+        default: return nil
         }
     }
     
     /// 字符串转Int
-    public var toInt: Int {
-       let string = base as! String
-       return Int(string) ?? 0
-    }
+    public var toInt: Int { Int(base as! String) ?? 0 }
     
     /// 字符串转Int64
-    public var toInt64: Int64 {
-       let string = base as! String
-       return Int64(string) ?? 0
-    }
+    public var toInt64: Int64 { Int64( base as! String) ?? 0 }
     
     /// 字符串转Int32
-    public var toInt32: Int32 {
-       let string = base as! String
-       return Int32(string) ?? 0
-    }
+    public var toInt32: Int32 { Int32(base as! String) ?? 0 }
     
     /// 汉字拼音转换方法
     public var toPinYin: String {
-        let string = base as! String
-        let mutableString = NSMutableString(string: string)
+        let mutableString = NSMutableString(string: base as! String)
         CFStringTransform(mutableString, nil, kCFStringTransformToLatin, false)
         CFStringTransform(mutableString, nil, kCFStringTransformStripDiacritics, false)
         return String(mutableString).replacingOccurrences(of: " ", with: "")
     }
     
     /// 字符串转码uft8
-    public var toUtf8: String {
-        let string = base as! String
-        return string.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) ?? ""
-    }
+    public var toUtf8: String { (base as! String).addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) ?? "" }
     
     /// 是否包含表情符号表达式
     public var isContainsEmoji: Bool {
@@ -233,94 +182,64 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     }
     
     /// 版本比较大小 Returns: big: base > two, small: two < base, equal: base == two
-    public func compareVersionSwift(with version: String) -> LXSwiftUtils.CompareResult {
-        let string = base as! String
-        return LXSwiftUtils.versionCompareSwift(v1: string, v2: version)
-    }
+    public func compareVersionSwift(with version: String) -> LXSwiftUtils.CompareResult { LXSwiftUtils.versionCompareSwift(v1: base as! String, v2: version) }
     
     /// 版本比较大小 Returns: big: base > two  ,small:two < base, equal:base == two
-    public func compareVersionOc(with version: String) -> LXSwiftUtils.CompareResult {
-        let string = base as! String
-        return LXSwiftUtils.versionCompareOc(v1: string, v2: version)
-    }
+    public func compareVersionObjc(with version: String) -> LXSwiftUtils.CompareResult { LXSwiftUtils.versionCompareOc(v1: base as! String, v2: version) }
     
     /// 在小数点后保留几个有效数字
     public func formatDecimalString(by digits: Int) -> String {
         let string = base as! String
-        guard let m =  Double(string) else { return string }
+        guard let m =  Double(base as! String) else { return string }
         return NSNumber(value: m).numberFormatter(with: .down, minDigits: digits, maxDigits: digits) ?? string
     }
     
     /// 小数点后保留两个有效数字。
-    public var formatDecimalStringTwo: String {
-        return formatDecimalString(by: 2)
-    }
+    public var formatDecimalTwoString: String { formatDecimalString(by: 2) }
     
     /// 小数点后保留三个有效数字。
-    public var formatDecimalStringThree: String {
-        return formatDecimalString(by: 3)
-    }
+    public var formatDecimalThreeString: String { formatDecimalString(by: 3) }
     
     /// 小数点后保留四个有效数字。
-    public var formatDecimalStringFour: String {
-        return formatDecimalString(by: 4)
-    }
+    public var formatDecimalFourString: String { formatDecimalString(by: 4) }
     
     ///“扩展计算”属性显示相应的
     ///GB、MB、KB、B格式，根据文件大小而定
     public var fileSize: String {
-        let string = base as! String
-        guard let size = Double(string) else { return "" }
-        return size.lx.sizeFileToStr
+        guard let size = Double(base as! String) else { return "" }
+        return size.lx.sizeFileToString
     }
     
     /// 从URL String 中获取参数，并将参数转为字典类型
     public var urlParams1: [String: String]? {
-        let string = base as! String
-        guard let url = URL(string: string) else { return nil }
+        guard let url = URL(string: base as! String) else { return nil }
         return url.lx.urlParams1
     }
     
     /// 从URL String 中获取参数，并将参数转为字典类型
     public var urlParams2: [String: String]? {
-        let string = base as! String
-        guard let url = URL(string: string) else { return nil }
+        guard let url = URL(string: base as! String) else { return nil }
         return url.lx.urlParams2
     }
     
-    public var stringByDeletingLastPathComponent: String {
-        let string = base as! String
-        return (string as NSString).deletingLastPathComponent
-    }
+    public var stringByDeletingLastPathComponent: String { (base as! String as NSString).deletingLastPathComponent }
     
-    public var stringByDeletingPathExtension: String {
-        let string = base as! String
-        return (string as NSString).deletingPathExtension
-    }
+    public var stringByDeletingPathExtension: String { (base as! String as NSString).deletingPathExtension }
     
-    public var pathComponents: [String] {
-        let string = base as! String
-        return (string as NSString).pathComponents
-    }
+    public var pathComponents: [String] { (base as! String as NSString).pathComponents }
     
     /// 末尾路径段落
-    public var lastPathComponent: String {
-        let string = base as! String
-        return (string as NSString).lastPathComponent
-    }
+    public var lastPathComponent: String { (base as! String as NSString).lastPathComponent }
     
     /// 扩展名
-    public var pathExtension: String {
-        let string = base as! String
-        return (string as NSString).pathExtension
-    }
+    public var pathExtension: String { (base as! String as NSString).pathExtension }
 
     /// 金钱格式化 每隔三位有一个逗号, 123.09   1,123.09
     public var moneyFormat1: String {
         let string = base as! String
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        guard let number = numberFormatter.number(from: string) else { return "-" }
+        guard let number = numberFormatter.number(from: string) else { return "" }
         let formatter = NumberFormatter()
         formatter.positiveFormat = "###,##0.00"
         return formatter.string(from: number) ?? ""
@@ -332,7 +251,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         var newStr: String = ""
         if string.lx.isContains(".") {
             // 拿到整数部分和小数部分
-            let allStrs: [String] = string.lx.split(with: ".")
+            let allStrs: [String] = string.lx.split(by: ".")
             let firstStr = allStrs.first ?? ""
             let secondStr = allStrs.last ?? ""
 
@@ -361,7 +280,6 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         }
         return newStr
     }
-    
 }
 
 //MARK: -  字符串匹配 (hyperlink, phone number, emoticon) 😊 Etc.)
@@ -372,7 +290,6 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         // regex is not nil
         if regex.count <= 0 { return }
         let string = base as! String
-        
         guard let regex = try? NSRegularExpression(pattern: regex.lx.trim, options: []) else { return }
         let results = regex.matches(in: string, options: [], range: NSRange(location: 0, length: string.count))
         //can matching more string
@@ -444,10 +361,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     }
     
     /// 字符串转换utf8数据
-    public var utf8Data: Data? {
-        let string = base as! String
-        return string.data(using: .utf8)
-    }
+    public var utf8Data: Data? { (base as! String).data(using: .utf8) }
     
     /// 字符串转换base64EncodedData
     public var base64EncodingString: String? {
@@ -460,8 +374,8 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     /// base64EncodedData转换字符串
     public var base64DecodingString: String? {
         let string = base as! String
-        guard  let utf8DecodedData =  Data(base64Encoded: string, options: Data.Base64DecodingOptions.init(rawValue: 0)) else { return nil }
-        return  String(data: utf8DecodedData, encoding: String.Encoding.utf8)
+        guard let utf8DecodedData = Data(base64Encoded: string, options: Data.Base64DecodingOptions.init(rawValue: 0)) else { return nil }
+        return String(data: utf8DecodedData, encoding: String.Encoding.utf8)
     }
     
     /// image base64格式uiimage的字符串
@@ -472,138 +386,72 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     }
     
     /// 将原始的url编码为合法的url
-    public var urlEncoded: String {
-        let string = base as! String
-        let encodeUrlString = string.addingPercentEncoding(withAllowedCharacters:
-            .urlQueryAllowed)
-        return encodeUrlString ?? ""
-    }
+    public var urlEncoded: String { (base as! String).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "" }
     
     /// 将编码后的url转换回原始的url
-    public var urlDecoded: String {
-        let string = base as! String
-        return string.removingPercentEncoding ?? ""
-    }
+    public var urlDecoded: String { (base as! String).removingPercentEncoding ?? "" }
 }
 
 //MARK: -  正则表达式验证相关
 extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     
     /// 验证字符串是否与正则表达式模式一致
-    public func isSuit(pattern: String) -> Bool {
-        let string = base as! String
-        return string.verification(pattern: pattern)
-    }
+    public func isSuit(pattern: String) -> Bool { (base as! String).verification(pattern: pattern) }
     
     ///Judge whether it is a legal license plate number
     ///"^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4,5}[A-Z0-9挂学警港澳]{1}"
-    public func isValidCarid() -> Bool {
-        let string = base as! String
-        let pattern = "^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4,5}[A-Z0-9挂学警港澳]{1}$"
-        return string.verification(pattern: pattern)
-    }
+    public func isValidCarid() -> Bool { (base as! String).verification(pattern: "^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4,5}[A-Z0-9挂学警港澳]{1}$") }
     
     /// 它包含特殊字符吗
-    public func isContainSpecialChar() -> Bool {
-        let string = base as! String
-        let emojiPattern = "[\\$\\(\\)\\*\\+\\[\\]\\?\\^\\{\\|]"
-        return string.verification(pattern: emojiPattern)
-    }
+    public func isContainSpecialChar() -> Bool { (base as! String).verification(pattern: "[\\$\\(\\)\\*\\+\\[\\]\\?\\^\\{\\|]") }
     
     /// 核实合法电子邮件
-    public func isValidEmail() -> Bool {
-        let string = base as! String
-        let emailPattern = "^(\\w)+(\\.\\w+)*@(\\w)+((\\.\\w{1,}){1,3})$"
-        return string.verification(pattern: emailPattern)
-    }
+    public func isValidEmail() -> Bool { (base as! String).verification(pattern: "^(\\w)+(\\.\\w+)*@(\\w)+((\\.\\w{1,}){1,3})$") }
     
     /// 验证它是否是合法的http或https地址
-    public func isValidUrl() -> Bool {
-        let string = base as! String
-        let urlPattern = "^http(s)?://"
-        return string.verification(pattern: urlPattern)
-    }
+    public func isValidUrl() -> Bool { (base as! String).verification(pattern: "^http(s)?://") }
     
     /// 核实合法手机号码
-    public func isValidPhoneNumber() -> Bool {
-        let string = base as! String
-        let phonePattern = "^1\\d{10}$"
-        return string.verification(pattern: phonePattern)
-    }
+    public func isValidPhoneNumber() -> Bool { (base as! String).verification(pattern: "^1\\d{10}$") }
     
     /// 核实合法身份证号码
-    public func isValidIDCard() -> Bool {
-      let string = base as! String
-      let iaCardPattern = "(^[1-9]\\d{5}(18|19|([23]\\d))\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx]$)|(^[1-9]\\d{5}\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{2}$)"
-        return string.verification(pattern: iaCardPattern)
-    }
+    public func isValidIDCard() -> Bool { (base as! String).verification(pattern: "(^[1-9]\\d{5}(18|19|([23]\\d))\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx]$)|(^[1-9]\\d{5}\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{2}$)") }
     
     /// 验证它是否为合法IP
-    public func isValidIP() -> Bool {
-        let string = base as! String
-        let ipPattern = "^((2[0-4]\\d|25[0-5]|[01]?\\d\\d?).){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)$"
-        return string.verification(pattern: ipPattern)
-    }
+    public func isValidIP() -> Bool { (base as! String).verification(pattern: "^((2[0-4]\\d|25[0-5]|[01]?\\d\\d?).){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)$") }
     
     /// 验证所有中文字符
-    public func isChinese() -> Bool {
-        let string = base as! String
-        let chinesePattern = "^[\\u0391-\\uFFE5]+$"
-        return string.verification(pattern: chinesePattern)
-    }
+    public func isChinese() -> Bool { (base as! String).verification(pattern: "^[\\u0391-\\uFFE5]+$") }
     
     /// 验证是合法的，纯数字
-    public func isNumber() -> Bool {
-        let string = base as! String
-        let numberPattern = "^[0-9]+(.[0-9]+)?$"
-        return string.verification(pattern: numberPattern)
-    }
+    public func isNumber() -> Bool { (base as! String).verification(pattern: "^[0-9]+(.[0-9]+)?$") }
     
     /// 验证是一个正整数
-    public func isInteger() -> Bool {
-        let string = base as! String
-        let numberPattern = "^[0-9]+$"
-        return string.verification(pattern: numberPattern)
-    }
+    public func isInteger() -> Bool { (base as! String).verification(pattern: "^[0-9]+$") }
     
     /// 确定是否为标准小数（小数点后两位）
-    public func isStandardDecimal() -> Bool {
-        let string = base as! String
-        let decimalPattern = "^[0-9]+(\\.[0-9]{2})$"
-        return string.verification(pattern: decimalPattern)
-    }
+    public func isStandardDecimal() -> Bool { (base as! String).verification(pattern: "^[0-9]+(\\.[0-9]{2})$") }
     
     /// 确定它是否是标准密码
-    public func isValidPasswd() -> Bool {
-        let string = base as! String
-        let passwdPattern = "^[a-zA-Z0-9]{6,18}$"
-        return string.verification(pattern: passwdPattern)
-    }
+    public func isValidPasswd() -> Bool { (base as! String).verification(pattern: "^[a-zA-Z0-9]{6,18}$") }
     
     /// 确认有空格或空行
-    public func isContainBlank() -> Bool {
-        let string = base as! String
-        let blank = "[\\s]"
-        return string.verification(pattern: blank)
-    }
+    public func isContainBlank() -> Bool { (base as! String).verification(pattern: "[\\s]") }
     
     ///返回字符串中的数字范围，可以是一个或多个。如果没有数字，则返回一个空数组
     public func numberRanges() -> [NSRange] {
         let string = base as! String
-        guard let results = string.lx.matching(pattern: "[0-9]+(.[0-9]+)?") else { return [] }
-        var ranges = [NSRange]()
-        for item in results {
-            ranges.append(item.range)
+        if let results = string.lx.matching(pattern: "[0-9]+(.[0-9]+)?") {
+            return results.map { $0.range }
         }
-        return ranges
+        return []
     }
     
     /// 获取匹配结果的数组
     public func matching(pattern: String, options: NSRegularExpression.Options = .caseInsensitive) -> [NSTextCheckingResult]? {
         let string = base as! String
         let regex = try? NSRegularExpression(pattern: pattern, options: [])
-        let results = regex?.matches(in: string, options: NSRegularExpression.MatchingOptions.init(rawValue: 0), range: NSMakeRange(0, string.count))
-        return results
+        return regex?.matches(in: string, options: NSRegularExpression.MatchingOptions.init(rawValue: 0), range: NSMakeRange(0, string.count))
     }
 }
 
@@ -611,7 +459,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
 extension String {
     
     /// internal 下标字符串截取
-    subscript (_ r: Range<Int>) -> String {
+   fileprivate subscript (_ r: Range<Int>) -> String {
         get {
             let startIndex = index(self.startIndex, offsetBy: r.lowerBound)
             let endIndex = index(self.startIndex, offsetBy: r.upperBound)
@@ -620,7 +468,5 @@ extension String {
     }
     
     /// 验证字符串匹配结果是否符合要求，返回布尔值
-    func verification(pattern: String) -> Bool {
-        return (self.lx.matching(pattern: pattern)?.count ?? -1) > 0
-    }
+    fileprivate func verification(pattern: String) -> Bool { (self.lx.matching(pattern: pattern)?.count ?? 0) > 0 }
 }

@@ -27,17 +27,13 @@ public extension LXSwiftBasics where Base: UIAlertController {
     static func show(_ msg: String, duration: TimeInterval = 1.5) {
         let alertController = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
         UIApplication.lx.visibleViewController?.present(alertController, animated: true, completion: nil)
-        DispatchQueue.lx.delay(with: duration) {
-            alertController.dismiss(animated: true, completion: nil)
-        }
+        DispatchQueue.lx.delay(with: duration) { alertController.dismiss(animated: true, completion: nil) }
     }
     
     /// 显示title 、文本 、按钮
     static func show(title: String?, msg: String?, style: UIAlertController.Style = .alert, actions: UIAlertAction...) {
         let alertController = UIAlertController(title: title, message: msg, preferredStyle: style)
-        actions.forEach { (action) in
-            alertController.addAction(action)
-        }
+        actions.forEach { (action) in alertController.addAction(action) }
         UIApplication.lx.visibleViewController?.present(alertController, animated: true, completion: nil)
     }
     

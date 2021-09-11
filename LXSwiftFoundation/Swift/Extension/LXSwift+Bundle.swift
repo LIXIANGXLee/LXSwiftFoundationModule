@@ -14,34 +14,22 @@ extension Bundle: LXSwiftCompatible { }
 extension LXSwiftBasics where Base: Bundle {
 
     /// 项目名字
-    public static var bundleName: String? {
-        return Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String
-    }
+    public static var bundleName: String? { Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String }
     
     /// 获取APP装到手机里之后显示的名称
-    static var bundleDisplayName: String? {
-        return Bundle.main.localizedInfoDictionary?["CFBundleDisplayName"] as? String
-    }
+    static var bundleDisplayName: String? { Bundle.main.localizedInfoDictionary?["CFBundleDisplayName"] as? String }
     
     /// bundleID 唯一标识
-    public static var bundleID: String? {
-        return Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String
-    }
+    public static var bundleID: String? { Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String }
     
     /// app version 版本号 - 应用程序的版本号标识
-    public static var bundleVersion: String? {
-        return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
-    }
+    public static var bundleVersion: String? { Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String }
     
     /// build 版本号
-    public static var buildVersion: String? {
-        return Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String
-    }
+    public static var buildVersion: String? { Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String }
     
     /// 获取命名空间
-    public static var namespace: String? {
-        return Bundle.main.infoDictionary?["CFBundleExecutable"] as? String
-    }
+    public static var namespace: String? { Bundle.main.infoDictionary?["CFBundleExecutable"] as? String }
     
     /// 获取icon图标
     public static var appIcon: UIImage? {

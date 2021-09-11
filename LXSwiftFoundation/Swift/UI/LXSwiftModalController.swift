@@ -30,14 +30,10 @@ open class LXSwiftModalController: UIViewController {
     }
     
     /// 内容视图操作单击
-    open lazy var contentGesture: UITapGestureRecognizer = {
-        return UITapGestureRecognizer(target: self, action: #selector(contentViewTaped(tap:)))
-    }()
+    open lazy var contentGesture: UITapGestureRecognizer = { UITapGestureRecognizer(target: self, action: #selector(contentViewTaped(tap:))) }()
     
     /// allscreen UITapGestureRecognizer
-    open lazy var tapGesture: UITapGestureRecognizer = {
-        return UITapGestureRecognizer(target: self, action: #selector(backgroundViewTap))
-    }()
+    open lazy var tapGesture: UITapGestureRecognizer = { UITapGestureRecognizer(target: self, action: #selector(backgroundViewTap)) }()
     
     /// 内容视图 注意：⚠️子类继承后需要设置尺寸后才能显示出来
     open lazy var contentView: UIView = {
@@ -47,9 +43,7 @@ open class LXSwiftModalController: UIViewController {
     }()
     
     /// 关闭当前窗口
-    open func dismiss() {
-        lx.dismissViewController()
-    }
+    open func dismiss() { lx.dismissViewController() }
     
 }
 

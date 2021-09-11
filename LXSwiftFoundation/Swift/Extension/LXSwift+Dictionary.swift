@@ -20,9 +20,7 @@ public func + (left: [String: Any], right: [String: Any]) -> [String: Any] {
 /// 两个字典相减 -
 public func - (left: [String: Any], right: [String: Any]) -> [String: Any] {
         var dic = left
-        for (k, _) in right where dic.keys.contains(k) {
-            dic.removeValue(forKey: k)
-        }
+        for (k, _) in right where dic.keys.contains(k) { dic.removeValue(forKey: k) }
         return dic
 }
 
@@ -32,15 +30,15 @@ extension LXSwiftBasics where Base == Dictionary<String, Any> {
     /// 字典到json字符串
     public var toJsonString: String? {
         guard JSONSerialization.isValidJSONObject(base) else { return nil }
-        guard let jsonData = try? JSONSerialization.data(withJSONObject: base, options: []), let json = String(data: jsonData, encoding: .utf8) else { return nil }
-        return json
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: base, options: []) else { return nil }
+        return String(data: jsonData, encoding: .utf8)
     }
 
     /// 字典到json字符串
     public var toPrettyString: String? {
         guard JSONSerialization.isValidJSONObject(base) else { return nil }
-        guard let jsonData = try? JSONSerialization.data(withJSONObject: base, options: .prettyPrinted), let json = String(data: jsonData, encoding: .utf8) else { return nil }
-        return json
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: base, options: .prettyPrinted) else { return nil }
+        return String(data: jsonData, encoding: .utf8)
     }
 }
 
@@ -48,12 +46,8 @@ extension LXSwiftBasics where Base == Dictionary<String, Any> {
 extension LXSwiftBasics where Base == Dictionary<String, Any> {
     
     /// dic到plist数据类型
-    public var toPlistData: Data? {
-        return try? PropertyListSerialization.data(fromPropertyList: base, format: .xml, options: 0)
-    }
+    public var toPlistData: Data? { try? PropertyListSerialization.data(fromPropertyList: base, format: .xml, options: 0) }
     
     /// plist 字典到字符串类型
-    public var toPlistString: String {
-        return toPlistData?.lx.utf8String ?? ""
-    }
+    public var toPlistString: String { toPlistData?.lx.utf8String ?? "" }
 }

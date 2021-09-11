@@ -11,7 +11,7 @@ open class LXSwiftNavController: UINavigationController {
 
     open override func viewDidLoad() {
         super.viewDidLoad()
-
+        view.backgroundColor = UIColor.white
     }
     
     ///重写系统方法

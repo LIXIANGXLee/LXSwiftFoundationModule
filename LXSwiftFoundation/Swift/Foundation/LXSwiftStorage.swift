@@ -16,6 +16,8 @@ public protocol LXUserDefaultsProtocol  {
 
 /// 限定为String类型 赋值uniqueKey为命名空间 + value为新传进来的值 防止key值重复
 public extension LXUserDefaultsProtocol where Self: RawRepresentable, Self.RawValue == String {
+    
+    /// 重写唯一key
     var uniqueKey: String {
         let namespace = Bundle.lx.namespace ?? Bundle.lx.bundleID ?? "lx"
         return namespace + "." + "\(rawValue)"
@@ -34,12 +36,8 @@ public struct LXSwiftStorage: LXSwiftCompatible {
    
     private static let defaultStandard = UserDefaults.standard
     public static subscript(key: LXUserDefaultsProtocol) -> Any? {
-        set {
-            set(with: newValue, key: key.uniqueKey)
-        }
-        get {
-            return get(for: key.uniqueKey)
-        }
+        set { set(with: newValue, key: key.uniqueKey) }
+        get { get(for: key.uniqueKey) }
     }
     
     /// 存储
@@ -49,22 +47,16 @@ public struct LXSwiftStorage: LXSwiftCompatible {
     }
     
     /// 取值
-    public static func get(for key: String) -> Any? {
-        return defaultStandard.object(forKey: key)
-    }
+    public static func get(for key: String) -> Any? { defaultStandard.object(forKey: key) }
 }
 
 /// 扩展存储 并且加密
 extension LXSwiftBasics where Base == LXSwiftStorage {
 
     /// 存储
-    public static func set(with value: Any?, key: String) {
-        Base.set(with: value, key: key)
-    }
+    public static func set(with value: Any?, key: String) { Base.set(with: value, key: key) }
     
     /// 取值
-    public static func get(for key: String) -> Any? {
-        return Base.get(for: key)
-    }
+    public static func get(for key: String) -> Any? { Base.get(for: key) }
     
 }

@@ -15,14 +15,10 @@ extension LXSwiftBasics where Base: NSNumber {
  
     /// 四舍五入应该保留多少小数位
     /// - maxDigits：保留几个小数位
-    public func numberFormatter(with mode: NumberFormatter.RoundingMode = .halfEven, minDigits: Int = 0, maxDigits:Int = 0) -> String? {
-        return base.numberFormatter(with: mode, minDigits: minDigits, maxDigits: maxDigits)
-    }
+    public func numberFormatter(with mode: NumberFormatter.RoundingMode = .halfEven, minDigits: Int = 0, maxDigits:Int = 0) -> String? { base.numberFormatter(with: mode, minDigits: minDigits, maxDigits: maxDigits) }
     
     /// 保留两位小数
-    public func numberFormatter() -> String? {
-        return base.numberFormatter(with: .halfEven,minDigits: 0,maxDigits: 2)
-    }
+    public func numberFormatter() -> String? { base.numberFormatter(with: .halfEven,minDigits: 0,maxDigits: 2) }
 }
 
 //MARK: -  Extending internal methods for NSNumber

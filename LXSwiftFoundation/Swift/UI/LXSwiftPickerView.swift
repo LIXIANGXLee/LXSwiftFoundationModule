@@ -232,9 +232,7 @@ extension LXSwiftPickerView {
     }
     
     /// 刷新内容数据
-    @objc open func reloadData() {
-        self.tableView.reloadData()
-    }
+    @objc open func reloadData() { self.tableView.reloadData() }
 }
 
 extension LXSwiftPickerView {
@@ -255,8 +253,7 @@ extension LXSwiftPickerView {
     @objc private func panGesture(_ gesture: UIPanGestureRecognizer) {
         let point = gesture.translation(in: gesture.view)
         switch gesture.state {
-        case .began:
-            defaultOriginY = tableView.frame.minY
+        case .began: defaultOriginY = tableView.frame.minY
         case .changed:
             /// 持续滑动修改tableView 的Y坐标
             tableView.lx_y = max(defaultOriginY + point.y - tableViewOriginOffSetY,
@@ -283,14 +280,10 @@ extension LXSwiftPickerView {
     }
 
     /// 设置滚动偏移量回调
-    private func setScrollViewDidScroll(_ scrollType: LXSwiftPickerView.ScrollType) {
-        self.delegate?.pickerView?(self, scrollViewDidScroll: SCREEN_HEIGHT_TO_HEIGHT - tableView.lx_y, scrollType: scrollType)
-    }
+    private func setScrollViewDidScroll(_ scrollType: LXSwiftPickerView.ScrollType) { self.delegate?.pickerView?(self, scrollViewDidScroll: SCREEN_HEIGHT_TO_HEIGHT - tableView.lx_y, scrollType: scrollType) }
     
     /// 开始动画
-    private func starAnimation(_ completion:(() -> Void)? = nil) {
-        setContentOffset(minHeight, colorType: .start, completion: completion)
-    }
+    private func starAnimation(_ completion:(() -> Void)? = nil) { setContentOffset(minHeight, colorType: .start, completion: completion) }
     
     /// 结束动画
     private func endAnimation(_ offSet: CGFloat, completion:(() -> Void)? = nil) {
@@ -325,44 +318,30 @@ extension LXSwiftPickerView {
     private func setContentOffset(_ height: CGFloat,
                                   colorType: ColorType = .none, completion:(() -> Void)? = nil) {
         switch colorType {
-        case .start:
-            self.backgroundColor = UIColor.black.withAlphaComponent(0)
-        case .end:
-            self.backgroundColor = UIColor.black.withAlphaComponent(self.bgOpaque)
-        default:
-            break
+        case .start: backgroundColor = UIColor.black.withAlphaComponent(0)
+        case .end: backgroundColor = UIColor.black.withAlphaComponent(self.bgOpaque)
+        default:  break
         }
         
         UIView.animate(withDuration: animationDuration) {
             self.tableView.lx_y = SCREEN_HEIGHT_TO_HEIGHT - height
             switch colorType {
-            case .start:
-                self.backgroundColor = UIColor.black.withAlphaComponent(self.bgOpaque)
-            case .end:
-                self.backgroundColor = UIColor.black.withAlphaComponent(0)
-            default:
-                break
+            case .start: self.backgroundColor = UIColor.black.withAlphaComponent(self.bgOpaque)
+            case .end: self.backgroundColor = UIColor.black.withAlphaComponent(0)
+            default: break
             }
-        } completion: { (_) in
-            completion?()
-        }
+        } completion: { (_) in completion?() }
     }
 }
 
 // MARK: - UITableViewDelegate 函数
 extension LXSwiftPickerView: UITableViewDelegate {
     
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return delegate?.pickerView?(self, heightForRowAt: indexPath) ?? SCALE_IP6_WIDTH_TO_WIDTH(55)
-    }
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { delegate?.pickerView?(self, heightForRowAt: indexPath) ?? SCALE_IP6_WIDTH_TO_WIDTH(55) }
 
-    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return delegate?.pickerView?(self, heightForHeaderInSection: section) ?? heightForHeaderAndFooter
-    }
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat { delegate?.pickerView?(self, heightForHeaderInSection: section) ?? heightForHeaderAndFooter }
     
-    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return delegate?.pickerView?(self, heightForFooterInSection: section) ?? heightForHeaderAndFooter
-    }
+    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat { delegate?.pickerView?(self, heightForFooterInSection: section) ?? heightForHeaderAndFooter }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         ///点击事件回调 取消点击效果
@@ -376,34 +355,22 @@ extension LXSwiftPickerView: UITableViewDelegate {
 // MARK: - UITableViewDataSource 函数
 extension LXSwiftPickerView: UITableViewDataSource {
 
-    public func numberOfSections(in tableView: UITableView) -> Int {
-        return dataSource?.pickerView?(numberOfSections: self) ?? 1
-    }
+    public func numberOfSections(in tableView: UITableView) -> Int { dataSource?.pickerView?(numberOfSections: self) ?? 1 }
     
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource!.pickerView(self, numberOfRowsInSection: section)
-    }
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { dataSource!.pickerView(self, numberOfRowsInSection: section) }
     
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return dataSource!.pickerView(self, tableView: tableView, cellForRowAt: indexPath)
-    }
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { dataSource!.pickerView(self, tableView: tableView, cellForRowAt: indexPath) }
     
-    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return dataSource?.pickerView?(self, viewForHeaderInSection: section)
-    }
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? { dataSource?.pickerView?(self, viewForHeaderInSection: section) }
     
-    public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return dataSource?.pickerView?(self, viewForFooterInSection: section)
-    }
+    public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? { dataSource?.pickerView?(self, viewForFooterInSection: section) }
 }
 
 // MARK: - UIGestureRecognizerDelegate 函数
 extension LXSwiftPickerView: UIGestureRecognizerDelegate {
     
     /// 支持多个 事件同时进行
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
-    }
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool { true }
 }
 
 // MARK: - UIScrollViewDelegate 函数
@@ -411,32 +378,32 @@ extension LXSwiftPickerView:  UIScrollViewDelegate {
     
     /// 滚动视图
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y > 0 && Int(self.tableView.frame.origin.y) == Int(SCREEN_HEIGHT_TO_HEIGHT - maxHeight){
+        if scrollView.contentOffset.y > 0 && Int(tableView.frame.origin.y) == Int(SCREEN_HEIGHT_TO_HEIGHT - maxHeight){
           
         }else{
             /// 非滑动顶部的时候tableView偏移量处理
-            self.tableView.contentOffset = CGPoint.zero
+            tableView.contentOffset = CGPoint.zero
         }
     }
     
     ///开始拖拽
     public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         /// 记录偏移量
-        self.tableViewOriginOffSetY = self.tableView.contentOffset.y
+        tableViewOriginOffSetY = tableView.contentOffset.y
     }
     
     public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         /// 记录偏移量
-        self.tableViewOriginOffSetY = self.tableView.contentOffset.y
+        tableViewOriginOffSetY = tableView.contentOffset.y
     }
     
     public func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
         /// 记录偏移量
-        self.tableViewOriginOffSetY = self.tableView.contentOffset.y
+        tableViewOriginOffSetY = tableView.contentOffset.y
     }
     
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         /// 记录偏移量
-        self.tableViewOriginOffSetY = self.tableView.contentOffset.y
+        tableViewOriginOffSetY = tableView.contentOffset.y
     }
 }

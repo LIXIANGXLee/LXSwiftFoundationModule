@@ -31,10 +31,8 @@ static const int block_key_kvo;
 /// kvo监听回调
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if (!self.block) return;
-    
     BOOL isPrior = [[change objectForKey:NSKeyValueChangeNotificationIsPriorKey] boolValue];
     if (isPrior) return;
-    
     NSKeyValueChange changeKind = [[change objectForKey:NSKeyValueChangeKindKey] integerValue];
     if (changeKind != NSKeyValueChangeSetting) return;
     
@@ -45,7 +43,6 @@ static const int block_key_kvo;
     /// 替换的新值
     id newVal = [change objectForKey:NSKeyValueChangeNewKey];
     if (newVal == [NSNull null]) newVal = nil;
-    
     /// 监听结果回调
     self.block(object, oldVal, newVal);
 }

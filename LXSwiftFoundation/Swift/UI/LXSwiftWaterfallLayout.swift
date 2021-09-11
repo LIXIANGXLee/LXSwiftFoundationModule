@@ -68,9 +68,7 @@ extension LXSwiftWaterfallLayout {
             // 设置item的属性
             attrs.frame = CGRect(x: self.sectionInset.left + (self.minimumInteritemSpacing + itemW) * CGFloat(index), y: minH - height - self.minimumLineSpacing, width: itemW, height: height)
             
-            if !attrsArray.contains(attrs) {
-                attrsArray.append(attrs)
-            }
+            if !attrsArray.contains(attrs) { attrsArray.append(attrs) }
         }
         
         // 记录最大值
@@ -80,12 +78,8 @@ extension LXSwiftWaterfallLayout {
         startIndex = itemCount
     }
     
-    open override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        return attrsArray
-    }
+    open override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? { attrsArray }
     
-    open override var collectionViewContentSize: CGSize {
-        return CGSize(width: 0, height: maxH + sectionInset.bottom - minimumLineSpacing)
-    }
+    open override var collectionViewContentSize: CGSize { CGSize(width: 0, height: maxH + sectionInset.bottom - minimumLineSpacing) }
 }
 

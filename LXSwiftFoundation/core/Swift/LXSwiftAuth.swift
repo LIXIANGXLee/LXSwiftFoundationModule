@@ -15,47 +15,32 @@ import Photos
 @objcMembers public final class LXSwiftAuth: NSObject {
  
     /// 相机权限
-    public static var isSupportCamera: Bool {
-        let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
-        return authStatus == .authorized
-    }
+    public static var isSupportCamera: Bool { AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == .authorized }
 
     /// 请求相机权限
     public static func authVideo(_ completion: @escaping (Bool) -> ()) {
         AVCaptureDevice.requestAccess(for: AVMediaType.video) { (granted) in
-            DispatchQueue.main.async {
-                completion(granted)
-            }
+            DispatchQueue.main.async { completion(granted) }
         }
     }
     
     /// 相册权限
-    public static var isSupportPhotoAlbum: Bool {
-        let authStatus = PHPhotoLibrary.authorizationStatus()
-        return authStatus == .authorized
-    }
+    public static var isSupportPhotoAlbum: Bool { PHPhotoLibrary.authorizationStatus() == .authorized }
     
     /// 请求相册权限
     public static func authAlbum(_ completion: @escaping (Bool) -> ()) {
         PHPhotoLibrary.requestAuthorization { (status) in
-            DispatchQueue.main.async {
-                completion(status == .authorized)
-            }
+            DispatchQueue.main.async { completion(status == .authorized) }
         }
     }
     
     /// 麦克风权限
-    public static var isSupportAudio: Bool {
-        let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.audio)
-        return authStatus == .authorized
-    }
+    public static var isSupportAudio: Bool { AVCaptureDevice.authorizationStatus(for: AVMediaType.audio) == .authorized }
     
     /// 请求麦克风权限
     public static func authAudio(_ completion: @escaping (Bool) -> ()) {
         AVCaptureDevice.requestAccess(for: AVMediaType.audio) { (granted) in
-            DispatchQueue.main.async {
-                completion(granted)
-            }
+            DispatchQueue.main.async { completion(granted) }
         }
     }
 
@@ -70,9 +55,7 @@ import Photos
     @available(iOS 10.0, *)
     public static func isSupportNotications(_ callback: @escaping (_ isSupport: Bool) -> Void) {
         UNUserNotificationCenter.current().getNotificationSettings { (setting) in
-            DispatchQueue.main.async {
-               callback(setting.authorizationStatus != .denied)
-            }
+            DispatchQueue.main.async { callback(setting.authorizationStatus != .denied) }
         }
     }
     
@@ -81,9 +64,7 @@ import Photos
     public static func regisiterRemoteNotications(_ completion: @escaping (Bool) -> ()) {
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .badge, .sound], completionHandler: { (isSuccess, error) in
-            DispatchQueue.main.async {
-               completion(isSuccess)
-            }
+            DispatchQueue.main.async { completion(isSuccess) }
         })
         UIApplication.shared.registerForRemoteNotifications()
     }

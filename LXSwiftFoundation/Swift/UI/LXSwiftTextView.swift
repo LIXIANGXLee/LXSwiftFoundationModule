@@ -22,9 +22,7 @@ import UIKit
     open override var font: UIFont? {
         didSet {
             guard let pFont = font else { return }
-            if placeholderFont == nil {
-                placehoderLabel.font = pFont
-            }
+            if placeholderFont == nil { placehoderLabel.font = pFont }
             setNeedsLayout()
         }
     }
@@ -88,7 +86,6 @@ import UIKit
      
         let labelX = textContainer.lineFragmentPadding
         let labelY = CGFloat(8)
-   
         let size = self.placehoderLabel.text?.lx.size(font: self.placehoderLabel.font, width: self.frame.width - CGFloat(labelX * 2)) ?? CGSize.zero
         self.placehoderLabel.frame = CGRect(origin: CGPoint(x: labelX, y: labelY), size: size)
     }
@@ -98,27 +95,19 @@ import UIKit
 extension LXSwiftTextView {
    
     /// 外部调用方法
-    @objc open func setHandle(_ textCallBack: LXSwiftTextView.TextCallBack?) {
-        self.textCallBack = textCallBack
-    }
+    @objc open func setHandle(_ textCallBack: LXSwiftTextView.TextCallBack?) { self.textCallBack = textCallBack }
     
     /// 设置文本最大长度
-    @objc open func setMaxTextLength(_ length: Int) {
-        self.maxTextLength = length
-    }
+    @objc open func setMaxTextLength(_ length: Int) { self.maxTextLength = length }
     
     /// 在赋值text或attributestring之后调用updateUI
     /// 如果设置回调函数setHandle，请在设置updateTextUI之前调用，否则设置text和nsattributestring的属性时回调是不回调的，如果设置text和nsattributestring属性时回调，则必须在调用updateTextUI()之前设置setHandle函数
-    @objc open func updateTextUI() {
-        textDidChange()
-    }
+    @objc open func updateTextUI() { textDidChange() }
     
     /// 设置默认文案和文案字体颜色
     @objc open func setPlaceholder(_ text: String?, color: UIColor?) {
         placehoderLabel.text = text
-        if let pColor = color {
-            placehoderLabel.textColor = pColor
-        }
+        if let pColor = color { placehoderLabel.textColor = pColor }
         setNeedsLayout()
     }
 }
@@ -129,9 +118,7 @@ extension LXSwiftTextView {
     @objc private func textDidChange() {
         placehoderLabel.isHidden = self.hasText
         if let maxLength = self.maxTextLength, let count = text?.count {
-            if count > maxLength {
-                text = text?.lx.substring(to: maxLength)
-            }
+            if count > maxLength { text = text?.lx.substring(to: maxLength) }
         }
         textCallBack?(text ?? "")
     }

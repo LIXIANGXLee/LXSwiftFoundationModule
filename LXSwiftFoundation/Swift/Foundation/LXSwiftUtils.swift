@@ -21,39 +21,25 @@ import AVFoundation
     }
     
     /// 获取网络类型
-    public static var getNetWorkType: String {
-        return UIDevice.lx.getNetWorkType
-    }
+    public static var getNetWorkType: String { UIDevice.lx.getNetWorkType }
     
     /// 两个版本比较大小 big: one > two, small: two < one,equal: one == two
-    public static func versionCompareOc(v1: String, v2: String) -> LXSwiftUtils.CompareResult {
-        let ret = LXObjcUtils.compareVersion(withV1: v1, v2: v2)
-        return LXSwiftUtils.compareResult(Int(ret))
-    }
+    public static func versionCompareOc(v1: String, v2: String) -> LXSwiftUtils.CompareResult { LXSwiftUtils.compareResult(Int(LXObjcUtils.compareVersion(withV1: v1, v2: v2))) }
     
     /// 两个版本比较大小 big: one > two, small: two < one, equal: one == two
-    public static func versionCompareSwift(v1: String, v2: String) -> LXSwiftUtils.CompareResult {
-        let com = v1.compare(v2)
-        return LXSwiftUtils.compareResult(com.rawValue)
-    }
+    public static func versionCompareSwift(v1: String, v2: String) -> LXSwiftUtils.CompareResult { LXSwiftUtils.compareResult(v1.compare(v2).rawValue) }
     
     /// 打电话
     public static func openTel(with number: String?, _ tellCallBack: LXSwiftUtils.TellCallBack? = nil) {
         if let number = number, let url = URL(string: "tel:" + number) {
-            if UIApplication.lx.isCanOpen(url) {
-                UIApplication.lx.openUrl(url)
-            }
+            if UIApplication.lx.isCanOpen(url) { UIApplication.lx.openUrl(url) }
         }
     }
     /// 将度换为弧度转
-    public static func degreesToRadians(_ radians: CGFloat) -> CGFloat {
-        return LXObjcUtils.degrees(toRadians: radians)
-    }
+    public static func degreesToRadians(_ radians: CGFloat) -> CGFloat { LXObjcUtils.degrees(toRadians: radians) }
     
     /// 将弧度转换为度
-    public static func radiansToDegrees(_ toDegrees: CGFloat) -> CGFloat  {
-        return LXObjcUtils.radians(toDegrees: toDegrees)
-    }
+    public static func radiansToDegrees(_ toDegrees: CGFloat) -> CGFloat  { LXObjcUtils.radians(toDegrees: toDegrees) }
 
     /// 在小数点后保留几个有效数字
     public static func formatDecimalString(with text: String, digits: Int,  mode: NumberFormatter.RoundingMode = .down) -> String {
@@ -63,19 +49,13 @@ import AVFoundation
     }
 
     /// 小数点后保留二位有效数字
-    public static func formatDecimalStringTwo(with text: String) -> String {
-       return formatDecimalString(with: text, digits: 2)
-    }
+    public static func formatDecimalStringTwo(with text: String) -> String { formatDecimalString(with: text, digits: 2) }
     
     /// 小数点后保留三位有效数字
-    public static func formatDecimalStringThree(with text: String) -> String {
-        return formatDecimalString(with: text, digits: 3)
-    }
+    public static func formatDecimalStringThree(with text: String) -> String { formatDecimalString(with: text, digits: 3) }
     
     /// 小数点后保留四位有效数字
-    public static func formatDecimalStringFour(with text: String) -> String {
-        return formatDecimalString(with: text, digits: 4)
-    }
+    public static func formatDecimalStringFour(with text: String) -> String { formatDecimalString(with: text, digits: 4) }
     
     /// 从路径看plist变换字典
     public static func readDictionary(with path: String?) -> Dictionary<String, Any>? {
@@ -86,9 +66,7 @@ import AVFoundation
     }
     
     /// 转换小写数字为大写数字 1 到 壹，2 到 贰 长度要小于19个，否则会crash闪退
-    public static func convert(toUppercaseNumbers number: Double) -> String {
-        return LXObjcUtils.convert(toUppercaseNumbers: number)
-    }
+    public static func convert(toUppercaseNumbers number: Double) -> String { LXObjcUtils.convert(toUppercaseNumbers: number) }
     
     /// 识别二维码图片
     public static func getQrCodeString(with image: UIImage?) -> String? {
@@ -104,9 +82,7 @@ import AVFoundation
     public static func async_getQrCodeString(with image: UIImage?, complete: @escaping (String?) -> ()) {
         DispatchQueue.global().async{
             let async_qrString = self.getQrCodeString(with: image)
-            DispatchQueue.main.async(execute: {
-                complete(async_qrString)
-            })
+            DispatchQueue.main.async(execute: { complete(async_qrString) })
         }
     }
     
@@ -124,9 +100,7 @@ import AVFoundation
     public static func async_getQrCodeImage(with qrCodeStr: String?, size: CGFloat = 800, complete: @escaping (UIImage?) -> ()) {
         DispatchQueue.global().async{
             let async_qrImage = self.getQrCodeImage(with: qrCodeStr, size: size)
-            DispatchQueue.main.async(execute: {
-                complete(async_qrImage)
-            })
+            DispatchQueue.main.async(execute: { complete(async_qrImage) })
         }
     }
     
@@ -181,14 +155,10 @@ extension LXSwiftUtils {
     /// 根据int值获取枚举值
     private static func compareResult(_ ret: Int) -> LXSwiftUtils.CompareResult {
         switch ret {
-        case 0:
-            return .equal
-        case -1:
-            return .small
-        case 1:
-            return .big
-        default:
-            return .small
+        case 0: return .equal
+        case -1: return .small
+        case 1: return .big
+        default: return .small
         }
     }
     

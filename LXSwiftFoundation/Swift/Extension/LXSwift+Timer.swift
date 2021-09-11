@@ -8,11 +8,8 @@
 import UIKit
 
 extension Timer: LXSwiftCompatible {
-    
     @objc func _execBlock(timer: Timer)  {
-        if let block = timer.userInfo as? ((Timer) -> Void) {
-            block(timer)
-        }
+        if let block = timer.userInfo as? ((Timer) -> Void) { block(timer) }
     }
 }
 

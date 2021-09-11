@@ -15,24 +15,16 @@ extension UIView: LXSwiftCompatible { }
 extension LXSwiftBasics where Base: UIView {
     
     /// presented 根视图
-    public var presentView: UIView? {
-        return UIApplication.lx.presentViewController?.view
-    }
+    public var presentView: UIView? { UIApplication.lx.presentViewController?.view }
     
     /// 当前的view
-    public var visibleVCView: UIView? {
-        return UIApplication.lx.visibleViewController?.view
-    }
+    public var visibleVCView: UIView? { UIApplication.lx.visibleViewController?.view }
     
     /// 导航跟控制器
-    public var visibleNavVC: UINavigationController? {
-        return UIApplication.lx.visibleNavRootViewController
-    }
+    public var visibleNavVC: UINavigationController? { UIApplication.lx.visibleNavRootViewController }
     
     /// 获取跟窗口
-    public var rootWindow: UIWindow? {
-        return UIApplication.lx.rootWindow
-    }
+    public var rootWindow: UIWindow? { UIApplication.lx.rootWindow }
     
     /// view截图
     public var snapShotImage: UIImage? {
@@ -40,9 +32,7 @@ extension LXSwiftBasics where Base: UIView {
         if isContainsWKWebView() {
             base.drawHierarchy(in: base.bounds, afterScreenUpdates: true)
         }else{
-            if let ctx = UIGraphicsGetCurrentContext() {
-                base.layer.render(in: ctx)
-            }
+            if let ctx = UIGraphicsGetCurrentContext() { base.layer.render(in: ctx) }
         }
         let snapImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -51,13 +41,9 @@ extension LXSwiftBasics where Base: UIView {
     
     /// 快照管理器，修复wkwebview屏幕截图错误。
     public func isContainsWKWebView() -> Bool {
-        if base.isKind(of: WKWebView.self) {
-            return true
-        }
+        if base.isKind(of: WKWebView.self) { return true }
         for subView in base.subviews {
-            if (subView.lx.isContainsWKWebView()) {
-                return true
-            }
+            if (subView.lx.isContainsWKWebView()) { return true }
         }
         return false
     }
@@ -94,9 +80,7 @@ extension LXSwiftBasics where Base: UIView {
     }
     
     /// 移除阴影
-    public func removeShadow() {
-        base.layer.shadowOpacity = 0.0
-    }
+    public func removeShadow() { base.layer.shadowOpacity = 0.0 }
     
     /// view 边框
     public func setBorder(width: CGFloat, color: UIColor, cornerRadius: CGFloat? = nil) {
@@ -139,65 +123,65 @@ extension LXSwiftBasics where Base: UIView {
     
     public var x: CGFloat {
         set(num) { base.frame = CGRect(x: LXSwiftApp.flat(num), y: y, width: width, height: height) }
-        get { return base.frame.origin.x }
+        get { base.frame.origin.x }
     }
     
     public var y: CGFloat {
         set(num) { base.frame = CGRect(x: x, y: LXSwiftApp.flat(num), width: width, height: height) }
-        get { return base.frame.origin.y }
+        get { base.frame.origin.y }
     }
     
     public var width: CGFloat {
         set(num) { base.frame = CGRect(x: x, y: y, width: LXSwiftApp.flat(num), height: height) }
-        get { return base.frame.size.width }
+        get { base.frame.size.width }
     }
     
     public var height: CGFloat {
         set(num) { base.frame = CGRect(x: x, y: y, width: width, height: LXSwiftApp.flat(num)) }
-        get { return base.frame.size.height }
+        get { base.frame.size.height }
     }
 
     /// 中心点横坐标
     public var centerX: CGFloat {
         set(num) { base.frame = CGRect(x: LXSwiftApp.flat(num - width / 2), y: y, width: width, height: height) }
-        get { return x + LXSwiftApp.flat(width / 2) }
+        get { x + LXSwiftApp.flat(width / 2) }
     }
     
     /// 中心点纵坐标
     public var centerY: CGFloat {
         set(num) { base.frame = CGRect(x: x, y: LXSwiftApp.flat(num - height / 2), width: width, height: height) }
-        get { return y + LXSwiftApp.flat(height / 2) }
+        get { y + LXSwiftApp.flat(height / 2) }
     }
 
     /// 左边缘
     public var left: CGFloat {
         set(num) { x = LXSwiftApp.flat(num) }
-        get { return base.frame.origin.x }
+        get { base.frame.origin.x }
     }
 
     /// 右边缘
     public var right: CGFloat {
         set(num) { x =  LXSwiftApp.flat(num - width) }
-        get { return x + width }
+        get { x + width }
     }
 
     /// 上边缘
     public var top: CGFloat {
         set(num) { y = LXSwiftApp.flat(num) }
-        get { return y }
+        get { y }
     }
 
     /// 下边缘
     public var bottom: CGFloat {
         set(num) { y = LXSwiftApp.flat(num - height) }
-        get { return y + height }
+        get { y + height }
     }
 }
 
 //MARK: -  Extending methods for UIView
 extension LXSwiftBasics where Base: UIView {
     
-    /// add 手势直接闭包回调
+    /// 添加手势直接闭包回调
     @discardableResult
     public func addGesture(_ viewCallBack: @escaping ((UIView?) -> ())) -> UITapGestureRecognizer {
         base.viewCallBack = viewCallBack
@@ -210,12 +194,10 @@ extension LXSwiftBasics where Base: UIView {
 private var viewCallBackKey: Void?
 extension UIView {
     
-    var viewCallBack: ((UIView?) -> ())? {
+    fileprivate var viewCallBack: ((UIView?) -> ())? {
         get { lx_getAssociatedObject(self, &viewCallBackKey) }
         set { lx_setRetainedAssociatedObject(self, &viewCallBackKey, newValue) }
     }
     
-    @objc func gestureTap(_ gesture: UIGestureRecognizer) {
-        self.viewCallBack?(gesture.view)
-    }
+    @objc fileprivate func gestureTap(_ gesture: UIGestureRecognizer) { viewCallBack?(gesture.view) }
 }

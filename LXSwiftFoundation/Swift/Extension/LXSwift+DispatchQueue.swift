@@ -19,18 +19,22 @@ extension DispatchQueue: LXSwiftCompatible {
 
 //MARK: -  Extending method for UIFont
 extension LXSwiftBasics where Base: DispatchQueue {
-    
+  
     /// 双重否定以防止并发访问 只执行一次任务
-    public func once(token: String, closure: () -> Void) {
+    public func once(token: String, _ callBack: () -> Void) {
         if DispatchQueue.onceTracker.contains(token) == false {
             objc_sync_enter(base)
             if DispatchQueue.onceTracker.contains(token) == false {
                 DispatchQueue.onceTracker.insert(token)
-                closure()
+                callBack()
             }
             objc_sync_exit(base)
         }
     }
+    
+    /// 双重否定以防止并发访问 只执行一次任务
+    @available(*, deprecated, message:"Use once(token: String, _ callBack:() -> Void)")
+    public func once(token: String, closure: () -> Void) { once(token: token, closure) }
 }
 
 //MARK: -  Extending method for UIFont
@@ -40,9 +44,7 @@ extension LXSwiftBasics where Base: DispatchQueue {
     public static func async(with task: @escaping DispatchQueue.LXSwiftCallTask, mainTask: DispatchQueue.LXSwiftCallTask? = nil) -> DispatchWorkItem {
         let item = DispatchWorkItem(block: task)
         DispatchQueue.global().async(execute: item)
-        if let main = mainTask {
-            item.notify(queue: DispatchQueue.main, execute: main)
-        }
+        if let main = mainTask { item.notify(queue: DispatchQueue.main, execute: main) }
         return item
     }
     
@@ -56,19 +58,17 @@ extension LXSwiftBasics where Base: DispatchQueue {
     
     /// 异步延时任务 主线程回调执行任务(主线程回调任务可不传，默认是nil)
     @discardableResult
-    public static func asyncDelay(with seconds: Double, task: @escaping DispatchQueue.LXSwiftCallTask, mainTask: DispatchQueue.LXSwiftCallTask? = nil) -> DispatchWorkItem {
+    public static func asyncDelay(with seconds: TimeInterval, task: @escaping DispatchQueue.LXSwiftCallTask, mainTask: DispatchQueue.LXSwiftCallTask? = nil) -> DispatchWorkItem {
         let item = DispatchWorkItem(block: task)
         let s = DispatchTime.now() + seconds
         DispatchQueue.global().asyncAfter(deadline: s, execute: item)
-        if let main = mainTask {
-            item.notify(queue: DispatchQueue.main, execute: main)
-        }
+        if let main = mainTask { item.notify(queue: DispatchQueue.main, execute: main) }
         return item
     }
     
     /// 延时后主线程执行任务
     @discardableResult
-    public static func delay(with seconds: Double, mainTask: @escaping DispatchQueue.LXSwiftCallTask) -> DispatchWorkItem {
+    public static func delay(with seconds: TimeInterval, mainTask: @escaping DispatchQueue.LXSwiftCallTask) -> DispatchWorkItem {
         let item = DispatchWorkItem(block: mainTask)
         let s = DispatchTime.now() + seconds
         DispatchQueue.main.asyncAfter(deadline: s, execute: item)
@@ -76,7 +76,10 @@ extension LXSwiftBasics where Base: DispatchQueue {
     }
     
     /// 延时后主线程执行任务 (自定义线程类型，例如：DispatchQueue.main主线程、DispatchQueue.global()全局线程等等)
-    public func after(with delay: TimeInterval, execute closure: @escaping () -> Void) {
-        base.asyncAfter(deadline: .now() + delay, execute: closure)
-    }
+    public func asyncAfter(with delay: TimeInterval, _ callBack: @escaping () -> Void) {  base.asyncAfter(deadline: .now() + delay, execute: callBack) }
+    
+    /// 延时后主线程执行任务 (自定义线程类型，例如：DispatchQueue.main主线程、DispatchQueue.global()全局线程等等)
+    @available(*, deprecated, message:"Use asyncAfter(with delay:,_ callBack:)")
+    public func after(with delay: TimeInterval, execute closure: @escaping () -> Void) { asyncAfter(with: delay, closure) }
+
 }

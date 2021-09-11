@@ -32,9 +32,7 @@ public extension LXSwiftCompatible {
             /// 对于结构体修改属性时加"mutating" 类型后起作用可以写改struct的属性值
         }
         
-        get {
-            LXSwiftBasics<Self>.self
-        }
+        get { LXSwiftBasics<Self>.self }
     }
     
     /// 为了解决结构变异中的方法问题，对实例计算属性集进行了扩展
@@ -44,22 +42,8 @@ public extension LXSwiftCompatible {
             /// 对于结构体实例修改属性时加"mutating" 类型后起作用可以写改struct的属性值
         }
         
-        get {
-            LXSwiftBasics<Self>(self)
-        }
+        get { LXSwiftBasics<Self>(self) }
     }
-}
-
-protocol LXSwiftPropertyCompatible {
-  
-    /// 协议扩展类型
-    associatedtype T
-    
-    /// 类别扩展
-    typealias SwiftCallBack = ((T) -> ())
-    
-    /// 定义闭包类型的计算属性
-    var swiftCallBack: SwiftCallBack? { get set }
 }
 
 /// 状态栏颜色 协议

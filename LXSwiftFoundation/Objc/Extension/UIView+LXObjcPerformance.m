@@ -32,8 +32,7 @@ static CFRunLoopObserverRef currentObserver;
 }
 
 #pragma mark - Add task
--(NSMutableArray *)tasks{
-    
+-(NSMutableArray *)tasks {
     NSMutableArray * taskArr = objc_getAssociatedObject(self, @selector(tasks));
     if (!taskArr) {
         taskArr = [NSMutableArray array];
@@ -43,11 +42,10 @@ static CFRunLoopObserverRef currentObserver;
 }
 
 /// not events
--(void)repeats{ }
+-(void)repeats { }
 
 /// 使用这种方法，uitableview和uicollectionview性能可以通过添加观察者进行优化
--(void)lx_addRunLoopObserverOfPerformance{
-    
+-(void)lx_addRunLoopObserverOfPerformance {
     CFRunLoopRef runloop = CFRunLoopGetCurrent();
     CFRunLoopObserverContext context = {
         0,
@@ -68,7 +66,6 @@ static CFRunLoopObserverRef currentObserver;
 
 /// 移除观察者
 -(void)lx_removeRunLoopObserver {
-    
     CFRunLoopRef runloop = CFRunLoopGetCurrent();
     if (runloop && currentObserver) {
         CFRunLoopRemoveObserver(runloop, currentObserver, kCFRunLoopCommonModes);
@@ -76,8 +73,7 @@ static CFRunLoopObserverRef currentObserver;
     [self removeTimer];
 }
 
--(void)lx_addTask:(ObjcRunloopBlock)task{
-    
+-(void)lx_addTask:(ObjcRunloopBlock)task {
     /// 创建定时器
     if (self.lx_timer == nil) {
         LXObjcProxy *proxy = [LXObjcProxy proxyWithTarget:self];
@@ -94,7 +90,7 @@ static CFRunLoopObserverRef currentObserver;
 }
 
 /// 事件监听回调
-static void CallBack(CFRunLoopObserverRef observer, CFRunLoopActivity activity, void *info){
+static void CallBack(CFRunLoopObserverRef observer, CFRunLoopActivity activity, void *info) {
     UIView * objc = (__bridge UIView *)info;
     if (objc.tasks.count == 0) {
         [objc removeTimer];
