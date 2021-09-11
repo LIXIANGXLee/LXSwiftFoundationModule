@@ -74,9 +74,29 @@ extension LXSwiftBasics where Base: UIButton {
     }
 }
 
+//MARK: -  Extending properties and methods for UIButton
+extension LXSwiftBasics where Base : UIButton {
+    public func setHandle(buttonCallBack: ((_ button: UIButton) -> ())?){
+        base.swiftCallBack = buttonCallBack
+        base.addTarget(base, action: #selector(base.swiftButtonAction(_:)), for: .touchUpInside)
+    }
+}
+
+private var buttonCallBackKey: Void?
+extension UIButton: LXSwiftPropertyCompatible {
+    public typealias T = UIButton
+    var swiftCallBack: SwiftCallBack? {
+        get { return lx_getAssociatedObject(self, &buttonCallBackKey) }
+        set { lx_setRetainedAssociatedObject(self, &buttonCallBackKey, newValue) }
+    }
+    
+    @objc func swiftButtonAction(_ button: UIButton) {
+        self.swiftCallBack?(button)
+    }
+}
+
 //MARK: -  Extending properties for LXSwiftButtonView
 extension LXSwiftBasics where Base: LXSwiftButton {
- 
     /// 设置标题的cgrect和图像的cgrect
     public func setHandle(titleCallBack: LXSwiftButton.ButtonCallBack?,
                           imageCallBack: LXSwiftButton.ButtonCallBack?) {
