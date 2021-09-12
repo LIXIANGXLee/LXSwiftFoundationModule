@@ -32,11 +32,14 @@ class ViewController: UIViewController {
             
         ViewController.lx_classRespond(to: #selector(btnClick(_:)))
         
-        
         datas.append("两段式滑动弹窗")
         datas.append("戴超链接的弹窗")
         datas.append("wkwebview加载网页，截取长图")
-        datas.append("上拉弹窗")
+        datas.append("弹窗1")
+        datas.append("弹窗2")
+        datas.append("弹窗3")
+        datas.append("弹窗4")
+        datas.append("弹窗5")
 
         tableView.frame = CGRect(x: 0,
                                  y: SCREEN_HEIGHT_TO_NAVBARHEIGHT,
@@ -126,14 +129,53 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate  {
         case 2:
             let vc = WebViewController()
             self.navigationController?.pushViewController(vc, animated: true)
-        default:
-            
-            let menu = LXSwiftMenuUpView()
-            let view = UIView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH_TO_WIDTH, height: 500))
+        case 3:
+            let menu = LXSwiftMenuCenterView()
+            menu.yType = .midRotate
+            let view = UIView(frame: CGRect(x: 0, y: 0, width: 260, height: 400))
+            let view1 = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
+            view1.backgroundColor = UIColor.red
+            view.addSubview(view1)
             view.backgroundColor = UIColor.purple
             menu.content = view
             menu.show()
-            break
+        case 4:
+            let menu = LXSwiftMenuCenterView()
+            menu.yType = .top
+            let view = UIView(frame: CGRect(x: 0, y: 0, width: 260, height: 400))
+            let view1 = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
+            view1.backgroundColor = UIColor.red
+            view.addSubview(view1)
+            view.backgroundColor = UIColor.purple
+            menu.content = view
+            menu.show()
+        case 5:
+            let menu = LXSwiftMenuCenterView()
+            menu.yType = .mid
+            let view = UIView(frame: CGRect(x: 0, y: 0, width: 260, height: 400))
+            let view1 = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
+            view1.backgroundColor = UIColor.red
+            view.addSubview(view1)
+            view.backgroundColor = UIColor.purple
+            menu.content = view
+            menu.show()
+        case 6:
+            let menu = LXSwiftMenuCenterView()
+            menu.yType = .bottom
+            let view = UIView(frame: CGRect(x: 0, y: 0, width: 260, height: 400))
+            let view1 = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
+            view1.backgroundColor = UIColor.red
+            view.addSubview(view1)
+            view.backgroundColor = UIColor.purple
+            menu.content = view
+            menu.show()
+        case 7:
+            let menu = LXSwiftMenuUpView()
+            let view = UIView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH_TO_WIDTH, height: 400))
+            view.backgroundColor = UIColor.purple
+            menu.content = view
+            menu.show()
+        default:  break
         }    
     }
 }

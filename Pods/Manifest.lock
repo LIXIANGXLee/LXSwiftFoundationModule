@@ -1,12 +1,12 @@
 PODS:
-  - LXSwiftFoundation (8.8.4):
-    - LXSwiftFoundation/Core (= 8.8.4)
-    - LXSwiftFoundation/Objc (= 8.8.4)
-    - LXSwiftFoundation/Swift (= 8.8.4)
-  - LXSwiftFoundation/Core (8.8.4)
-  - LXSwiftFoundation/Objc (8.8.4):
+  - LXSwiftFoundation (8.9.1):
+    - LXSwiftFoundation/Core (= 8.9.1)
+    - LXSwiftFoundation/Objc (= 8.9.1)
+    - LXSwiftFoundation/Swift (= 8.9.1)
+  - LXSwiftFoundation/Core (8.9.1)
+  - LXSwiftFoundation/Objc (8.9.1):
     - LXSwiftFoundation/Core
-  - LXSwiftFoundation/Swift (8.8.4):
+  - LXSwiftFoundation/Swift (8.9.1):
     - LXSwiftFoundation/Objc
 
 DEPENDENCIES:
@@ -17,7 +17,7 @@ EXTERNAL SOURCES:
     :path: "./"
 
 SPEC CHECKSUMS:
-  LXSwiftFoundation: 69c33668d920e118f469f59ba8e3b0dd7665ea65
+  LXSwiftFoundation: 36a2bc04db8ba1d98d89101faaf9defae1808346
 
 PODFILE CHECKSUM: ab0b2ae47ae2b869b8504ab2668ed6b85aecc6e0
 

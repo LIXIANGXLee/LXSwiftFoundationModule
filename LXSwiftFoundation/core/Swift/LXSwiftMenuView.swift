@@ -25,8 +25,11 @@ public protocol LXSwiftMenuViewDelegate: AnyObject { }
     /// 内容view
     open var content: UIView?
   
+    /// 结束动画时的回调，可以在此事件中处理结束动画后的一些事物
+    open var dismissCallBack: (() -> Void)?
+    
     /// 关掉当前窗口
-    open func dismiss() { }
+    open func dismiss() { dismissCallBack?() }
     
     open override func setupUI() {
         self.frame = CGRect(x: 0,

@@ -22,6 +22,9 @@ import UIKit
     /// 布局位置，相对于传进来的按钮位置的布局摆放
     open var xType: LXSwiftMenuDownView.MenuXType = .right
     
+    /// 默认缩放倍数，有缩放效果时用，内部属性
+    fileprivate let xyScale: CGFloat = 0.01
+ 
     open override var content: UIView? {
         didSet {
             guard let content = content else {return}
@@ -30,27 +33,24 @@ import UIKit
     }
 
     open override func dismiss() {
-        
         /// 结束动画
-       endAnimation()
+        endAnimation { (_) in super.dismiss() }
     }
 }
 
 extension LXSwiftMenuDownView {
    
     /// 显示视图，view是点击的view
-   @objc open func show(from view: UIView, rootView: UIView? = nil) {
+    @objc open func show(from view: UIView, rootView: UIView? = nil, callBack: ((Bool) -> Void)? = nil) {
 
         guard let content = content else { return }
-
         if rootView != nil {
             rootView?.addSubview(self)
-        }else{
+        } else {
             lx.presentView?.addSubview(self)
         }
         
         let rect = view.convert(view.bounds, to: rootView)
-    
         var x: CGFloat = 0
         var point: CGPoint = CGPoint.zero
         switch xType {
@@ -64,36 +64,38 @@ extension LXSwiftMenuDownView {
             x = rect.maxX - content.lx_width
             point = CGPoint(x: 1 - (rect.width * 0.5 / content.lx_width), y: 0)
         }
-    
         content.layer.anchorPoint = point
         content.lx_origin = CGPoint(x: x, y: rect.maxY + topMargin)
     
         /// 开始动画
-        startAnimation()
+        startAnimation(callBack)
     }
 }
 
 extension LXSwiftMenuDownView {
     
     /// 结束动画
-    private func endAnimation() {
+    private func endAnimation(_ callBack: ((Bool) -> Void)? = nil) {
         backgroundColor = UIColor.black.withAlphaComponent(viewOpaque)
         self.content?.transform = CGAffineTransform.identity
         UIView.animate(withDuration: animateDuration, animations: {
-            self.content?.transform = CGAffineTransform(scaleX: 0.001, y: 0.001)
+            self.content?.transform = CGAffineTransform(scaleX: self.xyScale, y: self.xyScale)
             self.backgroundColor = UIColor.black.withAlphaComponent(0)
-        }) {(finished) -> () in
+        }) {(isFinish) -> () in
             self.removeFromSuperview()
+            callBack?(isFinish)
         }
     }
    
     /// 开始动画
-    private func startAnimation() {
+    private func startAnimation(_ callBack: ((Bool) -> Void)? = nil) {
         self.content?.transform = CGAffineTransform(scaleX: 0, y: 0)
         backgroundColor = UIColor.black.withAlphaComponent(0)
         UIView.animate(withDuration: animateDuration) {
             self.content?.transform = CGAffineTransform.identity
             self.backgroundColor = UIColor.black.withAlphaComponent(self.viewOpaque)
+        } completion: { (isFinish) in
+            callBack?(isFinish)
         }
     }
 }
