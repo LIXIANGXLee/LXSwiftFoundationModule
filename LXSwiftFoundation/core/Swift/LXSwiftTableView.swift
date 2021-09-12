@@ -29,7 +29,7 @@ private let tag = 19920688
         tableHeaderView = UIView(frame: rect)
         if #available(iOS 11.0, *) {
             contentInsetAdjustmentBehavior = .never
-        }else {
+        } else {
             translatesAutoresizingMaskIntoConstraints = false
         }
         
@@ -105,7 +105,7 @@ public extension UITableView {
             let hasSectionFooter = (self.delegate?.tableView?(self, viewForFooterInSection: section)) != nil
             if numberOfRows == 0 && hasSectionFooter == false {
                 sectionHeader.roundSwiftBackground(roundingCorners: .allCorners, cornerRadius: cornerRadius, backgroundColor: backgroundColor)
-            }else{
+            } else {
                 sectionHeader.roundSwiftBackground(roundingCorners: [.topLeft, .topRight], cornerRadius: cornerRadius, backgroundColor: backgroundColor)
             }
         }

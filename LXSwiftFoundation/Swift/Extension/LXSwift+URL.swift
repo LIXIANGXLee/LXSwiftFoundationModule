@@ -46,7 +46,6 @@ extension LXSwiftBasics where Base == URL {
     public var urlParamsWithOrder: [[String: String]] {
         var queries = [[String: String]]()
         guard let query = base.query else { return queries }
-
         let andChar = CharacterSet(charactersIn: "&")
         let queryComponents = query.components(separatedBy: andChar)
         let equalChar = CharacterSet(charactersIn: "=")

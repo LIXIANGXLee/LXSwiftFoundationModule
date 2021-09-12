@@ -115,7 +115,7 @@ fileprivate struct LXSwiftX2ImageBuilder: LXSwiftImageAdaptNode {
     func loadImage(_ imagePath: String) -> UIImage? {
         if let image = UIImage(contentsOfFile: "\(imagePath)@2x.png") {
             return image
-        }else{ return successor?.loadImage(imagePath) }
+        } else { return successor?.loadImage(imagePath) }
     }
 }
 
@@ -127,7 +127,7 @@ fileprivate struct LXSwiftX3ImageBuilder: LXSwiftImageAdaptNode {
     func loadImage(_ imagePath: String) -> UIImage? {
         if let image = UIImage(contentsOfFile: "\(imagePath)@3x.png") {
             return image
-        }else{ return successor?.loadImage(imagePath) }
+        } else { return successor?.loadImage(imagePath) }
     }
 }
 
@@ -141,7 +141,7 @@ fileprivate struct LXSwiftX1ImageBuilder: LXSwiftImageAdaptNode {
     func loadImage(_ imagePath: String) -> UIImage? {
         if let image = UIImage(contentsOfFile: "\(imagePath).png") {
             return image
-        }else{  return successor?.loadImage(imagePath) }
+        } else { return successor?.loadImage(imagePath) }
     }
 }
 

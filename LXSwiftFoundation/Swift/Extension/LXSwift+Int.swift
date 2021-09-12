@@ -32,25 +32,19 @@ public prefix func ~<= (_ index: Int) -> (Int) -> (Bool) { { $0 <= index } }
 extension Int32: LXSwiftCompatible {
    
     /// Switch 匹配模式
-    public static func ~= (pattern: (Int32) -> (Bool), value: Int32) -> Bool {
-         pattern(value)
-    }
+    public static func ~= (pattern: (Int32) -> (Bool), value: Int32) -> Bool { pattern(value) }
 }
 
 extension Int64: LXSwiftCompatible {
    
     /// Switch 匹配模式
-    public static func ~= (pattern: (Int64) -> (Bool), value: Int64) -> Bool {
-         pattern(value)
-    }
+    public static func ~= (pattern: (Int64) -> (Bool), value: Int64) -> Bool { pattern(value) }
 }
 
 extension Int: LXSwiftCompatible {
     
     /// Switch 匹配模式
-    public static func ~= (pattern: (Int) -> (Bool), value: Int) -> Bool {
-         pattern(value)
-    }
+    public static func ~= (pattern: (Int) -> (Bool), value: Int) -> Bool { pattern(value) }
 }
 
 extension LXSwiftBasics where Base == Int32 {

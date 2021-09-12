@@ -19,7 +19,7 @@ extension LXSwiftBasics where Base == UIEdgeInsets {
 
     public mutating func set(withTop size: CGFloat) { base.top = LXSwiftApp.flat(size) }
     public mutating func set(withLeft size: CGFloat) { base.left = LXSwiftApp.flat(size) }
-    public mutating func set(withBottom size: CGFloat) {  base.bottom = LXSwiftApp.flat(size) }
+    public mutating func set(withBottom size: CGFloat) { base.bottom = LXSwiftApp.flat(size) }
     public mutating func set(withRight size: CGFloat) { base.right = LXSwiftApp.flat(size) }
 
     /// 将两个UIEdgeInsets合并为一个

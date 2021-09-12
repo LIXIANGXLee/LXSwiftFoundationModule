@@ -10,25 +10,23 @@ import UIKit
 import CommonCrypto
 
 /// Switch 的匹配模式，匹配字符串开头 是否包含此字符串
-public func has_prefix(_ prefix: String) -> ((String) -> (Bool)) {{$0.hasPrefix(prefix)}}
+public func has_prefix(_ prefix: String) -> ((String) -> (Bool)) { { $0.hasPrefix(prefix) } }
 
 /// Switch 的匹配模式，匹配字符串结尾 是否包含此字符串
-public func has_suffix(_ suffix: String) -> ((String) -> (Bool)) {{$0.hasSuffix(suffix)}}
+public func has_suffix(_ suffix: String) -> ((String) -> (Bool)) { { $0.hasSuffix(suffix) } }
 
 /// Switch 的匹配模式，匹配字符串被包含 是否包含此字符串
-public func has_contains(_ text: String) -> ((String) -> (Bool)) {{$0.contains(text)}}
+public func has_contains(_ text: String) -> ((String) -> (Bool)) { { $0.contains(text) } }
 
 /// Switch 的匹配模式，匹配字符串被包含 字符串是否相等
-public func has_equal(_ text: String) -> ((String) -> (Bool)) {{$0 == text}}
+public func has_equal(_ text: String) -> ((String) -> (Bool)) { { $0 == text } }
 
 //MARK: -  重载~=运算符，也是swich操作
 extension String: LXSwiftCompatible {
    
     /// 开关反匹配模式，匹配
     /// 第一个字符串包含还是最后一个字符串包含
-    public static func ~= (pattern: (String) -> Bool, value: String) -> Bool {
-        pattern(value)
-    }
+    public static func ~= (pattern: (String) -> Bool, value: String) -> Bool { pattern(value) }
 }
 
 //MARK: -  字符串截取、分割、去空格
@@ -43,7 +41,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         let string = base as! String
         if r.lowerBound < r.upperBound && r.upperBound <= string.count && r.lowerBound >= 0 {
             return string[r]
-        }else{ return string }
+        } else { return string }
     }
     
     ///  扩展字符串截取
@@ -51,7 +49,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         let string = base as! String
         if index <= string.count && index >= 0 {
             return subString(with: index..<string.count)
-        }else{ return string }
+        } else { return string }
     }
     
     ///  扩展字符串截取
@@ -59,7 +57,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
         let string = base as! String
         if index <= string.count && index >= 0 {
             return subString(with: 0..<index)
-        }else{ return string }
+        } else { return string }
     }
 
     /// 分割字符方法已过期

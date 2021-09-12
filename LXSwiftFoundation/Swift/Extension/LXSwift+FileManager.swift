@@ -103,7 +103,7 @@ extension LXSwiftBasics where Base: FileManager {
                 block?(false)
                 return false
             }
-        }else{
+        } else {
             block?(true)
             return true
         }
@@ -124,7 +124,7 @@ extension LXSwiftBasics where Base: FileManager {
                 !createFile(atPath: toFilePath) :
                 !createFolder(atPath: toFileFolderPath)  {
                 block?(false)
-            }else{
+            } else {
                 if isOverwrite && isFileExists(atPath: toFilePath) {
                     // 如果被移动的件夹或者文件，如果已存在，先删除，否则拷贝不了
                     do {
@@ -137,7 +137,7 @@ extension LXSwiftBasics where Base: FileManager {
                 do {
                     if moveType == .move {
                         try fileManagerDefault.moveItem(atPath: fromFilePath, toPath: toFilePath)
-                    }else{
+                    } else {
                         try fileManagerDefault.copyItem(atPath: fromFilePath, toPath: toFilePath)
                     }
                     block?(true)
@@ -159,18 +159,18 @@ extension LXSwiftBasics where Base: FileManager {
     public static func getAllFiles(atPath folderPath: String) -> [Any]? {
          // 查看文件夹是否存在，如果存在就直接读取，不存在就直接反空
          if isFileExists(atPath: folderPath) {
-             guard let allFile = fileManagerDefault.enumerator(atPath: folderPath) else {  return nil }
-            return allFile.allObjects
-         } else { return nil }
+            return fileManagerDefault.enumerator(atPath: folderPath)?.allObjects
+         }
+         return nil
      }
     
     /// 获取所有文件名（性能要比getAllFiles差一些）
     static func getAllFileNames(atPath folderPath: String) -> [String]? {
         // 查看文件夹是否存在，如果存在就直接读取，不存在就直接反空
         if (isFileExists(atPath: folderPath)) {
-            guard let subPaths = fileManagerDefault.subpaths(atPath: folderPath) else { return nil }
-            return subPaths
-        } else { return nil }
+            return fileManagerDefault.subpaths(atPath: folderPath)
+        }
+        return nil
     }
     
     /// 获取目录下所有文件的全路径
@@ -185,7 +185,7 @@ extension LXSwiftBasics where Base: FileManager {
         return Double(attr[FileAttributeKey.size] as? UInt64 ?? 0)
     }
     
-    /// 遍历所有子目录， 并计算所有文件总大小
+    /// 遍历所有子目录，并计算所有文件总大小
     public static func fileFolderSize(atPath folderPath: String) -> Double {
         var fileSize: Double = 0
         guard let files = getAllTotalFiles(atPath: folderPath) else { return fileSize }
@@ -194,8 +194,15 @@ extension LXSwiftBasics where Base: FileManager {
     }
     
     /// 计算单个文件的大小 显示格式GB、MB、KB、B 返回字符串
-    public static func fileSizeToStr(atPath path: String) -> String { fileSize(atPath: path).lx.sizeFileToString }
+    @available(*, deprecated, renamed: "fileSizeToString")
+    public static func fileSizeToStr(atPath path: String) -> String { fileSizeToString(atPath: path) }
     
+    /// 计算单个文件的大小 显示格式GB、MB、KB、B 返回字符串
+    public static func fileSizeToString(atPath path: String) -> String { fileSize(atPath: path).lx.sizeFileToString }
+
+    @available(*, deprecated, renamed: "fileFolderSizeToString")
+    public static func fileFolderSizeToStr(atPath path: String) -> String { fileFolderSizeToString(atPath: path) }
+
     /// 计算目录下所有文件的大小 显示格式GB、MB、KB、B 返回字符串
-    public static func fileFolderSizeToStr(atPath path: String) -> String { fileFolderSize(atPath: path).lx.sizeFileToString }
+    public static func fileFolderSizeToString(atPath path: String) -> String { fileFolderSize(atPath: path).lx.sizeFileToString }
 }

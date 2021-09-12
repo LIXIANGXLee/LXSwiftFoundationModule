@@ -27,7 +27,7 @@ extension LXSwiftBasics where Base: UIColor {
             return UIColor { (traitCollection) -> UIColor in
                 if traitCollection.userInterfaceStyle == .dark {
                     return darkColor
-                }else { return lightColor }
+                } else { return lightColor }
             }
         } else { return lightColor }
     }

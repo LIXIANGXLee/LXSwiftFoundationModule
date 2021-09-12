@@ -83,7 +83,7 @@ extension LXSwiftBasics where Base: UIDevice {
         let used = total - free
         if used <= 0 {
             return nil
-        }else{ return used }
+        } else { return used }
     }
     
     /// 获取内存大小

@@ -23,7 +23,7 @@ import UIKit
         
         if #available(iOS 11.0, *) {
             contentInsetAdjustmentBehavior = .never
-        }else {
+        } else {
             translatesAutoresizingMaskIntoConstraints = false
         }
         setupUI()

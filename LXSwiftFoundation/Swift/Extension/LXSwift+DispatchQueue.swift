@@ -60,8 +60,7 @@ extension LXSwiftBasics where Base: DispatchQueue {
     @discardableResult
     public static func asyncDelay(with seconds: TimeInterval, task: @escaping DispatchQueue.LXSwiftCallTask, mainTask: DispatchQueue.LXSwiftCallTask? = nil) -> DispatchWorkItem {
         let item = DispatchWorkItem(block: task)
-        let s = DispatchTime.now() + seconds
-        DispatchQueue.global().asyncAfter(deadline: s, execute: item)
+        DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + seconds, execute: item)
         if let main = mainTask { item.notify(queue: DispatchQueue.main, execute: main) }
         return item
     }
@@ -70,8 +69,7 @@ extension LXSwiftBasics where Base: DispatchQueue {
     @discardableResult
     public static func delay(with seconds: TimeInterval, mainTask: @escaping DispatchQueue.LXSwiftCallTask) -> DispatchWorkItem {
         let item = DispatchWorkItem(block: mainTask)
-        let s = DispatchTime.now() + seconds
-        DispatchQueue.main.asyncAfter(deadline: s, execute: item)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + seconds, execute: item)
         return item
     }
     

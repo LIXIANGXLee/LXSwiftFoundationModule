@@ -143,13 +143,13 @@ extension LXSwiftHyperlinksModalController {
         UIApplication.lx.visibleViewController?.present(self, animated: true, completion: nil)
     }
     
-    func getTitleH() -> CGFloat {
+   fileprivate func getTitleH() -> CGFloat {
         if let text = titleLabel.text {
             return text.lx.height(font: modaConfig.titleFont, width: contentView.frame.width - modaConfig.contentViewSubViewX * 2)
-        }else{ return 0 }
+        } else { return 0 }
     }
     
-    func getContentH(_ attr: NSAttributedString) -> CGFloat { attr.lx.height(contentView.frame.width - self.modaConfig.contentViewSubViewX * 2) }
+    fileprivate func getContentH(_ attr: NSAttributedString) -> CGFloat { attr.lx.height(contentView.frame.width - self.modaConfig.contentViewSubViewX * 2) }
 }
 
 @objc(LXObjcModalConfig)

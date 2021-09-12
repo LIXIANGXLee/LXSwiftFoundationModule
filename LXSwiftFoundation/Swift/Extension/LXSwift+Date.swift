@@ -21,7 +21,7 @@ extension LXSwiftBasics where Base == Date {
     }
     
     /// 日期和日期比较
-    public func dateCompare(with date: Date, unit: Set<Calendar.Component> = [.year,.month,.day]) -> (DateComponents,DateComponents) { (Calendar.current.dateComponents(unit, from: base),Calendar.current.dateComponents(unit, from: date)) }
+    public func dateCompare(with date: Date, unit: Set<Calendar.Component> = [.year,.month,.day]) -> (DateComponents,DateComponents) { (Calendar.current.dateComponents(unit, from: base), Calendar.current.dateComponents(unit, from: date)) }
     
     /// 获取两个日期之间的数据
     public func componentCompare(from date: Date, unit: Set<Calendar.Component> = [.year,.month,.day]) -> DateComponents { Calendar.current.dateComponents(unit, from: date, to: base) }
