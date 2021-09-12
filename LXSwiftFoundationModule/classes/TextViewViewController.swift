@@ -14,7 +14,7 @@ class TextViewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "textView和textField展示"
-        self.view.backgroundColor = UIColor.red
+        self.view.backgroundColor = UIColor.blue
         
         let textView = LXSwiftTextView(frame: CGRect(x: 20, y: 100, width: 260, height: 200))
         self.view.addSubview(textView)

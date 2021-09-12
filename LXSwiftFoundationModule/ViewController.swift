@@ -40,6 +40,7 @@ class ViewController: UIViewController {
         datas.append("弹窗3")
         datas.append("弹窗4")
         datas.append("弹窗5")
+        datas.append("textview和textfield")
 
         tableView.frame = CGRect(x: 0,
                                  y: SCREEN_HEIGHT_TO_NAVBARHEIGHT,
@@ -175,6 +176,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate  {
             view.backgroundColor = UIColor.purple
             menu.content = view
             menu.show()
+        case 8:
+            self.navigationController?.pushViewController(TextViewViewController(), animated: true)
         default:  break
         }    
     }
