@@ -77,9 +77,7 @@ extension LXSwiftMenuCenterView {
             case .bottom: fallthrough
             case .top: self.content?.transform = CGAffineTransform.identity
             case .mid: self.content?.transform = CGAffineTransform(scaleX: self.xyScale, y: self.xyScale)
-            case .midRotate:
-                let transform = CGAffineTransform(scaleX: self.xyScale, y: self.xyScale)
-                self.content?.transform = transform.rotated(by: CGFloat(Double.pi))
+            case .midRotate: self.content?.transform = CGAffineTransform(scaleX: self.xyScale, y: self.xyScale).rotated(by: CGFloat(Double.pi))
             default: break
             }
         }) {(isFinish) -> () in
