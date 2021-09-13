@@ -41,6 +41,9 @@ public func SCALE_IPAD129_HEIGHT_TO_HEIGHT(_ distance: CGFloat) -> CGFloat { LXS
 /// 居中运算
 public func SCALE_GET_CENTER_WIDTH_AND_WIDTH(_ parent: CGFloat, _ child: CGFloat) -> CGFloat { LXSwiftApp.flat((parent - child) / 2.0) }
 
+/// DEBU模式下日志打印简单封装，打印日志快捷函数 
+public func LXXXLog(_ msg: Any, _ file: NSString = #file, _ fn: String = #function, _ line: Int = #line) { LXSwiftApp.log(msg, file, fn, line) }
+
 // MARK: - LXSwftApp const
 /// define app const
 @objc(LXObjcApp)
@@ -108,7 +111,7 @@ public func SCALE_GET_CENTER_WIDTH_AND_WIDTH(_ parent: CGFloat, _ child: CGFloat
                return UIApplication.shared.delegate?.window ?? UIApplication.shared.windows.first
         }
     }
-    
+
     /// 获取状态栏高度
     private static var statusBarHeight: CGFloat {
         var statusH: CGFloat = UIApplication.shared.statusBarFrame.height
@@ -131,5 +134,12 @@ public func SCALE_GET_CENTER_WIDTH_AND_WIDTH(_ parent: CGFloat, _ child: CGFloat
             if touchBarH == 0 && Int(statusBarH) > 20 { touchBarH = 34 }
         }
         return touchBarH
+    }
+    
+    /// 打印日志
+    fileprivate static func log(_ msg: Any, _ file: NSString, _ fn: String, _ line: Int) {
+        #if DEBUG
+        print("「 DEBUG模式下打印： 」****** \(file.lastPathComponent) >> \(line) >> \(fn) >> \(msg) ******")
+        #endif
     }
 }

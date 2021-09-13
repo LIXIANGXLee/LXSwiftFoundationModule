@@ -13,10 +13,10 @@ import Photos
 
 class ViewController: UIViewController {
     
-    private var datas: [String] = []
+    private var datas: [[String]] = [[]]
     
     fileprivate lazy var tableView: LXSwiftTableView = {
-        let tableView = LXSwiftTableView(frame: CGRect.zero, style: UITableView.Style.plain)
+        let tableView = LXSwiftTableView(frame: CGRect.zero, style: UITableView.Style.grouped)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.registSwiftCell(LXTableViewViewCell.self)
@@ -25,29 +25,36 @@ class ViewController: UIViewController {
     
     private var switchCallBackKey: Void?
     private var switchCallBacka: Void?
-
+    
      override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "UI展示"
             
-        ViewController.lx_classRespond(to: #selector(btnClick(_:)))
+        print("=-=-=-=-=-=-=-=\(LXXXLog("dsdsdsdsdsd"))")
         
-        datas.append("两段式滑动弹窗")
-        datas.append("戴超链接的弹窗")
-        datas.append("wkwebview加载网页，截取长图")
-        datas.append("弹窗1")
-        datas.append("弹窗2")
-        datas.append("弹窗3")
-        datas.append("弹窗4")
-        datas.append("弹窗5")
-        datas.append("textview和textfield")
+        ViewController.lx_classRespond(to: #selector(btnClick(_:)))
+
+        datas = [
+            [
+               "弹窗1",
+               "弹窗2",
+               "弹窗3",
+               "弹窗4",
+               "弹窗5",
+               "两段式滑动弹窗"
+           ],
+            [
+                "戴超链接的弹窗",
+                "wkwebview加载网页，截取长图",
+                "textview和textfield"
+            ]
+        ]
 
         tableView.frame = CGRect(x: 0,
                                  y: SCREEN_HEIGHT_TO_NAVBARHEIGHT,
                                  width: LXSwiftApp.screenW,
                                  height: LXSwiftApp.screenH - SCREEN_HEIGHT_TO_NAVBARHEIGHT - SCREEN_HEIGHT_TO_TOUCHBARHEIGHT)
         view.addSubview(tableView)
-        
         
         let btn = UIButton(type: .custom)
         btn.backgroundColor = UIColor.red
@@ -104,82 +111,86 @@ class ViewController: UIViewController {
 // MARK: - UITableViewDataSource
 extension ViewController: UITableViewDataSource, UITableViewDelegate  {
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return datas.count
-    }
-
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { 50 }
+    func numberOfSections(in tableView: UITableView) -> Int { datas.count }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { datas[section].count }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueSwiftReusableCell(indexPath: indexPath) as LXTableViewViewCell
         tableView.roundSwiftSectionCell(cell, forRowAt: indexPath, cornerRadius: 20, backgroundColor: UIColor.blue)
-        
-        cell.textStr = datas[indexPath.row]
+        cell.textStr = datas[indexPath.section][indexPath.row]
         return cell
     }
        
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
+        
+        switch indexPath.section {
         case 0:
-            let vc = PickerViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
+            switch indexPath.row {
+            case 0:
+                let menu = LXSwiftMenuCenterView()
+                menu.yType = .midRotate
+                let view = UIView(frame: CGRect(x: 0, y: 0, width: 260, height: 400))
+                let view1 = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
+                view1.backgroundColor = UIColor.red
+                view.addSubview(view1)
+                view.backgroundColor = UIColor.purple
+                menu.content = view
+                menu.show()
+            case 1:
+                let menu = LXSwiftMenuCenterView()
+                menu.yType = .top
+                let view = UIView(frame: CGRect(x: 0, y: 0, width: 260, height: 400))
+                let view1 = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
+                view1.backgroundColor = UIColor.red
+                view.addSubview(view1)
+                view.backgroundColor = UIColor.purple
+                menu.content = view
+                menu.show()
+            case 2:
+                let menu = LXSwiftMenuCenterView()
+                menu.yType = .mid
+                let view = UIView(frame: CGRect(x: 0, y: 0, width: 260, height: 400))
+                let view1 = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
+                view1.backgroundColor = UIColor.red
+                view.addSubview(view1)
+                view.backgroundColor = UIColor.purple
+                menu.content = view
+                menu.show()
+            case 3:
+                let menu = LXSwiftMenuCenterView()
+                menu.yType = .bottom
+                let view = UIView(frame: CGRect(x: 0, y: 0, width: 260, height: 400))
+                let view1 = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
+                view1.backgroundColor = UIColor.red
+                view.addSubview(view1)
+                view.backgroundColor = UIColor.purple
+                menu.content = view
+                menu.show()
+            case 4:
+                let menu = LXSwiftMenuUpView()
+                let view = UIView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH_TO_WIDTH, height: 400))
+                view.backgroundColor = UIColor.purple
+                menu.content = view
+                menu.show()
+            case 5:
+                let vc = PickerViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            default: break
+            }
+            
         case 1:
-            showModal()
-        case 2:
-            let vc = WebViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
-        case 3:
-            let menu = LXSwiftMenuCenterView()
-            menu.yType = .midRotate
-            let view = UIView(frame: CGRect(x: 0, y: 0, width: 260, height: 400))
-            let view1 = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
-            view1.backgroundColor = UIColor.red
-            view.addSubview(view1)
-            view.backgroundColor = UIColor.purple
-            menu.content = view
-            menu.show()
-        case 4:
-            let menu = LXSwiftMenuCenterView()
-            menu.yType = .top
-            let view = UIView(frame: CGRect(x: 0, y: 0, width: 260, height: 400))
-            let view1 = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
-            view1.backgroundColor = UIColor.red
-            view.addSubview(view1)
-            view.backgroundColor = UIColor.purple
-            menu.content = view
-            menu.show()
-        case 5:
-            let menu = LXSwiftMenuCenterView()
-            menu.yType = .mid
-            let view = UIView(frame: CGRect(x: 0, y: 0, width: 260, height: 400))
-            let view1 = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
-            view1.backgroundColor = UIColor.red
-            view.addSubview(view1)
-            view.backgroundColor = UIColor.purple
-            menu.content = view
-            menu.show()
-        case 6:
-            let menu = LXSwiftMenuCenterView()
-            menu.yType = .bottom
-            let view = UIView(frame: CGRect(x: 0, y: 0, width: 260, height: 400))
-            let view1 = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
-            view1.backgroundColor = UIColor.red
-            view.addSubview(view1)
-            view.backgroundColor = UIColor.purple
-            menu.content = view
-            menu.show()
-        case 7:
-            let menu = LXSwiftMenuUpView()
-            let view = UIView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH_TO_WIDTH, height: 400))
-            view.backgroundColor = UIColor.purple
-            menu.content = view
-            menu.show()
-        case 8:
-            self.navigationController?.pushViewController(TextViewViewController(), animated: true)
+            switch indexPath.row {
+            case 0:
+                showModal()
+            case 1:
+                let vc = WebViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            case 2:
+                self.navigationController?.pushViewController(TextViewViewController(), animated: true)
+            default: break
+            }
         default:  break
-        }    
+        }
     }
 }
 

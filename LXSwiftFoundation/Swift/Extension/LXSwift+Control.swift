@@ -15,7 +15,6 @@ extension LXSwiftBasics where Base: UIControl {
     public func preventDoubleHit(_ hitTime: Double = 1) { base.hitDouble(hitTime) }
     
     /// 添加点击事件回调(注意：只能添加一处事件，多次添加会被覆盖，直取最后一次事件监听，如果想多处需要监听，库里提供oc方法方案)调用 lx_addBlockForControlEvents:(UIControlEvents)controlEvents block:(void (^)(id sender))block 方法就OK了，但建议还是一处监听为好，避免业务复杂处理起来出bug
-
     public func addTarget(for controlEvents: UIControl.Event = .touchUpInside, callBack: @escaping ((Any) -> ())) {
         base.callBack = callBack
         base.addTarget(base, action: #selector(base.swiftAction(_:)), for: controlEvents)

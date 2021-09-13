@@ -143,7 +143,7 @@ extension LXSwiftBasics where Base: ExpressibleByStringLiteral {
     public var toInt: Int { Int(base as! String) ?? 0 }
     
     /// 字符串转Int64
-    public var toInt64: Int64 { Int64( base as! String) ?? 0 }
+    public var toInt64: Int64 { Int64(base as! String) ?? 0 }
     
     /// 字符串转Int32
     public var toInt32: Int32 { Int32(base as! String) ?? 0 }

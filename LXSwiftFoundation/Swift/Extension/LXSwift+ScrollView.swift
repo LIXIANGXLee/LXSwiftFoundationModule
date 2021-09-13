@@ -93,7 +93,7 @@ extension UIScrollView {
             self.drawHierarchy(in: splitFrame, afterScreenUpdates: true)
             if index < maxIndex {
                 self.snapShotContentScrollPage(index: index + 1, maxIndex: maxIndex, callback: callback)
-            }else{ callback() }
+            } else { callback() }
         }
     }
 }
