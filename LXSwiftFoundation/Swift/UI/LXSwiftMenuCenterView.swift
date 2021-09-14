@@ -11,10 +11,11 @@ import UIKit
 @objcMembers open class LXSwiftMenuCenterView: LXSwiftMenuView {
     
     @objc public enum MenuYType: Int {
-         case bottom
-         case top
-         case mid
-         case midRotate
+         case bottom     // 下面弹起
+         case top        // 上面落下
+         case mid        // 中间放大
+         case midRotate  // 中间放大加旋转
+         case gradual    // 逐渐的
      }
      
      /// 距顶部间距
@@ -56,7 +57,10 @@ extension LXSwiftMenuCenterView {
         switch yType {
         case .top: content.lx_y = -content.lx_height
         case .mid: fallthrough
-        case .midRotate: content.lx_y = (SCREEN_HEIGHT_TO_HEIGHT - content.lx_height) * 0.5
+        case .gradual: fallthrough
+        case .midRotate:
+            content.lx_y = (SCREEN_HEIGHT_TO_HEIGHT - content.lx_height) * 0.5
+            content.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         case .bottom: content.lx_y = SCREEN_HEIGHT_TO_HEIGHT
         default: break
         }
@@ -72,12 +76,14 @@ extension LXSwiftMenuCenterView {
     private func endAnimation(_ callBack: ((Bool) -> Void)? = nil) {
         self.backgroundColor = UIColor.black.withAlphaComponent(viewOpaque)
         UIView.animate(withDuration: animateDuration, animations: {
+            guard let content = self.content else { return }
             self.backgroundColor = UIColor.black.withAlphaComponent(0)
             switch self.yType {
             case .bottom: fallthrough
-            case .top: self.content?.transform = CGAffineTransform.identity
-            case .mid: self.content?.transform = CGAffineTransform(scaleX: self.xyScale, y: self.xyScale)
-            case .midRotate: self.content?.transform = CGAffineTransform(scaleX: self.xyScale, y: self.xyScale).rotated(by: CGFloat(Double.pi))
+            case .top: content.transform = CGAffineTransform.identity
+            case .mid: content.transform = CGAffineTransform(scaleX: self.xyScale, y: self.xyScale)
+            case .midRotate: content.transform = CGAffineTransform(scaleX: self.xyScale, y: self.xyScale).rotated(by: CGFloat(Double.pi))
+            case .gradual: content.alpha = self.xyScale
             default: break
             }
         }) {(isFinish) -> () in
@@ -88,12 +94,14 @@ extension LXSwiftMenuCenterView {
     
     /// 开始动画
     private func startAnimation(_ callBack: ((Bool) -> Void)? = nil) {
+        guard let content = self.content else { return }
         self.backgroundColor = UIColor.black.withAlphaComponent(0)
         switch yType {
         case .bottom: fallthrough
-        case .top: content?.transform = CGAffineTransform.identity
-        case .mid: content?.transform = CGAffineTransform(scaleX: xyScale, y: xyScale)
-        case .midRotate: content?.transform = CGAffineTransform(scaleX: xyScale, y: xyScale).rotated(by: CGFloat(Double.pi))
+        case .top: content.transform = CGAffineTransform.identity
+        case .mid: content.transform = CGAffineTransform(scaleX: xyScale, y: xyScale)
+        case .gradual: content.alpha = xyScale
+        case .midRotate: content.transform = CGAffineTransform(scaleX: xyScale, y: xyScale).rotated(by: CGFloat(Double.pi))
         default: break
         }
         
@@ -104,11 +112,10 @@ extension LXSwiftMenuCenterView {
             case .bottom: content.transform = CGAffineTransform(translationX: 0, y: -(SCREEN_HEIGHT_TO_HEIGHT + content.lx_height) * 0.5)
             case .top: content.transform = CGAffineTransform(translationX: 0, y: (SCREEN_HEIGHT_TO_HEIGHT + content.lx_height) * 0.5)
             case .mid: content.transform = CGAffineTransform.identity
+            case .gradual: content.alpha = 1
             case .midRotate: content.transform = CGAffineTransform(scaleX: 1, y: 1).rotated(by: CGFloat(Double.pi * 2))
             default: break
             }
-        } completion: { (isFinish) in
-            callBack?(isFinish)
-        }
+        } completion: { (isFinish) in callBack?(isFinish) }
     }
 }

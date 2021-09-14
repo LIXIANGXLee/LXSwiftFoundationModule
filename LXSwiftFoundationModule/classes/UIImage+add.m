@@ -25,6 +25,7 @@ static dispatch_once_t oneToken;
     return instance;
 }
 - (LXObjcConvenienceBundle *)bundle {
+    LXXXLog(@"fdfdfdf%d",10);
     NSString *bundlePath = [NSBundle bundleForClass:self.class].bundlePath;
     return [[LXObjcConvenienceBundle alloc] initWithBundlePath:bundlePath bundleName:@"" path:nil];
 }

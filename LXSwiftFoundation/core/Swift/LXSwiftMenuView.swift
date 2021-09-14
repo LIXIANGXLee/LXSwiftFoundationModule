@@ -32,11 +32,7 @@ public protocol LXSwiftMenuViewDelegate: AnyObject { }
     open func dismiss() { dismissCallBack?() }
     
     open override func setupUI() {
-        self.frame = CGRect(x: 0,
-                            y: 0,
-                            width: SCREEN_WIDTH_TO_WIDTH,
-                            height: SCREEN_HEIGHT_TO_HEIGHT)
-
+        self.frame = CGRect(x: 0, y: 0, width: SCREEN_WIDTH_TO_WIDTH, height: SCREEN_HEIGHT_TO_HEIGHT)
     }
     
     /// 系统点击方法

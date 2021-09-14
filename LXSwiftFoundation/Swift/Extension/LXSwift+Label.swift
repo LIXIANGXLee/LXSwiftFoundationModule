@@ -40,4 +40,10 @@ extension LXSwiftBasics where Base: UILabel {
     
     /// 提供了设置标签属性的方便方法（颜色、字体大小、对齐方式）
    public func set(boldSize: CGFloat, textColor: String, alignment: NSTextAlignment? = nil) { set(withFont: UIFont.lx.font(withBold: boldSize), textColor: UIColor.lx.color(hex: textColor), alignment: alignment) }
+    
+    /// 提供了设置标签属性的方便方法（颜色、字体大小、对齐方式）
+    public func set(semiboldSize: CGFloat, textColor: String, alignment: NSTextAlignment? = nil) { set(withFont: UIFont.lx.font(withSemibold: semiboldSize), textColor: UIColor.lx.color(hex: textColor), alignment: alignment) }
+     
+    /// 提供了设置标签属性的方便方法（颜色、字体大小、对齐方式）
+    public func set(heavySize: CGFloat, textColor: String, alignment: NSTextAlignment? = nil) { set(withFont: UIFont.lx.font(withHeavy: heavySize), textColor: UIColor.lx.color(hex: textColor), alignment: alignment) }
 }

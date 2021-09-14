@@ -17,7 +17,7 @@ import UIKit
     /// 回调函数别名
     public typealias CallBack = ((_ imgView: LXSwiftImgView?) -> ())
 
-    ///
+    /// 事件点击回调
     open var callBack: LXSwiftImgView.CallBack?
     
     /// 是否允许交互

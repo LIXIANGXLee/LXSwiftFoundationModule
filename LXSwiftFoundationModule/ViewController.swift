@@ -29,8 +29,8 @@ class ViewController: UIViewController {
      override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "UI展示"
-            
-        print("=-=-=-=-=-=-=-=\(LXXXLog("dsdsdsdsdsd"))")
+        
+        LXXXLog("dsdsdsdsdsd")
         
         ViewController.lx_classRespond(to: #selector(btnClick(_:)))
 
@@ -41,10 +41,11 @@ class ViewController: UIViewController {
                "弹窗3",
                "弹窗4",
                "弹窗5",
-               "两段式滑动弹窗"
+               "弹窗6",
+               "两段式滑动弹窗",
+               "戴超链接的弹窗"
            ],
             [
-                "戴超链接的弹窗",
                 "wkwebview加载网页，截取长图",
                 "textview和textfield"
             ]
@@ -173,19 +174,29 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate  {
                 menu.content = view
                 menu.show()
             case 5:
+                let menu = LXSwiftMenuCenterView()
+                menu.yType = .gradual
+                let view = UIView(frame: CGRect(x: 0, y: 0, width: 260, height: 400))
+                let view1 = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
+                view1.backgroundColor = UIColor.red
+                view.addSubview(view1)
+                view.backgroundColor = UIColor.purple
+                menu.content = view
+                menu.show()
+            case 6:
                 let vc = PickerViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
+            case 7:
+                showModal()
             default: break
             }
             
         case 1:
             switch indexPath.row {
             case 0:
-                showModal()
-            case 1:
                 let vc = WebViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
-            case 2:
+            case 1:
                 self.navigationController?.pushViewController(TextViewViewController(), animated: true)
             default: break
             }
@@ -213,5 +224,4 @@ class LXTableViewViewCell: LXSwiftTableViewCell {
             titleLabel.text = textStr
         }
     }
-//    
 }

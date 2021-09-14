@@ -139,7 +139,7 @@ public func LXXXLog(_ msg: Any, _ file: NSString = #file, _ fn: String = #functi
     /// 打印日志
     fileprivate static func log(_ msg: Any, _ file: NSString, _ fn: String, _ line: Int) {
         #if DEBUG
-        print("「 DEBUG模式下打印： 」****** \(file.lastPathComponent) >> \(line) >> \(fn) >> \(msg) ******")
+        print("「 DEBUG模式下打印日志： 」****** \(file.lastPathComponent) >> \(line) >> \(fn) >> \(msg) ******")
         #endif
     }
 }

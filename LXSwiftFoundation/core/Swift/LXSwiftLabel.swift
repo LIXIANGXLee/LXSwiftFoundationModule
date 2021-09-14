@@ -50,6 +50,5 @@ import UIKit
         rect.size.height += (self.padding.top + self.padding.bottom)
         return rect
     }
-
 }
 

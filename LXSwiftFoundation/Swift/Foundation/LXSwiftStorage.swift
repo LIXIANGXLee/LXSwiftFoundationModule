@@ -34,29 +34,30 @@ public extension LXUserDefaultsProtocol where Self: RawRepresentable, Self.RawVa
 private let defaultStandard = UserDefaults.standard
 public struct LXSwiftStorage: LXSwiftCompatible {
    
+    /// 遵守协议，处理唯一标识存储
     private static let defaultStandard = UserDefaults.standard
     public static subscript(key: LXUserDefaultsProtocol) -> Any? {
         set { set(with: newValue, key: key.uniqueKey) }
         get { get(for: key.uniqueKey) }
     }
     
-    /// 存储
+    /// 基本存储
     public static func set(with value: Any?, key: String) {
         defaultStandard.set(value, forKey: key)
         defaultStandard.synchronize()
     }
     
-    /// 取值
+    /// 基本取值
     public static func get(for key: String) -> Any? { defaultStandard.object(forKey: key) }
 }
 
 /// 扩展存储 并且加密
 extension LXSwiftBasics where Base == LXSwiftStorage {
 
-    /// 存储
+    /// 基本存储
     public static func set(with value: Any?, key: String) { Base.set(with: value, key: key) }
     
-    /// 取值
+    /// 基本取值
     public static func get(for key: String) -> Any? { Base.get(for: key) }
     
 }

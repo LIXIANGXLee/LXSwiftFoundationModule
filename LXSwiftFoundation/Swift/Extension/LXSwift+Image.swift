@@ -87,7 +87,7 @@ extension LXSwiftBasics where Base: UIImage {
         path?.addClip()
         context.draw(cgImage, in: rect)
         context.restoreGState()
-        if  borderWidth < minSize, borderWidth > 0 {
+        if borderWidth < minSize, borderWidth > 0 {
             let strokeInset = floor(borderWidth * base.scale  + 0.5) / base.scale
             let strokeRect = rect.insetBy(dx: strokeInset, dy: strokeInset)
             let strokeRadius = radius > base.scale / 2 ? radius - base.scale / 2 : 0;

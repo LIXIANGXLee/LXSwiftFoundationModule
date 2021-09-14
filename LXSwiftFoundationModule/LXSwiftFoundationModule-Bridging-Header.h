@@ -4,3 +4,4 @@
 
 #import "LXObjcThreadActive.h"
 #import "TestObjcView.h"
+#import <LXSwiftFoundation/LXObjcFoundation.h>

@@ -36,6 +36,9 @@ extension LXSwiftBasics where Base == CGFloat {
     ///CGFloat转Double
     public var toDouble: Double { Double(base) }
     
+    /// CGFloat转bool
+    public var toBool: Bool { base > 0 ? true : false }
+ 
     /// 用户显示容量 (GB、MB、KB、B)
     @available(*, deprecated, renamed: "sizeFileToString")
     public var sizeFileToStr: String { sizeFileToString }
@@ -54,6 +57,9 @@ extension LXSwiftBasics where Base == CGFloat {
 //MARK: -  Extending methods for Double
 extension LXSwiftBasics where Base == Double {
     
+    /// Double转bool
+    public var toBool: Bool { base > 0 ? true : false }
+
     /// 保留小数点后的小数位
     public func roundTo(minDigits: Int = 0, maxDigits: Int = 2, mode: NumberFormatter.RoundingMode = .halfEven) -> String { NSNumber(value: base).lx.numberFormatter(with: mode, minDigits: minDigits, maxDigits: maxDigits) ?? "" }
     

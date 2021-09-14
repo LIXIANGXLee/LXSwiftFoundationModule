@@ -20,6 +20,13 @@
 #define SCALE_IPAD129_HEIGHT_TO_HEIGHT(h) [LXObjcApp flat:h * (SCREEN_HEIGHT_TO_HEIGHT / 1366)]
 #define SCALE_GET_CENTER_WIDTH_AND_WIDTH(p , c) [LXObjcApp flat:(p - c) / 2.0]
 
+/// 日志打印
+#ifdef DEBUG
+#define LXXXLog(...) NSLog(__VA_ARGS__)
+#else
+#define LXXXLog(...)
+#endif
+
 #import "UIGestureRecognizer+LXObjcAdd.h"
 #import "UIView+LXObjcPerformance.h"
 #import "LXDrawerViewController.h"
