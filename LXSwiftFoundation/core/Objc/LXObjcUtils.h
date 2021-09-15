@@ -32,8 +32,11 @@ typedef enum : NSUInteger {
 
 @interface LXObjcUtils : NSObject
 
-/// 方法交换 主要是交换方法的实现 method_getImplementation
+/// 方法交换 主要是交换对象方法的实现 method_getImplementation
 + (void)swizzleMethod:(SEL)originSel withNewMethod:(SEL)dstSel with:(Class)cls;
+
+/// 方法交换 主要是交换类方法的实现 method_getImplementation
++ (void)swizzleClassMethod:(SEL)originSel withNewClassMethod:(SEL)dstSel with:(Class)cls;
 
 /// 获取类的所有成员变量名字
 + (NSArray<NSString *> *)getAllIvars:(Class)cls;
@@ -92,10 +95,10 @@ typedef enum : NSUInteger {
 ///  是否包含表情符号
 - (BOOL)isContainsEmoji:(NSString *)string;
 
-/// 是否在主线程
+/// 判断是否在主线程
 + (BOOL)isMainThread;
 
-/// 主线程执行block
+/// 主线程执行block，如果项目有主线程操作推荐调用此方法，更有效
 + (void)executeMainForSafe:(void(^)(void)) block;
 
 /// 异步线程执行block
@@ -108,7 +111,7 @@ typedef enum : NSUInteger {
 /// 最好是使用SceneDelegate管理Window
 + (UIWindow *)getRootWindow;
 
-/// 获取最外层窗口
+/// 获取最外层窗口，并且过滤了相册授权弹起的窗口，因为关闭后Windows里面依然存在hidden的相册窗口，避免影响后续操作，特在此过滤掉
 + (UIWindow *)getLastWindow;
 
 /// 获取所有窗口
@@ -136,23 +139,25 @@ typedef enum : NSUInteger {
  */
 + (void)checkAuth:(LXObjcAuthType)type callBack:(void (*)(BOOL isPass))callBack;
 
-/** 将视频写入相册 (建议先执行方法checkAuth:(LXObjcAuthType)type callBack:(void (*)(BOOL isPass))callBack 或 checkAuth:(LXObjcAuthType)type isAlert:(BOOL)isAlert callBack:(void (*)(BOOL isPass))callBack LXObjcAuthType = LXObjcAuthTypePhoto  对相册隐私权限检测)
+/** 将视频写入相册（系统相册+自定义相册） (建议先执行方法checkAuth:(LXObjcAuthType)type callBack:(void (*)(BOOL isPass))callBack 或 checkAuth:(LXObjcAuthType)type isAlert:(BOOL)isAlert callBack:(void (*)(BOOL isPass))callBack LXObjcAuthType = LXObjcAuthTypePhoto  对相册隐私权限检测)
  * - parameter:
  * - url 视频资源
  * - collectionTitle 相册名称，相册名称为nil或者@"",则相册名是项目名
  */
-+ (void)writeVideoToAbulmWithUrl:(NSURL *)url collectionTitle:(NSString * _Nullable)collectionTitle completionHandler:(void (^)(BOOL isSuccess, NSString * _Nonnull))completionHandler API_AVAILABLE(ios(9.0));
++ (void)writeVideoToAbulmWithUrl:(NSURL *)url collectionTitle:(NSString * _Nullable)collectionTitle completionHandler:(void (^)(BOOL isSuccess, NSString *error))completionHandler API_AVAILABLE(ios(9.0));
 
-+ (void)writeVideoToAbulmWithUrl:(NSURL *)url completionHandler:(void (^)(BOOL isSuccess, NSString * _Nonnull))completionHandler API_AVAILABLE(ios(9.0));
+/// 将视频写入相册(系统相册) (建议先执行方法checkAuth:(LXObjcAuthType)type callBack:(void (*)(BOOL isPass))callBack 或 checkAuth:(LXObjcAuthType)type isAlert:(BOOL)isAlert callBack:(void (*)(BOOL isPass))callBack LXObjcAuthType = LXObjcAuthTypePhoto  对相册隐私权限检测)
++ (void)writeVideoToAbulmWithUrl:(NSURL *)url completionHandler:(void (^)(BOOL isSuccess, NSError *error, NSString *assetUrlLocalIdentifier))completionHandler API_AVAILABLE(ios(9.0));
 
-/** 将图片写入相册 (建议先执行方法checkAuth:(LXObjcAuthType)type callBack:(void (*)(BOOL isPass))callBack 或 checkAuth:(LXObjcAuthType)type isAlert:(BOOL)isAlert callBack:(void (*)(BOOL isPass))callBack LXObjcAuthType = LXObjcAuthTypePhoto  对相册隐私权限检测)
+/** 将图片写入相册（系统相册+自定义相册） (建议先执行方法checkAuth:(LXObjcAuthType)type callBack:(void (*)(BOOL isPass))callBack 或 checkAuth:(LXObjcAuthType)type isAlert:(BOOL)isAlert callBack:(void (*)(BOOL isPass))callBack LXObjcAuthType = LXObjcAuthTypePhoto  对相册隐私权限检测)
  * - parameter:
  * - image 图片资源
  * - collectionTitle 相册名称，相册名称为nil或者@"",则相册名是项目名
  */
-+ (void)writeImageToAbulmWithImage:(UIImage *)image collectionTitle:(NSString * _Nullable)collectionTitle completionHandler:(void (^)(BOOL isSuccess, NSString * _Nonnull))completionHandler API_AVAILABLE(ios(9.0));
++ (void)writeImageToAbulmWithImage:(UIImage *)image collectionTitle:(NSString * _Nullable)collectionTitle completionHandler:(void (^)(BOOL isSuccess, NSString *error))completionHandler API_AVAILABLE(ios(9.0));
 
-+ (void)writeImageToAbulmWithImage:(UIImage *)image completionHandler:(void (^)(BOOL isSuccess, NSString * _Nonnull))completionHandler API_AVAILABLE(ios(9.0));
+/// 将图片写入相册(系统相册) (建议先执行方法checkAuth:(LXObjcAuthType)type callBack:(void (*)(BOOL isPass))callBack 或 checkAuth:(LXObjcAuthType)type isAlert:(BOOL)isAlert callBack:(void (*)(BOOL isPass))callBack LXObjcAuthType = LXObjcAuthTypePhoto  对相册隐私权限检测)
++ (void)writeImageToAbulmWithImage:(UIImage *)image completionHandler:(void (^)(BOOL isSuccess, NSError *error, NSString *assetImageLocalIdentifier))completionHandler API_AVAILABLE(ios(9.0));
 
 /// 转换小写数字为大写数字 1 到 壹，2 到 贰 长度要小于19个，否则会crash闪退
 + (NSString *)convertToUppercaseNumbers:(double)number;

@@ -126,8 +126,9 @@ public extension UITableView {
 extension LXCustomRoundbackground {
     
     public func roundSwiftBackground(roundingCorners: UIRectCorner, cornerRadius: CGFloat, backgroundColor: UIColor = .white) {
-        let bounds = associatedView.bounds
+        guard let associatedView = self.associatedView else { return }
         
+        let bounds = associatedView.bounds
         let backgroundLayer = CAShapeLayer()
         let besizer = UIBezierPath(roundedRect: bounds, byRoundingCorners: roundingCorners, cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
         backgroundLayer.path = besizer.cgPath
@@ -143,14 +144,14 @@ extension LXCustomRoundbackground {
 }
 
 extension LXCustomRoundbackground where Self: UITableViewCell {
-    var associatedView: UIView {
+    var associatedView: UIView? {
         if backgroundView?.tag != tag {
             let roundView = UIView(frame: bounds)
             roundView.backgroundColor = UIColor.clear
             roundView.tag = tag
             backgroundView = roundView
         }
-        return backgroundView!
+        return backgroundView
     }
 }
 

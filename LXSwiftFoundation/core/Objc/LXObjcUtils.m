@@ -16,22 +16,44 @@
 
 @implementation LXObjcUtils
 
+/// 方法交换 主要是交换对象方法的实现 method_getImplementation
 + (void)swizzleMethod:(SEL)originSel withNewMethod:(SEL)dstSel with:(Class)cls {
-    Class class = [cls class];
-    if (class_isMetaClass(class)) { return; }
+    if (class_isMetaClass(cls)) { return; }
     
-    Method originalMethod = class_getInstanceMethod(class, originSel);
-    Method swizzledMethod = class_getInstanceMethod(class, dstSel);
+    Method originalMethod = class_getInstanceMethod(cls, originSel);
+    Method swizzledMethod = class_getInstanceMethod(cls, dstSel);
     
     // 若已经存在，则添加会失败
-    BOOL didAddMethod = class_addMethod(class,
+    BOOL didAddMethod = class_addMethod(cls,
                                         originSel,
                                         method_getImplementation(swizzledMethod),
                                         method_getTypeEncoding(swizzledMethod));
-    
     // 若原来的方法并不存在，则添加即可
     if (didAddMethod) {
-       class_replaceMethod(class,
+       class_replaceMethod(cls,
+                          dstSel,
+                          method_getImplementation(originalMethod),
+                          method_getTypeEncoding(originalMethod));
+    } else {
+       method_exchangeImplementations(originalMethod, swizzledMethod);
+    }
+}
+
+/// 方法交换 主要是交换类方法的实现 method_getImplementation
++ (void)swizzleClassMethod:(SEL)originSel withNewClassMethod:(SEL)dstSel with:(Class)cls {
+    if (!class_isMetaClass(cls)) { cls = object_getClass(cls); }
+    
+    Method originalMethod = class_getClassMethod(cls, originSel);
+    Method swizzledMethod = class_getClassMethod(cls, dstSel);
+    
+    // 若已经存在，则添加会失败
+    BOOL didAddMethod = class_addMethod(cls,
+                                        originSel,
+                                        method_getImplementation(swizzledMethod),
+                                        method_getTypeEncoding(swizzledMethod));
+    // 若原来的方法并不存在，则添加即可
+    if (didAddMethod) {
+       class_replaceMethod(cls,
                           dstSel,
                           method_getImplementation(originalMethod),
                           method_getTypeEncoding(originalMethod));
@@ -42,6 +64,8 @@
 
 /// 获取类的所有成员变量名字
 + (NSArray<NSString *> *)getAllIvars:(Class)cls {
+    if (class_isMetaClass(cls)) { return @[]; }
+
     unsigned int outCount = 0;
     Ivar *ivars = class_copyIvarList(cls, &outCount);
     NSMutableArray *mArr = [NSMutableArray array];
@@ -73,12 +97,10 @@
 
 /// 是否属于Foundation里的类 [NSURL class],[NSDate class],[NSValue class],[NSData class],[NSError class],[NSArray class],[NSDictionary class],[NSString class],[NSAttributedString class]
 + (BOOL)isClassFromFoundation:(Class)cls {
-    
     if (class_isMetaClass(cls)) { return NO; }
     
     /// 属于则直接返回 是属于Foundation的类
     if (cls == [NSObject class] || cls == [NSManagedObject class]) return YES;
-    
     static NSSet *fClasses;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -122,7 +144,6 @@
         [className hasPrefix:@"_UI"]) {
         return true;
     }
-    
     return false;
 }
 
@@ -131,9 +152,7 @@
     if (!sel) { return NO; }
     
     /// 获取类对象或者元类对象
-    if (class_respondsToSelector(cls, sel)) {
-        return YES;
-    }
+    if (class_respondsToSelector(cls, sel)) { return YES; }
 
     /// 判断是否为元类
     if (class_isMetaClass(cls)) {
@@ -147,9 +166,7 @@
 + (BOOL)isInstancesRespondToSelector:(SEL)sel with:(Class)cls {
     if (!sel) { return NO; }
 
-    if (class_respondsToSelector(cls, sel)) {
-        return YES;
-    }
+    if (class_respondsToSelector(cls, sel)) { return YES; }
     
     /// 判断是否为元类
     if (class_isMetaClass(cls)) {
@@ -164,9 +181,7 @@
     if (!sel) { return NO; }
     
     /// 获取类对象或者元类对象
-    if (class_respondsToSelector(cls, sel)) {
-        return YES;
-    }
+    if (class_respondsToSelector(cls, sel)) { return YES; }
 
     /// 判断是否为元类
     if (class_isMetaClass(cls)) {
@@ -179,6 +194,7 @@
 /// 获取实例方法的实现
 + (IMP)getInstanceMethodForSelector:(SEL)sel with:(Class)cls {
     if (!sel || class_isMetaClass(cls)) { return (IMP)0; }
+    
     return class_getMethodImplementation(cls, sel);
 }
 
@@ -186,9 +202,7 @@
 + (IMP)getClassMethodForSelector:(SEL)sel with:(Class)cls {
     if (!sel) { return (IMP)0; }
     
-    if (!class_isMetaClass(cls)) {
-        cls = object_getClass(cls);
-    }
+    if (!class_isMetaClass(cls)) { cls = object_getClass(cls); }
     return class_getMethodImplementation(cls, sel);
 }
 
@@ -287,7 +301,7 @@
                     NetworkType =  3; // 3G
                 }
             }
-        }else{
+        } else {
             if((flags & kSCNetworkReachabilityFlagsReachable) == kSCNetworkReachabilityFlagsReachable){
                 if ((flags & kSCNetworkReachabilityFlagsTransientConnection) == kSCNetworkReachabilityFlagsTransientConnection){
                     if((flags & kSCNetworkReachabilityFlagsConnectionRequired) == kSCNetworkReachabilityFlagsConnectionRequired){
@@ -380,7 +394,6 @@
 }
 
 + (void)checkAuth:(LXObjcAuthType)type callBack:(void (*)(BOOL))callBack {
-   
     __weak typeof(self)weakSelf = self;
     [LXObjcUtils executeMainForSafe:^{
         __strong typeof(weakSelf)strongSelf = weakSelf;
@@ -405,7 +418,9 @@
         if (callBack) { callBack(YES); }
     } else if (status == PHAuthorizationStatusNotDetermined) {
         [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
-            if (callBack) { callBack(status == PHAuthorizationStatusAuthorized); }
+            [LXObjcUtils executeMainForSafe:^{
+                if (callBack) { callBack(status == PHAuthorizationStatusAuthorized); }
+            }];
         }];
     }
 }
@@ -418,17 +433,16 @@
         if (isAlert) {
             if (type == AVMediaTypeAudio) {
                 [self unableAccessPermissions:@"无法访问您的麦克风权限"];
-            }else if (type == AVMediaTypeVideo){
+            } else if (type == AVMediaTypeVideo){
                 [self unableAccessPermissions:@"无法访问您的相机权限"];
             }
         }
     } else if (status == AVAuthorizationStatusDenied) {
         if (callBack) { callBack(NO); }
-
         if (isAlert) {
             if (type == AVMediaTypeAudio) {
                 [self expectAccessPermissions:@"开启麦克风权限" message:[NSString stringWithFormat:@"“%@”想访问您的麦克风，开启之后即可录音或播音", OBJC_PROJECT_NAME] ];
-            }else if (type == AVMediaTypeVideo){
+            } else if (type == AVMediaTypeVideo){
                 [self expectAccessPermissions:@"开启相机权限" message:[NSString stringWithFormat:@"“%@”想访问您的相机，开启之后即可拍照或者拍摄", OBJC_PROJECT_NAME]];
             }
         }
@@ -436,7 +450,9 @@
         if (callBack) { callBack(YES); }
     } else if (status == AVAuthorizationStatusNotDetermined) {
         [AVCaptureDevice requestAccessForMediaType:type completionHandler:^(BOOL granted) {
-            if (callBack) { callBack(granted); }
+            [LXObjcUtils executeMainForSafe:^{
+                if (callBack) { callBack(granted); }
+            }];
         }];
     }
 }
@@ -447,15 +463,13 @@
     [LXObjcUtils executeMainForSafe:^{
         __strong typeof(weakSelf)strongSelf = weakSelf;
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:@"" preferredStyle: UIAlertControllerStyleAlert];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"确定"  style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        }]];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"确定"  style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { }]];
         [[strongSelf getCurrentController] presentViewController:alertController animated:YES completion:nil];
     }];
 }
 
 /// 推荐打开权限
 +(void)expectAccessPermissions:(NSString *)title message:(NSString *)message {
-  
     __weak typeof(self)weakSelf = self;
     [LXObjcUtils executeMainForSafe:^{
         __strong typeof(weakSelf)strongSelf = weakSelf;
@@ -475,7 +489,7 @@
     if ([[UIApplication sharedApplication] canOpenURL:url]) {
         if (@available(iOS 10.0, *)){
             [[UIApplication sharedApplication] openURL:url options:@{ } completionHandler:nil];
-        }else{
+        } else {
             #pragma clang diagnostic push
             #pragma clang diagnostic ignored "-Wdeprecated-declarations"
             [[UIApplication sharedApplication] openURL:url];
@@ -540,29 +554,24 @@
     }
     if ([rootVC isKindOfClass:UITabBarController.class]) {
         currentVC = [self getCurrentVCFrom:[(UITabBarController *)rootVC selectedViewController]];
-    }else if ([rootVC isKindOfClass:UINavigationController.class]){
+    } else if ([rootVC isKindOfClass:UINavigationController.class]){
         currentVC = [self getCurrentVCFrom:[(UINavigationController *)rootVC visibleViewController]];
-    }else{
+    } else {
         currentVC = rootVC;
     }
     return currentVC;;
 }
 
-+ (void)writeVideoToAbulmWithUrl:(NSURL *)url completionHandler:(void (^)(BOOL, NSString * _Nonnull))completionHandler {
-    [self writeVideoToAbulmWithUrl:url collectionTitle:nil completionHandler:completionHandler];
-}
-
-+ (void)writeVideoToAbulmWithUrl:(NSURL *)url collectionTitle:(NSString *)collectionTitle completionHandler:(void (^)(BOOL isSuccess, NSString * _Nonnull ))completionHandler {
-    
-    __weak typeof(self)weakSelf = self;
-    [self saveVideoToSystemWithUrl:url
++ (void)writeVideoToAbulmWithUrl:(NSURL *)url collectionTitle:(NSString *)collectionTitle completionHandler:(void (^)(BOOL, NSString * _Nonnull))completionHandler {
+        __weak typeof(self)weakSelf = self;
+    [self writeVideoToAbulmWithUrl:url
                  completionHandler:^(BOOL success, NSError *error, NSString *assetUrlLocalIdentifier) {
         __strong typeof(weakSelf)strongSelf = weakSelf;
         if (success) {
-            [strongSelf saveAssetToCustomCollection:collectionTitle
+            [strongSelf writeAssetToCustomCollection:collectionTitle
                                assetLocalIdentifier:assetUrlLocalIdentifier
                                   completionHandler:completionHandler];
-        }else{
+        } else {
             [self executeMainForSafe:^{
                 if (completionHandler) {
                     completionHandler(NO, error.localizedDescription);
@@ -570,37 +579,55 @@
             }];
         }
     }];
-
 }
 
-+ (void)writeImageToAbulmWithImage:(UIImage *)image completionHandler:(void (^)(BOOL, NSString * _Nonnull))completionHandler {
-    [self writeImageToAbulmWithImage:image
-                     collectionTitle:nil
-                   completionHandler:completionHandler];
-}
-
-+ (void)writeImageToAbulmWithImage:(UIImage *)image collectionTitle:(NSString *)collectionTitle completionHandler:(void (^)(BOOL isSuccess, NSString * _Nonnull ))completionHandler {
-    
++ (void)writeImageToAbulmWithImage:(UIImage *)image collectionTitle:(NSString *)collectionTitle completionHandler:(void (^)(BOOL, NSString * _Nonnull))completionHandler {
     __weak typeof(self)weakSelf = self;
-    [self saveImageToSystemWithImage:image
+    [self writeImageToAbulmWithImage:image
                    completionHandler:^(BOOL success, NSError *error, NSString *assetImageLocalIdentifier) {
         __strong typeof(weakSelf)strongSelf = weakSelf;
         if (success){
-            [strongSelf saveAssetToCustomCollection:collectionTitle
+            [strongSelf writeAssetToCustomCollection:collectionTitle
                                assetLocalIdentifier:assetImageLocalIdentifier
                                   completionHandler:completionHandler];
-        }else{
+        } else {
             [self executeMainForSafe:^{
                 if (completionHandler) {
                     completionHandler(NO, error.localizedDescription);
                 }
             }];
         }
+    }];
+}
+
+/// 保存图片资源到系统相册
++ (void)writeImageToAbulmWithImage:(UIImage *)image completionHandler:(void (^)(BOOL, NSError * _Nonnull, NSString * _Nonnull))completionHandler {
+    __block NSString *assetImageLocalIdentifier = nil;
+    [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+        //保存图片A到"相机胶卷"中
+        if (@available(iOS 9.0, *)) {
+            assetImageLocalIdentifier = [PHAssetCreationRequest creationRequestForAssetFromImage:image].placeholderForCreatedAsset.localIdentifier;
+        }
+    } completionHandler:^(BOOL success, NSError * _Nullable error) {
+        completionHandler(success,error,assetImageLocalIdentifier);
+    }];
+}
+
+/// 保存视频资源到系统相册
++ (void)writeVideoToAbulmWithUrl:(NSURL *)url completionHandler:(void (^)(BOOL, NSError * _Nonnull, NSString * _Nonnull))completionHandler {
+    __block NSString *assetUrlLocalIdentifier = nil;
+    [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+        //保存图片A到"相机胶卷"中
+        if (@available(iOS 9.0, *)) {
+            assetUrlLocalIdentifier = [PHAssetCreationRequest creationRequestForAssetFromVideoAtFileURL:url].placeholderForCreatedAsset.localIdentifier;
+        }
+    } completionHandler:^(BOOL success, NSError * _Nullable error) {
+        completionHandler(success, error, assetUrlLocalIdentifier);
     }];
 }
 
 /// 添加资源到自定义相册
-+ (void)saveAssetToCustomCollection:(NSString * _Nullable)collectionTitle assetLocalIdentifier:(NSString *)assetLocalIdentifier completionHandler:(void (^)(BOOL isSuccess, NSString * _Nonnull error))completionHandler {
++ (void)writeAssetToCustomCollection:(NSString * _Nullable)collectionTitle assetLocalIdentifier:(NSString *)assetLocalIdentifier completionHandler:(void (^)(BOOL isSuccess, NSString * _Nonnull error))completionHandler {
     // 获得相簿
     __weak typeof(self)weakSelf = self;
     [self getAssetCollection:collectionTitle
@@ -617,41 +644,13 @@
                     }
                 }];
             }];
-        }else{
+        } else {
             [self executeMainForSafe:^{
                 if (completionHandler) {
                     completionHandler(NO, @"获取相册失败");
                 }
             }];
         }
-    }];
-}
-
-/// 保存图片资源到系统相册
-+ (void)saveImageToSystemWithImage:(UIImage *)image completionHandler:(void(^)(BOOL success, NSError *error,NSString *assetImageLocalIdentifier))completionHandler {
-    
-    __block NSString *assetImageLocalIdentifier = nil;
-    [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
-        //保存图片A到"相机胶卷"中
-        if (@available(iOS 9.0, *)) {
-            assetImageLocalIdentifier = [PHAssetCreationRequest creationRequestForAssetFromImage:image].placeholderForCreatedAsset.localIdentifier;
-        }
-    } completionHandler:^(BOOL success, NSError * _Nullable error) {
-        completionHandler(success,error,assetImageLocalIdentifier);
-    }];
-}
-
-/// 保存视频资源到系统相册
-+ (void)saveVideoToSystemWithUrl:(NSURL *)url completionHandler:(void(^)(BOOL success, NSError *error,NSString *assetUrlLocalIdentifier))completionHandler {
-    
-    __block NSString *assetUrlLocalIdentifier = nil;
-    [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
-        //保存图片A到"相机胶卷"中
-        if (@available(iOS 9.0, *)) {
-            assetUrlLocalIdentifier = [PHAssetCreationRequest creationRequestForAssetFromVideoAtFileURL:url].placeholderForCreatedAsset.localIdentifier;
-        }
-    } completionHandler:^(BOOL success, NSError * _Nullable error) {
-        completionHandler(success, error, assetUrlLocalIdentifier);
     }];
 }
 
@@ -671,7 +670,6 @@
 
 ///获取自定义相册
 + (void)getAssetCollection:(NSString * _Nullable)collectionTitle callBack:(void(^)(PHAssetCollection * __nullable assetCollection))callBack {
-    
     if (!collectionTitle || collectionTitle.length == 0) {
         collectionTitle = OBJC_PROJECT_NAME;
     }
@@ -691,9 +689,9 @@
     [[PHPhotoLibrary sharedPhotoLibrary] performChangesAndWait:^{
         assetCollectionLocalIdentifier = [PHAssetCollectionChangeRequest creationRequestForAssetCollectionWithTitle:collectionTitle].placeholderForCreatedAssetCollection.localIdentifier;
     } error:&error];
-    if (error){
+    if (error) {
         callBack(nil);
-    }else{
+    } else {
         PHAssetCollection *assetCollection = [PHAssetCollection fetchAssetCollectionsWithLocalIdentifiers:@[assetCollectionLocalIdentifier] options:nil].lastObject;
         callBack(assetCollection);
     }
@@ -814,7 +812,6 @@
 }
 
 + (NSString *)stringByTrim:(NSString *)string {
-    
     NSCharacterSet *set = [NSCharacterSet whitespaceAndNewlineCharacterSet];
     return [string stringByTrimmingCharactersInSet:set];
 }

@@ -27,7 +27,7 @@ public extension LXSwiftCellCompatible {
 public protocol LXCustomRoundbackground: AnyObject {
     
     /// 获取view的计算属性
-    var associatedView: UIView { get }
+    var associatedView: UIView? { get }
     
     /// 设置背景色和圆角
     func roundSwiftBackground(roundingCorners: UIRectCorner, cornerRadius: CGFloat, backgroundColor: UIColor)
@@ -36,5 +36,5 @@ public protocol LXCustomRoundbackground: AnyObject {
 extension LXCustomRoundbackground where Self: UIView {
     
     /// 默认实现计算属性
-    public var associatedView: UIView { return self }
+    public var associatedView: UIView? { return self }
 }

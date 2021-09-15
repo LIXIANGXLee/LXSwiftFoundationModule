@@ -29,11 +29,8 @@ class ViewController: UIViewController {
      override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "UI展示"
+       let _ = TestObjcView()
         
-        LXXXLog("dsdsdsdsdsd")
-        
-        ViewController.lx_classRespond(to: #selector(btnClick(_:)))
-
         datas = [
             [
                "弹窗1",

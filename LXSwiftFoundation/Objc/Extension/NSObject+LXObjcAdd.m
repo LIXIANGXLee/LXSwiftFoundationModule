@@ -18,6 +18,12 @@
     [LXObjcUtils swizzleMethod:originSel withNewMethod:dstSel with:cls];
 }
 
++ (void)lx_swizzleClassMethod:(SEL)originSel withNewClassMethod:(SEL)dstSel {
+    Class cls = object_getClass([self class]);
+
+    [LXObjcUtils swizzleClassMethod:originSel withNewClassMethod:dstSel with:cls];
+}
+
 /// 是否属于Foundation里的类 [NSURL class],[NSDate class],[NSValue class],[NSData class],[NSError class],[NSArray class],[NSDictionary class],[NSString class],[NSAttributedString class]
 + (BOOL)lx_isClassFromFoundation {
     Class cls = [self class];

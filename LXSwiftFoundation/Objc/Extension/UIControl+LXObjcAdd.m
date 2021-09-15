@@ -44,8 +44,7 @@ static const int block_key_control;
 - (void)lx_addBlockForControlEvents:(UIControlEvents)controlEvents block:(void (^)(id sender))block {
     if (!controlEvents) return;
     _LXObjcControlBlockTarget *target = [[_LXObjcControlBlockTarget alloc] initWithBlock:block events:controlEvents];
-    [self addTarget:target action:@selector(invokeTarget:)
-   forControlEvents:controlEvents];
+    [self addTarget:target action:@selector(invokeTarget:) forControlEvents:controlEvents];
     NSMutableArray *targets = [self _lxAllObjcControlBlocks];
     [targets addObject:target];
 }

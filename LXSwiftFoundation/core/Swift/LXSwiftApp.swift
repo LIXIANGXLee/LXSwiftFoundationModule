@@ -118,9 +118,9 @@ public func LXXXLog(_ msg: Any, _ file: NSString = #file, _ fn: String = #functi
         if statusH == 0 {
             if #available(iOS 13.0, *) {
                 statusH = rootWindow?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
-            }else if #available(iOS 11.0, *) {
+            } else if #available(iOS 11.0, *) {
                 statusH = rootWindow?.safeAreaInsets.top ?? 0
-            }else { return 20 }
+            } else { return 20 }
         }
         return statusH
     }
