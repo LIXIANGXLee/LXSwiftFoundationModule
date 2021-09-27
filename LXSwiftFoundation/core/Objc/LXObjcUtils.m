@@ -13,7 +13,7 @@
 #import <objc/runtime.h>
 
 #define OBJC_PROJECT_NAME [NSBundle mainBundle].infoDictionary[@"CFBundleDisplayName"]
-
+#define SURE_TITLE_BUTTON @"确定"
 @implementation LXObjcUtils
 
 /// 方法交换 主要是交换对象方法的实现 method_getImplementation
@@ -73,7 +73,7 @@
       Ivar ivar = ivars[i];
       const void *name = ivar_getName(ivar);
       NSString *ivarName = [NSString stringWithUTF8String:name];
-        [mArr addObject:ivarName];
+      [mArr addObject:ivarName];
     }
     // 释放资源
     free(ivars);
@@ -193,14 +193,14 @@
 
 /// 获取实例方法的实现
 + (IMP)getInstanceMethodForSelector:(SEL)sel with:(Class)cls {
-    if (!sel || class_isMetaClass(cls)) { return (IMP)0; }
+    if (!sel || class_isMetaClass(cls)) { return nil; }
     
     return class_getMethodImplementation(cls, sel);
 }
 
 /// 获得类方法的实现
 + (IMP)getClassMethodForSelector:(SEL)sel with:(Class)cls {
-    if (!sel) { return (IMP)0; }
+    if (!sel) { return nil; }
     
     if (!class_isMetaClass(cls)) { cls = object_getClass(cls); }
     return class_getMethodImplementation(cls, sel);
@@ -257,36 +257,27 @@
     
     //创建零地址，0.0.0.0的地址表示查询本机的网络连接状态
     struct sockaddr_storage zeroAddress;
-    
     bzero(&zeroAddress, sizeof(zeroAddress));
     zeroAddress.ss_len = sizeof(zeroAddress);
     zeroAddress.ss_family = AF_INET;
-    
     // Recover reachability flags
     SCNetworkReachabilityRef defaultRouteReachability = SCNetworkReachabilityCreateWithAddress(NULL, (struct sockaddr *)&zeroAddress);
     SCNetworkReachabilityFlags flags;
-    
     //获得连接的标志
     BOOL didRetrieveFlags = SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags);
     CFRelease(defaultRouteReachability);
-    
     //如果不能获取连接标志，则不能连接网络，直接返回
-    if (!didRetrieveFlags){
-        return NetworkType;
-    }
-    
+    if (!didRetrieveFlags) { return NetworkType; }
     if ((flags & kSCNetworkReachabilityFlagsConnectionRequired) == 0){
         if ((flags & kSCNetworkReachabilityFlagsReachable) != 0)
             NetworkType = 1; // WIFI
     }
-    
     if (((flags & kSCNetworkReachabilityFlagsConnectionOnDemand ) != 0) ||
         (flags & kSCNetworkReachabilityFlagsConnectionOnTraffic) != 0) {
         if ((flags & kSCNetworkReachabilityFlagsInterventionRequired) == 0){
             NetworkType = 1; // WIFI
         }
     }
-    
     if ((flags & kSCNetworkReachabilityFlagsIsWWAN) == kSCNetworkReachabilityFlagsIsWWAN){
         if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0){
             CTTelephonyNetworkInfo * info = [[CTTelephonyNetworkInfo alloc] init];
@@ -463,7 +454,7 @@
     [LXObjcUtils executeMainForSafe:^{
         __strong typeof(weakSelf)strongSelf = weakSelf;
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:@"" preferredStyle: UIAlertControllerStyleAlert];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"确定"  style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { }]];
+        [alertController addAction:[UIAlertAction actionWithTitle:[NSString stringWithFormat:@"%@",@"确定"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { }]];
         [[strongSelf getCurrentController] presentViewController:alertController animated:YES completion:nil];
     }];
 }
@@ -474,14 +465,13 @@
     [LXObjcUtils executeMainForSafe:^{
         __strong typeof(weakSelf)strongSelf = weakSelf;
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"以后再说" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [alertController addAction:[UIAlertAction actionWithTitle:[NSString stringWithFormat:@"%@",@"以后再说"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         }]];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"设置"  style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [alertController addAction:[UIAlertAction actionWithTitle:[NSString stringWithFormat:@"%@",@"设置"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [strongSelf jumpToSetting];
         }]];
         [[strongSelf getCurrentController] presentViewController:alertController animated:YES completion:nil];
     }];
-
 }
 
 + (void)jumpToSetting {
@@ -637,7 +627,6 @@
             [strongSelf addCameraAssetToAlbum:assetLocalIdentifier
                               assetCollection:assetCollection
                             completionHandler:^(BOOL success, NSError *error) {
-                
                 [self executeMainForSafe:^{
                     if (completionHandler) {
                         completionHandler(success, error.localizedDescription);

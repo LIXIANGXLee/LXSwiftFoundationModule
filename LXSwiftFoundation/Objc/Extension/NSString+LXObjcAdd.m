@@ -122,7 +122,6 @@
     return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
 
-
 - (NSString *)lx_documentFile {
     NSString * docsdir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     return [self createFilePath:[docsdir stringByAppendingPathComponent:self]];
@@ -133,7 +132,7 @@
   return [self createFilePath:[docsdir stringByAppendingPathComponent:self]];
 }
 
-- (NSString *)createFilePath:(NSString *)filePath{
+- (NSString *)createFilePath:(NSString *)filePath {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     BOOL isDir = NO;
     // fileExistsAtPath 判断一个文件或目录是否有效，isDirectory判断是否一个目录

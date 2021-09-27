@@ -50,7 +50,6 @@ import Photos
         return authStatus == .authorizedAlways || authStatus == .authorizedWhenInUse
     }
 
-    
     /// 判断系统是否支持消息推送能力
     @available(iOS 10.0, *)
     public static func isSupportNotications(_ callback: @escaping (_ isSupport: Bool) -> Void) {

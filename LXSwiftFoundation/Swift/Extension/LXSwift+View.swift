@@ -31,7 +31,7 @@ extension LXSwiftBasics where Base: UIView {
         UIGraphicsBeginImageContextWithOptions(base.bounds.size, base.isOpaque, 0)
         if isContainsWKWebView() {
             base.drawHierarchy(in: base.bounds, afterScreenUpdates: true)
-        }else{
+        } else {
             if let ctx = UIGraphicsGetCurrentContext() { base.layer.render(in: ctx) }
         }
         let snapImage = UIGraphicsGetImageFromCurrentImageContext()

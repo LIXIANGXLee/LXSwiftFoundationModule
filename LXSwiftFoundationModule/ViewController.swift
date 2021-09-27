@@ -91,6 +91,11 @@ class ViewController: UIViewController {
         let modal = LXSwiftHyperlinksModalController()
         modal.setModal(config, modalItems: [itemCancel,itemTrue]) { (text) -> (Void) in
             print("-=-=-=-=-=\(text)")
+            
+            LXObjcUtils.check(LXObjcAuthTypePhoto, isAlert: true) { (_) in
+                
+            }
+            
         }
         let r1 = LXSwiftRegexType(with: "《用户服务协议》",
                                   color: UIColor.lx.color(hex: "36acff"),

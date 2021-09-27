@@ -17,8 +17,9 @@ var window: UIWindow?
         [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
         self.window = UIWindow(frame: UIScreen.main.bounds)
+//        self.window?.rootViewController = UINavigationController(rootViewController: LXHomeViewController())
         self.window?.rootViewController = UINavigationController(rootViewController: ViewController())
-        
+
         self.window?.makeKeyAndVisible()
         
         return true

@@ -13,7 +13,7 @@ private let tag = 19920688
 @objcMembers open class LXSwiftTableView: UITableView {
         
     public typealias RecognizeSimultaneously = ((UIGestureRecognizer, UIGestureRecognizer) -> Bool)
-    public typealias ShouldBegin =  ((UIGestureRecognizer) -> Bool)
+    public typealias ShouldBegin = ((UIGestureRecognizer) -> Bool)
 
     open var shouldRecognizeSimultaneously: RecognizeSimultaneously?
     open var shouldBegin: ShouldBegin?
@@ -159,7 +159,7 @@ extension LXCustomRoundbackground where Self: UITableViewCell {
 extension LXSwiftTableView: UIGestureRecognizerDelegate {
     
     /// 您是否支持多事件传递代理
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,  shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool { shouldRecognizeSimultaneously?(gestureRecognizer, otherGestureRecognizer) ?? false }
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool { shouldRecognizeSimultaneously?(gestureRecognizer, otherGestureRecognizer) ?? false }
     
     /// 是否允许开始手势
     open override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool { shouldBegin?(gestureRecognizer) ?? super.gestureRecognizerShouldBegin(gestureRecognizer) }

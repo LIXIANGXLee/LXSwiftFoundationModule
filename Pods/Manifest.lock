@@ -1,24 +1,31 @@
 PODS:
-  - LXSwiftFoundation (8.9.1):
-    - LXSwiftFoundation/Core (= 8.9.1)
-    - LXSwiftFoundation/Objc (= 8.9.1)
-    - LXSwiftFoundation/Swift (= 8.9.1)
-  - LXSwiftFoundation/Core (8.9.1)
-  - LXSwiftFoundation/Objc (8.9.1):
+  - lottie-ios (3.2.3)
+  - LXSwiftFoundation (8.9.4):
+    - LXSwiftFoundation/Core (= 8.9.4)
+    - LXSwiftFoundation/Objc (= 8.9.4)
+    - LXSwiftFoundation/Swift (= 8.9.4)
+  - LXSwiftFoundation/Core (8.9.4)
+  - LXSwiftFoundation/Objc (8.9.4):
     - LXSwiftFoundation/Core
-  - LXSwiftFoundation/Swift (8.9.1):
+  - LXSwiftFoundation/Swift (8.9.4):
     - LXSwiftFoundation/Objc
 
 DEPENDENCIES:
+  - lottie-ios
   - LXSwiftFoundation (from `./`)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - lottie-ios
 
 EXTERNAL SOURCES:
   LXSwiftFoundation:
     :path: "./"
 
 SPEC CHECKSUMS:
-  LXSwiftFoundation: 36a2bc04db8ba1d98d89101faaf9defae1808346
+  lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
+  LXSwiftFoundation: 53079ccd771459d9ce2a6dea1595407a537ced1e
 
-PODFILE CHECKSUM: ab0b2ae47ae2b869b8504ab2668ed6b85aecc6e0
+PODFILE CHECKSUM: c2c7ce5610b694695b39c28814f2f85f7edd545d
 
 COCOAPODS: 1.11.0

@@ -9,14 +9,11 @@
 #import <Accelerate/Accelerate.h>
 
 #define Mask8(x) ( (x) & 0xFF )
-
 #define R(x) ( Mask8(x) )
 #define G(x) ( Mask8(x >> 8 ) )
 #define B(x) ( Mask8(x >> 16) )
 #define A(x) ( Mask8(x >> 24) )
-
 #define RGBAMake(r, g, b, a) (Mask8(r) | Mask8(g) << 8 | Mask8(b) << 16 | Mask8(a) << 24 )
-
 #define LX_OBJC_NIL_ISEMPTY(a) (a == nil || [a isEqual:[NSNull null]])
 
 static CGRect _LXCGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode mode) {
@@ -101,7 +98,6 @@ static CGRect _LXCGRectFitWithContentMode(CGRect rect, CGSize size, UIViewConten
     return rect;
 }
 
-
 static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef source, size_t index) {
     NSTimeInterval delay = 0;
     CFDictionaryRef dic = CGImageSourceCopyPropertiesAtIndex(source, index, NULL);
@@ -158,7 +154,6 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
     CGColorSpaceRelease(rgbColorSpace);
     CGContextRelease(context);
     CVPixelBufferUnlockBaseAddress(pxbuffer,0);
-    
     return pxbuffer;
 }
 
@@ -169,7 +164,6 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
     size_t bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer);
     size_t width = CVPixelBufferGetWidth(imageBuffer);
     size_t height = CVPixelBufferGetHeight(imageBuffer);
-    
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGContextRef context = CGBitmapContextCreate(baseAddress,
                                                  width,
@@ -184,7 +178,6 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
     CGColorSpaceRelease(colorSpace);
     CGImageRelease(quartzImage);
     CVPixelBufferUnlockBaseAddress(imageBuffer,0);
-
     return (image);
 }
 
@@ -202,7 +195,6 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
 }
 
 - (NSArray<UIImage *> *)lx_imageWithCutImageRow:(int)row column:(int)column {
-    
     if (LX_OBJC_NIL_ISEMPTY(self)) { return @[]; }
     CGImageRef imageRef = self.CGImage;
     NSMutableArray *imageArray = [NSMutableArray array];
@@ -214,7 +206,10 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
                 self.size.width/column,
                 self.size.height/row});
             UIImage *subImage = [[UIImage alloc] initWithCGImage:subRefImage];
-            [imageArray addObject:subImage];
+            if (subImage) {
+                [imageArray addObject:subImage];
+            }
+            CGImageRelease(subRefImage);
         }
     }
     return imageArray;
@@ -222,7 +217,6 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
 
 - (UIImage *)lx_imageClipCircle {
     if (LX_OBJC_NIL_ISEMPTY(self)) { return nil; }
-
     UIGraphicsBeginImageContextWithOptions(self.size, NO, 0.0);
     UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0,self.size.width,self.size.height)];
     [path addClip];
@@ -233,7 +227,6 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
 }
 
 - (UIImage *)lx_fitImageWithSize:(CGSize)size {
-    
     if (LX_OBJC_NIL_ISEMPTY(self)) { return nil; }
     if (CGSizeEqualToSize(self.size, CGSizeZero) ||
         (self.size.width <= size.width && self.size.height <= size.height)) {//不用压缩
@@ -445,7 +438,6 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
 
 - (UIImage *)lx_imageWithGrary {
     if (LX_OBJC_NIL_ISEMPTY(self)) { return nil; }
-    
     CGImageRef imageRef = self.CGImage;
     NSInteger width = CGImageGetWidth(imageRef);
     NSInteger height = CGImageGetHeight(imageRef);
@@ -528,7 +520,6 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
     CGFloat heightScale = mainImage.size.height / mainImageFrame.size.height;
     UIGraphicsBeginImageContext(CGSizeMake(mainImage.size.width, mainImage.size.height));
     [mainImage drawInRect:CGRectMake(0, 0, mainImage.size.width, mainImage.size.height)];
-    
     [subImages enumerateObjectsUsingBlock:^(UIImage * image, NSUInteger idx, BOOL * _Nonnull stop) {
         CGRect fristRect = CGRectFromString([subImageFrames objectAtIndex:idx]);
         [image drawInRect:CGRectMake(fristRect.origin.x * widthScale,
@@ -565,13 +556,11 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
 }
 
 -(UIImage *)lx_dermabrasionImageWithTouch:(UITouch *)touch view:(UIView *)view {
-    if (LX_OBJC_NIL_ISEMPTY(self)) { return nil; }
-   
+   if (LX_OBJC_NIL_ISEMPTY(self)) { return nil; }
    int whiteness = 2000;
    CGImageRef imageRef = self.CGImage;
    NSInteger width = CGImageGetWidth(imageRef);
    NSInteger height = CGImageGetHeight(imageRef);
-   
    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
    UInt32 * inputPixels = (UInt32*)calloc(width * height, sizeof(UInt32));
    CGContextRef contextRef = CGBitmapContextCreate(inputPixels,
@@ -587,7 +576,6 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
    CGFloat heightScale = height / view.frame.size.height;
    int x = ceilf(currentPoint.x * widthScale);
    int y = ceilf(currentPoint.y * heightScale);
-
    int magin = 15;
    for (int i = y - magin; i < y + magin; i ++) {
        for (int j = x - magin; j < x + magin ; j ++) {
@@ -614,7 +602,6 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
    }
    CGImageRef newImageRef = CGBitmapContextCreateImage(contextRef);
    UIImage * newImage = [UIImage imageWithCGImage:newImageRef];
-   
    CGColorSpaceRelease(colorSpaceRef);
    CGContextRelease(contextRef);
    CGImageRelease(newImageRef);
@@ -652,12 +639,10 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
     CGRect rect = CGRectMake(0, 0, self.size.width, self.size.height);
     CGContextScaleCTM(context, 1, -1);
     CGContextTranslateCTM(context, 0, -rect.size.height);
-    
     CGFloat minSize = MIN(self.size.width, self.size.height);
     if (borderWidth < minSize / 2) {
         UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectInset(rect, borderWidth, borderWidth) byRoundingCorners:corners cornerRadii:CGSizeMake(radius, borderWidth)];
         [path closePath];
-        
         CGContextSaveGState(context);
         [path addClip];
         CGContextDrawImage(context, rect, self.CGImage);
@@ -670,20 +655,17 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
         CGFloat strokeRadius = radius > self.scale / 2 ? radius - self.scale / 2 : 0;
         UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:strokeRect byRoundingCorners:corners cornerRadii:CGSizeMake(strokeRadius, borderWidth)];
         [path closePath];
-        
         path.lineWidth = borderWidth;
         path.lineJoinStyle = borderLineJoin;
         [borderColor setStroke];
         [path stroke];
     }
-    
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return image;
 }
 
 - (UIImage *)lx_imageWithOrientation {
-    
     if (self.imageOrientation == UIImageOrientationUp) { return self; }
     CGAffineTransform transform = CGAffineTransformIdentity;
     switch (self.imageOrientation) {
@@ -705,7 +687,6 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
         default:
             break;
     }
-    
     switch (self.imageOrientation) {
         case UIImageOrientationUpMirrored:
         case UIImageOrientationDownMirrored:
@@ -750,7 +731,6 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
     size_t height = (size_t)CGImageGetHeight(self.CGImage);
     CGRect newRect = CGRectApplyAffineTransform(CGRectMake(0., 0., width, height),
                                                 fitSize ? CGAffineTransformMakeRotation(radians) : CGAffineTransformIdentity);
-    
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGContextRef context = CGBitmapContextCreate(NULL,
                                                  (size_t)newRect.size.width,
@@ -761,14 +741,11 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
                                                  kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedFirst);
     CGColorSpaceRelease(colorSpace);
     if (!context) return nil;
-    
     CGContextSetShouldAntialias(context, true);
     CGContextSetAllowsAntialiasing(context, true);
     CGContextSetInterpolationQuality(context, kCGInterpolationHigh);
-    
     CGContextTranslateCTM(context, +(newRect.size.width * 0.5), +(newRect.size.height * 0.5));
     CGContextRotateCTM(context, radians);
-    
     CGContextDrawImage(context, CGRectMake(-(width * 0.5), -(height * 0.5), width, height), self.CGImage);
     CGImageRef imgRef = CGBitmapContextCreateImage(context);
     UIImage *img = [UIImage imageWithCGImage:imgRef scale:self.scale orientation:self.imageOrientation];
@@ -786,13 +763,9 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
     CGContextRef context = CGBitmapContextCreate(NULL, width, height, 8, bytesPerRow, colorSpace, kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedFirst);
     CGColorSpaceRelease(colorSpace);
     if (!context) return nil;
-    
     CGContextDrawImage(context, CGRectMake(0, 0, width, height), self.CGImage);
     UInt8 *data = (UInt8 *)CGBitmapContextGetData(context);
-    if (!data) {
-        CGContextRelease(context);
-        return nil;
-    }
+    if (!data) { CGContextRelease(context); return nil; }
     vImage_Buffer src = { data, height, width, bytesPerRow };
     vImage_Buffer dest = { data, height, width, bytesPerRow };
     if (vertical) {
@@ -832,9 +805,7 @@ static NSTimeInterval _LXCGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef s
 }
 
 - (NSUInteger)lx_imageCost {
-    
     if (LX_OBJC_NIL_ISEMPTY(self)) return 1;
-        
     CGImageRef cgImage = self.CGImage;
     if (!cgImage) return 1;
     CGFloat height = CGImageGetHeight(cgImage);

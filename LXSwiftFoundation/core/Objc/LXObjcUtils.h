@@ -60,10 +60,10 @@ typedef enum : NSUInteger {
 + (BOOL)isClassRespondToSelector:(SEL)sel with:(Class)cls;
 
 /// 获取实例方法的实现
-+ (IMP)getInstanceMethodForSelector:(SEL)sel with:(Class)cls;
++ (IMP _Nullable)getInstanceMethodForSelector:(SEL)sel with:(Class)cls;
 
 /// 获得类方法的实现
-+ (IMP)getClassMethodForSelector:(SEL)sel with:(Class)cls;
++ (IMP _Nullable)getClassMethodForSelector:(SEL)sel with:(Class)cls;
 
 /** 版本升级 版本比较大小
  

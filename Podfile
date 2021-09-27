@@ -8,6 +8,7 @@ target 'LXSwiftFoundationModule' do
   use_frameworks!
 
   pod 'LXSwiftFoundation', :path => './'
+  pod 'lottie-ios'
 
 #  pod 'SDWebImage'
   # Pods for LXSwiftFoundationModule
