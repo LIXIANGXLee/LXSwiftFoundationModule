@@ -1,5 +1,5 @@
 //
-//  LXTextLable.swift
+//  LXSwiftTextLable.swift
 //  LXSwiftFoundation
 //
 //  Created by Mac on 2020/5/1.
@@ -9,7 +9,7 @@
 import UIKit
 
 ///用于区分背景色的唯一标识符
-private let linkBgTag = 1234994321
+private let linkBgTag = 1992990313
 @objc public protocol LXTextLableDelegate: AnyObject {
     
     /// 点击长链接时回调

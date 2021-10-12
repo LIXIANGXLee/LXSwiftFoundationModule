@@ -27,7 +27,7 @@ import UIKit
  
     open override var content: UIView? {
         didSet {
-            guard let content = content else {return}
+            guard let content = content else { return }
             addSubview(content)
         }
     }

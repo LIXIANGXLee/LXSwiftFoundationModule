@@ -25,7 +25,7 @@ extension LXSwiftBasics where Base: NSNumber {
 extension NSNumber {
     
     /// 四舍五入应该保留多少小数位 maxDigits：保留几个小数位
-     func numberFormatter(with mode: NumberFormatter.RoundingMode = .halfEven, minDigits: Int = 0, maxDigits:Int = 0) -> String? {
+    internal func numberFormatter(with mode: NumberFormatter.RoundingMode = .halfEven, minDigits: Int = 0, maxDigits:Int = 0) -> String? {
         let formate = NumberFormatter()
         formate.numberStyle = NumberFormatter.Style.decimal
         formate.groupingSeparator = ","

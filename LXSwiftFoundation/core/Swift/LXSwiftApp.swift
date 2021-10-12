@@ -42,7 +42,7 @@ public func SCALE_IPAD129_HEIGHT_TO_HEIGHT(_ distance: CGFloat) -> CGFloat { LXS
 public func SCALE_GET_CENTER_WIDTH_AND_WIDTH(_ parent: CGFloat, _ child: CGFloat) -> CGFloat { LXSwiftApp.flat((parent - child) / 2.0) }
 
 /// DEBU模式下日志打印简单封装，打印日志快捷函数 
-public func LXXXLog(_ msg: Any, _ file: NSString = #file, _ fn: String = #function, _ line: Int = #line) { LXSwiftApp.log(msg, file, fn, line) }
+public func LXXXLog(_ msg: Any, _ file: String = #file, _ fn: String = #function, _ line: Int = #line) { LXSwiftApp.log(msg, file, fn, line) }
 
 // MARK: - LXSwftApp const
 /// define app const
@@ -137,9 +137,9 @@ public func LXXXLog(_ msg: Any, _ file: NSString = #file, _ fn: String = #functi
     }
     
     /// 打印日志
-    fileprivate static func log(_ msg: Any, _ file: NSString, _ fn: String, _ line: Int) {
+    fileprivate static func log(_ msg: Any, _ file: String, _ fn: String, _ line: Int) {
         #if DEBUG
-        print("「 DEBUG模式下打印日志： 」****** \(file.lastPathComponent) >> \(line) >> \(fn) >> \(msg) ******")
+        print("「 DEBUG模式下打印日志： 」****** \((file as NSString).lastPathComponent) >> \(line) >> \(fn) >> \(msg) ******")
         #endif
     }
 }

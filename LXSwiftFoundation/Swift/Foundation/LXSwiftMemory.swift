@@ -2,11 +2,11 @@
 //  LXSwiftMemory.swift
 //  LXSwiftFoundation
 //
-//  Created by 李响 on 2021/9/18.
+//  Created by 李响 on 2020/9/18. mj的swift的课程内存管理章节总结
 
 import UIKit
 
-private let LXSwift_EMPTY_PTR = UnsafeRawPointer(bitPattern: 0x1)!
+private let LXSWIFT_EMPTY_PTR = UnsafeRawPointer(bitPattern: 0x1)!
 
 public enum LXSwiftMemoryAlign: Int {
     case one   = 1
@@ -25,19 +25,24 @@ public enum LXSwiftMemoryType: UInt8 {
 public struct LXSwiftMemory<T> {
     
     /// 获得变量所占用的内存大小
+    @inline(__always)
     public static func size(ofVal v: inout T) -> Int { MemoryLayout.size(ofValue: v) > 0 ? MemoryLayout.stride(ofValue: v) : 0 }
     
     /// 获得引用所指向内存的大小
+    @inline(__always)
     public static func size(ofRef v: T) -> Int { malloc_size(ptr(ofRef: v)) }
    
     /// 获得变量的内存数据（字节数组格式）
+    @inline(__always)
     public static func memoryBytes(ofVal v: inout T) -> [UInt8] { _memoryBytes(ptr(ofVal: &v), size(ofVal: &v)) }
     
     /// 获得引用所指向的内存数据（字节数组格式）
+    @inline(__always)
     public static func memoryBytes(ofRef v: T) -> [UInt8] { _memoryBytes(ptr(ofRef: v), size(ofRef: v)) }
     
     /// 获得变量的内存数据（字符串格式）
     /// - Parameter alignment: 决定了多少个字节为一组
+    @inline(__always)
     public static func memoryStr(ofVal v: inout T, alignment: LXSwiftMemoryAlign? = nil) -> String {
         let p = ptr(ofVal: &v)
         let s = size(ofVal: &v)
@@ -48,6 +53,7 @@ public struct LXSwiftMemory<T> {
     /// 获得引用所指向的内存数据（字符串格式）
     ///
     /// - Parameter alignment: 决定了多少个字节为一组
+    @inline(__always)
     public static func memoryStr(ofRef v: T, alignment: LXSwiftMemoryAlign? = nil) -> String {
         let p = ptr(ofRef: v)
         let s = size(ofRef: v)
@@ -56,25 +62,27 @@ public struct LXSwiftMemory<T> {
     }
     
     /// 获得变量的内存地址
-    public static func ptr(ofVal v: inout T) -> UnsafeRawPointer { MemoryLayout.size(ofValue: v) == 0 ? LXSwift_EMPTY_PTR : withUnsafePointer(to: &v) { UnsafeRawPointer($0) } }
+    @inline(__always)
+    public static func ptr(ofVal v: inout T) -> UnsafeRawPointer { MemoryLayout.size(ofValue: v) == 0 ? LXSWIFT_EMPTY_PTR : withUnsafePointer(to: &v) { UnsafeRawPointer($0) } }
     
     /// 获得引用所指向内存的地址
+    @inline(__always)
     public static func ptr(ofRef v: T) -> UnsafeRawPointer {
         if v is Array<Any> || Swift.type(of: v) is AnyClass || v is AnyClass {
             return UnsafeRawPointer(bitPattern: unsafeBitCast(v, to: UInt.self))!
         } else if v is String {
             var mstr = v as! String
-            if mstr._type() != .heap { return LXSwift_EMPTY_PTR }
+            if mstr._type() != .heap { return LXSWIFT_EMPTY_PTR }
             return UnsafeRawPointer(bitPattern: unsafeBitCast(v, to: (UInt, UInt).self).1)!
         } else {
-            return LXSwift_EMPTY_PTR
+            return LXSWIFT_EMPTY_PTR
         }
     }
 }
 
 extension LXSwiftMemory {
     fileprivate static func _memoryStr(_ ptr: UnsafeRawPointer, _ size: Int, _ aligment: Int) ->String {
-        if ptr == LXSwift_EMPTY_PTR { return "" }
+        if ptr == LXSWIFT_EMPTY_PTR { return "" }
         var rawPtr = ptr
         var string = ""
         let fmt = "0x%0\(aligment << 1)lx"
@@ -101,7 +109,7 @@ extension LXSwiftMemory {
     
     fileprivate static func _memoryBytes(_ ptr: UnsafeRawPointer, _ size: Int) -> [UInt8] {
         var arr: [UInt8] = []
-        if ptr == LXSwift_EMPTY_PTR { return arr }
+        if ptr == LXSWIFT_EMPTY_PTR { return arr }
         for i in 0..<size { arr.append((ptr + i).load(as: UInt8.self)) }
         return arr
     }

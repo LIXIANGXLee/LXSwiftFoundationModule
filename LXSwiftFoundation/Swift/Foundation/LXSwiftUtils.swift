@@ -24,24 +24,31 @@ import AVFoundation
     public static var getNetWorkType: String { UIDevice.lx.getNetWorkType }
     
     /// 两个版本比较大小 big: one > two, small: two < one,equal: one == two
+    @inline(__always)
     public static func versionCompareOc(v1: String, v2: String) -> LXSwiftUtils.CompareResult { LXSwiftUtils.compareResult(Int(LXObjcUtils.compareVersion(withV1: v1, v2: v2))) }
     
     /// 两个版本比较大小 big: one > two, small: two < one, equal: one == two
+    @inline(__always)
     public static func versionCompareSwift(v1: String, v2: String) -> LXSwiftUtils.CompareResult { LXSwiftUtils.compareResult(v1.compare(v2).rawValue) }
     
     /// 打电话
+    @inline(__always)
     public static func openTel(with number: String?, _ tellCallBack: LXSwiftUtils.TellCallBack? = nil) {
         if let number = number, let url = URL(string: "tel:" + number) {
             if UIApplication.lx.isCanOpen(url) { UIApplication.lx.openUrl(url) }
         }
     }
+    
     /// 将度换为弧度转
+    @inline(__always)
     public static func degreesToRadians(_ radians: CGFloat) -> CGFloat { LXObjcUtils.degrees(toRadians: radians) }
     
     /// 将弧度转换为度
+    @inline(__always)
     public static func radiansToDegrees(_ toDegrees: CGFloat) -> CGFloat  { LXObjcUtils.radians(toDegrees: toDegrees) }
 
     /// 在小数点后保留几个有效数字
+    @inline(__always)
     public static func formatDecimalString(with text: String, digits: Int,  mode: NumberFormatter.RoundingMode = .down) -> String {
         guard let m = Double(text) else { return text }
         let number = NSNumber(value: m)
@@ -49,15 +56,19 @@ import AVFoundation
     }
 
     /// 小数点后保留二位有效数字
+    @inline(__always)
     public static func formatDecimalStringTwo(with text: String) -> String { formatDecimalString(with: text, digits: 2) }
     
     /// 小数点后保留三位有效数字
+    @inline(__always)
     public static func formatDecimalStringThree(with text: String) -> String { formatDecimalString(with: text, digits: 3) }
     
     /// 小数点后保留四位有效数字
+    @inline(__always)
     public static func formatDecimalStringFour(with text: String) -> String { formatDecimalString(with: text, digits: 4) }
     
     /// 从路径看plist变换字典
+    @inline(__always)
     public static func readDictionary(with path: String?) -> Dictionary<String, Any>? {
         guard let path = path else { return nil }
         let url = URL(fileURLWithPath: path)
@@ -66,9 +77,11 @@ import AVFoundation
     }
     
     /// 转换小写数字为大写数字 1 到 壹，2 到 贰 长度要小于19个，否则会crash闪退
+    @inline(__always)
     public static func convert(toUppercaseNumbers number: Double) -> String { LXObjcUtils.convert(toUppercaseNumbers: number) }
     
     /// 识别二维码图片
+    @inline(__always)
     public static func getQrCodeString(with image: UIImage?) -> String? {
         let context = CIContext(options: nil)
         let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: context, options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])
@@ -79,6 +92,7 @@ import AVFoundation
     }
     
     /// 异步获取二维码信息
+    @inline(__always)
     public static func async_getQrCodeString(with image: UIImage?, complete: @escaping (String?) -> ()) {
         DispatchQueue.global().async{
             let async_qrString = self.getQrCodeString(with: image)
@@ -87,6 +101,7 @@ import AVFoundation
     }
     
     /// 创建二维码图像
+    @inline(__always)
     public static func getQrCodeImage(with qrCodeStr: String?, size: CGFloat = 800) -> UIImage? {
         let filter = CIFilter(name: "CIQRCodeGenerator")
         filter?.setDefaults()
@@ -97,6 +112,7 @@ import AVFoundation
     }
     
     /// 异步创建二维码图像
+    @inline(__always)
     public static func async_getQrCodeImage(with qrCodeStr: String?, size: CGFloat = 800, complete: @escaping (UIImage?) -> ()) {
         DispatchQueue.global().async{
             let async_qrImage = self.getQrCodeImage(with: qrCodeStr, size: size)
@@ -105,6 +121,7 @@ import AVFoundation
     }
     
     /// 播放本地短暂的语音
+    @inline(__always)
     @available(iOS 9.0, *)
     public static func playSound(with filepath: String?, completion: (() -> ())? = nil) {
         guard let string = filepath, string.count > 0 else { return }
@@ -113,37 +130,43 @@ import AVFoundation
         AudioServicesCreateSystemSoundID(fileUrl as CFURL, &soundID)
         AudioServicesPlaySystemSound(soundID)
         AudioServicesPlaySystemSoundWithCompletion(soundID, {
-            completion?()
             AudioServicesDisposeSystemSoundID(soundID)
+            completion?()
         })
     }
     
     /// 已经进入
+    @inline(__always)
     public static func didBecomeActive(_ observer: Any, selector aSelector: Selector) {
         NotificationCenter.default.addObserver(observer, selector: aSelector, name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     
     /// 即将退出
+    @inline(__always)
     public static func willResignActive(_ observer: Any, selector aSelector: Selector) {
         NotificationCenter.default.addObserver(observer, selector: aSelector, name: UIApplication.willResignActiveNotification, object: nil)
     }
     
     /// 监听键盘即将弹起
+    @inline(__always)
     public static func keyboardWillShow(_ observer: Any, selector aSelector: Selector) {
         NotificationCenter.default.addObserver(observer, selector: aSelector, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
     /// 监听键盘已经弹起
+    @inline(__always)
     public static func keyboardDidShow(_ observer: Any, selector aSelector: Selector) {
         NotificationCenter.default.addObserver(observer, selector: aSelector, name: UIResponder.keyboardDidShowNotification, object: nil)
     }
     
     /// 监听键盘即将退下
+    @inline(__always)
     public static func keyboardWillHide(_ observer: Any, selector aSelector: Selector) {
         NotificationCenter.default.addObserver(observer, selector: aSelector, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     /// 监听键盘已经退下
+    @inline(__always)
     public static func keyboardDidHide(_ observer: Any, selector aSelector: Selector) {
         NotificationCenter.default.addObserver(observer, selector: aSelector, name: UIResponder.keyboardDidHideNotification, object: nil)
     }
@@ -153,6 +176,7 @@ import AVFoundation
 extension LXSwiftUtils {
     
     /// 根据int值获取枚举值
+    @inline(__always)
     private static func compareResult(_ ret: Int) -> LXSwiftUtils.CompareResult {
         switch ret {
         case 0: return .equal
@@ -171,7 +195,8 @@ extension LXSwiftUtils {
         let width = extent.width * scale;
         let height = extent.height * scale;
         let colorSpace = CGColorSpaceCreateDeviceGray();
-        guard let bitmapRef = CGContext(data: nil, width: Int(width),
+        guard let bitmapRef = CGContext(data: nil,
+                                        width: Int(width),
                                         height: Int(height),
                                         bitsPerComponent: 8,
                                         bytesPerRow: 0,

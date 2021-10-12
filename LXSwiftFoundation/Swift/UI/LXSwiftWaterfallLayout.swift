@@ -39,14 +39,14 @@ extension LXSwiftWaterfallLayout {
     
     open override func prepare() {
         super.prepare()
-        guard let c = collectionView else { return }
+        guard let cView = collectionView else { return }
 
         // 获取item的个数
-        let itemCount = c.numberOfItems(inSection: 0)
+        let itemCount = cView.numberOfItems(inSection: 0)
         // 获取列数
         let cols = dataSource?.numberOfColsInWaterfallLayout(self) ?? 2
         // 计算Item的宽度
-        let itemW = (c.bounds.width - self.sectionInset.left - self.sectionInset.right - self.minimumInteritemSpacing) / CGFloat(cols)
+        let itemW = (cView.bounds.width - self.sectionInset.left - self.sectionInset.right - self.minimumInteritemSpacing) / CGFloat(cols)
         
         // 计算所有的item的属性
         for i in startIndex..<itemCount {

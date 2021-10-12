@@ -42,12 +42,14 @@ public struct LXSwiftStorage: LXSwiftCompatible {
     }
     
     /// 基本存储
+    @inline(__always)
     public static func set(with value: Any?, key: String) {
         defaultStandard.set(value, forKey: key)
         defaultStandard.synchronize()
     }
     
     /// 基本取值
+    @inline(__always)
     public static func get(for key: String) -> Any? { defaultStandard.object(forKey: key) }
 }
 
@@ -55,9 +57,11 @@ public struct LXSwiftStorage: LXSwiftCompatible {
 extension LXSwiftBasics where Base == LXSwiftStorage {
 
     /// 基本存储
+    @inline(__always)
     public static func set(with value: Any?, key: String) { Base.set(with: value, key: key) }
     
     /// 基本取值
+    @inline(__always)
     public static func get(for key: String) -> Any? { Base.get(for: key) }
     
 }

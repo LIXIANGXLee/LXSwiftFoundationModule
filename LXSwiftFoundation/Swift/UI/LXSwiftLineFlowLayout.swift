@@ -31,13 +31,13 @@ public protocol LXSwiftLineFlowLayoutDelegate: AnyObject {
     }
     
     open override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-         guard let c = collectionView else { return [] }
+         guard let cView = collectionView else { return [] }
          var attsArray: [UICollectionViewLayoutAttributes] = []
          if let aArray = super.layoutAttributesForElements(in: rect) {
-            let centerX = c.frame.size.width / 2 + c.contentOffset.x
+            let centerX = cView.frame.size.width / 2 + cView.contentOffset.x
             for attribute in aArray {
                 let offsetX = abs(attribute.center.x - centerX)
-                let scale = 1 - (offsetX/c.frame.size.width * 0.3)
+                let scale = 1 - (offsetX / cView.frame.size.width * 0.3)
                 attribute.transform = CGAffineTransform(scaleX: scale, y: scale)
                 attsArray.append(attribute)
             }
@@ -46,14 +46,14 @@ public protocol LXSwiftLineFlowLayoutDelegate: AnyObject {
     }
     
     open override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
-        guard let c = collectionView else { return CGPoint.zero }
+        guard let cView = collectionView else { return CGPoint.zero }
         var contentOffset = CGPoint(x: proposedContentOffset.x, y: proposedContentOffset.y)
         var rect = CGRect.zero
         rect.origin.y = 0
         rect.origin.x = contentOffset.x
-        rect.size = c.frame.size
+        rect.size = cView.frame.size
         if let attsArray = super.layoutAttributesForElements(in: rect) {
-            let centerX = contentOffset.x + c.frame.size.width / 2
+            let centerX = contentOffset.x + cView.frame.size.width / 2
             var minSpace = MAXFLOAT
             for attrs in attsArray {
                 if abs(minSpace) > Float(abs(attrs.center.x - centerX)) {
@@ -67,10 +67,10 @@ public protocol LXSwiftLineFlowLayoutDelegate: AnyObject {
     }
     
     open override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-        guard let c = collectionView else { return true }
-        guard let pInViewPoint =  c.superview?.convert(c.center,
+        guard let cView = collectionView else { return true }
+        guard let pInViewPoint = cView.superview?.convert(cView.center,
             to: self.collectionView) else { return true }
-        guard let indexPathNow = c.indexPathForItem(at: pInViewPoint) else { return true }
+        guard let indexPathNow = cView.indexPathForItem(at: pInViewPoint) else { return true }
         if index != indexPathNow.row {
             index = indexPathNow.row
             delegate?.lineFlowLayout?(self, index)

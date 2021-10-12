@@ -10,7 +10,7 @@ target 'LXSwiftFoundationModule' do
   pod 'LXSwiftFoundation', :path => './'
   pod 'lottie-ios'
 
-#  pod 'SDWebImage'
+  #  pod 'SDWebImage'
   # Pods for LXSwiftFoundationModule
   
 end

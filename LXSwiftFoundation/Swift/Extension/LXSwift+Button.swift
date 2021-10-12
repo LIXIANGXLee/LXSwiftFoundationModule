@@ -48,11 +48,11 @@ extension LXSwiftBasics where Base: UIButton {
     /// button的宽度
     public var bestWidth: CGFloat { base.sizeThatFits(CGSize.zero).width }
     
-    ///  button的高度
+    /// button的高度
     public var bestHeight: CGFloat { base.sizeThatFits(CGSize.zero).height }
     
     /// 提供了一种设置uibutton属性的方便方法 （字体大小、字体颜色）
-    public func set(font: UIFont, titleColor: UIColor?) {
+    public func set(font: UIFont, titleColor: UIColor? = nil) {
         base.titleLabel?.font = font
         if let titleColor = titleColor { base.setTitleColor(titleColor, for: .normal) }
     }

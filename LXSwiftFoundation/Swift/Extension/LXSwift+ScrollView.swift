@@ -83,8 +83,7 @@ extension UIScrollView {
     /// 根据偏移量和页数绘制，此方法是一个图形，其中可能有递归调用
     func snapShotContentScrollPage(index: Int, maxIndex: Int, callback: @escaping () -> Void) {
         
-        self.setContentOffset(CGPoint(x: 0,
-               y: CGFloat(index) * self.frame.size.height), animated: false)
+        self.setContentOffset(CGPoint(x: 0, y: CGFloat(index) * self.frame.size.height), animated: false)
         let splitFrame = CGRect(x: 0,
                                 y: CGFloat(index) * self.frame.size.height,
                                 width: bounds.size.width,

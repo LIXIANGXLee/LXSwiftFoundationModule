@@ -8,12 +8,12 @@
 
 import UIKit
 
-private let tag = 19920688
+private let tag = 1991880313
 @objc(LXObjcTableView)
 @objcMembers open class LXSwiftTableView: UITableView {
         
     public typealias RecognizeSimultaneously = ((UIGestureRecognizer, UIGestureRecognizer) -> Bool)
-    public typealias ShouldBegin = ((UIGestureRecognizer) -> Bool)
+    public typealias ShouldBegin = ((UIGestureRecognizer) -> Bool?)
 
     open var shouldRecognizeSimultaneously: RecognizeSimultaneously?
     open var shouldBegin: ShouldBegin?
@@ -46,7 +46,6 @@ private let tag = 19920688
     open func setShouldRecognizeSimultaneously(_ callBack: RecognizeSimultaneously?) { self.shouldRecognizeSimultaneously = callBack }
     
     /// 是否允许开始手势
-    @objc(setObjcShouldBegin:)
     open func setShouldBegin(_ callBack: ShouldBegin?) { self.shouldBegin = callBack }
 }
 

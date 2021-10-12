@@ -18,6 +18,7 @@ import Photos
     public static var isSupportCamera: Bool { AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == .authorized }
 
     /// 请求相机权限
+    @inline(__always)
     public static func authVideo(_ completion: @escaping (Bool) -> ()) {
         AVCaptureDevice.requestAccess(for: AVMediaType.video) { (granted) in
             DispatchQueue.main.async { completion(granted) }
@@ -28,6 +29,7 @@ import Photos
     public static var isSupportPhotoAlbum: Bool { PHPhotoLibrary.authorizationStatus() == .authorized }
     
     /// 请求相册权限
+    @inline(__always)
     public static func authAlbum(_ completion: @escaping (Bool) -> ()) {
         PHPhotoLibrary.requestAuthorization { (status) in
             DispatchQueue.main.async { completion(status == .authorized) }
@@ -38,6 +40,7 @@ import Photos
     public static var isSupportAudio: Bool { AVCaptureDevice.authorizationStatus(for: AVMediaType.audio) == .authorized }
     
     /// 请求麦克风权限
+    @inline(__always)
     public static func authAudio(_ completion: @escaping (Bool) -> ()) {
         AVCaptureDevice.requestAccess(for: AVMediaType.audio) { (granted) in
             DispatchQueue.main.async { completion(granted) }
@@ -52,6 +55,7 @@ import Photos
 
     /// 判断系统是否支持消息推送能力
     @available(iOS 10.0, *)
+    @inline(__always)
     public static func isSupportNotications(_ callback: @escaping (_ isSupport: Bool) -> Void) {
         UNUserNotificationCenter.current().getNotificationSettings { (setting) in
             DispatchQueue.main.async { callback(setting.authorizationStatus != .denied) }
@@ -60,6 +64,7 @@ import Photos
     
     /// 请求推送权限
     @available(iOS 10.0, *)
+    @inline(__always)
     public static func regisiterRemoteNotications(_ completion: @escaping (Bool) -> ()) {
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .badge, .sound], completionHandler: { (isSuccess, error) in

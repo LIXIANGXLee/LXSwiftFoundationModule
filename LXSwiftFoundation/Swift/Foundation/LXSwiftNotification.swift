@@ -61,12 +61,14 @@ private var notificationCallBackKey: Void?
 extension NotificationCenter {
     
     /// 添加观察者 Selector
+    @inline(__always)
     public class func addObserver<T: Codable>(_ observer: Any, selector aSelector: Selector, notification: LXSwiftNotification<T>) {
         NotificationCenter.default.addObserver(observer,
              selector: aSelector, name: notification.name, object: nil)
     }
     
     /// 移除通知监听
+    @inline(__always)
     public class func lx_removeObserver(_ observer: Any) {
         NotificationCenter.default.removeObserver(observer)
     }

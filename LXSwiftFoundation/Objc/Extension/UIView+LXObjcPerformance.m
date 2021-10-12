@@ -15,12 +15,12 @@
 // Global observer object
 static CFRunLoopObserverRef currentObserver;
 
--(void)setLx_maxTaskPerformedCount:(int)lx_maxTaskPerformedCount {
+-(void)setLx_maxTaskPerformedCount:(NSInteger)lx_maxTaskPerformedCount {
     objc_setAssociatedObject(self, @selector(lx_maxTaskPerformedCount), @(lx_maxTaskPerformedCount), OBJC_ASSOCIATION_ASSIGN);
 }
 
-- (int)lx_maxTaskPerformedCount {
-    return (int)objc_getAssociatedObject(self, _cmd);
+- (NSInteger)lx_maxTaskPerformedCount {
+    return (NSInteger)objc_getAssociatedObject(self, _cmd);
 }
 
 - (void)setLx_timer:(NSTimer * _Nullable)lx_timer {
@@ -82,7 +82,7 @@ static CFRunLoopObserverRef currentObserver;
     }
     
     [self.tasks addObject:task];
-    int maxTaskCount = self.lx_maxTaskPerformedCount ? self.lx_maxTaskPerformedCount : 10;
+    NSInteger maxTaskCount = self.lx_maxTaskPerformedCount ? self.lx_maxTaskPerformedCount : 10;
     if (self.tasks.count > maxTaskCount) {
         [self.tasks removeObjectAtIndex:0];
     }

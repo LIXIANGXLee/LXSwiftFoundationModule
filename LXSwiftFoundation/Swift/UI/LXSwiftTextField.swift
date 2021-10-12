@@ -33,7 +33,7 @@ import UIKit
         let newBounds = super.textRect(forBounds: bounds)
         if let textRectInsert = textRectInsert {
             return newBounds.inset(by: textRectInsert)
-        }else{ return newBounds }
+        } else { return newBounds }
     }
     
     public override init(frame: CGRect) {

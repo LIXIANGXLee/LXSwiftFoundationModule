@@ -15,7 +15,7 @@ typedef void (^ObjcRunloopBlock)(void);
 @interface UIView (LXObjcPerformance)
 
 /// 当前页面显示具有tableviewcell max count或uicollectionviewcell max count的最大图片数
-@property(nonatomic, assign)int lx_maxTaskPerformedCount;
+@property(nonatomic, assign)NSInteger lx_maxTaskPerformedCount;
 
 /// 只读定时器属性
 @property(nonatomic, readonly, nullable)NSTimer *lx_timer;

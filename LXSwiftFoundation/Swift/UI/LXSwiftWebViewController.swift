@@ -39,7 +39,7 @@ open class LXSwiftWebViewController: UIViewController {
     
     fileprivate var spinner: UIActivityIndicatorView!
     fileprivate var progressView: UIProgressView!
-    fileprivate var methodTs = [LXSwiftMethod]()
+    fileprivate var methods = [LXSwiftMethod]()
     
     // MARK: - Customize the root view -- recommended when the entire page is a WebView or image
     public fileprivate(set) lazy var webView: WKWebView = {
@@ -62,7 +62,7 @@ open class LXSwiftWebViewController: UIViewController {
     
     override open func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(self.webView)
+        view.addSubview(webView)
         setUI()
         addObserver()
     }
@@ -71,9 +71,9 @@ open class LXSwiftWebViewController: UIViewController {
         webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress))
         webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.title))
         webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.url))
-        for methodT in methodTs {
-            let vc =  webView.configuration.userContentController
-            vc.removeScriptMessageHandler(forName: methodT.method)
+        methods.forEach { method in
+            let vc = webView.configuration.userContentController
+            vc.removeScriptMessageHandler(forName: method.method)
         }
     }
 }
@@ -99,22 +99,22 @@ extension LXSwiftWebViewController {
     }
     
     /// load webView h5
-    open func noticeWebviewShareResult(with javaScriptString: String, completionHandler: ((Any?, Error?) -> Void)? = nil) {
+    open func evaluateJavaScript(with javaScriptString: String, completionHandler: ((Any?, Error?) -> Void)? = nil) {
         webView.evaluateJavaScript(javaScriptString, completionHandler: completionHandler)
     }
     
     /// add js call back
     @available(iOS 8.0, *)
     open func jsMethod(with method: String, handel: @escaping (Any) -> ()) {
-        for methodT in methodTs { assert(methodT.method == method, "不能重复添加相同名称") }
-        self.methodTs.append(LXSwiftMethod(method: method, handel: handel))
+        for m in methods { assert(m.method == method, "不能重复添加相同名称") }
+        self.methods.append(LXSwiftMethod(method: method, handel: handel))
         let vc = webView.configuration.userContentController
         vc.add(LXSwiftWeakScriptMessageDelegate(self), name: method)
     }
     
     /// Snap Shot 截图
     @available(iOS 11.0, *)
-    open func takeSnapShot(with rect: CGRect = CGRect(x: 0, y: 0, width: LXSwiftApp.screenW, height: LXSwiftApp.screenH), handel: @escaping (UIImage) -> ()) {
+    open func snapShot(with rect: CGRect = CGRect(x: 0, y: 0, width: LXSwiftApp.screenW, height: LXSwiftApp.screenH), handel: @escaping (UIImage) -> ()) {
         let config = WKSnapshotConfiguration()
         config.rect = rect
         webView.takeSnapshot(with: config) { (image, error) in
@@ -129,10 +129,10 @@ extension LXSwiftWebViewController {
         webView.configuration.websiteDataStore.httpCookieStore.getAllCookies {
             cookies in
             var results = [HTTPCookie]()
-            for cookie in cookies{
+            cookies.forEach { [weak self] cookie in
                 if cookie.name == string{
-                    self.webView.configuration.websiteDataStore.httpCookieStore.delete(cookie)
-                }else{ results.append(cookie) }
+                    self?.webView.configuration.websiteDataStore.httpCookieStore.delete(cookie)
+                } else { results.append(cookie) }
             }
             handle(results)
         }
@@ -142,9 +142,8 @@ extension LXSwiftWebViewController {
     public func clearBrowserCache(handle: ((String) -> ())?) {
         let dataSouce = WKWebsiteDataStore.default()
         dataSouce.fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { (records) in
-            for record in records {
-                let ds = WKWebsiteDataStore.default()
-                ds.removeData(ofTypes: record.dataTypes, for: [record]) { handle?("清除成功\(record)") }
+            records.forEach { record in
+                WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record]) { handle?("清除成功\(record)") }
             }
         }
     }
@@ -153,8 +152,8 @@ extension LXSwiftWebViewController {
 // MARK: - WKScriptMessageHandler
 extension LXSwiftWebViewController: WKScriptMessageHandler {
     open func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        for methodT in methodTs {
-            if methodT.method == message.name { methodT.handel(message.body) }
+        methods.forEach { method in
+            if method.method == message.name { method.handel(message.body) }
         }
     }
 }
@@ -191,19 +190,19 @@ extension LXSwiftWebViewController {
     
     /// 实时获取加载进度的值
     override open func observeValue(forKeyPath keyPath: String?,of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == #keyPath(WKWebView.estimatedProgress){
+        if keyPath == #keyPath(WKWebView.estimatedProgress) {
             progressView.progress = Float(webView.estimatedProgress)
-        }else if keyPath == #keyPath(WKWebView.title) {
+        } else if keyPath == #keyPath(WKWebView.title) {
             guard let t = webView.title else { return }
             self.loadWebViewTitle?(t)
-        }else if keyPath == #keyPath(WKWebView.url) {
+        } else if keyPath == #keyPath(WKWebView.url) {
             guard let u = webView.url else { return }
             self.loadWebViewUrl?(u)
         }
     }
     
     /// 执行JS代码——也称为注入JavaScript
-    fileprivate func handleJS(){
+    fileprivate func handleJS() {
         webView.evaluateJavaScript("document.body.offsetHeight") { (res, error) in
             guard let height = res as? Int else { return }
             self.loadWebViewContentHeight?(Float(height))
@@ -212,7 +211,7 @@ extension LXSwiftWebViewController {
 }
 
 // MARK: - WKNavigationDelegate Some hook functions from request to response
-extension LXSwiftWebViewController: WKNavigationDelegate{
+extension LXSwiftWebViewController: WKNavigationDelegate {
     
     ///决定是否在当前文件夹中加载网站，WebView（例如，当加载包含动态URL时），主要基于一级信息的请求
     open func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
@@ -259,7 +258,7 @@ extension LXSwiftWebViewController: WKNavigationDelegate{
 
 // MARK: - WKUIDelegate It is mainly used to convert the
 //         three pop-up boxes of the website into IOS native pop-up boxes
-extension LXSwiftWebViewController: WKUIDelegate{
+extension LXSwiftWebViewController: WKUIDelegate {
     
     /// 闭包：用作参数的函数，非转义关闭-默认：执行后释放外围功能，Escape closure-@escaping:执行外围功能后，其引用仍由其他对象保留，
     /// 不会被释放，失控的闭包对于内存管理是有风险的——除非您知道，否则请谨慎使用

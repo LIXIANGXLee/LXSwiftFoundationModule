@@ -34,10 +34,11 @@ import UIKit
     }
     
     /// 开启定时器 倒计时
+    @inline(__always)
     public static func startCountDown(maxInterval: TimeInterval = 60,
                                       interval: TimeInterval = 1,
                                       identified: String?,
-                                      task: ((Int)->())?){
+                                      task: ((Int)->())?) {
         var total = maxInterval
         startTimer(with: 0, interval: interval, repeats: true, identified: identified) {
             total -= 1
@@ -47,6 +48,7 @@ import UIKit
     }
     
     /// 取消GCD定时器
+    @inline(__always)
     public static func cancel(with identified: String?) {
         guard let iden = identified else { return }
         if let timer = LXSwiftGCDTimer.timers[iden] {

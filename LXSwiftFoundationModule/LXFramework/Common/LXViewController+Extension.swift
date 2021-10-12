@@ -10,7 +10,6 @@ import UIKit
 
 extension UIViewController {
     
-    
     /// 判断当前控制器是否为一级界面
     public var isFirstLevelPage: Bool {
         return (self as? LXFirstLevelPage) != nil

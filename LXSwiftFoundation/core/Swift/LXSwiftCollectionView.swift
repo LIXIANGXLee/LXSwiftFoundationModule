@@ -12,7 +12,7 @@ import UIKit
 @objcMembers open class LXSwiftCollectionView: UICollectionView {
     
     public typealias RecognizeSimultaneously = ((UIGestureRecognizer, UIGestureRecognizer) -> Bool)
-    public typealias ShouldBegin = ((UIGestureRecognizer) -> Bool)
+    public typealias ShouldBegin = ((UIGestureRecognizer) -> Bool?)
 
     open var shouldRecognizeSimultaneously: RecognizeSimultaneously?
     open var shouldBegin: ShouldBegin?
@@ -39,7 +39,6 @@ import UIKit
     open func setShouldRecognizeSimultaneously(_ callBack: RecognizeSimultaneously?) { self.shouldRecognizeSimultaneously = callBack }
     
     /// 是否允许开始手势
-    @objc(setObjcShouldBegin:)
     open func setShouldBegin(_ callBack: ShouldBegin?) { self.shouldBegin = callBack }
 }
 

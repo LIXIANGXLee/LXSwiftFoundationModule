@@ -95,7 +95,7 @@ extension LXSwiftHyperlinksModalController {
     }
     
     /// 显示UI图层
-    @objc open func show(with title: String, content: NSAttributedString) {
+    @objc open func show(with title: String, content: NSAttributedString, vc: UIViewController? = nil) {
         titleLabel.text = title
         contentView.layer.cornerRadius = self.modaConfig.contentViewRadius
         contentView.lx.width = modaConfig.contentViewW
@@ -140,7 +140,9 @@ extension LXSwiftHyperlinksModalController {
             contentView.lx.height = lineView.frame.maxY
         }
         contentView.lx.y = (SCREEN_HEIGHT_TO_HEIGHT - contentView.lx.height) * 0.5 + modaConfig.contentViewOffSet
-        UIApplication.lx.visibleViewController?.present(self, animated: true, completion: nil)
+        
+       let currentVC = vc ?? UIApplication.lx.visibleViewController
+       currentVC?.present(self, animated: true, completion: nil)
     }
     
    fileprivate func getTitleH() -> CGFloat {

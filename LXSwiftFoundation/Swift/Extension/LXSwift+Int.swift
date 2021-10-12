@@ -160,7 +160,7 @@ extension LXSwiftBasics where Base == Int {
                 let date = base.lx.timeStampToDate()
                 if date.lx.isThisYear {
                     return date.lx.dateTranformString(with: "MM月dd日 HH:mm")
-                }else{
+                } else {
                     return date.lx.dateTranformString(with: "yyyy年MM月dd日 HH:mm")
                 }
             } else { return "\(days)天前" }
