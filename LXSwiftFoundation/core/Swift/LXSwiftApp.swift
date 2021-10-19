@@ -44,11 +44,12 @@ public func SCALE_GET_CENTER_WIDTH_AND_WIDTH(_ parent: CGFloat, _ child: CGFloat
 /// DEBU模式下日志打印简单封装，打印日志快捷函数 
 public func LXXXLog(_ msg: Any, _ file: String = #file, _ fn: String = #function, _ line: Int = #line) { LXSwiftApp.log(msg, file, fn, line) }
 
+private let applicationShared = UIApplication.shared
 // MARK: - LXSwftApp const
 /// define app const
 @objc(LXObjcApp)
 @objcMembers public final class LXSwiftApp: NSObject {
-        
+
     ///判断是否为iphone5（排除iphone4以外）Judge whether the mobile phone is iPhone 5
     public static var isIphone5 = LXSwiftApp.screenW == 320.0
 
@@ -93,34 +94,88 @@ public func LXXXLog(_ msg: Any, _ file: String = #file, _ fn: String = #function
      *  例如传进来 “2.1”，在 2x 倍数下会返回 2.5（0.5pt 对应 1px）在 3x 倍数下会返回 2.333（0.333pt 对应 1px）。
      */
     public static func flat(_ value: CGFloat) -> CGFloat { ceil(value * LXSwiftApp.screenScale) / LXSwiftApp.screenScale }
-
+   
+    @available(iOS 13.0, *)
+    public static var windowScenes: [UIWindowScene] {
+        applicationShared.connectedScenes
+            .filter({$0.activationState == .foregroundActive})
+            .map({$0 as? UIWindowScene}).compactMap({$0})
+    }
+    
     /// 获取跟窗口
     public static var rootWindow: UIWindow? {
+        var window: UIWindow? = applicationShared.windows.first
         if #available(iOS 13.0, *) {
-            if let window = UIApplication.shared.connectedScenes
-                   .filter({$0.activationState == .foregroundActive})
-                   .map({$0 as? UIWindowScene})
-                   .compactMap({$0})
-                   .first?.windows
-                   .filter({$0.isKeyWindow}).first {
-                   return window
-            }else {
-                return UIApplication.shared.delegate?.window ?? UIApplication.shared.windows.first
+            for s in windowScenes {
+                for w in s.windows where w.isMember(of: UIWindow.self) {
+                    window = w
+                    break
+                }
+            }
+        }
+        return window
+    }
+    
+    /**
+       定制化获取最外层窗口 需要判断不是UIRemoteKeyboardWindow才行，否则在ipad会存在问题，同时也排除了自定义的UIWindow的子类问题
+     */
+    public static var scheduledLastWindow: UIWindow? {
+        var window: UIWindow?
+        if #available(iOS 13.0, *) {
+            for s in windowScenes {
+                for w in s.windows.reversed() where w.isMember(of: UIWindow.self) {
+                    if let c = NSClassFromString("UIRemoteKeyboardWindow"), !w.isMember(of: c.self) {
+                        window = w
+                        break
+                    }
+                }
             }
         } else {
-               return UIApplication.shared.delegate?.window ?? UIApplication.shared.windows.first
+            for w in applicationShared.windows.reversed() where w.isMember(of: UIWindow.self) {
+                if let c = NSClassFromString("UIRemoteKeyboardWindow"), !w.isMember(of: c.self) {
+                    window = w
+                    break
+                }
+            }
         }
+        return window
     }
-
+    
+    /// 获取最外层窗口 需要判断不是UIRemoteKeyboardWindow才行，否则在ipad会存在问题
+    public static var lastWindow: UIWindow? {
+        var window: UIWindow?
+        if #available(iOS 13.0, *) {
+            for s in windowScenes {
+                for w in s.windows.reversed() {
+                    if let c = NSClassFromString("UIRemoteKeyboardWindow"), !w.isMember(of: c.self) {
+                        window = w
+                        break
+                    }
+                }
+            }
+        } else {
+            for w in applicationShared.windows.reversed() {
+                if let c = NSClassFromString("UIRemoteKeyboardWindow"), !w.isMember(of: c.self) {
+                    window = w
+                    break
+                }
+            }
+        }
+        return window
+    }
+    
     /// 获取状态栏高度
     private static var statusBarHeight: CGFloat {
-        var statusH: CGFloat = UIApplication.shared.statusBarFrame.height
+        var statusH = applicationShared.statusBarFrame.height
+        if #available(iOS 13.0, *){
+            statusH = rootWindow?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+        }
         if statusH == 0 {
-            if #available(iOS 13.0, *) {
-                statusH = rootWindow?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
-            } else if #available(iOS 11.0, *) {
-                statusH = rootWindow?.safeAreaInsets.top ?? 0
-            } else { return 20 }
+            if #available(iOS 11.0, *) {
+                statusH = rootWindow?.safeAreaInsets.top ?? 20
+            } else {
+                statusH = 20
+            }
         }
         return statusH
     }
@@ -131,7 +186,6 @@ public func LXXXLog(_ msg: Any, _ file: String = #file, _ fn: String = #function
         if #available(iOS 11.0, *) {
             touchBarH =
                rootWindow?.safeAreaInsets.bottom ?? 0
-            if touchBarH == 0 && Int(statusBarH) > 20 { touchBarH = 34 }
         }
         return touchBarH
     }

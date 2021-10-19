@@ -53,20 +53,11 @@ extension LXSwiftBasics where Base: UIApplication {
     /// 获取跟窗口
     public static var rootWindow: UIWindow? { LXSwiftApp.rootWindow }
     
+    /// 定制化获取最外层窗口 需要判断不是UIRemoteKeyboardWindow才行，否则在ipad会存在问题，同时也排除了自定义的UIWindow的子类问题
+    public static var scheduledLastWindow: UIWindow? { LXSwiftApp.scheduledLastWindow }
+    
     /// 获取最外层窗口 需要判断不是UIRemoteKeyboardWindow才行，否则在ipad会存在问题
-    public static var lastWindow: UIWindow? {
-        let windows = applicationShared.windows
-        var window: UIWindow?
-        for i in (0..<windows.count).reversed() {
-            if let c = NSClassFromString("UIRemoteKeyboardWindow") {
-                if !windows[i].isKind(of: c) {
-                    window = windows[i]
-                    break
-                }
-             }
-        }
-        return window
-    }
+    public static var lastWindow: UIWindow? { LXSwiftApp.lastWindow }
     
     /// 打开url
     public static func openUrl(_ urlStr: String, completionHandler: ((Bool) -> Void)? = nil) {
