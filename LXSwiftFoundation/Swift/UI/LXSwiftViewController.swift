@@ -12,6 +12,8 @@ open class LXSwiftViewController: UIViewController {
     open override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
+        setupUI()
+        setupViewModel()
     }
     
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -31,4 +33,9 @@ open class LXSwiftViewController: UIViewController {
     
     /// 暗黑模式 和亮模式切换时调用
     open func setUIDidChange(_ style: LXSwiftUserInterfaceStyle) { }
+}
+
+extension LXSwiftViewController: LXSwiftUIProtocol {
+    @objc open func setupUI() { }
+    @objc open func setupViewModel() { }
 }

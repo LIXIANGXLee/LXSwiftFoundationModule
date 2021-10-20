@@ -11,6 +11,9 @@ extension URL: LXSwiftCompatible { }
 
 extension LXSwiftBasics where Base == URL {
     
+    /// 根据url获取视频的size
+    public var videoSize: CGSize? { LXSwiftUtils.videoSize(with: base) }
+    
     /// 取出Get请求中的参数，结果是一个大字典
     public var urlParams1: [String: String] {
         let components = NSURLComponents(url: base, resolvingAgainstBaseURL: false)
@@ -33,9 +36,7 @@ extension LXSwiftBasics where Base == URL {
                 let paramsArray = paramsStr.components(separatedBy: "&")
                 paramsArray.forEach { (param) in
                     let arr = param.components(separatedBy: "=")
-                    if arr.count == 2 {
-                        params[arr[0]] = arr[1]
-                    }
+                    if arr.count == 2 { params[arr[0]] = arr[1] }
                 }
             }
         }
@@ -52,8 +53,7 @@ extension LXSwiftBasics where Base == URL {
         for component in queryComponents {
             let items = component.components(separatedBy: equalChar)
             guard items.count == 2 else { continue }
-            guard let firstItem = items.first,
-                  let lastItem = items.last else { continue }
+            guard let firstItem = items.first, let lastItem = items.last else { continue }
             let queryPair = [firstItem: lastItem]
             queries.append(queryPair)
         }

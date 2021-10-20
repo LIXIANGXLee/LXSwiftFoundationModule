@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-@objc(LXOCUtils)
+@objc(LXObjcSUtils)
 @objcMembers public final class LXSwiftUtils: NSObject {
     public typealias TellCallBack = ((Bool) -> ())
     
@@ -135,13 +135,23 @@ import AVFoundation
         })
     }
     
-    /// 已经进入
+    
+    /// 根据url获取视频的size
+    @inline(__always)
+    public static func videoSize(with url: URL) -> CGSize? {
+        AVURLAsset(url: url)
+        .tracks
+        .filter { $0.mediaType == .video }
+        .first?.naturalSize
+    }
+    
+    /// 已经进入App
     @inline(__always)
     public static func didBecomeActive(_ observer: Any, selector aSelector: Selector) {
         NotificationCenter.default.addObserver(observer, selector: aSelector, name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     
-    /// 即将退出
+    /// 即将退出App
     @inline(__always)
     public static func willResignActive(_ observer: Any, selector aSelector: Selector) {
         NotificationCenter.default.addObserver(observer, selector: aSelector, name: UIApplication.willResignActiveNotification, object: nil)

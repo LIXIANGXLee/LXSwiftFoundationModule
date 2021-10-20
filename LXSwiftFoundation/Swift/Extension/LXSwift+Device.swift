@@ -81,9 +81,7 @@ extension LXSwiftBasics where Base: UIDevice {
        guard let total = diskSpace, let free  = diskSpaceFree else { return nil }
         if total <= 0 || free <= 0 { return nil }
         let used = total - free
-        if used <= 0 {
-            return nil
-        } else { return used }
+        if used <= 0 { return nil } else { return used }
     }
     
     /// 获取内存大小

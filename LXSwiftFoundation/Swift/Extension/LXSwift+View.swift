@@ -26,6 +26,9 @@ extension LXSwiftBasics where Base: UIView {
     /// 获取跟窗口
     public var rootWindow: UIWindow? { UIApplication.lx.rootWindow }
     
+    /// 获取定制化跟窗口
+    public static var scheduledLastWindow: UIWindow? { UIApplication.lx.scheduledLastWindow }
+   
     /// view截图
     public var snapShotImage: UIImage? {
         UIGraphicsBeginImageContextWithOptions(base.bounds.size, base.isOpaque, 0)

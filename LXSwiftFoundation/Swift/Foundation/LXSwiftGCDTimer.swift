@@ -9,7 +9,7 @@
 import UIKit
 
 // MARK: - timer（GCD）
-@objc(LXOCGCDTimer)
+@objc(LXObjcSGCDTimer)
 @objcMembers public final class LXSwiftGCDTimer: NSObject {
     
     public typealias TaskCallBack = (() -> Void)

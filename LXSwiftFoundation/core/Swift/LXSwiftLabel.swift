@@ -16,26 +16,22 @@ import UIKit
     @objc(objcModel) open var swiftModel: Any?
    
     private var padding = UIEdgeInsets.zero
-    @IBInspectable
-    open var paddingLeft: CGFloat {
+    @IBInspectable open var paddingLeft: CGFloat {
        get { padding.left }
        set { padding.left = newValue }
     }
    
-    @IBInspectable
-    open var paddingRight: CGFloat {
+    @IBInspectable open var paddingRight: CGFloat {
        get { padding.right }
        set { padding.right = newValue }
     }
    
-    @IBInspectable
-    open var paddingTop: CGFloat {
+    @IBInspectable open var paddingTop: CGFloat {
        get { padding.top }
        set { padding.top = newValue }
     }
    
-    @IBInspectable
-    open var paddingBottom: CGFloat {
+    @IBInspectable open var paddingBottom: CGFloat {
        get { padding.bottom }
        set { padding.bottom = newValue }
     }

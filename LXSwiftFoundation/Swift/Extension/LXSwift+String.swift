@@ -181,8 +181,8 @@ extension LXSwiftBasics where Base == String {
     
     /// 在小数点后保留几个有效数字
     public func formatDecimalString(by digits: Int) -> String {
-        guard let m =  Double(base) else { return base }
-        return NSNumber(value: m).numberFormatter(with: .down, minDigits: digits, maxDigits: digits) ?? base
+        guard let mValue =  Double(base) else { return base }
+        return NSNumber(value: mValue).numberFormatter(with: .down, minDigits: digits, maxDigits: digits) ?? base
     }
     
     /// 小数点后保留两个有效数字。

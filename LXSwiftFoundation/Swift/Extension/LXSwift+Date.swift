@@ -10,6 +10,7 @@ import UIKit
 
 extension Date: LXSwiftCompatible { }
 
+private let LXCalendar = Calendar.current
 //MARK: -  Extending methods for Date
 extension LXSwiftBasics where Base == Date {
     
@@ -21,10 +22,10 @@ extension LXSwiftBasics where Base == Date {
     }
     
     /// 日期和日期比较
-    public func dateCompare(with date: Date, unit: Set<Calendar.Component> = [.year,.month,.day]) -> (DateComponents,DateComponents) { (Calendar.current.dateComponents(unit, from: base), Calendar.current.dateComponents(unit, from: date)) }
+    public func dateCompare(with date: Date, unit: Set<Calendar.Component> = [.year,.month,.day]) -> (DateComponents,DateComponents) { (LXCalendar.dateComponents(unit, from: base), LXCalendar.dateComponents(unit, from: date)) }
     
     /// 获取两个日期之间的数据
-    public func componentCompare(from date: Date, unit: Set<Calendar.Component> = [.year,.month,.day]) -> DateComponents { Calendar.current.dateComponents(unit, from: date, to: base) }
+    public func componentCompare(from date: Date, unit: Set<Calendar.Component> = [.year,.month,.day]) -> DateComponents { LXCalendar.dateComponents(unit, from: date, to: base) }
     
     /// 获取两个日期之间的天数
     public func numberOfDays(from date: Date) -> Int? { componentCompare(from: date, unit: [.day]).day }
@@ -44,17 +45,17 @@ extension LXSwiftBasics where Base == Date {
     
     /// 获取时间戳
     public var timeInterval: TimeInterval { base.timeIntervalSince1970 }
-    public var year: Int { NSCalendar.current.component(.year, from: base) }
-    public var month: Int { NSCalendar.current.component(.month, from: base) }
-    public var day: Int { NSCalendar.current.component(.day, from: base) }
-    public var hour: Int { NSCalendar.current.component(.hour, from: base) }
-    public var minute: Int { NSCalendar.current.component(.minute, from: base) }
-    public var second: Int { NSCalendar.current.component(.second, from: base) }
-    public var nanosecond: Int { NSCalendar.current.component(.nanosecond, from: base) }
-    public var weekday: Int { NSCalendar.current.component(.weekday, from: base) }
-    public var weekOfMonth: Int { NSCalendar.current.component(.weekOfMonth, from: base) }
-    public var weekOfYear: Int { NSCalendar.current.component(.weekOfYear, from: base) }
-    public var quarter: Int { NSCalendar.current.component(.quarter, from: base) }
+    public var year: Int { LXCalendar.component(.year, from: base) }
+    public var month: Int { LXCalendar.component(.month, from: base) }
+    public var day: Int { LXCalendar.component(.day, from: base) }
+    public var hour: Int { LXCalendar.component(.hour, from: base) }
+    public var minute: Int { LXCalendar.component(.minute, from: base) }
+    public var second: Int { LXCalendar.component(.second, from: base) }
+    public var nanosecond: Int { LXCalendar.component(.nanosecond, from: base) }
+    public var weekday: Int { LXCalendar.component(.weekday, from: base) }
+    public var weekOfMonth: Int { LXCalendar.component(.weekOfMonth, from: base) }
+    public var weekOfYear: Int { LXCalendar.component(.weekOfYear, from: base) }
+    public var quarter: Int { LXCalendar.component(.quarter, from: base) }
  
     /// 是否是今年
     public var isThisYear: Bool {
