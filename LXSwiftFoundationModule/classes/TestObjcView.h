@@ -15,9 +15,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TestObjcView : UIView
-{
-    NSString *str;
-}
+
 @end
 
 NS_ASSUME_NONNULL_END

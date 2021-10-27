@@ -1,13 +1,13 @@
 PODS:
   - lottie-ios (3.2.3)
-  - LXSwiftFoundation (8.9.5):
-    - LXSwiftFoundation/Core (= 8.9.5)
-    - LXSwiftFoundation/Objc (= 8.9.5)
-    - LXSwiftFoundation/Swift (= 8.9.5)
-  - LXSwiftFoundation/Core (8.9.5)
-  - LXSwiftFoundation/Objc (8.9.5):
+  - LXSwiftFoundation (8.9.8):
+    - LXSwiftFoundation/Core (= 8.9.8)
+    - LXSwiftFoundation/Objc (= 8.9.8)
+    - LXSwiftFoundation/Swift (= 8.9.8)
+  - LXSwiftFoundation/Core (8.9.8)
+  - LXSwiftFoundation/Objc (8.9.8):
     - LXSwiftFoundation/Core
-  - LXSwiftFoundation/Swift (8.9.5):
+  - LXSwiftFoundation/Swift (8.9.8):
     - LXSwiftFoundation/Objc
 
 DEPENDENCIES:
@@ -24,8 +24,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
-  LXSwiftFoundation: c226c4e3310233706f45cc8952d1f743b36b798e
+  LXSwiftFoundation: fd27f69d3a48ab22bccb21344850694fa88d2d2c
 
 PODFILE CHECKSUM: f3307fd78a43cea9a91c7cd7ef01e37844f678ae
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2

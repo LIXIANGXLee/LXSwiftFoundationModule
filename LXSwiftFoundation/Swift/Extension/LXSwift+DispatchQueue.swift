@@ -80,4 +80,16 @@ extension LXSwiftBasics where Base: DispatchQueue {
     @available(*, deprecated, message:"Use asyncAfter(with delay:,_ callBack:)")
     public func after(with delay: TimeInterval, execute closure: @escaping () -> Void) { asyncAfter(with: delay, closure) }
 
+    /// 在主线程执行任务
+    public func asyncSafeMain(_ execute: @escaping () -> ()) {
+        if Thread.current.isMainThread {
+            execute()
+        } else {
+            DispatchQueue.main.async(execute: execute)
+        }
+    }
+    
+    /// 子线程执行任务
+    public func asyncSafeGlobal(_ execute: @escaping () -> ()) { DispatchQueue.global(qos: .default).async(execute: execute) }
+
 }

@@ -9,25 +9,25 @@
 import UIKit
 
 /// 自定义运算符
-prefix operator ~>  /// 大于
-prefix operator ~<  /// 小于
-prefix operator ~>= /// 大于等于
-prefix operator ~<= /// 小于等于
+prefix operator ~~>  /// 大于
+prefix operator ~~<  /// 小于
+prefix operator ~~>= /// 大于等于
+prefix operator ~~<= /// 小于等于
 
-public prefix func ~>  (_ index: Int32) -> (Int32) -> (Bool) { { $0 >  index } }
-public prefix func ~>= (_ index: Int32) -> (Int32) -> (Bool) { { $0 >= index } }
-public prefix func ~<  (_ index: Int32) -> (Int32) -> (Bool) { { $0 <  index } }
-public prefix func ~<= (_ index: Int32) -> (Int32) -> (Bool) { { $0 <= index } }
+public prefix func ~~>  (_ index: Int32) -> (Int32) -> (Bool) { { $0 >  index } }
+public prefix func ~~>= (_ index: Int32) -> (Int32) -> (Bool) { { $0 >= index } }
+public prefix func ~~<  (_ index: Int32) -> (Int32) -> (Bool) { { $0 <  index } }
+public prefix func ~~<= (_ index: Int32) -> (Int32) -> (Bool) { { $0 <= index } }
 
-public prefix func ~>  (_ index: Int64) -> (Int64) -> (Bool) { { $0 >  index } }
-public prefix func ~>= (_ index: Int64) -> (Int64) -> (Bool) { { $0 >= index } }
-public prefix func ~<  (_ index: Int64) -> (Int64) -> (Bool) { { $0 <  index } }
-public prefix func ~<= (_ index: Int64) -> (Int64) -> (Bool) { { $0 <= index } }
+public prefix func ~~>  (_ index: Int64) -> (Int64) -> (Bool) { { $0 >  index } }
+public prefix func ~~>= (_ index: Int64) -> (Int64) -> (Bool) { { $0 >= index } }
+public prefix func ~~<  (_ index: Int64) -> (Int64) -> (Bool) { { $0 <  index } }
+public prefix func ~~<= (_ index: Int64) -> (Int64) -> (Bool) { { $0 <= index } }
 
-public prefix func ~>  (_ index: Int) -> (Int) -> (Bool) { { $0 >  index } }
-public prefix func ~>= (_ index: Int) -> (Int) -> (Bool) { { $0 >= index } }
-public prefix func ~<  (_ index: Int) -> (Int) -> (Bool) { { $0 <  index } }
-public prefix func ~<= (_ index: Int) -> (Int) -> (Bool) { { $0 <= index } }
+public prefix func ~~>  (_ index: Int) -> (Int) -> (Bool) { { $0 >  index } }
+public prefix func ~~>= (_ index: Int) -> (Int) -> (Bool) { { $0 >= index } }
+public prefix func ~~<  (_ index: Int) -> (Int) -> (Bool) { { $0 <  index } }
+public prefix func ~~<= (_ index: Int) -> (Int) -> (Bool) { { $0 <= index } }
 
 extension Int32: LXSwiftCompatible {
    
@@ -148,11 +148,11 @@ extension LXSwiftBasics where Base == Int {
         let current = Date().lx.timeInterval
         let timeDiff = Int(current) - base
         switch timeDiff {
-        case ~<60:
+        case ~~<60:
             return "刚刚"
-        case ~<3600:
+        case ~~<3600:
             return "\(timeDiff / 60)分钟前"
-        case ~<(24 * 3600):
+        case ~~<(24 * 3600):
             return "\(timeDiff / 3600)小时前"
         default:
             let days = timeDiff / (24 * 3600)

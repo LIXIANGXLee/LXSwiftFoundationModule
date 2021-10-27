@@ -19,8 +19,9 @@ public extension LXSwiftUIProtocol {
     func setupUI() { }
     func setupViewModel() { }
 }
-
-open class LXSwiftView: UIView {
+ 
+@objc(LXObjcView)
+@objcMembers open class LXSwiftView: UIView {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)

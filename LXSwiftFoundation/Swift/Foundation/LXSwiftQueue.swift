@@ -21,14 +21,16 @@ public class LXSwiftQueue<Element> {
 extension LXSwiftQueue {
     
     /// 入队列一个元素
-    @inline(__always) public func enQueue(_ element: Element) {
+    @inline(__always)
+    public func enQueue(_ element: Element) {
         lock.lock()
         defer { lock.unlock() }
         list.add(element)
     }
     
     /// 出队列一个元素
-    @inline(__always) public func deQueue() -> Element? {
+    @inline(__always)
+    public func deQueue() -> Element? {
         lock.lock()
         defer { lock.unlock() }
         if isEmpty() {
@@ -39,7 +41,8 @@ extension LXSwiftQueue {
     }
     
     /// 获取队列第一个元素
-    @inline(__always) public func front() -> Element? {
+    @inline(__always)
+    public func front() -> Element? {
         lock.lock()
         defer { lock.unlock() }
         if isEmpty() {
@@ -50,21 +53,24 @@ extension LXSwiftQueue {
     }
     
     /// 清空队列所有元素
-    @inline(__always) public func clear() {
+    @inline(__always)
+    public func clear() {
         lock.lock()
         defer { lock.unlock() }
         list.clear()
     }
     
     /// 获取队列元素的个数
-    @inline(__always) public func size() -> Int {
+    @inline(__always)
+    public func size() -> Int {
         lock.lock()
         defer { lock.unlock() }
         return Int(list.size())
     }
     
     /// 判断队列是否为空
-    @inline(__always) public func isEmpty() -> Bool {
+    @inline(__always)
+    public func isEmpty() -> Bool {
         lock.lock()
         defer { lock.unlock() }
         return list.isEmpty()

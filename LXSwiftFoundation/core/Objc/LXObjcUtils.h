@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -164,6 +165,12 @@ typedef enum : NSUInteger {
 
 /// 去两边空格
 + (NSString *)stringByTrim:(NSString *)string;
+
+/// 读取音频采样数据
++ (NSData * _Nullable)readAudioSamplesFromAVsset:(AVAsset *)asset;
+
+/// 获取声音波形图数据
++ (NSArray *)soundWaveFromAVsset:(AVAsset *)asset forSize:(CGSize)size;
 
 @end
 

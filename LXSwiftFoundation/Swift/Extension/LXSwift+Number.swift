@@ -18,7 +18,7 @@ extension LXSwiftBasics where Base: NSNumber {
     public func numberFormatter(with mode: NumberFormatter.RoundingMode = .halfEven, minDigits: Int = 0, maxDigits:Int = 0) -> String? { base.numberFormatter(with: mode, minDigits: minDigits, maxDigits: maxDigits) }
     
     /// 保留两位小数
-    public func numberFormatter() -> String? { base.numberFormatter(with: .halfEven,minDigits: 0,maxDigits: 2) }
+    public func numberFormatter() -> String? { base.numberFormatter(with: .halfEven, minDigits: 0,maxDigits: 2) }
 }
 
 //MARK: -  Extending internal methods for NSNumber

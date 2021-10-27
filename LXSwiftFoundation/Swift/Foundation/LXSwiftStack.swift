@@ -21,14 +21,16 @@ public struct LXSwiftStack<Element> {
 extension LXSwiftStack {
     
     /// 入栈一个元素
-    @inline(__always) public func push(_ element: Element) {
+    @inline(__always)
+    public func push(_ element: Element) {
         lock.lock()
         defer { lock.unlock() }
         list.add(element)
     }
     
     /// 出栈一个数据
-    @inline(__always) public func pop() -> Element? {
+    @inline(__always)
+    public func pop() -> Element? {
         lock.lock()
         defer { lock.unlock() }
         if isEmpty() {
@@ -39,21 +41,24 @@ extension LXSwiftStack {
     }
     
     /// 清空栈所有数据
-    @inline(__always) public func clear(){
+    @inline(__always)
+    public func clear(){
         lock.lock()
         defer { lock.unlock() }
         list.clear()
     }
     
     /// 栈元素个数
-    @inline(__always) public func size() -> Int32 {
+    @inline(__always)
+    public func size() -> Int32 {
         lock.lock()
         defer { lock.unlock() }
         return list.size()
     }
     
     /// 判断栈是否为空
-    @inline(__always) public func isEmpty() -> Bool {
+    @inline(__always)
+    public func isEmpty() -> Bool {
         lock.lock()
         defer { lock.unlock() }
         return list.isEmpty()

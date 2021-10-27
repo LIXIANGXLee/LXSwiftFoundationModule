@@ -134,9 +134,7 @@ fileprivate struct LXSwiftX3ImageBuilder: LXSwiftImageAdaptNode {
 /// x1 image builder
 fileprivate struct LXSwiftX1ImageBuilder: LXSwiftImageAdaptNode {
     private var successor: LXSwiftImageAdaptNode?
-    init(successor: LXSwiftImageAdaptNode? = nil) {
-        self.successor = successor
-    }
+    init(successor: LXSwiftImageAdaptNode? = nil) { self.successor = successor }
     
     func loadImage(_ imagePath: String) -> UIImage? {
         if let image = UIImage(contentsOfFile: "\(imagePath).png") {

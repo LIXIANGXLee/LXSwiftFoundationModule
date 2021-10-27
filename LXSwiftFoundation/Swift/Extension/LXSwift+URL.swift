@@ -14,6 +14,9 @@ extension LXSwiftBasics where Base == URL {
     /// 根据url获取视频的size
     public var videoSize: CGSize? { LXSwiftUtils.videoSize(with: base) }
     
+    /// 根据url创建AVAsset
+    public var videoAsset: AVAsset { AVAsset(url: base) }
+    
     /// 取出Get请求中的参数，结果是一个大字典
     public var urlParams1: [String: String] {
         let components = NSURLComponents(url: base, resolvingAgainstBaseURL: false)

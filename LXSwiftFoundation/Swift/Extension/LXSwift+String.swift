@@ -184,7 +184,7 @@ extension LXSwiftBasics where Base == String {
         guard let mValue =  Double(base) else { return base }
         return NSNumber(value: mValue).numberFormatter(with: .down, minDigits: digits, maxDigits: digits) ?? base
     }
-    
+       
     /// 小数点后保留两个有效数字。
     public var formatDecimalTwoString: String { formatDecimalString(by: 2) }
     

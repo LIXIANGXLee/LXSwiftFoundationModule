@@ -135,14 +135,77 @@ import AVFoundation
         })
     }
     
-    
     /// 根据url获取视频的size
     @inline(__always)
     public static func videoSize(with url: URL) -> CGSize? {
-        AVURLAsset(url: url)
-        .tracks
-        .filter { $0.mediaType == .video }
-        .first?.naturalSize
+        AVAsset(url: url)
+            .tracks(withMediaType: .video)
+            .first?
+            .naturalSize
+    }
+    
+    /// 获取视频旋转角度
+    public static func videoDegress(from asset: AVAsset) -> Int {
+        var degress: Int = 0
+        guard let track = asset.tracks(withMediaType: .video).first else { return degress }
+        let t = track.preferredTransform
+        if t.a == 0 && t.b == 1.0 && t.c == -1.0 && t.d == 0 {
+            // Portrait
+            degress = 90
+        } else if t.a == 0 && t.b == -1.0 && t.c == 1.0 && t.d == 0 {
+            // PortraitUpsideDown
+            degress = 270
+        } else if t.a == 1.0 && t.b == 0 && t.c == 0 && t.d == 1.0 {
+            // Right
+            degress = 0
+        } else if t.a == -1.0 && t.b == 0 && t.c == 0 && t.d == -1.0 {
+            // Left
+            degress = 180
+        }
+        return degress
+    }
+    
+    /// 根据视频角度获取视频大小
+    public static func videoTransformSize(from asset: AVAsset) -> CGSize {
+        let degrees = videoDegress(from: asset)
+        var videoSize = CGSize.zero
+        guard let track = asset.tracks(withMediaType: .video).first else { return videoSize }
+        switch degrees {
+        case 90:
+            fallthrough
+        case 270:
+            videoSize = CGSize(width: track.naturalSize.height, height: track.naturalSize.width)
+        case 180:
+            videoSize = CGSize(width: track.naturalSize.width, height: track.naturalSize.height)
+        default:
+            videoSize = track.naturalSize
+        }
+        return videoSize
+    }
+    
+    
+    /// 旋转 CGAffineTransform
+    public static func videoTransform(from asset: AVAsset) -> CGAffineTransform {
+        let degrees = videoDegress(from: asset)
+        var transform: CGAffineTransform = .identity
+        guard let track = asset.tracks(withMediaType: .video).first else { return transform }
+        switch degrees {
+        case 90:
+            // 顺时针旋转90°
+            let translateToCenter = CGAffineTransform(translationX: track.naturalSize.height, y: 0)
+            transform = translateToCenter.rotated(by: CGFloat(Double.pi * 2))
+        case 180:
+            // 顺时针旋转180°
+            let translateToCenter = CGAffineTransform(translationX: track.naturalSize.width, y: track.naturalSize.height)
+            transform = translateToCenter.rotated(by: CGFloat(Double.pi))
+        case 270:
+            // 顺时针旋转270°
+            let translateToCenter = CGAffineTransform(translationX: 0, y: track.naturalSize.width)
+            transform = translateToCenter.rotated(by: CGFloat(Double.pi * 2 / 3))
+        default:
+            transform = track.preferredTransform;
+        }
+        return transform
     }
     
     /// 已经进入App

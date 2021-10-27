@@ -45,5 +45,6 @@
 #import "LXObjcGCDTimer.h"
 #import "LXObjcProxy.h"
 #import "LXObjcUtils.h"
+#import "LXAudioView.h"
 
 #endif /* LXSwiftFoundation_h */

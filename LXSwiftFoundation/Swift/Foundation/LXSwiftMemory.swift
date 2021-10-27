@@ -6,8 +6,11 @@
 
 import UIKit
 
-private let LXSWIFT_EMPTY_PTR = UnsafeRawPointer(bitPattern: 0x1)!
+/// 自定义运算符
+infix operator ~>> : MultiplicationPrecedence
+internal func ~>> <T1, T2>(type1: T1, type2: T2.Type) -> T2 { unsafeBitCast(type1, to: type2) }
 
+private let LXSWIFT_EMPTY_PTR = UnsafeRawPointer(bitPattern: 0x1)!
 public enum LXSwiftMemoryAlign: Int {
     case one   = 1
     case two   = 2
@@ -69,11 +72,11 @@ public struct LXSwiftMemory<T> {
     @inline(__always)
     public static func ptr(ofRef v: T) -> UnsafeRawPointer {
         if v is Array<Any> || Swift.type(of: v) is AnyClass || v is AnyClass {
-            return UnsafeRawPointer(bitPattern: unsafeBitCast(v, to: UInt.self))!
+            return UnsafeRawPointer(bitPattern: v ~>> UInt.self)!
         } else if v is String {
             var mstr = v as! String
             if mstr._type() != .heap { return LXSWIFT_EMPTY_PTR }
-            return UnsafeRawPointer(bitPattern: unsafeBitCast(v, to: (UInt, UInt).self).1)!
+            return UnsafeRawPointer(bitPattern: (v ~>> (UInt,UInt).self).1)!
         } else {
             return LXSWIFT_EMPTY_PTR
         }
@@ -113,6 +116,7 @@ extension LXSwiftMemory {
         for i in 0..<size { arr.append((ptr + i).load(as: UInt8.self)) }
         return arr
     }
+
 }
 
 extension String {

@@ -27,6 +27,7 @@
 #import "UIView+LXObjcPerformance.h"
 #import "LXObjcFoundation.h"
 #import "LXObjcGCDTimer.h"
+#import "LXAudioView.h"
 #import "LXDrawerViewController.h"
 #import "LXLineFlowLayout.h"
 #import "LXWaterFlowLayout.h"

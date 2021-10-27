@@ -124,7 +124,7 @@ private let applicationShared = UIApplication.shared
         if #available(iOS 13.0, *) {
             for s in windowScenes {
                 for w in s.windows.reversed() where w.isMember(of: UIWindow.self) {
-                    if let c = NSClassFromString("UIRemoteKeyboardWindow"), !w.isMember(of: c.self), !w.isHidden {
+                    if !w.isHidden {
                         window = w
                         break
                     }
@@ -132,7 +132,7 @@ private let applicationShared = UIApplication.shared
             }
         } else {
             for w in applicationShared.windows.reversed() where w.isMember(of: UIWindow.self) {
-                if let c = NSClassFromString("UIRemoteKeyboardWindow"), !w.isMember(of: c.self), !w.isHidden {
+                if !w.isHidden {
                     window = w
                     break
                 }
@@ -167,7 +167,7 @@ private let applicationShared = UIApplication.shared
     /// 获取状态栏高度
     private static var statusBarHeight: CGFloat {
         var statusH = applicationShared.statusBarFrame.height
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, *){
             statusH = rootWindow?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
         }
         if statusH == 0 {

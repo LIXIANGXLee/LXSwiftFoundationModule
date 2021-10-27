@@ -74,7 +74,7 @@ extension LXSwiftRegex {
             NSAttributedString.Key.kern: wordSpaceing
         ] as [NSAttributedString.Key : Any]
         let attributedStr = NSMutableAttributedString(string: text, attributes:attributes)
-        // Start text matching
+        /// Start text matching
         for wordRegexType in wordRegexTypes {
             if wordRegexType.isExpression { // Expression matching
                 text.lx.enumerateStringsMatchedByRegex(regex: wordRegexType.link)
@@ -91,7 +91,7 @@ extension LXSwiftRegex {
                     attributedStr.addAttribute(key, value: capturedStrings, range: range)
                 }
             }else {
-                // Match hyperlinks
+                /// Match hyperlinks
                 text.lx.enumerateStringsMatchedByRegex(regex: wordRegexType.link)
                 { (captureCount, capturedStrings, range) in
                     attributedStr.addAttributes([.foregroundColor : wordRegexType.color,

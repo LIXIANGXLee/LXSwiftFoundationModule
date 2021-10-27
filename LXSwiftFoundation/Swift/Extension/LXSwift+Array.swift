@@ -13,7 +13,10 @@ extension LXSwiftBasics where Base == Array<Any> {
    
     /// 数组转成json
     public var toJsonString: String? {
-        guard JSONSerialization.isValidJSONObject(base) else { return nil }
+        guard JSONSerialization.isValidJSONObject(base) else {
+            LXXXLog("无法解析数据。。。")
+            return nil
+        }
         guard let jsonData = try? JSONSerialization.data(withJSONObject: base, options: []) else { return nil }
         return String(data: jsonData, encoding: .utf8)
     }

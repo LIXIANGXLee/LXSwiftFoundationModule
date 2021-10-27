@@ -28,7 +28,10 @@ extension LXSwiftBasics where Base: UIView {
     
     /// 获取定制化跟窗口
     public static var scheduledLastWindow: UIWindow? { UIApplication.lx.scheduledLastWindow }
-   
+    
+    /// 获取最外层窗口 需要判断不是UIRemoteKeyboardWindow才行，否则在ipad会存在问题
+    public static var lastWindow: UIWindow? { UIApplication.lx.lastWindow }
+ 
     /// view截图
     public var snapShotImage: UIImage? {
         UIGraphicsBeginImageContextWithOptions(base.bounds.size, base.isOpaque, 0)
@@ -50,6 +53,34 @@ extension LXSwiftBasics where Base: UIView {
         }
         return false
     }
+    
+    /// 打开url
+    @inline(__always)
+    public static func openUrl(_ urlStr: String, completionHandler: ((Bool) -> Void)? = nil) { UIApplication.lx.openUrl(urlStr, completionHandler: completionHandler) }
+    
+    /// 已经进入App
+    @inline(__always)
+    public func didBecomeActive(_ aSelector: Selector) { LXSwiftUtils.didBecomeActive(base, selector: aSelector) }
+    
+    /// 即将退出App
+    @inline(__always)
+    public func willResignActive(_ aSelector: Selector) { LXSwiftUtils.willResignActive(base, selector: aSelector) }
+    
+    /// 监听键盘即将弹起
+    @inline(__always)
+    public func keyboardWillShow(_ aSelector: Selector) { LXSwiftUtils.keyboardWillShow(base, selector: aSelector) }
+    
+    /// 监听键盘已经弹起
+    @inline(__always)
+    public func keyboardDidShow(_ aSelector: Selector) { LXSwiftUtils.keyboardDidShow(base, selector: aSelector) }
+    
+    /// 监听键盘即将退下
+    @inline(__always)
+    public func keyboardWillHide(_ aSelector: Selector) { LXSwiftUtils.keyboardWillHide(base, selector: aSelector) }
+    
+    /// 监听键盘已经退下
+    @inline(__always)
+    public func keyboardDidHide(_ aSelector: Selector) { LXSwiftUtils.keyboardDidHide(base, selector: aSelector) }
 }
 
 //MARK: -  Extending methods for UIView
