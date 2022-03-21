@@ -9,12 +9,11 @@
 import UIKit
 
 /// 可设置文字内边距
-@objc(LXObjcLabel)
-@objcMembers open class LXSwiftLabel: UILabel {
+@objcMembers open class LXSwiftLabel<T>: UILabel {
   
     /// 方便携带的参数 有的时候可能想自定义一些参数，做为传参作用
-    @objc(objcModel) open var swiftModel: Any?
-   
+    open var swiftModel: T?
+
     private var padding = UIEdgeInsets.zero
     @IBInspectable open var paddingLeft: CGFloat {
        get { padding.left }

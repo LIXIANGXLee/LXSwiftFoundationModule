@@ -9,6 +9,7 @@
 #import "LXAudioViewController.h"
 #import <LXSwiftFoundation/LXSwiftFoundation-Swift.h>
 #import <LXSwiftFoundation/LXObjcFoundation.h>
+#import "LXAudioView.h"
 
 @interface LXAudioViewController ()
 @property(nonatomic, strong)LXAudioView *audioView;

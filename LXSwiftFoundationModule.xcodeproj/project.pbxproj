@@ -18,6 +18,7 @@
 		7607A094251B1CB70071B9AD /* LXSwiftFoundation.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 7607A092251B1CB70071B9AD /* LXSwiftFoundation.podspec */; };
 		7637401E253ACFEF001EC785 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7637401D253ACFEF001EC785 /* WebViewController.swift */; };
 		7B566DDA1A33A0ADA6224DD1 /* Pods_LXSwiftFoundationModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F715AA7BA9B925B133355970 /* Pods_LXSwiftFoundationModule.framework */; };
+		840A7CEB27E847DE0035F240 /* LXAudioView.m in Sources */ = {isa = PBXBuildFile; fileRef = 840A7CE927E847DD0035F240 /* LXAudioView.m */; };
 		840EE12B26F5BE3600BC04E7 /* LXSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840EE12A26F5BE3600BC04E7 /* LXSegmentView.swift */; };
 		840EE12F26F5BE5D00BC04E7 /* LXContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840EE12E26F5BE5D00BC04E7 /* LXContentView.swift */; };
 		840EE2F226FDA59000BC04E7 /* LXTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840EE2F126FDA59000BC04E7 /* LXTabBarController.swift */; };
@@ -52,6 +53,8 @@
 		7607A08C251B1C0D0071B9AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7607A092251B1CB70071B9AD /* LXSwiftFoundation.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LXSwiftFoundation.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		7637401D253ACFEF001EC785 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		840A7CE927E847DD0035F240 /* LXAudioView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXAudioView.m; sourceTree = "<group>"; };
+		840A7CEA27E847DE0035F240 /* LXAudioView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXAudioView.h; sourceTree = "<group>"; };
 		840EE12A26F5BE3600BC04E7 /* LXSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXSegmentView.swift; sourceTree = "<group>"; };
 		840EE12E26F5BE5D00BC04E7 /* LXContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXContentView.swift; sourceTree = "<group>"; };
 		840EE2F126FDA59000BC04E7 /* LXTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTabBarController.swift; sourceTree = "<group>"; };
@@ -95,6 +98,8 @@
 				848B4FDB26DF67240068893A /* PickerViewController.swift */,
 				0447CA3526E366BB00F46B63 /* UIImage+add.h */,
 				0447CA3626E366BB00F46B63 /* UIImage+add.m */,
+				840A7CEA27E847DE0035F240 /* LXAudioView.h */,
+				840A7CE927E847DD0035F240 /* LXAudioView.m */,
 				84AAF53A2728FCD700EC3DB0 /* LXAudioViewController.h */,
 				84AAF53B2728FCD700EC3DB0 /* LXAudioViewController.m */,
 			);
@@ -361,6 +366,7 @@
 				840EE30226FDA91D00BC04E7 /* LXTabBar.swift in Sources */,
 				8471063326DC752E0089EB73 /* ViewController.swift in Sources */,
 				840EE31026FDB2B200BC04E7 /* LXHomeViewCell.swift in Sources */,
+				840A7CEB27E847DE0035F240 /* LXAudioView.m in Sources */,
 				7607A07F251B1C0B0071B9AD /* AppDelegate.swift in Sources */,
 				0447CA3726E366BB00F46B63 /* UIImage+add.m in Sources */,
 				840EE2FE26FDA89700BC04E7 /* LXNavigationController.swift in Sources */,
