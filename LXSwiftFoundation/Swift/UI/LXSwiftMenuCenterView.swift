@@ -18,14 +18,14 @@ import UIKit
          case gradual    // 逐渐的
      }
      
-     /// 距顶部间距
-    open var topMargin: CGFloat = SCALE_IP6_WIDTH_TO_WIDTH(10)
-     
+     /// 纵向偏离距离 yType = mid 、midRotate、 gradual时有效
+    open var offsetY: CGFloat = SCALE_IP6_WIDTH_TO_WIDTH(10)
+
      /// 布局位置，相对于传进来的按钮位置的布局摆放
     open var yType: LXSwiftMenuCenterView.MenuYType = .top
     
     /// 默认缩放倍数，有缩放效果时用，内部属性
-    fileprivate let xyScale: CGFloat = 0.01
+    private let xyScale: CGFloat = 0.01
     
     open override var content: UIView? {
         didSet {
@@ -59,7 +59,7 @@ extension LXSwiftMenuCenterView {
         case .mid: fallthrough
         case .gradual: fallthrough
         case .midRotate:
-            content.lx_y = (SCREEN_HEIGHT_TO_HEIGHT - content.lx_height) * 0.5
+            content.lx_y = (SCREEN_HEIGHT_TO_HEIGHT - content.lx_height) * 0.5 - offsetY
             content.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         case .bottom: content.lx_y = SCREEN_HEIGHT_TO_HEIGHT
         default: break
