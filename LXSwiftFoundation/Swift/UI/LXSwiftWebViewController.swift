@@ -81,17 +81,17 @@ open class LXSwiftWebViewController: UIViewController {
 extension LXSwiftWebViewController {
     
     /// load webview 的网络连接
-    open func load(with string: String, cachePolicy: URLRequest.CachePolicy = .reloadRevalidatingCacheData) {
+    open func load(with string: String, cachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy, timeoutInterval: TimeInterval = 60.0) {
         
         guard let url = URL(string: string) else { return }
-        webView.load(URLRequest(url: url, cachePolicy: cachePolicy))
+        webView.load(URLRequest(url: url, cachePolicy: cachePolicy, timeoutInterval: timeoutInterval))
        
     }
     
     /// load HTML
-   open func loadHTML(with string: String) {
+   open func loadHTML(with string: String, baseURL: URL? = Bundle.main.resourceURL) {
         if string.count == 0 { return }
-        webView.loadHTMLString(string, baseURL: Bundle.main.resourceURL)
+        webView.loadHTMLString(string, baseURL: baseURL)
     }
     
     /// load HTMLFile
