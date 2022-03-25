@@ -44,14 +44,31 @@ open class LXSwiftWebViewController: UIViewController {
     // MARK: - Customize the root view -- recommended when the entire page is a WebView or image
     public fileprivate(set) lazy var webView: WKWebView = {
         let config = WKWebViewConfiguration()
-        //是否支持javaScript
-        config.preferences.javaScriptEnabled = true
         config.allowsAirPlayForMediaPlayback = true
+        
+        // 支持h5内嵌播放视频模式
+        config.allowsInlineMediaPlayback = true
+        
+        //是否支持javaScript
+        if #available(iOS 14.0, *) {
+            config.defaultWebpagePreferences.allowsContentJavaScript = true
+        } else {
+            config.preferences.javaScriptEnabled = true
+        }
+        
+        // 是否自动播放（默认是自动播放）
+        if #available(iOS 10.0, *) {
+            config.mediaTypesRequiringUserActionForPlayback = []
+        } else {
+            config.requiresUserActionForMediaPlayback = false
+        }
         
         let webView = WKWebView(frame: .zero, configuration: config)
         webView.allowsBackForwardNavigationGestures = true
         webView.uiDelegate = self
         webView.navigationDelegate = self
+        
+        // 约束布局限制
         if #available(iOS 11.0, *) {
             webView.scrollView.contentInsetAdjustmentBehavior = .never
         }else {

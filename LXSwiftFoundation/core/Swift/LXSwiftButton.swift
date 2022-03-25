@@ -9,7 +9,7 @@
 import UIKit
 
 /// 添加按钮水平布局和按钮垂直布局
-@objcMembers open class LXSwiftButton<T>: UIButton {
+open class LXSwiftButton<T>: UIButton {
     
     /// 方便携带的参数 有的时候可能想自定义一些参数，做为传参作用
     open var swiftModel: T?
