@@ -15,22 +15,10 @@ extension UIDevice: LXSwiftCompatible { }
 extension LXSwiftBasics where Base: UIDevice {
     
     /// 是否为ipad
-    public static var isPad: Bool {
-        if #available(iOS 13.0, *) {
-            return UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad
-        }else{
-            return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad
-        }
-    }
+    public static var isPad: Bool { UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad }
     
     /// 是否为iphone
-    public static var isPhone: Bool {
-        if #available(iOS 13.0, *) {
-            return UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone
-        }else{
-            return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone
-        }
-    }
+    public static var isPhone: Bool { UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone }
     
     /// 是否为模拟器
     public var isSimulator: Bool { base.model.range(of: "Simulator") != nil }
