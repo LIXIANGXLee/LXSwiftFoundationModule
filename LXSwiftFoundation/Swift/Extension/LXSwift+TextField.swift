@@ -11,16 +11,67 @@ import UIKit
 //MARK: -  Extending methods for UITextField
 extension LXSwiftBasics where Base: UITextField {
 
-   /// 设置暂位文字的颜色
+   /// 设置占位文字的颜色
    public var placeholderColor: UIColor {
-       get { base.value(forKeyPath: "_placeholderLabel.textColor") as? UIColor ?? .white }
-       set { base.setValue(newValue, forKeyPath: "_placeholderLabel.textColor") }
+       get {
+           base.value(forKeyPath: "_placeholderLabel.textColor") as? UIColor ?? .white
+       }
+       set {
+           base.setValue(newValue, forKeyPath: "_placeholderLabel.textColor")
+       }
     }
 
-    ///设置暂位文字的字体
+    /// 设置占位文字的字体
     public var placeholderFont: UIFont {
-        get { base.value(forKeyPath: "_placeholderLabel.font") as? UIFont ?? UIFont.lx.font(withRegular: 14) }
-        set { base.setValue(newValue, forKeyPath: "_placeholderLabel.font") }
+        get {
+            base.value(forKeyPath: "_placeholderLabel.font") as? UIFont ?? UIFont.lx.font(withRegular: 14)
+        }
+        set {
+            base.setValue(newValue, forKeyPath: "_placeholderLabel.font")
+        }
+    }
+    
+    /// 设置占位符和颜色
+    public func set(withPlaceholder placeholder: String?,
+                    color: UIColor = UIColor.lx.color(hex: "999999"),
+                    font: UIFont = UIFont.lx.font(withRegular: 14)) {
+        guard let placeholder = placeholder else { return }
+        let attributes = [NSAttributedString.Key.foregroundColor: color,
+                          NSAttributedString.Key.font: font]
+        base.attributedPlaceholder = NSMutableAttributedString(string: placeholder, attributes: attributes)
+    }
+    
+    /// 设置占位符和颜色字符串
+    public func set(withPlaceholder placeholder: String?,
+                    color: String = "999999",
+                    fontSize: CGFloat = 14) {
+        set(withPlaceholder: placeholder,
+            color: UIColor.lx.color(hex: color),
+            font: UIFont.lx.font(withRegular: fontSize))
+    }
+    
+    /// 设置字体和文本颜色
+    public func set(with font: UIFont, textColor: UIColor?) {
+        base.font = font
+        if let color = textColor { base.textColor = color }
+    }
+    
+    /// 设置粗体字体和文本颜色
+    public func set(withBold fontSize: CGFloat, textColor: String) {
+        set(with: UIFont.lx.font(withBold: fontSize),
+            textColor: UIColor.lx.color(hex: textColor))
+    }
+    
+    /// 设置中等字体和文本颜色
+    public func set(withMedium fontSize: CGFloat, textColor: String) {
+        set(with: UIFont.lx.font(withMedium: fontSize),
+            textColor: UIColor.lx.color(hex: textColor))
+    }
+    
+    /// 设置常规字体和文本颜色
+    public func set(withRegular fontSize: CGFloat, textColor: String) {
+        set(with: UIFont.lx.font(withRegular: fontSize),
+            textColor: UIColor.lx.color(hex: textColor))
     }
 }
 
@@ -38,28 +89,4 @@ extension LXSwiftBasics where Base: UITextField {
         base.rightView = view
         base.rightViewMode = mode
     }
-    
-    /// 设置占位符和颜色
-    public func set(with placeholder: String?, color: UIColor? = UIColor.lx.color(hex: "999999")) {
-        guard let placeholder = placeholder, let pColor = color else { return }
-        base.attributedPlaceholder = NSMutableAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: pColor])
-    }
-    
-    /// 设置占位符和颜色字符串
-    public func set(with placeholder: String?, color: String = "999999") { set(with: placeholder, color: UIColor.lx.color(hex: color)) }
-    
-    /// 设置字体和文本颜色
-    public func set(with font: UIFont, textColor: UIColor?) {
-        base.font = font
-        if let color = textColor { base.textColor = color }
-    }
-    
-    /// 设置粗体字体和文本颜色
-    public func set(withBold fontSize: CGFloat, textColor: String) { set(with: UIFont.lx.font(withBold: fontSize), textColor: UIColor.lx.color(hex: textColor)) }
-    
-    /// 设置中等字体和文本颜色
-    public func set(withMedium fontSize: CGFloat, textColor: String) { set(with: UIFont.lx.font(withMedium: fontSize), textColor: UIColor.lx.color(hex: textColor)) }
-    
-    /// 设置常规字体和文本颜色
-    public func set(withRegular fontSize: CGFloat, textColor: String) { set(with: UIFont.lx.font(withRegular: fontSize), textColor: UIColor.lx.color(hex: textColor)) }
 }
