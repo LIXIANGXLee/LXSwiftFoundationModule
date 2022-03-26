@@ -19,17 +19,6 @@
 		7637401E253ACFEF001EC785 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7637401D253ACFEF001EC785 /* WebViewController.swift */; };
 		7B566DDA1A33A0ADA6224DD1 /* Pods_LXSwiftFoundationModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F715AA7BA9B925B133355970 /* Pods_LXSwiftFoundationModule.framework */; };
 		840A7CEB27E847DE0035F240 /* LXAudioView.m in Sources */ = {isa = PBXBuildFile; fileRef = 840A7CE927E847DD0035F240 /* LXAudioView.m */; };
-		840EE12B26F5BE3600BC04E7 /* LXSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840EE12A26F5BE3600BC04E7 /* LXSegmentView.swift */; };
-		840EE12F26F5BE5D00BC04E7 /* LXContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840EE12E26F5BE5D00BC04E7 /* LXContentView.swift */; };
-		840EE2F226FDA59000BC04E7 /* LXTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840EE2F126FDA59000BC04E7 /* LXTabBarController.swift */; };
-		840EE2F626FDA5F200BC04E7 /* LXCommonProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840EE2F526FDA5F200BC04E7 /* LXCommonProtocol.swift */; };
-		840EE2FA26FDA6DD00BC04E7 /* LXViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840EE2F926FDA6DD00BC04E7 /* LXViewController+Extension.swift */; };
-		840EE2FE26FDA89700BC04E7 /* LXNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840EE2FD26FDA89700BC04E7 /* LXNavigationController.swift */; };
-		840EE30226FDA91D00BC04E7 /* LXTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840EE30126FDA91D00BC04E7 /* LXTabBar.swift */; };
-		840EE30626FDAF9700BC04E7 /* LXHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840EE30526FDAF9700BC04E7 /* LXHomeViewController.swift */; };
-		840EE30B26FDB04E00BC04E7 /* LXVideoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840EE30A26FDB04E00BC04E7 /* LXVideoListViewController.swift */; };
-		840EE31026FDB2B200BC04E7 /* LXHomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840EE30F26FDB2B200BC04E7 /* LXHomeViewCell.swift */; };
-		840EE31426FDB9B300BC04E7 /* LXHomeViewSubCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840EE31326FDB9B300BC04E7 /* LXHomeViewSubCell.swift */; };
 		8471063326DC752E0089EB73 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8471063226DC752E0089EB73 /* ViewController.swift */; };
 		848B4FDC26DF67240068893A /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848B4FDB26DF67240068893A /* PickerViewController.swift */; };
 		84AAF53C2728FCD700EC3DB0 /* LXAudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AAF53B2728FCD700EC3DB0 /* LXAudioViewController.m */; };
@@ -55,17 +44,6 @@
 		7637401D253ACFEF001EC785 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		840A7CE927E847DD0035F240 /* LXAudioView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXAudioView.m; sourceTree = "<group>"; };
 		840A7CEA27E847DE0035F240 /* LXAudioView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXAudioView.h; sourceTree = "<group>"; };
-		840EE12A26F5BE3600BC04E7 /* LXSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXSegmentView.swift; sourceTree = "<group>"; };
-		840EE12E26F5BE5D00BC04E7 /* LXContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXContentView.swift; sourceTree = "<group>"; };
-		840EE2F126FDA59000BC04E7 /* LXTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTabBarController.swift; sourceTree = "<group>"; };
-		840EE2F526FDA5F200BC04E7 /* LXCommonProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXCommonProtocol.swift; sourceTree = "<group>"; };
-		840EE2F926FDA6DD00BC04E7 /* LXViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LXViewController+Extension.swift"; sourceTree = "<group>"; };
-		840EE2FD26FDA89700BC04E7 /* LXNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXNavigationController.swift; sourceTree = "<group>"; };
-		840EE30126FDA91D00BC04E7 /* LXTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTabBar.swift; sourceTree = "<group>"; };
-		840EE30526FDAF9700BC04E7 /* LXHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXHomeViewController.swift; sourceTree = "<group>"; };
-		840EE30A26FDB04E00BC04E7 /* LXVideoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXVideoListViewController.swift; sourceTree = "<group>"; };
-		840EE30F26FDB2B200BC04E7 /* LXHomeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXHomeViewCell.swift; sourceTree = "<group>"; };
-		840EE31326FDB9B300BC04E7 /* LXHomeViewSubCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXHomeViewSubCell.swift; sourceTree = "<group>"; };
 		8471063226DC752E0089EB73 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		848B4FDB26DF67240068893A /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		84AAF53A2728FCD700EC3DB0 /* LXAudioViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXAudioViewController.h; sourceTree = "<group>"; };
@@ -146,8 +124,6 @@
 		7607A07D251B1C0B0071B9AD /* LXSwiftFoundationModule */ = {
 			isa = PBXGroup;
 			children = (
-				840EE2EA26FDA41400BC04E7 /* LXFramework */,
-				840EE12926F5BE1100BC04E7 /* segment */,
 				0447CA3026E361FA00F46B63 /* classes */,
 				04E627F2251E55120033BBA5 /* LXSwiftFoundationModule-Bridging-Header.h */,
 				7607A07E251B1C0B0071B9AD /* AppDelegate.swift */,
@@ -159,79 +135,6 @@
 				7607A08C251B1C0D0071B9AD /* Info.plist */,
 			);
 			path = LXSwiftFoundationModule;
-			sourceTree = "<group>";
-		};
-		840EE12926F5BE1100BC04E7 /* segment */ = {
-			isa = PBXGroup;
-			children = (
-				840EE12A26F5BE3600BC04E7 /* LXSegmentView.swift */,
-				840EE12E26F5BE5D00BC04E7 /* LXContentView.swift */,
-			);
-			path = segment;
-			sourceTree = "<group>";
-		};
-		840EE2EA26FDA41400BC04E7 /* LXFramework */ = {
-			isa = PBXGroup;
-			children = (
-				840EE30926FDB02F00BC04E7 /* VideoList */,
-				840EE30426FDAF4400BC04E7 /* Vcs */,
-				840EE2FC26FDA87900BC04E7 /* Nav */,
-				840EE2F426FDA5A700BC04E7 /* Common */,
-				840EE2EB26FDA49A00BC04E7 /* TabBar */,
-			);
-			path = LXFramework;
-			sourceTree = "<group>";
-		};
-		840EE2EB26FDA49A00BC04E7 /* TabBar */ = {
-			isa = PBXGroup;
-			children = (
-				840EE2F126FDA59000BC04E7 /* LXTabBarController.swift */,
-				840EE30126FDA91D00BC04E7 /* LXTabBar.swift */,
-			);
-			path = TabBar;
-			sourceTree = "<group>";
-		};
-		840EE2F426FDA5A700BC04E7 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				840EE2F526FDA5F200BC04E7 /* LXCommonProtocol.swift */,
-				840EE2F926FDA6DD00BC04E7 /* LXViewController+Extension.swift */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
-		840EE2FC26FDA87900BC04E7 /* Nav */ = {
-			isa = PBXGroup;
-			children = (
-				840EE2FD26FDA89700BC04E7 /* LXNavigationController.swift */,
-			);
-			path = Nav;
-			sourceTree = "<group>";
-		};
-		840EE30426FDAF4400BC04E7 /* Vcs */ = {
-			isa = PBXGroup;
-			children = (
-				840EE30E26FDB29000BC04E7 /* cell */,
-				840EE30526FDAF9700BC04E7 /* LXHomeViewController.swift */,
-			);
-			path = Vcs;
-			sourceTree = "<group>";
-		};
-		840EE30926FDB02F00BC04E7 /* VideoList */ = {
-			isa = PBXGroup;
-			children = (
-				840EE30A26FDB04E00BC04E7 /* LXVideoListViewController.swift */,
-			);
-			path = VideoList;
-			sourceTree = "<group>";
-		};
-		840EE30E26FDB29000BC04E7 /* cell */ = {
-			isa = PBXGroup;
-			children = (
-				840EE30F26FDB2B200BC04E7 /* LXHomeViewCell.swift */,
-				840EE31326FDB9B300BC04E7 /* LXHomeViewSubCell.swift */,
-			);
-			path = cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -352,25 +255,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				840EE31426FDB9B300BC04E7 /* LXHomeViewSubCell.swift in Sources */,
-				840EE2F626FDA5F200BC04E7 /* LXCommonProtocol.swift in Sources */,
-				840EE30626FDAF9700BC04E7 /* LXHomeViewController.swift in Sources */,
 				7637401E253ACFEF001EC785 /* WebViewController.swift in Sources */,
-				840EE2FA26FDA6DD00BC04E7 /* LXViewController+Extension.swift in Sources */,
-				840EE2F226FDA59000BC04E7 /* LXTabBarController.swift in Sources */,
-				840EE12B26F5BE3600BC04E7 /* LXSegmentView.swift in Sources */,
 				84AAF53C2728FCD700EC3DB0 /* LXAudioViewController.m in Sources */,
 				848B4FDC26DF67240068893A /* PickerViewController.swift in Sources */,
 				84EF37DD266483620087E578 /* LXCollectionViewCell.swift in Sources */,
-				840EE12F26F5BE5D00BC04E7 /* LXContentView.swift in Sources */,
-				840EE30226FDA91D00BC04E7 /* LXTabBar.swift in Sources */,
 				8471063326DC752E0089EB73 /* ViewController.swift in Sources */,
-				840EE31026FDB2B200BC04E7 /* LXHomeViewCell.swift in Sources */,
 				840A7CEB27E847DE0035F240 /* LXAudioView.m in Sources */,
 				7607A07F251B1C0B0071B9AD /* AppDelegate.swift in Sources */,
 				0447CA3726E366BB00F46B63 /* UIImage+add.m in Sources */,
-				840EE2FE26FDA89700BC04E7 /* LXNavigationController.swift in Sources */,
-				840EE30B26FDB04E00BC04E7 /* LXVideoListViewController.swift in Sources */,
 				040C02D826E65A8500C82BBD /* TextViewViewController.swift in Sources */,
 				040C02D226E65A3400C82BBD /* TestObjcView.m in Sources */,
 			);
