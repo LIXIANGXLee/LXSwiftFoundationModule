@@ -37,7 +37,7 @@ public protocol LXSwiftMenuViewDelegate: AnyObject { }
     
     /// 系统点击方法
     override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let point = touches.first?.location(in: self) else {return}
+        guard let point = touches.first?.location(in: self) else { return }
         let view = self.hitTest(point, with: event)
         if view is LXSwiftMenuViewDelegate && isTouchBgDismiss { dismiss() }
     }
