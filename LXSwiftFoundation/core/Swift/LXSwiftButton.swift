@@ -9,11 +9,11 @@
 import UIKit
 
 /// 添加按钮水平布局和按钮垂直布局
-open class LXSwiftButton<T>: UIButton {
+open class LXSwiftButton: UIButton {
     
     /// 方便携带的参数 有的时候可能想自定义一些参数，做为传参作用
-    open var swiftModel: T?
-    
+    public var swiftModel: Any?
+
     /// 回调函数别名
     public typealias ButtonCallBack = ((_ contentRect: CGRect) -> (CGRect))
     open var titleCallBack: ButtonCallBack?

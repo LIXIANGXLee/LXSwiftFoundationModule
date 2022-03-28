@@ -9,10 +9,10 @@
 import UIKit
 
 /// 可设置文字内边距
-open class LXSwiftLabel<T>: UILabel {
+open class LXSwiftLabel: UILabel {
   
     /// 方便携带的参数 有的时候可能想自定义一些参数，做为传参作用
-    open var swiftModel: T?
+    public var swiftModel: Any?
 
     private var padding = UIEdgeInsets.zero
     @IBInspectable open var paddingLeft: CGFloat {
