@@ -15,6 +15,7 @@
 #import "LXObjcThreadActive.h"
 #import "LXObjcUtils.h"
 #import "CADisplayLink+Block.h"
+#import "NSData+LXCrypto.h"
 #import "NSObject+LXObjcAdd.h"
 #import "NSObject+LXObjcKVO.h"
 #import "NSString+LXObjcAdd.h"
