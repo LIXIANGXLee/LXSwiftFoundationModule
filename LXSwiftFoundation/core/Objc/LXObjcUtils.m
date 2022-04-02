@@ -14,6 +14,7 @@
 
 #define OBJC_PROJECT_NAME [NSBundle mainBundle].infoDictionary[@"CFBundleDisplayName"]
 #define SURE_TITLE_BUTTON @"确定"
+
 @implementation LXObjcUtils
 
 /// 方法交换 主要是交换对象方法的实现 method_getImplementation
@@ -360,6 +361,70 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         block();
     });
+}
+
+/// 获取当前显示的视图控制器
++ (UIViewController *)getCurrentController {
+    UIViewController *rootVC = [self getRootWindow].rootViewController;
+    UIViewController *currentVC = [self getCurrentVCFrom:rootVC];
+    return currentVC;
+}
+
++ (UIViewController *)getCurrentVCFrom:(UIViewController *)rootVC {
+    UIViewController *currentVC;
+    while (rootVC.presentedViewController) {
+        rootVC = rootVC.presentedViewController;
+    }
+    if ([rootVC isKindOfClass:UITabBarController.class]) {
+        currentVC = [self getCurrentVCFrom:[(UITabBarController *)rootVC selectedViewController]];
+    } else if ([rootVC isKindOfClass:UINavigationController.class]){
+        currentVC = [self getCurrentVCFrom:[(UINavigationController *)rootVC visibleViewController]];
+    } else {
+        currentVC = rootVC;
+    }
+    return currentVC;;
+}
+
+/// 获取跟窗口,适配iOS13.0+ PS:如果需要实现iPad多屏处理
+/// 最好是使用SceneDelegate管理Window
++ (UIWindow *)getRootWindow {
+    UIWindow *mainWindow = nil;
+    // 如果是多场景，可以遍历windows,检查window.isKeyWindow获取
+    NSArray *windows = [self getAllWindows];
+    if (@available(iOS 13.0, *)) {
+        for (UIWindow *window in windows) {
+            if (window.isKeyWindow) {
+                mainWindow = window;
+                break;
+            }
+        }
+        if (!mainWindow) {
+            mainWindow = windows.firstObject;
+        }
+    } else {
+        mainWindow = [UIApplication sharedApplication].keyWindow;
+        if (!mainWindow) {
+            mainWindow =  windows.firstObject;
+        }
+    }
+    return mainWindow;
+}
+
+/// 获取最外层窗口
++ (UIWindow *)getLastWindow {
+    NSArray *windows = [self getAllWindows];
+    for (NSInteger i = windows.count - 1; i > 0; i--) {
+        Class c = NSClassFromString(@"UIRemoteKeyboardWindow");
+        if (![windows[i] isKindOfClass:c]) {
+            return windows[i];
+        }
+    }
+    return windows.lastObject;
+}
+
+/// 获取所有窗口
++ (NSArray<UIWindow *> *)getAllWindows {
+    return [UIApplication sharedApplication].windows;
 }
 
 + (NSString *)convertToUppercaseNumbers:(double)number {
