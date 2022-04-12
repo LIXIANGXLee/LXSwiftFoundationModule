@@ -66,11 +66,6 @@ extension LXSwiftBasics where Base == Double {
     /// 保留小数点后的小数位
     public func roundTo(digits: Int = 0, mode: NumberFormatter.RoundingMode = .halfEven) -> String { NSNumber(value: base).lx.numberFormatter(with: mode, minDigits: digits, maxDigits: digits) ?? "" }
     
-    /// 转换小写数字为大写数字 1 到 壹，2 到 贰 长度要小于19个，否则会crash闪退
-    public var convertToUppercaseNumbers: String? {
-       return LXSwiftUtils.convert(toUppercaseNumbers: base)
-    }
-    
     /// 用户显示容量 (GB、MB、KB、B)
     @available(*, deprecated, renamed: "sizeFileToString")
     public var sizeFileToStr: String { sizeFileToString }

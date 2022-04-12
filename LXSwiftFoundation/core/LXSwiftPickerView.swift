@@ -74,7 +74,7 @@ public protocol LXSwiftPickerViewDataSource: AnyObject {
     /// 内容的最大高度
     open var maxHeight: CGFloat = SCREEN_HEIGHT_TO_HEIGHT * 0.6 {
         didSet {
-            tableView.lx_height = maxHeight
+            tableView.lx.height = maxHeight
         }
     }
     
@@ -256,7 +256,7 @@ extension LXSwiftPickerView {
         case .began: defaultOriginY = tableView.frame.minY
         case .changed:
             /// 持续滑动修改tableView 的Y坐标
-            tableView.lx_y = max(defaultOriginY + point.y - tableViewOriginOffSetY,
+            tableView.lx.y = max(defaultOriginY + point.y - tableViewOriginOffSetY,
                                  SCREEN_HEIGHT_TO_HEIGHT - maxHeight)
             self.setScrollViewDidScroll(.change)
         default:
@@ -280,7 +280,7 @@ extension LXSwiftPickerView {
     }
 
     /// 设置滚动偏移量回调
-    private func setScrollViewDidScroll(_ scrollType: LXSwiftPickerView.ScrollType) { self.delegate?.pickerView?(self, scrollViewDidScroll: SCREEN_HEIGHT_TO_HEIGHT - tableView.lx_y, scrollType: scrollType) }
+    private func setScrollViewDidScroll(_ scrollType: LXSwiftPickerView.ScrollType) { self.delegate?.pickerView?(self, scrollViewDidScroll: SCREEN_HEIGHT_TO_HEIGHT - tableView.lx.y, scrollType: scrollType) }
     
     /// 开始动画
     private func starAnimation(_ completion:(() -> Void)? = nil) { setContentOffset(minHeight, colorType: .start, completion: completion) }
@@ -324,7 +324,7 @@ extension LXSwiftPickerView {
         }
         
         UIView.animate(withDuration: animationDuration) {
-            self.tableView.lx_y = SCREEN_HEIGHT_TO_HEIGHT - height
+            self.tableView.lx.y = SCREEN_HEIGHT_TO_HEIGHT - height
             switch colorType {
             case .start: self.backgroundColor = UIColor.black.withAlphaComponent(self.bgOpaque)
             case .end: self.backgroundColor = UIColor.black.withAlphaComponent(0)

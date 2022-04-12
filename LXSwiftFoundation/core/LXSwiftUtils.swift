@@ -20,13 +20,6 @@ import AVFoundation
         case small = -1  /// 小于
     }
     
-    /// 获取网络类型
-    public static var getNetWorkType: String { UIDevice.lx.getNetWorkType }
-    
-    /// 两个版本比较大小 big: one > two, small: two < one,equal: one == two
-    @inline(__always)
-    public static func versionCompareOc(v1: String, v2: String) -> LXSwiftUtils.CompareResult { LXSwiftUtils.compareResult(Int(LXObjcUtils.compareVersion(withV1: v1, v2: v2))) }
-    
     /// 两个版本比较大小 big: one > two, small: two < one, equal: one == two
     @inline(__always)
     public static func versionCompareSwift(v1: String, v2: String) -> LXSwiftUtils.CompareResult { LXSwiftUtils.compareResult(v1.compare(v2).rawValue) }
@@ -38,14 +31,6 @@ import AVFoundation
             if UIApplication.lx.isCanOpen(url) { UIApplication.lx.openUrl(url) }
         }
     }
-    
-    /// 将度换为弧度转
-    @inline(__always)
-    public static func degreesToRadians(_ radians: CGFloat) -> CGFloat { LXObjcUtils.degrees(toRadians: radians) }
-    
-    /// 将弧度转换为度
-    @inline(__always)
-    public static func radiansToDegrees(_ toDegrees: CGFloat) -> CGFloat  { LXObjcUtils.radians(toDegrees: toDegrees) }
 
     /// 在小数点后保留几个有效数字
     @inline(__always)
@@ -75,10 +60,6 @@ import AVFoundation
         guard let data = try? Data(contentsOf: url) else { return nil }
         return data.lx.dataToPlistDictionary
     }
-    
-    /// 转换小写数字为大写数字 1 到 壹，2 到 贰 长度要小于19个，否则会crash闪退
-    @inline(__always)
-    public static func convert(toUppercaseNumbers number: Double) -> String { LXObjcUtils.convert(toUppercaseNumbers: number) }
     
     /// 识别二维码图片
     @inline(__always)

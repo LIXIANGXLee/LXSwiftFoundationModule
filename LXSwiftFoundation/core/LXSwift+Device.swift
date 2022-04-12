@@ -45,25 +45,6 @@ extension LXSwiftBasics where Base: UIDevice {
         return attrs[FileAttributeKey.systemFreeSize] as? Int64
     }
     
-    /// 获取网络类型字符串
-    public static var getNetWorkType: String {
-        let type = LXObjcUtils.getNetWorkType()
-        var netType: String
-        switch type {
-        case LXNetWorkTypeWifi:
-            netType = "wifi"
-        case LXNetWorkType4G:
-            netType = "4G"
-        case LXNetWorkType3G:
-            netType = "3G"
-        case LXNetWorkType2G:
-            netType = "2G"
-        default:
-            netType = "未知"
-        }
-        return netType
-    }
-    
     /// 磁盘空间是按大小使用的
     public static var diskSpaceUsed: Int64? {
        guard let total = diskSpace, let free  = diskSpaceFree else { return nil }

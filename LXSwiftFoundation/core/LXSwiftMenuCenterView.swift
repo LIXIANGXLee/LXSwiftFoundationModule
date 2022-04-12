@@ -46,22 +46,22 @@ extension LXSwiftMenuCenterView {
     /// 显示视图
     open func show(_ rootView: UIView? = nil, callBack: ((Bool) -> Void)? = nil) {
       
-        guard let content = content else { return }
+        guard var content = content else { return }
         if rootView != nil {
             rootView?.addSubview(self)
         } else {
             lx.presentView?.addSubview(self)
         }
 
-        content.lx_center_x = SCREEN_WIDTH_TO_WIDTH * 0.5
+        content.lx.centerX = SCREEN_WIDTH_TO_WIDTH * 0.5
         switch yType {
-        case .top: content.lx_y = -content.lx_height
+        case .top: content.lx.y = -content.lx.height
         case .mid: fallthrough
         case .gradual: fallthrough
         case .midRotate:
-            content.lx_y = (SCREEN_HEIGHT_TO_HEIGHT - content.lx_height) * 0.5 - offsetY
+            content.lx.y = (SCREEN_HEIGHT_TO_HEIGHT - content.lx.height) * 0.5 - offsetY
             content.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        case .bottom: content.lx_y = SCREEN_HEIGHT_TO_HEIGHT
+        case .bottom: content.lx.y = SCREEN_HEIGHT_TO_HEIGHT
         default: break
         }
         
@@ -109,8 +109,8 @@ extension LXSwiftMenuCenterView {
             guard let content = self.content else { return }
             self.backgroundColor = UIColor.black.withAlphaComponent(self.viewOpaque)
             switch self.yType {
-            case .bottom: content.transform = CGAffineTransform(translationX: 0, y: -(SCREEN_HEIGHT_TO_HEIGHT + content.lx_height) * 0.5)
-            case .top: content.transform = CGAffineTransform(translationX: 0, y: (SCREEN_HEIGHT_TO_HEIGHT + content.lx_height) * 0.5)
+            case .bottom: content.transform = CGAffineTransform(translationX: 0, y: -(SCREEN_HEIGHT_TO_HEIGHT + content.lx.height) * 0.5)
+            case .top: content.transform = CGAffineTransform(translationX: 0, y: (SCREEN_HEIGHT_TO_HEIGHT + content.lx.height) * 0.5)
             case .mid: content.transform = CGAffineTransform.identity
             case .gradual: content.alpha = 1
             case .midRotate: content.transform = CGAffineTransform(scaleX: 1, y: 1).rotated(by: CGFloat(Double.pi * 2))

@@ -29,13 +29,13 @@ extension LXSwiftMenuUpView {
     /// 显示视图
     open func show(_ rootView: UIView? = nil, callBack: ((Bool) -> Void)? = nil) {
       
-        guard let content = content else { return }
+        guard var content = content else { return }
         if rootView != nil {
             rootView?.addSubview(self)
         } else {
             lx.presentView?.addSubview(self)
         }
-        content.lx_y = SCREEN_HEIGHT_TO_HEIGHT
+        content.lx.y = SCREEN_HEIGHT_TO_HEIGHT
         
         /// 开始动画
         startAnimation(callBack)
@@ -48,7 +48,7 @@ extension LXSwiftMenuUpView {
     private func endAnimation(_ callBack: ((Bool) -> Void)? = nil) {
         self.backgroundColor = UIColor.black.withAlphaComponent(viewOpaque)
         UIView.animate(withDuration: animateDuration, animations: {
-            self.content?.lx_y = SCREEN_HEIGHT_TO_HEIGHT
+            self.content?.lx.y = SCREEN_HEIGHT_TO_HEIGHT
             self.backgroundColor = UIColor.black.withAlphaComponent(0)
         }) {(isFinish) -> () in
             self.removeFromSuperview()
@@ -60,9 +60,9 @@ extension LXSwiftMenuUpView {
     private func startAnimation(_ callBack: ((Bool) -> Void)? = nil) {
         self.backgroundColor = UIColor.black.withAlphaComponent(0)
         UIView.animate(withDuration:animateDuration) { 
-            guard let content = self.content else { return }
+            guard var content = self.content else { return }
             self.backgroundColor = UIColor.black.withAlphaComponent(self.viewOpaque)
-            content.lx_y = SCREEN_HEIGHT_TO_HEIGHT - content.lx_height
+            content.lx.y = SCREEN_HEIGHT_TO_HEIGHT - content.lx.height
         } completion: { (isFinish) in
             callBack?(isFinish)
         }

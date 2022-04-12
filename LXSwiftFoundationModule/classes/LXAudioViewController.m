@@ -28,18 +28,18 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-  
-    self.title = @"声音波形图";
-    
-    self.view.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:self.audioView];
-    
-    NSString *url = [[NSBundle mainBundle]pathForResource:@"lxQrCodeVoice" ofType:@"wav"];
-    AVAsset *asset = [AVAsset assetWithURL:[NSURL fileURLWithPath:url]];
-    NSArray *lines = [LXObjcUtils soundWaveFromAVsset:asset forSize:self.audioView.frame.size];
-    
-    self.audioView.lines = lines;
-    
+//
+//    self.title = @"声音波形图";
+//    
+//    self.view.backgroundColor = [UIColor whiteColor];
+//    [self.view addSubview:self.audioView];
+//
+//    NSString *url = [[NSBundle mainBundle]pathForResource:@"lxQrCodeVoice" ofType:@"wav"];
+//    AVAsset *asset = [AVAsset assetWithURL:[NSURL fileURLWithPath:url]];
+//    NSArray *lines = [LXObjcUtils soundWaveFromAVsset:asset forSize:self.audioView.frame.size];
+//
+//    self.audioView.lines = lines;
+//
 }
 
 @end

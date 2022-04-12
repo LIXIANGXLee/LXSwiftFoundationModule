@@ -59,7 +59,7 @@ import UIKit
         let placehoderLabel = UILabel()
         placehoderLabel.numberOfLines = 0
         placehoderLabel.backgroundColor = UIColor.clear
-        placehoderLabel.textColor = UIColor.lx_color(withHexString: "999999")
+        placehoderLabel.textColor = UIColor.lx.color(hex: "999999")
         return placehoderLabel
     }()
     

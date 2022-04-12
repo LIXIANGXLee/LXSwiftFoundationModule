@@ -174,11 +174,8 @@ extension LXSwiftBasics where Base == String {
     }
     
     /// 版本比较大小 Returns: big: base > two, small: two < base, equal: base == two
-    public func compareVersionSwift(with version: String) -> LXSwiftUtils.CompareResult { LXSwiftUtils.versionCompareSwift(v1: base, v2: version) }
-    
-    /// 版本比较大小 Returns: big: base > two  ,small:two < base, equal:base == two
-    public func compareVersionObjc(with version: String) -> LXSwiftUtils.CompareResult { LXSwiftUtils.versionCompareOc(v1: base, v2: version) }
-    
+    public func compareVersion(with version: String) -> LXSwiftUtils.CompareResult { LXSwiftUtils.versionCompareSwift(v1: base, v2: version) }
+        
     /// 在小数点后保留几个有效数字
     public func formatDecimalString(by digits: Int) -> String {
         guard let mValue =  Double(base) else { return base }

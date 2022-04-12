@@ -43,7 +43,7 @@ extension LXSwiftMenuDownView {
     /// 显示视图，view是点击的view
     @objc open func show(from view: UIView, rootView: UIView? = nil, callBack: ((Bool) -> Void)? = nil) {
 
-        guard let content = content else { return }
+        guard var content = content else { return }
         if rootView != nil {
             rootView?.addSubview(self)
         } else {
@@ -55,17 +55,17 @@ extension LXSwiftMenuDownView {
         var point: CGPoint = CGPoint.zero
         switch xType {
         case .left:
-            x = rect.minX - content.lx_width
+            x = rect.minX - content.lx.width
             point = CGPoint(x: 1, y: 0)
         case .mid:
-            x = rect.midX - content.lx_width
+            x = rect.midX - content.lx.width
             point = CGPoint(x: 1, y: 0)
         case .right:
-            x = rect.maxX - content.lx_width
-            point = CGPoint(x: 1 - (rect.width * 0.5 / content.lx_width), y: 0)
+            x = rect.maxX - content.lx.width
+            point = CGPoint(x: 1 - (rect.width * 0.5 / content.lx.width), y: 0)
         }
         content.layer.anchorPoint = point
-        content.lx_origin = CGPoint(x: x, y: rect.maxY + topMargin)
+        content.frame.origin = CGPoint(x: x, y: rect.maxY + topMargin)
     
         /// 开始动画
         startAnimation(callBack)

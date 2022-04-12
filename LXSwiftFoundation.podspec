@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "LXSwiftFoundation"
-  spec.version      = "8.9.19"
+  spec.version      = "8.10.0"
   spec.summary      = "Extend more user-friendly functions for system classes"
 
   
@@ -37,16 +37,6 @@ Pod::Spec.new do |spec|
     
         spec.subspec 'Core' do |core|
             core.source_files = "LXSwiftFoundation/Core/**/*.{swift,h,m}"
-        end
-        
-        spec.subspec 'Objc' do |oc|
-            oc.source_files = "LXSwiftFoundation/Objc/**/*.{h,m}"
-            oc.dependency 'LXSwiftFoundation/Core'
-        end
-        
-        spec.subspec 'Swift' do |swift|
-            swift.source_files = "LXSwiftFoundation/Swift/**/*.swift"
-            swift.dependency 'LXSwiftFoundation/Objc'
         end
             
   end
