@@ -13,7 +13,7 @@ import UIKit
     open override var content: UIView? {
         didSet {
             guard let content = content else { return }
-            addSubview(content)
+            scrollView.addSubview(content)
         }
     }
         

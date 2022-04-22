@@ -28,7 +28,7 @@ import UIKit
     open override var content: UIView? {
         didSet {
             guard let content = content else { return }
-            addSubview(content)
+            scrollView.addSubview(content)
         }
     }
 
@@ -43,7 +43,7 @@ extension LXSwiftMenuDownView {
     /// 显示视图，view是点击的view
     @objc open func show(from view: UIView, rootView: UIView? = nil, callBack: ((Bool) -> Void)? = nil) {
 
-        guard var content = content else { return }
+        guard let content = content else { return }
         if rootView != nil {
             rootView?.addSubview(self)
         } else {

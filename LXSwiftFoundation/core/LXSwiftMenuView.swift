@@ -10,8 +10,32 @@ import UIKit
 @objc(LXObjcMenuViewDelegate)
 public protocol LXSwiftMenuViewDelegate: AnyObject { }
 
+@objcMembers internal class LXSwiftInnerScrollView: UIScrollView, LXSwiftMenuViewDelegate {
+    
+    internal var touchBgDismissClosure: (() -> Void)?
+    
+    internal override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = UIColor.clear
+        showsVerticalScrollIndicator = false
+        showsHorizontalScrollIndicator = false
+        isScrollEnabled = true
+        isPagingEnabled = false
+    }
+    
+    required internal init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override internal func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let point = touches.first?.location(in: self) else { return }
+        let view = self.hitTest(point, with: event)
+        if view is LXSwiftMenuViewDelegate { touchBgDismissClosure?() }
+    }
+}
+
 @objc(LXObjcMenuView)
-@objcMembers open class LXSwiftMenuView: LXSwiftView, LXSwiftMenuViewDelegate {
+@objcMembers open class LXSwiftMenuView: LXSwiftView {
     
     /// 动画时常
     open var animateDuration: TimeInterval = 0.25
@@ -21,6 +45,11 @@ public protocol LXSwiftMenuViewDelegate: AnyObject { }
 
     /// 点击背景色时dismiss掉弹窗
     open var isTouchBgDismiss: Bool = true
+    
+    internal private(set) lazy var scrollView: LXSwiftInnerScrollView = {
+        let scrollView = LXSwiftInnerScrollView()
+        return scrollView
+    }()
     
     /// 内容view
     open var content: UIView?
@@ -32,13 +61,24 @@ public protocol LXSwiftMenuViewDelegate: AnyObject { }
     open func dismiss() { dismissCallBack?() }
     
     open override func setupUI() {
-        self.frame = CGRect(x: 0, y: 0, width: SCREEN_WIDTH_TO_WIDTH, height: SCREEN_HEIGHT_TO_HEIGHT)
+        let rect = CGRect(x: 0,
+                          y: 0,
+                          width: SCREEN_WIDTH_TO_WIDTH,
+                          height: SCREEN_HEIGHT_TO_HEIGHT)
+        self.frame = rect
+        self.scrollView.frame = rect
+        addSubview(scrollView)
+        
+        scrollView.touchBgDismissClosure = { [weak self] in
+            guard let `self` = self else { return }
+            if self.isTouchBgDismiss { self.dismiss() }
+        }
     }
     
     /// 系统点击方法
-    override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let point = touches.first?.location(in: self) else { return }
-        let view = self.hitTest(point, with: event)
-        if view is LXSwiftMenuViewDelegate && isTouchBgDismiss { dismiss() }
-    }
+//    override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        guard let point = touches.first?.location(in: self) else { return }
+//        let view = self.hitTest(point, with: event)
+//        if view is LXSwiftMenuViewDelegate && isTouchBgDismiss { dismiss() }
+//    }
 }
