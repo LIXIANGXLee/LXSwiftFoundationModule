@@ -43,8 +43,7 @@ class ViewController: UIViewController {
            ],
             [
                 "wkwebview加载网页，截取长图",
-                "textview和textfield",
-                "音律波形图"
+                "textview和textfield"
             ]
         ]
 
@@ -200,8 +199,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate  {
                 self.navigationController?.pushViewController(vc, animated: true)
             case 1:
                 self.navigationController?.pushViewController(TextViewViewController(), animated: true)
-            case 2:
-                self.navigationController?.pushViewController(LXAudioViewController(), animated: true)
             default: break
             }
         default:  break
