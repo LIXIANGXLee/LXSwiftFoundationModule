@@ -74,7 +74,7 @@ extension LXSwiftBasics where Base: DispatchQueue {
     }
     
     /// 延时后主线程执行任务 (自定义线程类型，例如：DispatchQueue.main主线程、DispatchQueue.global()全局线程等等)
-    public func asyncAfter(with delay: TimeInterval, _ callBack: @escaping () -> Void) {  base.asyncAfter(deadline: .now() + delay, execute: callBack) }
+    public func asyncAfter(with delay: TimeInterval, _ callBack: @escaping () -> Void) { base.asyncAfter(deadline: .now() + delay, execute: callBack) }
     
     /// 延时后主线程执行任务 (自定义线程类型，例如：DispatchQueue.main主线程、DispatchQueue.global()全局线程等等)
     @available(*, deprecated, message:"Use asyncAfter(with delay:,_ callBack:)")
@@ -82,12 +82,15 @@ extension LXSwiftBasics where Base: DispatchQueue {
 
     /// 在主线程执行任务
     public func asyncSafeMain(_ execute: @escaping () -> ()) {
-        if Thread.current.isMainThread {
+        if isMainThread {
             execute()
         } else {
             DispatchQueue.main.async(execute: execute)
         }
     }
+    
+    /// 是否为主线成
+    public var isMainThread: Bool { Thread.current.isMainThread }
     
     /// 子线程执行任务
     public func asyncSafeGlobal(_ execute: @escaping () -> ()) { DispatchQueue.global(qos: .default).async(execute: execute) }

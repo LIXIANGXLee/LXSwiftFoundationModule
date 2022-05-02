@@ -23,7 +23,7 @@ open class LXSwiftViewController: UIViewController {
                 self.traitCollection.performAsCurrent { [weak self] in
                     self?.setUIDidChange(.dark)
                 }
-            }else if self.traitCollection.userInterfaceStyle == .light {
+            } else if self.traitCollection.userInterfaceStyle == .light {
                 self.traitCollection.performAsCurrent { [weak self] in
                     self?.setUIDidChange(.light)
                 }

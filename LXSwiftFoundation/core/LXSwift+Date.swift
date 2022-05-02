@@ -70,8 +70,8 @@ extension LXSwiftBasics where Base == Date {
         let (selfCmps, nowComps) = base.lx.dateCompare(with: Date(), unit: unit)
         guard let nDay = nowComps.day, let cDay = selfCmps.day else { return false }
         return (selfCmps.year == nowComps.year) &&
-            (selfCmps.month == nowComps.month) &&
-            ((nDay - cDay) == 1)
+             (selfCmps.month == nowComps.month) &&
+             ((nDay - cDay) == 1)
     }
     
     /// 是否是今天
@@ -79,8 +79,8 @@ extension LXSwiftBasics where Base == Date {
         let unit: Set<Calendar.Component> = [.day,.month,.year]
         let (selfCmps, nowComps) = base.lx.dateCompare(with: Date(), unit: unit)
         return (selfCmps.year == nowComps.year) &&
-            (selfCmps.month == nowComps.month) &&
-            (selfCmps.day == nowComps.day)
+               (selfCmps.month == nowComps.month) &&
+               (selfCmps.day == nowComps.day)
     }
     
     /// 是否是一小时前
@@ -88,9 +88,9 @@ extension LXSwiftBasics where Base == Date {
         let unit: Set<Calendar.Component> = [.hour,.day,.month,.year]
         let (selfCmps, nowComps) = base.lx.dateCompare(with: Date(), unit: unit)
         return (selfCmps.year == nowComps.year) &&
-            (selfCmps.month == nowComps.month) &&
-            (selfCmps.day == nowComps.day) &&
-            (selfCmps.hour == nowComps.hour)
+               (selfCmps.month == nowComps.month) &&
+               (selfCmps.day == nowComps.day) &&
+               (selfCmps.hour == nowComps.hour)
     }
     
     /// 是否是一分钟内
@@ -98,14 +98,15 @@ extension LXSwiftBasics where Base == Date {
         let unit: Set<Calendar.Component> = [.minute,.hour,.day,.month,.year]
         let (selfCmps, nowComps) = base.lx.dateCompare(with: Date(), unit: unit)
         return (selfCmps.year == nowComps.year) &&
-            (selfCmps.month == nowComps.month) &&
-            (selfCmps.day == nowComps.day) &&
-            (selfCmps.hour == nowComps.hour) &&
-            (selfCmps.minute == nowComps.minute)
+               (selfCmps.month == nowComps.month) &&
+               (selfCmps.day == nowComps.day) &&
+               (selfCmps.hour == nowComps.hour) &&
+               (selfCmps.minute == nowComps.minute)
     }
 
     ///判断是否为瑞年
     public var isLeapYear: Bool {
+      
         let year = base.lx.year
         return ((year % 400 == 0) || ((year % 100 != 0) && (year % 4 == 0)))
     }

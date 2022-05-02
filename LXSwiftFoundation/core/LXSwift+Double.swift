@@ -8,15 +8,15 @@
 
 import UIKit
 
-public prefix func ~~>  (_ index: CGFloat) -> (CGFloat) -> (Bool) { { $0 >  index } }
-public prefix func ~~>= (_ index: CGFloat) -> (CGFloat) -> (Bool) { { $0 >= index } }
-public prefix func ~~<  (_ index: CGFloat) -> (CGFloat) -> (Bool) { { $0 <  index } }
-public prefix func ~~<= (_ index: CGFloat) -> (CGFloat) -> (Bool) { { $0 <= index } }
+public prefix func ~~~>  (_ index: CGFloat) -> (CGFloat) -> (Bool) { { $0 >  index } }
+public prefix func ~~~>= (_ index: CGFloat) -> (CGFloat) -> (Bool) { { $0 >= index } }
+public prefix func ~~~<  (_ index: CGFloat) -> (CGFloat) -> (Bool) { { $0 <  index } }
+public prefix func ~~~<= (_ index: CGFloat) -> (CGFloat) -> (Bool) { { $0 <= index } }
 
-public prefix func ~~>  (_ index: Double) -> (Double) -> (Bool) { { $0 >  index } }
-public prefix func ~~>= (_ index: Double) -> (Double) -> (Bool) { { $0 >= index } }
-public prefix func ~~<  (_ index: Double) -> (Double) -> (Bool) { { $0 <  index } }
-public prefix func ~~<= (_ index: Double) -> (Double) -> (Bool) { { $0 <= index } }
+public prefix func ~~~>  (_ index: Double) -> (Double) -> (Bool) { { $0 >  index } }
+public prefix func ~~~>= (_ index: Double) -> (Double) -> (Bool) { { $0 >= index } }
+public prefix func ~~~<  (_ index: Double) -> (Double) -> (Bool) { { $0 <  index } }
+public prefix func ~~~<= (_ index: Double) -> (Double) -> (Bool) { { $0 <= index } }
 
 extension CGFloat: LXSwiftCompatible {
  
@@ -92,16 +92,16 @@ extension LXSwiftBasics where Base == Double {
     public var timeToString: String {
         let dur = Int(round(base))
         switch dur {
-        case ~~>=3600:
+        case ~~~>=3600:
             let h = dur / 3600
             let m = (dur % 3600) / 60
             let s = dur % 60
             return String(format: "%02d:%02d:%02d", h, m, s)
-        case ~~>=60:
+        case ~~~>=60:
             let m = dur / 60
             let s = dur % 60
             return String(format: "00:%02d:%02d", m, s)
-        case ~~>=0:
+        case ~~~>=0:
             return String(format: "00:00:%02d", dur)
         default:
             return "00:00:00"

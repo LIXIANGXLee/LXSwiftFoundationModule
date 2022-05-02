@@ -48,14 +48,14 @@ extension LXSwiftBasics where Base == Data {
     
     /// 文件类型
     public var mimeType: String {
-        var c: UInt8 = 0
-        base.copyBytes(to: &c, count: 1)
-        return Data.mimeTypeSignatures[c] ?? "application/octet-stream"
+        var mime: UInt8 = 0
+        base.copyBytes(to: &mime, count: 1)
+        return Data.mimeTypeSignatures[mime] ?? "application/octet-stream"
     }
 
     /// data转换字典
     public var dataToPlistDictionary: Dictionary<String, Any>? {
-        guard let propertyList = try? PropertyListSerialization.propertyList(from: base, options: .init(rawValue: 0),format: nil) else { return nil }
+        guard let propertyList = try? PropertyListSerialization.propertyList(from: base, options: .init(rawValue: 0), format: nil) else { return nil }
         return propertyList as? Dictionary<String, Any>
     }
 }

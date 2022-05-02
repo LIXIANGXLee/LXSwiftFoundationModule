@@ -116,7 +116,7 @@ public extension UITableView {
         let hasSectionHeader = (self.delegate?.tableView?(self, viewForHeaderInSection: section)) != nil
         if numberOfRows == 0 && hasSectionHeader == false {
             sectionFooter.roundSwiftBackground(roundingCorners: .allCorners, cornerRadius: cornerRadius, backgroundColor: backgroundColor)
-        }else{
+        } else {
             sectionFooter.roundSwiftBackground(roundingCorners: [.bottomLeft, .bottomRight], cornerRadius: cornerRadius, backgroundColor: backgroundColor)
         }
     }

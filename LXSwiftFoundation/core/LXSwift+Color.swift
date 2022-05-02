@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 extension UIColor: LXSwiftCompatible { }
 
 //MARK: -  Extending methods for UIColor

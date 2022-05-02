@@ -77,6 +77,7 @@ extension LXSwiftMenuCenterView {
         self.backgroundColor = UIColor.black.withAlphaComponent(viewOpaque)
         UIView.animate(withDuration: animateDuration, animations: {
             guard let content = self.content else { return }
+        
             self.backgroundColor = UIColor.black.withAlphaComponent(0)
             switch self.yType {
             case .bottom: fallthrough
@@ -95,6 +96,7 @@ extension LXSwiftMenuCenterView {
     /// 开始动画
     private func startAnimation(_ callBack: ((Bool) -> Void)? = nil) {
         guard let content = self.content else { return }
+       
         self.backgroundColor = UIColor.black.withAlphaComponent(0)
         switch yType {
         case .bottom: fallthrough

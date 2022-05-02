@@ -39,7 +39,7 @@ extension LXSwiftBasics where Base: UIViewController {
     public func dismissViewController() {
         if base.navigationController != nil {
             base.navigationController?.dismiss(animated: true, completion: nil)
-        }else{
+        } else {
             base.dismiss(animated: true, completion: nil)
         }
     }

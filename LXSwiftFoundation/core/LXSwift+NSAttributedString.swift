@@ -154,7 +154,7 @@ extension LXSwiftBasics where Base: NSMutableAttributedString {
             let mulParaStyle = paraStyle.mutableCopy() as? NSMutableParagraphStyle {
             setAttribute(with: .paragraphStyle, value: mulParaStyle, range: NSMakeRange(0, base.length))
             return mulParaStyle
-        }else{
+        } else {
             let mulParaStyle = NSMutableParagraphStyle()
             setAttribute(with: .paragraphStyle, value: mulParaStyle, range: NSMakeRange(0, base.length))
             return mulParaStyle

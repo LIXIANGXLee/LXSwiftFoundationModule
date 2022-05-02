@@ -219,7 +219,7 @@ extension LXSwiftPickerView {
    @objc open func show(_ rootView: UIView? = nil, completion:(() -> Void)? = nil) {
         if rootView != nil {
             rootView?.addSubview(self)
-        }else{
+        } else {
             lx.presentView?.addSubview(self)
         }
         
@@ -272,7 +272,7 @@ extension LXSwiftPickerView {
              if let cornerRadii = tHeaderViewTopCornerRadii {
                 view.lx.setPartCornerRadius(radius: cornerRadii, roundingCorners: [.topLeft,.topRight])
              }
-        }else{
+        } else {
             if let cornerRadii = tFooterViewBottomCornerRadii {
                 view.lx.setPartCornerRadius(radius: cornerRadii, roundingCorners: [.bottomLeft,.bottomRight])
             }
@@ -292,14 +292,14 @@ extension LXSwiftPickerView {
                 guard let `self` = self else { return }
                 self.setScrollViewDidScroll(.top)
             }
-        }else if offSet <= maxHeight && offSet >= minHeight {/// 最大和最小之间
+        } else if offSet <= maxHeight && offSet >= minHeight {/// 最大和最小之间
             let isTop = maxHeight - offSet < offSet - minHeight
             let height = isTop ? maxHeight : minHeight
             setContentOffset(height) { [weak self] in
                 guard let `self` = self else { return }
                 self.setScrollViewDidScroll(isTop ? .top : .mid)
             }
-        }else { /// 最小和底部的之间
+        } else { /// 最小和底部的之间
             let isTop = minHeight - offSet < offSet
             let colorType = isTop ? ColorType.none : ColorType.end
             let height = isTop ? minHeight : 0
@@ -380,7 +380,7 @@ extension LXSwiftPickerView:  UIScrollViewDelegate {
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y > 0 && Int(tableView.frame.origin.y) == Int(SCREEN_HEIGHT_TO_HEIGHT - maxHeight){
           
-        }else{
+        } else {
             /// 非滑动顶部的时候tableView偏移量处理
             tableView.contentOffset = CGPoint.zero
         }

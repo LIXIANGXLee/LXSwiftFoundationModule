@@ -23,7 +23,7 @@ import UIKit
     open var xType: LXSwiftMenuDownView.MenuXType = .right
     
     /// 默认缩放倍数，有缩放效果时用，内部属性
-    fileprivate let xyScale: CGFloat = 0.01
+    private let xyScale: CGFloat = 0.01
  
     open override var content: UIView? {
         didSet {

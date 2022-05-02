@@ -21,7 +21,7 @@ extension LXSwiftBasics where Base: UIApplication {
         let rootVC = visibleRootViewController
         if let navVC = rootVC as? UINavigationController {
             return navVC
-        }else if let tabBar = rootVC as? UITabBarController {
+        } else if let tabBar = rootVC as? UITabBarController {
             return tabBar.children[tabBar.selectedIndex] as? UINavigationController
         } else { return nil }
     }

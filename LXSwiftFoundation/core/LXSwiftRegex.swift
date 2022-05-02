@@ -90,7 +90,7 @@ extension LXSwiftRegex {
                     let key = NSAttributedString.Key(rawValue: LXSwiftRegex.imageLinkConst)
                     attributedStr.addAttribute(key, value: capturedStrings, range: range)
                 }
-            }else {
+            } else {
                 /// Match hyperlinks
                 text.lx.enumerateStringsMatchedByRegex(regex: wordRegexType.link)
                 { (captureCount, capturedStrings, range) in

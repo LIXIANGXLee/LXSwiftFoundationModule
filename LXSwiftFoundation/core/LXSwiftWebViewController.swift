@@ -49,7 +49,7 @@ open class LXSwiftWebViewController: UIViewController {
         // 支持h5内嵌播放视频模式
         config.allowsInlineMediaPlayback = true
         
-        //是否支持javaScript
+        // 是否支持javaScript
         if #available(iOS 14.0, *) {
             config.defaultWebpagePreferences.allowsContentJavaScript = true
         } else {
@@ -71,7 +71,7 @@ open class LXSwiftWebViewController: UIViewController {
         // 约束布局限制
         if #available(iOS 11.0, *) {
             webView.scrollView.contentInsetAdjustmentBehavior = .never
-        }else {
+        } else {
             webView.translatesAutoresizingMaskIntoConstraints = false
         }
         return webView

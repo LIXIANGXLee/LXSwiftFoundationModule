@@ -93,9 +93,9 @@ fileprivate class LXSwiftImageBuilder: NSObject {
         let scale = UIScreen.main.scale
         if abs(scale - 3) <= 0.01 {
             return x3ImageBuilder.loadImage(imagePath)
-        }else if abs(scale - 2) <= 0.01 {
+        } else if abs(scale - 2) <= 0.01 {
             return x2ImageBuilder.loadImage(imagePath)
-        }else {
+        } else {
             return x1ImageBuilder.loadImage(imagePath)
         }
     }

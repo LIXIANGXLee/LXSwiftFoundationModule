@@ -22,7 +22,7 @@ import UIKit
     /// ModalItem事件集合
     private var modalItems = [LXSwiftItem]()
     
-    lazy var titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
        let titleLabel = UILabel()
        titleLabel.textAlignment = .center
        titleLabel.textColor = modaConfig.titleColor
@@ -30,14 +30,14 @@ import UIKit
        return titleLabel
     }()
     
-    lazy var scrollView: UIScrollView = {
+    private lazy var scrollView: UIScrollView = {
        let scrollView = UIScrollView()
        scrollView.isScrollEnabled = modaConfig.isContentMidViewScrollEnabled
        scrollView.showsVerticalScrollIndicator = modaConfig.isshowsVerticalScrollIndicator
        return scrollView
     }()
     
-    lazy var textLabel: LXSwiftTextLable = {
+    private lazy var textLabel: LXSwiftTextLable = {
        var config = LXSwiftTextLableConfig()
        config.bgColor = self.modaConfig.selectBgColor
        let textLabel = LXSwiftTextLable(config: config)
@@ -45,7 +45,7 @@ import UIKit
        return textLabel
     }()
     
-    lazy var lineView: UIView = {
+    private lazy var lineView: UIView = {
         let lineView = UIView()
         lineView.backgroundColor = modaConfig.lineColor
         return lineView

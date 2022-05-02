@@ -24,7 +24,7 @@ import UIKit
     open override func textRect(forBounds bounds: CGRect) -> CGRect {
         if let textRectInsert = textRectInsert {
             return bounds.inset(by: textRectInsert)
-        }else{
+        } else {
             return super.textRect(forBounds: bounds)
         }
     }
