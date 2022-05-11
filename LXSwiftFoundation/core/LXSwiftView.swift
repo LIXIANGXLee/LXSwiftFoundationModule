@@ -39,19 +39,26 @@ public extension LXSwiftUIProtocol {
         if #available(iOS 13.0, *) {
             if self.traitCollection.userInterfaceStyle == .dark {
                 self.traitCollection.performAsCurrent { [weak self] in
-                    self?.setUIDidChange(.dark)
+                    self?.updateTraitCollectionDidChange(.dark)
                 }
             } else if self.traitCollection.userInterfaceStyle == .light {
                 self.traitCollection.performAsCurrent { [weak self] in
-                    self?.setUIDidChange(.light)
+                    self?.updateTraitCollectionDidChange(.light)
                 }
+            }
+            
+            if self.traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+                self.updateHasDifferentColorAppearance()
             }
         }
     }
     
     /// 暗黑模式 和亮模式切换时调用
-  @objc open func setUIDidChange(_ style: LXSwiftUserInterfaceStyle) { }
+  @objc open func updateTraitCollectionDidChange(_ style: LXSwiftUserInterfaceStyle) { }
     
+     /// 使用traitCollectionDidChange并使用hasDifferentColorAppearance比较特征集，以在切换黑暗模式时捕获, 注意⚠️： CGcolor 颜色刷新需要再次方法内执行
+   @objc open func updateHasDifferentColorAppearance() { }
+
 }
 
 extension LXSwiftView: LXSwiftUIProtocol {
