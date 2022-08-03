@@ -81,7 +81,7 @@ extension LXSwiftBasics where Base: DispatchQueue {
     public func after(with delay: TimeInterval, execute closure: @escaping () -> Void) { asyncAfter(with: delay, closure) }
 
     /// 在主线程执行任务
-    public func asyncSafeMain(_ execute: @escaping () -> ()) {
+    public static func asyncSafeMain(_ execute: @escaping () -> ()) {
         if isMainThread {
             execute()
         } else {
@@ -90,9 +90,9 @@ extension LXSwiftBasics where Base: DispatchQueue {
     }
     
     /// 是否为主线成
-    public var isMainThread: Bool { Thread.current.isMainThread }
+    public static var isMainThread: Bool { Thread.current.isMainThread }
     
     /// 子线程执行任务
-    public func asyncSafeGlobal(_ execute: @escaping () -> ()) { DispatchQueue.global(qos: .default).async(execute: execute) }
+    public static func asyncSafeGlobal(_ execute: @escaping () -> ()) { DispatchQueue.global(qos: .default).async(execute: execute) }
 
 }

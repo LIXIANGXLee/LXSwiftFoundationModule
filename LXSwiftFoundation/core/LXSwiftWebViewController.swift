@@ -31,7 +31,8 @@ open class LXSwiftWeakScriptMessageDelegate: NSObject, WKScriptMessageHandler {
 }
 
 /// MARK: - WKWebView
-open class LXSwiftWebViewController: UIViewController {
+@objc(LXObjcWebViewController)
+@objcMembers open class LXSwiftWebViewController: UIViewController {
     
     open var loadWebViewContentHeight: ((Float) -> ())?
     open var loadWebViewTitle: ((String) -> ())?

@@ -7,7 +7,8 @@
 //
 import UIKit
 
-open class LXSwiftViewController: UIViewController {    
+@objc(LXObjcViewController)
+@objcMembers open class LXSwiftViewController: UIViewController {
    
     open override func viewDidLoad() {
         super.viewDidLoad()
