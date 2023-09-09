@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "LXSwiftFoundation"
-  spec.version      = "9.1.3"
+  spec.version      = "9.2.0"
   spec.summary      = "Extend more user-friendly functions for system classes"
 
   
@@ -36,7 +36,7 @@ Pod::Spec.new do |spec|
     spec.source = { :git => "https://github.com/LIXIANGXLee/LXSwiftFoundationModule.git", :tag => "#{spec.version}" }
     
         spec.subspec 'Core' do |core|
-            core.source_files = "LXSwiftFoundation/Core/**/*.{swift,h,m}"
+            core.source_files = "LXSwiftFoundation/Core/**/*.swift"
         end
             
   end
