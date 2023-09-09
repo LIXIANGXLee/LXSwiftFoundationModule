@@ -36,7 +36,9 @@ extension SwiftBasics where Base == URL {
                 let paramsArray = paramsStr.components(separatedBy: "&")
                 paramsArray.forEach { (param) in
                     let arr = param.components(separatedBy: "=")
-                    if arr.count == 2 { params[arr[0]] = arr[1] }
+                    if arr.count == 2 {
+                        params[arr[0]] = arr[1]
+                    }
                 }
             }
         }
@@ -57,7 +59,10 @@ extension SwiftBasics where Base == URL {
             guard items.count == 2 else {
                 continue
             }
-            guard let firstItem = items.first, let lastItem = items.last else { continue }
+            guard let firstItem = items.first,
+                  let lastItem = items.last else {
+                continue
+            }
             let queryPair = [firstItem: lastItem]
             queries.append(queryPair)
         }

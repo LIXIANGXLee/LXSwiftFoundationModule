@@ -16,7 +16,7 @@ class TextViewViewController: UIViewController {
         self.title = "textView和textField展示"
         self.view.backgroundColor = UIColor.blue
         
-        let textView = LXSwiftTextView(frame: CGRect(x: 20, y: 100, width: 260, height: 200))
+        let textView = SwiftTextView(frame: CGRect(x: 20, y: 100, width: 260, height: 200))
         self.view.addSubview(textView)
         textView.maxTextLength = 5
         textView.placeholder = "dsds"
@@ -27,7 +27,7 @@ class TextViewViewController: UIViewController {
         textView.updateTextUI()
         
         
-        let textField = LXSwiftTextField(frame: CGRect(x: 20, y: 310, width: 260, height: 100))
+        let textField = SwiftTextField(frame: CGRect(x: 20, y: 310, width: 260, height: 100))
         self.view.addSubview(textField)
         textField.textRectInsert = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         textField.maxTextLength = 5

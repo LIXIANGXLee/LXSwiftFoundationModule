@@ -51,11 +51,10 @@ extension SwiftMenuCenterView {
         guard var content = content else {
             return
         }
-        if rootView != nil {
-            rootView?.addSubview(self)
-        } else {
-            lx.presentView?.addSubview(self)
-        }
+        
+        let currentView = rootView ?? UIApplication.lx.currentViewController?.view
+
+        currentView?.addSubview(self)
 
         content.lx.centerX = SCREEN_WIDTH_TO_WIDTH * 0.5
         switch yType {

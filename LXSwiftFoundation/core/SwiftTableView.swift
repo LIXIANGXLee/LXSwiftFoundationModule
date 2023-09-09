@@ -22,7 +22,7 @@ private let tag = 1991880313
         super.init(frame: frame, style: style)
         backgroundColor = UIColor.white
         var rect = CGRect.zero
-        rect.size.width = SwiftApp.screenW
+        rect.size.width = SCREEN_WIDTH_TO_WIDTH
         rect.size.height = 0.01
 
         tableFooterView = UIView(frame:rect)

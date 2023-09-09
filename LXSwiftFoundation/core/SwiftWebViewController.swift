@@ -141,7 +141,7 @@ extension SwiftWebViewController {
     
     /// Snap Shot 截图
     @available(iOS 11.0, *)
-    open func snapShot(with rect: CGRect = CGRect(x: 0, y: 0, width: SwiftApp.screenW, height: SwiftApp.screenH), handel: @escaping (UIImage) -> ()) {
+    open func snapShot(with rect: CGRect = CGRect(x: 0, y: 0, width: SCREEN_WIDTH_TO_WIDTH, height: SCREEN_HEIGHT_TO_HEIGHT), handel: @escaping (UIImage) -> ()) {
         let config = WKSnapshotConfiguration()
         config.rect = rect
         webView.takeSnapshot(with: config) { (image, error) in
@@ -159,7 +159,7 @@ extension SwiftWebViewController {
             cookies in
             var results = [HTTPCookie]()
             cookies.forEach { [weak self] cookie in
-                if cookie.name == string{
+                if cookie.name == string {
                     self?.webView.configuration.websiteDataStore.httpCookieStore.delete(cookie)
                 } else {
                     results.append(cookie)
@@ -184,7 +184,9 @@ extension SwiftWebViewController {
 extension SwiftWebViewController: WKScriptMessageHandler {
     open func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         methods.forEach { method in
-            if method.method == message.name { method.handel(message.body) }
+            if method.method == message.name {
+                method.handel(message.body)
+            }
         }
     }
 }
@@ -265,10 +267,14 @@ extension SwiftWebViewController: WKNavigationDelegate {
     }
     
     /// 从web服务器请求数据时调用（网页开始加载）
-    open func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) { spinner.startAnimating() }
+    open func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        spinner.startAnimating()
+    }
     
     /// 收到服务器响应后，主要根据响应头信息决定是否在当前WebView中加载网站
-    open func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) { decisionHandler(.allow) }
+    open func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
+        decisionHandler(.allow)
+    }
     
     /// 开始从web服务器接收数据时调用
     open func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) { }

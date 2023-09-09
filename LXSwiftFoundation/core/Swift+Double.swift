@@ -80,15 +80,30 @@ extension SwiftBasics where Base == Double {
     /// 用户显示容量 (GB、MB、KB、B)
     public var sizeFileToString: String {
         let unit = 1000.0
-        if base > pow(unit, 3) {
-            return String(format: "%.2fGB", base / pow(unit, 3))
-        } else if base > pow(unit, 2) {
+        
+        /// 优化代码判断逻辑
+
+//        if base > pow(unit, 3) {
+//            return String(format: "%.2fGB", base / pow(unit, 3))
+//        } else if base > pow(unit, 2) {
+//            return String(format: "%.2fMB", base / pow(unit, 2))
+//        } else if base > pow(unit, 1) {
+//            return String(format: "%.2fKB", base / pow(unit, 1))
+//        } else {
+//            return String(format: "%dB", Int(base))
+//        }
+        
+        switch base {
+        case ~~~>pow(unit, 3):
+           return String(format: "%.2fGB", base / pow(unit, 3))
+        case ~~~>pow(unit, 2):
             return String(format: "%.2fMB", base / pow(unit, 2))
-        } else if base > pow(unit, 1) {
+        case ~~~>pow(unit, 1):
             return String(format: "%.2fKB", base / pow(unit, 1))
-        } else {
+        default:
             return String(format: "%dB", Int(base))
         }
+
     }
     
     /// 时间字符串

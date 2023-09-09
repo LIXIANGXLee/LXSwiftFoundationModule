@@ -12,7 +12,7 @@ import UIKit
 extension SwiftBasics where Base: UILabel {
     
     /// UILabel的宽度
-    public func width(_ width: CGFloat = SwiftApp.screenW) -> CGFloat {
+    public func width(_ width: CGFloat = SCREEN_WIDTH_TO_WIDTH) -> CGFloat {
         size(height: CGFloat(MAXFLOAT), width: width, lines: 1).width
     }
     

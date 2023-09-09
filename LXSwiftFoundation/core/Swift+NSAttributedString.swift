@@ -25,7 +25,7 @@ extension SwiftBasics where Base: NSAttributedString {
     
     /// 获取基于字体和宽度的文本宽度
     public var width: CGFloat {
-        size(SwiftApp.screenW).width
+        size(SCREEN_WIDTH_TO_WIDTH).width
     }
     
     /// 获取的NSAttributeString属性字典

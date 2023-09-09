@@ -15,8 +15,8 @@ class ViewController: UIViewController {
     
     private var datas: [[String]] = [[]]
     
-    fileprivate lazy var tableView: LXSwiftTableView = {
-        let tableView = LXSwiftTableView(frame: CGRect.zero, style: UITableView.Style.grouped)
+    fileprivate lazy var tableView: SwiftTableView = {
+        let tableView = SwiftTableView(frame: CGRect.zero, style: UITableView.Style.grouped)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.registSwiftCell(LXTableViewViewCell.self)
@@ -49,8 +49,11 @@ class ViewController: UIViewController {
 
         tableView.frame = CGRect(x: 0,
                                  y: SCREEN_HEIGHT_TO_NAVBARHEIGHT,
-                                 width: LXSwiftApp.screenW,
-                                 height: LXSwiftApp.screenH - SCREEN_HEIGHT_TO_NAVBARHEIGHT - SCREEN_HEIGHT_TO_TOUCHBARHEIGHT)
+                                 width: SCREEN_WIDTH_TO_WIDTH,
+                                 height: SCREEN_HEIGHT_TO_HEIGHT - SCREEN_HEIGHT_TO_NAVBARHEIGHT - SCREEN_HEIGHT_TO_TOUCHBARHEIGHT)
+         
+         LXXXLog(tableView.frame)
+
         view.addSubview(tableView)
         
         let btn = UIButton(type: .custom)
@@ -66,7 +69,7 @@ class ViewController: UIViewController {
     
     @objc func btnClick(_ btn: UIButton) {
         
-        let menu = LXSwiftMenuDownView()
+        let menu = SwiftMenuDownView()
         menu.xType = .right
         menu.animateDuration = 0.25
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 400))
@@ -76,31 +79,31 @@ class ViewController: UIViewController {
     
     }
     func showModal() {
-        let config = LXSwiftModalConfig()
+        let config = SwiftModalConfig()
         config.isDismissBg = false
         config.contentMidViewH = SCALE_IP6_WIDTH_TO_WIDTH(260)
         config.titleFont = UIFont.lx.font(withMedium: 16)
         config.titleColor = UIColor.black
-        let itemCancel = LXSwiftItem(title: "不同意",
+        let itemCancel = SwiftItem(title: "不同意",
                                          titleColor: UIColor.blue,
                                          titleFont: UIFont.systemFont(ofSize: 17, weight: .medium)) { }
-        let itemTrue =  LXSwiftItem(title: "同意",
+        let itemTrue =  SwiftItem(title: "同意",
                                          titleColor: UIColor.blue,
                                         titleFont: UIFont.systemFont(ofSize: 17, weight: .medium)) {
             let str = Bundle.main.path(forResource: "lxQrCodeVoice", ofType: "wav")
-            LXSwiftUtils.playSound(with: str)
+            SwiftUtils.playSound(with: str)
         }
         
-        let modal = LXSwiftHyperlinksModalController()
+        let modal = SwiftHyperlinksModalController()
         modal.setModal(config, modalItems: [itemCancel,itemTrue]) { (text) -> (Void) in
             print("-=-=-=-=-=\(text)")
             
         }
-        let r1 = LXSwiftRegexType(with: "《用户服务协议》",
+        let r1 = SwiftRegexType(with: "《用户服务协议》",
                                   color: UIColor.lx.color(hex: "36acff"),
                                   font: UIFont.systemFont(ofSize: 14),
                                   isExpression: false)
-        let r2 = LXSwiftRegexType(with: "《隐私政策》",
+        let r2 = SwiftRegexType(with: "《隐私政策》",
                                   color: UIColor.lx.color(hex: "36acff"),
                                   font: UIFont.systemFont(ofSize: 14),
                                   isExpression: false)
@@ -129,7 +132,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate  {
         case 0:
             switch indexPath.row {
             case 0:
-                let menu = LXSwiftMenuCenterView()
+                let menu = SwiftMenuCenterView()
                 menu.yType = .midRotate
                 let view = UIView(frame: CGRect(x: 0, y: 0, width: 260, height: 400))
                 let view1 = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
@@ -139,7 +142,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate  {
                 menu.content = view
                 menu.show()
             case 1:
-                let menu = LXSwiftMenuCenterView()
+                let menu = SwiftMenuCenterView()
                 menu.yType = .top
                 let view = UIView(frame: CGRect(x: 0, y: 0, width: 260, height: 400))
                 let view1 = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
@@ -149,7 +152,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate  {
                 menu.content = view
                 menu.show()
             case 2:
-                let menu = LXSwiftMenuCenterView()
+                let menu = SwiftMenuCenterView()
                 menu.yType = .mid
                 let view = UIView(frame: CGRect(x: 0, y: 0, width: 260, height: 400))
                 let view1 = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
@@ -159,7 +162,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate  {
                 menu.content = view
                 menu.show()
             case 3:
-                let menu = LXSwiftMenuCenterView()
+                let menu = SwiftMenuCenterView()
                 menu.yType = .bottom
                 let view = UIView(frame: CGRect(x: 0, y: 0, width: 260, height: 400))
                 let view1 = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
@@ -169,13 +172,13 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate  {
                 menu.content = view
                 menu.show()
             case 4:
-                let menu = LXSwiftMenuUpView()
+                let menu = SwiftMenuUpView()
                 let view = UIView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH_TO_WIDTH, height: 400))
                 view.backgroundColor = UIColor.purple
                 menu.content = view
                 menu.show()
             case 5:
-                let menu = LXSwiftMenuCenterView()
+                let menu = SwiftMenuCenterView()
                 menu.yType = .gradual
                 let view = UIView(frame: CGRect(x: 0, y: 0, width: 260, height: 400))
                 let view1 = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
@@ -206,7 +209,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate  {
     }
 }
 
-class LXTableViewViewCell: LXSwiftTableViewCell {
+class LXTableViewViewCell: SwiftTableViewCell {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: 00, y: 0, width: SCREEN_WIDTH_TO_WIDTH, height: 50))

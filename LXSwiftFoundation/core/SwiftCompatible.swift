@@ -47,6 +47,8 @@ public extension SwiftCompatible {
 }
 
 /// 遵守协议
+
+extension UIView: SwiftCompatible { }
 extension Array: SwiftCompatible { }
 extension UIBezierPath: SwiftCompatible { }
 extension Bundle: SwiftCompatible { }

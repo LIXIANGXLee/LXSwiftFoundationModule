@@ -28,7 +28,9 @@ public enum SwiftMemoryType: UInt8 {
 public struct SwiftMemory<T> {
     
     /// 获得变量所占用的内存大小
-    public static func size(ofVal v: inout T) -> Int { MemoryLayout.size(ofValue: v) > 0 ? MemoryLayout.stride(ofValue: v) : 0 }
+    public static func size(ofVal v: inout T) -> Int {
+        MemoryLayout.size(ofValue: v) > 0 ? MemoryLayout.stride(ofValue: v) : 0
+    }
     
     /// 获得引用所指向内存的大小
     public static func size(ofRef v: T) -> Int {

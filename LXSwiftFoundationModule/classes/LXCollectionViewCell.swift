@@ -9,7 +9,7 @@
 import UIKit
 import LXSwiftFoundation
 
-class LXCollectionViewCell: LXSwiftCollectionViewCell {
+class LXCollectionViewCell: SwiftCollectionViewCell {
     
     override func setupUI() {
         

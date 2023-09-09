@@ -9,24 +9,17 @@
 import UIKit
 import WebKit
 
-extension UIView: SwiftCompatible { }
-
 //MARK: -  Extending properties for UIView
 extension SwiftBasics where Base: UIView {
-    
-    /// presented 根视图
-    public var presentView: UIView? {
-        UIApplication.lx.presentViewController?.view
-    }
-    
-    /// 当前的view
-    public var visibleVCView: UIView? {
-        UIApplication.lx.currentViewController?.view
-    }
-    
+      
     /// 导航跟控制器
-    public var visibleNavVC: UINavigationController? {
+    public var rootNavViewController: UINavigationController? {
         UIApplication.lx.rootNavViewController
+    }
+    
+    /// root跟控制器
+    public static var rootViewController: UIViewController? {
+        UIApplication.lx.rootViewController
     }
     
     /// 获取跟窗口
@@ -35,8 +28,8 @@ extension SwiftBasics where Base: UIView {
     }
     
     /// 获取定制化跟窗口
-    public static var scheduledLastWindow: UIWindow? {
-        UIApplication.lx.scheduledLastWindow
+    public static var lastWindowInAllWindows: UIWindow? {
+        UIApplication.lx.lastWindowInAllWindows
     }
     
     /// 获取最外层窗口 需要判断不是UIRemoteKeyboardWindow才行，否则在ipad会存在问题
@@ -50,7 +43,9 @@ extension SwiftBasics where Base: UIView {
         if isContainsWKWebView() {
             base.drawHierarchy(in: base.bounds, afterScreenUpdates: true)
         } else {
-            if let ctx = UIGraphicsGetCurrentContext() { base.layer.render(in: ctx) }
+            if let ctx = UIGraphicsGetCurrentContext() {
+                base.layer.render(in: ctx)
+            }
         }
         let snapImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -68,6 +63,11 @@ extension SwiftBasics where Base: UIView {
             }
         }
         return false
+    }
+    
+    /// 获取当前view对应的控制器
+    public static func currentViewController(ofView view: UIView) -> UIViewController? {
+        return UIApplication.lx.currentViewController(ofView: view)
     }
     
     /// 打开url
@@ -114,7 +114,7 @@ extension SwiftBasics where Base: UIView {
                                  locations: [NSNumber] = [0.0,1.0],
                                  startPoint: CGPoint = CGPoint(x: 0, y: 0.5),
                                  endPoint: CGPoint = CGPoint(x: 1, y: 0.5),
-                                 size: CGSize? = nil){
+                                 size: CGSize? = nil) {
         
         let s = size ?? base.bounds.size
         if !s.equalTo(CGSize.zero) {

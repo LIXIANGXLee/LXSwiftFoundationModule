@@ -184,7 +184,9 @@ public protocol SwiftPickerViewDataSource: AnyObject {
     
     /// 系统背景点击事件
     override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let point = touches.first?.location(in: self) else { return }
+        guard let point = touches.first?.location(in: self) else {
+            return
+        }
         let view = self.hitTest(point, with: event)
         if view is SwiftPickerViewCommomDelegate && isDismissOfDidSelectBgView {
             dismiss()
@@ -225,17 +227,13 @@ extension SwiftPickerView {
     
     /// 展示pickerView
    @objc open func show(_ rootView: UIView? = nil, completion:(() -> Void)? = nil) {
-        if rootView != nil {
-            rootView?.addSubview(self)
-        } else {
-            lx.presentView?.addSubview(self)
-        }
-        
+  
+       let currentView = rootView ?? UIApplication.lx.currentViewController?.view
+       currentView?.addSubview(self)
+
         /// 开始动画
         starAnimation { [weak self] in
-            guard let `self` = self else {
-                return
-            }
+            guard let `self` = self else { return }
             completion?()
             self.setScrollViewDidScroll(.mid)
         }

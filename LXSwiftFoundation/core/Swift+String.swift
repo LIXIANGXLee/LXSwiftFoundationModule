@@ -87,7 +87,7 @@ extension SwiftBasics where Base == String {
     
     /// 根据字体获取字体宽度
     public func width(font: UIFont) -> CGFloat {
-        self.size(font: font, width: SwiftApp.screenW).width
+        self.size(font: font, width: SCREEN_WIDTH_TO_WIDTH).width
     }
     
     /// 根据字体和宽度获取字体高度
@@ -325,7 +325,6 @@ extension SwiftBasics where Base == String {
             return
         }
         let results = regex.matches(in: base, options: [], range: NSRange(location: 0, length: base.count))
-        //can matching more string
         for result in results.reversed() {
             usingBlock(results.count, base[result.range.location..<(result.range.location + result.range.length)], result.range)
         }

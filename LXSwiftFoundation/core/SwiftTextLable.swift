@@ -49,7 +49,7 @@ private let linkBgTag = 1992990313
     private lazy var links = [SwiftTextLable.TextLink]()
     private var config: SwiftTextLableConfig
     
-    fileprivate lazy var textView: UITextView = {
+    private lazy var textView: UITextView = {
         let textView = UITextView()
         textView.isEditable = false
         textView.isScrollEnabled = false
@@ -64,13 +64,13 @@ private let linkBgTag = 1992990313
         return textView
     }()
     
-    fileprivate lazy var tagGesture: UITapGestureRecognizer = {
+    private lazy var tagGesture: UITapGestureRecognizer = {
         let tagGesture = UITapGestureRecognizer(target: self, action: #selector(gestureTag(gesture:)))
         tagGesture.numberOfTouchesRequired = 1
         return tagGesture
     }()
     
-    fileprivate lazy var longGesture: UILongPressGestureRecognizer = {
+    private lazy var longGesture: UILongPressGestureRecognizer = {
         let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(gestureLong(gesture:)))
         longGesture.minimumPressDuration = 0.8
         return longGesture

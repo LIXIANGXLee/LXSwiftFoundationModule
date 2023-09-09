@@ -22,9 +22,8 @@ extension SwiftBasics where Base: UIViewController {
         }
         if #available(iOS 13.0, *) {
             return lightContent ? .lightContent : .darkContent
-        } else {
-            return .default
         }
+        return .default
     }
 
     /// 当前视图是否可见
@@ -33,7 +32,7 @@ extension SwiftBasics where Base: UIViewController {
         
     }
      
-    /// 控制器 dismiss 销毁
+    /// 控制器 dismiss销毁
     public func dismissViewController() {
         if base.navigationController != nil {
             base.navigationController?.dismiss(animated: true, completion: nil)

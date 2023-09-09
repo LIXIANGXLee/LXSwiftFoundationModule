@@ -24,7 +24,9 @@ import UIKit
             guard let pFont = font else {
                 return
             }
-            if placeholderFont == nil { placehoderLabel.font = pFont }
+            if placeholderFont == nil {
+                placehoderLabel.font = pFont
+            }
             setNeedsLayout()
         }
     }

@@ -9,12 +9,12 @@
 import UIKit
 import LXSwiftFoundation
 
-class WebViewController: LXSwiftWebViewController {
+class WebViewController: SwiftWebViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.webView.frame = CGRect(x: 0, y: 0, width: LXSwiftApp.screenW, height: LXSwiftApp.screenH)
+        self.webView.frame = CGRect(x: 0, y: 0, width: SCREEN_WIDTH_TO_WIDTH, height: SCREEN_HEIGHT_TO_HEIGHT)
         
         self.load(with: "http://www.baidu.com")
   

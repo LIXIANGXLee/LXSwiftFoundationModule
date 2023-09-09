@@ -21,13 +21,17 @@ import AVFoundation
     }
     
     /// 两个版本比较大小 big: one > two, small: two < one, equal: one == two
-    public static func versionCompareSwift(v1: String, v2: String) -> SwiftUtils.CompareResult { SwiftUtils.compareResult(v1.compare(v2).rawValue) }
+    public static func versionCompareSwift(v1: String, v2: String) -> SwiftUtils.CompareResult {
+        SwiftUtils.compareResult(v1.compare(v2).rawValue)
+    }
     
     /// 打电话
     public static func openTel(with number: String?, _ tellCallBack: SwiftUtils.TellCallBack? = nil) {
         if let number = number,
            let url = URL(string: "tel:" + number) {
-            if UIApplication.lx.isCanOpen(url) { UIApplication.lx.openUrl(url) }
+            if UIApplication.lx.isCanOpen(url) {
+                UIApplication.lx.openUrl(url)
+            }
         }
     }
 
@@ -57,9 +61,13 @@ import AVFoundation
     
     /// 从路径看plist变换字典
     public static func readDictionary(with path: String?) -> Dictionary<String, Any>? {
-        guard let path = path else { return nil }
+        guard let path = path else {
+            return nil
+        }
         let url = URL(fileURLWithPath: path)
-        guard let data = try? Data(contentsOf: url) else { return nil }
+        guard let data = try? Data(contentsOf: url) else {
+            return nil
+        }
         return data.lx.dataToPlistDictionary
     }
     
@@ -67,7 +75,9 @@ import AVFoundation
     public static func getQrCodeString(with image: UIImage?) -> String? {
         let context = CIContext(options: nil)
         let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: context, options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])
-        guard let cgImage = image?.cgImage else { return nil }
+        guard let cgImage = image?.cgImage else {
+            return nil
+        }
         let ciImage = CIImage(cgImage: cgImage)
         let feature = detector?.features(in: ciImage).first as? CIQRCodeFeature
         return feature?.messageString
@@ -77,7 +87,9 @@ import AVFoundation
     public static func async_getQrCodeString(with image: UIImage?, complete: @escaping (String?) -> ()) {
         DispatchQueue.global().async{
             let async_qrString = self.getQrCodeString(with: image)
-            DispatchQueue.main.async(execute: { complete(async_qrString) })
+            DispatchQueue.main.async(execute: {
+                complete(async_qrString)
+            })
         }
     }
     
@@ -130,7 +142,9 @@ import AVFoundation
     /// 获取视频旋转角度
     public static func videoDegress(from asset: AVAsset) -> Int {
         var degress: Int = 0
-        guard let track = asset.tracks(withMediaType: .video).first else { return degress }
+        guard let track = asset.tracks(withMediaType: .video).first else {
+            return degress
+        }
         let t = track.preferredTransform
         if t.a == 0 && t.b == 1.0 && t.c == -1.0 && t.d == 0 {
             // Portrait
@@ -152,7 +166,9 @@ import AVFoundation
     public static func videoTransformSize(from asset: AVAsset) -> CGSize {
         let degrees = videoDegress(from: asset)
         var videoSize = CGSize.zero
-        guard let track = asset.tracks(withMediaType: .video).first else { return videoSize }
+        guard let track = asset.tracks(withMediaType: .video).first else {
+            return videoSize
+        }
         switch degrees {
         case 90:
             fallthrough
@@ -171,7 +187,9 @@ import AVFoundation
     public static func videoTransform(from asset: AVAsset) -> CGAffineTransform {
         let degrees = videoDegress(from: asset)
         var transform: CGAffineTransform = .identity
-        guard let track = asset.tracks(withMediaType: .video).first else { return transform }
+        guard let track = asset.tracks(withMediaType: .video).first else {
+            return transform
+        }
         switch degrees {
         case 90:
             // 顺时针旋转90°

@@ -56,7 +56,8 @@ extension SwiftBasics where Base: UIColor {
     
    /// 获取两个颜色rgb的差值的颜色值
     public static func getRGBDelta(withColor first: UIColor, seccond: UIColor) -> (CGFloat, CGFloat, CGFloat)? {
-        guard let firstRGB = first.lx.getRGB, let secondRGB = seccond.lx.getRGB else {
+        guard let firstRGB = first.lx.getRGB,
+              let secondRGB = seccond.lx.getRGB else {
             return nil
         }
         return (firstRGB.0 - secondRGB.0, firstRGB.1 - secondRGB.1, firstRGB.2 - secondRGB.2)

@@ -72,11 +72,9 @@ extension SwiftMenuUpView {
         guard var content = content else {
             return
         }
-        if rootView != nil {
-            rootView?.addSubview(self)
-        } else {
-            lx.presentView?.addSubview(self)
-        }
+        let currentView = rootView ?? UIApplication.lx.currentViewController?.view
+        currentView?.addSubview(self)
+
         content.lx.y = SCREEN_HEIGHT_TO_HEIGHT
         
         /// 开始动画

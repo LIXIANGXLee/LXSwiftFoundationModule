@@ -46,11 +46,9 @@ extension SwiftMenuDownView {
         guard let content = content else {
             return
         }
-        if rootView != nil {
-            rootView?.addSubview(self)
-        } else {
-            lx.presentView?.addSubview(self)
-        }
+        
+        let currentView = rootView ?? UIApplication.lx.currentViewController?.view
+        currentView?.addSubview(self)
         
         let rect = view.convert(view.bounds, to: rootView)
         var x: CGFloat = 0
