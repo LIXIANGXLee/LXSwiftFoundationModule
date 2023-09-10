@@ -61,7 +61,6 @@ public final class SwiftNotification<T: Codable>: SwiftNotificationBase {
     }
 }
 
-private var notificationCallBackKey: Void?
 extension NotificationCenter {
     
     /// 添加观察者 Selector

@@ -143,7 +143,9 @@ extension SwiftBasics where Base: FileManager {
                     do {
                         try fileManagerDefault.removeItem(atPath: toFilePath)
                         block?(true)
-                    } catch _ { block?(false) }
+                    } catch _ {
+                        block?(false)
+                    }
                 }
                 
                 // 移动文件夹或者文件
@@ -154,7 +156,9 @@ extension SwiftBasics where Base: FileManager {
                         try fileManagerDefault.copyItem(atPath: fromFilePath, toPath: toFilePath)
                     }
                     block?(true)
-                } catch _ { block?(false) }
+                } catch _ {
+                    block?(false)
+                }
             }
         }
     }
@@ -204,7 +208,9 @@ extension SwiftBasics where Base: FileManager {
     
     /// 计算单个文件的大小
     public static func fileSize(atPath path: String) -> Double {
-        guard let attr = try? fileManagerDefault.attributesOfItem(atPath: path) else { return 0 }
+        guard let attr = try? fileManagerDefault.attributesOfItem(atPath: path) else {
+            return 0
+        }
         return Double(attr[FileAttributeKey.size] as? UInt64 ?? 0)
     }
     

@@ -60,7 +60,7 @@ import AVFoundation
     }
     
     /// 从路径看plist变换字典
-    public static func readDictionary(with path: String?) -> Dictionary<String, Any>? {
+    public static func readDictionary(from path: String?) -> Dictionary<String, Any>? {
         guard let path = path else {
             return nil
         }

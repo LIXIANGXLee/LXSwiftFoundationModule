@@ -8,24 +8,6 @@
 
 import UIKit
 
-/// 两个字典相加 +
-public func + (left: [String: Any], right: [String: Any]) -> [String: Any] {
-    var dic = left
-    for (k, v) in right {
-        dic[k] = v
-    }
-    return dic
-}
-
-/// 两个字典相减 -
-public func - (left: [String: Any], right: [String: Any]) -> [String: Any] {
-    var dic = left
-    for (k, _) in right where dic.keys.contains(k) {
-        dic.removeValue(forKey: k)
-    }
-    return dic
-}
-
 //MARK: -  Extending properties for Date
 extension SwiftBasics where Base == Dictionary<String, Any> {
     

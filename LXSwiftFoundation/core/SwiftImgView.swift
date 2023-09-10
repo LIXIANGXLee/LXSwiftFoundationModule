@@ -14,10 +14,10 @@ open class SwiftImgView: UIImageView {
     public var swiftModel: Any?
 
     /// 回调函数别名
-    public typealias CallBack = ((_ imgView: SwiftImgView?) -> ())
+    public typealias TapClosure = ((SwiftImgView?) -> ())
 
     /// 事件点击回调
-    open var callBack: SwiftImgView.CallBack?
+    open var tapClosure: SwiftImgView.TapClosure?
     
     /// 是否允许交互
     open var isInteractionEnabled: Bool = false {
@@ -28,25 +28,22 @@ open class SwiftImgView: UIImageView {
        
     public convenience init() {
         self.init(frame: CGRect.zero)
-        
     }
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(swiftImgViewAction(_:)))
-        addGestureRecognizer(tapGesture)
+        
+        lx.addTapGestureRecognizer { view in
+            view?.isUserInteractionEnabled = false
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                view?.isUserInteractionEnabled = true
+            }
+            self.tapClosure?(view as? SwiftImgView)
+        }
     }
     
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    /// action call
-    @objc private func swiftImgViewAction(_ gesture: UIGestureRecognizer) {
-        gesture.view?.isUserInteractionEnabled = false
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
-            gesture.view?.isUserInteractionEnabled = true
-        }
-        self.callBack?(gesture.view as? SwiftImgView)
-    }
+
 }

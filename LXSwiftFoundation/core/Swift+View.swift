@@ -67,7 +67,7 @@ extension SwiftBasics where Base: UIView {
     
     /// 获取当前view对应的控制器
     public static func currentViewController(ofView view: UIView) -> UIViewController? {
-        return UIApplication.lx.currentViewController(ofView: view)
+        UIApplication.lx.currentViewController(ofView: view)
     }
     
     /// 打开url
@@ -242,27 +242,27 @@ extension SwiftBasics where Base: UIView {
     
     /// 添加手势直接闭包回调
     @discardableResult
-    public func addGesture(_ viewCallBack: @escaping ((UIView?) -> ())) -> UITapGestureRecognizer {
-        base.viewCallBack = viewCallBack
+    public func addTapGestureRecognizer(_ gestureClosure: @escaping ((UIView?) -> ())) -> UITapGestureRecognizer {
+        base.gestureClosure = gestureClosure
         let gesture = UITapGestureRecognizer(target: base, action: #selector(base.gestureTap(_:)))
         base.addGestureRecognizer(gesture)
         return gesture
     }
 }
 
-private var viewCallBackKey: Void?
+private var _swiftGestureClosureKey: Void?
 extension UIView {
     
-    fileprivate var viewCallBack: ((UIView?) -> ())? {
+    fileprivate var gestureClosure: ((UIView?) -> ())? {
         get {
-            swift_getAssociatedObject(self, &viewCallBackKey)
+            objc_getAssociatedObject(self,  &_swiftGestureClosureKey) as? (UIView?) -> ()
         }
         set {
-            swift_setRetainedAssociatedObject(self, &viewCallBackKey, newValue)
+            objc_setAssociatedObject(self, &_swiftGestureClosureKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
     @objc fileprivate func gestureTap(_ gesture: UIGestureRecognizer) {
-        viewCallBack?(gesture.view)
+        gestureClosure?(gesture.view)
     }
 }

@@ -60,11 +60,8 @@ class ViewController: UIViewController {
         btn.backgroundColor = UIColor.red
         btn.frame = CGRect(x: SCREEN_WIDTH_TO_WIDTH - 100, y: SCREEN_HEIGHT_TO_NAVBARHEIGHT, width: 60, height: 60)
         view.addSubview(btn)
+
         btn.addTarget(self, action: #selector(btnClick(_:)), for: UIControl.Event.touchUpInside)
-         
-         
-         LXXXLog("===-=-=-=-=-=-=\("123456".lx.md5)")
-         
      }
     
     @objc func btnClick(_ btn: UIButton) {

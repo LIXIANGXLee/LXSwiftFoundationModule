@@ -38,7 +38,9 @@ extension SwiftBasics where Base: NSAttributedString {
 extension SwiftBasics where Base: NSMutableAttributedString {
     
     public func setAttribute(with attribute: NSAttributedString.Key, value: Any?, range: NSRange) {
-        guard let value = value else { return }
+        guard let value = value else {
+            return
+        }
         base.addAttribute(attribute, value: value, range: range)
     }
     

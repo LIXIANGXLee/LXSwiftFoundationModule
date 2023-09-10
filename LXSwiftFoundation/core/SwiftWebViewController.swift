@@ -38,12 +38,12 @@ open class SwiftWeakScriptMessageDelegate: NSObject, WKScriptMessageHandler {
     open var loadWebViewTitle: ((String) -> ())?
     open var loadWebViewUrl: ((URL) -> ())?
     
-    fileprivate var spinner: UIActivityIndicatorView!
-    fileprivate var progressView: UIProgressView!
-    fileprivate var methods = [SwiftMethod]()
+    private var spinner: UIActivityIndicatorView!
+    private var progressView: UIProgressView!
+    private var methods = [SwiftMethod]()
     
     // MARK: - Customize the root view -- recommended when the entire page is a WebView or image
-    public fileprivate(set) lazy var webView: WKWebView = {
+    public private(set) lazy var webView: WKWebView = {
         let config = WKWebViewConfiguration()
         config.allowsAirPlayForMediaPlayback = true
         
@@ -133,7 +133,9 @@ extension SwiftWebViewController {
     /// add js call back
     @available(iOS 8.0, *)
     open func jsMethod(with method: String, handel: @escaping (Any) -> ()) {
-        for m in methods { assert(m.method == method, "不能重复添加相同名称") }
+        for m in methods {
+            assert(m.method == method, "不能重复添加相同名称")
+        }
         self.methods.append(SwiftMethod(method: method, handel: handel))
         let vc = webView.configuration.userContentController
         vc.add(SwiftWeakScriptMessageDelegate(self), name: method)
@@ -194,7 +196,7 @@ extension SwiftWebViewController: WKScriptMessageHandler {
 // MARK: -  UI部分
 extension SwiftWebViewController {
     
-    fileprivate func setUI() {
+    private func setUI() {
         spinner = UIActivityIndicatorView()
         spinner.translatesAutoresizingMaskIntoConstraints = false
         webView.addSubview(spinner)
@@ -214,7 +216,7 @@ extension SwiftWebViewController {
     }
     
     ///observer
-    fileprivate func addObserver() {
+    private func addObserver() {
         /// 添加观察者--实时监视“估计进度”属性的值
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.title), options: .new, context: nil)
@@ -239,7 +241,7 @@ extension SwiftWebViewController {
     }
     
     /// 执行JS代码——也称为注入JavaScript
-    fileprivate func handleJS() {
+    private func handleJS() {
         webView.evaluateJavaScript("document.body.offsetHeight") { (res, error) in
             guard let height = res as? Int else {
                 return

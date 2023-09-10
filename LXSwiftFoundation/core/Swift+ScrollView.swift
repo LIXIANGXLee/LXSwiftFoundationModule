@@ -57,7 +57,9 @@ extension UIScrollView {
     /// 获取ScrollView的contentScroll长图像
     func snapShotContentScroll(_ completionHandler: @escaping (_ screenShotImage: UIImage?)  -> Void) {
         
-        guard let snapShotView = self.snapshotView(afterScreenUpdates: true) else { return }
+        guard let snapShotView = self.snapshotView(afterScreenUpdates: true) else {
+            return
+        }
         snapShotView.frame = CGRect(x: self.frame.origin.x,
                                      y: self.frame.origin.y,
                                      width: snapShotView.frame.size.width,
@@ -90,7 +92,7 @@ extension UIScrollView {
                                 y: CGFloat(index) * self.frame.size.height,
                                 width: bounds.size.width,
                                 height: bounds.size.height)
-        DispatchQueue.lx.delay(with: Double(Int64(0.3*Double(NSEC_PER_SEC)))/Double(NSEC_PER_SEC)) {
+        DispatchQueue.lx.delay(with: Double(Int64(0.3 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
             self.drawHierarchy(in: splitFrame, afterScreenUpdates: true)
             if index < maxIndex {
                 self.snapShotContentScrollPage(index: index + 1, maxIndex: maxIndex, callback: callback)

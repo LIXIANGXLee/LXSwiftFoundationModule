@@ -45,30 +45,37 @@ public extension SwiftUICompatible {
     func setupUI() { }
     func setupViewModel() { }
 }
+
 extension SwiftView: SwiftUICompatible {
     @objc open func setupUI() { }
     @objc open func setupViewModel() { }
 }
+
 extension SwiftCollectionView: SwiftUICompatible {
     @objc open func setupUI() { }
     @objc open func setupViewModel() { }
 }
+
 extension SwiftCollectionViewCell: SwiftUICompatible {
     @objc open func setupUI() { }
     @objc open func setupViewModel() { }
 }
+
 extension SwiftScrollView: SwiftUICompatible {
     @objc open func setupUI() { }
     @objc open func setupViewModel() { }
 }
+
 extension SwiftTableView: SwiftUICompatible {
     @objc open func setupUI() { }
     @objc open func setupViewModel() { }
 }
+
 extension SwiftTableViewCell: SwiftUICompatible {
     @objc open func setupUI() { }
     @objc open func setupViewModel() { }
 }
+
 extension SwiftViewController: SwiftUICompatible {
     @objc open func setupUI() { }
     @objc open func setupViewModel() { }

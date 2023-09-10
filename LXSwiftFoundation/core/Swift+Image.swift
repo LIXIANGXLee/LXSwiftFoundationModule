@@ -26,7 +26,9 @@ extension SwiftBasics where Base: UIImage {
     /// 暗黑模式 和 亮模式
     public static func image(light: UIImage, dark: UIImage) -> UIImage {
         if #available(iOS 13.0, *) {
-            guard let config = light.configuration else { return light }
+            guard let config = light.configuration else {
+                return light
+            }
             let lightImage = light.withConfiguration(
                 config.withTraitCollection(
                     UITraitCollection.init(userInterfaceStyle: UIUserInterfaceStyle.light)))
@@ -139,7 +141,9 @@ extension SwiftBasics where Base: UIImage {
                                    y: CGFloat(i * imageRef.height / row),
                                    width: CGFloat(imageRef.width / col),
                                    height: CGFloat(imageRef.height / row))
-                guard let subImageRef = imageRef.cropping(to: rect) else { return nil }
+                guard let subImageRef = imageRef.cropping(to: rect) else {
+                    return nil
+                }
                 images.append(UIImage(cgImage: subImageRef))
             }
         }
