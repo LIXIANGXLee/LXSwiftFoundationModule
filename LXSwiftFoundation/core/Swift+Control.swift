@@ -21,7 +21,7 @@ extension SwiftBasics where Base: UIControl {
         base.swiftAddTarget(forControlEvents: events, closure: closure)
     }
     
-    @available(*, deprecated, message:"Use addTarget(for controlEvents:,callBack:)")
+    @available(*, deprecated, message:"Use addTarget(forControlEvents events:, closure:)")
     public func setHandle(buttonCallBack: ((_ button: UIButton) -> ())?) {
         addTarget { (objc) in
             if let btn = objc as? UIButton {
