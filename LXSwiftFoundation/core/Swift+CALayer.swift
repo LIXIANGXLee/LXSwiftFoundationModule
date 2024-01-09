@@ -24,7 +24,7 @@ extension SwiftBasics where Base: CALayer {
     }
     
     /// 添加边框
-    public func addBorder(_ edge: UIRectEdge, color: UIColor = UIColor.lx.color(hex: "999999"), side: CGFloat = 0.5) {
+    public func addBorder(_ edge: UIRectEdge, color: UIColor = UIColor.black, side: CGFloat = 0.5) {
         let border = CALayer()
         switch edge {
         case UIRectEdge.top:

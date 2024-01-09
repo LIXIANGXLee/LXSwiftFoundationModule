@@ -8,7 +8,6 @@
 
 import UIKit
 
-private let tag = 1991880313
 @objc(LXObjcTableView)
 @objcMembers open class SwiftTableView: UITableView {
         
@@ -58,108 +57,47 @@ public extension UITableView {
     /*
      注册cell扩展 
      示例代码:
-     public class LXTableViewViewCell: LXSwiftTableViewCell { }
+     public class TableViewViewCell: SwiftTableViewCell { }
      或者
-     public class LXTableViewViewCell: UITableViewCell, LXSwiftCellCompatible {  }
+     public class TableViewViewCell: UITableViewCell, SwiftCellCompatible {  }
      
      实现如下tableView的代理, 调用tableView的扩展方法即可.
      /// 注册
-     tableView.registSwiftCell(LXTableViewViewCell.self)
+     tableView.registerSwiftCell(TableViewViewCell.self)
      cell代理代理方法
      func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
      
      /// 获取cell
-        tableView.dequeueSwiftReusableCell(indexPath: indexPath) as LXTableViewViewCell
+        tableView.dequeueSwiftReusableCell(indexPath: indexPath, as: LXTableViewViewCell.self) 
      }
      */
-    func registSwiftCell<T: UITableViewCell>(_ cell: T.Type) where T: SwiftCellCompatible {
-        register(cell, forCellReuseIdentifier: cell.reusableSwiftIdentifier)
+    func registerSwiftCell<T: UITableViewCell>(cellType: T.Type) where T: SwiftCellCompatible {
+      
+        register(cellType.self, forCellReuseIdentifier: cellType.reusableIdentifier)
+    }
+    
+    func registerSwifView<T: UITableViewHeaderFooterView>(headerFotterViewType: T.Type) where T: SwiftCellCompatible {
+       
+        register(headerFotterViewType.self, forCellReuseIdentifier: headerFotterViewType.reusableIdentifier)
     }
 
     /// 获取注册的cell的扩展
-    func dequeueSwiftReusableCell<T: UITableViewCell>(indexPath: IndexPath) -> T where T: SwiftCellCompatible {
-        dequeueReusableCell(withIdentifier: T.reusableSwiftIdentifier, for: indexPath) as! T
-    }
-    
-    /*
-     给cell扩展圆角和背景色
-     示例代码:
-     实现如下tableView的代理, 调用tableView的扩展方法即可.
-     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        tableView.roundSwiftSectionCell(cell, forRowAt: indexPath, cornerRadius: 6.0)
-     }
-     */
-   @objc func roundSwiftSectionCell(_ cell: UITableViewCell, forRowAt indexPath: IndexPath, cornerRadius: CGFloat, backgroundColor: UIColor = .white) {
-        let hasSectionHeader = (self.delegate?.tableView?(self, viewForHeaderInSection: indexPath.section)) != nil
-        let hasSectionFooter = (self.delegate?.tableView?(self, viewForFooterInSection: indexPath.section)) != nil
-        let numberOfRows = self.numberOfRows(inSection: indexPath.section)
-        if (indexPath.row == 0 && numberOfRows == 1) {
-            cell.roundSwiftBackground(roundingCorners: .allCorners, cornerRadius: cornerRadius, backgroundColor: backgroundColor)
-        } else if indexPath.row == 0 && !hasSectionHeader {
-            cell.roundSwiftBackground(roundingCorners: [.topLeft, .topRight], cornerRadius: cornerRadius, backgroundColor: backgroundColor)
-        } else if indexPath.row == (numberOfRows - 1) && !hasSectionFooter {
-            cell.roundSwiftBackground(roundingCorners: [.bottomLeft, .bottomRight], cornerRadius: cornerRadius, backgroundColor: backgroundColor)
-        } else {
-            cell.roundSwiftBackground(roundingCorners: [], cornerRadius: cornerRadius, backgroundColor: backgroundColor)
-        }
-    }
-    
-    /// 给sectionHeader扩展圆角和背景色
-    @objc func roundSwiftSectionHeader(_ sectionHeader: UIView, forSection section: Int, cornerRadius: CGFloat, backgroundColor: UIColor = .white) {
-        OperationQueue.main.addOperation {
-            let numberOfRows = self.numberOfRows(inSection: section)
-            let hasSectionFooter = (self.delegate?.tableView?(self, viewForFooterInSection: section)) != nil
-            if numberOfRows == 0 && hasSectionFooter == false {
-                sectionHeader.roundSwiftBackground(roundingCorners: .allCorners, cornerRadius: cornerRadius, backgroundColor: backgroundColor)
-            } else {
-                sectionHeader.roundSwiftBackground(roundingCorners: [.topLeft, .topRight], cornerRadius: cornerRadius, backgroundColor: backgroundColor)
-            }
-        }
-    }
-    
-    /// 给sectionFooter扩展圆角和背景色
-    @objc func roundSwiftSectionFooter(_ sectionFooter: UIView, forSection section: Int, cornerRadius: CGFloat, backgroundColor: UIColor = .white) {
-        let numberOfRows = self.numberOfRows(inSection: section)
-        let hasSectionHeader = (self.delegate?.tableView?(self, viewForHeaderInSection: section)) != nil
-        if numberOfRows == 0 && hasSectionHeader == false {
-            sectionFooter.roundSwiftBackground(roundingCorners: .allCorners, cornerRadius: cornerRadius, backgroundColor: backgroundColor)
-        } else {
-            sectionFooter.roundSwiftBackground(roundingCorners: [.bottomLeft, .bottomRight], cornerRadius: cornerRadius, backgroundColor: backgroundColor)
-        }
-    }
-}
-
-extension SwiftCustomRoundbackground {
-    
-    public func roundSwiftBackground(roundingCorners: UIRectCorner, cornerRadius: CGFloat, backgroundColor: UIColor = .white) {
-        guard let associatedView = self.associatedView else {
-            return
+    func dequeueSwiftReusableCell<T: UITableViewCell>(indexPath: IndexPath, as cellType: T.Type = T.self) -> T where T: SwiftCellCompatible {
+        
+        guard let cell = dequeueReusableCell(withIdentifier: T.reusableIdentifier, for: indexPath) as? T else {
+            preconditionFailure("Failed to dequeue a cell with identifier \(cellType.reusableIdentifier) matching type \(cellType.self). " + "Check that you registered the cell beforehand")
         }
         
-        let bounds = associatedView.bounds
-        let backgroundLayer = CAShapeLayer()
-        let besizer = UIBezierPath(roundedRect: bounds, byRoundingCorners: roundingCorners, cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
-        backgroundLayer.path = besizer.cgPath
-        backgroundLayer.fillColor = backgroundColor.cgColor
-        associatedView.backgroundColor = UIColor.clear
-        associatedView.layer.sublayers?.forEach {
-            if let shapeLayer = $0 as? CAShapeLayer {
-                shapeLayer.removeFromSuperlayer()
-            }
-        }
-        associatedView.layer.insertSublayer(backgroundLayer, at: 0)
+        return cell
+        
     }
-}
-
-extension SwiftCustomRoundbackground where Self: UITableViewCell {
-    var associatedView: UIView? {
-        if backgroundView?.tag != tag {
-            let roundView = UIView(frame: bounds)
-            roundView.backgroundColor = UIColor.clear
-            roundView.tag = tag
-            backgroundView = roundView
+    
+    func dequeueSwiftReusableHeaderFotterView<T: UITableViewHeaderFooterView>(as viewType: T.Type = T.self) -> T where T: SwiftCellCompatible {
+        
+        guard let view = dequeueReusableHeaderFooterView(withIdentifier: viewType.reusableIdentifier) as? T else {
+            preconditionFailure("Failed to dequeue a header/fotter with identifier \(viewType.reusableIdentifier) matching type \(viewType.self). " + "Check that you registered the header/fotter beforehand")
         }
-        return backgroundView
+        return view
     }
 }
 
@@ -178,7 +116,7 @@ extension SwiftTableView: UIGestureRecognizerDelegate {
 }
 
 //MARK: - LXTableViewCell
-@objcMembers open class SwiftTableViewCell: UITableViewCell, SwiftCellCompatible {
+@objcMembers open class SwiftTableViewCell: UITableViewCell {
 
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -191,3 +129,4 @@ extension SwiftTableView: UIGestureRecognizerDelegate {
     }
 }
 
+extension SwiftTableViewCell: SwiftCellCompatible { }

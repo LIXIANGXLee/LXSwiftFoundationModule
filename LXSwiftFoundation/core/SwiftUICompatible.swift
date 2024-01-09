@@ -15,32 +15,16 @@ public protocol SwiftUICompatible: AnyObject {
 
 /// 任意类型协议
 public protocol SwiftCellCompatible: AnyObject {
-    static var reusableSwiftIdentifier: String { get }
+    static var reusableIdentifier: String { get }
 }
 
 /// 默认实现协议扩展
-public extension SwiftCellCompatible {
-    static var reusableSwiftIdentifier: String { "\(self)" }
+public extension SwiftCellCompatible where Self: UIView {
+    static var reusableIdentifier: String {
+        String(describing: Self.self)
+    }
 }
 
-/// 定义圆角背景色协议
-public protocol SwiftCustomRoundbackground: AnyObject {
-    
-    /// 获取view的计算属性
-    var associatedView: UIView? { get }
-    
-    /// 设置背景色和圆角
-    func roundSwiftBackground(roundingCorners: UIRectCorner, cornerRadius: CGFloat, backgroundColor: UIColor)
-}
-
-extension SwiftCustomRoundbackground where Self: UIView {
-    
-    /// 默认实现计算属性
-    public var associatedView: UIView? { return self }
-}
-
-/// 遵守协议
-extension UIView: SwiftCustomRoundbackground { }
 public extension SwiftUICompatible {
     func setupUI() { }
     func setupViewModel() { }

@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         let tableView = SwiftTableView(frame: CGRect.zero, style: UITableView.Style.grouped)
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.registSwiftCell(LXTableViewViewCell.self)
+        tableView.registerSwiftCell(cellType: LXTableViewViewCell.self)
         return tableView
     }()
     
@@ -117,8 +117,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate  {
     func numberOfSections(in tableView: UITableView) -> Int { datas.count }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { datas[section].count }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueSwiftReusableCell(indexPath: indexPath) as LXTableViewViewCell
-        tableView.roundSwiftSectionCell(cell, forRowAt: indexPath, cornerRadius: 20, backgroundColor: UIColor.blue)
+        
+        let cell = tableView.dequeueSwiftReusableCell(indexPath: indexPath, as: LXTableViewViewCell.self)
         cell.textStr = datas[indexPath.section][indexPath.row]
         return cell
     }
@@ -210,7 +210,7 @@ class LXTableViewViewCell: SwiftTableViewCell {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: 00, y: 0, width: SCREEN_WIDTH_TO_WIDTH, height: 50))
-        label.textColor = UIColor.white
+        label.textColor = UIColor.black
         label.textAlignment = .center
         label.font = UIFont.lx.font(withBold: 16)
         return label

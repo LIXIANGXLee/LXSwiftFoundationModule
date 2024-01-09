@@ -22,7 +22,8 @@ import UIKit
                                   identified: String?,
                                   task: SwiftGCDTimer.TaskCallBack?) {
         
-        guard let iden = identified, delaySeconds >= 0, interval >= 0, task != nil else {
+        guard let iden = identified, delaySeconds >= 0,
+              interval >= 0, task != nil else {
             return
         }
         let timer = DispatchSource.makeTimerSource(queue: DispatchQueue.global())
