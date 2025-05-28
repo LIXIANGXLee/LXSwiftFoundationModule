@@ -84,27 +84,34 @@ extension DispatchQueue: SwiftCompatible {
     static var onceTracker = Set<String>()
 }
 extension CGFloat: SwiftCompatible {
-    public static func ~= (pattern: (CGFloat) -> (Bool), value: CGFloat) -> Bool { pattern(value) }
+    public static func ~= (pattern: (CGFloat) -> (Bool), value: CGFloat) -> Bool {
+        pattern(value)
+    }
 }
 extension Double: SwiftCompatible {
-    public static func ~= (pattern: (Double) -> (Bool), value: Double) -> Bool { pattern(value) }
+    public static func ~= (pattern: (Double) -> (Bool), value: Double) -> Bool {
+        pattern(value)
+    }
 }
 extension Int32: SwiftCompatible {
-    public static func ~= (pattern: (Int32) -> (Bool), value: Int32) -> Bool { pattern(value) }
+    public static func ~= (pattern: (Int32) -> (Bool), value: Int32) -> Bool {
+        pattern(value)
+    }
 }
 
 extension Int64: SwiftCompatible {
-    public static func ~= (pattern: (Int64) -> (Bool), value: Int64) -> Bool { pattern(value) }
+    public static func ~= (pattern: (Int64) -> (Bool), value: Int64) -> Bool {
+        pattern(value)
+    }
 }
 
 extension Int: SwiftCompatible {
-    public static func ~= (pattern: (Int) -> (Bool), value: Int) -> Bool { pattern(value) }
+    public static func ~= (pattern: (Int) -> (Bool), value: Int) -> Bool {
+        pattern(value)
+    }
 }
 extension String: SwiftCompatible {
-    public static func ~= (pattern: (String) -> Bool, value: String) -> Bool { pattern(value) }
-}
-extension Timer: SwiftCompatible {
-    @objc func _execBlock(timer: Timer)  {
-        if let block = timer.userInfo as? ((Timer) -> Void) { block(timer) }
+    public static func ~= (pattern: (String) -> Bool, value: String) -> Bool {
+        pattern(value)
     }
 }

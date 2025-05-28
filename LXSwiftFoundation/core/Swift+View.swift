@@ -26,12 +26,7 @@ extension SwiftBasics where Base: UIView {
     public var rootWindow: UIWindow? {
         UIApplication.lx.rootWindow
     }
-    
-    /// 获取定制化跟窗口
-    public static var lastWindowInAllWindows: UIWindow? {
-        UIApplication.lx.lastWindowInAllWindows
-    }
-    
+ 
     /// 获取最外层窗口 需要判断不是UIRemoteKeyboardWindow才行，否则在ipad会存在问题
     public static var lastWindow: UIWindow? {
         UIApplication.lx.lastWindow
@@ -84,26 +79,7 @@ extension SwiftBasics where Base: UIView {
     public func willResignActive(_ aSelector: Selector) {
         SwiftUtils.willResignActive(base, selector: aSelector)
     }
-    
-    /// 监听键盘即将弹起
-    public func keyboardWillShow(_ aSelector: Selector) {
-        SwiftUtils.keyboardWillShow(base, selector: aSelector)
-    }
-    
-    /// 监听键盘已经弹起
-    public func keyboardDidShow(_ aSelector: Selector) {
-        SwiftUtils.keyboardDidShow(base, selector: aSelector)
-    }
-    
-    /// 监听键盘即将退下
-    public func keyboardWillHide(_ aSelector: Selector) {
-        SwiftUtils.keyboardWillHide(base, selector: aSelector)
-    }
-    
-    /// 监听键盘已经退下
-    public func keyboardDidHide(_ aSelector: Selector) {
-        SwiftUtils.keyboardDidHide(base, selector: aSelector)
-    }
+
 }
 
 //MARK: -  Extending methods for UIView

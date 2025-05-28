@@ -46,7 +46,8 @@ import UIKit
 extension SwiftMenuCenterView {
    
     /// 显示视图
-    open func show(_ rootView: UIView? = nil, callBack: ((Bool) -> Void)? = nil) {
+    open func show(_ rootView: UIView? = nil,
+                   callBack: ((Bool) -> Void)? = nil) {
       
         guard var content = content else {
             return

@@ -26,15 +26,11 @@ extension SwiftBasics where Base == CGFloat {
     public var toDouble: Double { Double(base) }
     
     /// CGFloat转bool
-    public var toBool: Bool {
-        base > 0 ? true : false
-    }
+    public var toBool: Bool { base > 0 ? true : false }
  
     /// 用户显示容量 (GB、MB、KB、B)
     @available(*, deprecated, renamed: "sizeFileToString")
-    public var sizeFileToStr: String {
-        sizeFileToString
-    }
+    public var sizeFileToStr: String { sizeFileToString }
     
     /// 用户显示容量 (GB、MB、KB、B)
     public var sizeFileToString: String {
@@ -43,9 +39,7 @@ extension SwiftBasics where Base == CGFloat {
     
     /// 时间字符串
     @available(*, deprecated, renamed: "timeToString")
-    public var timeToStr: String {
-        timeToString
-    }
+    public var timeToStr: String { timeToString }
     
     /// 时间字符串
     public var timeToString: String {
@@ -57,25 +51,23 @@ extension SwiftBasics where Base == CGFloat {
 extension SwiftBasics where Base == Double {
     
     /// Double转bool
-    public var toBool: Bool {
-        base > 0 ? true : false
-    }
+    public var toBool: Bool { base > 0 ? true : false }
 
     /// 保留小数点后的小数位
-    public func roundTo(minDigits: Int = 0, maxDigits: Int = 2, mode: NumberFormatter.RoundingMode = .halfEven) -> String {
-        NSNumber(value: base).lx.numberFormatter(with: mode, minDigits: minDigits, maxDigits: maxDigits) ?? ""
-    }
+    public func roundTo(minDigits: Int = 0,
+                        maxDigits: Int = 2,
+                        mode: NumberFormatter.RoundingMode = .halfEven) -> String? {
+        
+        let number = NSNumber(value: base);
     
-    /// 保留小数点后的小数位
-    public func roundTo(digits: Int = 0, mode: NumberFormatter.RoundingMode = .halfEven) -> String {
-        NSNumber(value: base).lx.numberFormatter(with: mode, minDigits: digits, maxDigits: digits) ?? ""
+        return number.lx.numberFormatter(with: mode,
+                                        minDigits: minDigits,
+                                        maxDigits: maxDigits)
     }
     
     /// 用户显示容量 (GB、MB、KB、B)
     @available(*, deprecated, renamed: "sizeFileToString")
-    public var sizeFileToStr: String {
-        sizeFileToString
-    }
+    public var sizeFileToStr: String { sizeFileToString }
     
     /// 用户显示容量 (GB、MB、KB、B)
     public var sizeFileToString: String {
@@ -108,9 +100,7 @@ extension SwiftBasics where Base == Double {
     
     /// 时间字符串
     @available(*, deprecated, renamed: "timeToString")
-    public var timeToStr: String {
-        timeToString
-    }
+    public var timeToStr: String { timeToString }
     
     /// 时间字符串
     public var timeToString: String {

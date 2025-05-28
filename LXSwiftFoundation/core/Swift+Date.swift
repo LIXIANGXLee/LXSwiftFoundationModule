@@ -8,117 +8,114 @@
 
 import UIKit
 
-private let CurrentCalendar = Calendar.current
-//MARK: -  Extending methods for Date
 extension SwiftBasics where Base == Date {
     
-    /// 日期转换字符串 yyyy-MM-dd HH:mm:ss
-    public func dateTranformString(with ymd: String = "yyyy-MM-dd HH:mm:ss") -> String {
-        let fmt = DateFormatter()
-        fmt.dateFormat = ymd
-        return fmt.string(from: base)
+    /// 将日期格式化为指定格式的字符串
+    /// - Parameter format: 日期格式字符串，默认为 "yyyy-MM-dd HH:mm:ss"
+    /// - Returns: 格式化后的日期字符串
+    ///
+    /// 示例:
+    /// ```
+    /// let date = Date()
+    /// date.lx.dateTranformString()                     // "2023-08-15 14:30:00"
+    /// date.lx.dateTranformString(with: "yyyy/MM/dd")   // "2023/08/15"
+    /// date.lx.dateTranformString(with: "HH:mm")        // "14:30"
+    /// ```
+    public func dateTranformString(with format: String = "yyyy-MM-dd HH:mm:ss") -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale.current  // 使用当前地区设置
+        formatter.timeZone = TimeZone.current  // 使用当前时区
+        formatter.dateFormat = format
+        return formatter.string(from: base)
     }
     
-    /// 日期和日期比较
-    public func dateCompare(with date: Date, unit: Set<Calendar.Component> = [.year,.month,.day]) -> (DateComponents,DateComponents) {
-        (CurrentCalendar.dateComponents(unit, from: base), CurrentCalendar.dateComponents(unit, from: date))
-    }
+    // MARK: - 辅助方法 (Helper Methods)
     
-    /// 获取两个日期之间的数据
-    public func componentCompare(from date: Date, unit: Set<Calendar.Component> = [.year,.month,.day]) -> DateComponents {
-        CurrentCalendar.dateComponents(unit, from: date, to: base)
+    /// 比较两个日期的指定组件
+    /// - Parameters:
+    ///   - date: 要比较的日期
+    ///   - unit: 要比较的日历组件
+    /// - Returns: 包含两个日期组件的元组
+    public func dateCompare(with date: Date, unit: Set<Calendar.Component>) -> (DateComponents, DateComponents) {
+        let selfCmps = Calendar.current.dateComponents(unit, from: base)
+        let otherCmps = Calendar.current.dateComponents(unit, from: date)
+        return (selfCmps, otherCmps)
     }
-    
-    /// 获取两个日期之间的天数
-    public func numberOfDays(from date: Date) -> Int? {
-        componentCompare(from: date, unit: [.day]).day
-    }
-    
-    /// 获取两个日期之间的小时
-    public func numberOfHours(from date: Date) -> Int? {
-        componentCompare(from: date, unit: [.hour]).hour
-    }
-    
-    /// 获取两个日期之间的分钟
-    public func numberOfMinutes(from date: Date) -> Int? {
-        componentCompare(from: date, unit: [.minute]).minute
-    }
-    
-    /// 获取两个日期之间的秒数
-    public func numberOfSeconds(from date: Date) -> Int? {
-        componentCompare(from: date, unit: [.second]).second
-    }
+ 
 }
 
-//MARK: -  Extending properties  for NSData
+// MARK: - 日期扩展 (Date Extension)
 extension SwiftBasics where Base == Date {
     
-    /// 获取时间戳
+    // MARK: - 时间组件 (Time Components)
+    
+    /// 获取时间戳（Unix时间戳，1970年至今的秒数）
     public var timeInterval: TimeInterval { base.timeIntervalSince1970 }
-    public var year: Int { CurrentCalendar.component(.year, from: base) }
-    public var month: Int { CurrentCalendar.component(.month, from: base) }
-    public var day: Int { CurrentCalendar.component(.day, from: base) }
-    public var hour: Int { CurrentCalendar.component(.hour, from: base) }
-    public var minute: Int { CurrentCalendar.component(.minute, from: base) }
-    public var second: Int { CurrentCalendar.component(.second, from: base) }
-    public var nanosecond: Int { CurrentCalendar.component(.nanosecond, from: base) }
-    public var weekday: Int { CurrentCalendar.component(.weekday, from: base) }
-    public var weekOfMonth: Int { CurrentCalendar.component(.weekOfMonth, from: base) }
-    public var weekOfYear: Int { CurrentCalendar.component(.weekOfYear, from: base) }
-    public var quarter: Int { CurrentCalendar.component(.quarter, from: base) }
- 
-    /// 是否是今年
+    
+    /// 年份（如：2023）
+    public var year: Int { Calendar.current.component(.year, from: base) }
+    
+    /// 月份（1-12）
+    public var month: Int { Calendar.current.component(.month, from: base) }
+    
+    /// 日（1-31）
+    public var day: Int { Calendar.current.component(.day, from: base) }
+    
+    /// 小时（0-23）
+    public var hour: Int { Calendar.current.component(.hour, from: base) }
+    
+    /// 分钟（0-59）
+    public var minute: Int { Calendar.current.component(.minute, from: base) }
+    
+    /// 秒（0-59）
+    public var second: Int { Calendar.current.component(.second, from: base) }
+    
+    /// 纳秒
+    public var nanosecond: Int { Calendar.current.component(.nanosecond, from: base) }
+    
+    /// 星期几（1-7，系统相关，通常1=星期日）
+    public var weekday: Int { Calendar.current.component(.weekday, from: base) }
+    
+    /// 月中的第几周（1-5）
+    public var weekOfMonth: Int { Calendar.current.component(.weekOfMonth, from: base) }
+    
+    /// 年中的第几周（1-52）
+    public var weekOfYear: Int { Calendar.current.component(.weekOfYear, from: base) }
+    
+    /// 季度（1-4）
+    public var quarter: Int { Calendar.current.component(.quarter, from: base) }
+    
+    // MARK: - 日期判断 (Date Checks)
+    
+    /// 判断是否是今年
     public var isThisYear: Bool {
-        let unit: Set<Calendar.Component> = [.year]
-        let (selfCmps, nowComps) = base.lx.dateCompare(with: Date(), unit: unit)
-        return nowComps.year == selfCmps.year
+        return Calendar.current.isDate(base, equalTo: Date(), toGranularity: .year)
     }
     
-    /// 是否是昨天
+    /// 判断是否是昨天
     public var isYesterday: Bool {
-        let unit: Set<Calendar.Component> = [.day,.month,.year]
-        let (selfCmps, nowComps) = base.lx.dateCompare(with: Date(), unit: unit)
-        guard let nDay = nowComps.day, let cDay = selfCmps.day else { return false }
-        return (selfCmps.year == nowComps.year) &&
-             (selfCmps.month == nowComps.month) &&
-             ((nDay - cDay) == 1)
+        return Calendar.current.isDateInYesterday(base)
     }
     
-    /// 是否是今天
-    public var isToday: Bool{
-        let unit: Set<Calendar.Component> = [.day,.month,.year]
-        let (selfCmps, nowComps) = base.lx.dateCompare(with: Date(), unit: unit)
-        return (selfCmps.year == nowComps.year) &&
-               (selfCmps.month == nowComps.month) &&
-               (selfCmps.day == nowComps.day)
+    /// 判断是否是今天
+    public var isToday: Bool {
+        return Calendar.current.isDateInToday(base)
     }
     
-    /// 是否是一小时前
-    public var isAnHourAgo: Bool{
-        let unit: Set<Calendar.Component> = [.hour,.day,.month,.year]
-        let (selfCmps, nowComps) = base.lx.dateCompare(with: Date(), unit: unit)
-        return (selfCmps.year == nowComps.year) &&
-               (selfCmps.month == nowComps.month) &&
-               (selfCmps.day == nowComps.day) &&
-               (selfCmps.hour == nowComps.hour)
+    /// 判断是否是一小时内（当前小时）
+    public var isAnHourAgo: Bool {
+        return Calendar.current.isDate(base, equalTo: Date(), toGranularity: .hour)
     }
     
-    /// 是否是一分钟内
-    public var isJust: Bool{
-        let unit: Set<Calendar.Component> = [.minute,.hour,.day,.month,.year]
-        let (selfCmps, nowComps) = base.lx.dateCompare(with: Date(), unit: unit)
-        return (selfCmps.year == nowComps.year) &&
-               (selfCmps.month == nowComps.month) &&
-               (selfCmps.day == nowComps.day) &&
-               (selfCmps.hour == nowComps.hour) &&
-               (selfCmps.minute == nowComps.minute)
+    /// 判断是否是一分钟内（当前分钟）
+    public var isJust: Bool {
+        return Calendar.current.isDate(base, equalTo: Date(), toGranularity: .minute)
+    }
+    
+    /// 判断是否是闰年
+    public var isLeapYear: Bool {
+        let year = base.lx.year
+        return (year % 400 == 0) || (year % 100 != 0 && year % 4 == 0)
     }
 
-    ///判断是否为瑞年
-    public var isLeapYear: Bool {
-      
-        let year = base.lx.year
-        return ((year % 400 == 0) || ((year % 100 != 0) && (year % 4 == 0)))
-    }
-    
 }

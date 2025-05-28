@@ -55,12 +55,15 @@ public extension UICollectionView {
     
     func registerSwifView<T: UICollectionReusableView>(supplementaryViewType: T.Type, ofKind elementKind: String) where T: SwiftCellCompatible {
         
-        register(supplementaryViewType.self, forSupplementaryViewOfKind: elementKind, withReuseIdentifier: supplementaryViewType.reusableIdentifier)
+        register(supplementaryViewType.self,
+                 forSupplementaryViewOfKind: elementKind,
+                 withReuseIdentifier: supplementaryViewType.reusableIdentifier)
     }
     
     func dequeueSwiftReusableCell<T: UICollectionViewCell>(indexPath: IndexPath, as cellType: T.Type = T.self) -> T where T: SwiftCellCompatible {
       
-        guard let cell = dequeueReusableCell(withReuseIdentifier: T.reusableIdentifier, for: indexPath) as? T else {
+        guard let cell = dequeueReusableCell(withReuseIdentifier: T.reusableIdentifier,
+                                             for: indexPath) as? T else {
             preconditionFailure("Failed to dequeue a cell with identifier \(cellType.reusableIdentifier) matching type \(cellType.self). " + "Check that you registered the cell beforehand")
         }
         
@@ -69,7 +72,9 @@ public extension UICollectionView {
     
     func dequeueSwiftReusableSupplementaryView<T: UICollectionReusableView>(ofKind elementkind: String, indexPath: IndexPath, as viewType: T.Type = T.self) -> T where T: SwiftCellCompatible {
         
-        guard let view = dequeueReusableSupplementaryView(ofKind: elementkind, withReuseIdentifier: viewType.reusableIdentifier, for: indexPath) as? T else {
+        guard let view = dequeueReusableSupplementaryView(ofKind: elementkind,
+                                                          withReuseIdentifier: viewType.reusableIdentifier,
+                                                          for: indexPath) as? T else {
             preconditionFailure("Failed to dequeue a supplementary view with identifier \(viewType.reusableIdentifier) matching type \(viewType.self). " + "Check that you registered the supplementary view beforehand")
         }
         return view
@@ -103,6 +108,30 @@ extension SwiftCollectionView: UIGestureRecognizerDelegate {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
-extension SwiftCollectionViewCell: SwiftCellCompatible { }
  
+// MARK: - 子类配置方法
+extension SwiftCollectionViewCell: SwiftUICompatible, SwiftCellCompatible {
+    /// 配置界面元素（子类必须重写，无需调用super）
+    @objc open func setupUI() {
+        // 示例：在此添加子视图、约束等
+    }
+    
+    /// 配置视图模型（子类必须重写，无需调用super）
+    @objc open func setupViewModel() {
+        // 示例：在此绑定数据模型、监听事件等
+    }
+}
+
+
+// MARK: - 子类配置方法
+extension SwiftCollectionView: SwiftUICompatible {
+    /// 配置界面元素（子类必须重写，无需调用super）
+    @objc open func setupUI() {
+        // 示例：在此添加子视图、约束等
+    }
+    
+    /// 配置视图模型（子类必须重写，无需调用super）
+    @objc open func setupViewModel() {
+        // 示例：在此绑定数据模型、监听事件等
+    }
+}

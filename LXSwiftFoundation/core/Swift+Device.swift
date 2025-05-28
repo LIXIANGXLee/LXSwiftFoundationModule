@@ -8,89 +8,77 @@
 
 import UIKit
 
-private let fileManagerDefault = FileManager.default
+private let fileManager = FileManager.default
 
-//MARK: -  Extending methods  for UIDevice is ipad or iphone
+// MARK: - 设备信息扩展
 extension SwiftBasics where Base: UIDevice {
     
-    /// 是否为ipad
+    // MARK: - 设备类型判断
+    
+    /// 判断当前设备是否为 iPad
     public static var isPad: Bool {
-        UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad
+        UIDevice.current.userInterfaceIdiom == .pad
     }
     
-    /// 是否为iphone
+    /// 判断当前设备是否为 iPhone
     public static var isPhone: Bool {
-        UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone
+        UIDevice.current.userInterfaceIdiom == .phone
     }
     
-    /// 是否为模拟器
-    public var isSimulator: Bool {
-        base.model.range(of: "Simulator") != nil
-    }
+    // MARK: - 系统信息
     
-    /// 是否能打电话
-    public static var isCanCallTel: Bool {
-        UIApplication.lx.isCanOpen(URL(string: "tel://")!)
-    }
-}
-
-//MARK: -  Extending methods  for UIDevice is ipad or iphone
-extension SwiftBasics where Base: UIDevice {
-    
-    /// 获取系统开始日期
+    /// 获取系统启动时间
     public static var systemUptime: Date {
-        Date(timeIntervalSinceNow: ProcessInfo.processInfo.systemUptime)
+        Date(timeIntervalSinceNow: -ProcessInfo.processInfo.systemUptime)
     }
     
-    /// 磁盘空间
+    /// 获取设备系统版本（格式示例："15.4.1"）
+    public static var systemVersion: String {
+        UIDevice.current.systemVersion
+    }
+    
+    // MARK: - 存储空间信息
+    
+    /// 获取磁盘总空间（单位：字节）
     public static var diskSpace: Int64? {
-        guard let attrs = try? fileManagerDefault.attributesOfFileSystem(forPath: NSHomeDirectory()) else {
+        guard let attrs = try? fileManager.attributesOfFileSystem(forPath: NSHomeDirectory()),
+              let size = attrs[.systemSize] as? Int64,
+                size > 0 else {
             return nil
         }
-        return attrs[FileAttributeKey.systemSize] as? Int64
+        return size
     }
     
-    /// 磁盘空间是可以使用的大小
+    /// 获取磁盘可用空间（单位：字节）
     public static var diskSpaceFree: Int64? {
-        guard let attrs = try? fileManagerDefault.attributesOfFileSystem(forPath: NSHomeDirectory()) else {
+        guard let attrs = try? fileManager.attributesOfFileSystem(forPath: NSHomeDirectory()),
+              let free = attrs[.systemFreeSize] as? Int64,
+              free > 0 else {
             return nil
         }
-        return attrs[FileAttributeKey.systemFreeSize] as? Int64
+        return free
     }
     
-    /// 磁盘空间是按大小使用的
+    /// 获取磁盘已用空间（单位：字节）
     public static var diskSpaceUsed: Int64? {
-       guard let total = diskSpace,
-             let free  = diskSpaceFree else {
-           return nil
-       }
-        if total <= 0 || free <= 0 {
+        guard let total = diskSpace,
+                let free = diskSpaceFree else {
             return nil
         }
-        let used = total - free
-        if used > 0 {
-            return used
-        }
-        return nil
+        return total - free
     }
     
-    /// 获取内存大小
+    // MARK: - 内存信息
+    
+    /// 获取设备物理内存总大小（单位：字节）
     public static var memoryTotal: UInt64 {
         ProcessInfo.processInfo.physicalMemory
     }
     
-    /// 设备类型
-    public static var deviceType: String {
-        UIDevice.current.model
-    }
+    // MARK: - 设备标识
     
-    /// 系统版本
-    public static var deviceSyetemVersion: String {
-        UIDevice.current.systemVersion
-    }
-
-    /// 当前系统版本
-    public static var currentSystemVersion: String {
-        UIDevice.current.systemVersion
+    /// 获取设备类型标识（如 "iPhone"、"iPad"）
+    public static var deviceModel: String {
+        UIDevice.current.model
     }
 }

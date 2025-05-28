@@ -59,3 +59,16 @@ extension SwiftScrollView: UIGestureRecognizerDelegate {
         shouldBegin?(gestureRecognizer) ?? super.gestureRecognizerShouldBegin(gestureRecognizer)
     }
 }
+
+// MARK: - 子类配置方法
+extension SwiftScrollView: SwiftUICompatible {
+    /// 配置界面元素（子类必须重写，无需调用super）
+    @objc open func setupUI() {
+        // 示例：在此添加子视图、约束等
+    }
+    
+    /// 配置视图模型（子类必须重写，无需调用super）
+    @objc open func setupViewModel() {
+        // 示例：在此绑定数据模型、监听事件等
+    }
+}

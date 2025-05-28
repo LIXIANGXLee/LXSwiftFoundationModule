@@ -30,75 +30,128 @@ extension SwiftBasics where Base: DispatchQueue {
     }
 }
 
-//MARK: -  Extending method for UIFont
 extension SwiftBasics where Base: DispatchQueue {
+    // MARK: - Type Alias
+    public typealias SwiftCallTask = () -> Void
     
-    /// 异步任务 主线程回调执行任务(主线程回调任务可不传，默认是nil)
-    public static func async(with task: @escaping DispatchQueue.SwiftCallTask, mainTask: DispatchQueue.SwiftCallTask? = nil) -> DispatchWorkItem {
-        let item = DispatchWorkItem(block: task)
-        DispatchQueue.global().async(execute: item)
-        if let main = mainTask {
-            item.notify(queue: DispatchQueue.main, execute: main)
+    // MARK: - Asynchronous Operations
+    
+    /// 异步执行任务并在完成后可选地在主线程回调
+    /// - Parameters:
+    ///   - task: 要在后台队列执行的闭包任务
+    ///   - mainTask: 任务完成后在主线程执行的闭包（可选）
+    /// - Returns: 可取消的 DispatchWorkItem 对象
+    @discardableResult
+    public static func async(
+        with task: @escaping SwiftCallTask,
+        mainTask: SwiftCallTask? = nil
+    ) -> DispatchWorkItem {
+        let workItem = DispatchWorkItem(block: task)
+        DispatchQueue.global().async(execute: workItem)
+        
+        // 如果提供了主线程回调，则在任务完成后通知主队列
+        if let mainTask = mainTask {
+            workItem.notify(queue: .main, execute: mainTask)
         }
-        return item
+        
+        return workItem
     }
     
-    /// 主线程执行任务
+    /// 在主队列异步执行任务
+    /// - Parameter task: 要在主队列执行的闭包任务
+    /// - Returns: 可取消的 DispatchWorkItem 对象
     @discardableResult
-    public static func asyncMain(with task: @escaping DispatchQueue.SwiftCallTask) -> DispatchWorkItem {
-        let item = DispatchWorkItem(block: task)
-        DispatchQueue.main.async(execute: item)
-        return item
+    public static func asyncMain(with task: @escaping SwiftCallTask) -> DispatchWorkItem {
+        let workItem = DispatchWorkItem(block: task)
+        DispatchQueue.main.async(execute: workItem)
+        return workItem
     }
     
-    /// 异步延时任务 主线程回调执行任务(主线程回调任务可不传，默认是nil)
+    // MARK: - Delayed Operations
+    
+    /// 异步延时执行任务并在完成后可选地在主线程回调
+    /// - Parameters:
+    ///   - seconds: 延迟时间（秒）
+    ///   - task: 要在后台队列执行的闭包任务
+    ///   - mainTask: 任务完成后在主线程执行的闭包（可选）
+    /// - Returns: 可取消的 DispatchWorkItem 对象
     @discardableResult
-    public static func asyncDelay(with seconds: TimeInterval, task: @escaping DispatchQueue.SwiftCallTask, mainTask: DispatchQueue.SwiftCallTask? = nil) -> DispatchWorkItem {
-        let item = DispatchWorkItem(block: task)
-        DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + seconds, execute: item)
-        if let main = mainTask {
-            item.notify(queue: DispatchQueue.main, execute: main)
+    public static func asyncDelay(
+        with seconds: TimeInterval,
+        task: @escaping SwiftCallTask,
+        mainTask: SwiftCallTask? = nil
+    ) -> DispatchWorkItem {
+        let workItem = DispatchWorkItem(block: task)
+        DispatchQueue.global().asyncAfter(
+            deadline: .now() + seconds,
+            execute: workItem
+        )
+        
+        if let mainTask = mainTask {
+            workItem.notify(queue: .main, execute: mainTask)
         }
-        return item
+        
+        return workItem
     }
     
-    /// 延时后主线程执行任务
+    /// 延时后在主队列执行任务
+    /// - Parameters:
+    ///   - seconds: 延迟时间（秒）
+    ///   - mainTask: 要在主队列执行的闭包任务
+    /// - Returns: 可取消的 DispatchWorkItem 对象
     @discardableResult
-    public static func delay(with seconds: TimeInterval, mainTask: @escaping DispatchQueue.SwiftCallTask) -> DispatchWorkItem {
-        let item = DispatchWorkItem(block: mainTask)
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + seconds, execute: item)
-        return item
+    public static func delay(
+        with seconds: TimeInterval,
+        mainTask: @escaping SwiftCallTask
+    ) -> DispatchWorkItem {
+        let workItem = DispatchWorkItem(block: mainTask)
+        DispatchQueue.main.asyncAfter(
+            deadline: .now() + seconds,
+            execute: workItem
+        )
+        return workItem
     }
     
-    /// 延时后主线程执行任务 (自定义线程类型，例如：DispatchQueue.main主线程、DispatchQueue.global()全局线程等等)
-    public func asyncAfter(with delay: TimeInterval, _ callBack: @escaping () -> Void) {
+    /// 在指定队列上延时执行任务
+    /// - Parameters:
+    ///   - delay: 延迟时间（秒）
+    ///   - callBack: 要执行的闭包任务
+    public func asyncAfter(
+        with delay: TimeInterval,
+        _ callBack: @escaping SwiftCallTask
+    ) {
         base.asyncAfter(deadline: .now() + delay, execute: callBack)
     }
     
-    /// 延时后主线程执行任务 (自定义线程类型，例如：DispatchQueue.main主线程、DispatchQueue.global()全局线程等等)
-    @available(*, deprecated, message:"Use asyncAfter(with delay:,_ callBack:)")
-    public func after(with delay: TimeInterval, execute closure: @escaping () -> Void) {
-        asyncAfter(with: delay, closure)
-        
-    }
-
-    /// 在主线程执行任务
-    public static func asyncSafeMain(_ execute: @escaping () -> ()) {
-        if isMainThread {
-            execute()
-        } else {
-            DispatchQueue.main.async(execute: execute)
-        }
+    // MARK: - Thread-Safe Operations
+    
+    /// 安全地在主线程执行任务（如果当前已在主线程则同步执行）
+    /// - Parameter execute: 要执行的闭包任务
+    public static func asyncSafeMain(_ execute: @escaping SwiftCallTask) {
+        isMainThread ? execute() : DispatchQueue.main.async(execute: execute)
     }
     
-    /// 是否为主线成
+    /// 在全局队列安全地执行任务
+    /// - Parameter execute: 要执行的闭包任务
+    public static func asyncSafeGlobal(_ execute: @escaping SwiftCallTask) {
+        DispatchQueue.global(qos: .default).async(execute: execute)
+    }
+    
+    // MARK: - Utility Properties
+    
+    /// 检查当前是否在主线程
     public static var isMainThread: Bool {
         Thread.current.isMainThread
     }
     
-    /// 子线程执行任务
-    public static func asyncSafeGlobal(_ execute: @escaping () -> ()) {
-        DispatchQueue.global(qos: .default).async(execute: execute)
+    // MARK: - Deprecated Methods
+    
+    /// 已废弃 - 使用 asyncAfter(with:_:) 替代
+    @available(*, deprecated, message: "Use `asyncAfter(with:_:)` instead")
+    public func after(
+        with delay: TimeInterval,
+        execute closure: @escaping SwiftCallTask
+    ) {
+        asyncAfter(with: delay, closure)
     }
-
 }

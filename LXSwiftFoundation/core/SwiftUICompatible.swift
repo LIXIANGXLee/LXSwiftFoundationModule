@@ -9,8 +9,22 @@ import UIKit
 
 @objc(LXObjcUIProtocol)
 public protocol SwiftUICompatible: AnyObject {
-    func setupUI()
-    func setupViewModel()
+    /// 配置界面元素（子类需重写实现）
+   @objc func setupUI()
+    
+    /// 配置视图模型（子类需重写实现）
+   @objc func setupViewModel()
+
+}
+
+@objc(LXObjcTraitProtocol)
+public protocol SwiftTraitCompatible: AnyObject {
+    /// 界面样式变化回调（需要时在子类中重写）
+    /// - Parameter style: 新的界面样式
+    func updateTraitCollectionDidChange(_ style: SwiftUserInterfaceStyle)
+    
+    /// 颜色外观变化回调（需要刷新CGColor时在子类中重写）
+    func updateHasDifferentColorAppearance()
 }
 
 /// 任意类型协议
@@ -23,44 +37,4 @@ public extension SwiftCellCompatible where Self: UIView {
     static var reusableIdentifier: String {
         String(describing: Self.self)
     }
-}
-
-public extension SwiftUICompatible {
-    func setupUI() { }
-    func setupViewModel() { }
-}
-
-extension SwiftView: SwiftUICompatible {
-    @objc open func setupUI() { }
-    @objc open func setupViewModel() { }
-}
-
-extension SwiftCollectionView: SwiftUICompatible {
-    @objc open func setupUI() { }
-    @objc open func setupViewModel() { }
-}
-
-extension SwiftCollectionViewCell: SwiftUICompatible {
-    @objc open func setupUI() { }
-    @objc open func setupViewModel() { }
-}
-
-extension SwiftScrollView: SwiftUICompatible {
-    @objc open func setupUI() { }
-    @objc open func setupViewModel() { }
-}
-
-extension SwiftTableView: SwiftUICompatible {
-    @objc open func setupUI() { }
-    @objc open func setupViewModel() { }
-}
-
-extension SwiftTableViewCell: SwiftUICompatible {
-    @objc open func setupUI() { }
-    @objc open func setupViewModel() { }
-}
-
-extension SwiftViewController: SwiftUICompatible {
-    @objc open func setupUI() { }
-    @objc open func setupViewModel() { }
 }

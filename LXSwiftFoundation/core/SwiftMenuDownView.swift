@@ -27,21 +27,27 @@ import UIKit
  
     open override var content: UIView? {
         didSet {
-            guard let content = content else { return }
+            guard let content = content else {
+                return
+            }
             scrollView.addSubview(content)
         }
     }
 
     open override func dismiss() {
         /// 结束动画
-        endAnimation { (_) in super.dismiss() }
+        endAnimation { (_) in
+            super.dismiss()
+        }
     }
 }
 
 extension SwiftMenuDownView {
    
     /// 显示视图，view是点击的view
-    @objc open func show(from view: UIView, rootView: UIView? = nil, callBack: ((Bool) -> Void)? = nil) {
+    @objc open func show(from view: UIView,
+                         rootView: UIView? = nil,
+                         callBack: ((Bool) -> Void)? = nil) {
 
         guard let content = content else {
             return
@@ -78,7 +84,8 @@ extension SwiftMenuDownView {
     private func endAnimation(_ callBack: ((Bool) -> Void)? = nil) {
         backgroundColor = UIColor.black.withAlphaComponent(viewOpaque)
         self.content?.transform = CGAffineTransform.identity
-        UIView.animate(withDuration: animateDuration, animations: {
+        UIView.animate(withDuration: animateDuration,
+                       animations: {
             self.content?.transform = CGAffineTransform(scaleX: self.xyScale, y: self.xyScale)
             self.backgroundColor = UIColor.black.withAlphaComponent(0)
         }) {(isFinish) -> () in

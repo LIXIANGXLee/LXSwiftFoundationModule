@@ -6,80 +6,102 @@
 //  Copyright © 2020 李响. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
 import Photos
+import CoreLocation
+import UserNotifications
 
-/// PrivacyManager自动根据状态返回提示语
+/// 权限管理工具类，用于检查及请求系统权限
 @objc(LXObjcAuth)
 @objcMembers public final class SwiftAuth: NSObject {
- 
-    /// 相机权限
+    
+    // MARK: - 相机权限
+    
+    /// 检查当前是否已获得相机权限
+    /// - 说明: 此属性检查当前应用的相机权限状态是否为已授权
+    /// - 注意: 实际设备摄像头可用性需额外检查
     public static var isSupportCamera: Bool {
-        AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == .authorized
+        AVCaptureDevice.authorizationStatus(for: .video) == .authorized
     }
-
+    
     /// 请求相机权限
-    public static func authVideo(_ completion: @escaping (Bool) -> ()) {
-        AVCaptureDevice.requestAccess(for: AVMediaType.video) { (granted) in
-            DispatchQueue.main.async {
-                completion(granted)
-            }
+    /// - Parameter completion: 异步回调授权结果（主线程执行）
+    public static func authVideo(_ completion: @escaping (Bool) -> Void) {
+        AVCaptureDevice.requestAccess(for: .video) { granted in
+            dispatchToMain(granted, completion: completion)
         }
     }
     
-    /// 相册权限
+    // MARK: - 相册权限
+    
+    /// 检查当前是否已获得相册权限
+    /// - 重要: 需要确保Info.plist中包含NSPhotoLibraryUsageDescription描述
     public static var isSupportPhotoAlbum: Bool {
         PHPhotoLibrary.authorizationStatus() == .authorized
     }
     
     /// 请求相册权限
-    public static func authAlbum(_ completion: @escaping (Bool) -> ()) {
-        PHPhotoLibrary.requestAuthorization { (status) in
-            DispatchQueue.main.async {
-                completion(status == .authorized)
-            }
+    /// - Parameter completion: 异步回调授权结果（主线程执行）
+    public static func authAlbum(_ completion: @escaping (Bool) -> Void) {
+        PHPhotoLibrary.requestAuthorization { status in
+            dispatchToMain(status == .authorized, completion: completion)
         }
     }
     
-    /// 麦克风权限
+    // MARK: - 麦克风权限
+    
+    /// 检查当前是否已获得麦克风权限
+    /// - 重要: 需要确保Info.plist中包含NSMicrophoneUsageDescription描述
     public static var isSupportAudio: Bool {
-        AVCaptureDevice.authorizationStatus(for: AVMediaType.audio) == .authorized
+        AVCaptureDevice.authorizationStatus(for: .audio) == .authorized
     }
     
     /// 请求麦克风权限
-    public static func authAudio(_ completion: @escaping (Bool) -> ()) {
-        AVCaptureDevice.requestAccess(for: AVMediaType.audio) { (granted) in
-            DispatchQueue.main.async {
-                completion(granted)
-            }
-        }
-    }
-
-    /// 定位权限
-    public static var isSupportLocation: Bool {
-        let authStatus = CLLocationManager.authorizationStatus()
-        return authStatus == .authorizedAlways || authStatus == .authorizedWhenInUse
-    }
-
-    /// 判断系统是否支持消息推送能力
-    @available(iOS 10.0, *)
-    public static func isSupportNotications(_ callback: @escaping (_ isSupport: Bool) -> Void) {
-        UNUserNotificationCenter.current().getNotificationSettings { (setting) in
-            
-            DispatchQueue.main.async {
-                callback(setting.authorizationStatus != .denied)
-            }
+    /// - Parameter completion: 异步回调授权结果（主线程执行）
+    public static func authAudio(_ completion: @escaping (Bool) -> Void) {
+        AVCaptureDevice.requestAccess(for: .audio) { granted in
+            dispatchToMain(granted, completion: completion)
         }
     }
     
-    /// 请求推送权限
+    // MARK: - 定位权限
+    
+    /// 检查当前是否已获得定位权限
+    /// - 说明: 返回true表示拥有"始终使用"或"使用时"权限
+    /// - 重要: 需要确保Info.plist中包含定位权限描述
+    public static var isSupportLocation: Bool {
+        let status = CLLocationManager.authorizationStatus()
+        return status == .authorizedAlways || status == .authorizedWhenInUse
+    }
+    
+    // MARK: - 通知权限
+    
+    /// 检查系统通知权限是否可用（iOS 10+）
+    /// - 说明: 返回true表示用户未明确拒绝通知权限（包括未决定状态）
+    /// - Parameter callback: 异步回调检查结果（主线程执行）
     @available(iOS 10.0, *)
-    public static func regisiterRemoteNotications(_ completion: @escaping (Bool) -> ()) {
+    public static func checkNotificationSupport(_ callback: @escaping (Bool) -> Void) {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            dispatchToMain(settings.authorizationStatus != .denied, completion: callback)
+        }
+    }
+    
+    /// 请求远程通知权限（iOS 10+）
+    /// - 说明: 自动注册远程通知并触发系统权限弹窗
+    /// - Parameter completion: 异步回调授权结果（主线程执行）
+    @available(iOS 10.0, *)
+    public static func registerRemoteNotifications(_ completion: @escaping (Bool) -> Void) {
         let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert, .badge, .sound], completionHandler: { (isSuccess, error) in
-            DispatchQueue.main.async { completion(isSuccess) }
-        })
-        UIApplication.shared.registerForRemoteNotifications()
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { granted, _ in
+            dispatchToMain(granted, completion: completion)
+            UIApplication.shared.registerForRemoteNotifications()
+        }
+    }
+    
+    // MARK: - 私有工具方法
+    
+    /// 统一主线程派发方法
+    private static func dispatchToMain(_ result: Bool, completion: @escaping (Bool) -> Void) {
+        DispatchQueue.main.async { completion(result) }
     }
 }

@@ -73,11 +73,15 @@ public struct SwiftMemory<T> {
     
     /// 获得引用所指向内存的地址
     public static func ptr(ofRef v: T) -> UnsafeRawPointer {
-        if v is Array<Any> || Swift.type(of: v) is AnyClass || v is AnyClass {
+        if v is Array<Any> ||
+            Swift.type(of: v) is AnyClass ||
+            v is AnyClass {
             return UnsafeRawPointer(bitPattern: v ~>> UInt.self)!
         } else if v is String {
             var mstr = v as! String
-            if mstr._type() != .heap { return SWIFT_EMPTY_PTR }
+            if mstr._type() != .heap {
+                return SWIFT_EMPTY_PTR
+            }
             return UnsafeRawPointer(bitPattern: (v ~>> (UInt,UInt).self).1)!
         } else {
             return SWIFT_EMPTY_PTR

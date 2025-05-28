@@ -8,26 +8,31 @@
 
 import UIKit
 
-/// const
-private let pngHeader: [UInt8] = [0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A]
-private let jpgHeaderSOI: [UInt8] = [0xFF, 0xD8]
-private let jpgHeaderIF: [UInt8] = [0xFF]
-private let gifHeader: [UInt8] = [0x47, 0x49, 0x46]
+// MARK: - 常量定义
+private let pngHeader: [UInt8] = [0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A] // PNG文件头标识
+private let jpgHeaderSOI: [UInt8] = [0xFF, 0xD8] // JPEG文件开始标识(Start Of Image)
+private let jpgHeaderIF: [UInt8] = [0xFF] // JPEG标记前缀
+private let gifHeader: [UInt8] = [0x47, 0x49, 0x46] // GIF文件头标识("GIF"的ASCII码)
 
-/// image type enum
+/// 图片类型枚举
 public enum SwiftImageDataType {
-    case Unknown, PNG, JPEG, GIF
+    case unknown
+    case png
+    case jpeg
+    case gif
+    
+    // 优化建议：使用小写开头更符合Swift命名规范
 }
 
-//MARK: -  Extending properties  for Data
+// MARK: - Data扩展
 extension SwiftBasics where Base == Data {
     
-    /// 数据转换utf8字符串
+    /// 将Data转换为UTF-8编码的字符串
     public var utf8String: String? {
         String(data: base, encoding: .utf8)
     }
     
-    /// 数据传输uiimage的base64
+    /// 将Base64编码的Data解码为UIImage
     public var base64DecodingImage: UIImage? {
         guard let base64Data = Data(base64Encoded: base, options: .ignoreUnknownCharacters) else {
             return nil
@@ -35,46 +40,54 @@ extension SwiftBasics where Base == Data {
         return UIImage(data: base64Data)
     }
     
-    /// 文件类型
+    /// 获取数据的MIME类型
     public var mimeType: String {
-        var mime: UInt8 = 0
-        base.copyBytes(to: &mime, count: 1)
-        return Data.mimeTypeSignatures[mime] ?? "application/octet-stream"
+        var firstByte: UInt8 = 0
+        base.copyBytes(to: &firstByte, count: 1)
+        return Data.mimeTypeSignatures[firstByte] ?? "application/octet-stream"
     }
 
-    /// data转换字典
-    public var dataToPlistDictionary: Dictionary<String, Any>? {
-        guard let propertyList = try? PropertyListSerialization.propertyList(from: base, options: .init(rawValue: 0), format: nil) else {
+    /// 将Property List数据转换为字典
+    public var dataToPlistDictionary: [String: Any]? {
+        guard let propertyList = try? PropertyListSerialization.propertyList(
+            from: base,
+            options: [],
+            format: nil
+        ) else {
             return nil
         }
-        return propertyList as? Dictionary<String, Any>
+        return propertyList as? [String: Any]
     }
 }
 
-//MARK: -  Extending properties  for NSData
+// MARK: - NSData扩展
 extension SwiftBasics where Base == NSData {
-  
-    /// 判断data是不是gif类型图片
+    
+    /// 判断数据是否为GIF图片
     public var isGIF: Bool {
-        base.lx.imageType == .GIF
+        base.lx.imageType == .gif
     }
     
-    /// data类型
+    /// 获取图片数据类型
     public var imageType: SwiftImageDataType {
         var buffer = [UInt8](repeating: 0, count: 8)
         base.getBytes(&buffer, length: 8)
-        var type: SwiftImageDataType = .Unknown
+        
+        // PNG检测
         if buffer == pngHeader {
-            type = .PNG
+            return .png
+            // JPEG检测 (SOI + 标记前缀)
         } else if buffer[0] == jpgHeaderSOI[0] &&
-            buffer[1] == jpgHeaderSOI[1] &&
-            buffer[2] == jpgHeaderIF[0] {
-            type = .JPEG
+           buffer[1] == jpgHeaderSOI[1] &&
+           buffer[2] == jpgHeaderIF[0] {
+            return .jpeg
+            // GIF检测 ("GIF")
         } else if buffer[0] == gifHeader[0] &&
-            buffer[1] == gifHeader[1] &&
-            buffer[2] == gifHeader[2] {
-            type = .GIF
+           buffer[1] == gifHeader[1] &&
+           buffer[2] == gifHeader[2] {
+            return .gif
         }
-        return type
+        
+        return .unknown
     }
 }

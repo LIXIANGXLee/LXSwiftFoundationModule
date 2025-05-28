@@ -8,67 +8,44 @@
 
 import UIKit
 
-//MARK: -  Extending methods for UITextField
+// MARK: - UITextField 扩展方法
 extension SwiftBasics where Base: UITextField {
     
-    /// 设置占位符和颜色
+    /// 设置文本框占位文字及其样式
+    /// - Parameters:
+    ///   - placeholder: 占位文字内容
+    ///   - color: 占位文字颜色，默认为十六进制 "#999999" 对应的颜色
+    ///   - font: 占位文字字体，默认为常规体14号字
     public func set(withPlaceholder placeholder: String?,
                     color: UIColor = UIColor.lx.color(hex: "999999"),
                     font: UIFont = UIFont.lx.font(withRegular: 14)) {
+        // 确保占位文字不为nil
         guard let placeholder = placeholder else { return }
-        let attributes = [NSAttributedString.Key.foregroundColor: color,
-                          NSAttributedString.Key.font: font]
-        base.attributedPlaceholder = NSMutableAttributedString(string: placeholder, attributes: attributes)
+        
+        // 创建文字属性字典
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: color,
+            .font: font
+        ]
+        
+        // 设置带属性的占位文字
+        base.attributedPlaceholder = NSAttributedString(
+            string: placeholder,
+            attributes: attributes
+        )
     }
     
-    /// 设置占位符和颜色字符串
+    /// 设置文本框占位文字及其样式（使用十六进制颜色字符串和字号）
+    /// - Parameters:
+    ///   - placeholder: 占位文字内容
+    ///   - color: 十六进制颜色字符串，默认为 "999999"
+    ///   - fontSize: 占位文字字号，默认为14
     public func set(withPlaceholder placeholder: String?,
                     color: String = "999999",
                     fontSize: CGFloat = 14) {
+        // 调用主方法，转换颜色和字体参数
         set(withPlaceholder: placeholder,
             color: UIColor.lx.color(hex: color),
             font: UIFont.lx.font(withRegular: fontSize))
-    }
-    
-    /// 设置字体和文本颜色
-    public func set(with font: UIFont, textColor: UIColor?) {
-        base.font = font
-        if let color = textColor {
-            base.textColor = color
-        }
-    }
-    
-    /// 设置粗体字体和文本颜色
-    public func set(withBold fontSize: CGFloat, textColor: String) {
-        set(with: UIFont.lx.font(withBold: fontSize),
-            textColor: UIColor.lx.color(hex: textColor))
-    }
-    
-    /// 设置中等字体和文本颜色
-    public func set(withMedium fontSize: CGFloat, textColor: String) {
-        set(with: UIFont.lx.font(withMedium: fontSize),
-            textColor: UIColor.lx.color(hex: textColor))
-    }
-    
-    /// 设置常规字体和文本颜色
-    public func set(withRegular fontSize: CGFloat, textColor: String) {
-        set(with: UIFont.lx.font(withRegular: fontSize),
-            textColor: UIColor.lx.color(hex: textColor))
-    }
-}
-
-//MARK: -  Extending methods for UITextField
-extension SwiftBasics where Base: UITextField {
-    
-    /// 设置文本字段左视图
-    public func setLeftView(with view: UIView, mode: UITextField.ViewMode = .always) {
-        base.leftView = view
-        base.leftViewMode = mode
-    }
-    
-    /// 设置文本字段右视图
-    public func setRightView(with view: UIView, mode: UITextField.ViewMode = .always) {
-        base.rightView = view
-        base.rightViewMode = mode
     }
 }

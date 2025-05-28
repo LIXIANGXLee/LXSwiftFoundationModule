@@ -88,20 +88,20 @@ extension UIColor {
     }
 
     convenience init(hex: String, alpha: CGFloat = 1.0) {
-        var cHex: String = hex.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
+        var hex: String = hex.lx.trim
         switch hex {
         case has_prefix("0X"), has_prefix("0x"):
-            cHex = cHex.lx.substring(from: 2)
+            hex = hex.lx.substring(from: 2)
             fallthrough
         case has_prefix("#"):
-            cHex = cHex.lx.substring(from: 1)
+            hex = hex.lx.substring(from: 1)
         default: break
         }
-        if cHex.count > 6 || cHex.isEmpty {
+        if hex.count > 6 || hex.isEmpty {
             self.init(hex: 0xFFFFFF)
         }
         var color: UInt32 = 0x0
-        Scanner.init(string: cHex).scanHexInt32(&color)
+        Scanner.init(string: hex).scanHexInt32(&color)
         self.init(hex: Int(color), alpha: alpha)
     }
 }

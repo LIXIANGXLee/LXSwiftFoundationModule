@@ -116,7 +116,9 @@ public protocol SwiftPickerViewDataSource: AnyObject {
     /// 设置整体圆角 上、下、左、右
     open var tViewAllCornerRadii: CGFloat? {
         didSet {
-            guard let cornerRadii = self.tViewAllCornerRadii else { return }
+            guard let cornerRadii = self.tViewAllCornerRadii else {
+                return
+            }
             self.tableView.lx.setCornerRadius(radius: cornerRadii, clips: true)
         }
     }
@@ -168,7 +170,11 @@ public protocol SwiftPickerViewDataSource: AnyObject {
     }
       
     /// 自定义指定构造器
-    public init(_ frame: CGRect = CGRect(x: 0, y: 0, width: SCREEN_WIDTH_TO_WIDTH, height: SCREEN_HEIGHT_TO_HEIGHT), style: UITableView.Style = .plain) {
+    public init(_ frame: CGRect = CGRect(x: 0,
+                                         y: 0,
+                                         width: SCREEN_WIDTH_TO_WIDTH,
+                                         height: SCREEN_HEIGHT_TO_HEIGHT),
+                style: UITableView.Style = .plain) {
         
         self.style = style
         super.init(frame: frame)
@@ -202,7 +208,6 @@ public protocol SwiftPickerViewDataSource: AnyObject {
     
     /// 延迟属性 加载内容
     private lazy var tableView: SwiftTableView = {
-        
          let rect = CGRect(x: 0,
                            y: SCREEN_HEIGHT_TO_HEIGHT,
                            width: SCREEN_WIDTH_TO_WIDTH,
@@ -256,7 +261,7 @@ extension SwiftPickerView {
         tableView.addGestureRecognizer(panGesture)
        
         /// 设置底部偏移量
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: SCREEN_HEIGHT_TO_TOUCHBARHEIGHT, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: SCREEN_HEIGHT_TO_BOTTOMSAFEHEIGHT, right: 0)
     }
     
     /// 滑动事件处理
@@ -291,7 +296,9 @@ extension SwiftPickerView {
 
     /// 设置滚动偏移量回调
     private func setScrollViewDidScroll(_ scrollType: SwiftPickerView.ScrollType) {
-        self.delegate?.pickerView?(self, scrollViewDidScroll: SCREEN_HEIGHT_TO_HEIGHT - tableView.lx.y, scrollType: scrollType)
+        self.delegate?.pickerView?(self,
+                                   scrollViewDidScroll: SCREEN_HEIGHT_TO_HEIGHT - tableView.lx.y,
+                                   scrollType: scrollType)
     }
     
     /// 开始动画
@@ -310,7 +317,9 @@ extension SwiftPickerView {
             let isTop = maxHeight - offSet < offSet - minHeight
             let height = isTop ? maxHeight : minHeight
             setContentOffset(height) { [weak self] in
-                guard let `self` = self else { return }
+                guard let `self` = self else {
+                    return
+                }
                 self.setScrollViewDidScroll(isTop ? .top : .mid)
             }
         } else { /// 最小和底部的之间
@@ -332,7 +341,8 @@ extension SwiftPickerView {
     
     /// 设置内容偏移量
     private func setContentOffset(_ height: CGFloat,
-                                  colorType: ColorType = .none, completion:(() -> Void)? = nil) {
+                                  colorType: ColorType = .none,
+                                  completion:(() -> Void)? = nil) {
         switch colorType {
         case .start: backgroundColor = UIColor.black.withAlphaComponent(0)
         case .end: backgroundColor = UIColor.black.withAlphaComponent(self.bgOpaque)
@@ -356,15 +366,18 @@ extension SwiftPickerView {
 extension SwiftPickerView: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        delegate?.pickerView?(self, heightForRowAt: indexPath) ?? SCALE_IP6_WIDTH_TO_WIDTH(55)
+        delegate?.pickerView?(self,
+                              heightForRowAt: indexPath) ?? SCALE_IP6_WIDTH_TO_WIDTH(55)
     }
 
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        delegate?.pickerView?(self, heightForHeaderInSection: section) ?? heightForHeaderAndFooter
+        delegate?.pickerView?(self,
+                              heightForHeaderInSection: section) ?? heightForHeaderAndFooter
     }
     
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        delegate?.pickerView?(self, heightForFooterInSection: section) ?? heightForHeaderAndFooter
+        delegate?.pickerView?(self,
+                              heightForFooterInSection: section) ?? heightForHeaderAndFooter
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

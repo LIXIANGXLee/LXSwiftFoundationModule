@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "LXSwiftFoundation"
-  spec.version      = "9.2.1"
+  spec.version      = "10.0.0"
   spec.summary      = "Extend more user-friendly functions for system classes"
 
   

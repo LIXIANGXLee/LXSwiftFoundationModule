@@ -13,99 +13,89 @@ import UIKit
 @objcMembers open class SwiftTextView: UITextView {
     
     public typealias TextCallBack = (String) -> Void
-    open var textCallBack: SwiftTextView.TextCallBack?
-    
-    /// 配置文本可输入最长文本长度
+     
+    // MARK: - 公开属性
+    /// 文本变化回调闭包
+    open var textCallBack: TextCallBack?
+      
+    /// 最大输入字符数（设置为nil时不限制）
     open var maxTextLength: Int?
+      
+    /// 占位符标签
+    private lazy var placeholderLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.backgroundColor = .clear
+        label.textColor = .lx.color(hex: "999999")
+        return label
+    }()
 
     /// 设置字体大小
     open override var font: UIFont? {
         didSet {
-            guard let pFont = font else {
-                return
-            }
-            if placeholderFont == nil {
-                placehoderLabel.font = pFont
-            }
+            guard let font = font,
+                    placeholderFont == nil else { return }
+            placeholderLabel.font = font
             setNeedsLayout()
         }
     }
     
-    /// 设置默认文案
+    /// 设置占位符文本
     open var placeholder: String? {
         didSet {
-            guard let text = placeholder else {
-                return
-            }
-            placehoderLabel.text = text
+            placeholderLabel.text = placeholder
             setNeedsLayout()
         }
     }
     
-    /// 设置默认文案字体颜色
+    /// 设置占位符文本颜色
     open var placeholderColor: UIColor? {
         didSet {
             guard let color = placeholderColor else {
                 return
             }
-            placehoderLabel.textColor = color
+            placeholderLabel.textColor = color
             setNeedsLayout()
         }
     }
     
-    /// 设置默认文案字体大小，如果不设置则跟输入文本字体大小一致
+    /// 设置占位符字体（如果未设置则使用输入框字体）
     open var placeholderFont: UIFont? {
         didSet {
             guard let font = placeholderFont else {
                 return
             }
-            placehoderLabel.font = font
+            placeholderLabel.font = font
             setNeedsLayout()
         }
     }
     
-    /// 显示文案的标签
-    private lazy var placehoderLabel: UILabel = {
-        let placehoderLabel = UILabel()
-        placehoderLabel.numberOfLines = 0
-        placehoderLabel.backgroundColor = UIColor.clear
-        placehoderLabel.textColor = UIColor.lx.color(hex: "999999")
-        return placehoderLabel
-    }()
-    
+    // MARK: - 初始化方法
     public override init(frame: CGRect, textContainer: NSTextContainer? = nil) {
         super.init(frame: frame, textContainer: textContainer)
-        addSubview(placehoderLabel)
-        
-        /// call after placehoderLabel
-        font = UIFont.systemFont(ofSize: 16)
-        placehoderLabel.font = font
-
-        NotificationCenter.default.addObserver(self, selector: #selector(textDidChange), name: UITextView.textDidChangeNotification, object: self)
+        setupUI()
+        setupNotifications()
     }
     
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    /// 移除通知
+    // MARK: - 生命周期管理
     deinit {
-        NotificationCenter.swift_removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
+    // MARK: - 布局方法
     open override func layoutSubviews() {
         super.layoutSubviews()
-     
-        let labelX = textContainer.lineFragmentPadding
-        let labelY = CGFloat(8)
-        let size = self.placehoderLabel.text?.lx.size(font: self.placehoderLabel.font, width: self.frame.width - CGFloat(labelX * 2)) ?? CGSize.zero
-        self.placehoderLabel.frame = CGRect(origin: CGPoint(x: labelX, y: labelY), size: size)
+        updatePlaceholderLayout()
     }
 }
 
 // MARK: - public method
 extension SwiftTextView {
-   
+    
     /// 外部调用方法
     @objc open func setHandle(_ textCallBack: SwiftTextView.TextCallBack?) {
         self.textCallBack = textCallBack
@@ -124,9 +114,9 @@ extension SwiftTextView {
     
     /// 设置默认文案和文案字体颜色
     @objc open func setPlaceholder(_ text: String?, color: UIColor?) {
-        placehoderLabel.text = text
+        placeholderLabel.text = text
         if let pColor = color {
-            placehoderLabel.textColor = pColor
+            placeholderLabel.textColor = pColor
         }
         setNeedsLayout()
     }
@@ -134,9 +124,44 @@ extension SwiftTextView {
 
 // MARK: - private method
 extension SwiftTextView {
+    
+    /// 初始化界面配置
+   private func setupUI() {
+        addSubview(placeholderLabel)
+        font = UIFont.systemFont(ofSize: 16)
+        placeholderLabel.font = font
+    }
+    
+    /// 设置通知监听
+    private func setupNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(textDidChange),
+            name: UITextView.textDidChangeNotification,
+            object: self
+        )
+    }
+    
+    /// 更新占位符布局
+    private func updatePlaceholderLayout() {
+        let linePadding = textContainer.lineFragmentPadding
+        let inset = textContainerInset
+        let maxWidth = frame.width - linePadding * 2 - inset.left - inset.right
+        
+        let size = placeholderLabel.sizeThatFits(
+            CGSize(width: maxWidth, height: CGFloat.greatestFiniteMagnitude))
+        
+        placeholderLabel.frame = CGRect(
+            x: linePadding + inset.left,
+            y: inset.top,
+            width: maxWidth,
+            height: size.height
+        )
+    }
+    
     /// 事件监听
     @objc private func textDidChange() {
-        placehoderLabel.isHidden = self.hasText
+        placeholderLabel.isHidden = self.hasText
         if let maxLength = self.maxTextLength,
             let count = text?.count {
             if count > maxLength {

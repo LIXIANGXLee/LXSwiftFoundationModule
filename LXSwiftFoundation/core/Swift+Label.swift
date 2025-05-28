@@ -31,39 +31,4 @@ extension SwiftBasics where Base: UILabel {
         base.textRect(forBounds: rect, limitedToNumberOfLines: lines)
     }
     
-    /// 提供了设置标签属性的方便方法（颜色、字体大小、对齐方式）
-    public func set(withFont font: UIFont, textColor: UIColor, alignment: NSTextAlignment? = nil) {
-        base.font = font
-        base.textColor = textColor
-        if let alignment = alignment {
-            base.textAlignment = alignment
-        }
-    }
-    
-    /// 提供了设置标签属性的方便方法（颜色、字体大小、对齐方式）
-    public func set(regularSize: CGFloat, textColor: String, alignment: NSTextAlignment? = nil) {
-        set(withFont: UIFont.lx.font(withRegular: regularSize),
-            textColor: UIColor.lx.color(hex: textColor), alignment: alignment)
-    }
-    
-    /// 提供了设置标签属性的方便方法（颜色、字体大小、对齐方式）
-    public func set(mediumSize: CGFloat, textColor: String, alignment: NSTextAlignment? = nil) {
-        set(withFont: UIFont.lx.font(withMedium: mediumSize),
-            textColor: UIColor.lx.color(hex: textColor), alignment: alignment)
-    }
-    
-    /// 提供了设置标签属性的方便方法（颜色、字体大小、对齐方式）
-   public func set(boldSize: CGFloat, textColor: String, alignment: NSTextAlignment? = nil) {
-       set(withFont: UIFont.lx.font(withBold: boldSize), textColor: UIColor.lx.color(hex: textColor), alignment: alignment)
-   }
-    
-    /// 提供了设置标签属性的方便方法（颜色、字体大小、对齐方式）
-    public func set(semiboldSize: CGFloat, textColor: String, alignment: NSTextAlignment? = nil) {
-        set(withFont: UIFont.lx.font(withSemibold: semiboldSize), textColor: UIColor.lx.color(hex: textColor), alignment: alignment)
-    }
-     
-    /// 提供了设置标签属性的方便方法（颜色、字体大小、对齐方式）
-    public func set(heavySize: CGFloat, textColor: String, alignment: NSTextAlignment? = nil) {
-        set(withFont: UIFont.lx.font(withHeavy: heavySize), textColor: UIColor.lx.color(hex: textColor), alignment: alignment)
-    }
 }

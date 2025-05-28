@@ -1,6 +1,6 @@
 //
-//  LXWebViewController.swift
-//  LXSwiftFoundation
+//  SwiftWebViewController.swift
+//  XLSwiftFoundation
 //
 //  Created by Mac on 2020/4/23.
 //  Copyright © 2020 李响. All rights reserved.
@@ -11,51 +11,68 @@
 import UIKit
 import WebKit
 
-public struct SwiftMethod {
-    public var method: String
-    public var handel: (Any) -> ()
+///表示具有名称和回调的JavaScript方法处理程序
+public struct SwiftJSCallHandler {
+    public var methodName: String
+    public var handler: (Any) -> Void
 }
 
-// MARK: - Solving circular references
-/// 解决强引用问题
+// MARK: - Weak Script Message Delegate
+
+/// 弱引用包装器，防止WKScriptMessageHandler的保留周期
 open class SwiftWeakScriptMessageDelegate: NSObject, WKScriptMessageHandler {
-    fileprivate weak var delegate: WKScriptMessageHandler?
-    init(_ delegate: WKScriptMessageHandler) {
+    private weak var delegate: WKScriptMessageHandler?
+    
+    init(delegate: WKScriptMessageHandler) {
         self.delegate = delegate
         super.init()
     }
     
-    open func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        self.delegate?.userContentController(userContentController, didReceive: message)
+    open func userContentController(
+        _ userContentController: WKUserContentController,
+        didReceive message: WKScriptMessage) {
+        delegate?.userContentController(userContentController, didReceive: message)
     }
 }
 
-/// MARK: - WKWebView
+// MARK: - Web View Controller
+
+/// 一个功能齐全的WKWebView控制器，具有进度跟踪、JavaScript交互和常见的web任务
 @objc(LXObjcWebViewController)
 @objcMembers open class SwiftWebViewController: UIViewController {
+    // MARK: - Public Properties
+  
+    public typealias HeightHandler = (Float) -> Void
+    public typealias TitleHandler = (String) -> Void
+    public typealias URLHandler = (URL?) -> Void
     
-    open var loadWebViewContentHeight: ((Float) -> ())?
-    open var loadWebViewTitle: ((String) -> ())?
-    open var loadWebViewUrl: ((URL) -> ())?
+    open var onContentHeightChange: HeightHandler?
+    open var onTitleUpdate: TitleHandler?
+    open var onURLUpdate: URLHandler?
     
-    private var spinner: UIActivityIndicatorView!
-    private var progressView: UIProgressView!
-    private var methods = [SwiftMethod]()
+    private var jsHandlers = [SwiftJSCallHandler]()
     
-    // MARK: - Customize the root view -- recommended when the entire page is a WebView or image
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
+    private lazy var progressBar: UIProgressView = {
+        let progress = UIProgressView(progressViewStyle: .bar)
+        progress.translatesAutoresizingMaskIntoConstraints = false
+        progress.tintColor = .systemBlue
+        return progress
+    }()
+
+    // MARK: - 自定义根视图——当整个页面是WebView或图像时建议使用
     public private(set) lazy var webView: WKWebView = {
         let config = WKWebViewConfiguration()
         config.allowsAirPlayForMediaPlayback = true
         
         // 支持h5内嵌播放视频模式
         config.allowsInlineMediaPlayback = true
-        
-        // 是否支持javaScript
-        if #available(iOS 14.0, *) {
-            config.defaultWebpagePreferences.allowsContentJavaScript = true
-        } else {
-            config.preferences.javaScriptEnabled = true
-        }
         
         // 是否自动播放（默认是自动播放）
         if #available(iOS 10.0, *) {
@@ -64,6 +81,13 @@ open class SwiftWeakScriptMessageDelegate: NSObject, WKScriptMessageHandler {
             config.requiresUserActionForMediaPlayback = false
         }
         
+        // 是否支持javaScript
+        if #available(iOS 14.0, *) {
+            config.defaultWebpagePreferences.allowsContentJavaScript = true
+        } else {
+            config.preferences.javaScriptEnabled = true
+        }
+ 
         let webView = WKWebView(frame: .zero, configuration: config)
         webView.allowsBackForwardNavigationGestures = true
         webView.uiDelegate = self
@@ -80,8 +104,9 @@ open class SwiftWeakScriptMessageDelegate: NSObject, WKScriptMessageHandler {
     
     override open func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(webView)
-        setUI()
+        
+        setupWebView()
+        setupLoadingIndicators()
         addObserver()
     }
     
@@ -89,59 +114,65 @@ open class SwiftWeakScriptMessageDelegate: NSObject, WKScriptMessageHandler {
         webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress))
         webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.title))
         webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.url))
-        methods.forEach { method in
-            let vc = webView.configuration.userContentController
-            vc.removeScriptMessageHandler(forName: method.method)
-        }
+        
+        let controller = webView.configuration.userContentController
+        jsHandlers.forEach { controller.removeScriptMessageHandler(forName: $0.methodName) }
+        jsHandlers.removeAll()
+
     }
 }
 
 extension SwiftWebViewController {
-    
-    /// load webview 的网络连接
-    open func load(with string: String, cachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy, timeoutInterval: TimeInterval = 60.0) {
-        
-        guard let url = URL(string: string) else {
+
+    ///从URL字符串加载内容
+    open func load(urlString: String,
+                  cachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy,
+                  timeout: TimeInterval = 60.0) {
+        guard let url = URL(string: urlString) else {
+            handleInvalidURL(urlString)
             return
         }
-        webView.load(URLRequest(url: url, cachePolicy: cachePolicy, timeoutInterval: timeoutInterval))
-       
+        webView.load(URLRequest(url: url, cachePolicy: cachePolicy, timeoutInterval: timeout))
     }
-    
-    /// load HTML
-   open func loadHTML(with string: String, baseURL: URL? = Bundle.main.resourceURL) {
-        if string.count == 0 {
+    /// 直接加载HTML内容
+    open func loadHTMLString(_ string: String, baseURL: URL? = Bundle.main.resourceURL) {
+        guard !string.isEmpty else {
             return
         }
         webView.loadHTMLString(string, baseURL: baseURL)
     }
     
-    /// load HTMLFile
+    /// 加载HTML文件
    open func loadHTMLFile(with string: String,_ type: String) {
-        if string.count == 0 {
-            return
-        }
-        let url = Bundle.main.url(forResource: string, withExtension: type)!
+       guard !string.isEmpty,
+             let url = Bundle.main.url(forResource: string, withExtension: type) else {
+           return
+       }
         webView.loadFileURL(url, allowingReadAccessTo: url.deletingLastPathComponent())
     }
     
-    /// load webView h5
+    /// 注册JavaScript处理程序
+    open func addJSHandler(for methodName: String, handler: @escaping (Any) -> Void) {
+        guard !jsHandlers.contains(where: { $0.methodName == methodName }) else {
+            assertionFailure("Duplicate JavaScript handler name: \(methodName)")
+            return
+        }
+        
+        let handler = SwiftJSCallHandler(methodName: methodName, handler: handler)
+        jsHandlers.append(handler)
+        webView.configuration.userContentController.add(
+            SwiftWeakScriptMessageDelegate(delegate: self),
+            name: methodName
+        )
+    }
+    
+    /// 加载网页视图h5
     open func evaluateJavaScript(with javaScriptString: String, completionHandler: ((Any?, Error?) -> Void)? = nil) {
         webView.evaluateJavaScript(javaScriptString, completionHandler: completionHandler)
     }
     
-    /// add js call back
-    @available(iOS 8.0, *)
-    open func jsMethod(with method: String, handel: @escaping (Any) -> ()) {
-        for m in methods {
-            assert(m.method == method, "不能重复添加相同名称")
-        }
-        self.methods.append(SwiftMethod(method: method, handel: handel))
-        let vc = webView.configuration.userContentController
-        vc.add(SwiftWeakScriptMessageDelegate(self), name: method)
-    }
     
-    /// Snap Shot 截图
+    /// 快照
     @available(iOS 11.0, *)
     open func snapShot(with rect: CGRect = CGRect(x: 0, y: 0, width: SCREEN_WIDTH_TO_WIDTH, height: SCREEN_HEIGHT_TO_HEIGHT), handel: @escaping (UIImage) -> ()) {
         let config = WKSnapshotConfiguration()
@@ -185,9 +216,9 @@ extension SwiftWebViewController {
 // MARK: - WKScriptMessageHandler
 extension SwiftWebViewController: WKScriptMessageHandler {
     open func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        methods.forEach { method in
-            if method.method == message.name {
-                method.handel(message.body)
+        jsHandlers.forEach { method in
+            if method.methodName == message.name {
+                method.handler(message.body)
             }
         }
     }
@@ -196,23 +227,26 @@ extension SwiftWebViewController: WKScriptMessageHandler {
 // MARK: -  UI部分
 extension SwiftWebViewController {
     
-    private func setUI() {
-        spinner = UIActivityIndicatorView()
-        spinner.translatesAutoresizingMaskIntoConstraints = false
-        webView.addSubview(spinner)
+    func setupWebView() {
+        view.addSubview(webView)
+        webView.frame = view.bounds
+        webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+    }
+    
+    private func setupLoadingIndicators() {
         
-        spinner.centerXAnchor.constraint(equalTo: webView.centerXAnchor).isActive = true
-        spinner.centerYAnchor.constraint(equalTo: webView.centerYAnchor).isActive = true
-        spinner.widthAnchor.constraint(equalToConstant:SCALE_IP6_WIDTH_TO_WIDTH(60)).isActive = true
-        spinner.heightAnchor.constraint(equalToConstant: SCALE_IP6_WIDTH_TO_WIDTH(60)).isActive = true
+        webView.addSubview(activityIndicator)
+        webView.addSubview(progressBar)
         
-        progressView = UIProgressView(progressViewStyle: .default)
-        progressView.translatesAutoresizingMaskIntoConstraints = false
-        webView.addSubview(progressView)
-        
-        progressView.centerXAnchor.constraint(equalTo: webView.centerXAnchor).isActive = true
-        progressView.widthAnchor.constraint(equalTo: webView.widthAnchor).isActive = true
-        progressView.heightAnchor.constraint(equalToConstant: SCALE_IP6_WIDTH_TO_WIDTH(2)).isActive = true
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: webView.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: webView.centerYAnchor),
+//
+//          progressBar.topAnchor.constraint(equalTo: webView.safeAreaLayoutGuide.topAnchor),
+            progressBar.leadingAnchor.constraint(equalTo: webView.leadingAnchor),
+            progressBar.trailingAnchor.constraint(equalTo: webView.trailingAnchor),
+            progressBar.heightAnchor.constraint(equalToConstant: SCALE_IP6_WIDTH_TO_WIDTH(2))
+        ])
     }
     
     ///observer
@@ -226,28 +260,41 @@ extension SwiftWebViewController {
     /// 实时获取加载进度的值
     override open func observeValue(forKeyPath keyPath: String?,of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == #keyPath(WKWebView.estimatedProgress) {
-            progressView.progress = Float(webView.estimatedProgress)
+            progressBar.progress = Float(webView.estimatedProgress)
         } else if keyPath == #keyPath(WKWebView.title) {
-            guard let t = webView.title else {
-                return
-            }
-            self.loadWebViewTitle?(t)
+            self.onTitleUpdate?(webView.title ?? "")
         } else if keyPath == #keyPath(WKWebView.url) {
-            guard let u = webView.url else {
-                return
-            }
-            self.loadWebViewUrl?(u)
+            self.onURLUpdate?(webView.url)
         }
     }
     
     /// 执行JS代码——也称为注入JavaScript
-    private func handleJS() {
+    private func updateContentHeight() {
         webView.evaluateJavaScript("document.body.offsetHeight") { (res, error) in
             guard let height = res as? Int else {
                 return
             }
-            self.loadWebViewContentHeight?(Float(height))
+            self.onContentHeightChange?(Float(height))
         }
+    }
+    
+    func handleInvalidURL(_ urlString: String) {
+        let error = NSError(
+            domain: "WebViewController",
+            code: 400,
+            userInfo: [NSLocalizedDescriptionKey: "Invalid URL: \(urlString)"]
+        )
+        handleLoadingError(error)
+    }
+    
+    func handleLoadingError(_ error: Error) {
+        let alert = UIAlertController(
+            title: "Load Failed",
+            message: error.localizedDescription,
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
 }
 
@@ -270,7 +317,7 @@ extension SwiftWebViewController: WKNavigationDelegate {
     
     /// 从web服务器请求数据时调用（网页开始加载）
     open func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        spinner.startAnimating()
+        activityIndicator.startAnimating()
     }
     
     /// 收到服务器响应后，主要根据响应头信息决定是否在当前WebView中加载网站
@@ -283,20 +330,20 @@ extension SwiftWebViewController: WKNavigationDelegate {
     
     /// 从web服务器接收数据时调用（页面加载完成）
     open func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        print(#function)
-        spinner.stopAnimating()
-        spinner.removeFromSuperview()
-        progressView.removeFromSuperview()
+        SwiftLog.log(#function)
+        activityIndicator.stopAnimating()
+        activityIndicator.removeFromSuperview()
+        progressBar.removeFromSuperview()
         
         //Inject JS code
-        handleJS()
+        updateContentHeight()
     }
     /// 当网页加载失败时调用
     open func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        print(#function)
-        spinner.stopAnimating()
-        spinner.removeFromSuperview()
-        progressView.removeFromSuperview()
+        SwiftLog.log(#function)
+        activityIndicator.stopAnimating()
+        activityIndicator.removeFromSuperview()
+        progressBar.removeFromSuperview()
     }
     
 }
@@ -318,6 +365,7 @@ extension SwiftWebViewController: WKUIDelegate {
     
     // [js]confirm()
     open func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
+        
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         alert.lx.addAction(with: "取消", style: .cancel) { (_) in
             completionHandler(false)
@@ -340,4 +388,3 @@ extension SwiftWebViewController: WKUIDelegate {
         present(alert, animated: true, completion: nil)
     }
 }
-

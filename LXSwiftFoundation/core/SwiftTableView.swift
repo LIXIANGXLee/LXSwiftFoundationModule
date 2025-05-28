@@ -129,4 +129,29 @@ extension SwiftTableView: UIGestureRecognizerDelegate {
     }
 }
 
-extension SwiftTableViewCell: SwiftCellCompatible { }
+// MARK: - 子类配置方法
+extension SwiftTableViewCell: SwiftUICompatible, SwiftCellCompatible {
+    /// 配置界面元素（子类必须重写，无需调用super）
+    @objc open func setupUI() {
+        // 示例：在此添加子视图、约束等
+    }
+    
+    /// 配置视图模型（子类必须重写，无需调用super）
+    @objc open func setupViewModel() {
+        // 示例：在此绑定数据模型、监听事件等
+    }
+}
+
+
+// MARK: - 子类配置方法
+extension SwiftTableView: SwiftUICompatible {
+    /// 配置界面元素（子类必须重写，无需调用super）
+    @objc open func setupUI() {
+        // 示例：在此添加子视图、约束等
+    }
+    
+    /// 配置视图模型（子类必须重写，无需调用super）
+    @objc open func setupViewModel() {
+        // 示例：在此绑定数据模型、监听事件等
+    }
+}

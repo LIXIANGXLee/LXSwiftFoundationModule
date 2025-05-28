@@ -35,7 +35,9 @@ import UIKit
     open override func dismiss() {
 
         /// 结束动画
-        endAnimation { (_) in super.dismiss() }
+        endAnimation {
+            (_) in super.dismiss()
+        }
     }
     
     /// 是否支持滑动手势 默认是false 不支持滑动手势
@@ -50,7 +52,9 @@ import UIKit
         }
         
         let offSet = pan.translation(in: pan.view)
-        if offSet.y < 0 { return }
+        if offSet.y < 0 {
+            return
+        }
         
         switch pan.state {
         case .began:
@@ -88,9 +92,9 @@ extension SwiftMenuUpView {
     private func endAnimation(_ callBack: ((Bool) -> Void)? = nil) {
      
         self.backgroundColor = UIColor.black.withAlphaComponent(viewOpaque)
-        UIView.animate(withDuration: animateDuration, animations: {
+        UIView.animate(withDuration: animateDuration,
+                       animations: {
             self.content?.lx.y = SCREEN_HEIGHT_TO_HEIGHT
-          
             self.backgroundColor = UIColor.black.withAlphaComponent(0)
         }) {(isFinish) -> () in
             self.removeFromSuperview()
@@ -118,7 +122,9 @@ extension SwiftMenuUpView {
     private func resetStart() {
        
         UIView.animate(withDuration:animateDuration) {
-            guard var content = self.content else { return }
+            guard var content = self.content else {
+                return
+            }
           
             content.lx.y = SCREEN_HEIGHT_TO_HEIGHT - content.lx.height
         }

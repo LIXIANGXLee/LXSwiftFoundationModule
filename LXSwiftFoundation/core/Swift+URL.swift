@@ -9,63 +9,63 @@ import UIKit
 
 extension SwiftBasics where Base == URL {
     
-    /// 根据url获取视频的size
+    // MARK: - 视频相关
+    
+    /// 获取URL指向视频的尺寸
+    /// - 返回值: 视频尺寸CGSize，如果无法获取则返回nil
     public var videoSize: CGSize? {
         SwiftUtils.videoSize(with: base)
     }
    
-    /// 取出Get请求中的参数，结果是一个大字典
+    // MARK: - URL参数处理
+    
+    /// 解析URL中的查询参数(使用NSURLComponents方式)
+    /// - 返回值: 参数字典，格式为 [参数名: 参数值]
+    /// - 说明: 此方法会自动处理URL编码，参数值会保留原始URL中的编码状态
     public var urlParams1: [String: String] {
-        let components = NSURLComponents(url: base, resolvingAgainstBaseURL: false)
-        let queryItems = components?.queryItems ?? []
-        return queryItems.reduce([String: String]()) {
-            var dict = $0
-            dict[$1.name] = $1.value ?? ""
-            return dict
+        guard let components = URLComponents(url: base, resolvingAgainstBaseURL: false),
+              let queryItems = components.queryItems else {
+            return [:]
+        }
+        
+        return queryItems.reduce(into: [String: String]()) { result, item in
+            result[item.name] = item.value ?? ""
         }
     }
     
-    /// 从URL String 中获取参数，并将参数转为字典类型
+    /// 解析URL中的查询参数(字符串分割方式)
+    /// - 返回值: 参数字典，格式为 [参数名: 参数值]
+    /// - 注意: 此方法不会自动处理URL编码，参数值会保留原始URL中的编码状态
     public var urlParams2: [String: String] {
-        let string = base.absoluteString
-        var params: [String: String] = [:]
-        let array = string.components(separatedBy: "?")
-        if array.count == 2 {
-            let paramsStr = array[1]
-            if paramsStr.count > 0 {
-                let paramsArray = paramsStr.components(separatedBy: "&")
-                paramsArray.forEach { (param) in
-                    let arr = param.components(separatedBy: "=")
-                    if arr.count == 2 {
-                        params[arr[0]] = arr[1]
-                    }
-                }
-            }
+        let urlString = base.absoluteString
+        guard let queryStartIndex = urlString.firstIndex(of: "?") else {
+            return [:]
         }
+        
+        let queryString = String(urlString[urlString.index(after: queryStartIndex)...])
+        var params = [String: String]()
+        
+        queryString.components(separatedBy: "&").forEach { paramPair in
+            let components = paramPair.components(separatedBy: "=")
+            guard components.count == 2 else { return }
+            params[components[0]] = components[1]
+        }
+        
         return params
     }
     
-    ///  按照原顺序 取出Get请求中的参数，结果是一个数组，每个元素是一个字典
+    /// 按照原始顺序解析URL中的查询参数
+    /// - 返回值: 参数数组，每个元素是一个字典，格式为 [参数名: 参数值]
+    /// - 说明: 保持参数在URL中出现的原始顺序，适用于需要顺序敏感的场景
     public var urlParamsWithOrder: [[String: String]] {
-        var queries = [[String: String]]()
-        guard let query = base.query else {
-            return queries
+        guard let query = base.query, !query.isEmpty else {
+            return []
         }
-        let andChar = CharacterSet(charactersIn: "&")
-        let queryComponents = query.components(separatedBy: andChar)
-        let equalChar = CharacterSet(charactersIn: "=")
-        for component in queryComponents {
-            let items = component.components(separatedBy: equalChar)
-            guard items.count == 2 else {
-                continue
-            }
-            guard let firstItem = items.first,
-                  let lastItem = items.last else {
-                continue
-            }
-            let queryPair = [firstItem: lastItem]
-            queries.append(queryPair)
+        
+        return query.components(separatedBy: "&").compactMap { paramPair in
+            let components = paramPair.components(separatedBy: "=")
+            guard components.count == 2 else { return nil }
+            return [components[0]: components[1]]
         }
-        return queries
     }
 }

@@ -31,7 +31,9 @@ public prefix func ~~~<= (_ index: Int) -> (Int) -> (Bool) { { $0 <= index } }
 
 //MARK: -  Extending methods for Int
 extension SwiftBasics where Base == Int {
-    
+    /// int转bool
+    public var toBool: Bool { base > 0 ? true : false }
+   
     /// 生成区间的随机数
     public static func randomInt(lower: Int = 0, upper: Int = Int(UInt32.max)) -> Int {
         lower + Int(arc4random_uniform(UInt32(upper - lower)))
@@ -42,32 +44,19 @@ extension SwiftBasics where Base == Int {
         randomInt(lower: range.lowerBound, upper: range.upperBound)
     }
     
-    /// int转bool
-    public var toBool: Bool {
-        base > 0 ? true : false
-    }
-    
     /// 用户显示容量 (GB、MB、KB、B)
     @available(*, deprecated, renamed: "sizeFileToString")
-    public var sizeFileToStr: String {
-        sizeFileToString
-    }
+    public var sizeFileToStr: String { sizeFileToString }
     
     /// 用户显示容量 (GB、MB、KB、B)
-    public var sizeFileToString: String {
-        Double(base).lx.sizeFileToString
-    }
+    public var sizeFileToString: String { Double(base).lx.sizeFileToString }
     
     /// 时间（秒数）转换字符串
     @available(*, deprecated, renamed: "timeToString")
-    public var timeToStr: String {
-        timeToString
-    }
+    public var timeToStr: String { timeToString }
     
     /// 时间（秒数）转换字符串
-    public var timeToString: String {
-        Double(base).lx.timeToString
-    }
+    public var timeToString: String { Double(base).lx.timeToString }
     
     ///  时间戳转时间字符串 base: 时间戳（单位：s） ymd: 转换手的字符串格式， 转换后得到的字符串
     public func timeStampToString(with ymd: String = "yyyy-MM-dd HH:mm:ss") -> String {
