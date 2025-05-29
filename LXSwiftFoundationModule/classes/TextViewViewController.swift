@@ -20,8 +20,10 @@ class TextViewViewController: UIViewController {
         self.view.addSubview(textView)
         textView.maxTextLength = 5
         textView.placeholder = "dsds"
+        textView.placeholderColor = UIColor.red
+
         textView.setHandle { (text) in
-            print("-=-=-=-=-=-\(text)")
+            SwiftLog.log("-=-=-=-=-=-\(text)")
         }
         
         textView.updateTextUI()
@@ -29,11 +31,13 @@ class TextViewViewController: UIViewController {
         
         let textField = SwiftTextField(frame: CGRect(x: 20, y: 310, width: 260, height: 100))
         self.view.addSubview(textField)
-        textField.textRectInsert = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        textField.textRectInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         textField.maxTextLength = 5
         textField.placeholder = "dsdsds"
-        textField.setHandle { (text) in
-            print("-=-=-=--------=\(text)")
+        textField.textColor = UIColor.blue
+        textField.lx.set(withPlaceholder: "dsdsds", color: UIColor.red)
+        textField.textDidChangeCallback =  { (text) in
+            SwiftLog.log("-=-=-=--------=\(text)")
         }
         
     }

@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "LXSwiftFoundation"
-  spec.version      = "10.0.0"
+  spec.version      = "10.1.0"
   spec.summary      = "Extend more user-friendly functions for system classes"
 
   
@@ -30,7 +30,7 @@ Pod::Spec.new do |spec|
     spec.license = "MIT"
     spec.author = { "lixiang" => "1367015013@qq.com" }
 
-    spec.platform = :ios, "9.0"
+    spec.platform = :ios, "10.0"
     spec.swift_version = "5.0"
 
     spec.source = { :git => "https://github.com/LIXIANGXLee/LXSwiftFoundationModule.git", :tag => "#{spec.version}" }

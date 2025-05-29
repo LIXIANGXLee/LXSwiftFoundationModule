@@ -18,6 +18,17 @@ public prefix func ~~~>= (_ index: Double) -> (Double) -> (Bool) { { $0 >= index
 public prefix func ~~~<  (_ index: Double) -> (Double) -> (Bool) { { $0 <  index } }
 public prefix func ~~~<= (_ index: Double) -> (Double) -> (Bool) { { $0 <= index } }
 
+extension CGFloat {
+    public static func ~= (pattern: (CGFloat) -> (Bool), value: CGFloat) -> Bool {
+        pattern(value)
+    }
+}
+
+extension Double {
+    public static func ~= (pattern: (Double) -> (Bool), value: Double) -> Bool {
+        pattern(value)
+    }
+}
 
 //MARK: -  Extending methods for CGFloat
 extension SwiftBasics where Base == CGFloat {

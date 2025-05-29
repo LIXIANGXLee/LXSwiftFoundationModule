@@ -16,8 +16,20 @@ class WebViewController: SwiftWebViewController {
         
         self.webView.frame = CGRect(x: 0, y: 0, width: SCREEN_WIDTH_TO_WIDTH, height: SCREEN_HEIGHT_TO_HEIGHT)
         
-        self.load(with: "http://www.baidu.com")
+        self.load(urlString: "http://www.baidu.com")
   
+        self.onURLUpdate = { a in
+            SwiftLog.log(a)
+        }
+        
+        self.onTitleUpdate = { a in
+            SwiftLog.log(a)
+        }
+        
+        self.onContentHeightChange = { a in
+            SwiftLog.log(a)
+        }
+        
         let imgView = UIImageView(frame: CGRect(x: 100, y: 100, width: 260, height: 500))
         imgView.contentMode = .scaleAspectFit
         view.addSubview(imgView)
@@ -32,7 +44,7 @@ class WebViewController: SwiftWebViewController {
     }
 
     deinit {
-        print("-=-=-=-=-=-=")
+        SwiftLog.log("-=-=-=-=-=-=")
     }
 
 }

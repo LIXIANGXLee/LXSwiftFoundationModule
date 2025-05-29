@@ -77,6 +77,7 @@ public struct SwiftUserDefaults: SwiftCompatible {
     ///   - value: 要存储的值（支持可序列化类型，nil表示删除键）
     ///   - key: 原始字符串键
     public static func set(with value: Any?, key: String) {
+
         UserDefaults.standard.set(value, forKey: key)
         UserDefaults.standard.synchronize()  // 确保立即写入
     }

@@ -7,12 +7,12 @@
 //
 
 import UIKit
-import LXSwiftFoundation
+//import LXSwiftFoundation
 import Photos
-
+import AVFoundation
 
 class ViewController: UIViewController {
-    
+     
     private var datas: [[String]] = [[]]
     
     fileprivate lazy var tableView: SwiftTableView = {
@@ -20,14 +20,29 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.registerSwiftCell(cellType: LXTableViewViewCell.self)
+        tableView.backgroundColor = UIColor.white
         return tableView
     }()
     
     private var switchCallBackKey: Void?
     private var switchCallBacka: Void?
-    
+    private var player: AVPlayer?
      override func viewDidLoad() {
         super.viewDidLoad()
+         view.backgroundColor = UIColor.white
+      
+//        try? AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playAndRecord)
+//         try? AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+//         try? AVAudioSession.sharedInstance().setActive(true)
+//  
+//         let url = URL(string: "https://cn.rich.my-imcloud.com/download/7days_1600046091_eHJfdXNlcl8xMg_5690aeca97f0a1da96c62a29874437f7-5BEECACB191C9BC13827D772C034FDD6.audio?auth=4tBhMfaVcY_ljjV2Kj6oFfJuPwAb-Phc8Dpn0Myz9AjalzPk4JO-O9T8lnAYUGUH6yXY4srOpX7AzALTalBGgJtNUIhJfFakOvw1fjybJyHT2--yfCAa4MxwJK95bMLMziAfF2sfmSPaDEYzkH7bAcfm10oTRVoQNwJWilxFPg8FFe9-b72DGthBmQijOGKC7XU89TGFxLYaQVCN4enEFalA1co1NDltzz3ftGASo2s")
+//
+//         // 创建AVPlayer实例
+//         player = AVPlayer(url: url!)
+//     
+//         player?.play()
+//         
+         
         self.title = "UI展示"
         let _ = TestObjcView()
         datas = [
@@ -43,16 +58,17 @@ class ViewController: UIViewController {
            ],
             [
                 "wkwebview加载网页，截取长图",
-                "textview和textfield"
+                "textview和textfield",
+                "NotificationTest"
+                
             ]
         ]
 
         tableView.frame = CGRect(x: 0,
                                  y: SCREEN_HEIGHT_TO_NAVBARHEIGHT,
                                  width: SCREEN_WIDTH_TO_WIDTH,
-                                 height: SCREEN_HEIGHT_TO_HEIGHT - SCREEN_HEIGHT_TO_NAVBARHEIGHT - SCREEN_HEIGHT_TO_TOUCHBARHEIGHT)
+                                 height: SCREEN_HEIGHT_TO_HEIGHT - SCREEN_HEIGHT_TO_NAVBARHEIGHT - SCREEN_HEIGHT_TO_BOTTOMSAFEHEIGHT)
          
-         LXXXLog(tableView.frame)
 
         view.addSubview(tableView)
         
@@ -91,21 +107,30 @@ class ViewController: UIViewController {
             SwiftUtils.playSound(with: str)
         }
         
-        let modal = SwiftHyperlinksModalController()
+        let modal = SwiftHyperlinksController()
         modal.setModal(config, modalItems: [itemCancel,itemTrue]) { (text) -> (Void) in
-            print("-=-=-=-=-=\(text)")
+            SwiftLog.log("-=-=-=-=-=\(text)")
             
         }
-        let r1 = SwiftRegexType(with: "《用户服务协议》",
-                                  color: UIColor.lx.color(hex: "36acff"),
-                                  font: UIFont.systemFont(ofSize: 14),
-                                  isExpression: false)
-        let r2 = SwiftRegexType(with: "《隐私政策》",
-                                  color: UIColor.lx.color(hex: "36acff"),
-                                  font: UIFont.systemFont(ofSize: 14),
-                                  isExpression: false)
-        let str = "欢迎使用迎使用！我们非常《用户服务协议》重视您《隐私政策》的您同意并接受全部条款后方可开始使用。"
-        guard let attr = modal.getAttributedString(with: str, textColor: UIColor.lx.color(hex: "666666"), textFont: UIFont.systemFont(ofSize: 14), regexTypes: [r1,r2]) else { return }
+        
+        let r1 = SwiftRegexType(regexPattern: "《用户服务协议》",
+                       color: UIColor.lx.color(hex: "36acff"),
+                       font: UIFont.systemFont(ofSize: 14),
+                       isExpression: false)
+        
+        let r2 = SwiftRegexType(regexPattern: "《隐私政策》",
+                       color: UIColor.lx.color(hex: "36acff"),
+                       font: UIFont.systemFont(ofSize: 14),
+                       isExpression: false)
+        
+        let r3 = SwiftRegexType(regexPattern: SwiftRegex.httpRegex,
+                       color: UIColor.lx.color(hex: "36acff"),
+                       font: UIFont.systemFont(ofSize: 14),
+                       isExpression: false)
+  
+        let str = "欢迎使用迎使用！我们非常《用户服务协议》重视您《隐私政策》的您同意https://chat.deepseek.com并接受全部条款后方可开始使用。"
+        
+        guard let attr = modal.getAttributedString(with: str, textColor: UIColor.lx.color(hex: "666666"), textFont: UIFont.systemFont(ofSize: 14), regexTypes: [r1,r2,r3]) else { return }
         modal.show(with: "温馨提示", content: attr)
     }
 }
@@ -199,6 +224,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate  {
                 self.navigationController?.pushViewController(vc, animated: true)
             case 1:
                 self.navigationController?.pushViewController(TextViewViewController(), animated: true)
+            case 2:
+                self.navigationController?.pushViewController(NotificationTest(), animated: true)
             default: break
             }
         default:  break
@@ -218,6 +245,7 @@ class LXTableViewViewCell: SwiftTableViewCell {
     
     override func setupUI() {
         contentView.addSubview(titleLabel)
+        contentView.backgroundColor = UIColor.white
     }
     
     public var textStr: String? {

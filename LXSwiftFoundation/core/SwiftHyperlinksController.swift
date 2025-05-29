@@ -10,8 +10,8 @@ import UIKit
 
 /// 模态视图控制器，支持超链接文本和底部操作按钮
 /// - Note: 继承自 SwiftModalController，提供标题、可滚动超链接文本和底部按钮的布局
-@objc(LXObjcHyperlinksModalController)
-@objcMembers open class SwiftHyperlinksModalController: SwiftModalController {
+@objc(LXObjcHyperlinksController)
+@objcMembers open class SwiftHyperlinksController: SwiftModalController {
     
     // MARK: - 类型定义
     /// 超链接点击回调类型
@@ -19,7 +19,7 @@ import UIKit
     
     // MARK: - 公开属性
     /// 超链接点击回调
-    open var callBack: SwiftHyperlinksModalController.CallBack?
+    open var callBack: SwiftHyperlinksController.CallBack?
     
     // MARK: - 私有属性
     /// 模态视图配置
@@ -82,7 +82,7 @@ import UIKit
 }
 
 // MARK: - 超链接文本代理实现
-extension SwiftHyperlinksModalController: TextLableDelegate {
+extension SwiftHyperlinksController: TextLableDelegate {
     /// 处理超链接点击事件
     public func textLable(_ textView: SwiftTextLable, didSelect text: String) {
         callBack?(text)
@@ -90,7 +90,7 @@ extension SwiftHyperlinksModalController: TextLableDelegate {
 }
 
 // MARK: - 功能扩展
-extension SwiftHyperlinksModalController {
+extension SwiftHyperlinksController {
     
     // MARK: 文本处理工具
     /// 生成富文本字符串（带超链接）
@@ -117,7 +117,7 @@ extension SwiftHyperlinksModalController {
     ///   - modaConfig: 视图配置
     ///   - modalItems: 底部按钮数据
     ///   - callBack: 超链接回调
-    @objc open func setModal(_ modaConfig: SwiftModalConfig, modalItems: [SwiftItem], callBack: SwiftHyperlinksModalController.CallBack?) {
+    @objc open func setModal(_ modaConfig: SwiftModalConfig, modalItems: [SwiftItem], callBack: SwiftHyperlinksController.CallBack?) {
         // 保存配置和数据
         self.modaConfig = modaConfig
         self.modalItems = modalItems

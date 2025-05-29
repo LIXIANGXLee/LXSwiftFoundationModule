@@ -29,6 +29,12 @@ public func has_equal(_ text: String) -> ((String) -> (Bool)) {
     { $0 == text }
 }
 
+extension String {
+    public static func ~= (pattern: (String) -> Bool, value: String) -> Bool {
+        pattern(value)
+    }
+}
+
 // MARK: - 字符串操作扩展
 // 提供字符串截取、分割、替换和去空格等常用功能
 extension SwiftBasics where Base == String {
@@ -164,6 +170,65 @@ extension SwiftBasics where Base == String {
     }
 }
 
+// MARK: - 字符串匹配功能扩展 (超链接、电话号码、表情符号等)
+extension SwiftBasics where Base == String {
+    /// 使用正则表达式枚举字符串中的所有匹配结果
+    /// - 参数:
+    ///   - regex: 正则表达式字符串（自动去除首尾空格）
+    ///   - usingBlock: 处理每个匹配结果的回调闭包
+    ///     - 参数1 captureCount: 捕获组的数量（不包含完整匹配组）
+    ///     - 参数2 matchedString: 匹配到的完整字符串
+    ///     - 参数3 range: 匹配结果在原始字符串中的范围(NSRange)
+    public func enumerateMatches(regex: String,
+                                usingBlock: (_ captureCount: Int,
+                                             _ matchedString: String,
+                                             _ range: NSRange) -> Void) {
+        
+        // 检查正则表达式是否为空
+        guard !regex.isEmpty else {
+            SwiftLog.log("错误：正则表达式不能为空")
+            return
+        }
+        
+        // 清理正则表达式（去除首尾空格）
+        let cleanedRegex = regex.lx.trim
+        
+        // 尝试创建NSRegularExpression实例
+        guard let regularExpression = try? NSRegularExpression(pattern: cleanedRegex) else {
+            SwiftLog.log("错误：无效的正则表达式格式[\(cleanedRegex)]")
+            return
+        }
+        
+        // 创建整个字符串的NSRange范围
+        let fullRange = NSRange(location: 0, length: base.utf16.count)
+        
+        // 查找所有匹配结果（使用正向匹配）
+        let matches = regularExpression.matches(in: base, options: [], range: fullRange)
+        
+        // 注意：逆向遍历可防止替换操作导致范围偏移
+        // 例如在枚举过程中修改字符串时，从后往前处理可保持原始位置信息有效
+        for match in matches.reversed() {
+            // 获取完整匹配范围
+            let matchRange = match.range
+            
+            // 验证范围有效性（防止越界访问）
+            guard matchRange.location != NSNotFound,
+                  let stringRange = Range(matchRange, in: base) else {
+                continue // 跳过无效范围
+            }
+            
+            // 提取匹配的完整子字符串
+            let matchedString = String(base[stringRange])
+            
+            // 计算捕获组数量（总范围数减1，因为索引0始终是完整匹配）
+            let captureGroupCount = match.numberOfRanges - 1
+            
+            // 传递匹配信息给调用方
+            usingBlock(captureGroupCount, matchedString, matchRange)
+        }
+    }
+}
+
 // MARK: - 字符串转换功能扩展
 extension SwiftBasics where Base == String {
     
@@ -220,10 +285,25 @@ extension SwiftBasics where Base == String {
     /// 将字符串转换为JSON对象
     /// - 返回值: 转换后的JSON对象，如果转换失败返回nil
     public var jsonObject: Any? {
+        // 1. 检查字符串能否转换为UTF-8格式的Data
+        // 转换失败则返回nil，避免后续无效操作
         guard let data = base.data(using: .utf8) else {
             return nil
         }
-        return try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
+        
+        // 2. 尝试将Data解析为JSON对象
+        // 使用.allowFragments选项允许解析非集合类型（如字符串/数字）的顶层JSON
+        // try? 表示解析失败时静默返回nil（不抛出错误）
+        return try? JSONSerialization.jsonObject(
+            with: data,
+            options: .allowFragments
+        )
+    }
+    
+    /// 对字符串进行UTF-8编码
+    /// - 返回值: 编码后的字符串，如果编码失败返回空字符串
+    public var toUtf8: String {
+        base.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
     }
     
     /// 将字符串转换为Bool值
@@ -248,12 +328,6 @@ extension SwiftBasics where Base == String {
         // 去除音标
         CFStringTransform(mutableString, nil, kCFStringTransformStripDiacritics, false)
         return String(mutableString).replacingOccurrences(of: " ", with: "")
-    }
-    
-    /// 对字符串进行UTF-8编码
-    /// - 返回值: 编码后的字符串，如果编码失败返回空字符串
-    public var toUtf8: String {
-        base.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
     }
     
     /// 检查字符串是否包含表情符号
@@ -307,20 +381,20 @@ extension SwiftBasics where Base == String {
     
     /// 从URL字符串中获取参数并转为字典 (方法1)
     /// - 返回值: 参数字典，如果解析失败返回nil
-    public var urlParams1: [String: String]? {
+    public var urlParametersParsing: [String: String]? {
         guard let url = URL(string: base) else {
             return nil
         }
-        return url.lx.urlParams1
+        return url.lx.urlParametersParsing
     }
     
     /// 从URL字符串中获取参数并转为字典 (方法2)
     /// - 返回值: 参数字典，如果解析失败返回nil
-    public var urlParams2: [String: String]? {
+    public var urlParametersHighParsing: [String: String]? {
         guard let url = URL(string: base) else {
             return nil
         }
-        return url.lx.urlParams2
+        return url.lx.urlParametersHighParsing
     }
     
     /// 删除最后一个路径组件
@@ -355,7 +429,7 @@ extension SwiftBasics where Base == String {
 
     /// 金钱格式化 (方法1) - 每隔三位加逗号，保留两位小数
     /// - 返回值: 格式化后的金钱字符串
-    public var moneyFormat1: String {
+    public var moneyFormat: String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         guard let number = numberFormatter.number(from: base) else {
@@ -366,78 +440,6 @@ extension SwiftBasics where Base == String {
         return formatter.string(from: number) ?? ""
     }
     
-    /// 金钱格式化 (方法2) - 手动实现每隔三位加逗号
-    /// - 返回值: 格式化后的金钱字符串
-    public var moneyFormat2: String {
-        var newStr: String = ""
-        if base.lx.isContains(".") {
-            // 处理带小数的情况
-            let allStrs = base.lx.split(by: ".")
-            let firstStr = allStrs.first ?? ""
-            let secondStr = allStrs.last ?? ""
-
-            // 处理整数部分
-            for i in 1...firstStr.count {
-                let index = firstStr.count - i
-                let subStr = firstStr.lx.subString(with: index..<index+1)
-                if i % 3 == 0 && index != 0 {
-                    newStr = ",".appending(subStr).appending(newStr)
-                } else {
-                    newStr = subStr.appending(newStr)
-                }
-            }
-            newStr = newStr.appending(".").appending(secondStr)
-        } else {
-            // 处理纯整数情况
-            for i in 1...base.count {
-                let index = base.count - i
-                let subStr = base.lx.subString(with: index..<index+1)
-                if i % 3 == 0 && index != 0 {
-                    newStr = ",".appending(subStr).appending(newStr)
-                } else {
-                    newStr = subStr.appending(newStr)
-                }
-            }
-        }
-        return newStr
-    }
-}
-
-// MARK: - 字符串匹配功能扩展 (超链接、电话号码、表情符号等)
-extension SwiftBasics where Base == String {
-
-    /// 使用正则表达式枚举匹配结果
-    /// - 参数:
-    ///   - regex: 正则表达式字符串
-    ///   - usingBlock: 处理每个匹配结果的闭包
-    ///     参数1: 捕获组数量
-    ///     参数2: 匹配到的字符串
-    ///     参数3: 匹配到的范围
-    public func enumerateMatches(regex: String,
-                                usingBlock: (_ captureCount: Int,
-                                             _ matchedString: String,
-                                             _ range: NSRange) -> Void) {
-    
-        // 前置条件检查
-        guard !regex.isEmpty,
-              let regularExpression = try? NSRegularExpression(pattern: regex.lx.trim) else {
-            SwiftLog.log("无效的正则表达式: \(regex)")
-            return
-        }
-     
-        let range = NSRange(location: 0, length: base.count)
-            
-        // 逆向遍历所有匹配结果以防止替换操作导致范围偏移
-        let matches = regularExpression.matches(in: base, options: [], range: range)
-            
-        for match in matches.reversed() {
-            // 提取完整匹配字符串
-            let fullMatchString = base[match.range.location..<(match.range.location + match.range.length)]
-            
-            // 传递捕获组数量和匹配信息
-            usingBlock(match.numberOfRanges - 1, fullMatchString, match.range)
-        }
-    }
 }
 
 // MARK: - 字符串日期相关功能扩展

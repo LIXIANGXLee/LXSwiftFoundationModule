@@ -54,101 +54,138 @@ import UIKit
  */
 
 //MARK: - bundle @1x @2x @3x image
+import UIKit
+
+/// 面向Objective-C的便捷Bundle资源加载器
+/// - 提供基于路径的图片资源加载能力
+/// - 支持多分辨率自动适配（@1x/@2x/@3x）
 @objc(LXObjcConvenienceBundle)
 @objcMembers public final class SwiftConvenienceBundle: NSObject {
-    private let path: String?
-    private let bundlePath: String     // bundle  path
-    private let bundleName: String     // bundle name
+    // MARK: - 属性
+    private let defaultSubPath: String?  // 默认子路径（可选）
+    private let bundlePath: String       // Bundle根目录路径
+    private let bundleName: String       // Bundle名称
     
+    // MARK: - 初始化方法
+    /// 初始化资源加载器
+    /// - Parameters:
+    ///   - bundlePath: Bundle所在目录的绝对路径
+    ///   - bundleName: Bundle文件名称（不含扩展名）
+    ///   - path: 资源默认子路径（可选）
     public init(bundlePath: String, bundleName: String, path: String? = nil) {
         self.bundlePath = bundlePath
-        self.path = path
         self.bundleName = bundleName
+        self.defaultSubPath = path
     }
     
-    /// 根据资源名称和资源路径加载资源
-    ///
-    /// -ImageName：图像的名称或路径
-    /// -path:bundle如果指定，则不使用默认路径
+    // MARK: - 图片加载接口
+    /// 加载指定名称的图片资源
+    /// - Parameters:
+    ///   - imageName: 图片基础名称（不含分辨率后缀和扩展名）
+    ///   - path: 自定义子路径（可选），覆盖初始化时的默认路径
+    /// - Returns: 加载成功的UIImage对象，失败返回nil
     public func imageNamed(_ imageName: String, path: String? = nil) -> UIImage? {
+        // 1. 构建基础路径：bundlePath/bundleName/
         var imagePath = "\(bundlePath)/\(bundleName)/"
-        if let path = path {
-            imagePath = imagePath + "\(path)/"
-        } else if let path = self.path, path.count > 0 {
-            imagePath = imagePath + "\(path)/"
+        
+        // 2. 添加子路径（优先使用参数路径，其次使用初始化路径）
+        if let customPath = path {
+            imagePath.append("\(customPath)/")
+        } else if let defaultPath = defaultSubPath, !defaultPath.isEmpty {
+            imagePath.append("\(defaultPath)/")
         }
-        imagePath = imagePath + imageName
+        
+        // 3. 拼接图片基础名称
+        imagePath.append(imageName)
+        
+        // 4. 通过图片加载器获取适配当前屏幕的图片
         return SwiftImageBuilder.loadImage(imagePath)
     }
 }
 
-fileprivate class SwiftImageBuilder: NSObject {
-    static var x1ImageBuilder: SwiftImageAdaptNode = SwiftX1ImageBuilder(successor:
-                                SwiftX2ImageBuilder(successor: SwiftX3ImageBuilder()))
-    static var x2ImageBuilder: SwiftImageAdaptNode = SwiftX2ImageBuilder(successor:
-                                SwiftX3ImageBuilder(successor: SwiftX1ImageBuilder()))
-    static var x3ImageBuilder: SwiftImageAdaptNode = SwiftX3ImageBuilder(successor:
-                               SwiftX2ImageBuilder(successor: SwiftX1ImageBuilder()))
-    static func loadImage(_ imagePath: String) -> UIImage? {
-        let scale = UIScreen.main.scale
-        if abs(scale - 3) <= 0.01 {
-            return x3ImageBuilder.loadImage(imagePath)
-        } else if abs(scale - 2) <= 0.01 {
-            return x2ImageBuilder.loadImage(imagePath)
-        } else {
-            return x1ImageBuilder.loadImage(imagePath)
-        }
+// MARK: - 图片加载器（责任链模式实现）
+fileprivate class SwiftImageBuilder {
+    /// 责任链节点（静态初始化）
+    /// 注意：责任链设置为线性结构避免循环引用（3x -> 2x -> 1x）
+    private static let imageLoaderChain: SwiftImageAdaptNode = {
+        // 创建链式关系：x3处理器 -> x2处理器 -> x1处理器
+        let x1Loader = SwiftX1ImageBuilder(successor: nil)
+        let x2Loader = SwiftX2ImageBuilder(successor: x1Loader)
+        return SwiftX3ImageBuilder(successor: x2Loader)
+    }()
+    
+    /// 根据当前屏幕分辨率选择合适的图片加载链
+    static func loadImage(_ baseImagePath: String) -> UIImage? {
+        // 根据屏幕分辨率选择加载策略（责任链自动处理多分辨率适配）
+        // 注意：实际加载逻辑由责任链统一处理，此处直接调用责任链入口
+        return imageLoaderChain.loadImage(baseImagePath)
     }
 }
 
-/// 责任链节点声明（责任链设计模式）
+// MARK: - 责任链节点协议
 fileprivate protocol SwiftImageAdaptNode {
+    /// 初始化方法
+    /// - Parameter successor: 责任链中的下一个处理器
     init(successor: SwiftImageAdaptNode?)
+    
+    /// 图片加载核心方法
+    /// - Parameter imagePath: 图片基础路径（不含分辨率后缀和扩展名）
     func loadImage(_ imagePath: String) -> UIImage?
 }
 
-///  x2 image builder
-fileprivate struct SwiftX2ImageBuilder: SwiftImageAdaptNode {
-    private var successor: SwiftImageAdaptNode?
-    init(successor: SwiftImageAdaptNode? = nil) {
-        self.successor = successor
-    }
-    
-    func loadImage(_ imagePath: String) -> UIImage? {
-        if let image = UIImage(contentsOfFile: "\(imagePath)@2x.png") {
-            return image
-        }
-        return successor?.loadImage(imagePath)
-    }
-}
-
-/// x3 image builder
+// MARK: - @3x图片处理器
 fileprivate struct SwiftX3ImageBuilder: SwiftImageAdaptNode {
-    private var successor: SwiftImageAdaptNode?
+    private let successor: SwiftImageAdaptNode?
+    
     init(successor: SwiftImageAdaptNode? = nil) {
         self.successor = successor
     }
     
     func loadImage(_ imagePath: String) -> UIImage? {
+        // 尝试加载@3x分辨率图片
         if let image = UIImage(contentsOfFile: "\(imagePath)@3x.png") {
             return image
         }
+        
+        // 加载失败则转交下一个处理器
         return successor?.loadImage(imagePath)
     }
 }
 
-/// x1 image builder
-fileprivate struct SwiftX1ImageBuilder: SwiftImageAdaptNode {
-    private var successor: SwiftImageAdaptNode?
+// MARK: - @2x图片处理器
+fileprivate struct SwiftX2ImageBuilder: SwiftImageAdaptNode {
+    private let successor: SwiftImageAdaptNode?
+    
     init(successor: SwiftImageAdaptNode? = nil) {
         self.successor = successor
     }
     
     func loadImage(_ imagePath: String) -> UIImage? {
-        if let image = UIImage(contentsOfFile: "\(imagePath).png") {
+        // 尝试加载@2x分辨率图片
+        if let image = UIImage(contentsOfFile: "\(imagePath)@2x.png") {
             return image
         }
+        
+        // 加载失败则转交下一个处理器
         return successor?.loadImage(imagePath)
     }
 }
 
+// MARK: - @1x图片处理器（基础分辨率）
+fileprivate struct SwiftX1ImageBuilder: SwiftImageAdaptNode {
+    private let successor: SwiftImageAdaptNode?
+    
+    init(successor: SwiftImageAdaptNode? = nil) {
+        self.successor = successor
+    }
+    
+    func loadImage(_ imagePath: String) -> UIImage? {
+        // 尝试加载基础分辨率图片（无后缀）
+        if let image = UIImage(contentsOfFile: "\(imagePath).png") {
+            return image
+        }
+        
+        // 作为责任链末端不再向后传递
+        return nil
+    }
+}

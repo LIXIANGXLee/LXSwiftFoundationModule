@@ -102,14 +102,17 @@ public func SCALE_IPAD129_HEIGHT_TO_HEIGHT(_ distance: CGFloat) -> CGFloat {
     public static var rootWindow: UIWindow? {
         var window: UIWindow?
         if #available(iOS 13.0, *) {
-            // 扁平化处理所有场景的窗口，使用 lazy 优化性能
+            // 使用 lazy 延迟加载优化性能：避免立即处理所有场景
+            // flatMap 将多个场景的窗口数组合并成单个数组
             window = windowScenes.lazy.flatMap { $0.windows }.first {
-                // 精确匹配 UIWindow 基类实例（排除自定义子类窗口）
+                // 关键检测：精确匹配 UIWindow 基类（排除自定义子类窗口）
+                // 确保获取的是系统原生的窗口对象
                 $0.isMember(of: UIWindow.self)
             }
         }
         
         // 如果 window == nil的话，则回退方案：使用传统窗口获取方式
+        // 兼容旧版系统：使用传统窗口获取方式
         return window ?? UIApplication.shared.windows.first
 
     }
@@ -138,48 +141,62 @@ public func SCALE_IPAD129_HEIGHT_TO_HEIGHT(_ distance: CGFloat) -> CGFloat {
     }
     
     
-    /// 在给定的窗口数组中查找最后一个符合条件的窗口（非远程键盘窗口且未隐藏）
+    /// 在给定的窗口数组中查找最后一个符合条件的窗口
+    /// 条件：1. 非远程键盘窗口 2. 窗口未隐藏
     /// - Parameter windows: 待筛选的窗口数组
-    /// - Returns: 符合条件的最后一个窗口，若不存在则返回 nil
+    /// - Returns: 符合条件的最后一个窗口（原始数组顺序），若不存在则返回 nil
     private static func findValidWindow(in windows: [UIWindow]) -> UIWindow? {
-        // 提前获取远程键盘窗口类（避免循环内重复获取）
-        // 使用安全转换确保类型正确，若类不存在则返回最后一个可见窗口
+        // 尝试获取远程键盘窗口类
+        // 使用安全转换确保类型匹配，若类不存在则直接处理可见窗口
         guard let keyboardClass = NSClassFromString("UIRemoteKeyboardWindow") as? UIWindow.Type else {
+            // 当远程键盘类不存在时（如旧系统版本）
+            // 直接返回最后一个可见窗口（无需过滤键盘类型）
             return windows.reversed().first { !$0.isHidden }
         }
 
-        // 使用反向遍历 + 惰性计算优化大数组性能
-        // 找到第一个同时满足以下条件的窗口：
-        // 1. 不是远程键盘窗口类型
-        // 2. 窗口处于可见状态
+        // 优化点：
+        // 1. 反向遍历：从窗口层级顶部开始查找（UIWindow 数组通常按层级排序）
+        // 2. 惰性求值：使用 lazy 避免创建临时数组，提升大数组处理性能
+        // 3. 复合条件：同时满足非隐藏且非远程键盘类型
         return windows.reversed().lazy.first {
             !$0.isHidden && !$0.isMember(of: keyboardClass)
         
         }
     }
-    /// 系统状态栏高度（包含刘海屏适配）
+    /// 获取当前状态栏高度（兼容所有iOS版本）
     public static var statusBarHeight: CGFloat {
         var height: CGFloat = 0
         
-        // iOS13+ 使用场景状态栏管理器
+        // MARK: - 首选方案（iOS13+ 场景化窗口方案）
+        // 在iOS13及以上系统中，通过窗口场景的状态栏管理器获取高度
         if #available(iOS 13.0, *) {
+            // 注意：当应用有多个场景时，rootWindow可能关联当前活动场景
             height = rootWindow?.windowScene?
                 .statusBarManager?
                 .statusBarFrame.height ?? 0
         }
         
-        // 备用方案：从状态栏框架或安全区域获取
+        // 如果已通过场景化方案获取到有效高度，直接返回
         guard height <= 0 else { return height }
         
-        // 当无法通过场景获取时，降级处理方案
+        // MARK: - 备用方案（全版本兼容降级方案）
+        // 获取全局状态栏框架尺寸（此方法在iOS13+已废弃但仍可用）
         let statusFrame = UIApplication.shared.statusBarFrame
+        
+        // 在iOS11+系统中优先使用安全区域顶部间距
+        // 原因：某些特殊状态（如通话/热点）下安全区域更能反映实际状态栏高度
         if #available(iOS 11.0, *) {
+            // 安全区域策略：当主窗口安全区域顶部值有效时优先采用
+            // 注意：在状态栏隐藏时safeAreaInsets.top可能为0，此时回退到statusFrame
             height = rootWindow?.safeAreaInsets.top ?? statusFrame.height
         } else {
+            // iOS11以下系统直接使用状态栏框架高度
             height = statusFrame.height
         }
         
-        // 最终保底值（默认状态栏高度）
+        // MARK: - 终极保底策略
+        // 若所有方案均失效（通常发生在早期启动阶段或模拟器异常）
+        // 返回传统默认状态栏高度：20pt（非刘海屏标准高度）
         return height > 0 ? height : 20
     }
     

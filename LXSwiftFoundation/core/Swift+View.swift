@@ -9,235 +9,298 @@
 import UIKit
 import WebKit
 
-//MARK: -  Extending properties for UIView
+//MARK: - UIView 扩展属性
 extension SwiftBasics where Base: UIView {
-      
-    /// 导航跟控制器
+    
+    /// 获取应用的根导航控制器
     public var rootNavViewController: UINavigationController? {
         UIApplication.lx.rootNavViewController
     }
     
-    /// root跟控制器
+    /// 获取应用的根视图控制器
     public static var rootViewController: UIViewController? {
         UIApplication.lx.rootViewController
     }
     
-    /// 获取跟窗口
+    /// 获取包含当前视图的控制器
+    public static func currentViewController(ofView view: UIView) -> UIViewController? {
+        UIApplication.lx.currentViewController(ofView: view)
+    }
+    
+    /// 获取应用的主窗口
     public var rootWindow: UIWindow? {
         UIApplication.lx.rootWindow
     }
  
-    /// 获取最外层窗口 需要判断不是UIRemoteKeyboardWindow才行，否则在ipad会存在问题
+    /// 获取应用最顶层的窗口（排除键盘窗口）
     public static var lastWindow: UIWindow? {
         UIApplication.lx.lastWindow
     }
- 
-    /// view截图
+
+    /// 生成当前视图的快照图像
+    /// - 注意：针对 WKWebView 做了特殊处理
     public var snapShotImage: UIImage? {
+        // 创建图像上下文
         UIGraphicsBeginImageContextWithOptions(base.bounds.size, base.isOpaque, 0)
+        defer { UIGraphicsEndImageContext() } // 确保结束后释放上下文
+        
         if isContainsWKWebView() {
+            // 使用层级绘制（适用于 WKWebView）
             base.drawHierarchy(in: base.bounds, afterScreenUpdates: true)
         } else {
-            if let ctx = UIGraphicsGetCurrentContext() {
-                base.layer.render(in: ctx)
-            }
+            // 使用图层渲染（常规视图）
+            base.layer.render(in: UIGraphicsGetCurrentContext()!)
         }
-        let snapImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return snapImage
+        return UIGraphicsGetImageFromCurrentImageContext()
     }
     
-    /// 快照管理器，修复wkwebview屏幕截图错误。
-    public func isContainsWKWebView() -> Bool {
+    /// 检查当前视图或其子视图是否包含 WKWebView
+    /// - 用于快照时选择正确的渲染方式
+    private func isContainsWKWebView() -> Bool {
+        // 当前视图是 WKWebView
         if base.isKind(of: WKWebView.self) {
             return true
         }
+        // 递归检查子视图
         for subView in base.subviews {
-            if (subView.lx.isContainsWKWebView()) {
+            if subView.lx.isContainsWKWebView() {
                 return true
             }
         }
         return false
     }
     
-    /// 获取当前view对应的控制器
-    public static func currentViewController(ofView view: UIView) -> UIViewController? {
-        UIApplication.lx.currentViewController(ofView: view)
-    }
-    
-    /// 打开url
+    /// 打开指定 URL
+    /// - Parameters:
+    ///   - urlStr: 要打开的 URL 字符串
+    ///   - completionHandler: 完成回调，指示是否成功打开
     public static func openUrl(_ urlStr: String, completionHandler: ((Bool) -> Void)? = nil) {
         UIApplication.lx.openUrl(urlStr, completionHandler: completionHandler)
     }
     
-    /// 已经进入App
+    /// 注册应用进入前台的通知
+    /// - Parameter aSelector: 要执行的方法选择器
     public func didBecomeActive(_ aSelector: Selector) {
         SwiftUtils.didBecomeActive(base, selector: aSelector)
     }
     
-    /// 即将退出App
+    /// 注册应用进入后台的通知
+    /// - Parameter aSelector: 要执行的方法选择器
     public func willResignActive(_ aSelector: Selector) {
         SwiftUtils.willResignActive(base, selector: aSelector)
     }
-
 }
 
-//MARK: -  Extending methods for UIView
+//MARK: - 视图样式扩展
 extension SwiftBasics where Base: UIView {
   
-    /// view 渐变色 size如果设置尺寸的话 则使用其尺寸，如果没有设置则使用view的尺寸
-    public func setGradientLayer(with colors: [UIColor],
-                                 locations: [NSNumber] = [0.0,1.0],
-                                 startPoint: CGPoint = CGPoint(x: 0, y: 0.5),
-                                 endPoint: CGPoint = CGPoint(x: 1, y: 0.5),
-                                 size: CGSize? = nil) {
+    /// 设置渐变背景
+    /// - Parameters:
+    ///   - colors: 渐变色数组
+    ///   - locations: 颜色位置 (默认 [0.0, 1.0])
+    ///   - startPoint: 渐变起点 (默认 (0, 0.5))
+    ///   - endPoint: 渐变终点 (默认 (1, 0.5))
+    ///   - size: 渐变层尺寸 (默认使用视图尺寸)
+    public func setGradientLayer(
+        with colors: [UIColor],
+        locations: [NSNumber] = [0.0, 1.0],
+        startPoint: CGPoint = CGPoint(x: 0, y: 0.5),
+        endPoint: CGPoint = CGPoint(x: 1, y: 0.5),
+        size: CGSize? = nil
+    ) {
+        let targetSize = size ?? base.bounds.size
+        guard !targetSize.equalTo(.zero) else { return }
         
-        let s = size ?? base.bounds.size
-        if !s.equalTo(CGSize.zero) {
-            let gradientLayer = CAGradientLayer()
-            gradientLayer.frame = CGRect(origin: base.bounds.origin, size: s)
-            base.layer.insertSublayer(gradientLayer, at: 0)
-            gradientLayer.colors = colors.map{ $0.cgColor }
-            gradientLayer.locations = locations
-            gradientLayer.startPoint = startPoint
-            gradientLayer.endPoint = endPoint
-        }
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = CGRect(origin: .zero, size: targetSize)
+        gradientLayer.colors = colors.map { $0.cgColor }
+        gradientLayer.locations = locations
+        gradientLayer.startPoint = startPoint
+        gradientLayer.endPoint = endPoint
+        
+        // 插入到视图最底层
+        base.layer.insertSublayer(gradientLayer, at: 0)
     }
     
-    /// view 的阴影
-    public func setShadow(color: UIColor, radius: CGFloat, opacity: Float, offset: CGSize = CGSize.zero) {
+    /// 设置视图阴影
+    /// - Parameters:
+    ///   - color: 阴影颜色
+    ///   - radius: 阴影模糊半径
+    ///   - opacity: 阴影透明度 (0-1)
+    ///   - offset: 阴影偏移量 (默认 .zero)
+    public func setShadow(
+        color: UIColor,
+        radius: CGFloat,
+        opacity: Float,
+        offset: CGSize = .zero
+    ) {
         base.layer.shadowColor = color.cgColor
         base.layer.shadowRadius = radius
         base.layer.shadowOpacity = opacity
         base.layer.shadowOffset = offset
     }
     
-    /// 移除阴影
+    /// 移除视图阴影
     public func removeShadow() {
-        base.layer.shadowOpacity = 0.0
+        base.layer.shadowOpacity = 0
     }
     
-    /// view 边框
-    public func setBorder(width: CGFloat, color: UIColor, cornerRadius: CGFloat? = nil) {
+    /// 设置视图边框
+    /// - Parameters:
+    ///   - width: 边框宽度
+    ///   - color: 边框颜色
+    ///   - cornerRadius: 圆角半径 (可选)
+    public func setBorder(
+        width: CGFloat,
+        color: UIColor,
+        cornerRadius: CGFloat? = nil
+    ) {
         base.layer.borderWidth = width
         base.layer.borderColor = color.cgColor
-        if let cornerRadius = cornerRadius {
-            base.layer.cornerRadius = cornerRadius
+        
+        if let radius = cornerRadius {
+            base.layer.cornerRadius = radius
         }
     }
     
-    /// 圆角
-    public func setCornerRadius(radius: CGFloat = 4.0, clips: Bool = true) {
+    /// 设置统一圆角
+    /// - Parameters:
+    ///   - radius: 圆角半径 (默认 4)
+    ///   - clips: 是否裁剪超出部分 (默认 true)
+    public func setCornerRadius(radius: CGFloat = 4, clips: Bool = true) {
         base.layer.cornerRadius = radius
         base.layer.masksToBounds = clips
     }
     
-    /// 圆角 cornerRadius(topLeft topRight bottomLeft bottomRight)
-    ///
+    /// 设置部分圆角
     /// - Parameters:
-    ///   - cornerRadii: radius size
-    ///   - roundingCorners: UIRectCorner(rawValue:
-    ///   (UIRectCorner.topRight.rawValue) | (UIRectCorner.bottomRight.rawValue))
-    ///   - viewSize: size of the current view
-    public func setPartCornerRadius(radius: CGFloat = 4.0, roundingCorners: UIRectCorner = .allCorners, viewSize: CGSize? = nil) {
+    ///   - radius: 圆角半径 (默认 4)
+    ///   - roundingCorners: 需要设置的角
+    ///   - viewSize: 自定义尺寸 (默认使用视图当前尺寸)
+    public func setPartCornerRadius(
+        radius: CGFloat = 4,
+        roundingCorners: UIRectCorner = .allCorners,
+        viewSize: CGSize? = nil
+    ) {
+        let targetSize = viewSize ?? base.bounds.size
+        guard !targetSize.equalTo(.zero) else { return }
         
-        let s = viewSize ?? base.bounds.size
-        let rect = CGRect(origin: CGPoint.zero, size: s)
-        let bezierPath = UIBezierPath(roundedRect: rect,
-                                     byRoundingCorners: roundingCorners,
-                                     cornerRadii: CGSize(width: radius, height: radius))
-        if !s.equalTo(CGSize.zero) {
-            let rect = CGRect(origin: base.bounds.origin, size: s)
-            base.layer.mask = bezierPath.lx.layer(with: rect)
-        }
+        let bezierPath = UIBezierPath(
+            roundedRect: CGRect(origin: .zero, size: targetSize),
+            byRoundingCorners: roundingCorners,
+            cornerRadii: CGSize(width: radius, height: radius))
+        
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = bezierPath.cgPath
+        base.layer.mask = shapeLayer
     }
 }
 
-//MARK: -  快捷设置view尺寸
+//MARK: - 视图布局快捷属性
 extension SwiftBasics where Base: UIView {
     
+    /// 视图的 X 坐标
     public var x: CGFloat {
-        set(num) { base.frame = CGRect(x: num, y: y, width: width, height: height) }
         get { base.frame.origin.x }
+        set { base.frame.origin.x = newValue }
     }
     
+    /// 视图的 Y 坐标
     public var y: CGFloat {
-        set(num) { base.frame = CGRect(x: x, y: num, width: width, height: height) }
         get { base.frame.origin.y }
+        set { base.frame.origin.y = newValue }
     }
     
+    /// 视图宽度
     public var width: CGFloat {
-        set(num) { base.frame = CGRect(x: x, y: y, width: num, height: height) }
         get { base.frame.size.width }
+        set { base.frame.size.width = newValue }
     }
     
+    /// 视图高度
     public var height: CGFloat {
-        set(num) { base.frame = CGRect(x: x, y: y, width: width, height: num) }
         get { base.frame.size.height }
+        set { base.frame.size.height = newValue }
     }
 
-    /// 中心点横坐标
+    /// 视图中心点 X 坐标
     public var centerX: CGFloat {
-        set(num) { base.frame = CGRect(x: num - width / 2, y: y, width: width, height: height) }
-        get { x + width / 2 }
+        get { base.center.x }
+        set { base.center.x = newValue }
     }
     
-    /// 中心点纵坐标
+    /// 视图中心点 Y 坐标
     public var centerY: CGFloat {
-        set(num) { base.frame = CGRect(x: x, y: num - height / 2, width: width, height: height) }
-        get { y + height / 2 }
+        get { base.center.y }
+        set { base.center.y = newValue }
     }
 
-    /// 左边缘
+    /// 视图左边界
     public var left: CGFloat {
-        set(num) { x = num }
-        get { base.frame.origin.x }
+        get { x }
+        set { x = newValue }
     }
 
-    /// 右边缘
+    /// 视图右边界
     public var right: CGFloat {
-        set(num) { x =  num - width }
         get { x + width }
+        set { x = newValue - width }
     }
 
-    /// 上边缘
+    /// 视图上边界
     public var top: CGFloat {
-        set(num) { y = num }
         get { y }
+        set { y = newValue }
     }
 
-    /// 下边缘
+    /// 视图下边界
     public var bottom: CGFloat {
-        set(num) { y = num - height }
         get { y + height }
+        set { y = newValue - height }
     }
 }
 
-//MARK: -  Extending methods for UIView
+//MARK: - 手势扩展
 extension SwiftBasics where Base: UIView {
     
-    /// 添加手势直接闭包回调
+    /// 添加点击手势（闭包形式）
+    /// - Parameter gestureClosure: 手势触发回调
+    /// - Returns: 创建的手势识别器
     @discardableResult
-    public func addTapGestureRecognizer(_ gestureClosure: @escaping ((UIView?) -> ())) -> UITapGestureRecognizer {
+    public func addTapGestureRecognizer(_ gestureClosure: @escaping (UIView?) -> Void) -> UITapGestureRecognizer {
+        // 存储闭包
         base.gestureClosure = gestureClosure
-        let gesture = UITapGestureRecognizer(target: base, action: #selector(base.gestureTap(_:)))
+        
+        // 创建并添加手势
+        let gesture = UITapGestureRecognizer(
+            target: base,
+            action: #selector(base.gestureTap(_:)))
         base.addGestureRecognizer(gesture)
+        
         return gesture
     }
 }
 
-private var _swiftGestureClosureKey: Void?
+// MARK: - 关联对象扩展
+private var gestureClosureKey: UInt8 = 0
+
 extension UIView {
-    
-    fileprivate var gestureClosure: ((UIView?) -> ())? {
+    /// 存储点击手势闭包的关联属性
+    fileprivate var gestureClosure: ((UIView?) -> Void)? {
         get {
-            objc_getAssociatedObject(self,  &_swiftGestureClosureKey) as? (UIView?) -> ()
+            objc_getAssociatedObject(self, &gestureClosureKey) as? (UIView?) -> Void
         }
         set {
-            objc_setAssociatedObject(self, &_swiftGestureClosureKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(
+                self,
+                &gestureClosureKey,
+                newValue,
+                .OBJC_ASSOCIATION_RETAIN_NONATOMIC
+            )
         }
     }
     
+    /// 手势触发方法
     @objc fileprivate func gestureTap(_ gesture: UIGestureRecognizer) {
         gestureClosure?(gesture.view)
     }

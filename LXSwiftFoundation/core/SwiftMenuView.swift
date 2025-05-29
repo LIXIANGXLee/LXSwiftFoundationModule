@@ -7,89 +7,121 @@
 
 import UIKit
 
+/// SwiftMenuView的代理协议（目前为空，可扩展）
 @objc(LXObjcMenuViewDelegate)
 public protocol SwiftMenuViewDelegate: AnyObject { }
 
-/// 内部类默认是internal，此处可以去掉internal
-@objcMembers internal class SwiftInnerScrollView: UIScrollView, SwiftMenuViewDelegate {
+// MARK: - 内部滚动视图
+/// 用于实现背景点击消失功能的内部滚动视图
+@objcMembers final class SwiftInnerScrollView: UIScrollView, SwiftMenuViewDelegate {
     
-    internal var touchBgDismissClosure: (() -> Void)?
+    // MARK: 属性
+    /// 点击背景时的回调闭包
+    var touchBgDismissClosure: (() -> Void)?
     
-    internal override init(frame: CGRect) {
+    // MARK: 初始化
+    override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor.clear
+        configureView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: 视图配置
+    private func configureView() {
+        backgroundColor = .clear
         showsVerticalScrollIndicator = false
         showsHorizontalScrollIndicator = false
         isScrollEnabled = true
         isPagingEnabled = false
     }
     
-    required internal init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override internal func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let point = touches.first?.location(in: self) else {
-            return
-        }
-        let view = self.hitTest(point, with: event)
-        if view is SwiftMenuViewDelegate {
+    // MARK: 触摸处理
+    /// 处理背景触摸事件（非内容区域）
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let point = touches.first?.location(in: self) else { return }
+        
+        // 检查触摸点是否在背景上（非子视图）
+        let touchedView = hitTest(point, with: event)
+        if touchedView is SwiftMenuViewDelegate {
             touchBgDismissClosure?()
         }
     }
 }
 
+// MARK: - 菜单视图
+/// 自定义弹窗菜单视图，支持背景点击消失
 @objc(LXObjcMenuView)
 @objcMembers open class SwiftMenuView: SwiftView {
     
-    /// 动画时常
+    // MARK: 配置属性
+    /// 动画持续时间（秒）
     open var animateDuration: TimeInterval = 0.25
   
-    /// view的透明度
+    /// 背景视图透明度 (0.0~1.0)
     open var viewOpaque: CGFloat = 0.7
 
-    /// 点击背景色时dismiss掉弹窗
+    /// 是否允许点击背景关闭弹窗
     open var isTouchBgDismiss: Bool = true
     
-    internal private(set) lazy var scrollView: SwiftInnerScrollView = {
-        let scrollView = SwiftInnerScrollView()
-        return scrollView
-    }()
-    
-    /// 内容view
-    open var content: UIView?
+    /// 内容视图（需要自定义的内容区域）
+    open var content: UIView? {
+        didSet {
+            guard let content = content else { return }
+            scrollView.addSubview(content)
+            // 这里可以添加内容视图的布局约束
+        }
+    }
   
-    /// 结束动画时的回调，可以在此事件中处理结束动画后的一些事物
+    /// 弹窗关闭后的回调
     open var dismissCallBack: (() -> Void)?
     
-    /// 关掉当前窗口
-    open func dismiss() {
-        dismissCallBack?()
+    // MARK: 内部组件
+    /// 核心滚动视图（承载背景点击功能）
+    private(set) lazy var scrollView: SwiftInnerScrollView = {
+        let view = SwiftInnerScrollView()
+        view.touchBgDismissClosure = { [weak self] in
+            guard let self = self, self.isTouchBgDismiss else { return }
+            self.dismiss()
+        }
+        return view
+    }()
+    
+    // MARK: 生命周期
+    deinit {
+        SwiftLog.log("SwiftMenuView deallocated")
     }
     
+    // MARK: 视图初始化
     open override func setupUI() {
-        let rect = CGRect(x: 0,
-                          y: 0,
-                          width: SCREEN_WIDTH_TO_WIDTH,
-                          height: SCREEN_HEIGHT_TO_HEIGHT)
-        self.frame = rect
-        self.scrollView.frame = rect
-        addSubview(scrollView)
+        // 设置全屏尺寸
+        self.frame = UIScreen.main.bounds
+        scrollView.frame = self.bounds
         
-        scrollView.touchBgDismissClosure = { [weak self] in
-            guard let `self` = self else {
-                return
-            }
-            if self.isTouchBgDismiss {
-                self.dismiss()
-            }
+        addSubview(scrollView)
+        backgroundColor = UIColor.black.withAlphaComponent(viewOpaque)
+    }
+    
+    // MARK: 公开方法
+    /// 关闭弹窗（带动画效果）
+    open func dismiss() {
+        UIView.animate(withDuration: animateDuration, animations: {
+            self.alpha = 0
+        }) { _ in
+            self.removeFromSuperview()
+            self.dismissCallBack?()
         }
     }
     
-    /// 系统点击方法
-//    override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        guard let point = touches.first?.location(in: self) else { return }
-//        let view = self.hitTest(point, with: event)
-//        if view is LXSwiftMenuViewDelegate && isTouchBgDismiss { dismiss() }
-//    }
+    /// 展示弹窗（添加到指定视图）
+    open func show(in view: UIView) {
+        alpha = 0
+        view.addSubview(self)
+        
+        UIView.animate(withDuration: animateDuration) {
+            self.alpha = 1
+        }
+    }
 }

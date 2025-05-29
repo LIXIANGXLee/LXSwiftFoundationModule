@@ -29,6 +29,11 @@ public prefix func ~~~>= (_ index: Int) -> (Int) -> (Bool) { { $0 >= index } }
 public prefix func ~~~<  (_ index: Int) -> (Int) -> (Bool) { { $0 <  index } }
 public prefix func ~~~<= (_ index: Int) -> (Int) -> (Bool) { { $0 <= index } }
 
+extension Int {
+    public static func ~= (pattern: (Int) -> (Bool), value: Int) -> Bool {
+        pattern(value)
+    }
+}
 //MARK: -  Extending methods for Int
 extension SwiftBasics where Base == Int {
     /// int转bool

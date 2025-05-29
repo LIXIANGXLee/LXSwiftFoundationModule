@@ -47,7 +47,6 @@ public extension SwiftCompatible {
 }
 
 /// 遵守协议
-
 extension UIView: SwiftCompatible { }
 extension Array: SwiftCompatible { }
 extension UIBezierPath: SwiftCompatible { }
@@ -67,51 +66,9 @@ extension UIImage: SwiftCompatible { }
 extension UIApplication: SwiftCompatible { }
 extension URL: SwiftCompatible { }
 extension UIViewController: SwiftCompatible { }
-extension Data: SwiftCompatible {
-    static let mimeTypeSignatures: [UInt8: String] = [
-        0xFF: "image/jpeg",
-        0x89: "image/png",
-        0x47: "image/gif",
-        0x49: "image/tiff",
-        0x4D: "image/tiff",
-        0x25: "application/pdf",
-        0xD0: "application/vnd",
-        0x46: "text/plain"
-        ]
-}
-extension DispatchQueue: SwiftCompatible {
-    public typealias SwiftCallTask = (() -> Void)
-    static var onceTracker = Set<String>()
-}
-extension CGFloat: SwiftCompatible {
-    public static func ~= (pattern: (CGFloat) -> (Bool), value: CGFloat) -> Bool {
-        pattern(value)
-    }
-}
-extension Double: SwiftCompatible {
-    public static func ~= (pattern: (Double) -> (Bool), value: Double) -> Bool {
-        pattern(value)
-    }
-}
-extension Int32: SwiftCompatible {
-    public static func ~= (pattern: (Int32) -> (Bool), value: Int32) -> Bool {
-        pattern(value)
-    }
-}
-
-extension Int64: SwiftCompatible {
-    public static func ~= (pattern: (Int64) -> (Bool), value: Int64) -> Bool {
-        pattern(value)
-    }
-}
-
-extension Int: SwiftCompatible {
-    public static func ~= (pattern: (Int) -> (Bool), value: Int) -> Bool {
-        pattern(value)
-    }
-}
-extension String: SwiftCompatible {
-    public static func ~= (pattern: (String) -> Bool, value: String) -> Bool {
-        pattern(value)
-    }
-}
+extension Data: SwiftCompatible { }
+extension DispatchQueue: SwiftCompatible { }
+extension CGFloat: SwiftCompatible { }
+extension Double: SwiftCompatible { }
+extension Int: SwiftCompatible { }
+extension String: SwiftCompatible { }

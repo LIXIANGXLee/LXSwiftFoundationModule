@@ -46,7 +46,7 @@ class PickerViewController: UIViewController {
         picker.tFooterViewBottomCornerRadii = 20
 
         picker.show {
-            print("-=-=-=-=--=-=show-----===")
+            SwiftLog.log("-=-=-=-=--=-=show-----===")
         }
     }
     
@@ -66,17 +66,17 @@ extension PickerViewController: SwiftPickerViewDelegate {
     }
     
     func pickerView(didDismissView pickerView: SwiftPickerView) {
-        print("-=-=-=-=-=didDismissView-=-=-=-=\(pickerView)")
+        SwiftLog.log("-=-=-=-=-=didDismissView-=-=-=-=\(pickerView)")
     }
     
     func pickerView(_ pickerView: SwiftPickerView, didSelectRowAt indexPath: IndexPath) {
         pickerView.dismiss()
-        print("-=-=-=-=-=didSelectRowAt-=-=-=-=\(indexPath)")
+        SwiftLog.log("-=-=-=-=-=didSelectRowAt-=-=-=-=\(indexPath)")
 
     }
     
     func pickerView(_ pickerView: SwiftPickerView, scrollViewDidScroll offSetY: CGFloat, scrollType: SwiftPickerView.ScrollType) {
-        print("-=-=-=-=-=-=-=\(offSetY)==\(scrollType.rawValue)")
+        SwiftLog.log("-=-=-=-=-=-=-=\(offSetY)==\(scrollType.rawValue)")
     }
 }
 

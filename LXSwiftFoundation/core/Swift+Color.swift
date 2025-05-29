@@ -6,102 +6,194 @@
 //  Copyright © 2020 李响. All rights reserved.
 //
 
-import UIKit
-
-//MARK: -  Extending methods for UIColor
+// MARK: - UIColor 扩展 (命名空间)
 extension SwiftBasics where Base: UIColor {
     
-    /// 暗黑模式 和 亮模式
+    // MARK: 暗黑模式适配
+    
+    /// 创建支持暗黑模式的颜色 (十六进制字符串)
+    /// - Parameters:
+    ///   - lightHex: 浅色模式下的十六进制颜色值 (支持格式: "#RGB", "#RRGGBB", "0xRRGGBB")
+    ///   - darkHex: 深色模式下的十六进制颜色值 (格式同上)
+    ///   - alpha: 透明度 (默认1.0)
+    /// - Returns: 适配当前外观模式的颜色
+    /// - Note: iOS13以下系统仅返回浅色模式颜色
     public static func color(lightHex: String, darkHex: String, alpha: CGFloat = 1.0) -> UIColor {
         let light = UIColor(hex: lightHex, alpha: alpha)
         let dark = UIColor(hex: darkHex, alpha: alpha)
         return color(lightColor: light, darkColor: dark)
     }
     
-    /// 暗黑模式 和 亮模式
+    /// 创建支持暗黑模式的颜色 (UIColor对象)
+    /// - Parameters:
+    ///   - lightColor: 浅色模式下的颜色
+    ///   - darkColor: 深色模式下的颜色
+    /// - Returns: 适配当前外观模式的颜色
+    /// - Note: iOS13以下系统仅返回浅色模式颜色
     public static func color(lightColor: UIColor, darkColor: UIColor) -> UIColor {
+        // 利用iOS13+的UITraitCollection特性适配暗黑模式
         if #available(iOS 13.0, *) {
-            return UIColor { (traitCollection) -> UIColor in
-                if traitCollection.userInterfaceStyle == .dark {
-                    return darkColor
-                }
-                return lightColor
+            return UIColor { traitCollection in
+                traitCollection.userInterfaceStyle == .dark ? darkColor : lightColor
             }
         }
+        // 旧版本系统回退到浅色模式
         return lightColor
     }
     
-    // MARK: - Constructor (hexadecimal)
-    /// 根据字符串设置颜色
+    // MARK: 基础颜色构造
+    
+    /// 通过十六进制字符串创建颜色
+    /// - Parameters:
+    ///   - hex: 十六进制字符串 (支持格式: "#RGB", "#RRGGBB", "0xRRGGBB")
+    ///   - alpha: 透明度 (默认1.0)
+    /// - Returns: 对应的UIColor对象
+    /// - Warning: 无效格式会返回透明红色作为错误提示
     public static func color(hex: String, alpha: CGFloat = 1.0) -> UIColor {
         UIColor(hex: hex, alpha: alpha)
     }
     
-    /// 根据十六进制数设置颜色
+    /// 通过十六进制数值创建颜色
+    /// - Parameters:
+    ///   - hex: 十六进制数值 (格式: 0xRRGGBB)
+    ///   - alpha: 透明度 (默认1.0)
+    /// - Returns: 对应的UIColor对象
     public static func color(hex: Int, alpha: CGFloat = 1.0) -> UIColor {
         UIColor(hex: hex, alpha: alpha)
     }
     
-    /// 根据R、G、B设置颜色
-    public static func color(r : CGFloat, g : CGFloat, b : CGFloat, alpha : CGFloat = 1.0) -> UIColor? {
-        UIColor(r: r, g: g, b:  b, alpha: alpha)
+    /// 通过RGB分量创建颜色
+    /// - Parameters:
+    ///   - r: 红色分量 (0-255范围)
+    ///   - g: 绿色分量 (0-255范围)
+    ///   - b: 蓝色分量 (0-255范围)
+    ///   - alpha: 透明度 (默认1.0)
+    /// - Returns: 对应的UIColor对象
+    public static func color(r: CGFloat, g: CGFloat, b: CGFloat, alpha: CGFloat = 1.0) -> UIColor {
+        UIColor(r: r, g: g, b: b, alpha: alpha)
     }
     
-    /// 随机颜色
+    // MARK: 实用功能
+    
+    /// 生成随机颜色
+    /// - Returns: RGB分量随机的颜色
     public static func randomColor() -> UIColor {
-         UIColor(r: CGFloat(Int.lx.randomInt(lower: 0, upper: 256)),
-                 g: CGFloat(Int.lx.randomInt(lower: 0, upper: 256)),
-                 b: CGFloat(Int.lx.randomInt(lower: 0, upper: 256)))
+        UIColor(
+            r: CGFloat.random(in: 0...255),
+            g: CGFloat.random(in: 0...255),
+            b: CGFloat.random(in: 0...255)
+        )
     }
     
-   /// 获取两个颜色rgb的差值的颜色值
-    public static func getRGBDelta(withColor first: UIColor, seccond: UIColor) -> (CGFloat, CGFloat, CGFloat)? {
+    /// 计算两个颜色的RGB差值
+    /// - Parameters:
+    ///   - first: 第一个颜色
+    ///   - second: 第二个颜色
+    /// - Returns: RGB分量的差值元组 (redDelta, greenDelta, blueDelta)
+    /// - Note: 仅支持RGB色彩空间，其他色彩空间返回nil
+    public static func getRGBDelta(first: UIColor, second: UIColor) -> (CGFloat, CGFloat, CGFloat)? {
         guard let firstRGB = first.lx.getRGB,
-              let secondRGB = seccond.lx.getRGB else {
+              let secondRGB = second.lx.getRGB else {
             return nil
         }
-        return (firstRGB.0 - secondRGB.0, firstRGB.1 - secondRGB.1, firstRGB.2 - secondRGB.2)
+        return (
+            firstRGB.0 - secondRGB.0,
+            firstRGB.1 - secondRGB.1,
+            firstRGB.2 - secondRGB.2
+        )
     }
     
-    /// 获取rgb颜色值 请保证普通颜色是RGB方式传入
+    // MARK: 颜色信息
+    
+    /// 获取颜色的RGB分量值 (0-255范围)
+    /// - Returns: 包含RGB分量的元组 (红, 绿, 蓝)
+    /// - Note: 仅支持RGB色彩空间，其他色彩空间返回nil
     public var getRGB: (CGFloat, CGFloat, CGFloat)? {
-        guard let cmps = base.cgColor.components else {
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        
+        // 确保颜色在RGB色彩空间且成功获取分量
+        guard base.getRed(&red, green: &green, blue: &blue, alpha: nil) else {
             return nil
         }
-        return (cmps[0] * 255, cmps[1] * 255, cmps[2] * 255)
+        
+        // 转换到0-255范围
+        return (red * 255, green * 255, blue * 255)
     }
 }
 
-//MARK: -  Extending Constructor methods for UIColor
+// MARK: - UIColor 构造方法扩展
 extension UIColor {
     
-    /// 便利构造函数
+    /// RGB分量初始化 (0-255范围)
+    /// - Parameters:
+    ///   - r: 红色分量 (0-255)
+    ///   - g: 绿色分量 (0-255)
+    ///   - b: 蓝色分量 (0-255)
+    ///   - alpha: 透明度 (默认1.0)
     convenience init(r: CGFloat, g: CGFloat, b: CGFloat, alpha: CGFloat = 1.0) {
-        self.init(red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: alpha)
+        self.init(
+            red: r / 255.0,
+            green: g / 255.0,
+            blue: b / 255.0,
+            alpha: alpha
+        )
     }
     
-    convenience init(hex: Int, alpha: CGFloat = 1) {
+    /// 十六进制数值初始化
+    /// - Parameters:
+    ///   - hex: 十六进制数值 (格式: 0xRRGGBB)
+    ///   - alpha: 透明度 (默认1.0)
+    convenience init(hex: Int, alpha: CGFloat = 1.0) {
         let red = CGFloat((hex & 0xFF0000) >> 16) / 255
-        let green = CGFloat((hex & 0xFF00) >> 8) / 255
-        let blue = CGFloat(hex & 0xFF) / 255
+        let green = CGFloat((hex & 0x00FF00) >> 8) / 255
+        let blue = CGFloat(hex & 0x0000FF) / 255
         self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
-
+    
+    /// 十六进制字符串初始化
+    /// - Parameters:
+    ///   - hex: 十六进制字符串 (支持格式: "#RGB", "#RRGGBB", "0xRRGGBB")
+    ///   - alpha: 透明度 (默认1.0)
+    /// - Note: 无效格式会返回透明红色(alpha=0.5)便于调试
     convenience init(hex: String, alpha: CGFloat = 1.0) {
-        var hex: String = hex.lx.trim
-        switch hex {
-        case has_prefix("0X"), has_prefix("0x"):
-            hex = hex.lx.substring(from: 2)
-            fallthrough
-        case has_prefix("#"):
-            hex = hex.lx.substring(from: 1)
-        default: break
+        var processedHex = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        
+        // 去除前缀标识
+        ["0X", "#", "0x"].forEach { prefix in
+            if processedHex.hasPrefix(prefix) {
+                processedHex = String(processedHex.dropFirst(prefix.count))
+            }
         }
-        if hex.count > 6 || hex.isEmpty {
-            self.init(hex: 0xFFFFFF)
+        
+        // 验证有效性
+        let isValidHex = processedHex.allSatisfy { $0.isHexDigit }
+        guard !processedHex.isEmpty, isValidHex else {
+            self.init(red: 1, green: 0, blue: 0, alpha: 0.5) // 错误提示色
+            return
         }
-        var color: UInt32 = 0x0
-        Scanner.init(string: hex).scanHexInt32(&color)
-        self.init(hex: Int(color), alpha: alpha)
+        
+        // 处理短格式 (如"FFF")
+        if processedHex.count == 3 {
+            processedHex = processedHex.map { String(repeating: $0, count: 2) }.joined()
+        }
+        
+        // 验证标准长度
+        guard processedHex.count == 6 else {
+            self.init(red: 1, green: 0, blue: 0, alpha: 0.5) // 错误提示色
+            return
+        }
+        
+        // 解析颜色分量
+        var rgbValue: UInt64 = 0
+        Scanner(string: processedHex).scanHexInt64(&rgbValue)
+        
+        self.init(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255,
+            alpha: alpha
+        )
     }
 }

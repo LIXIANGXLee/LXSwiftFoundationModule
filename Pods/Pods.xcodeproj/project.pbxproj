@@ -3,81 +3,81 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		01078AD102004D6A2C71E9643878865C /* SwiftButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5CF80E6D51C3A4D9AF8FB3E876640F /* SwiftButton.swift */; };
-		063BBEA8CCB37C45EE1EBC4E0146D61D /* Swift+Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67A8165CF3DF771BB80458B286D85A7 /* Swift+Button.swift */; };
+		03A97842BFBF070BAEC435810B23F550 /* SwiftBasics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1632F4CD78CAD760E76FB19147679C76 /* SwiftBasics.swift */; };
+		041AE8274A61B7BB1B28EC8B8824DABF /* SwiftUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39030329245C9D933A342C6999BC937A /* SwiftUtils.swift */; };
 		06A93181678D9CED414FA0F28FF79B7A /* LXSwiftFoundation-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A81E884EAEBBAF80D9FDD9E6C5828061 /* LXSwiftFoundation-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0B7368886FF6D56C0643CCCE91C47BA4 /* Swift+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F973995BA177A878B7A30B56B7A11ED /* Swift+View.swift */; };
-		0C5579F123C61AD67545D55A019578D1 /* SwiftMenuDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261B4BCB0CB9FBA1E45B87CC12F567C7 /* SwiftMenuDownView.swift */; };
-		0EAE0140F9B89F9394341C8A42D1E6C1 /* SwiftImgView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE02C6F2782BFCA95DC9018BDC2E12EC /* SwiftImgView.swift */; };
-		10727F20D071FBD1BF6B355B6513699A /* Swift+Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8D9B1FECCCBAD6E42C583ECAA5D1CE /* Swift+Label.swift */; };
-		15383A8DED7B571FBB82BD1AD004598D /* Swift+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD900D87225525E2D8538F9D339BBD8B /* Swift+Font.swift */; };
+		0743D17F3E90E5BDD14C1FA4052E0004 /* SwiftModalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D597FCB07B5CACC14AEF1847FCD4708D /* SwiftModalController.swift */; };
+		0798C48F2651CCA335E5ED10A132306B /* SwiftWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FDBD7A914EC5E61D02B697D9AF793D /* SwiftWindow.swift */; };
+		0E159634E8516D77F5CC58867754979C /* SwiftCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FC1527CA8837A54D39A9744EFE686F /* SwiftCollectionView.swift */; };
+		1611F4B7E109CBB48340B16937469EBE /* SwiftCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018A8DB3ECCD5B83D94AA83CEC16BC3 /* SwiftCompatible.swift */; };
 		172EA19E52A769E00CA5CCDA760253FA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */; };
-		21CCF90C0FD87B85C4949C16EDA3D65A /* SwiftLineFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65945D023603F54B5B3EB2C81E8A4174 /* SwiftLineFlowLayout.swift */; };
-		2A481CC89CDA28C9DE47A42EE00E3A3A /* SwiftTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59A60553B2300CDB63681C57915888C /* SwiftTableView.swift */; };
-		31E3B6747FFF173DE9A9689488439808 /* SwiftMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FC43FACA24937F91C817AF2FC07B28 /* SwiftMemory.swift */; };
-		33B3B5BDAC87BCFE3AAD4C105A9E1E30 /* Swift+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E648C0F62CCC1306C4E9D5CF459C5F /* Swift+Array.swift */; };
-		39139DD578CE3157CCB2ABCD137FBDD1 /* Swift+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03452775EE11615E5E041038DCB34558 /* Swift+Data.swift */; };
-		3989E688598ACE5DB6517B08B0835407 /* SwiftBasics.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D0D7898D31C9E1DFF94CEAD7C223D7 /* SwiftBasics.swift */; };
+		1B2E88F395C762C515EF25B6D879391A /* SwiftTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A6B4BE05B1BE81AE79E58EA5BDFD60 /* SwiftTextView.swift */; };
+		1EA6BDB7F476C514865201F866A23FDB /* SwiftImgView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1C1900C305ACBD0FC54EFCC872F8CA /* SwiftImgView.swift */; };
+		1FA4ABB690A0ADD01CAD73325BD51E3A /* Swift+Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543A1191F7FD144BD6E9831BD1BD6D19 /* Swift+Layer.swift */; };
+		21C018D3F8B03D8D83F14D74631BCF9C /* Swift+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA1317B4B9678D4933CC44F0499E1D5 /* Swift+Font.swift */; };
+		21CABC3A03186CDF0FE1746EEBDB6703 /* SwiftButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8818032C5F85A96BB9F623A5DD6A46 /* SwiftButton.swift */; };
+		3651F22748F8EB1C480BDC6D7143EDF5 /* Swift+ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25B65AFE7E89D7E875D02D7281DE95 /* Swift+ScrollView.swift */; };
 		3A2BF45947AB2C4C3E95D349F9589AB4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */; };
-		485A8CB40C24C927510714C9B9D80F01 /* SwiftTextLable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44B09B3AA82C2C40DD4CD387B985B0B /* SwiftTextLable.swift */; };
-		49A009F358CE27A98830F539F7473C15 /* Swift+Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D93E19B75211EB1FFECE434FE47B193 /* Swift+Dictionary.swift */; };
-		4B295C13295D23BE8D09AA96D7FE0112 /* SwiftWaterfallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC891698DB58C699C1095139B353392 /* SwiftWaterfallLayout.swift */; };
-		4F85EA6D034F11B409072518ECD04EAE /* LXSwiftFoundation-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F2A64B6C9E8F7439766974077C0B98 /* LXSwiftFoundation-dummy.m */; };
-		5BC337AE3B5D247038C535125FD3BEEC /* SwiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA0A147BEFD201B025BA2CBC732C464 /* SwiftView.swift */; };
-		5DC040D1013CA4925F66A71714C9206E /* Swift+NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE439F0BD03292EF2F8897FE3A69CBB /* Swift+NSAttributedString.swift */; };
-		5EBCA84C4614D07976D3C52C408A6742 /* SwiftConvenienceBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A609371B7EA6D5EA89D012546D5C1C9 /* SwiftConvenienceBundle.swift */; };
-		611E30FBFF1A219048C919335305E334 /* SwiftModalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B99D09604DB90A178DA90564D1B620 /* SwiftModalController.swift */; };
+		3AA307B044158DBC1B28907F68A2C7C0 /* SwiftConvenienceBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052780A861A4AE0C951940A9C7CEE56A /* SwiftConvenienceBundle.swift */; };
+		3DF4F0E5CAF9E2CC3FD011971A8F75AF /* SwiftMenuUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E3E499EAC2914ABEF6D7A2390F0D49 /* SwiftMenuUpView.swift */; };
+		40AA0A02997D7DF9E70CD556981C5E54 /* SwiftLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4917077DAE4F41B95E8FFE94D07CE036 /* SwiftLog.swift */; };
+		46648AE083DB2AD9E18B716402BF1EBF /* Swift+WKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA95BD8277BAFDA7C4C36D18EA0749F /* Swift+WKWebView.swift */; };
+		4B5A9ECF2B125FDBB8B3105B94B3C001 /* Swift+Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D908D5A42C3777947F0AEF9446264D /* Swift+Button.swift */; };
+		59750909CBB16CB56FF5A7CA24A6B724 /* Swift+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC6D16432FA7A57F247E2DD6B568912 /* Swift+Data.swift */; };
+		59CF1B8538821D2496F2B5C4E42511EC /* SwiftLineFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF97249EE4A3E8431148FE5CDB1C65D /* SwiftLineFlowLayout.swift */; };
+		5B6FD4997521CDAA287350E047675B63 /* LXSwiftFoundation-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F2A64B6C9E8F7439766974077C0B98 /* LXSwiftFoundation-dummy.m */; };
+		5BB6F6588C308DCF67EEAF5A27F2B773 /* Swift+NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3073B319F71B1581CDBB8B23D1D0EE04 /* Swift+NSAttributedString.swift */; };
 		6199C7EFB89CE536A3B05AE3F334C3F5 /* Pods-LXSwiftFoundationModule-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E093E81AA39BD512D225DADBDD07811 /* Pods-LXSwiftFoundationModule-dummy.m */; };
-		62F96D6CCE37B374ADD84C298011FCFE /* SwiftPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2914FBFC27AA08E22F6BC1474D433413 /* SwiftPickerView.swift */; };
-		695E54A5541CD9AF9C4EB6871A69D2C3 /* Swift+Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A013664A56FED5C133E02681628B99 /* Swift+Bundle.swift */; };
-		6B778CDC94F8CACCB45655B504607A37 /* SwiftUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CC681B0D766E678BF10D00EE7632E /* SwiftUserDefaults.swift */; };
-		72B4D59AB542E2E18D096D8ED9048517 /* Swift+WKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAD6F1E00B41C405DA43CB1ECD60F87 /* Swift+WKWebView.swift */; };
-		7F39C9C5A327FCEA5F45F3C8497EAD07 /* SwiftHyperlinksModalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F138B87C156FF2F38B64695C531A6F /* SwiftHyperlinksModalController.swift */; };
-		844342E289751F3BCB2245C7F14DE723 /* Swift+Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA1810D5FEDAB2F57D584B54946BD9 /* Swift+Rect.swift */; };
-		847A310B088A40B8CFC057EFEBEE22DD /* Swift+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5EEDF8A299DE527B0970BF4CC56206 /* Swift+Date.swift */; };
-		84CE6608C4AED9C1C1F26902D1772521 /* SwiftNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510A22E704310C351883DA4106D0B279 /* SwiftNavController.swift */; };
-		86CCA329ED12976DB2E782EBA3173AC5 /* Swift+TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAE53041E536CAE85CF36565863C847 /* Swift+TextField.swift */; };
-		88B5B8EC45105509BA49FC731D003BD9 /* SwiftAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4F321E704506835E59D66079AA77E7 /* SwiftAuth.swift */; };
-		8D0A5A6CE1D015DBE4F8D318C262E940 /* Swift+Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51AC3687585FB1040EEC40FD7C04BA1 /* Swift+Control.swift */; };
-		8E32C67747D0787881FF1D421ED678AA /* Swift+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2B4F37B3E4421273031F95CEAF24F4 /* Swift+Double.swift */; };
-		94A25CD468E18084E5AA45950BDF08EB /* Swift+AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3320CCC2ED935A214D5ABBC2AEFBFAD /* Swift+AlertController.swift */; };
-		97997C2CD8BDBB2A852B9578734854D9 /* SwiftLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CCD9A52B0EAD11A6231A43BAA3C4CB /* SwiftLog.swift */; };
-		99F50007A1433C854207165935F7B012 /* SwiftRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8100671FC5C282033889E7A29BBFF91F /* SwiftRegex.swift */; };
-		9D570FBBEDC9B7378D22C90F2CDFFF12 /* SwiftLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA04816CD96E4B9B5BCC9117457B616 /* SwiftLabel.swift */; };
-		A1494EFEFFE4805F38651D471DC6AECF /* Swift+ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CA2A68F64B0D64F7A24282BB96F578 /* Swift+ViewController.swift */; };
-		A25DD68DDE59E11F897CD62A671DCA1A /* SwiftUICompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E4824D896CB6B513B8BE2AAD19B9BD /* SwiftUICompatible.swift */; };
-		A4966E7FF7421B19E95BD889E7EFC1F9 /* Swift+BezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD25B4E10504A05E449581362DCA989E /* Swift+BezierPath.swift */; };
-		A5CE3352DB6892B6E81CB28C608914A1 /* SwiftTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DA0A4C3FEB40AF59F3FA40E1EB836B /* SwiftTextView.swift */; };
+		6278262183A143542074161BCF9B117E /* SwiftTextLable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D058D3305D0858E1465872A4703FF009 /* SwiftTextLable.swift */; };
+		67934AE2150A24351FABF7EB7A9C6F39 /* Swift+FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491E0F380C8985999C04B276D2647D58 /* Swift+FileManager.swift */; };
+		6856C2024457D0F862190EB44D9E0505 /* SwiftMenuDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBEFED308761BEF5847E707C7E573FA /* SwiftMenuDownView.swift */; };
+		6DAE8F6BA59DF1E68F35F19E360F5738 /* SwiftTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8C1CE7180FFC76F286421E7F3B871F /* SwiftTimer.swift */; };
+		70537DB84D6EAFA3086DFD9C9DD3307F /* SwiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AE7EDC40279EE087C320DB432BD67F /* SwiftView.swift */; };
+		75E17ABD384036F944C941173CFF0A18 /* Swift+UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BE8EC92FD4E9C7F97DA351ABFCF1A1 /* Swift+UIApplication.swift */; };
+		7699B06D96EE3A35AA089A8837987F1C /* Swift+Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92464BE3A5BCA4FD8DFDE9B6446C7681 /* Swift+Control.swift */; };
+		7DAEA53520C7DD0C4035CC8A340027B3 /* Swift+TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319EFEBA44D22DCFA325EE69F53F64D1 /* Swift+TextField.swift */; };
+		7FBAAC6D01B0018B818E16A0ED8E42C2 /* SwiftNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D24BCA794C39F186A5824C554DE28C /* SwiftNotification.swift */; };
+		84BD925079FF3E88F07D9098C07466C6 /* Swift+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF769340036EC8EA0D924D93D3E3A2C /* Swift+Date.swift */; };
+		850B38B253EF246D45C0EBDB574759EA /* SwiftAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D86FB6FA6530370083345686046B4BB /* SwiftAuth.swift */; };
+		859AF59D23DF0B305F26C1A75D91947C /* Swift+AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2193C3CD1283446D94CC162997AF71 /* Swift+AlertController.swift */; };
+		86762844A1B1D923B02A298D4EA598EC /* Swift+Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD60533A7BDFE8DF1AFA81E68FB7D2A0 /* Swift+Dictionary.swift */; };
+		88704C49F3F223EA96CEEE17E9B6C4E3 /* SwiftMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7038E43AB48806245AAD176665BA737B /* SwiftMenuView.swift */; };
+		8DD8DC1DCA1BE66FD63FBA9C1DE278E5 /* SwiftScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6DBFBCE64BEB3311B64D4E16621510 /* SwiftScrollView.swift */; };
+		9008B65080E3B446EA8B7A58A2015C58 /* Swift+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD6D400035A46DD4D77AAB5AA7A6954 /* Swift+Double.swift */; };
+		93AEC1DA91BF9404211CEA5E7FBA2995 /* SwiftHyperlinksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0E7A27AF356FA2C545F63A3DA42B0D /* SwiftHyperlinksController.swift */; };
+		978C15A790A3FA5D48FA376EC41435CF /* Swift+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B225F28EBA747FA76D996B08D2F9646 /* Swift+URL.swift */; };
+		9999913888C48E59A4A8E3D84895E102 /* Swift+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B5C03D26275E604C2B97E1686A8C7D /* Swift+Image.swift */; };
+		9EEB1174222C17421EC9F8FD61CEA943 /* SwiftTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCFF97D835E352570E93D962B1EA288 /* SwiftTextField.swift */; };
+		A6855C3D3E2B69CC7AE9ABD5E8BE3E86 /* Swift+BezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F87318733E1D0D33B4169732F5E5926 /* Swift+BezierPath.swift */; };
+		AE2DEAC6F039F298D4524FFB5BFFA41F /* Swift+DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30856DD5347886A5125C5DE9090CDAF8 /* Swift+DispatchQueue.swift */; };
 		B0C51023266D84491159B89EA8BCE8A4 /* Pods-LXSwiftFoundationModule-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CC8D351C709683C611A900D82D108E2E /* Pods-LXSwiftFoundationModule-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B5D908F83969F27A200BB7292CBC8B8F /* SwiftMenuCenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D742142EE0536CD89C3E4D63BDD789 /* SwiftMenuCenterView.swift */; };
-		B9542E42AC311DC073789C91767C8C37 /* SwiftScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5CE03FE7C31385D0508E56C094A68E /* SwiftScrollView.swift */; };
-		BFE52BCF78A6791AEA15766595358E1B /* Swift+Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DD2A9749572EC2C0858AC7311948A1 /* Swift+Device.swift */; };
-		C55649BBC926766E61F489D13D2B9095 /* SwiftCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A98C3CC96F22DEEA4AC3AF12A80BE87 /* SwiftCompatible.swift */; };
-		C74A5972C083F510ED5C8F44F871EE41 /* Swift+DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6DA0406311902F3891959B1511C227 /* Swift+DispatchQueue.swift */; };
-		C7CB32711C6CFD784F85797B8E355289 /* Swift+ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBFD72E18CF182F533CA8FD07F5ECB1 /* Swift+ScrollView.swift */; };
-		CB7E64E39BD639A8A98815482826CFAB /* SwiftMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76899E9B1CCCCBB7F53149E29B6C5946 /* SwiftMenuView.swift */; };
-		CD7DEAA91D47B9FECC14E20B5998F699 /* SwiftUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957ED6C111817F86035EB70797F53AF0 /* SwiftUtils.swift */; };
-		D3D7133681F9776D7A0C95E492C8648A /* SwiftCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC62E1EC51E5AE7541ED7EEAB14221 /* SwiftCollectionView.swift */; };
-		D4FC15DE1000CE553E0BE2040A632234 /* SwiftNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7B7D87C9E4EA120AA12A7B044ACF0 /* SwiftNotification.swift */; };
-		DA817E5800B8E09DB4405FD45E5FB377 /* Swift+Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624E5056532C33591959F17644D4A454 /* Swift+Layer.swift */; };
-		DC4728CE1C548FC9A1FFA38C26F60755 /* Swift+FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EE78B71776C8CBF8F505BD9FB76501 /* Swift+FileManager.swift */; };
-		DDC41AFC0F94F541290134195E7E31B7 /* Swift+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B77E4DCF57B550AB69F97A503E9FCD /* Swift+String.swift */; };
-		DE204ED83E16FAE58582DCAE6EEFF53E /* SwiftTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDACC32DED73AC401892A1FC35DEA82 /* SwiftTimer.swift */; };
-		DE63E599B8FB09284AA90B301C3CBAF4 /* Swift+UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B3209BA874A20133F400092C4E66BD /* Swift+UIApplication.swift */; };
-		E7EDAF58CC0BD833F4A3D73419DBC6B3 /* SwiftMenuUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D895E821F0514041BDE3918A4E639FC /* SwiftMenuUpView.swift */; };
-		E8CE8EAB5219242503D2DBD46BCE1BBE /* Swift+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45A0C9F1AA0F81146CE708CADEDB636 /* Swift+Int.swift */; };
-		EAF9E3EF090E02CD199093C813A36C21 /* Swift+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570A9D89277E6870F5A0BA9FEF257DCA /* Swift+Color.swift */; };
-		F16C2738092F668956F8BB46FA83C745 /* Swift+Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2BD678CADC7575CFB69AA859674E3D /* Swift+Number.swift */; };
-		F67166952344C78AB0C2DB3E3E7BB8F3 /* SwiftTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BC42CCAD4A8AB2BE2D53B760E1F878 /* SwiftTextField.swift */; };
-		F6B6E9D89F02EF6CD0AEB9F12BE6D1BA /* SwiftWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2A0DC27366CE3B03E6F2039BDC5E99 /* SwiftWindow.swift */; };
-		F920D1AD7DBDFB44F72362FF29B68378 /* Swift+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E05BD7E0F9DC3123CDFC188FD8E923 /* Swift+URL.swift */; };
-		FAD598028DB2DB8A7AAB0D4A9540328D /* SwiftWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57077B19D4B573FE25262851B9ED8A61 /* SwiftWebViewController.swift */; };
-		FC338CDE20D90609EF2FDA3078842EBE /* Swift+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = F744AA8B5E73B58E03E68C60B2AF2F6B /* Swift+Image.swift */; };
-		FF1F78667B8EB8710F906BE9E34AA47C /* SwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E55BC312A751EAE0CF6248B4E09EED1 /* SwiftViewController.swift */; };
+		B31D45F096D48C083C676C5D17D8AE7D /* Swift+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6ECC68E14E4220030D193F42AEA232 /* Swift+Int.swift */; };
+		B38150D4678F9BE0FF9AE2C140FA358B /* Swift+Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B6DDA91CFD9BDD0F3DA7AC09E0165B /* Swift+Number.swift */; };
+		B58FE1FCE4F7311F730A3155A7194C4F /* SwiftLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CE6F35F545DCADCDCBD0BCDAF33E4D /* SwiftLabel.swift */; };
+		CE2C6BCB0709838D22BE95DDEACEBF85 /* Swift+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0987D535F8702E2E640C486EF70D129A /* Swift+String.swift */; };
+		D72CE337C014D1A76254CE07A556EF55 /* Swift+Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F9C4471C0030E4C0432FD103EB3BFA /* Swift+Label.swift */; };
+		D7BAF63FFD32AE5A21EEFC5D078B5348 /* SwiftMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B570DF752F3DC6041640F90650D3BD34 /* SwiftMemory.swift */; };
+		DAE794A5656D67661D3CED4B2A00C4D5 /* Swift+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8401D3382721632546A88BE39C6A864A /* Swift+Array.swift */; };
+		DF75F07C012C486388D8C46A75ED0C9F /* Swift+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9DB775B1E16F3A9C0001FC742B2F8C /* Swift+Color.swift */; };
+		E020609507F89FD3745195D8B2831E96 /* SwiftTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1062B36CDF65904B101D722114B8BA39 /* SwiftTableView.swift */; };
+		E03129F914F6AA70613DE6580A6435D2 /* Swift+Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2095955A01D79B33DEB81271D1B1C0C7 /* Swift+Device.swift */; };
+		E034943E2FA28B5A8A71303D4D969168 /* SwiftUICompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD2FB95408902185262AD1975CD5D7F /* SwiftUICompatible.swift */; };
+		E03D95E18A1CDAC9A131C5A8648DE777 /* SwiftPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DAFC66BA575A86FC20B2ACD0FD2845 /* SwiftPickerView.swift */; };
+		E5CB99CB5744099F0DEEEB88D58F8993 /* Swift+Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F894A53FCA5B9F5953EAF41181A3F3 /* Swift+Rect.swift */; };
+		E7C49C5C559C8D4F8F9CD45EB8C7B417 /* SwiftWaterfallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F594030C612982C21E277ECC9DCC6960 /* SwiftWaterfallLayout.swift */; };
+		EC1E0D02762B61AF38D63C3B3F6C1FD8 /* Swift+ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112C86CB1B94ECE0C810D72CB0B34D33 /* Swift+ViewController.swift */; };
+		F52981116044D3C7A82C097F8A6E5D2D /* Swift+Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F593BB3482E795BCC251038F1BF44AF1 /* Swift+Bundle.swift */; };
+		F9B4F37AE040725EFA8585D423463E8C /* SwiftNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E371D53F84F68793B8B26F11E4E4184 /* SwiftNavController.swift */; };
+		F9D5F32406F2DBFF53AB302E48A0D9E3 /* SwiftWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955D5D331D759FCC276EF98DC83C8749 /* SwiftWebViewController.swift */; };
+		FD72AF11519197478462B34D8515E8B9 /* Swift+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77AA467F8F173C4500563CB38245BC8 /* Swift+View.swift */; };
+		FE1A88473D1B17F6D1C6AD1B7F4745E1 /* SwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5532BE918E1700BBA60FF851189CF0D9 /* SwiftViewController.swift */; };
+		FE81D1325AF2958FA6662F90890E7802 /* SwiftRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141652C4845A5B77181131AA17DE8519 /* SwiftRegex.swift */; };
+		FF30AF544A2B4C72FCFB19258F13C589 /* SwiftUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2752DC082BB11D33ABFC8379B7D177FF /* SwiftUserDefaults.swift */; };
+		FF8741F420F24A204D72B7EF107BA1AE /* SwiftMenuCenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F40130B08C27716D4FBB1A1070AE184 /* SwiftMenuCenterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,93 +91,93 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		03452775EE11615E5E041038DCB34558 /* Swift+Data.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Data.swift"; path = "LXSwiftFoundation/core/Swift+Data.swift"; sourceTree = "<group>"; };
-		0DBFD72E18CF182F533CA8FD07F5ECB1 /* Swift+ScrollView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+ScrollView.swift"; path = "LXSwiftFoundation/core/Swift+ScrollView.swift"; sourceTree = "<group>"; };
+		052780A861A4AE0C951940A9C7CEE56A /* SwiftConvenienceBundle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftConvenienceBundle.swift; path = LXSwiftFoundation/core/SwiftConvenienceBundle.swift; sourceTree = "<group>"; };
+		05AE7EDC40279EE087C320DB432BD67F /* SwiftView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftView.swift; path = LXSwiftFoundation/core/SwiftView.swift; sourceTree = "<group>"; };
+		0987D535F8702E2E640C486EF70D129A /* Swift+String.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+String.swift"; path = "LXSwiftFoundation/core/Swift+String.swift"; sourceTree = "<group>"; };
+		0BF97249EE4A3E8431148FE5CDB1C65D /* SwiftLineFlowLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftLineFlowLayout.swift; path = LXSwiftFoundation/core/SwiftLineFlowLayout.swift; sourceTree = "<group>"; };
+		1018A8DB3ECCD5B83D94AA83CEC16BC3 /* SwiftCompatible.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftCompatible.swift; path = LXSwiftFoundation/core/SwiftCompatible.swift; sourceTree = "<group>"; };
+		1062B36CDF65904B101D722114B8BA39 /* SwiftTableView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftTableView.swift; path = LXSwiftFoundation/core/SwiftTableView.swift; sourceTree = "<group>"; };
+		112C86CB1B94ECE0C810D72CB0B34D33 /* Swift+ViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+ViewController.swift"; path = "LXSwiftFoundation/core/Swift+ViewController.swift"; sourceTree = "<group>"; };
+		11DAFC66BA575A86FC20B2ACD0FD2845 /* SwiftPickerView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftPickerView.swift; path = LXSwiftFoundation/core/SwiftPickerView.swift; sourceTree = "<group>"; };
+		13D24BCA794C39F186A5824C554DE28C /* SwiftNotification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftNotification.swift; path = LXSwiftFoundation/core/SwiftNotification.swift; sourceTree = "<group>"; };
+		141652C4845A5B77181131AA17DE8519 /* SwiftRegex.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftRegex.swift; path = LXSwiftFoundation/core/SwiftRegex.swift; sourceTree = "<group>"; };
+		1632F4CD78CAD760E76FB19147679C76 /* SwiftBasics.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftBasics.swift; path = LXSwiftFoundation/core/SwiftBasics.swift; sourceTree = "<group>"; };
 		198AC41F5D76E6CAAEDA3FA88108E849 /* LXSwiftFoundation.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = LXSwiftFoundation.modulemap; sourceTree = "<group>"; };
-		1A609371B7EA6D5EA89D012546D5C1C9 /* SwiftConvenienceBundle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftConvenienceBundle.swift; path = LXSwiftFoundation/core/SwiftConvenienceBundle.swift; sourceTree = "<group>"; };
-		1D93E19B75211EB1FFECE434FE47B193 /* Swift+Dictionary.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Dictionary.swift"; path = "LXSwiftFoundation/core/Swift+Dictionary.swift"; sourceTree = "<group>"; };
-		1F973995BA177A878B7A30B56B7A11ED /* Swift+View.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+View.swift"; path = "LXSwiftFoundation/core/Swift+View.swift"; sourceTree = "<group>"; };
-		261B4BCB0CB9FBA1E45B87CC12F567C7 /* SwiftMenuDownView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftMenuDownView.swift; path = LXSwiftFoundation/core/SwiftMenuDownView.swift; sourceTree = "<group>"; };
-		28B3209BA874A20133F400092C4E66BD /* Swift+UIApplication.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+UIApplication.swift"; path = "LXSwiftFoundation/core/Swift+UIApplication.swift"; sourceTree = "<group>"; };
-		2914FBFC27AA08E22F6BC1474D433413 /* SwiftPickerView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftPickerView.swift; path = LXSwiftFoundation/core/SwiftPickerView.swift; sourceTree = "<group>"; };
-		2A98C3CC96F22DEEA4AC3AF12A80BE87 /* SwiftCompatible.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftCompatible.swift; path = LXSwiftFoundation/core/SwiftCompatible.swift; sourceTree = "<group>"; };
-		2C6DA0406311902F3891959B1511C227 /* Swift+DispatchQueue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+DispatchQueue.swift"; path = "LXSwiftFoundation/core/Swift+DispatchQueue.swift"; sourceTree = "<group>"; };
+		2095955A01D79B33DEB81271D1B1C0C7 /* Swift+Device.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Device.swift"; path = "LXSwiftFoundation/core/Swift+Device.swift"; sourceTree = "<group>"; };
+		21FDBD7A914EC5E61D02B697D9AF793D /* SwiftWindow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftWindow.swift; path = LXSwiftFoundation/core/SwiftWindow.swift; sourceTree = "<group>"; };
+		23A6B4BE05B1BE81AE79E58EA5BDFD60 /* SwiftTextView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftTextView.swift; path = LXSwiftFoundation/core/SwiftTextView.swift; sourceTree = "<group>"; };
+		2752DC082BB11D33ABFC8379B7D177FF /* SwiftUserDefaults.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftUserDefaults.swift; path = LXSwiftFoundation/core/SwiftUserDefaults.swift; sourceTree = "<group>"; };
+		2B225F28EBA747FA76D996B08D2F9646 /* Swift+URL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+URL.swift"; path = "LXSwiftFoundation/core/Swift+URL.swift"; sourceTree = "<group>"; };
+		3073B319F71B1581CDBB8B23D1D0EE04 /* Swift+NSAttributedString.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+NSAttributedString.swift"; path = "LXSwiftFoundation/core/Swift+NSAttributedString.swift"; sourceTree = "<group>"; };
+		30856DD5347886A5125C5DE9090CDAF8 /* Swift+DispatchQueue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+DispatchQueue.swift"; path = "LXSwiftFoundation/core/Swift+DispatchQueue.swift"; sourceTree = "<group>"; };
+		30B5C03D26275E604C2B97E1686A8C7D /* Swift+Image.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Image.swift"; path = "LXSwiftFoundation/core/Swift+Image.swift"; sourceTree = "<group>"; };
+		319EFEBA44D22DCFA325EE69F53F64D1 /* Swift+TextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+TextField.swift"; path = "LXSwiftFoundation/core/Swift+TextField.swift"; sourceTree = "<group>"; };
+		34B6DDA91CFD9BDD0F3DA7AC09E0165B /* Swift+Number.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Number.swift"; path = "LXSwiftFoundation/core/Swift+Number.swift"; sourceTree = "<group>"; };
 		3507C175AA59B9EDEC77084089B77AB7 /* Pods-LXSwiftFoundationModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LXSwiftFoundationModule.release.xcconfig"; sourceTree = "<group>"; };
 		384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		3C2A0DC27366CE3B03E6F2039BDC5E99 /* SwiftWindow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftWindow.swift; path = LXSwiftFoundation/core/SwiftWindow.swift; sourceTree = "<group>"; };
-		3FBA1810D5FEDAB2F57D584B54946BD9 /* Swift+Rect.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Rect.swift"; path = "LXSwiftFoundation/core/Swift+Rect.swift"; sourceTree = "<group>"; };
+		39030329245C9D933A342C6999BC937A /* SwiftUtils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftUtils.swift; path = LXSwiftFoundation/core/SwiftUtils.swift; sourceTree = "<group>"; };
+		3B8818032C5F85A96BB9F623A5DD6A46 /* SwiftButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftButton.swift; path = LXSwiftFoundation/core/SwiftButton.swift; sourceTree = "<group>"; };
+		3D9DB775B1E16F3A9C0001FC742B2F8C /* Swift+Color.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Color.swift"; path = "LXSwiftFoundation/core/Swift+Color.swift"; sourceTree = "<group>"; };
 		45EF78BB89A784E606467EF6745E4443 /* LXSwiftFoundation-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LXSwiftFoundation-prefix.pch"; sourceTree = "<group>"; };
-		4B2B4F37B3E4421273031F95CEAF24F4 /* Swift+Double.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Double.swift"; path = "LXSwiftFoundation/core/Swift+Double.swift"; sourceTree = "<group>"; };
-		4D895E821F0514041BDE3918A4E639FC /* SwiftMenuUpView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftMenuUpView.swift; path = LXSwiftFoundation/core/SwiftMenuUpView.swift; sourceTree = "<group>"; };
-		50CCD9A52B0EAD11A6231A43BAA3C4CB /* SwiftLog.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftLog.swift; path = LXSwiftFoundation/core/SwiftLog.swift; sourceTree = "<group>"; };
-		50F138B87C156FF2F38B64695C531A6F /* SwiftHyperlinksModalController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftHyperlinksModalController.swift; path = LXSwiftFoundation/core/SwiftHyperlinksModalController.swift; sourceTree = "<group>"; };
-		510A22E704310C351883DA4106D0B279 /* SwiftNavController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftNavController.swift; path = LXSwiftFoundation/core/SwiftNavController.swift; sourceTree = "<group>"; };
+		4917077DAE4F41B95E8FFE94D07CE036 /* SwiftLog.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftLog.swift; path = LXSwiftFoundation/core/SwiftLog.swift; sourceTree = "<group>"; };
+		491E0F380C8985999C04B276D2647D58 /* Swift+FileManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+FileManager.swift"; path = "LXSwiftFoundation/core/Swift+FileManager.swift"; sourceTree = "<group>"; };
+		4FA1317B4B9678D4933CC44F0499E1D5 /* Swift+Font.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Font.swift"; path = "LXSwiftFoundation/core/Swift+Font.swift"; sourceTree = "<group>"; };
+		543A1191F7FD144BD6E9831BD1BD6D19 /* Swift+Layer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Layer.swift"; path = "LXSwiftFoundation/core/Swift+Layer.swift"; sourceTree = "<group>"; };
+		5532BE918E1700BBA60FF851189CF0D9 /* SwiftViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftViewController.swift; path = LXSwiftFoundation/core/SwiftViewController.swift; sourceTree = "<group>"; };
 		565AF50605AEE3050EBC6D6904C667C5 /* Pods-LXSwiftFoundationModule-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LXSwiftFoundationModule-frameworks.sh"; sourceTree = "<group>"; };
-		57077B19D4B573FE25262851B9ED8A61 /* SwiftWebViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftWebViewController.swift; path = LXSwiftFoundation/core/SwiftWebViewController.swift; sourceTree = "<group>"; };
-		570A9D89277E6870F5A0BA9FEF257DCA /* Swift+Color.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Color.swift"; path = "LXSwiftFoundation/core/Swift+Color.swift"; sourceTree = "<group>"; };
-		57E648C0F62CCC1306C4E9D5CF459C5F /* Swift+Array.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Array.swift"; path = "LXSwiftFoundation/core/Swift+Array.swift"; sourceTree = "<group>"; };
+		5A0E7A27AF356FA2C545F63A3DA42B0D /* SwiftHyperlinksController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftHyperlinksController.swift; path = LXSwiftFoundation/core/SwiftHyperlinksController.swift; sourceTree = "<group>"; };
+		5AA95BD8277BAFDA7C4C36D18EA0749F /* Swift+WKWebView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+WKWebView.swift"; path = "LXSwiftFoundation/core/Swift+WKWebView.swift"; sourceTree = "<group>"; };
 		5ABF905D8979282D27B90282940F1C4B /* Pods-LXSwiftFoundationModule-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-LXSwiftFoundationModule-acknowledgements.markdown"; sourceTree = "<group>"; };
-		5CAE53041E536CAE85CF36565863C847 /* Swift+TextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+TextField.swift"; path = "LXSwiftFoundation/core/Swift+TextField.swift"; sourceTree = "<group>"; };
-		5FA0A147BEFD201B025BA2CBC732C464 /* SwiftView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftView.swift; path = LXSwiftFoundation/core/SwiftView.swift; sourceTree = "<group>"; };
-		61E05BD7E0F9DC3123CDFC188FD8E923 /* Swift+URL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+URL.swift"; path = "LXSwiftFoundation/core/Swift+URL.swift"; sourceTree = "<group>"; };
-		624E5056532C33591959F17644D4A454 /* Swift+Layer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Layer.swift"; path = "LXSwiftFoundation/core/Swift+Layer.swift"; sourceTree = "<group>"; };
-		64EE78B71776C8CBF8F505BD9FB76501 /* Swift+FileManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+FileManager.swift"; path = "LXSwiftFoundation/core/Swift+FileManager.swift"; sourceTree = "<group>"; };
-		65945D023603F54B5B3EB2C81E8A4174 /* SwiftLineFlowLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftLineFlowLayout.swift; path = LXSwiftFoundation/core/SwiftLineFlowLayout.swift; sourceTree = "<group>"; };
+		5E371D53F84F68793B8B26F11E4E4184 /* SwiftNavController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftNavController.swift; path = LXSwiftFoundation/core/SwiftNavController.swift; sourceTree = "<group>"; };
+		5FC6D16432FA7A57F247E2DD6B568912 /* Swift+Data.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Data.swift"; path = "LXSwiftFoundation/core/Swift+Data.swift"; sourceTree = "<group>"; };
 		65AD807BA9CE97F9E0741E22045DCB82 /* LXSwiftFoundation-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "LXSwiftFoundation-Info.plist"; sourceTree = "<group>"; };
-		6B5CE03FE7C31385D0508E56C094A68E /* SwiftScrollView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftScrollView.swift; path = LXSwiftFoundation/core/SwiftScrollView.swift; sourceTree = "<group>"; };
 		6BCE8F0DD975B49DEFC8EA29EA561C35 /* Pods-LXSwiftFoundationModule-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LXSwiftFoundationModule-Info.plist"; sourceTree = "<group>"; };
-		6E55BC312A751EAE0CF6248B4E09EED1 /* SwiftViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftViewController.swift; path = LXSwiftFoundation/core/SwiftViewController.swift; sourceTree = "<group>"; };
-		6E8D9B1FECCCBAD6E42C583ECAA5D1CE /* Swift+Label.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Label.swift"; path = "LXSwiftFoundation/core/Swift+Label.swift"; sourceTree = "<group>"; };
-		70A7B7D87C9E4EA120AA12A7B044ACF0 /* SwiftNotification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftNotification.swift; path = LXSwiftFoundation/core/SwiftNotification.swift; sourceTree = "<group>"; };
-		73DA0A4C3FEB40AF59F3FA40E1EB836B /* SwiftTextView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftTextView.swift; path = LXSwiftFoundation/core/SwiftTextView.swift; sourceTree = "<group>"; };
-		743CC681B0D766E678BF10D00EE7632E /* SwiftUserDefaults.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftUserDefaults.swift; path = LXSwiftFoundation/core/SwiftUserDefaults.swift; sourceTree = "<group>"; };
-		76899E9B1CCCCBB7F53149E29B6C5946 /* SwiftMenuView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftMenuView.swift; path = LXSwiftFoundation/core/SwiftMenuView.swift; sourceTree = "<group>"; };
-		79BC42CCAD4A8AB2BE2D53B760E1F878 /* SwiftTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftTextField.swift; path = LXSwiftFoundation/core/SwiftTextField.swift; sourceTree = "<group>"; };
-		7B4F321E704506835E59D66079AA77E7 /* SwiftAuth.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftAuth.swift; path = LXSwiftFoundation/core/SwiftAuth.swift; sourceTree = "<group>"; };
-		7DAD6F1E00B41C405DA43CB1ECD60F87 /* Swift+WKWebView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+WKWebView.swift"; path = "LXSwiftFoundation/core/Swift+WKWebView.swift"; sourceTree = "<group>"; };
-		8100671FC5C282033889E7A29BBFF91F /* SwiftRegex.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftRegex.swift; path = LXSwiftFoundation/core/SwiftRegex.swift; sourceTree = "<group>"; };
+		7038E43AB48806245AAD176665BA737B /* SwiftMenuView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftMenuView.swift; path = LXSwiftFoundation/core/SwiftMenuView.swift; sourceTree = "<group>"; };
+		7BCFF97D835E352570E93D962B1EA288 /* SwiftTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftTextField.swift; path = LXSwiftFoundation/core/SwiftTextField.swift; sourceTree = "<group>"; };
+		7D86FB6FA6530370083345686046B4BB /* SwiftAuth.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftAuth.swift; path = LXSwiftFoundation/core/SwiftAuth.swift; sourceTree = "<group>"; };
+		7EF769340036EC8EA0D924D93D3E3A2C /* Swift+Date.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Date.swift"; path = "LXSwiftFoundation/core/Swift+Date.swift"; sourceTree = "<group>"; };
+		7F40130B08C27716D4FBB1A1070AE184 /* SwiftMenuCenterView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftMenuCenterView.swift; path = LXSwiftFoundation/core/SwiftMenuCenterView.swift; sourceTree = "<group>"; };
+		8401D3382721632546A88BE39C6A864A /* Swift+Array.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Array.swift"; path = "LXSwiftFoundation/core/Swift+Array.swift"; sourceTree = "<group>"; };
+		8BD6D400035A46DD4D77AAB5AA7A6954 /* Swift+Double.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Double.swift"; path = "LXSwiftFoundation/core/Swift+Double.swift"; sourceTree = "<group>"; };
+		8C6ECC68E14E4220030D193F42AEA232 /* Swift+Int.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Int.swift"; path = "LXSwiftFoundation/core/Swift+Int.swift"; sourceTree = "<group>"; };
 		8CD7ECCC3DAC82DD0213A08F6748B8FE /* Pods-LXSwiftFoundationModule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LXSwiftFoundationModule.debug.xcconfig"; sourceTree = "<group>"; };
-		8DC891698DB58C699C1095139B353392 /* SwiftWaterfallLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftWaterfallLayout.swift; path = LXSwiftFoundation/core/SwiftWaterfallLayout.swift; sourceTree = "<group>"; };
 		8EC4B08554BC62C2BA2A4AD00B71FDE7 /* Pods-LXSwiftFoundationModule.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-LXSwiftFoundationModule.modulemap"; sourceTree = "<group>"; };
 		91A4F3DDA382BE2E8A7F55E69898FCF0 /* LXSwiftFoundation */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = LXSwiftFoundation; path = LXSwiftFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		93B99D09604DB90A178DA90564D1B620 /* SwiftModalController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftModalController.swift; path = LXSwiftFoundation/core/SwiftModalController.swift; sourceTree = "<group>"; };
-		957ED6C111817F86035EB70797F53AF0 /* SwiftUtils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftUtils.swift; path = LXSwiftFoundation/core/SwiftUtils.swift; sourceTree = "<group>"; };
+		92464BE3A5BCA4FD8DFDE9B6446C7681 /* Swift+Control.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Control.swift"; path = "LXSwiftFoundation/core/Swift+Control.swift"; sourceTree = "<group>"; };
+		955D5D331D759FCC276EF98DC83C8749 /* SwiftWebViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftWebViewController.swift; path = LXSwiftFoundation/core/SwiftWebViewController.swift; sourceTree = "<group>"; };
 		95B87A18FADBB01ED13D95D7605BB474 /* Pods-LXSwiftFoundationModule-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LXSwiftFoundationModule-acknowledgements.plist"; sourceTree = "<group>"; };
-		96FC43FACA24937F91C817AF2FC07B28 /* SwiftMemory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftMemory.swift; path = LXSwiftFoundation/core/SwiftMemory.swift; sourceTree = "<group>"; };
+		96FC1527CA8837A54D39A9744EFE686F /* SwiftCollectionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftCollectionView.swift; path = LXSwiftFoundation/core/SwiftCollectionView.swift; sourceTree = "<group>"; };
 		973C9264F3CEF553392A338E188D3E72 /* LXSwiftFoundation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LXSwiftFoundation.debug.xcconfig; sourceTree = "<group>"; };
-		99B77E4DCF57B550AB69F97A503E9FCD /* Swift+String.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+String.swift"; path = "LXSwiftFoundation/core/Swift+String.swift"; sourceTree = "<group>"; };
+		99BE8EC92FD4E9C7F97DA351ABFCF1A1 /* Swift+UIApplication.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+UIApplication.swift"; path = "LXSwiftFoundation/core/Swift+UIApplication.swift"; sourceTree = "<group>"; };
 		9C982B663D975AA8A284913C062F4BAF /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9E093E81AA39BD512D225DADBDD07811 /* Pods-LXSwiftFoundationModule-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-LXSwiftFoundationModule-dummy.m"; sourceTree = "<group>"; };
-		A0DD2A9749572EC2C0858AC7311948A1 /* Swift+Device.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Device.swift"; path = "LXSwiftFoundation/core/Swift+Device.swift"; sourceTree = "<group>"; };
-		A44B09B3AA82C2C40DD4CD387B985B0B /* SwiftTextLable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftTextLable.swift; path = LXSwiftFoundation/core/SwiftTextLable.swift; sourceTree = "<group>"; };
-		A51AC3687585FB1040EEC40FD7C04BA1 /* Swift+Control.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Control.swift"; path = "LXSwiftFoundation/core/Swift+Control.swift"; sourceTree = "<group>"; };
-		A5A013664A56FED5C133E02681628B99 /* Swift+Bundle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Bundle.swift"; path = "LXSwiftFoundation/core/Swift+Bundle.swift"; sourceTree = "<group>"; };
+		9F87318733E1D0D33B4169732F5E5926 /* Swift+BezierPath.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+BezierPath.swift"; path = "LXSwiftFoundation/core/Swift+BezierPath.swift"; sourceTree = "<group>"; };
+		A1F9C4471C0030E4C0432FD103EB3BFA /* Swift+Label.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Label.swift"; path = "LXSwiftFoundation/core/Swift+Label.swift"; sourceTree = "<group>"; };
+		A77AA467F8F173C4500563CB38245BC8 /* Swift+View.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+View.swift"; path = "LXSwiftFoundation/core/Swift+View.swift"; sourceTree = "<group>"; };
 		A81E884EAEBBAF80D9FDD9E6C5828061 /* LXSwiftFoundation-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LXSwiftFoundation-umbrella.h"; sourceTree = "<group>"; };
 		AB520CD132149910E44FA2B2654DBA13 /* Pods-LXSwiftFoundationModule */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-LXSwiftFoundationModule"; path = Pods_LXSwiftFoundationModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AD900D87225525E2D8538F9D339BBD8B /* Swift+Font.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Font.swift"; path = "LXSwiftFoundation/core/Swift+Font.swift"; sourceTree = "<group>"; };
-		AEA04816CD96E4B9B5BCC9117457B616 /* SwiftLabel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftLabel.swift; path = LXSwiftFoundation/core/SwiftLabel.swift; sourceTree = "<group>"; };
+		AC2193C3CD1283446D94CC162997AF71 /* Swift+AlertController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+AlertController.swift"; path = "LXSwiftFoundation/core/Swift+AlertController.swift"; sourceTree = "<group>"; };
+		AEBEFED308761BEF5847E707C7E573FA /* SwiftMenuDownView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftMenuDownView.swift; path = LXSwiftFoundation/core/SwiftMenuDownView.swift; sourceTree = "<group>"; };
 		B4E2EFA0D43F6A289CD37825A9AED84E /* LXSwiftFoundation.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = LXSwiftFoundation.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		B67A8165CF3DF771BB80458B286D85A7 /* Swift+Button.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Button.swift"; path = "LXSwiftFoundation/core/Swift+Button.swift"; sourceTree = "<group>"; };
-		B9D742142EE0536CD89C3E4D63BDD789 /* SwiftMenuCenterView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftMenuCenterView.swift; path = LXSwiftFoundation/core/SwiftMenuCenterView.swift; sourceTree = "<group>"; };
-		BC5CF80E6D51C3A4D9AF8FB3E876640F /* SwiftButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftButton.swift; path = LXSwiftFoundation/core/SwiftButton.swift; sourceTree = "<group>"; };
-		BE02C6F2782BFCA95DC9018BDC2E12EC /* SwiftImgView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftImgView.swift; path = LXSwiftFoundation/core/SwiftImgView.swift; sourceTree = "<group>"; };
-		C3E4824D896CB6B513B8BE2AAD19B9BD /* SwiftUICompatible.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftUICompatible.swift; path = LXSwiftFoundation/core/SwiftUICompatible.swift; sourceTree = "<group>"; };
-		C45A0C9F1AA0F81146CE708CADEDB636 /* Swift+Int.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Int.swift"; path = "LXSwiftFoundation/core/Swift+Int.swift"; sourceTree = "<group>"; };
-		C59A60553B2300CDB63681C57915888C /* SwiftTableView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftTableView.swift; path = LXSwiftFoundation/core/SwiftTableView.swift; sourceTree = "<group>"; };
-		CC2BD678CADC7575CFB69AA859674E3D /* Swift+Number.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Number.swift"; path = "LXSwiftFoundation/core/Swift+Number.swift"; sourceTree = "<group>"; };
+		B570DF752F3DC6041640F90650D3BD34 /* SwiftMemory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftMemory.swift; path = LXSwiftFoundation/core/SwiftMemory.swift; sourceTree = "<group>"; };
+		C1E3E499EAC2914ABEF6D7A2390F0D49 /* SwiftMenuUpView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftMenuUpView.swift; path = LXSwiftFoundation/core/SwiftMenuUpView.swift; sourceTree = "<group>"; };
 		CC8D351C709683C611A900D82D108E2E /* Pods-LXSwiftFoundationModule-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-LXSwiftFoundationModule-umbrella.h"; sourceTree = "<group>"; };
-		CD25B4E10504A05E449581362DCA989E /* Swift+BezierPath.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+BezierPath.swift"; path = "LXSwiftFoundation/core/Swift+BezierPath.swift"; sourceTree = "<group>"; };
-		CEDACC32DED73AC401892A1FC35DEA82 /* SwiftTimer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftTimer.swift; path = LXSwiftFoundation/core/SwiftTimer.swift; sourceTree = "<group>"; };
-		D0CA2A68F64B0D64F7A24282BB96F578 /* Swift+ViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+ViewController.swift"; path = "LXSwiftFoundation/core/Swift+ViewController.swift"; sourceTree = "<group>"; };
+		CD60533A7BDFE8DF1AFA81E68FB7D2A0 /* Swift+Dictionary.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Dictionary.swift"; path = "LXSwiftFoundation/core/Swift+Dictionary.swift"; sourceTree = "<group>"; };
+		CF25B65AFE7E89D7E875D02D7281DE95 /* Swift+ScrollView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+ScrollView.swift"; path = "LXSwiftFoundation/core/Swift+ScrollView.swift"; sourceTree = "<group>"; };
+		D058D3305D0858E1465872A4703FF009 /* SwiftTextLable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftTextLable.swift; path = LXSwiftFoundation/core/SwiftTextLable.swift; sourceTree = "<group>"; };
 		D0F2A64B6C9E8F7439766974077C0B98 /* LXSwiftFoundation-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LXSwiftFoundation-dummy.m"; sourceTree = "<group>"; };
-		D9D0D7898D31C9E1DFF94CEAD7C223D7 /* SwiftBasics.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftBasics.swift; path = LXSwiftFoundation/core/SwiftBasics.swift; sourceTree = "<group>"; };
+		D4F894A53FCA5B9F5953EAF41181A3F3 /* Swift+Rect.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Rect.swift"; path = "LXSwiftFoundation/core/Swift+Rect.swift"; sourceTree = "<group>"; };
+		D597FCB07B5CACC14AEF1847FCD4708D /* SwiftModalController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftModalController.swift; path = LXSwiftFoundation/core/SwiftModalController.swift; sourceTree = "<group>"; };
+		D8D908D5A42C3777947F0AEF9446264D /* Swift+Button.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Button.swift"; path = "LXSwiftFoundation/core/Swift+Button.swift"; sourceTree = "<group>"; };
+		DF1C1900C305ACBD0FC54EFCC872F8CA /* SwiftImgView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftImgView.swift; path = LXSwiftFoundation/core/SwiftImgView.swift; sourceTree = "<group>"; };
+		DF8C1CE7180FFC76F286421E7F3B871F /* SwiftTimer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftTimer.swift; path = LXSwiftFoundation/core/SwiftTimer.swift; sourceTree = "<group>"; };
+		E1CE6F35F545DCADCDCBD0BCDAF33E4D /* SwiftLabel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftLabel.swift; path = LXSwiftFoundation/core/SwiftLabel.swift; sourceTree = "<group>"; };
 		EA636A12F3C529F47EF02F15967C9723 /* LXSwiftFoundation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LXSwiftFoundation.release.xcconfig; sourceTree = "<group>"; };
-		EDEC62E1EC51E5AE7541ED7EEAB14221 /* SwiftCollectionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftCollectionView.swift; path = LXSwiftFoundation/core/SwiftCollectionView.swift; sourceTree = "<group>"; };
-		EEE439F0BD03292EF2F8897FE3A69CBB /* Swift+NSAttributedString.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+NSAttributedString.swift"; path = "LXSwiftFoundation/core/Swift+NSAttributedString.swift"; sourceTree = "<group>"; };
-		F3320CCC2ED935A214D5ABBC2AEFBFAD /* Swift+AlertController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+AlertController.swift"; path = "LXSwiftFoundation/core/Swift+AlertController.swift"; sourceTree = "<group>"; };
-		F744AA8B5E73B58E03E68C60B2AF2F6B /* Swift+Image.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Image.swift"; path = "LXSwiftFoundation/core/Swift+Image.swift"; sourceTree = "<group>"; };
-		FD5EEDF8A299DE527B0970BF4CC56206 /* Swift+Date.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Date.swift"; path = "LXSwiftFoundation/core/Swift+Date.swift"; sourceTree = "<group>"; };
+		EF6DBFBCE64BEB3311B64D4E16621510 /* SwiftScrollView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftScrollView.swift; path = LXSwiftFoundation/core/SwiftScrollView.swift; sourceTree = "<group>"; };
+		EFD2FB95408902185262AD1975CD5D7F /* SwiftUICompatible.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftUICompatible.swift; path = LXSwiftFoundation/core/SwiftUICompatible.swift; sourceTree = "<group>"; };
+		F593BB3482E795BCC251038F1BF44AF1 /* Swift+Bundle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Swift+Bundle.swift"; path = "LXSwiftFoundation/core/Swift+Bundle.swift"; sourceTree = "<group>"; };
+		F594030C612982C21E277ECC9DCC6960 /* SwiftWaterfallLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftWaterfallLayout.swift; path = LXSwiftFoundation/core/SwiftWaterfallLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,78 +206,6 @@
 				B83A515E260A098A27A54DBB7AE886BF /* Pods-LXSwiftFoundationModule */,
 			);
 			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		94BE31EFA656FCF4A4778C03E9CDBF4D /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				F3320CCC2ED935A214D5ABBC2AEFBFAD /* Swift+AlertController.swift */,
-				57E648C0F62CCC1306C4E9D5CF459C5F /* Swift+Array.swift */,
-				CD25B4E10504A05E449581362DCA989E /* Swift+BezierPath.swift */,
-				A5A013664A56FED5C133E02681628B99 /* Swift+Bundle.swift */,
-				B67A8165CF3DF771BB80458B286D85A7 /* Swift+Button.swift */,
-				570A9D89277E6870F5A0BA9FEF257DCA /* Swift+Color.swift */,
-				A51AC3687585FB1040EEC40FD7C04BA1 /* Swift+Control.swift */,
-				03452775EE11615E5E041038DCB34558 /* Swift+Data.swift */,
-				FD5EEDF8A299DE527B0970BF4CC56206 /* Swift+Date.swift */,
-				A0DD2A9749572EC2C0858AC7311948A1 /* Swift+Device.swift */,
-				1D93E19B75211EB1FFECE434FE47B193 /* Swift+Dictionary.swift */,
-				2C6DA0406311902F3891959B1511C227 /* Swift+DispatchQueue.swift */,
-				4B2B4F37B3E4421273031F95CEAF24F4 /* Swift+Double.swift */,
-				64EE78B71776C8CBF8F505BD9FB76501 /* Swift+FileManager.swift */,
-				AD900D87225525E2D8538F9D339BBD8B /* Swift+Font.swift */,
-				F744AA8B5E73B58E03E68C60B2AF2F6B /* Swift+Image.swift */,
-				C45A0C9F1AA0F81146CE708CADEDB636 /* Swift+Int.swift */,
-				6E8D9B1FECCCBAD6E42C583ECAA5D1CE /* Swift+Label.swift */,
-				624E5056532C33591959F17644D4A454 /* Swift+Layer.swift */,
-				EEE439F0BD03292EF2F8897FE3A69CBB /* Swift+NSAttributedString.swift */,
-				CC2BD678CADC7575CFB69AA859674E3D /* Swift+Number.swift */,
-				3FBA1810D5FEDAB2F57D584B54946BD9 /* Swift+Rect.swift */,
-				0DBFD72E18CF182F533CA8FD07F5ECB1 /* Swift+ScrollView.swift */,
-				99B77E4DCF57B550AB69F97A503E9FCD /* Swift+String.swift */,
-				5CAE53041E536CAE85CF36565863C847 /* Swift+TextField.swift */,
-				28B3209BA874A20133F400092C4E66BD /* Swift+UIApplication.swift */,
-				61E05BD7E0F9DC3123CDFC188FD8E923 /* Swift+URL.swift */,
-				1F973995BA177A878B7A30B56B7A11ED /* Swift+View.swift */,
-				D0CA2A68F64B0D64F7A24282BB96F578 /* Swift+ViewController.swift */,
-				7DAD6F1E00B41C405DA43CB1ECD60F87 /* Swift+WKWebView.swift */,
-				7B4F321E704506835E59D66079AA77E7 /* SwiftAuth.swift */,
-				D9D0D7898D31C9E1DFF94CEAD7C223D7 /* SwiftBasics.swift */,
-				BC5CF80E6D51C3A4D9AF8FB3E876640F /* SwiftButton.swift */,
-				EDEC62E1EC51E5AE7541ED7EEAB14221 /* SwiftCollectionView.swift */,
-				2A98C3CC96F22DEEA4AC3AF12A80BE87 /* SwiftCompatible.swift */,
-				1A609371B7EA6D5EA89D012546D5C1C9 /* SwiftConvenienceBundle.swift */,
-				50F138B87C156FF2F38B64695C531A6F /* SwiftHyperlinksModalController.swift */,
-				BE02C6F2782BFCA95DC9018BDC2E12EC /* SwiftImgView.swift */,
-				AEA04816CD96E4B9B5BCC9117457B616 /* SwiftLabel.swift */,
-				65945D023603F54B5B3EB2C81E8A4174 /* SwiftLineFlowLayout.swift */,
-				50CCD9A52B0EAD11A6231A43BAA3C4CB /* SwiftLog.swift */,
-				96FC43FACA24937F91C817AF2FC07B28 /* SwiftMemory.swift */,
-				B9D742142EE0536CD89C3E4D63BDD789 /* SwiftMenuCenterView.swift */,
-				261B4BCB0CB9FBA1E45B87CC12F567C7 /* SwiftMenuDownView.swift */,
-				4D895E821F0514041BDE3918A4E639FC /* SwiftMenuUpView.swift */,
-				76899E9B1CCCCBB7F53149E29B6C5946 /* SwiftMenuView.swift */,
-				93B99D09604DB90A178DA90564D1B620 /* SwiftModalController.swift */,
-				510A22E704310C351883DA4106D0B279 /* SwiftNavController.swift */,
-				70A7B7D87C9E4EA120AA12A7B044ACF0 /* SwiftNotification.swift */,
-				2914FBFC27AA08E22F6BC1474D433413 /* SwiftPickerView.swift */,
-				8100671FC5C282033889E7A29BBFF91F /* SwiftRegex.swift */,
-				6B5CE03FE7C31385D0508E56C094A68E /* SwiftScrollView.swift */,
-				C59A60553B2300CDB63681C57915888C /* SwiftTableView.swift */,
-				79BC42CCAD4A8AB2BE2D53B760E1F878 /* SwiftTextField.swift */,
-				A44B09B3AA82C2C40DD4CD387B985B0B /* SwiftTextLable.swift */,
-				73DA0A4C3FEB40AF59F3FA40E1EB836B /* SwiftTextView.swift */,
-				CEDACC32DED73AC401892A1FC35DEA82 /* SwiftTimer.swift */,
-				C3E4824D896CB6B513B8BE2AAD19B9BD /* SwiftUICompatible.swift */,
-				743CC681B0D766E678BF10D00EE7632E /* SwiftUserDefaults.swift */,
-				957ED6C111817F86035EB70797F53AF0 /* SwiftUtils.swift */,
-				5FA0A147BEFD201B025BA2CBC732C464 /* SwiftView.swift */,
-				6E55BC312A751EAE0CF6248B4E09EED1 /* SwiftViewController.swift */,
-				8DC891698DB58C699C1095139B353392 /* SwiftWaterfallLayout.swift */,
-				57077B19D4B573FE25262851B9ED8A61 /* SwiftWebViewController.swift */,
-				3C2A0DC27366CE3B03E6F2039BDC5E99 /* SwiftWindow.swift */,
-			);
-			name = Core;
 			sourceTree = "<group>";
 		};
 		A763C30BB2DA36577848782BF30E14F3 /* Products */ = {
@@ -351,7 +279,7 @@
 		EC829177F7B992F76B03C58615C48522 /* LXSwiftFoundation */ = {
 			isa = PBXGroup;
 			children = (
-				94BE31EFA656FCF4A4778C03E9CDBF4D /* Core */,
+				F4A1A122529B4824F0801983FE165CBE /* Core */,
 				F13E62A0A4AA7E2C2A0B75F97E019D46 /* Pod */,
 				D364CB0DAEFDEAAC24BBFFF3D1B21E53 /* Support Files */,
 			);
@@ -374,6 +302,78 @@
 				9C982B663D975AA8A284913C062F4BAF /* README.md */,
 			);
 			name = Pod;
+			sourceTree = "<group>";
+		};
+		F4A1A122529B4824F0801983FE165CBE /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				AC2193C3CD1283446D94CC162997AF71 /* Swift+AlertController.swift */,
+				8401D3382721632546A88BE39C6A864A /* Swift+Array.swift */,
+				9F87318733E1D0D33B4169732F5E5926 /* Swift+BezierPath.swift */,
+				F593BB3482E795BCC251038F1BF44AF1 /* Swift+Bundle.swift */,
+				D8D908D5A42C3777947F0AEF9446264D /* Swift+Button.swift */,
+				3D9DB775B1E16F3A9C0001FC742B2F8C /* Swift+Color.swift */,
+				92464BE3A5BCA4FD8DFDE9B6446C7681 /* Swift+Control.swift */,
+				5FC6D16432FA7A57F247E2DD6B568912 /* Swift+Data.swift */,
+				7EF769340036EC8EA0D924D93D3E3A2C /* Swift+Date.swift */,
+				2095955A01D79B33DEB81271D1B1C0C7 /* Swift+Device.swift */,
+				CD60533A7BDFE8DF1AFA81E68FB7D2A0 /* Swift+Dictionary.swift */,
+				30856DD5347886A5125C5DE9090CDAF8 /* Swift+DispatchQueue.swift */,
+				8BD6D400035A46DD4D77AAB5AA7A6954 /* Swift+Double.swift */,
+				491E0F380C8985999C04B276D2647D58 /* Swift+FileManager.swift */,
+				4FA1317B4B9678D4933CC44F0499E1D5 /* Swift+Font.swift */,
+				30B5C03D26275E604C2B97E1686A8C7D /* Swift+Image.swift */,
+				8C6ECC68E14E4220030D193F42AEA232 /* Swift+Int.swift */,
+				A1F9C4471C0030E4C0432FD103EB3BFA /* Swift+Label.swift */,
+				543A1191F7FD144BD6E9831BD1BD6D19 /* Swift+Layer.swift */,
+				3073B319F71B1581CDBB8B23D1D0EE04 /* Swift+NSAttributedString.swift */,
+				34B6DDA91CFD9BDD0F3DA7AC09E0165B /* Swift+Number.swift */,
+				D4F894A53FCA5B9F5953EAF41181A3F3 /* Swift+Rect.swift */,
+				CF25B65AFE7E89D7E875D02D7281DE95 /* Swift+ScrollView.swift */,
+				0987D535F8702E2E640C486EF70D129A /* Swift+String.swift */,
+				319EFEBA44D22DCFA325EE69F53F64D1 /* Swift+TextField.swift */,
+				99BE8EC92FD4E9C7F97DA351ABFCF1A1 /* Swift+UIApplication.swift */,
+				2B225F28EBA747FA76D996B08D2F9646 /* Swift+URL.swift */,
+				A77AA467F8F173C4500563CB38245BC8 /* Swift+View.swift */,
+				112C86CB1B94ECE0C810D72CB0B34D33 /* Swift+ViewController.swift */,
+				5AA95BD8277BAFDA7C4C36D18EA0749F /* Swift+WKWebView.swift */,
+				7D86FB6FA6530370083345686046B4BB /* SwiftAuth.swift */,
+				1632F4CD78CAD760E76FB19147679C76 /* SwiftBasics.swift */,
+				3B8818032C5F85A96BB9F623A5DD6A46 /* SwiftButton.swift */,
+				96FC1527CA8837A54D39A9744EFE686F /* SwiftCollectionView.swift */,
+				1018A8DB3ECCD5B83D94AA83CEC16BC3 /* SwiftCompatible.swift */,
+				052780A861A4AE0C951940A9C7CEE56A /* SwiftConvenienceBundle.swift */,
+				5A0E7A27AF356FA2C545F63A3DA42B0D /* SwiftHyperlinksController.swift */,
+				DF1C1900C305ACBD0FC54EFCC872F8CA /* SwiftImgView.swift */,
+				E1CE6F35F545DCADCDCBD0BCDAF33E4D /* SwiftLabel.swift */,
+				0BF97249EE4A3E8431148FE5CDB1C65D /* SwiftLineFlowLayout.swift */,
+				4917077DAE4F41B95E8FFE94D07CE036 /* SwiftLog.swift */,
+				B570DF752F3DC6041640F90650D3BD34 /* SwiftMemory.swift */,
+				7F40130B08C27716D4FBB1A1070AE184 /* SwiftMenuCenterView.swift */,
+				AEBEFED308761BEF5847E707C7E573FA /* SwiftMenuDownView.swift */,
+				C1E3E499EAC2914ABEF6D7A2390F0D49 /* SwiftMenuUpView.swift */,
+				7038E43AB48806245AAD176665BA737B /* SwiftMenuView.swift */,
+				D597FCB07B5CACC14AEF1847FCD4708D /* SwiftModalController.swift */,
+				5E371D53F84F68793B8B26F11E4E4184 /* SwiftNavController.swift */,
+				13D24BCA794C39F186A5824C554DE28C /* SwiftNotification.swift */,
+				11DAFC66BA575A86FC20B2ACD0FD2845 /* SwiftPickerView.swift */,
+				141652C4845A5B77181131AA17DE8519 /* SwiftRegex.swift */,
+				EF6DBFBCE64BEB3311B64D4E16621510 /* SwiftScrollView.swift */,
+				1062B36CDF65904B101D722114B8BA39 /* SwiftTableView.swift */,
+				7BCFF97D835E352570E93D962B1EA288 /* SwiftTextField.swift */,
+				D058D3305D0858E1465872A4703FF009 /* SwiftTextLable.swift */,
+				23A6B4BE05B1BE81AE79E58EA5BDFD60 /* SwiftTextView.swift */,
+				DF8C1CE7180FFC76F286421E7F3B871F /* SwiftTimer.swift */,
+				EFD2FB95408902185262AD1975CD5D7F /* SwiftUICompatible.swift */,
+				2752DC082BB11D33ABFC8379B7D177FF /* SwiftUserDefaults.swift */,
+				39030329245C9D933A342C6999BC937A /* SwiftUtils.swift */,
+				05AE7EDC40279EE087C320DB432BD67F /* SwiftView.swift */,
+				5532BE918E1700BBA60FF851189CF0D9 /* SwiftViewController.swift */,
+				F594030C612982C21E277ECC9DCC6960 /* SwiftWaterfallLayout.swift */,
+				955D5D331D759FCC276EF98DC83C8749 /* SwiftWebViewController.swift */,
+				21FDBD7A914EC5E61D02B697D9AF793D /* SwiftWindow.swift */,
+			);
+			name = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -422,7 +422,7 @@
 			buildConfigurationList = 314274E8AECDE1952D794B4C5CABD925 /* Build configuration list for PBXNativeTarget "LXSwiftFoundation" */;
 			buildPhases = (
 				3C264C4E7A3361D717637724FDE14854 /* Headers */,
-				D3C4357037BA96D502330C4716C3283A /* Sources */,
+				9F9159E2D8422CD6532CC7AAA388723E /* Sources */,
 				60332A77F0B181FD73A4A11BE41AB8A0 /* Frameworks */,
 				1CBBBE03D429730337CFB4A1B671115D /* Resources */,
 			);
@@ -445,7 +445,7 @@
 				LastUpgradeCheck = 1600;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
-			compatibilityVersion = "Xcode 10.0";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -491,76 +491,76 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D3C4357037BA96D502330C4716C3283A /* Sources */ = {
+		9F9159E2D8422CD6532CC7AAA388723E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F85EA6D034F11B409072518ECD04EAE /* LXSwiftFoundation-dummy.m in Sources */,
-				94A25CD468E18084E5AA45950BDF08EB /* Swift+AlertController.swift in Sources */,
-				33B3B5BDAC87BCFE3AAD4C105A9E1E30 /* Swift+Array.swift in Sources */,
-				A4966E7FF7421B19E95BD889E7EFC1F9 /* Swift+BezierPath.swift in Sources */,
-				695E54A5541CD9AF9C4EB6871A69D2C3 /* Swift+Bundle.swift in Sources */,
-				063BBEA8CCB37C45EE1EBC4E0146D61D /* Swift+Button.swift in Sources */,
-				EAF9E3EF090E02CD199093C813A36C21 /* Swift+Color.swift in Sources */,
-				8D0A5A6CE1D015DBE4F8D318C262E940 /* Swift+Control.swift in Sources */,
-				39139DD578CE3157CCB2ABCD137FBDD1 /* Swift+Data.swift in Sources */,
-				847A310B088A40B8CFC057EFEBEE22DD /* Swift+Date.swift in Sources */,
-				BFE52BCF78A6791AEA15766595358E1B /* Swift+Device.swift in Sources */,
-				49A009F358CE27A98830F539F7473C15 /* Swift+Dictionary.swift in Sources */,
-				C74A5972C083F510ED5C8F44F871EE41 /* Swift+DispatchQueue.swift in Sources */,
-				8E32C67747D0787881FF1D421ED678AA /* Swift+Double.swift in Sources */,
-				DC4728CE1C548FC9A1FFA38C26F60755 /* Swift+FileManager.swift in Sources */,
-				15383A8DED7B571FBB82BD1AD004598D /* Swift+Font.swift in Sources */,
-				FC338CDE20D90609EF2FDA3078842EBE /* Swift+Image.swift in Sources */,
-				E8CE8EAB5219242503D2DBD46BCE1BBE /* Swift+Int.swift in Sources */,
-				10727F20D071FBD1BF6B355B6513699A /* Swift+Label.swift in Sources */,
-				DA817E5800B8E09DB4405FD45E5FB377 /* Swift+Layer.swift in Sources */,
-				5DC040D1013CA4925F66A71714C9206E /* Swift+NSAttributedString.swift in Sources */,
-				F16C2738092F668956F8BB46FA83C745 /* Swift+Number.swift in Sources */,
-				844342E289751F3BCB2245C7F14DE723 /* Swift+Rect.swift in Sources */,
-				C7CB32711C6CFD784F85797B8E355289 /* Swift+ScrollView.swift in Sources */,
-				DDC41AFC0F94F541290134195E7E31B7 /* Swift+String.swift in Sources */,
-				86CCA329ED12976DB2E782EBA3173AC5 /* Swift+TextField.swift in Sources */,
-				DE63E599B8FB09284AA90B301C3CBAF4 /* Swift+UIApplication.swift in Sources */,
-				F920D1AD7DBDFB44F72362FF29B68378 /* Swift+URL.swift in Sources */,
-				0B7368886FF6D56C0643CCCE91C47BA4 /* Swift+View.swift in Sources */,
-				A1494EFEFFE4805F38651D471DC6AECF /* Swift+ViewController.swift in Sources */,
-				72B4D59AB542E2E18D096D8ED9048517 /* Swift+WKWebView.swift in Sources */,
-				88B5B8EC45105509BA49FC731D003BD9 /* SwiftAuth.swift in Sources */,
-				3989E688598ACE5DB6517B08B0835407 /* SwiftBasics.swift in Sources */,
-				01078AD102004D6A2C71E9643878865C /* SwiftButton.swift in Sources */,
-				D3D7133681F9776D7A0C95E492C8648A /* SwiftCollectionView.swift in Sources */,
-				C55649BBC926766E61F489D13D2B9095 /* SwiftCompatible.swift in Sources */,
-				5EBCA84C4614D07976D3C52C408A6742 /* SwiftConvenienceBundle.swift in Sources */,
-				7F39C9C5A327FCEA5F45F3C8497EAD07 /* SwiftHyperlinksModalController.swift in Sources */,
-				0EAE0140F9B89F9394341C8A42D1E6C1 /* SwiftImgView.swift in Sources */,
-				9D570FBBEDC9B7378D22C90F2CDFFF12 /* SwiftLabel.swift in Sources */,
-				21CCF90C0FD87B85C4949C16EDA3D65A /* SwiftLineFlowLayout.swift in Sources */,
-				97997C2CD8BDBB2A852B9578734854D9 /* SwiftLog.swift in Sources */,
-				31E3B6747FFF173DE9A9689488439808 /* SwiftMemory.swift in Sources */,
-				B5D908F83969F27A200BB7292CBC8B8F /* SwiftMenuCenterView.swift in Sources */,
-				0C5579F123C61AD67545D55A019578D1 /* SwiftMenuDownView.swift in Sources */,
-				E7EDAF58CC0BD833F4A3D73419DBC6B3 /* SwiftMenuUpView.swift in Sources */,
-				CB7E64E39BD639A8A98815482826CFAB /* SwiftMenuView.swift in Sources */,
-				611E30FBFF1A219048C919335305E334 /* SwiftModalController.swift in Sources */,
-				84CE6608C4AED9C1C1F26902D1772521 /* SwiftNavController.swift in Sources */,
-				D4FC15DE1000CE553E0BE2040A632234 /* SwiftNotification.swift in Sources */,
-				62F96D6CCE37B374ADD84C298011FCFE /* SwiftPickerView.swift in Sources */,
-				99F50007A1433C854207165935F7B012 /* SwiftRegex.swift in Sources */,
-				B9542E42AC311DC073789C91767C8C37 /* SwiftScrollView.swift in Sources */,
-				2A481CC89CDA28C9DE47A42EE00E3A3A /* SwiftTableView.swift in Sources */,
-				F67166952344C78AB0C2DB3E3E7BB8F3 /* SwiftTextField.swift in Sources */,
-				485A8CB40C24C927510714C9B9D80F01 /* SwiftTextLable.swift in Sources */,
-				A5CE3352DB6892B6E81CB28C608914A1 /* SwiftTextView.swift in Sources */,
-				DE204ED83E16FAE58582DCAE6EEFF53E /* SwiftTimer.swift in Sources */,
-				A25DD68DDE59E11F897CD62A671DCA1A /* SwiftUICompatible.swift in Sources */,
-				6B778CDC94F8CACCB45655B504607A37 /* SwiftUserDefaults.swift in Sources */,
-				CD7DEAA91D47B9FECC14E20B5998F699 /* SwiftUtils.swift in Sources */,
-				5BC337AE3B5D247038C535125FD3BEEC /* SwiftView.swift in Sources */,
-				FF1F78667B8EB8710F906BE9E34AA47C /* SwiftViewController.swift in Sources */,
-				4B295C13295D23BE8D09AA96D7FE0112 /* SwiftWaterfallLayout.swift in Sources */,
-				FAD598028DB2DB8A7AAB0D4A9540328D /* SwiftWebViewController.swift in Sources */,
-				F6B6E9D89F02EF6CD0AEB9F12BE6D1BA /* SwiftWindow.swift in Sources */,
+				5B6FD4997521CDAA287350E047675B63 /* LXSwiftFoundation-dummy.m in Sources */,
+				859AF59D23DF0B305F26C1A75D91947C /* Swift+AlertController.swift in Sources */,
+				DAE794A5656D67661D3CED4B2A00C4D5 /* Swift+Array.swift in Sources */,
+				A6855C3D3E2B69CC7AE9ABD5E8BE3E86 /* Swift+BezierPath.swift in Sources */,
+				F52981116044D3C7A82C097F8A6E5D2D /* Swift+Bundle.swift in Sources */,
+				4B5A9ECF2B125FDBB8B3105B94B3C001 /* Swift+Button.swift in Sources */,
+				DF75F07C012C486388D8C46A75ED0C9F /* Swift+Color.swift in Sources */,
+				7699B06D96EE3A35AA089A8837987F1C /* Swift+Control.swift in Sources */,
+				59750909CBB16CB56FF5A7CA24A6B724 /* Swift+Data.swift in Sources */,
+				84BD925079FF3E88F07D9098C07466C6 /* Swift+Date.swift in Sources */,
+				E03129F914F6AA70613DE6580A6435D2 /* Swift+Device.swift in Sources */,
+				86762844A1B1D923B02A298D4EA598EC /* Swift+Dictionary.swift in Sources */,
+				AE2DEAC6F039F298D4524FFB5BFFA41F /* Swift+DispatchQueue.swift in Sources */,
+				9008B65080E3B446EA8B7A58A2015C58 /* Swift+Double.swift in Sources */,
+				67934AE2150A24351FABF7EB7A9C6F39 /* Swift+FileManager.swift in Sources */,
+				21C018D3F8B03D8D83F14D74631BCF9C /* Swift+Font.swift in Sources */,
+				9999913888C48E59A4A8E3D84895E102 /* Swift+Image.swift in Sources */,
+				B31D45F096D48C083C676C5D17D8AE7D /* Swift+Int.swift in Sources */,
+				D72CE337C014D1A76254CE07A556EF55 /* Swift+Label.swift in Sources */,
+				1FA4ABB690A0ADD01CAD73325BD51E3A /* Swift+Layer.swift in Sources */,
+				5BB6F6588C308DCF67EEAF5A27F2B773 /* Swift+NSAttributedString.swift in Sources */,
+				B38150D4678F9BE0FF9AE2C140FA358B /* Swift+Number.swift in Sources */,
+				E5CB99CB5744099F0DEEEB88D58F8993 /* Swift+Rect.swift in Sources */,
+				3651F22748F8EB1C480BDC6D7143EDF5 /* Swift+ScrollView.swift in Sources */,
+				CE2C6BCB0709838D22BE95DDEACEBF85 /* Swift+String.swift in Sources */,
+				7DAEA53520C7DD0C4035CC8A340027B3 /* Swift+TextField.swift in Sources */,
+				75E17ABD384036F944C941173CFF0A18 /* Swift+UIApplication.swift in Sources */,
+				978C15A790A3FA5D48FA376EC41435CF /* Swift+URL.swift in Sources */,
+				FD72AF11519197478462B34D8515E8B9 /* Swift+View.swift in Sources */,
+				EC1E0D02762B61AF38D63C3B3F6C1FD8 /* Swift+ViewController.swift in Sources */,
+				46648AE083DB2AD9E18B716402BF1EBF /* Swift+WKWebView.swift in Sources */,
+				850B38B253EF246D45C0EBDB574759EA /* SwiftAuth.swift in Sources */,
+				03A97842BFBF070BAEC435810B23F550 /* SwiftBasics.swift in Sources */,
+				21CABC3A03186CDF0FE1746EEBDB6703 /* SwiftButton.swift in Sources */,
+				0E159634E8516D77F5CC58867754979C /* SwiftCollectionView.swift in Sources */,
+				1611F4B7E109CBB48340B16937469EBE /* SwiftCompatible.swift in Sources */,
+				3AA307B044158DBC1B28907F68A2C7C0 /* SwiftConvenienceBundle.swift in Sources */,
+				93AEC1DA91BF9404211CEA5E7FBA2995 /* SwiftHyperlinksController.swift in Sources */,
+				1EA6BDB7F476C514865201F866A23FDB /* SwiftImgView.swift in Sources */,
+				B58FE1FCE4F7311F730A3155A7194C4F /* SwiftLabel.swift in Sources */,
+				59CF1B8538821D2496F2B5C4E42511EC /* SwiftLineFlowLayout.swift in Sources */,
+				40AA0A02997D7DF9E70CD556981C5E54 /* SwiftLog.swift in Sources */,
+				D7BAF63FFD32AE5A21EEFC5D078B5348 /* SwiftMemory.swift in Sources */,
+				FF8741F420F24A204D72B7EF107BA1AE /* SwiftMenuCenterView.swift in Sources */,
+				6856C2024457D0F862190EB44D9E0505 /* SwiftMenuDownView.swift in Sources */,
+				3DF4F0E5CAF9E2CC3FD011971A8F75AF /* SwiftMenuUpView.swift in Sources */,
+				88704C49F3F223EA96CEEE17E9B6C4E3 /* SwiftMenuView.swift in Sources */,
+				0743D17F3E90E5BDD14C1FA4052E0004 /* SwiftModalController.swift in Sources */,
+				F9B4F37AE040725EFA8585D423463E8C /* SwiftNavController.swift in Sources */,
+				7FBAAC6D01B0018B818E16A0ED8E42C2 /* SwiftNotification.swift in Sources */,
+				E03D95E18A1CDAC9A131C5A8648DE777 /* SwiftPickerView.swift in Sources */,
+				FE81D1325AF2958FA6662F90890E7802 /* SwiftRegex.swift in Sources */,
+				8DD8DC1DCA1BE66FD63FBA9C1DE278E5 /* SwiftScrollView.swift in Sources */,
+				E020609507F89FD3745195D8B2831E96 /* SwiftTableView.swift in Sources */,
+				9EEB1174222C17421EC9F8FD61CEA943 /* SwiftTextField.swift in Sources */,
+				6278262183A143542074161BCF9B117E /* SwiftTextLable.swift in Sources */,
+				1B2E88F395C762C515EF25B6D879391A /* SwiftTextView.swift in Sources */,
+				6DAE8F6BA59DF1E68F35F19E360F5738 /* SwiftTimer.swift in Sources */,
+				E034943E2FA28B5A8A71303D4D969168 /* SwiftUICompatible.swift in Sources */,
+				FF30AF544A2B4C72FCFB19258F13C589 /* SwiftUserDefaults.swift in Sources */,
+				041AE8274A61B7BB1B28EC8B8824DABF /* SwiftUtils.swift in Sources */,
+				70537DB84D6EAFA3086DFD9C9DD3307F /* SwiftView.swift in Sources */,
+				FE1A88473D1B17F6D1C6AD1B7F4745E1 /* SwiftViewController.swift in Sources */,
+				E7C49C5C559C8D4F8F9CD45EB8C7B417 /* SwiftWaterfallLayout.swift in Sources */,
+				F9D5F32406F2DBFF53AB302E48A0D9E3 /* SwiftWebViewController.swift in Sources */,
+				0798C48F2651CCA335E5ED10A132306B /* SwiftWindow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -576,83 +576,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		28B48AA457C92F8E0E770D3C3C1AB054 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 973C9264F3CEF553392A338E188D3E72 /* LXSwiftFoundation.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = NO;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GCC_PREFIX_HEADER = "Target Support Files/LXSwiftFoundation/LXSwiftFoundation-prefix.pch";
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "Target Support Files/LXSwiftFoundation/LXSwiftFoundation-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/LXSwiftFoundation/LXSwiftFoundation.modulemap";
-				PRODUCT_MODULE_NAME = LXSwiftFoundation;
-				PRODUCT_NAME = LXSwiftFoundation;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_INSTALL_OBJC_HEADER = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		45436B52DAE7455584FFD362B1032373 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EA636A12F3C529F47EF02F15967C9723 /* LXSwiftFoundation.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = NO;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GCC_PREFIX_HEADER = "Target Support Files/LXSwiftFoundation/LXSwiftFoundation-prefix.pch";
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "Target Support Files/LXSwiftFoundation/LXSwiftFoundation-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/LXSwiftFoundation/LXSwiftFoundation.modulemap";
-				PRODUCT_MODULE_NAME = LXSwiftFoundation;
-				PRODUCT_NAME = LXSwiftFoundation;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_INSTALL_OBJC_HEADER = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		51F5E47232AAF696DFB0746BCDEA3A73 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3507C175AA59B9EDEC77084089B77AB7 /* Pods-LXSwiftFoundationModule.release.xcconfig */;
@@ -752,6 +675,85 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		5C043549366B91F7899AA848F7A4D5E5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 973C9264F3CEF553392A338E188D3E72 /* LXSwiftFoundation.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_PREFIX_HEADER = "Target Support Files/LXSwiftFoundation/LXSwiftFoundation-prefix.pch";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Target Support Files/LXSwiftFoundation/LXSwiftFoundation-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/LXSwiftFoundation/LXSwiftFoundation.modulemap";
+				PRODUCT_MODULE_NAME = LXSwiftFoundation;
+				PRODUCT_NAME = LXSwiftFoundation;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		76068F0CDBE7B09F973BA85076785E81 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EA636A12F3C529F47EF02F15967C9723 /* LXSwiftFoundation.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_PREFIX_HEADER = "Target Support Files/LXSwiftFoundation/LXSwiftFoundation-prefix.pch";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Target Support Files/LXSwiftFoundation/LXSwiftFoundation-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/LXSwiftFoundation/LXSwiftFoundation.modulemap";
+				PRODUCT_MODULE_NAME = LXSwiftFoundation;
+				PRODUCT_NAME = LXSwiftFoundation;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -866,8 +868,8 @@
 		314274E8AECDE1952D794B4C5CABD925 /* Build configuration list for PBXNativeTarget "LXSwiftFoundation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				28B48AA457C92F8E0E770D3C3C1AB054 /* Debug */,
-				45436B52DAE7455584FFD362B1032373 /* Release */,
+				5C043549366B91F7899AA848F7A4D5E5 /* Debug */,
+				76068F0CDBE7B09F973BA85076785E81 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

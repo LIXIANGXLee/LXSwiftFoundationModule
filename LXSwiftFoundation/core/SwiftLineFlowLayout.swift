@@ -29,13 +29,13 @@ public protocol SwiftLineFlowLayoutDelegate: AnyObject {
     
     // MARK: - 私有属性
     
-    /// 当前居中的单元格索引
+    /// 当前居中的单元格索引（避免重复回调）
     private var currentCenteredIndex: Int = 0
     
-    /// 缩放系数（距离中心越远，缩放比例越小）
+    /// 缩放系数（距离中心越远，缩放比例越小，取值范围0.0~1.0）
     private let scaleFactor: CGFloat = 0.3
     
-    /// 最小行间距（这里设置为0以实现紧密排列）
+    /// 最小行间距（设置为0实现紧密排列）
     private let minimumLineSpacingValue: CGFloat = 0
     
     // MARK: - 布局准备
@@ -44,17 +44,26 @@ public protocol SwiftLineFlowLayoutDelegate: AnyObject {
     open override func prepare() {
         super.prepare()
         
-        // 配置基础布局参数
+        // 1. 配置滚动方向为水平
         scrollDirection = .horizontal
+        
+        // 2. 设置单元格最小间距为0（紧密排列）
         minimumLineSpacing = minimumLineSpacingValue
         
-        // 计算并设置左右边距使内容居中
+        // 3. 计算并设置左右边距使内容居中
         guard let collectionView = collectionView else { return }
-        let horizontalInset = max(0, (collectionView.frame.width - itemSize.width) * 0.5)
+        
+        // 确保itemSize有有效值（默认使用100防止除0错误）
+        let itemWidth = itemSize.width > 0 ? itemSize.width : 100
+        
+        // 计算水平边距 = (屏幕宽度 - 单元格宽度) / 2
+        let horizontalInset = max(0, (collectionView.frame.width - itemWidth) * 0.5)
+        
+        // 4. 设置sectionInset确保内容居中显示（保留原有top/bottom值）
         sectionInset = UIEdgeInsets(
-            top: 0,
+            top: sectionInset.top,
             left: horizontalInset,
-            bottom: 0,
+            bottom: sectionInset.bottom,
             right: horizontalInset
         )
     }
@@ -63,30 +72,43 @@ public protocol SwiftLineFlowLayoutDelegate: AnyObject {
     
     /// 返回指定矩形区域内所有元素的布局属性（添加缩放效果）
     open override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        // 获取父类计算的布局属性
+        // 1. 获取父类计算的布局属性
         guard let collectionView = collectionView,
               let attributesArray = super.layoutAttributesForElements(in: rect) else {
             return nil
         }
         
-        // 计算当前视图中心点（考虑滚动偏移）
+        // 2. 计算当前可视区域中心点（考虑滚动偏移）
         let visibleCenterX = collectionView.contentOffset.x + collectionView.bounds.width / 2
         
-        // 对每个属性应用缩放变换
-        return attributesArray.map { attributes in
-            let attributesCopy = attributes.copy() as! UICollectionViewLayoutAttributes
-            // 计算与中心的水平偏移量
-            let xOffset = abs(attributesCopy.center.x - visibleCenterX)
-            // 根据偏移量计算缩放比例
-            let scale = 1 - (xOffset / collectionView.bounds.width) * scaleFactor
-            attributesCopy.transform = CGAffineTransform(scaleX: scale, y: scale)
-            return attributesCopy
+        // 3. 对每个单元格应用缩放变换
+        return attributesArray.map { originalAttributes in
+            // 创建属性副本（避免修改原始属性）
+            let attributes = originalAttributes.copy() as! UICollectionViewLayoutAttributes
+            
+            // 计算单元格中心与屏幕中心的水平距离
+            let distanceToCenter = abs(attributes.center.x - visibleCenterX)
+            
+            /* 缩放比例计算逻辑：
+               - 当单元格位于中心时：distance=0 → scale=1.0（原始大小）
+               - 当单元格位于屏幕边缘时：distance=collectionView.width/2 → scale=1-scaleFactor
+               - 缩放曲线：线性递减
+             */
+            let scale = max(0, 1 - (distanceToCenter / collectionView.bounds.width) * scaleFactor)
+            
+            // 应用缩放变换
+            attributes.transform = CGAffineTransform(scaleX: scale, y: scale)
+            
+            // 设置层级（中心单元格显示在最前面）
+            attributes.zIndex = Int(scale * 1000)  // 根据缩放值生成zIndex
+            
+            return attributes
         }
     }
     
     // MARK: - 滚动位置调整
     
-    /// 计算滚动停止时的目标位置（使最近单元格居中）
+    /// 计算滚动停止时的目标位置（自动吸附到最近的单元格）
     open override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint,
                                         withScrollingVelocity velocity: CGPoint) -> CGPoint {
         guard let collectionView = collectionView else {
@@ -94,7 +116,7 @@ public protocol SwiftLineFlowLayoutDelegate: AnyObject {
                                           withScrollingVelocity: velocity)
         }
         
-        // 计算目标显示区域
+        // 1. 确定目标显示区域（使用collectionView的bounds）
         let targetRect = CGRect(
             x: proposedContentOffset.x,
             y: 0,
@@ -102,30 +124,36 @@ public protocol SwiftLineFlowLayoutDelegate: AnyObject {
             height: collectionView.bounds.height
         )
         
-        // 获取目标区域内的布局属性
+        // 2. 获取目标区域内的布局属性
         guard let attributes = super.layoutAttributesForElements(in: targetRect) else {
             return proposedContentOffset
         }
         
-        // 计算目标中心点
+        // 3. 计算目标中心点（屏幕中心）
         let targetCenterX = proposedContentOffset.x + collectionView.bounds.width / 2
         
-        // 寻找最近的单元格
+        // 4. 寻找最近的单元格
         var closestAttribute: UICollectionViewLayoutAttributes?
-        var minDistance = CGFloat.greatestFiniteMagnitude
+        var minDistance = CGFloat.greatestFiniteMagnitude  // 初始设为最大浮点数
         
         for attribute in attributes {
+            // 计算单元格中心与目标中心的绝对距离
             let distance = abs(attribute.center.x - targetCenterX)
+            
+            // 更新最小距离和最近单元格
             if distance < minDistance {
                 minDistance = distance
                 closestAttribute = attribute
             }
         }
         
-        // 调整contentOffset使单元格居中
+        // 5. 调整contentOffset使最近的单元格居中
         if let closestAttribute = closestAttribute {
+            // 计算需要调整的偏移量：单元格中心X - 屏幕中心X
+            let adjustedOffsetX = closestAttribute.center.x - collectionView.bounds.width / 2
+            
             return CGPoint(
-                x: closestAttribute.center.x - collectionView.bounds.width / 2,
+                x: adjustedOffsetX,
                 y: proposedContentOffset.y
             )
         }
@@ -133,25 +161,39 @@ public protocol SwiftLineFlowLayoutDelegate: AnyObject {
         return proposedContentOffset
     }
     
-    // MARK: - 布局失效判断
+    // MARK: - 布局失效处理
     
-    /// 判断是否需要更新布局（检测当前居中单元格）
+    /// 当边界改变时判断是否需要重新布局（检测当前居中单元格变化）
     open override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         guard let collectionView = collectionView else { return true }
         
-        // 计算当前可见区域中心点
-        let currentCenterX = collectionView.contentOffset.x + collectionView.bounds.width / 2
-        let currentCenterY = collectionView.contentOffset.y + collectionView.bounds.height / 2
-        let currentCenter = CGPoint(x: currentCenterX, y: currentCenterY)
+        // 1. 计算当前可见区域中心点
+        let visibleCenterX = collectionView.contentOffset.x + collectionView.bounds.width / 2
         
-        // 获取中心点对应的索引
-        if let indexPath = collectionView.indexPathForItem(at: currentCenter),
-           indexPath.item != currentCenteredIndex {
-            currentCenteredIndex = indexPath.item
+        // 2. 获取当前可见区域的布局属性
+        guard let attributes = layoutAttributesForElements(in: newBounds) else {
+            return super.shouldInvalidateLayout(forBoundsChange: newBounds)
+        }
+        
+        // 3. 寻找距离中心最近的单元格
+        var closestIndex: Int?
+        var minDistance = CGFloat.greatestFiniteMagnitude
+        
+        for attribute in attributes {
+            let distance = abs(attribute.center.x - visibleCenterX)
+            if distance < minDistance {
+                minDistance = distance
+                closestIndex = attribute.indexPath.item
+            }
+        }
+        
+        // 4. 检测中心索引变化并通知代理
+        if let closestIndex = closestIndex, closestIndex != currentCenteredIndex {
+            currentCenteredIndex = closestIndex
             delegate?.lineFlowLayout?(self, currentCenteredIndex)
         }
         
-        // 继承父类的失效判断逻辑
+        // 5. 继承父类的布局失效判断（通常需要重新计算布局属性）
         return super.shouldInvalidateLayout(forBoundsChange: newBounds)
     }
 }
