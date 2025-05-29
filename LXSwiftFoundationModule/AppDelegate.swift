@@ -27,9 +27,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SwiftUserDefaults[AppSettings.userToken] = "a1b2c3d4"
 
         SwiftUserDefaults[AppSettings.darkModeEnabled] = "ewewewewew"
+        let imageStr = UIImage(named: "timg")?.lx.base64EncodingImageString ?? ""
+        SwiftLog.log(imageStr);
+        SwiftLog.log(imageStr.lx.base64DecodingImage);
 
+        let aaa = "asd".lx.base64EncodingString ?? ""
+        SwiftLog.log(aaa);
         
-        
+        SwiftLog.log(aaa.lx.base64DecodingString);
+
         return true
     }
 }
