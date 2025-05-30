@@ -32,14 +32,14 @@ class WebViewController: SwiftWebViewController {
         
         let imgView = UIImageView(frame: CGRect(x: 100, y: 100, width: 260, height: 500))
         imgView.contentMode = .scaleAspectFit
+        imgView.backgroundColor = UIColor.red
         view.addSubview(imgView)
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 10) {
-            
-            self.webView.lx.snapShotContentScroll { (image) in
+            self.webView.scrollView.lx.captureScrollContentShot(completionHandler: { image in
                 imgView.image = image
 
-            }
+            })
         }
     }
 

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 /// Define protocol
 public protocol SwiftCompatible {
@@ -72,3 +73,5 @@ extension CGFloat: SwiftCompatible { }
 extension Double: SwiftCompatible { }
 extension Int: SwiftCompatible { }
 extension String: SwiftCompatible { }
+extension AVAsset: SwiftCompatible { }
+extension NotificationCenter: SwiftCompatible { }

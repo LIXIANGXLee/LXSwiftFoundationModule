@@ -176,7 +176,9 @@ extension UIColor {
         
         // 处理短格式 (如"FFF")
         if processedHex.count == 3 {
-            processedHex = processedHex.map { String(repeating: $0, count: 2) }.joined()
+            processedHex = processedHex.map {
+                String(repeating: $0, count: 2)
+            }.joined()
         }
         
         // 验证标准长度

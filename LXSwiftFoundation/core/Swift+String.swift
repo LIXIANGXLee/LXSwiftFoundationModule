@@ -9,6 +9,13 @@
 import UIKit
 import CommonCrypto
 
+/// 版本比较结果枚举
+public enum CompareResult: Int {
+    case big = 1     /// 版本大于目标版本
+    case equal = 0   /// 版本等于目标版本
+    case small = -1  /// 版本小于目标版本
+}
+
 /// Switch 的匹配模式，匹配字符串开头 是否包含此字符串
 public func has_prefix(_ prefix: String) -> ((String) -> (Bool)) {
     { $0.hasPrefix(prefix) }
@@ -168,6 +175,27 @@ extension SwiftBasics where Base == String {
     public func height(font: UIFont, width: CGFloat) -> CGFloat {
         self.size(font: font, width: width).height
     }
+    
+
+    // MARK: - 版本比较
+    
+    /// 比较两个语义化版本号 (Semantic Versioning)
+    /// - Parameters:
+    ///   - v1: 版本号字符串1 (格式: "主版本.次版本.修订号")
+    ///   - v2: 版本号字符串2
+    /// - Returns: 比较结果枚举值
+    ///
+    /// 示例:
+    ///   versionCompareSwift(v1: "2.3.1", v2: "2.1.4") -> .big
+    public static func versionCompareSwift(v1: String, v2: String) -> CompareResult {
+        
+        let result = v1.compare(v2, options: .numeric);
+        switch result {
+        case .orderedAscending: return CompareResult.small
+        case .orderedSame: return CompareResult.equal
+        case .orderedDescending: return CompareResult.big
+        }
+    }
 }
 
 // MARK: - 字符串匹配功能扩展 (超链接、电话号码、表情符号等)
@@ -318,16 +346,40 @@ extension SwiftBasics where Base == String {
             return nil
         }
     }
-    
-    /// 将中文字符串转换为拼音
-    /// - 返回值: 转换后的拼音字符串（不带音标和空格）
+
+    /// 将中文字符串转换为拼音（无音标、无空格）
+    /// - 返回值: 转换后的拼音字符串（小写字母连续拼接）
     public var toPinYin: String {
+        // 1. 空字符串快速返回
+        guard !base.isEmpty else { return "" }
+        
+        // 2. 创建可变字符串用于转换操作
         let mutableString = NSMutableString(string: base)
-        // 转换为拉丁字母
+        
+        // 3. 第一阶段转换：汉字转拉丁字母（含音标）
+        // 参数说明：
+        // - mutableString: 输入/输出的字符串
+        // - nil: 转换范围指针（默认整个字符串）
+        // - kCFStringTransformToLatin: 转换为拉丁字母的转换标识
+        // - false: 不逆向转换
         CFStringTransform(mutableString, nil, kCFStringTransformToLatin, false)
-        // 去除音标
+        
+        // 4. 第二阶段转换：去除音调符号
+        // 参数说明：
+        // - kCFStringTransformStripDiacritics: 去除变音符号的转换标识
         CFStringTransform(mutableString, nil, kCFStringTransformStripDiacritics, false)
-        return String(mutableString).replacingOccurrences(of: " ", with: "")
+        
+        // 5. 转换为标准String类型
+        let converted = String(mutableString)
+        
+        // 6. 清理操作：
+        // - 移除所有空格（拼音间原有空格）
+        // - 转换为小写字母（保证拼音统一格式）
+        // - 过滤非字母字符（处理转换产生的特殊字符）
+        return converted
+            .replacingOccurrences(of: " ", with: "")  // 移除拼音间的空格
+            .lowercased()                             // 统一转换为小写
+            .filter { $0.isLetter }                   // 过滤保留字母字符
     }
     
     /// 检查字符串是否包含表情符号
@@ -349,25 +401,24 @@ extension SwiftBasics where Base == String {
         return false
     }
     
-    /// 比较版本号
-    /// - 参数 version: 要比较的版本号字符串
-    /// - 返回值: 比较结果枚举(.big, .small, .equal)
-    public func compareVersion(with version: String) -> SwiftUtils.CompareResult {
-        SwiftUtils.versionCompareSwift(v1: base, v2: version)
-    }
-    
     /// 格式化小数字符串，保留指定小数位数
     /// - 参数 digits: 要保留的小数位数
+    ///   - mode: 舍入模式 (默认向下取整)
     /// - 返回值: 格式化后的字符串
-    public func formatDecimalString(by digits: Int) -> String {
-        guard let mValue = Double(base) else {
+    public func formatDecimalString(by digits: Int,
+                                    mode: NumberFormatter.RoundingMode = .down) -> String {
+        // 1. 清理输入字符串
+        let cleanText = base
+            .replacingOccurrences(of: ",", with: "")
+            .trimmingCharacters(in: .whitespaces)
+        
+        // 2. 验证并转换数值
+        guard !cleanText.isEmpty, let value = Double(cleanText) else {
             return base
         }
         
-        let number = NSNumber(value: mValue)
-        return number.lx.numberFormatter(with: .down,
-                                       minDigits: digits,
-                                       maxDigits: digits) ?? base
+       // 配置数字格式化器 返回格式化结果
+        return NSNumber(value: value).lx.numberFormatter(with: mode, minDigits: digits, maxDigits: digits) ?? base
     }
     
     /// 将文件大小字符串格式化为更易读的格式 (GB, MB, KB, B)
@@ -522,41 +573,222 @@ extension SwiftBasics where Base == String {
     /// 将字符串进行Base64编码
     /// - 返回值: Base64编码后的字符串，如果编码失败返回nil
     public var base64EncodingString: String? {
-        guard let utf8EncodeData = base.data(using: .utf8,
-                allowLossyConversion: true) else {
+        // 步骤1：将原始字符串转换为UTF8编码的Data对象
+        // 使用allowLossyConversion: true参数允许转换时丢弃无法编码的字符（替换为UTF8替换字符U+FFFD）
+        guard let utf8EncodeData = base.data(
+            using: .utf8,
+            allowLossyConversion: true
+        ) else {
+            // 转换失败时返回nil（通常因编码问题导致）
             return nil
         }
-        return utf8EncodeData.base64EncodedString(options: .init(rawValue: 0))
+        
+        // 步骤2：将UTF8编码的Data对象进行Base64编码
+        // 使用options: .init(rawValue: 0)表示默认编码选项（无换行/填充等特殊处理）
+        let base64String = utf8EncodeData.base64EncodedString(
+            options: .init(rawValue: 0)
+        )
+        
+        return base64String
     }
     
-    /// 将Base64编码的字符串解码
-    /// - 返回值: 解码后的原始字符串，如果解码失败返回nil
+    /// 将Base64编码的字符串解码为原始字符串
+    /// - 返回值: 解码后的原始字符串（UTF-8编码），如果输入非合法Base64字符串或解码后非有效UTF-8数据则返回nil
     public var base64DecodingString: String? {
-        guard let utf8DecodedData = Data(base64Encoded: base, options: .init(rawValue: 0)) else {
+        // 步骤1：尝试将Base64字符串解码为Data对象
+        // 使用默认解码选项（.ignoreUnknownCharacters），自动忽略非法字符（如换行符、空格等）
+        guard let decodedData = Data(base64Encoded: base, options: .ignoreUnknownCharacters) else {
+            // 输入字符串不符合Base64规范（长度非法/包含非法字符）
             return nil
         }
-        return String(data: utf8DecodedData, encoding: .utf8)
+        
+        // 步骤2：将解码后的二进制数据转换为UTF-8字符串
+        // 注意：此操作假设原始编码为UTF-8，若原始数据非文本或使用其他编码（如GBK/ASCII）可能失败
+        guard let decodedString = String(data: decodedData, encoding: .utf8) else {
+            // 解码后的二进制数据不符合UTF-8编码规范
+            return nil
+        }
+        
+        return decodedString
     }
     
-    /// 将Base64编码的图片字符串转换为UIImage
-    /// - 返回值: 解码后的UIImage，如果解码失败返回nil
-    public var base64EncodingImage: UIImage? {
-        guard let base64Data = Data(base64Encoded: base, options: .ignoreUnknownCharacters) else {
+    /*// 含URL头的多行Base64字符串
+     let base64String = """
+     data:image/png;base64,
+     iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAAXNSR0IArs4c6QAAAARnQU1BAACx
+     jwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAu
+     MTnU1rJkAAAAi0lEQVRIie2VMQqAMAwFfYGcexQv4Ik8goJgq1YQ3JS2KbgYB7+0UAr5L1BC0Lz0
+     pdC0EBERERERERERERGRf+IFKAAWcCKsAcuZcG1M6N1F2CxPwsQ+wiY1QbCbMNhMEGwjCLYQBNsH
+     wvZ9sH0fbN8H2/fB9n2wfR9s3wf8H0BERERERERERERERERERERERP6UD8koxSuBzQMSAAAAAElF
+     TkSuQmCC
+     """
+
+     // 自动处理URL头和多行格式
+     let image = base64String.base64DecodingImage*/
+    
+    /// 将Base64编码的字符串解码为UIImage对象
+    public var base64DecodingImage: UIImage? {
+        // 0. 预处理：移除Base64字符串中的URL头标识（如"data:image/png;base64,"）和非法字符
+        // - 截取逗号后的有效数据部分（常见于Web传输的Base64格式）
+        // - 过滤换行符/空格等干扰字符（确保符合Base64规范）
+        let processedBase = base
+            .components(separatedBy: ",")  // 分割可能存在的URL头标识
+            .last?                         // 取最后部分（有效数据）
+            .filter { !$0.isWhitespace } ?? base  // 过滤空白字符，保底使用原字符串
+        
+        // 1. Base64字符串解码为Data对象
+        guard let base64Data = Data(
+            base64Encoded: processedBase,
+            options: .ignoreUnknownCharacters  // 关键容错选项：忽略非法字符（如换行符/特殊符号）
+        ) else {
+            // 解码失败可能原因：
+            // - 字符串包含非Base64字符（字母表外字符）
+            // - 字符串长度不是4的整数倍（Base64规范要求）
+            // - 填充字符'='位置错误
             return nil
         }
+        
+        // 2. 二进制数据转UIImage对象
+        // 注意：可能因以下原因失败：
+        //   - 数据实际格式与声明不符（如声明PNG实际是JPG）
+        //   - 图片文件头损坏或数据截断
+        //   - 系统不支持该图片格式（如WebP需额外支持）
+        //   - 内存不足（超大图片）
         return UIImage(data: base64Data)
     }
     
-    /// 对URL字符串进行编码
-    /// - 返回值: 编码后的URL字符串，如果编码失败返回空字符串
-    public var urlEncoded: String {
-        base.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+    /// 生成高清晰度二维码图片
+    /// - Parameters:
+    ///   - size: 生成图片的边长，单位：点（默认800px）
+    /// - Returns: 生成的二维码图片 (失败返回nil)
+    ///
+    /// 特性说明：
+    /// 1. 使用"H"级容错率（约30%纠错能力）
+    /// 2. 采用最近邻插值算法保持边缘锐利
+    /// 3. 显式处理颜色空间确保跨平台兼容性
+    public func createQrCodeImage(size: CGFloat = 800) -> UIImage? {
+        // 确保原始字符串非空
+        guard !base.isEmpty else {
+            SwiftLog.log("⚠️ 二维码生成失败：输入内容为空")
+            return nil
+        }
+        
+        // 使用系统内置的二维码生成过滤器
+        guard let filter = CIFilter(name: "CIQRCodeGenerator") else {
+            SwiftLog.log("❌ 二维码生成失败：CIQRCodeGenerator过滤器不可用")
+            return nil
+        }
+        
+        // 将字符串转为UTF8编码的二进制数据
+        guard let inputData = base.data(using: .utf8) else {
+            SwiftLog.log("❌ 二维码生成失败：字符串编码转换失败")
+            return nil
+        }
+        
+        // 设置输入信息
+        filter.setValue(inputData, forKey: "inputMessage")
+        // 设置容错级别为最高（H级，30%纠错能力）
+        filter.setValue("H", forKey: "inputCorrectionLevel")
+        
+        // 获取未缩放的CIImage对象
+        guard let outputImage = filter.outputImage else {
+            SwiftLog.log("❌ 二维码生成失败：过滤器未输出图像")
+            return nil
+        }
+        
+        // 原始二维码图像尺寸（通常较小，如33x33）
+        let originalSize = outputImage.extent.size
+        // 计算目标尺寸到原始尺寸的缩放比例
+        let scale = size / originalSize.width
+        
+        // 使用仿射变换进行缩放
+        let transformedImage = outputImage.transformed(
+            by: CGAffineTransform(scaleX: scale, y: scale)
+        )
+        
+        // 创建Core Image上下文（使用GPU加速）
+        let context: CIContext
+        if let metalDevice = MTLCreateSystemDefaultDevice() {
+            // 优先使用Metal硬件加速
+            context = CIContext(mtlDevice: metalDevice)
+        } else {
+            // 回退到软件渲染
+            context = CIContext(options: [CIContextOption.useSoftwareRenderer: false])
+        }
+        
+        // 创建RGB颜色空间（确保跨平台兼容性）
+        guard let colorSpace = CGColorSpace(name: CGColorSpace.sRGB) else {
+            SwiftLog.log("❌ 二维码生成失败：颜色空间创建失败")
+            return nil
+        }
+        
+        // 渲染CoreImage到CGImage（关键步骤：提高清晰度）
+        guard let cgImage = context.createCGImage(
+            transformedImage,
+            from: transformedImage.extent,
+            format: .RGBA8,
+            colorSpace: colorSpace
+        ) else {
+            SwiftLog.log("❌ 二维码生成失败：CGImage渲染失败")
+            return nil
+        }
+        
+        // 注意：此处使用init(cgImage:)保持图像方向正确
+        return UIImage(cgImage: cgImage)
     }
     
-    /// 对URL字符串进行解码
-    /// - 返回值: 解码后的原始URL字符串，如果解码失败返回空字符串
+    /// 对URL字符串进行百分比编码
+    ///
+    /// 此计算属性将原始字符串转换为符合URL规范的格式，主要处理以下情况：
+    /// 1. 将非ASCII字符（如中文）转换为`%`编码格式
+    /// 2. 保留URL查询字符串允许的合法字符集
+    /// 3. 处理空格、特殊符号等需要转义的字符
+    ///
+    /// 编码规则说明：
+    /// - 使用系统提供的URL查询字符集（.urlQueryAllowed）作为允许保留的字符
+    /// - 该字符集包含：字母数字字符（A-Z/a-z/0-9）、连字符（-）、下划线（_）、点（.）、波浪线（~）
+    /// - 其他字符均会被转换为`%`后跟两位十六进制数的形式
+    ///
+    /// 示例：
+    ///   "搜索 terms!&" 编码后 → "搜索%20terms!%26"
+    ///   "price=$100&discount=50%" 编码后 → "price%3D%24100%26discount%3D50%25"
+    ///
+    /// - 返回值: 安全合法的URL编码字符串，若编码失败将返回空字符串（理论上不会发生，此处为安全处理）
+    public var urlEncoded: String {
+        // 使用系统预定义的URL查询允许字符集进行编码
+        // 注意：此字符集不会编码保留字符（如：?、&、=），适合查询参数使用
+        let encodedString = base.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        
+        // 空值保护：理论上仅当字符串包含非法UTF8序列时返回nil，此时返回安全空字符串
+        return encodedString ?? ""
+    }
+    
+    /// 对URL字符串进行百分比解码
+    /// - 说明:
+    ///   1. 此方法用于处理URL中经过百分比编码(%xx格式)的字符串
+    ///   2. 解码规则遵循RFC 3986标准，将%xx格式的序列转换为原始字符
+    ///   3. 支持解码多字节字符（如中文）和特殊符号
+    /// - 返回值:
+    ///   - 成功: 返回解码后的原始字符串
+    ///   - 失败: 当遇到无效百分比编码序列时返回空字符串
+    /// - 注意事项:
+    ///   1. 若字符串不包含百分号编码，将原样返回原始内容
+    ///   2. 百分号后必须跟随两个十六进制数字（0-9, A-F, a-f）
+    ///   3. 空字符串或全空格的输入将直接返回原值
+    ///   4. 主要应用场景：处理URL参数、路径片段等需要还原原始字符的场景
     public var urlDecoded: String {
-        base.removingPercentEncoding ?? ""
+        // 使用系统API进行百分比解码
+        // removingPercentEncoding 方法特性：
+        //   - 自动识别%xx格式的编码序列
+        //   - 遇到无效编码（如%后非十六进制字符、不完整编码）时返回nil
+        //   - 保留未编码部分的原始内容
+        guard let decodedString = base.removingPercentEncoding else {
+            // 解码失败处理（包含以下情况）：
+            //   - 字符串包含非法百分比序列（例如"%G"、"%%"）
+            //   - 百分比编码格式错误（如"%A"不完整）
+            return ""
+        }
+        return decodedString
     }
 }
 
@@ -656,28 +888,64 @@ extension SwiftBasics where Base == String {
         }
         return []
     }
-    
-    /// 使用正则表达式匹配字符串
+
+    /// 使用正则表达式匹配当前字符串
     /// - 参数:
-    ///   - pattern: 正则表达式模式
-    ///   - options: 正则表达式选项 (默认不区分大小写)
-    /// - 返回值: 匹配结果数组，如果没有匹配返回nil
-    public func matching(pattern: String, options: NSRegularExpression.Options = .caseInsensitive) -> [NSTextCheckingResult]? {
-        let regex = try? NSRegularExpression(pattern: pattern, options: [])
-        return regex?.matches(in: base,
-                              options: .init(rawValue: 0),
-                              range: NSRange(location: 0, length: base.count))
+    ///   - pattern: 正则表达式模式字符串
+    ///   - options: 正则表达式选项，默认为 `.caseInsensitive` (不区分大小写)
+    /// - 返回值:
+    ///     - 成功: 包含所有匹配结果的数组 `[NSTextCheckingResult]`
+    ///     - 失败: 当正则表达式编译失败时返回 `nil`
+    /// - 注意:
+    ///     1. 当正则表达式模式无效时会静默失败（返回 nil）
+    ///     2. 匹配范围覆盖整个字符串（从起始位置到末尾）
+    ///     3. 默认启用不区分大小写匹配，可通过 options 参数修改
+    public func matching(
+        pattern: String,
+        options: NSRegularExpression.Options = .caseInsensitive
+    ) -> [NSTextCheckingResult]? {
+        // 尝试编译正则表达式（使用传入的选项）
+        // 使用 try? 避免抛出异常，编译失败时返回 nil
+        guard let regex = try? NSRegularExpression(
+            pattern: pattern,
+            options: options
+        ) else {
+            // 正则表达式模式无效，返回 nil
+            return nil
+        }
+        
+        // 在整个字符串范围内执行匹配
+        let fullRange = NSRange(
+            location: 0,
+            length: base.count
+        )
+        
+        // 返回所有匹配结果（可能为空数组表示无匹配）
+        return regex.matches(
+            in: base,
+            options: [],          // 匹配选项使用默认值
+            range: fullRange      // 指定完整匹配范围
+        )
     }
 }
 
 /// 内部使用的扩展方法
 extension String {
     
-    /// 内部方法: 通过整数范围截取子字符串
+    /// 通过整数范围截取字符串的子串（左闭右开区间）
+    /// - 注意：索引越界会触发运行时错误！调用者需确保范围在有效区间内 [0, count]
     fileprivate subscript (_ r: Range<Int>) -> String {
         get {
+            // 计算起始索引：从字符串头部偏移 r.lowerBound 个字符位置
+            // ⚠️ 如果 r.lowerBound 超过字符串长度，会导致崩溃
             let startIndex = index(self.startIndex, offsetBy: r.lowerBound)
+            
+            // 计算结束索引：从字符串头部偏移 r.upperBound 个字符位置
+            // ⚠️ 如果 r.upperBound 超过字符串长度，会导致崩溃
             let endIndex = index(self.startIndex, offsetBy: r.upperBound)
+            
+            // 截取子字符串（遵循Swift标准左闭右开规则）
+            // 示例：str[2..<5] 实际截取第2、3、4三个字符
             return String(self[startIndex..<endIndex])
         }
     }

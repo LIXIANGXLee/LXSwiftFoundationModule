@@ -8,8 +8,6 @@
 
 import UIKit
 
-private let fileManagerDefault = FileManager.default
-
 extension FileManager: SwiftCompatible {
     /// 文件类型枚举
     public enum FileType {
@@ -30,7 +28,7 @@ extension SwiftBasics where Base: FileManager {
     
     /// 获取缓存目录的URL
     public static var cachesURL: URL? {
-        fileManagerDefault.urls(for: .cachesDirectory, in: .userDomainMask).last
+        FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).last
     }
     
     /// 获取缓存目录的路径字符串
@@ -40,7 +38,7 @@ extension SwiftBasics where Base: FileManager {
     
     /// 获取文档目录的URL
     public static var documentURL: URL? {
-        fileManagerDefault.urls(for: .documentDirectory, in: .userDomainMask).last
+        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last
     }
     
     /// 获取文档目录的路径字符串
@@ -50,7 +48,7 @@ extension SwiftBasics where Base: FileManager {
     
     /// 获取Library目录的URL
     public static var libraryURL: URL? {
-        fileManagerDefault.urls(for: .libraryDirectory, in: .userDomainMask).last
+        FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).last
     }
     
     /// 获取Library目录的路径字符串
@@ -75,7 +73,7 @@ extension SwiftBasics where Base: FileManager {
         
         do {
             // 创建目录，withIntermediateDirectories为true表示自动创建中间目录
-            try fileManagerDefault.createDirectory(
+            try FileManager.default.createDirectory(
                 atPath: path,
                 withIntermediateDirectories: true,
                 attributes: nil
@@ -103,13 +101,43 @@ extension SwiftBasics where Base: FileManager {
         }
         
         // 创建空文件
-        let isSuccess = fileManagerDefault.createFile(
+        let isSuccess = FileManager.default.createFile(
             atPath: path,
             contents: nil,
             attributes: nil
         )
         block?(isSuccess)
         return isSuccess
+    }
+    
+    /// 从Plist文件路径读取字典数据
+    /// - Parameter path: plist文件绝对路径
+    /// - Returns: 解析后的字典 (失败返回nil)
+    ///
+    /// 注意: 文件需为有效的Property List格式
+    public static func readDictionary(from path: String) -> [String: Any]? {
+        // 1. 验证文件存在性
+        guard !isFileExists(atPath: path) else {
+            // 文件已存在，直接返回成功
+           
+            return nil
+        }
+        
+        do {
+            // 2. 读取文件数据
+            let data = try Data(contentsOf: URL(fileURLWithPath: path))
+            
+            // 3. 反序列化Property List
+            return try PropertyListSerialization.propertyList(
+                from: data,
+                options: [],
+                format: nil
+            ) as? [String: Any]
+        } catch {
+            // 4. 错误处理
+            SwiftLog.log("Plist文件读取失败: \(error.localizedDescription)")
+            return nil
+        }
     }
     
     /// 删除目录
@@ -126,7 +154,7 @@ extension SwiftBasics where Base: FileManager {
         }
         
         do {
-            try fileManagerDefault.removeItem(atPath: path)
+            try FileManager.default.removeItem(atPath: path)
             block?(true)
             return true
         } catch {
@@ -150,7 +178,7 @@ extension SwiftBasics where Base: FileManager {
         }
         
         do {
-            try fileManagerDefault.removeItem(atPath: path)
+            try FileManager.default.removeItem(atPath: path)
             block?(true)
             return true
         } catch {
@@ -200,7 +228,7 @@ extension SwiftBasics where Base: FileManager {
         // 处理目标路径已存在的情况
         if isOverwrite && isFileExists(atPath: toFilePath) {
             do {
-                try fileManagerDefault.removeItem(atPath: toFilePath)
+                try FileManager.default.removeItem(atPath: toFilePath)
             } catch {
                 SwiftLog.log("删除已存在文件失败: \(error.localizedDescription)")
                 block?(false)
@@ -212,9 +240,9 @@ extension SwiftBasics where Base: FileManager {
         do {
             switch moveType {
             case .move:
-                try fileManagerDefault.moveItem(atPath: fromFilePath, toPath: toFilePath)
+                try FileManager.default.moveItem(atPath: fromFilePath, toPath: toFilePath)
             case .copy:
-                try fileManagerDefault.copyItem(atPath: fromFilePath, toPath: toFilePath)
+                try FileManager.default.copyItem(atPath: fromFilePath, toPath: toFilePath)
             }
             block?(true)
         } catch {
@@ -229,7 +257,7 @@ extension SwiftBasics where Base: FileManager {
     /// - Parameter path: 路径
     /// - Returns: 是否存在
     public static func isFileExists(atPath path: String) -> Bool {
-        fileManagerDefault.fileExists(atPath: path)
+        FileManager.default.fileExists(atPath: path)
     }
     
     /// 获取路径的父目录
@@ -253,7 +281,7 @@ extension SwiftBasics where Base: FileManager {
         guard isFileExists(atPath: folderPath) else {
             return nil
         }
-        return fileManagerDefault.enumerator(atPath: folderPath)?.allObjects
+        return FileManager.default.enumerator(atPath: folderPath)?.allObjects
     }
     
     /// 获取目录下所有文件和子目录的名称（非递归）
@@ -263,7 +291,7 @@ extension SwiftBasics where Base: FileManager {
         guard isFileExists(atPath: folderPath) else {
             return nil
         }
-        return fileManagerDefault.subpaths(atPath: folderPath)
+        return FileManager.default.subpaths(atPath: folderPath)
     }
     
     /// 获取目录下所有文件和子目录的完整路径（递归）
@@ -282,7 +310,7 @@ extension SwiftBasics where Base: FileManager {
     /// - Parameter path: 文件路径
     /// - Returns: 文件大小（字节）
     public static func fileSize(atPath path: String) -> Double {
-        guard let attr = try? fileManagerDefault.attributesOfItem(atPath: path) else {
+        guard let attr = try? FileManager.default.attributesOfItem(atPath: path) else {
             return 0
         }
         return Double(attr[FileAttributeKey.size] as? UInt64 ?? 0)

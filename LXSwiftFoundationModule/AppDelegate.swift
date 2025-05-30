@@ -30,11 +30,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let imageStr = UIImage(named: "timg")?.lx.base64EncodingImageString ?? ""
         SwiftLog.log(imageStr);
         SwiftLog.log(imageStr.lx.base64DecodingImage);
-
-        let aaa = "asd".lx.base64EncodingString ?? ""
-        SwiftLog.log(aaa);
+  
+        NotificationCenter.default.lx.observeDidBecomeActive(observer: self) { noti in
+            print("2121212121212121212observeDidBecomeActive")
+        }
         
-        SwiftLog.log(aaa.lx.base64DecodingString);
+        NotificationCenter.default.lx.observeWillResignActive(observer: self, handler: {noti in
+            print("2121212121212121212observeWillResignActive")
+        })
 
         return true
     }

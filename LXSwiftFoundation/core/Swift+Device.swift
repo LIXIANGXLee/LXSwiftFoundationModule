@@ -33,9 +33,7 @@ extension SwiftBasics where Base: UIDevice {
     }
     
     /// 获取设备系统版本（格式示例："15.4.1"）
-    public static var systemVersion: String {
-        UIDevice.current.systemVersion
-    }
+    public static var systemVersion: String { UIDevice.current.systemVersion }
     
     // MARK: - 存储空间信息
     
@@ -71,14 +69,10 @@ extension SwiftBasics where Base: UIDevice {
     // MARK: - 内存信息
     
     /// 获取设备物理内存总大小（单位：字节）
-    public static var memoryTotal: UInt64 {
-        ProcessInfo.processInfo.physicalMemory
-    }
+    public static var memoryTotal: UInt64 { ProcessInfo.processInfo.physicalMemory }
     
     // MARK: - 设备标识
     
     /// 获取设备类型标识（如 "iPhone"、"iPad"）
-    public static var deviceModel: String {
-        UIDevice.current.model
-    }
+    public static var deviceModel: String { UIDevice.current.model }
 }

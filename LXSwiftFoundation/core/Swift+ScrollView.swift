@@ -13,46 +13,8 @@ extension SwiftBasics where Base: UIScrollView {
  
     /// 截取滚动视图的全部内容（长截图）
     /// - Parameter callBack: 截图完成后的回调，返回生成的UIImage对象
-    public func snapShotContentScroll(callBack: @escaping (UIImage?) -> ()) {
-        base.snapShotContentScroll { image in
-            callBack(image)
-        }
-    }
-}
-
-// MARK: - UIScrollView 扩展方法
-extension SwiftBasics where Base: UIScrollView {
-    
-    /// 滚动到内容顶部
-    /// - Parameter animated: 是否使用动画效果，默认为true
-    public func scrollToTop(animated: Bool = true) {
-        var off = base.contentOffset
-        off.y = -base.contentInset.top  // 考虑内边距
-        base.setContentOffset(off, animated: animated)
-    }
-    
-    /// 滚动到内容底部
-    /// - Parameter animated: 是否使用动画效果，默认为true
-    public func scrollToBottom(animated: Bool = true) {
-        var off = base.contentOffset
-        off.y = base.contentSize.height - base.bounds.height + base.contentInset.bottom
-        base.setContentOffset(off, animated: animated)
-    }
-    
-    /// 滚动到内容最左侧
-    /// - Parameter animated: 是否使用动画效果，默认为true
-    public func scrollToLeft(animated: Bool = true) {
-        var off = base.contentOffset
-        off.x = -base.contentInset.left  // 考虑内边距
-        base.setContentOffset(off, animated: animated)
-    }
-    
-    /// 滚动到内容最右侧
-    /// - Parameter animated: 是否使用动画效果，默认为true
-    public func scrollToRight(animated: Bool = true) {
-        var off = base.contentOffset
-        off.x = base.contentSize.width - base.bounds.width + base.contentInset.right
-        base.setContentOffset(off, animated: animated)
+    public func captureScrollContentShot(completionHandler: @escaping (UIImage?) -> ()) {
+        base.captureScrollContentShot(completionHandler)
     }
 }
 
@@ -61,7 +23,7 @@ extension UIScrollView {
     
     /// 截取滚动视图的全部内容（长截图）
     /// - Parameter completionHandler: 截图完成后的回调，返回生成的UIImage对象
-    func snapShotContentScroll(_ completionHandler: @escaping (_ screenShotImage: UIImage?) -> Void) {
+   fileprivate func captureScrollContentShot(_ completionHandler: @escaping (_ screenShotImage: UIImage?) -> Void) {
         
         // 1. 先获取当前视图的快照
         guard let snapShotView = self.snapshotView(afterScreenUpdates: true) else {
@@ -87,14 +49,18 @@ extension UIScrollView {
         
         // 6. 开始分页截图（递归方法）
         self.snapShotContentScrollPage(index: 0, maxIndex: Int(page), callback: { [weak self] in
-            guard let strongSelf = self else { return }
-            
+            guard let self = self else { return }
+
             // 7. 从上下文中获取最终合成的图片
             let screenShotImage = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
+
+            defer {
+                // 确保结束时释放上下文
+                UIGraphicsEndImageContext()
+            }
             
             // 8. 恢复原始偏移量
-            strongSelf.setContentOffset(originOffset, animated: false)
+            self.setContentOffset(originOffset, animated: false)
             
             // 9. 移除快照视图
             snapShotView.removeFromSuperview()
@@ -109,23 +75,33 @@ extension UIScrollView {
     ///   - index: 当前页码
     ///   - maxIndex: 最大页码
     ///   - callback: 所有页截图完成后的回调
-    func snapShotContentScrollPage(index: Int, maxIndex: Int, callback: @escaping () -> Void) {
-        // 1. 滚动到当前页的位置
-        self.setContentOffset(CGPoint(x: 0, y: CGFloat(index) * self.frame.size.height), animated: false)
+    private func snapShotContentScrollPage(index: Int, maxIndex: Int, callback: @escaping () -> Void) {
         
-        // 2. 定义当前页的绘制区域
+        // 1. 滚动到当前页起始位置
+        let yOffset = CGFloat(index) * self.bounds.height
+        self.setContentOffset(CGPoint(x: 0, y: yOffset), animated: false)
+        
+        // 2. 计算当前页的实际高度（最后一页可能不足整屏）
+        let pageHeight: CGFloat
+        if index == maxIndex - 1 {
+            pageHeight = self.contentSize.height - yOffset
+        } else {
+            pageHeight = self.bounds.height
+        }
+        
+        // 3. 定义当前页的绘制区域
         let splitFrame = CGRect(x: 0,
                                 y: CGFloat(index) * self.frame.size.height,
                                 width: bounds.size.width,
-                                height: bounds.size.height)
+                                height: pageHeight)
         
-        // 3. 延迟0.3秒确保滚动完成
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            // 4. 将当前页的内容绘制到位图上下文中
+        // 4. 延迟0.1秒确保滚动完成
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            // 5. 将当前页的内容绘制到位图上下文中
             self.drawHierarchy(in: splitFrame, afterScreenUpdates: true)
             
-            // 5. 判断是否还有下一页需要截图
-            if index < maxIndex {
+            // 6. 判断是否还有下一页需要截图
+            if index < maxIndex - 1 {
                 // 递归调用，处理下一页
                 self.snapShotContentScrollPage(index: index + 1, maxIndex: maxIndex, callback: callback)
             } else {

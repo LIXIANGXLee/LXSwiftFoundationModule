@@ -77,18 +77,7 @@ extension SwiftBasics where Base: UIView {
     public static func openUrl(_ urlStr: String, completionHandler: ((Bool) -> Void)? = nil) {
         UIApplication.lx.openUrl(urlStr, completionHandler: completionHandler)
     }
-    
-    /// 注册应用进入前台的通知
-    /// - Parameter aSelector: 要执行的方法选择器
-    public func didBecomeActive(_ aSelector: Selector) {
-        SwiftUtils.didBecomeActive(base, selector: aSelector)
-    }
-    
-    /// 注册应用进入后台的通知
-    /// - Parameter aSelector: 要执行的方法选择器
-    public func willResignActive(_ aSelector: Selector) {
-        SwiftUtils.willResignActive(base, selector: aSelector)
-    }
+
 }
 
 //MARK: - 视图样式扩展

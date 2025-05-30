@@ -26,9 +26,9 @@ import UserNotifications
     
     /// 请求相机权限
     /// - Parameter completion: 异步回调授权结果（主线程执行）
-    public static func authVideo(_ completion: @escaping (Bool) -> Void) {
+    public static func requestAccessVideo(_ completion: @escaping (Bool) -> Void) {
         AVCaptureDevice.requestAccess(for: .video) { granted in
-            dispatchToMain(granted, completion: completion)
+            DispatchQueue.lx.asyncMain { completion(granted) }
         }
     }
     
@@ -42,9 +42,9 @@ import UserNotifications
     
     /// 请求相册权限
     /// - Parameter completion: 异步回调授权结果（主线程执行）
-    public static func authAlbum(_ completion: @escaping (Bool) -> Void) {
+    public static func requestAuthorization(_ completion: @escaping (Bool) -> Void) {
         PHPhotoLibrary.requestAuthorization { status in
-            dispatchToMain(status == .authorized, completion: completion)
+            DispatchQueue.lx.asyncMain { completion(status == .authorized) }
         }
     }
     
@@ -58,9 +58,9 @@ import UserNotifications
     
     /// 请求麦克风权限
     /// - Parameter completion: 异步回调授权结果（主线程执行）
-    public static func authAudio(_ completion: @escaping (Bool) -> Void) {
+    public static func requestAccessAudio(_ completion: @escaping (Bool) -> Void) {
         AVCaptureDevice.requestAccess(for: .audio) { granted in
-            dispatchToMain(granted, completion: completion)
+            DispatchQueue.lx.asyncMain { completion(granted) }
         }
     }
     
@@ -80,9 +80,11 @@ import UserNotifications
     /// - 说明: 返回true表示用户未明确拒绝通知权限（包括未决定状态）
     /// - Parameter callback: 异步回调检查结果（主线程执行）
     @available(iOS 10.0, *)
-    public static func checkNotificationSupport(_ callback: @escaping (Bool) -> Void) {
+    public static func checkNotificationSupport(_ completion: @escaping (Bool) -> Void) {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
-            dispatchToMain(settings.authorizationStatus != .denied, completion: callback)
+            DispatchQueue.lx.asyncMain {
+                completion(settings.authorizationStatus != .denied)
+            }
         }
     }
     
@@ -93,15 +95,8 @@ import UserNotifications
     public static func registerRemoteNotifications(_ completion: @escaping (Bool) -> Void) {
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .badge, .sound]) { granted, _ in
-            dispatchToMain(granted, completion: completion)
+            DispatchQueue.lx.asyncMain { completion(granted) }
             UIApplication.shared.registerForRemoteNotifications()
         }
-    }
-    
-    // MARK: - 私有工具方法
-    
-    /// 统一主线程派发方法
-    private static func dispatchToMain(_ result: Bool, completion: @escaping (Bool) -> Void) {
-        DispatchQueue.main.async { completion(result) }
     }
 }

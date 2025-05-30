@@ -8,6 +8,7 @@
 
 
 import UIKit
+import AVFoundation
 
 extension SwiftBasics where Base: UIApplication {
     /// 获取应用程序的根窗口（优先获取原生 UIWindow 类型的窗口）
@@ -144,5 +145,65 @@ extension SwiftBasics where Base: UIApplication {
             return false
         }
         return UIApplication.shared.canOpenURL(validUrl)
+    }
+    
+    // MARK: - 系统功能
+    
+    /// 调用系统拨号功能
+    /// - Parameters:
+    ///   - number: 电话号码字符串 (自动过滤无效字符)
+    ///   - tellCallBack: 拨号操作结果回调 (布尔值表示是否成功)
+    ///
+    /// 注意: 在模拟器上始终返回失败
+    public static func openTel(with number: String?, _ completionHandler: ((Bool) -> Void)? = nil) {
+        // 1. 清理并验证电话号码
+        guard let number = number?.trimmingCharacters(in: .whitespaces),
+              !number.isEmpty,
+              let url = URL(string: "tel://" + number) else {
+            completionHandler?(false)
+            return
+        }
+        
+        // 2. 通过扩展方法打开系统拨号
+        UIApplication.lx.openUrl(url, completionHandler: completionHandler)
+    }
+    
+    
+    // MARK: - 音频处理
+    
+    /// 播放短音频文件 (系统声音)
+    /// - Parameters:
+    ///   - filepath: 音频文件绝对路径
+    ///   - completion: 播放完成回调
+    ///
+    /// 要求: iOS 9.0+，支持常见音频格式(caf, wav, aiff)
+    @available(iOS 9.0, *)
+    public static func playSound(
+        with filepath: String?,
+        completion: (() -> Void)? = nil
+    ) {
+        
+        // 1. 验证文件存在性
+        guard let path = filepath,
+              FileManager.lx.isFileExists(atPath: path) else {
+            return
+        }
+        
+        var soundID: SystemSoundID = 0
+        let fileURL = URL(fileURLWithPath: path)
+        
+        // 2. 创建系统声音对象
+        let status = AudioServicesCreateSystemSoundID(fileURL as CFURL, &soundID)
+        guard status == kAudioServicesNoError else {
+            SwiftLog.log("音频加载失败: OSStatus=\(status)")
+            return
+        }
+        
+        // 3. 播放声音并处理完成回调
+        AudioServicesPlaySystemSoundWithCompletion(soundID) {
+            // 4. 释放资源
+            AudioServicesDisposeSystemSoundID(soundID)
+            completion?()
+        }
     }
 }

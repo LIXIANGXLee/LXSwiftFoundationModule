@@ -54,7 +54,8 @@ class ViewController: UIViewController {
                "弹窗5",
                "弹窗6",
                "两段式滑动弹窗",
-               "戴超链接的弹窗"
+               "戴超链接的弹窗",
+               "图片"
            ],
             [
                 "wkwebview加载网页，截取长图",
@@ -104,7 +105,8 @@ class ViewController: UIViewController {
                                          titleColor: UIColor.blue,
                                         titleFont: UIFont.systemFont(ofSize: 17, weight: .medium)) {
             let str = Bundle.main.path(forResource: "lxQrCodeVoice", ofType: "wav")
-            SwiftUtils.playSound(with: str)
+            
+            UIApplication.lx.playSound(with: str)
         }
         
         let modal = SwiftHyperlinksController()
@@ -214,6 +216,11 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate  {
                 self.navigationController?.pushViewController(vc, animated: true)
             case 7:
                 showModal()
+            case 8:
+                let vc = ImageTestViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+                
+                
             default: break
             }
             

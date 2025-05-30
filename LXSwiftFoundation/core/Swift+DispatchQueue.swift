@@ -86,16 +86,6 @@ extension SwiftBasics where Base: DispatchQueue {
         return workItem
     }
     
-    /// 在主队列异步执行任务
-    /// - Parameter task: 要在主队列执行的闭包任务
-    /// - Returns: 可取消的 DispatchWorkItem 对象
-    @discardableResult
-    public static func asyncMain(with task: @escaping SwiftCallTask) -> DispatchWorkItem {
-        let workItem = DispatchWorkItem(block: task)
-        DispatchQueue.main.async(execute: workItem)
-        return workItem
-    }
-    
     /// 通用异步操作封装
     /// - Parameters:
     ///   - operation: 需要在后台线程执行的阻塞操作闭包。返回类型为泛型 T 的可选值。
@@ -131,6 +121,16 @@ extension SwiftBasics where Base: DispatchQueue {
                 completion(result)
             }
         }
+    }
+    
+    /// 在主队列异步执行任务
+    /// - Parameter task: 要在主队列执行的闭包任务
+    /// - Returns: 可取消的 DispatchWorkItem 对象
+    @discardableResult
+    public static func asyncMain(with task: @escaping SwiftCallTask) -> DispatchWorkItem {
+        let workItem = DispatchWorkItem(block: task)
+        DispatchQueue.main.async(execute: workItem)
+        return workItem
     }
     
     // MARK: - Delayed Operations
@@ -171,6 +171,7 @@ extension SwiftBasics where Base: DispatchQueue {
         mainTask: @escaping SwiftCallTask
     ) -> DispatchWorkItem {
         let workItem = DispatchWorkItem(block: mainTask)
+        
         DispatchQueue.main.asyncAfter(
             deadline: .now() + seconds,
             execute: workItem

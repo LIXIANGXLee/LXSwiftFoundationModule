@@ -18,9 +18,7 @@ extension SwiftBasics where Base == URL {
     ///   1. 此方法会阻塞当前线程，建议在后台线程调用
     ///   2. 支持本地文件URL和远程网络URL
     ///   3. 对于网络资源会触发临时下载（不缓存完整文件）
-    public var videoSize: CGSize? {
-        SwiftUtils.videoSize(with: base)
-    }
+    public var videoSize: CGSize? { AVURLAsset(url: base).lx.videoSize }
     
     // MARK: - URL参数解析方法
     

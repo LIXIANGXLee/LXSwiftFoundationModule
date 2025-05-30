@@ -61,27 +61,51 @@ extension SwiftBasics where Base == Data {
         String(data: base, encoding: .utf8)
     }
     
-    /// 将Base64编码的Data解码为UIImage
+    /// 将Base64编码字符串解码为UIImage对象
     public var base64DecodingImage: UIImage? {
-        // 忽略无法识别的字符，增强容错性
+        // 1. 解码Base64字符串 -> 二进制数据
+        // 使用.ignoreUnknownCharacters选项增强容错性：忽略空格、换行等无效字符
         guard let base64Data = Data(base64Encoded: base, options: .ignoreUnknownCharacters) else {
+            // 解码失败：Base64字符串格式非法或包含大量无效字符
             return nil
         }
+        
+        // 2. 将二进制数据转换为UIImage
+        // 注意：此方法可能因以下原因返回nil：
+        //   - 数据不是有效的图像格式（如JPEG/PNG损坏）
+        //   - 内存不足导致图像初始化失败
+        //   - 数据为空或字节数不足
         return UIImage(data: base64Data)
     }
     
-    /// 将Property List数据转换为字典
+    // 使用属性列表序列化将Data对象解析为Plist数据结构
     public var dataToPlistDictionary: [String: Any]? {
         do {
-            // 使用现代API进行属性列表解析
+            // PropertyListSerialization.propertyList方法参数说明：
+            // - from: 包含属性列表数据的Data对象
+            // - options: 解析选项（空数组表示默认行为）
+            // - format: 接收解析出的格式（nil表示不关心格式）
             let plist = try PropertyListSerialization.propertyList(
-                from: base,
-                options: [],
-                format: nil
+                from: base,       // 待解析的原始数据
+                options: [],      // 使用默认解析选项
+                format: nil       // 不获取原始数据格式
             )
+            
+            // 将解析结果尝试转换为[String: Any]字典类型
+            // 因为属性列表顶层通常是字典，但也可以是数组或其他类型
+            // 转换失败时返回nil（表示顶层结构不是字典）
             return plist as? [String: Any]
+            
         } catch {
+            // 错误处理：捕获解析过程中可能发生的所有异常
+            // 常见的错误类型包括：
+            // 1. 数据格式无效（非Plist格式）
+            // 2. 数据类型不支持（包含非法对象）
+            // 3. 数据损坏或截断
+            // 4. 内存不足（大型文件处理时）
             SwiftLog.log("Plist解析错误: \(error.localizedDescription)")
+            
+            // 解析失败时返回nil，表示无法获取有效字典
             return nil
         }
     }
