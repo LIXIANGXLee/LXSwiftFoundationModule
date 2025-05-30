@@ -74,4 +74,6 @@ extension Double: SwiftCompatible { }
 extension Int: SwiftCompatible { }
 extension String: SwiftCompatible { }
 extension AVAsset: SwiftCompatible { }
+extension AVURLAsset: SwiftCompatible { }
 extension NotificationCenter: SwiftCompatible { }
+
