@@ -9,11 +9,11 @@
 /* 使用示例：
 let button = SwiftButton()
 button.setLayoutCalculators(
-    titleBlock: { contentRect in
+    titleLayoutClosure: { contentRect in
         return CGRect(x: 0, y: contentRect.height*0.7,
                      width: contentRect.width, height: contentRect.height*0.3)
     },
-    imageBlock: { contentRect in
+    imageLayoutClosure: { contentRect in
         return CGRect(x: 0, y: 0,
                      width: contentRect.width, height: contentRect.height*0.7)
     }

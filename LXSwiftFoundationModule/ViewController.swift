@@ -125,14 +125,14 @@ class ViewController: UIViewController {
                        font: UIFont.systemFont(ofSize: 14),
                        isExpression: false)
         
-        let r3 = SwiftRegexType(regexPattern: SwiftRegex.httpRegex,
+        let r3 = SwiftRegexType(regexPattern: SwiftRegexType.defaultHttpRegex,
                        color: UIColor.lx.color(hex: "36acff"),
                        font: UIFont.systemFont(ofSize: 14),
                        isExpression: false)
   
         let str = "欢迎使用迎使用！我们非常《用户服务协议》重视您《隐私政策》的您同意https://chat.deepseek.com并接受全部条款后方可开始使用。"
         
-        guard let attr = modal.getAttributedString(with: str, textColor: UIColor.lx.color(hex: "666666"), textFont: UIFont.systemFont(ofSize: 14), regexTypes: [r1,r2,r3]) else { return }
+        guard let attr = modal.getAttributedString(str, textColor: UIColor.lx.color(hex: "666666"), textFont: UIFont.systemFont(ofSize: 14), regexTypes: [r1,r2,r3]) else { return }
         modal.show(with: "温馨提示", content: attr)
     }
 }

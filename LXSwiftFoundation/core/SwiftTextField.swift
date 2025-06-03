@@ -70,7 +70,7 @@ import UIKit
     private func addTextChangeObserver() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(handleTextDidChange),
+            selector: #selector(textDidChange),
             name: UITextField.textDidChangeNotification,
             object: self
         )
@@ -85,7 +85,7 @@ import UIKit
     }
     
     /// 处理文本变化事件
-    @objc private func handleTextDidChange() {
+    @objc private func textDidChange() {
         guard let maxLength = maxTextLength,
               let currentText = text else { return }
         
@@ -95,7 +95,6 @@ import UIKit
         }
         
         textHandler?(text ?? "")
-
     }
 }
 

@@ -13,13 +13,9 @@ import UIKit
 @objc(LXObjcHyperlinksController)
 @objcMembers open class SwiftHyperlinksController: SwiftModalController {
     
-    // MARK: - 类型定义
-    /// 超链接点击回调类型
-    public typealias CallBack = ((String) -> (Void))
-    
     // MARK: - 公开属性
     /// 超链接点击回调
-    open var callBack: SwiftHyperlinksController.CallBack?
+    open var tapHandler: ((String) -> (Void))?
     
     // MARK: - 私有属性
     /// 模态视图配置
@@ -49,10 +45,13 @@ import UIKit
     
     /// 超链接文本标签
     private lazy var textLabel: SwiftTextLable = {
-        var config = SwiftTextLableConfig()
-        config.bgColor = self.modaConfig.selectBgColor
-        let label = SwiftTextLable(config: config)
-        label.delegate = self
+        let label = SwiftTextLable()
+        label.backgroundColor = UIColor.white
+        label.linkBackgroundColor = self.modaConfig.selectBgColor
+        label.tapHandler = {[weak self] text in
+            self?.tapHandler?(text)
+        }
+
         return label
     }()
     
@@ -75,17 +74,9 @@ import UIKit
     /// 底部按钮点击事件
     @objc private func itemViewClick(_ itemView: SwiftItemView) {
         // 执行按钮对应的回调
-        modalItems[itemView.tag].callBack?()
+        modalItems[itemView.tag].handdler?()
         // 关闭模态视图
         lx.dismissViewController()
-    }
-}
-
-// MARK: - 超链接文本代理实现
-extension SwiftHyperlinksController: TextLableDelegate {
-    /// 处理超链接点击事件
-    public func textLable(_ textView: SwiftTextLable, didSelect text: String) {
-        callBack?(text)
     }
 }
 
@@ -100,15 +91,15 @@ extension SwiftHyperlinksController {
     ///   - textFont: 默认文本字体
     ///   - regexTypes: 正则匹配类型数组
     /// - Returns: 格式化后的富文本
-    public func getAttributedString(with text: String,
+    public func getAttributedString(_ text: String,
                                     textColor: UIColor = UIColor.lx.color(hex: "666666"),
                                     textFont: UIFont = UIFont.systemFont(ofSize: 14),
                                     regexTypes: [SwiftRegexType]) -> NSAttributedString? {
         
-        SwiftRegex.createAttributedString(from: text,
-                                          textColor: textColor,
-                                          textFont: textFont,
-                                          regexTypes: regexTypes)
+        text.lx.createAttributedString(textColor: textColor,
+                                       textFont: textFont,
+                                       regexTypes: regexTypes)
+            
     }
     
     // MARK: 配置方法
@@ -117,11 +108,11 @@ extension SwiftHyperlinksController {
     ///   - modaConfig: 视图配置
     ///   - modalItems: 底部按钮数据
     ///   - callBack: 超链接回调
-    @objc open func setModal(_ modaConfig: SwiftModalConfig, modalItems: [SwiftItem], callBack: SwiftHyperlinksController.CallBack?) {
+    @objc open func setModal(_ modaConfig: SwiftModalConfig, modalItems: [SwiftItem], tapHandler: ((String) -> (Void))?) {
         // 保存配置和数据
         self.modaConfig = modaConfig
         self.modalItems = modalItems
-        self.callBack = callBack
+        self.tapHandler = tapHandler
         
         // 构建UI层次结构
         view.addSubview(contentView)
@@ -289,9 +280,6 @@ extension SwiftHyperlinksController {
 // MARK: - 底部按钮数据模型
 @objc(LXObjcItem)
 @objcMembers open class SwiftItem: NSObject {
-    /// 按钮回调闭包类型
-    public typealias LXSwiftModalItemCallBack = (() -> Void)
-    
     /// 按钮标题
     open var title: String
     /// 标题颜色
@@ -299,17 +287,17 @@ extension SwiftHyperlinksController {
     /// 标题字体
     open var titleFont: UIFont
     /// 点击回调
-    open var callBack: SwiftItem.LXSwiftModalItemCallBack?
+    open var handdler:  (() -> Void)?
     
     /// 初始化按钮数据模型
     public init(title: String,
                 titleColor: UIColor = UIColor.black,
                 titleFont: UIFont = UIFont.lx.font(withMedium: 16),
-                callBack: SwiftItem.LXSwiftModalItemCallBack?) {
+                handdler: ( (() -> Void))?) {
         self.title = title
         self.titleFont = titleFont
         self.titleColor = titleColor
-        self.callBack = callBack
+        self.handdler = handdler
     }
 }
 

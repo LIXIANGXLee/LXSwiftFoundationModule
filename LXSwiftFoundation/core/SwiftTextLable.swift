@@ -8,43 +8,14 @@
 
 import UIKit
 
-/// 用于背景视图的唯一标识符（避免与其他视图冲突）
-private let linkBackgroundTag = 1992990313
-
-/// 文本标签代理协议
-@objc public protocol TextLableDelegate: AnyObject {
-    
-    /// 点击链接时的回调
-    @objc optional func textLable(_ textView: SwiftTextLable, didSelect text: String)
-    
-    /// 长按整个文本的回调
-    @objc optional func textLable(_ textView: SwiftTextLable, longPress text: String)
-}
-
-/// 文本标签配置类
-@objc(LXObjcTextLableConfig)
-@objcMembers open class SwiftTextLableConfig: NSObject {
-    
-    /// 链接背景色
-    open var bgColor: UIColor
-    
-    /// 链接背景圆角半径
-    open var bgRadius: CGFloat
-    
-    /// 初始化配置
-    public init(bgRadius: CGFloat = 6,
-                bgColor: UIColor = UIColor.black.withAlphaComponent(0.1)) {
-        self.bgColor = bgColor
-        self.bgRadius = bgRadius
-    }
-}
-
 // MARK: - 文本标签主类
 @objc(LXObjcTextLable)
 @objcMembers open class SwiftTextLable: UIView {
     
+    private let _tag = -1
+    
     /// 链接数据模型
-    @objc open class TextLink: NSObject {
+    @objcMembers open class TextLink: NSObject {
         open var text: String       // 链接文本
         open var rang: NSRange      // 在富文本中的位置
         open var rects: [CGRect]    // 在视图中的位置矩形（可能跨行）
@@ -56,12 +27,20 @@ private let linkBackgroundTag = 1992990313
         }
     }
     
-    // MARK: - 公开属性
-    open weak var delegate: TextLableDelegate?
+    /// 链接背景色
+    open var linkBackgroundColor: UIColor = UIColor.black.withAlphaComponent(0.1)
     
+    /// 链接背景圆角半径
+    open var linkBackgroundRadius: CGFloat = SCALE_IP6_WIDTH_TO_WIDTH(6)
+    
+    /// 点击链接时的回调
+    open var tapHandler: ((String) -> Void)?
+    
+    /// 长按整个文本的回调
+    open var longPressHandler: ((String) -> Void)?
+
     // MARK: - 私有属性
     private var links = [TextLink]()        // 存储所有链接数据
-    private let config: SwiftTextLableConfig // 配置对象
     
     /// 核心文本视图（用于计算链接位置）
     private lazy var textView: UITextView = {
@@ -118,7 +97,7 @@ private let linkBackgroundTag = 1992990313
             textView.attributedText = attr
             
             // 遍历富文本查找链接
-            let linkKey = NSAttributedString.Key(rawValue: SwiftRegex.textLinkAttributeKey)
+            let linkKey = NSAttributedString.Key(rawValue: SwiftRegexType.textLinkAttributeKey)
             attr.enumerateAttribute(
                 linkKey,
                 in: NSRange(location: 0, length: attr.length),
@@ -141,20 +120,18 @@ private let linkBackgroundTag = 1992990313
                 }
                 
                 // 存储链接数据
-                links.append(TextLink(
-                    text: linkText,
-                    rang: range,
-                    rects: rects
-                ))
+                links.append(TextLink(text: linkText, rang: range, rects: rects))
             }
         }
     }
     
+    
     // MARK: - 初始化方法
-    public init(config: SwiftTextLableConfig = SwiftTextLableConfig()) {
-        self.config = config
+    public init() {
+  
         super.init(frame: .zero)
-        setupUI()
+             
+        configureBaseSettings()
     }
     
     required public init?(coder: NSCoder) {
@@ -162,7 +139,7 @@ private let linkBackgroundTag = 1992990313
     }
     
     // MARK: - 界面设置
-    private func setupUI() {
+    private func configureBaseSettings() {
         // 跨版本背景色适配
         if #available(iOS 13.0, *) {
             backgroundColor = .systemBackground
@@ -183,7 +160,7 @@ private extension SwiftTextLable {
     @objc func longPressGesture(_ gesture: UILongPressGestureRecognizer) {
         guard gesture.state == .began else { return }
         // 回调整个文本内容
-        delegate?.textLable?(self, longPress: attributedText?.string ?? "")
+        longPressHandler?(attributedText?.string ?? "")
     }
     
     /// 处理点击手势
@@ -193,9 +170,9 @@ private extension SwiftTextLable {
         // 防止连续点击
         isUserInteractionEnabled = false
         defer {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.isUserInteractionEnabled = true
-                self.removeLinkHighlights()
+            DispatchQueue.lx.delay(1) { [weak self] in
+                self?.isUserInteractionEnabled = true
+                self?.removeLinkHighlights()
             }
         }
         
@@ -205,7 +182,7 @@ private extension SwiftTextLable {
         // 查找点击的链接
         if let link = findLink(at: point) {
             highlightLink(link)
-            delegate?.textLable?(self, didSelect: link.text)
+            tapHandler?(link.text)
         }
     }
     
@@ -224,9 +201,9 @@ private extension SwiftTextLable {
     private func highlightLink(_ link: TextLink) {
         for rect in link.rects {
             let highlightView = UIView(frame: rect)
-            highlightView.tag = linkBackgroundTag
-            highlightView.backgroundColor = config.bgColor
-            highlightView.layer.cornerRadius = config.bgRadius
+            highlightView.tag = _tag
+            highlightView.backgroundColor = linkBackgroundColor
+            highlightView.layer.cornerRadius = linkBackgroundRadius
             highlightView.layer.masksToBounds = true
             insertSubview(highlightView, belowSubview: textView)
         }
@@ -235,7 +212,7 @@ private extension SwiftTextLable {
     /// 移除所有链接高亮
     @objc private func removeLinkHighlights() {
         subviews.forEach {
-            if $0.tag == linkBackgroundTag {
+            if $0.tag == _tag {
                 $0.removeFromSuperview()
             }
         }
