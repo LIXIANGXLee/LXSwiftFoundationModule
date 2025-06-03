@@ -12,11 +12,9 @@ import UIKit
 @objc(LXObjcTextView)
 @objcMembers open class SwiftTextView: UITextView {
     
-    public typealias TextCallBack = (String) -> Void
-     
     // MARK: - 公开属性
     /// 文本变化回调闭包
-    open var textCallBack: TextCallBack?
+    open var textHandler: ((String) -> Void)?
       
     /// 最大输入字符数（设置为nil时不限制）
     open var maxTextLength: Int?
@@ -73,7 +71,7 @@ import UIKit
     // MARK: - 初始化方法
     public override init(frame: CGRect, textContainer: NSTextContainer? = nil) {
         super.init(frame: frame, textContainer: textContainer)
-        setupUI()
+        configureBaseSettings()
         setupNotifications()
     }
     
@@ -96,16 +94,6 @@ import UIKit
 // MARK: - public method
 extension SwiftTextView {
     
-    /// 外部调用方法
-    @objc open func setHandle(_ textCallBack: SwiftTextView.TextCallBack?) {
-        self.textCallBack = textCallBack
-    }
-    
-    /// 设置文本最大长度
-    @objc open func setMaxTextLength(_ length: Int) {
-        self.maxTextLength = length
-    }
-    
     /// 在赋值text或attributestring之后调用updateUI
     /// 如果设置回调函数setHandle，请在设置updateTextUI之前调用，否则设置text和nsattributestring的属性时回调是不回调的，如果设置text和nsattributestring属性时回调，则必须在调用updateTextUI()之前设置setHandle函数
     @objc open func updateTextUI() {
@@ -124,6 +112,20 @@ extension SwiftTextView {
 
 // MARK: - private method
 extension SwiftTextView {
+    
+    
+    private func configureBaseSettings() {
+        // 跨版本背景色适配
+        if #available(iOS 13.0, *) {
+            backgroundColor = .systemBackground
+        } else {
+            backgroundColor = .white
+        }
+
+        addSubview(placeholderLabel)
+        font = UIFont.systemFont(ofSize: 16)
+        placeholderLabel.font = font
+    }
     
     /// 初始化界面配置
    private func setupUI() {
@@ -162,12 +164,15 @@ extension SwiftTextView {
     /// 事件监听
     @objc private func textDidChange() {
         placeholderLabel.isHidden = self.hasText
-        if let maxLength = self.maxTextLength,
-            let count = text?.count {
-            if count > maxLength {
-                text = text?.lx.substring(to: maxLength)
-            }
+  
+        guard let maxLength = maxTextLength,
+              let currentText = text else { return }
+        
+        if currentText.count > maxLength {
+            // 使用 String 的 prefix 方法保证字符安全截取
+            text = String(currentText.prefix(maxLength))
         }
-        textCallBack?(text ?? "")
+        
+        textHandler?(text ?? "")
     }
 }

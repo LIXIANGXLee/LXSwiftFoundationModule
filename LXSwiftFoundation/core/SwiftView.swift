@@ -9,40 +9,71 @@
 import UIKit
 
 /// 用户界面样式类型（兼容Objective-C）
-/// 注意：与系统`UIUserInterfaceStyle`映射，确保样式转换正确
+/// 注意：与系统`UIUserInterfaceStyle`一一映射，确保样式转换正确
 @objc(LXObjcUserInterfaceStyle)
 public enum SwiftUserInterfaceStyle: Int {
     case dark
     case light
-    case unspecified // 扩展以处理未指定情况，根据需求调整
+    case unspecified // 扩展以处理未指定情况
     
-    /// 根据系统样式初始化
+    /// 根据系统样式初始化（iOS12+）
     @available(iOS 12.0, *)
     public init(uiStyle: UIUserInterfaceStyle) {
         switch uiStyle {
         case .dark: self = .dark
         case .light: self = .light
-        case .unspecified: self = .unspecified
-        @unknown default: self = .unspecified
+        default: self = .unspecified // 包含.unspecified和未知情况
         }
     }
 }
 
 @objc(LXObjcView)
 @objcMembers open class SwiftView: UIView {
+    // MARK: - 公共属性
+    
+    /// 通用扩展参数容器（可用于传递自定义数据）
+    /// 示例：`swiftImgView.swiftModel = YourCustomModel()`
+    public var swiftModel: Any?
+    
+    /// 点击事件回调（自动处理弱引用）
+    open var handler: ((_ view: SwiftView) -> Void)?
+    
+    /// 点击防抖时间间隔（默认 0.5 秒，更合理的时间）
+    open var throttleInterval: TimeInterval = 0.5
+    
+    // MARK: - 生命周期
+    
+    deinit { lx.removeTapGesture() }
+    
+    public convenience init() {
+        self.init(frame: .zero)
+    }
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        // 使用系统背景颜色适配深色模式
-        backgroundColor = .white
+        configureBaseSettings()
         setupUI()
         setupViewModel()
     }
     
     required public init?(coder: NSCoder) {
-        fatalError("init(coder:) 不支持，请使用init(frame:)初始化")
+        // 提供更友好的错误提示
+        fatalError("init(coder:) 不支持，请使用代码布局方式初始化")
     }
     
+    // MARK: - 视图配置
+    private func configureBaseSettings() {
+        // 跨版本背景色适配
+        if #available(iOS 13.0, *) {
+            backgroundColor = .systemBackground
+        } else {
+            backgroundColor = .white
+        }
+        lx.addTapGesture(closure: tap(_:))
+
+    }
+    
+    // MARK: - 深色模式处理
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
@@ -60,10 +91,29 @@ public enum SwiftUserInterfaceStyle: Int {
                 updateHasDifferentColorAppearance()
             }
         }
+
+    }
+    
+    // MARK: - 点击处理
+    /// 处理点击事件
+    @objc private func tap(_ gesture: UITapGestureRecognizer) {
+        guard gesture.state == .ended else { return }
+        
+        // 防抖处理：点击后临时禁用交互
+        isUserInteractionEnabled = false
+        defer {
+            // 延迟恢复交互（确保即使提前释放也不会崩溃）
+            DispatchQueue.lx.delay(with: throttleInterval) { [weak self] in
+                self?.isUserInteractionEnabled = true
+            }
+        }
+        
+        // 执行回调（传递弱引用避免循环）
+        handler?(self)
     }
 }
 
-// MARK: - 子类配置方法
+// MARK: - 子类重写扩展
 extension SwiftView: SwiftUICompatible {
     /// 配置界面元素（子类必须重写，无需调用super）
     @objc open func setupUI() {
@@ -91,3 +141,4 @@ extension SwiftView: SwiftTraitCompatible { // 修正协议名称拼写
         // 注意：UIColor的CGColor可能在模式切换后失效，需在此重新获取
     }
 }
+

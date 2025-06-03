@@ -11,6 +11,7 @@ import UIKit
 // MARK: - NSAttributedString 扩展
 extension SwiftBasics where Base: NSAttributedString {
     
+    
     /// 计算富文本在指定宽度下的尺寸
     /// - Parameter width: 指定的宽度
     /// - Returns: 计算得出的尺寸
@@ -19,6 +20,7 @@ extension SwiftBasics where Base: NSAttributedString {
         let rect = base.boundingRect(with: size,
                                    options: [.usesLineFragmentOrigin, .usesFontLeading],
                                    context: nil)
+        
         return rect.size
     }
     

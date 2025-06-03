@@ -21,8 +21,7 @@ class TextViewViewController: UIViewController {
         textView.maxTextLength = 5
         textView.placeholder = "dsds"
         textView.placeholderColor = UIColor.red
-
-        textView.setHandle { (text) in
+        textView.textHandler = { (text) in
             SwiftLog.log("-=-=-=-=-=-\(text)")
         }
         
@@ -35,10 +34,23 @@ class TextViewViewController: UIViewController {
         textField.maxTextLength = 5
         textField.placeholder = "dsdsds"
         textField.textColor = UIColor.blue
+        textField.backgroundColor = UIColor.white
         textField.lx.set(withPlaceholder: "dsdsds", color: UIColor.red)
-        textField.textDidChangeCallback =  { (text) in
+        textField.textHandler =  { (text) in
             SwiftLog.log("-=-=-=--------=\(text)")
         }
+        
+        let swiftView = SwiftView(frame: CGRect(x: 20, y: 500, width: 260, height: 100))
+        swiftView.backgroundColor = UIColor.red
+        swiftView.throttleInterval = 1
+        self.view.addSubview(swiftView)
+
+        swiftView.handler = {view in
+            SwiftLog.log(view)
+        }
+        
+        
+        
         
     }
     

@@ -83,7 +83,7 @@ extension UIControl {
             self.isUserInteractionEnabled = false
             
             // 延迟恢复交互能力
-            DispatchQueue.main.asyncAfter(deadline: .now() + time) {
+            DispatchQueue.lx.delay(with: time) {
                 self.isUserInteractionEnabled = true
             }
         }

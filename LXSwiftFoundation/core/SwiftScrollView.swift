@@ -19,8 +19,13 @@ import UIKit
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor.white
-        
+        // 跨版本背景色适配
+        if #available(iOS 13.0, *) {
+            backgroundColor = .systemBackground
+        } else {
+            backgroundColor = .white
+        }
+
         if #available(iOS 11.0, *) {
             contentInsetAdjustmentBehavior = .never
         } else {

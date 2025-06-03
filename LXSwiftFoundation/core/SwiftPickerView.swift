@@ -257,6 +257,13 @@ extension SwiftPickerView {
 extension SwiftPickerView {
     /// 初始化内容UI
     private func setContentUI() {
+        // 跨版本背景色适配
+        if #available(iOS 13.0, *) {
+            backgroundColor = .systemBackground
+        } else {
+            backgroundColor = .white
+        }
+
         addSubview(tableView)
         tableView.addGestureRecognizer(panGesture)
         tableView.contentInset = UIEdgeInsets(

@@ -1,9 +1,11 @@
 //
-//  Swift+AVAsset.swift
-//  Pods
+//  Swift+AVURLAsset.swift
+//  LXSwiftFoundation
 //
-//  Created by xrj on 2025/5/30.
+//  Created by Mac on 2021/9/29.
+//  Copyright © 2017 李响. All rights reserved.
 //
+
 
 import AVFoundation
 

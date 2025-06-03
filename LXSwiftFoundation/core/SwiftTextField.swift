@@ -13,18 +13,13 @@ import UIKit
 @objc(LXObjcTextField)
 @objcMembers open class SwiftTextField: UITextField {
     
-    // MARK: - 类型定义
-    
-    /// 文本变化回调类型别名
-    public typealias TextCallBack = (String) -> Void
-    
     // MARK: - 公开属性
     
     /// 文本输入区域的内边距设置（可选）
     open var textRectInset: UIEdgeInsets?
     
     /// 文本变化回调闭包
-    open var textDidChangeCallback: TextCallBack?
+    open var textHandler: ((String) -> Void)?
     
     /// 最大文本长度限制（可选）
     open var maxTextLength: Int?
@@ -33,7 +28,7 @@ import UIKit
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        commonInit()
+        configureBaseSettings()
     }
     
     required public init?(coder: NSCoder) {
@@ -60,8 +55,14 @@ import UIKit
     // MARK: - 私有方法
     
     /// 公共初始化配置
-    private func commonInit() {
-        backgroundColor = .white
+    private func configureBaseSettings() {
+        // 跨版本背景色适配
+        if #available(iOS 13.0, *) {
+            backgroundColor = .systemBackground
+        } else {
+            backgroundColor = .white
+        }
+
         addTextChangeObserver()
     }
     
@@ -85,41 +86,16 @@ import UIKit
     
     /// 处理文本变化事件
     @objc private func handleTextDidChange() {
-        enforceMaxLengthIfNeeded()
-        notifyTextChange()
-    }
-    
-    /// 执行最大长度限制
-    private func enforceMaxLengthIfNeeded() {
-        guard let maxLength = maxTextLength, let currentText = text else { return }
+        guard let maxLength = maxTextLength,
+              let currentText = text else { return }
         
         if currentText.count > maxLength {
             // 使用 String 的 prefix 方法保证字符安全截取
             text = String(currentText.prefix(maxLength))
         }
-    }
-    
-    /// 通知文本变化
-    private func notifyTextChange() {
-        textDidChangeCallback?(text ?? "")
+        
+        textHandler?(text ?? "")
+
     }
 }
 
-// MARK: - 公开接口扩展
-extension SwiftTextField {
-    
-    /// 设置文本变化回调（替代直接访问属性）
-    public func setTextChangeHandler(_ handler: TextCallBack?) {
-        textDidChangeCallback = handler
-    }
-    
-    /// 设置最大文本长度限制（兼容 Objective-C）
-    @objc open func configureMaxLength(_ length: Int) {
-        maxTextLength = length
-    }
-    
-    /// 配置文本输入区域边距（兼容 Objective-C）
-    @objc open func configureTextInset(_ insets: UIEdgeInsets) {
-        textRectInset = insets
-    }
-}

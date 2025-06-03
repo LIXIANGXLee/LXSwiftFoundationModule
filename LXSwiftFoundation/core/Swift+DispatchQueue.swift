@@ -16,7 +16,7 @@ extension SwiftBasics where Base: DispatchQueue {
     /// - 参数：
     ///   - token: 唯一标识符（推荐使用反向域名格式：com.yourcompany.taskname）
     ///   - callBack: 需要执行一次的闭包
-    public func once(token: String, _ callBack: () -> Void) {
+    public func once(token: String, _ closure: () -> Void) {
         // 第一次无锁快速检查（性能优化）
         guard !DispatchQueue.onceTracker.contains(token) else { return }
         
@@ -30,7 +30,7 @@ extension SwiftBasics where Base: DispatchQueue {
         // 标记 token 已执行
         DispatchQueue.onceTracker.insert(token)
         // 执行闭包
-        callBack()
+        closure()
     }
     
     /// (已废弃) 确保指定 token 的闭包只执行一次
@@ -61,7 +61,7 @@ extension DispatchQueue {
 
 extension SwiftBasics where Base: DispatchQueue {
     // MARK: - Type Alias
-    public typealias SwiftCallTask = () -> Void
+    public typealias SwiftClosureTask = () -> Void
     
     // MARK: - Asynchronous Operations
     
@@ -72,8 +72,8 @@ extension SwiftBasics where Base: DispatchQueue {
     /// - Returns: 可取消的 DispatchWorkItem 对象
     @discardableResult
     public static func async(
-        with task: @escaping SwiftCallTask,
-        mainTask: SwiftCallTask? = nil
+        with task: @escaping SwiftClosureTask,
+        mainTask: SwiftClosureTask? = nil
     ) -> DispatchWorkItem {
         let workItem = DispatchWorkItem(block: task)
         DispatchQueue.global().async(execute: workItem)
@@ -127,8 +127,8 @@ extension SwiftBasics where Base: DispatchQueue {
     /// - Parameter task: 要在主队列执行的闭包任务
     /// - Returns: 可取消的 DispatchWorkItem 对象
     @discardableResult
-    public static func asyncMain(with task: @escaping SwiftCallTask) -> DispatchWorkItem {
-        let workItem = DispatchWorkItem(block: task)
+    public static func asyncMain(with closure: @escaping SwiftClosureTask) -> DispatchWorkItem {
+        let workItem = DispatchWorkItem(block: closure)
         DispatchQueue.main.async(execute: workItem)
         return workItem
     }
@@ -144,17 +144,17 @@ extension SwiftBasics where Base: DispatchQueue {
     @discardableResult
     public static func asyncDelay(
         with seconds: TimeInterval,
-        task: @escaping SwiftCallTask,
-        mainTask: SwiftCallTask? = nil
+        closure: @escaping SwiftClosureTask,
+        mainClosure: SwiftClosureTask? = nil
     ) -> DispatchWorkItem {
-        let workItem = DispatchWorkItem(block: task)
+        let workItem = DispatchWorkItem(block: closure)
         DispatchQueue.global().asyncAfter(
             deadline: .now() + seconds,
             execute: workItem
         )
         
-        if let mainTask = mainTask {
-            workItem.notify(queue: .main, execute: mainTask)
+        if let mainClosure = mainClosure {
+            workItem.notify(queue: .main, execute: mainClosure)
         }
         
         return workItem
@@ -168,9 +168,9 @@ extension SwiftBasics where Base: DispatchQueue {
     @discardableResult
     public static func delay(
         with seconds: TimeInterval,
-        mainTask: @escaping SwiftCallTask
+        mainClosure: @escaping SwiftClosureTask
     ) -> DispatchWorkItem {
-        let workItem = DispatchWorkItem(block: mainTask)
+        let workItem = DispatchWorkItem(block: mainClosure)
         
         DispatchQueue.main.asyncAfter(
             deadline: .now() + seconds,
@@ -185,31 +185,29 @@ extension SwiftBasics where Base: DispatchQueue {
     ///   - callBack: 要执行的闭包任务
     public func asyncAfter(
         with delay: TimeInterval,
-        _ callBack: @escaping SwiftCallTask
+        closure: @escaping SwiftClosureTask,
     ) {
-        base.asyncAfter(deadline: .now() + delay, execute: callBack)
+        base.asyncAfter(deadline: .now() + delay, execute: closure)
     }
     
     // MARK: - Thread-Safe Operations
     
     /// 安全地在主线程执行任务（如果当前已在主线程则同步执行）
     /// - Parameter execute: 要执行的闭包任务
-    public static func asyncSafeMain(_ execute: @escaping SwiftCallTask) {
+    public static func asyncSafeMain(_ execute: @escaping SwiftClosureTask) {
         isMainThread ? execute() : DispatchQueue.main.async(execute: execute)
     }
     
     /// 在全局队列安全地执行任务
     /// - Parameter execute: 要执行的闭包任务
-    public static func asyncSafeGlobal(_ execute: @escaping SwiftCallTask) {
+    public static func asyncSafeGlobal(_ execute: @escaping SwiftClosureTask) {
         DispatchQueue.global(qos: .default).async(execute: execute)
     }
     
     // MARK: - Utility Properties
     
     /// 检查当前是否在主线程
-    public static var isMainThread: Bool {
-        Thread.current.isMainThread
-    }
+    public static var isMainThread: Bool { Thread.current.isMainThread }
     
     // MARK: - Deprecated Methods
     
@@ -217,8 +215,8 @@ extension SwiftBasics where Base: DispatchQueue {
     @available(*, deprecated, message: "Use `asyncAfter(with:_:)` instead")
     public func after(
         with delay: TimeInterval,
-        execute closure: @escaping SwiftCallTask
+        execute closure: @escaping SwiftClosureTask
     ) {
-        asyncAfter(with: delay, closure)
+        asyncAfter(with: delay, closure: closure)
     }
 }

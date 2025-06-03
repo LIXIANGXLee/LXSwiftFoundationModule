@@ -42,7 +42,7 @@ open class SwiftButton: UIButton {
     /// 设计初始化方法
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        commonInit()
+        configureBaseSettings()
     }
     
     /// 不支持Storyboard初始化（增强代码安全性）
@@ -80,7 +80,8 @@ open class SwiftButton: UIButton {
 // MARK: - 配置方法
 private extension SwiftButton {
     /// 通用初始化配置
-    func commonInit() {
+    func configureBaseSettings() {
+
         // 图片视图配置
         imageView?.contentMode = .scaleAspectFit
         imageView?.clipsToBounds = true

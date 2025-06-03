@@ -13,9 +13,6 @@ import UIKit
 @objc(LXObjcTimer)
 @objcMembers public final class SwiftTimer: NSObject {
     
-    /// 定时器任务回调类型
-    public typealias TaskCallBack = () -> Void
-    
     /// 存储所有定时器的字典，键为定时器唯一标识符
     private static var timers = [String: DispatchSourceTimer]()
     
@@ -35,12 +32,12 @@ import UIKit
                                   interval: TimeInterval = 1,
                                   repeats: Bool = true,
                                   identifier: String?,
-                                  task: TaskCallBack?) {
+                                  handler: (() -> Void)?) {
         // 参数有效性检查
         guard let iden = identifier,
               delaySeconds >= 0,
               interval >= 0,
-              task != nil else {
+              handler != nil else {
             return
         }
         
@@ -76,7 +73,7 @@ import UIKit
         // 设置事件处理器
         timer.setEventHandler {
             // 主线程执行任务
-            DispatchQueue.main.async { task?() }
+            DispatchQueue.lx.asyncMain { handler?() }
             
             // 单次任务执行后自动移除
             if !repeats { cancel(with: iden) }

@@ -7,7 +7,8 @@
 //
 
 /// 增强的 UIImageView 子类，支持点击事件回调与扩展参数
-open class SwiftImgView: UIImageView {
+@objc(LXObjcImgView)
+@objcMembers open class SwiftImgView: UIImageView {
     
     // MARK: - Public Properties
     
@@ -15,33 +16,12 @@ open class SwiftImgView: UIImageView {
     /// 示例：swiftImgView.swiftModel = YourCustomModel()
     public var swiftModel: Any?
     
-    /// 点击事件回调闭包类型（参数为当前视图实例的弱引用）
-    public typealias TapClosure = ((_ view: SwiftImgView?) -> Void)
-    
     /// 点击事件回调（使用弱引用避免循环引用）
-    open var tapClosure: TapClosure?
-    
-    /// 交互使能开关（自动同步系统交互属性）
-    /// - 注意：此属性仅用于业务层逻辑判断，实际交互状态请使用 isUserInteractionEnabled
-    open var isInteractionEnabled: Bool = false {
-        didSet {
-            isUserInteractionEnabled = isInteractionEnabled
-            setupTapGestureIfNeeded()
-        }
-    }
+    open var handler: ((_ view: SwiftImgView) -> Void)?
     
     /// 点击防抖时间间隔（默认 1 秒）
-    open var tapThrottleInterval: TimeInterval = 1.0
-    
-    // MARK: - Private Properties
-    
-    /// 点击手势识别器（懒加载保证只创建一次）
-    private lazy var tapGesture: UITapGestureRecognizer = {
-        let gesture = UITapGestureRecognizer()
-        gesture.addTarget(self, action: #selector(handleTap(_:)))
-        return gesture
-    }()
-    
+    open var throttleInterval: TimeInterval = 1.0
+        
     // MARK: - Initialization
     
     /// 便捷初始化方法（默认零帧布局）
@@ -53,7 +33,13 @@ open class SwiftImgView: UIImageView {
     /// - Parameter frame: 视图布局帧
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        commonInit()
+        // 跨版本背景色适配
+        if #available(iOS 13.0, *) {
+            backgroundColor = .systemBackground
+        } else {
+            backgroundColor = .white
+        }
+        lx.addTapGesture(closure: tap(_:))
     }
     
     /// 不支持 Storyboard/XIB 初始化
@@ -61,47 +47,30 @@ open class SwiftImgView: UIImageView {
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK: - Configuration
-    
-    /// 公共初始化配置
-    private func commonInit() {
-        setupTapGestureIfNeeded()
-    }
-    
-    /// 按需设置点击手势
-    private func setupTapGestureIfNeeded() {
-        // 仅在允许交互时添加手势
-        guard isInteractionEnabled,
-              gestureRecognizers?.contains(tapGesture) != true else {
-            return
-        }
-        addGestureRecognizer(tapGesture)
-    }
-    
+  
     // MARK: - Action Handling
     
     /// 处理点击事件
-    @objc private func handleTap(_ gesture: UITapGestureRecognizer) {
+    @objc private func tap(_ gesture: UITapGestureRecognizer) {
         guard gesture.state == .ended else { return }
         
         // 防抖处理：点击后临时禁用交互
         isUserInteractionEnabled = false
         defer {
             // 延迟恢复交互（确保即使提前释放也不会崩溃）
-            DispatchQueue.main.asyncAfter(deadline: .now() + tapThrottleInterval) { [weak self] in
+            DispatchQueue.lx.delay(with: throttleInterval) { [weak self] in
                 self?.isUserInteractionEnabled = true
             }
         }
         
         // 执行回调（传递弱引用避免循环）
-        tapClosure?(self)
+        handler?(self)
     }
     
     // MARK: - Lifecycle
     
     /// 析构时移除手势（示范内存管理）
     deinit {
-        removeGestureRecognizer(tapGesture)
+        lx.removeTapGesture()
     }
 }

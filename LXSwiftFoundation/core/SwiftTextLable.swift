@@ -82,7 +82,7 @@ private let linkBackgroundTag = 1992990313
     private lazy var tapGesture: UITapGestureRecognizer = {
         let gesture = UITapGestureRecognizer(
             target: self,
-            action: #selector(handleTapGesture(_:))
+            action: #selector(tapGesture(_:))
         )
         gesture.numberOfTapsRequired = 1
         return gesture
@@ -91,7 +91,7 @@ private let linkBackgroundTag = 1992990313
     private lazy var longPressGesture: UILongPressGestureRecognizer = {
         let gesture = UILongPressGestureRecognizer(
             target: self,
-            action: #selector(handleLongPressGesture(_:))
+            action: #selector(longPressGesture(_:))
         )
         gesture.minimumPressDuration = 0.8 // 长按时间阈值
         return gesture
@@ -163,6 +163,13 @@ private let linkBackgroundTag = 1992990313
     
     // MARK: - 界面设置
     private func setupUI() {
+        // 跨版本背景色适配
+        if #available(iOS 13.0, *) {
+            backgroundColor = .systemBackground
+        } else {
+            backgroundColor = .white
+        }
+
         addSubview(textView)
         addGestureRecognizer(tapGesture)
         addGestureRecognizer(longPressGesture)
@@ -173,14 +180,14 @@ private let linkBackgroundTag = 1992990313
 private extension SwiftTextLable {
     
     /// 处理长按手势
-    @objc func handleLongPressGesture(_ gesture: UILongPressGestureRecognizer) {
+    @objc func longPressGesture(_ gesture: UILongPressGestureRecognizer) {
         guard gesture.state == .began else { return }
         // 回调整个文本内容
         delegate?.textLable?(self, longPress: attributedText?.string ?? "")
     }
     
     /// 处理点击手势
-    @objc func handleTapGesture(_ gesture: UITapGestureRecognizer) {
+    @objc func tapGesture(_ gesture: UITapGestureRecognizer) {
         guard gesture.state == .ended else { return }
         
         // 防止连续点击

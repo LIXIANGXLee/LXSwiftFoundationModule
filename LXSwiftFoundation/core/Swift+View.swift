@@ -69,15 +69,6 @@ extension SwiftBasics where Base: UIView {
         }
         return false
     }
-    
-    /// 打开指定 URL
-    /// - Parameters:
-    ///   - urlStr: 要打开的 URL 字符串
-    ///   - completionHandler: 完成回调，指示是否成功打开
-    public static func openUrl(_ urlStr: String, completionHandler: ((Bool) -> Void)? = nil) {
-        UIApplication.lx.openUrl(urlStr, completionHandler: completionHandler)
-    }
-
 }
 
 //MARK: - 视图样式扩展
@@ -246,51 +237,5 @@ extension SwiftBasics where Base: UIView {
     public var bottom: CGFloat {
         get { y + height }
         set { y = newValue - height }
-    }
-}
-
-//MARK: - 手势扩展
-extension SwiftBasics where Base: UIView {
-    
-    /// 添加点击手势（闭包形式）
-    /// - Parameter gestureClosure: 手势触发回调
-    /// - Returns: 创建的手势识别器
-    @discardableResult
-    public func addTapGestureRecognizer(_ gestureClosure: @escaping (UIView?) -> Void) -> UITapGestureRecognizer {
-        // 存储闭包
-        base.gestureClosure = gestureClosure
-        
-        // 创建并添加手势
-        let gesture = UITapGestureRecognizer(
-            target: base,
-            action: #selector(base.gestureTap(_:)))
-        base.addGestureRecognizer(gesture)
-        
-        return gesture
-    }
-}
-
-// MARK: - 关联对象扩展
-private var gestureClosureKey: UInt8 = 0
-
-extension UIView {
-    /// 存储点击手势闭包的关联属性
-    fileprivate var gestureClosure: ((UIView?) -> Void)? {
-        get {
-            objc_getAssociatedObject(self, &gestureClosureKey) as? (UIView?) -> Void
-        }
-        set {
-            objc_setAssociatedObject(
-                self,
-                &gestureClosureKey,
-                newValue,
-                .OBJC_ASSOCIATION_RETAIN_NONATOMIC
-            )
-        }
-    }
-    
-    /// 手势触发方法
-    @objc fileprivate func gestureTap(_ gesture: UIGestureRecognizer) {
-        gestureClosure?(gesture.view)
     }
 }
