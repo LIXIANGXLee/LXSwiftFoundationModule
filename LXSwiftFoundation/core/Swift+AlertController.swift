@@ -50,7 +50,7 @@ public extension SwiftBasics where Base: UIAlertController {
         UIApplication.lx.currentViewController?.present(alertController, animated: true, completion: nil)
         
         // 延迟指定时间后自动消失
-        DispatchQueue.lx.delay(with: duration) {
+        DispatchQueue.lx.delay(duration) {
             alertController.dismiss(animated: true, completion: nil)
         }
     }

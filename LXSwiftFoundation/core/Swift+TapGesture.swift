@@ -24,7 +24,7 @@ extension SwiftBasics where Base: UIView {
     ///   - numberOfTouches: 需要的手指数量（默认为1，表示单指点击）
     /// - Note: 多次调用会移除之前添加的手势和回调
     public func addTapGesture(
-        closure: @escaping (UITapGestureRecognizer) -> Void,
+        execute: @escaping (UITapGestureRecognizer) -> Void,
         numberOfTaps: Int = 1,
         numberOfTouches: Int = 1
     ) {
@@ -51,7 +51,7 @@ extension SwiftBasics where Base: UIView {
         objc_setAssociatedObject(
             base,
             &AssociatedKeys.tapGestureHandler,
-            closure,
+            execute,
             .OBJC_ASSOCIATION_RETAIN_NONATOMIC
         )
         

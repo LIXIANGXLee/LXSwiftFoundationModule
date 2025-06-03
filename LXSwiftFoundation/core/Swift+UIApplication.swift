@@ -181,7 +181,7 @@ extension SwiftBasics where Base: UIApplication {
     @available(iOS 9.0, *)
     public static func playSound(
         with filepath: String?,
-        completion: (() -> Void)? = nil
+        completionHandler: (() -> Void)? = nil
     ) {
         
         // 1. 验证文件存在性
@@ -204,7 +204,7 @@ extension SwiftBasics where Base: UIApplication {
         AudioServicesPlaySystemSoundWithCompletion(soundID) {
             // 4. 释放资源
             AudioServicesDisposeSystemSoundID(soundID)
-            completion?()
+            completionHandler?()
         }
     }
     
@@ -219,9 +219,9 @@ extension SwiftBasics where Base: UIApplication {
     
     /// 请求相机权限
     /// - Parameter completion: 异步回调授权结果（主线程执行）
-    public static func requestAccessVideo(_ completion: @escaping (Bool) -> Void) {
+    public static func requestAccessVideo(_ completionHandler: @escaping (Bool) -> Void) {
         AVCaptureDevice.requestAccess(for: .video) { granted in
-            DispatchQueue.lx.asyncMain { completion(granted) }
+            DispatchQueue.lx.asyncMain { completionHandler(granted) }
         }
     }
     
@@ -235,9 +235,9 @@ extension SwiftBasics where Base: UIApplication {
     
     /// 请求相册权限
     /// - Parameter completion: 异步回调授权结果（主线程执行）
-    public static func requestAuthorization(_ completion: @escaping (Bool) -> Void) {
+    public static func requestAuthorization(_ completionHandler: @escaping (Bool) -> Void) {
         PHPhotoLibrary.requestAuthorization { status in
-            DispatchQueue.lx.asyncMain { completion(status == .authorized) }
+            DispatchQueue.lx.asyncMain { completionHandler(status == .authorized) }
         }
     }
     
@@ -251,9 +251,9 @@ extension SwiftBasics where Base: UIApplication {
     
     /// 请求麦克风权限
     /// - Parameter completion: 异步回调授权结果（主线程执行）
-    public static func requestAccessAudio(_ completion: @escaping (Bool) -> Void) {
+    public static func requestAccessAudio(_ completionHandler: @escaping (Bool) -> Void) {
         AVCaptureDevice.requestAccess(for: .audio) { granted in
-            DispatchQueue.lx.asyncMain { completion(granted) }
+            DispatchQueue.lx.asyncMain { completionHandler(granted) }
         }
     }
     
@@ -273,10 +273,10 @@ extension SwiftBasics where Base: UIApplication {
     /// - 说明: 返回true表示用户未明确拒绝通知权限（包括未决定状态）
     /// - Parameter callback: 异步回调检查结果（主线程执行）
     @available(iOS 10.0, *)
-    public static func checkNotificationSupport(_ completion: @escaping (Bool) -> Void) {
+    public static func checkNotificationSupport(_ completionHandler: @escaping (Bool) -> Void) {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             DispatchQueue.lx.asyncMain {
-                completion(settings.authorizationStatus != .denied)
+                completionHandler(settings.authorizationStatus != .denied)
             }
         }
     }
@@ -285,10 +285,10 @@ extension SwiftBasics where Base: UIApplication {
     /// - 说明: 自动注册远程通知并触发系统权限弹窗
     /// - Parameter completion: 异步回调授权结果（主线程执行）
     @available(iOS 10.0, *)
-    public static func registerRemoteNotifications(_ completion: @escaping (Bool) -> Void) {
+    public static func registerRemoteNotifications(_ completionHandler: @escaping (Bool) -> Void) {
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .badge, .sound]) { granted, _ in
-            DispatchQueue.lx.asyncMain { completion(granted) }
+            DispatchQueue.lx.asyncMain { completionHandler(granted) }
             UIApplication.shared.registerForRemoteNotifications()
         }
     }

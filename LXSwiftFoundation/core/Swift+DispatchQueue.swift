@@ -60,9 +60,7 @@ extension DispatchQueue {
 
 
 extension SwiftBasics where Base: DispatchQueue {
-    // MARK: - Type Alias
-    public typealias SwiftClosureTask = () -> Void
-    
+  
     // MARK: - Asynchronous Operations
     
     /// 异步执行任务并在完成后可选地在主线程回调
@@ -72,15 +70,15 @@ extension SwiftBasics where Base: DispatchQueue {
     /// - Returns: 可取消的 DispatchWorkItem 对象
     @discardableResult
     public static func async(
-        with task: @escaping SwiftClosureTask,
-        mainTask: SwiftClosureTask? = nil
+        _ execute: @escaping (() -> Void),
+        completion: (() -> Void)? = nil
     ) -> DispatchWorkItem {
-        let workItem = DispatchWorkItem(block: task)
+        let workItem = DispatchWorkItem(block: execute)
         DispatchQueue.global().async(execute: workItem)
         
         // 如果提供了主线程回调，则在任务完成后通知主队列
-        if let mainTask = mainTask {
-            workItem.notify(queue: .main, execute: mainTask)
+        if let completion = completion {
+            workItem.notify(queue: .main, execute: completion)
         }
         
         return workItem
@@ -94,7 +92,7 @@ extension SwiftBasics where Base: DispatchQueue {
     ///             注意：该闭包可能捕获外部变量，需使用 `[weak self]` 避免循环引用。
     ///   - qos: 指定操作执行的服务质量（优先级），默认为用户交互级别
     public static func asyncOperation<T>(
-        _ operation: @escaping () -> T?,
+        _ execute: @escaping () -> T?,
         completion: @escaping (_ result: T?) -> Void,
         qos: DispatchQoS.QoSClass = .userInitiated  // 添加可配置的优先级参数
     ) {
@@ -106,7 +104,7 @@ extension SwiftBasics where Base: DispatchQueue {
         
         asyncQueue.async {
             // 执行耗时操作，捕获可能发生的崩溃
-            let result = operation()
+            let result = execute()
            
             // 确保主线程安全回调
             DispatchQueue.main.async {
@@ -127,8 +125,8 @@ extension SwiftBasics where Base: DispatchQueue {
     /// - Parameter task: 要在主队列执行的闭包任务
     /// - Returns: 可取消的 DispatchWorkItem 对象
     @discardableResult
-    public static func asyncMain(with closure: @escaping SwiftClosureTask) -> DispatchWorkItem {
-        let workItem = DispatchWorkItem(block: closure)
+    public static func asyncMain(_ execute: @escaping () -> Void) -> DispatchWorkItem {
+        let workItem = DispatchWorkItem(block: execute)
         DispatchQueue.main.async(execute: workItem)
         return workItem
     }
@@ -143,18 +141,18 @@ extension SwiftBasics where Base: DispatchQueue {
     /// - Returns: 可取消的 DispatchWorkItem 对象
     @discardableResult
     public static func asyncDelay(
-        with seconds: TimeInterval,
-        closure: @escaping SwiftClosureTask,
-        mainClosure: SwiftClosureTask? = nil
+        _ seconds: TimeInterval,
+        _ execute: @escaping () -> Void,
+        completion: (() -> Void)? = nil
     ) -> DispatchWorkItem {
-        let workItem = DispatchWorkItem(block: closure)
+        let workItem = DispatchWorkItem(block: execute)
         DispatchQueue.global().asyncAfter(
             deadline: .now() + seconds,
             execute: workItem
         )
         
-        if let mainClosure = mainClosure {
-            workItem.notify(queue: .main, execute: mainClosure)
+        if let completion = completion {
+            workItem.notify(queue: .main, execute: completion)
         }
         
         return workItem
@@ -167,10 +165,10 @@ extension SwiftBasics where Base: DispatchQueue {
     /// - Returns: 可取消的 DispatchWorkItem 对象
     @discardableResult
     public static func delay(
-        with seconds: TimeInterval,
-        mainClosure: @escaping SwiftClosureTask
+        _ seconds: TimeInterval,
+        execute: @escaping () -> Void
     ) -> DispatchWorkItem {
-        let workItem = DispatchWorkItem(block: mainClosure)
+        let workItem = DispatchWorkItem(block: execute)
         
         DispatchQueue.main.asyncAfter(
             deadline: .now() + seconds,
@@ -184,23 +182,23 @@ extension SwiftBasics where Base: DispatchQueue {
     ///   - delay: 延迟时间（秒）
     ///   - callBack: 要执行的闭包任务
     public func asyncAfter(
-        with delay: TimeInterval,
-        closure: @escaping SwiftClosureTask,
+        _ delay: TimeInterval,
+        execute: @escaping () -> Void,
     ) {
-        base.asyncAfter(deadline: .now() + delay, execute: closure)
+        base.asyncAfter(deadline: .now() + delay, execute: execute)
     }
     
     // MARK: - Thread-Safe Operations
     
     /// 安全地在主线程执行任务（如果当前已在主线程则同步执行）
     /// - Parameter execute: 要执行的闭包任务
-    public static func asyncSafeMain(_ execute: @escaping SwiftClosureTask) {
+    public static func asyncSafeMain(_ execute: @escaping () -> Void) {
         isMainThread ? execute() : DispatchQueue.main.async(execute: execute)
     }
     
     /// 在全局队列安全地执行任务
     /// - Parameter execute: 要执行的闭包任务
-    public static func asyncSafeGlobal(_ execute: @escaping SwiftClosureTask) {
+    public static func asyncSafeGlobal(_ execute: @escaping () -> Void) {
         DispatchQueue.global(qos: .default).async(execute: execute)
     }
     
@@ -214,9 +212,8 @@ extension SwiftBasics where Base: DispatchQueue {
     /// 已废弃 - 使用 asyncAfter(with:_:) 替代
     @available(*, deprecated, message: "Use `asyncAfter(with:_:)` instead")
     public func after(
-        with delay: TimeInterval,
-        execute closure: @escaping SwiftClosureTask
+        with delay: TimeInterval, execute: @escaping () -> Void
     ) {
-        asyncAfter(with: delay, closure: closure)
+        asyncAfter(delay, execute: execute)
     }
 }

@@ -69,7 +69,7 @@ public enum SwiftUserInterfaceStyle: Int {
         } else {
             backgroundColor = .white
         }
-        lx.addTapGesture(closure: tap(_:))
+        lx.addTapGesture(execute: tap(_:))
 
     }
     
@@ -103,7 +103,7 @@ public enum SwiftUserInterfaceStyle: Int {
         isUserInteractionEnabled = false
         defer {
             // 延迟恢复交互（确保即使提前释放也不会崩溃）
-            DispatchQueue.lx.delay(with: throttleInterval) { [weak self] in
+            DispatchQueue.lx.delay(throttleInterval) { [weak self] in
                 self?.isUserInteractionEnabled = true
             }
         }

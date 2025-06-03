@@ -35,13 +35,13 @@ extension SwiftBasics where Base: NotificationCenter {
     public func observeDidBecomeActive(
         observer: AnyObject,
         queue: OperationQueue? = .main,
-        closure: @escaping (Notification) -> Void
+        execute: @escaping (Notification) -> Void
     ) {
         registerNotification(
             name: UIApplication.didBecomeActiveNotification,
             observer: observer,
             queue: queue,
-            closure: closure
+            execute: execute
         )
     }
     
@@ -54,13 +54,13 @@ extension SwiftBasics where Base: NotificationCenter {
     public func observeWillResignActive(
         observer: AnyObject,
         queue: OperationQueue? = .main,
-        closure: @escaping (Notification) -> Void
+        execute: @escaping (Notification) -> Void
     ) {
         registerNotification(
             name: UIApplication.willResignActiveNotification,
             observer: observer,
             queue: queue,
-            closure: closure
+            execute: execute
         )
     }
     
@@ -70,13 +70,13 @@ extension SwiftBasics where Base: NotificationCenter {
     public func observeKeyboardWillShow(
         observer: AnyObject,
         queue: OperationQueue? = .main,
-        closure: @escaping (Notification) -> Void
+        execute: @escaping (Notification) -> Void
     ) {
         registerNotification(
             name: UIResponder.keyboardWillShowNotification,
             observer: observer,
             queue: queue,
-            closure: closure
+            execute: execute
         )
     }
     
@@ -84,13 +84,13 @@ extension SwiftBasics where Base: NotificationCenter {
     public func observeKeyboardDidShow(
         observer: AnyObject,
         queue: OperationQueue? = .main,
-        closure: @escaping (Notification) -> Void
+        execute: @escaping (Notification) -> Void
     ) {
         registerNotification(
             name: UIResponder.keyboardDidShowNotification,  // 修正了错误的常量名
             observer: observer,
             queue: queue,
-            closure: closure
+            execute: execute
         )
     }
     
@@ -98,13 +98,13 @@ extension SwiftBasics where Base: NotificationCenter {
     public func observeKeyboardWillHide(
         observer: AnyObject,
         queue: OperationQueue? = .main,
-        closure: @escaping (Notification) -> Void
+        execute: @escaping (Notification) -> Void
     ) {
         registerNotification(
             name: UIResponder.keyboardWillHideNotification,  // 修正了错误的常量名
             observer: observer,
             queue: queue,
-            closure: closure
+            execute: execute
         )
     }
     
@@ -112,13 +112,13 @@ extension SwiftBasics where Base: NotificationCenter {
     public func observeKeyboardDidHide(
         observer: AnyObject,
         queue: OperationQueue? = .main,
-        closure: @escaping (Notification) -> Void
+        execute: @escaping (Notification) -> Void
     ) {
         registerNotification(
             name: UIResponder.keyboardDidHideNotification,  // 修正了错误的常量名
             observer: observer,
             queue: queue,
-            closure: closure
+            execute: execute
         )
     }
     
@@ -129,13 +129,13 @@ extension SwiftBasics where Base: NotificationCenter {
         name: Notification.Name,
         observer: AnyObject,
         queue: OperationQueue?,
-        closure: @escaping (Notification) -> Void
+        execute: @escaping (Notification) -> Void
     ) {
         let token = base.addObserver(
             forName: name,
             object: nil,
             queue: queue,
-            using: closure
+            using: execute
         )
         storeToken(token, for: observer)
     }

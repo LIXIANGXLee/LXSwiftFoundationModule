@@ -64,10 +64,10 @@ extension SwiftBasics where Base: FileManager {
     ///   - block: 完成回调，返回是否成功
     /// - Returns: 是否创建成功
     @discardableResult
-    public static func createFolder(atPath path: String, block: ((_ isSuccess: Bool) -> Void)? = nil) -> Bool {
+    public static func createFolder(atPath path: String, execute: ((_ isSuccess: Bool) -> Void)? = nil) -> Bool {
         guard !isFileExists(atPath: path) else {
             // 目录已存在，直接返回成功
-            block?(true)
+            execute?(true)
             return true
         }
         
@@ -78,11 +78,11 @@ extension SwiftBasics where Base: FileManager {
                 withIntermediateDirectories: true,
                 attributes: nil
             )
-            block?(true)
+            execute?(true)
             return true
         } catch {
             SwiftLog.log("创建目录失败: \(error.localizedDescription)")
-            block?(false)
+            execute?(false)
             return false
         }
     }
@@ -93,10 +93,10 @@ extension SwiftBasics where Base: FileManager {
     ///   - block: 完成回调，返回是否成功
     /// - Returns: 是否创建成功
     @discardableResult
-    public static func createFile(atPath path: String, block: ((_ isSuccess: Bool) -> Void)? = nil) -> Bool {
+    public static func createFile(atPath path: String, execute: ((_ isSuccess: Bool) -> Void)? = nil) -> Bool {
         guard !isFileExists(atPath: path) else {
             // 文件已存在，直接返回成功
-            block?(true)
+            execute?(true)
             return true
         }
         
@@ -106,7 +106,7 @@ extension SwiftBasics where Base: FileManager {
             contents: nil,
             attributes: nil
         )
-        block?(isSuccess)
+        execute?(isSuccess)
         return isSuccess
     }
     
@@ -146,20 +146,20 @@ extension SwiftBasics where Base: FileManager {
     ///   - block: 完成回调，返回是否成功
     /// - Returns: 是否删除成功
     @discardableResult
-    public static func removefolder(atPath path: String, block: ((_ isSuccess: Bool) -> Void)? = nil) -> Bool {
+    public static func removefolder(atPath path: String, execute: ((_ isSuccess: Bool) -> Void)? = nil) -> Bool {
         guard isFileExists(atPath: path) else {
             // 目录不存在，直接返回成功
-            block?(true)
+            execute?(true)
             return true
         }
         
         do {
             try FileManager.default.removeItem(atPath: path)
-            block?(true)
+            execute?(true)
             return true
         } catch {
             SwiftLog.log("删除目录失败: \(error.localizedDescription)")
-            block?(false)
+            execute?(false)
             return false
         }
     }
@@ -170,20 +170,20 @@ extension SwiftBasics where Base: FileManager {
     ///   - block: 完成回调，返回是否成功
     /// - Returns: 是否删除成功
     @discardableResult
-    public static func removefile(atPath path: String, block: ((_ isSuccess: Bool) -> Void)? = nil) -> Bool {
+    public static func removefile(atPath path: String, execute: ((_ isSuccess: Bool) -> Void)? = nil) -> Bool {
         guard isFileExists(atPath: path) else {
             // 文件不存在，直接返回成功
-            block?(true)
+            execute?(true)
             return true
         }
         
         do {
             try FileManager.default.removeItem(atPath: path)
-            block?(true)
+            execute?(true)
             return true
         } catch {
             SwiftLog.log("删除文件失败: \(error.localizedDescription)")
-            block?(false)
+            execute?(false)
             return false
         }
     }
@@ -202,11 +202,11 @@ extension SwiftBasics where Base: FileManager {
         fileType: FileManager.FileType = .file,
         moveType: FileManager.MoveFileType = .move,
         isOverwrite: Bool = true,
-        block: ((_ isSuccess: Bool) -> Void)? = nil
+        execute: ((_ isSuccess: Bool) -> Void)? = nil
     ) {
         // 检查源路径是否存在
         guard isFileExists(atPath: fromFilePath) else {
-            block?(false)
+            execute?(false)
             return
         }
         
@@ -220,7 +220,7 @@ extension SwiftBasics where Base: FileManager {
                 createFolder(atPath: toFileFolderPath)
             
             guard createSuccess else {
-                block?(false)
+                execute?(false)
                 return
             }
         }
@@ -231,7 +231,7 @@ extension SwiftBasics where Base: FileManager {
                 try FileManager.default.removeItem(atPath: toFilePath)
             } catch {
                 SwiftLog.log("删除已存在文件失败: \(error.localizedDescription)")
-                block?(false)
+                execute?(false)
                 return
             }
         }
@@ -244,10 +244,10 @@ extension SwiftBasics where Base: FileManager {
             case .copy:
                 try FileManager.default.copyItem(atPath: fromFilePath, toPath: toFilePath)
             }
-            block?(true)
+            execute?(true)
         } catch {
             SwiftLog.log("文件操作失败: \(error.localizedDescription)")
-            block?(false)
+            execute?(false)
         }
     }
     
