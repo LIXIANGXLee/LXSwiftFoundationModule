@@ -93,11 +93,11 @@ class ViewController: UIViewController {
     
     }
     func showModal() {
-        let config = SwiftModalConfig()
-        config.isDismissBg = false
-        config.contentMidViewH = SCALE_IP6_WIDTH_TO_WIDTH(260)
+        let config = SwiftHyperlinksConfig()
+        config.contentMidViewHeight = SCALE_IP6_WIDTH_TO_WIDTH(260)
         config.titleFont = UIFont.lx.font(withMedium: 16)
         config.titleColor = UIColor.black
+        config.isDismissBackground = true
         let itemCancel = SwiftItem(title: "不同意",
                                          titleColor: UIColor.blue,
                                          titleFont: UIFont.systemFont(ofSize: 17, weight: .medium)) { }
@@ -105,35 +105,28 @@ class ViewController: UIViewController {
                                          titleColor: UIColor.blue,
                                         titleFont: UIFont.systemFont(ofSize: 17, weight: .medium)) {
             let str = Bundle.main.path(forResource: "lxQrCodeVoice", ofType: "wav")
-            
             UIApplication.lx.playSound(with: str)
         }
         
+        
+        let color = UIColor.lx.color(hex: "36acff")
+        let font = UIFont.systemFont(ofSize: SCALE_IP6_WIDTH_TO_WIDTH(14))
+        let r1 = SwiftRegexType(regexPattern: "《用户服务协议》", color: color, font: font,isExpression: false)
+        let r2 = SwiftRegexType(regexPattern: "《隐私政策》", color: color, font: font,isExpression: false)
+        let r3 = SwiftRegexType(regexPattern: SwiftRegexType.defaultHttpRegex, color: color, font: font,isExpression: false)
+
+        let str = "欢迎使用迎使用！我们非常《用户服务协议》重视您《隐私政策》的您同意https://chat.deepseek.com并接受全部条款后方可开始使用。欢迎使用迎使用！我们非常《用户服务协议》重视您《隐私政策》的您同意https://chat.deepseek.com并接受全部条款后方可开始使用。欢迎使用迎使用！我们非常《用户服务协议》重视您《隐私政策》的您同意https://chat.deepseek.com并接受全部条款后方可开始使用。欢迎使用迎使用！我们非常《用户服务协议》重视您《隐私政策》的您同意https://chat.deepseek.com并接受全部条款后方可开始使用。欢迎使用迎使用！我们非常《用户服务协议》重视您《隐私政策》的您同意https://chat.deepseek.com并接受全部条款后方可开始使用。"
+        
         let modal = SwiftHyperlinksController()
-        modal.setModal(config, modalItems: [itemCancel,itemTrue]) { (text) -> (Void) in
+        modal.tapHandler = { text in
             SwiftLog.log("-=-=-=-=-=\(text)")
-            
         }
-        
-        let r1 = SwiftRegexType(regexPattern: "《用户服务协议》",
-                       color: UIColor.lx.color(hex: "36acff"),
-                       font: UIFont.systemFont(ofSize: 14),
-                       isExpression: false)
-        
-        let r2 = SwiftRegexType(regexPattern: "《隐私政策》",
-                       color: UIColor.lx.color(hex: "36acff"),
-                       font: UIFont.systemFont(ofSize: 14),
-                       isExpression: false)
-        
-        let r3 = SwiftRegexType(regexPattern: SwiftRegexType.defaultHttpRegex,
-                       color: UIColor.lx.color(hex: "36acff"),
-                       font: UIFont.systemFont(ofSize: 14),
-                       isExpression: false)
-  
-        let str = "欢迎使用迎使用！我们非常《用户服务协议》重视您《隐私政策》的您同意https://chat.deepseek.com并接受全部条款后方可开始使用。"
-        
-        guard let attr = modal.getAttributedString(str, textColor: UIColor.lx.color(hex: "666666"), textFont: UIFont.systemFont(ofSize: 14), regexTypes: [r1,r2,r3]) else { return }
-        modal.show(with: "温馨提示", content: attr)
+
+        guard let attr = modal.getAttributedString(str, regexTypes: [r1,r2,r3]) else { return }
+        modal.show(with: "温馨提示",
+                   content: attr,
+                   config: config,
+                   items: [itemCancel,itemTrue])
     }
 }
 

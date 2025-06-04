@@ -90,6 +90,8 @@ import UIKit
     /// 富文本内容（设置后会解析链接）
     open var attributedText: NSAttributedString? {
         didSet {
+            assert(viewFrame != nil, "viewFrame must not be empty")
+
             guard let attr = attributedText else { return }
             
             // 重置之前的链接数据
