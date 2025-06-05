@@ -360,6 +360,46 @@ extension SwiftBasics where Base == String {
             attributedString.addAttribute(customKey, value: expressionName, range: newRange)
         }
     }
+    
+    
+    /// 使用正则表达式匹配当前字符串
+    /// - 参数:
+    ///   - pattern: 正则表达式模式字符串
+    ///   - options: 正则表达式选项，默认为 `.caseInsensitive` (不区分大小写)
+    /// - 返回值:
+    ///     - 成功: 包含所有匹配结果的数组 `[NSTextCheckingResult]`
+    ///     - 失败: 当正则表达式编译失败时返回 `nil`
+    /// - 注意:
+    ///     1. 当正则表达式模式无效时会静默失败（返回 nil）
+    ///     2. 匹配范围覆盖整个字符串（从起始位置到末尾）
+    ///     3. 默认启用不区分大小写匹配，可通过 options 参数修改
+    public func matching(
+        pattern: String,
+        options: NSRegularExpression.Options = .caseInsensitive
+    ) -> [NSTextCheckingResult]? {
+        // 尝试编译正则表达式（使用传入的选项）
+        // 使用 try? 避免抛出异常，编译失败时返回 nil
+        guard let regex = try? NSRegularExpression(
+            pattern: pattern,
+            options: options
+        ) else {
+            // 正则表达式模式无效，返回 nil
+            return nil
+        }
+        
+        // 在整个字符串范围内执行匹配
+        let fullRange = NSRange(
+            location: 0,
+            length: base.count
+        )
+        
+        // 返回所有匹配结果（可能为空数组表示无匹配）
+        return regex.matches(
+            in: base,
+            options: [],          // 匹配选项使用默认值
+            range: fullRange      // 指定完整匹配范围
+        )
+    }
 }
 
 //MARK: - 字符串尺寸计算
@@ -408,8 +448,8 @@ extension SwiftBasics where Base == String {
     /// - Returns: 比较结果枚举值
     ///
     /// 示例:
-    ///   versionCompareSwift(v1: "2.3.1", v2: "2.1.4") -> .big
-    public static func versionCompareSwift(v1: String, v2: String) -> CompareResult {
+    ///   compareVersion(v1: "2.3.1", v2: "2.1.4") -> .big
+    public static func compareVersion(v1: String, v2: String) -> CompareResult {
         
         let result = v1.compare(v2, options: .numeric);
         switch result {
@@ -1052,44 +1092,6 @@ extension SwiftBasics where Base == String {
         return []
     }
 
-    /// 使用正则表达式匹配当前字符串
-    /// - 参数:
-    ///   - pattern: 正则表达式模式字符串
-    ///   - options: 正则表达式选项，默认为 `.caseInsensitive` (不区分大小写)
-    /// - 返回值:
-    ///     - 成功: 包含所有匹配结果的数组 `[NSTextCheckingResult]`
-    ///     - 失败: 当正则表达式编译失败时返回 `nil`
-    /// - 注意:
-    ///     1. 当正则表达式模式无效时会静默失败（返回 nil）
-    ///     2. 匹配范围覆盖整个字符串（从起始位置到末尾）
-    ///     3. 默认启用不区分大小写匹配，可通过 options 参数修改
-    public func matching(
-        pattern: String,
-        options: NSRegularExpression.Options = .caseInsensitive
-    ) -> [NSTextCheckingResult]? {
-        // 尝试编译正则表达式（使用传入的选项）
-        // 使用 try? 避免抛出异常，编译失败时返回 nil
-        guard let regex = try? NSRegularExpression(
-            pattern: pattern,
-            options: options
-        ) else {
-            // 正则表达式模式无效，返回 nil
-            return nil
-        }
-        
-        // 在整个字符串范围内执行匹配
-        let fullRange = NSRange(
-            location: 0,
-            length: base.count
-        )
-        
-        // 返回所有匹配结果（可能为空数组表示无匹配）
-        return regex.matches(
-            in: base,
-            options: [],          // 匹配选项使用默认值
-            range: fullRange      // 指定完整匹配范围
-        )
-    }
 }
 
 /// 内部使用的扩展方法

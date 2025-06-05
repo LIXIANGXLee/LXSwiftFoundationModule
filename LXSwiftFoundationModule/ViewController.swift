@@ -55,7 +55,8 @@ class ViewController: UIViewController {
                "弹窗6",
                "两段式滑动弹窗",
                "戴超链接的弹窗",
-               "图片"
+               "图片",
+               "KVO"
            ],
             [
                 "wkwebview加载网页，截取长图",
@@ -212,8 +213,9 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate  {
             case 8:
                 let vc = ImageTestViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
-                
-                
+            case 9:
+                let vc = KVOViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
             default: break
             }
             

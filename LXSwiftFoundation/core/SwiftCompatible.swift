@@ -48,32 +48,39 @@ public extension SwiftCompatible {
 }
 
 /// 遵守协议
-extension UIView: SwiftCompatible { }
 extension Array: SwiftCompatible { }
-extension UIBezierPath: SwiftCompatible { }
-extension Bundle: SwiftCompatible { }
-extension CALayer: SwiftCompatible { }
-extension UIColor: SwiftCompatible { }
-extension NSAttributedString: SwiftCompatible{ }
-extension NSNumber: SwiftCompatible { }
 extension CGRect: SwiftCompatible { }
-extension NSData: SwiftCompatible { }
-extension Date: SwiftCompatible { }
-extension UIDevice: SwiftCompatible { }
-extension Dictionary: SwiftCompatible { }
-extension UIEdgeInsets: SwiftCompatible { }
-extension UIFont: SwiftCompatible { }
-extension UIImage: SwiftCompatible { }
-extension UIApplication: SwiftCompatible { }
-extension URL: SwiftCompatible { }
-extension UIViewController: SwiftCompatible { }
-extension Data: SwiftCompatible { }
-extension DispatchQueue: SwiftCompatible { }
 extension CGFloat: SwiftCompatible { }
 extension Double: SwiftCompatible { }
 extension Int: SwiftCompatible { }
 extension String: SwiftCompatible { }
-extension AVAsset: SwiftCompatible { }
-extension AVURLAsset: SwiftCompatible { }
-extension NotificationCenter: SwiftCompatible { }
+extension Data: SwiftCompatible { }
+extension URL: SwiftCompatible { }
+extension Date: SwiftCompatible { }
+extension Dictionary: SwiftCompatible { }
+extension UIEdgeInsets: SwiftCompatible { }
+
+
+extension NSObject: SwiftCompatible { }
+//extension UIView: SwiftCompatible { }
+//extension UIBezierPath: SwiftCompatible { }
+//extension Bundle: SwiftCompatible { }
+//extension CALayer: SwiftCompatible { }
+//extension UIColor: SwiftCompatible { }
+//extension NSAttributedString: SwiftCompatible{ }
+//extension NSNumber: SwiftCompatible { }
+//extension NSData: SwiftCompatible { }
+//extension Date: SwiftCompatible { }
+//extension UIDevice: SwiftCompatible { }
+//extension Dictionary: SwiftCompatible { }
+//extension UIEdgeInsets: SwiftCompatible { }
+//extension UIFont: SwiftCompatible { }
+//extension UIImage: SwiftCompatible { }
+//extension UIApplication: SwiftCompatible { }
+//extension UIViewController: SwiftCompatible { }
+//extension DispatchQueue: SwiftCompatible { }
+//extension AVAsset: SwiftCompatible { }
+//extension AVURLAsset: SwiftCompatible { }
+//extension NotificationCenter: SwiftCompatible { }
+//extension UIDevice: SwiftCompatible { }
 
