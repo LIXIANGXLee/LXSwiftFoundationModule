@@ -71,14 +71,14 @@ extension SwiftBasics where Base: DispatchQueue {
     @discardableResult
     public static func async(
         _ execute: @escaping (() -> Void),
-        completion: (() -> Void)? = nil
+        completionHandler: (() -> Void)? = nil
     ) -> DispatchWorkItem {
         let workItem = DispatchWorkItem(block: execute)
         DispatchQueue.global().async(execute: workItem)
         
         // 如果提供了主线程回调，则在任务完成后通知主队列
-        if let completion = completion {
-            workItem.notify(queue: .main, execute: completion)
+        if let completionHandler = completionHandler {
+            workItem.notify(queue: .main, execute: completionHandler)
         }
         
         return workItem
@@ -93,7 +93,7 @@ extension SwiftBasics where Base: DispatchQueue {
     ///   - qos: 指定操作执行的服务质量（优先级），默认为用户交互级别
     public static func asyncOperation<T>(
         _ execute: @escaping () -> T?,
-        completion: @escaping (_ result: T?) -> Void,
+        completionHandler: @escaping (_ result: T?) -> Void,
         qos: DispatchQoS.QoSClass = .userInitiated  // 添加可配置的优先级参数
     ) {
         // 创建专用串行队列（避免使用全局并发队列可能导致的线程爆炸问题）
@@ -116,7 +116,7 @@ extension SwiftBasics where Base: DispatchQueue {
                     SwiftLog.log("⚠️ 警告：未在主线程回调")
                 }
                 #endif
-                completion(result)
+                completionHandler(result)
             }
         }
     }
@@ -143,7 +143,7 @@ extension SwiftBasics where Base: DispatchQueue {
     public static func asyncDelay(
         _ seconds: TimeInterval,
         _ execute: @escaping () -> Void,
-        completion: (() -> Void)? = nil
+        completionHandler: (() -> Void)? = nil
     ) -> DispatchWorkItem {
         let workItem = DispatchWorkItem(block: execute)
         DispatchQueue.global().asyncAfter(
@@ -151,8 +151,8 @@ extension SwiftBasics where Base: DispatchQueue {
             execute: workItem
         )
         
-        if let completion = completion {
-            workItem.notify(queue: .main, execute: completion)
+        if let completionHandler = completionHandler {
+            workItem.notify(queue: .main, execute: completionHandler)
         }
         
         return workItem

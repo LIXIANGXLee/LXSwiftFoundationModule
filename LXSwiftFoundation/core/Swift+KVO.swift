@@ -34,11 +34,6 @@ extension SwiftBasics where Base: NSObject {
 // 关联对象 Key
 private var swiftObserverKey: UInt8 = 0
 
-// 定义可销毁对象的协议
-public protocol SwiftDisposable {
-    func dispose()
-}
-
 // 封装 KVO 观察者的内部类
 private final class KVOObserver: NSObject, SwiftDisposable {
     weak var target: NSObject?  // 弱引用避免循环引用

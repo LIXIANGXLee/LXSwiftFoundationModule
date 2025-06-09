@@ -69,7 +69,7 @@ public enum SwiftUserInterfaceStyle: Int {
         } else {
             backgroundColor = .white
         }
-        lx.addTapGesture(execute: tap(_:))
+        lx.addTapGesture(completionHandler: tap(_:))
 
     }
     

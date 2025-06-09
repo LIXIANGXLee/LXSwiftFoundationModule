@@ -38,3 +38,9 @@ public extension SwiftCellCompatible where Self: UIView {
         String(describing: Self.self)
     }
 }
+
+
+// 定义可销毁对象的协议
+public protocol SwiftDisposable {
+    func dispose()
+}

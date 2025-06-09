@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension FileManager: SwiftCompatible {
+extension FileManager {
     /// 文件类型枚举
     public enum FileType {
         case file      // 文件类型
@@ -64,10 +64,10 @@ extension SwiftBasics where Base: FileManager {
     ///   - block: 完成回调，返回是否成功
     /// - Returns: 是否创建成功
     @discardableResult
-    public static func createFolder(atPath path: String, execute: ((_ isSuccess: Bool) -> Void)? = nil) -> Bool {
+    public static func createFolder(atPath path: String, completionHandler: ((_ isSuccess: Bool) -> Void)? = nil) -> Bool {
         guard !isFileExists(atPath: path) else {
             // 目录已存在，直接返回成功
-            execute?(true)
+            completionHandler?(true)
             return true
         }
         
@@ -78,11 +78,11 @@ extension SwiftBasics where Base: FileManager {
                 withIntermediateDirectories: true,
                 attributes: nil
             )
-            execute?(true)
+            completionHandler?(true)
             return true
         } catch {
             SwiftLog.log("创建目录失败: \(error.localizedDescription)")
-            execute?(false)
+            completionHandler?(false)
             return false
         }
     }
@@ -93,10 +93,10 @@ extension SwiftBasics where Base: FileManager {
     ///   - block: 完成回调，返回是否成功
     /// - Returns: 是否创建成功
     @discardableResult
-    public static func createFile(atPath path: String, execute: ((_ isSuccess: Bool) -> Void)? = nil) -> Bool {
+    public static func createFile(atPath path: String, completionHandler: ((_ isSuccess: Bool) -> Void)? = nil) -> Bool {
         guard !isFileExists(atPath: path) else {
             // 文件已存在，直接返回成功
-            execute?(true)
+            completionHandler?(true)
             return true
         }
         
@@ -106,7 +106,7 @@ extension SwiftBasics where Base: FileManager {
             contents: nil,
             attributes: nil
         )
-        execute?(isSuccess)
+        completionHandler?(isSuccess)
         return isSuccess
     }
     
@@ -146,20 +146,20 @@ extension SwiftBasics where Base: FileManager {
     ///   - block: 完成回调，返回是否成功
     /// - Returns: 是否删除成功
     @discardableResult
-    public static func removefolder(atPath path: String, execute: ((_ isSuccess: Bool) -> Void)? = nil) -> Bool {
+    public static func removefolder(atPath path: String, completionHandler: ((_ isSuccess: Bool) -> Void)? = nil) -> Bool {
         guard isFileExists(atPath: path) else {
             // 目录不存在，直接返回成功
-            execute?(true)
+            completionHandler?(true)
             return true
         }
         
         do {
             try FileManager.default.removeItem(atPath: path)
-            execute?(true)
+            completionHandler?(true)
             return true
         } catch {
             SwiftLog.log("删除目录失败: \(error.localizedDescription)")
-            execute?(false)
+            completionHandler?(false)
             return false
         }
     }
@@ -170,20 +170,20 @@ extension SwiftBasics where Base: FileManager {
     ///   - block: 完成回调，返回是否成功
     /// - Returns: 是否删除成功
     @discardableResult
-    public static func removefile(atPath path: String, execute: ((_ isSuccess: Bool) -> Void)? = nil) -> Bool {
+    public static func removefile(atPath path: String, completionHandler: ((_ isSuccess: Bool) -> Void)? = nil) -> Bool {
         guard isFileExists(atPath: path) else {
             // 文件不存在，直接返回成功
-            execute?(true)
+            completionHandler?(true)
             return true
         }
         
         do {
             try FileManager.default.removeItem(atPath: path)
-            execute?(true)
+            completionHandler?(true)
             return true
         } catch {
             SwiftLog.log("删除文件失败: \(error.localizedDescription)")
-            execute?(false)
+            completionHandler?(false)
             return false
         }
     }
@@ -202,11 +202,11 @@ extension SwiftBasics where Base: FileManager {
         fileType: FileManager.FileType = .file,
         moveType: FileManager.MoveFileType = .move,
         isOverwrite: Bool = true,
-        execute: ((_ isSuccess: Bool) -> Void)? = nil
+        completionHandler: ((_ isSuccess: Bool) -> Void)? = nil
     ) {
         // 检查源路径是否存在
         guard isFileExists(atPath: fromFilePath) else {
-            execute?(false)
+            completionHandler?(false)
             return
         }
         
@@ -220,7 +220,7 @@ extension SwiftBasics where Base: FileManager {
                 createFolder(atPath: toFileFolderPath)
             
             guard createSuccess else {
-                execute?(false)
+                completionHandler?(false)
                 return
             }
         }
@@ -231,7 +231,7 @@ extension SwiftBasics where Base: FileManager {
                 try FileManager.default.removeItem(atPath: toFilePath)
             } catch {
                 SwiftLog.log("删除已存在文件失败: \(error.localizedDescription)")
-                execute?(false)
+                completionHandler?(false)
                 return
             }
         }
@@ -244,10 +244,10 @@ extension SwiftBasics where Base: FileManager {
             case .copy:
                 try FileManager.default.copyItem(atPath: fromFilePath, toPath: toFilePath)
             }
-            execute?(true)
+            completionHandler?(true)
         } catch {
             SwiftLog.log("文件操作失败: \(error.localizedDescription)")
-            execute?(false)
+            completionHandler?(false)
         }
     }
     

@@ -39,7 +39,7 @@
         } else {
             backgroundColor = .white
         }
-        lx.addTapGesture(execute: tap(_:))
+        lx.addTapGesture(completionHandler: tap(_:))
     }
     
     /// 不支持 Storyboard/XIB 初始化

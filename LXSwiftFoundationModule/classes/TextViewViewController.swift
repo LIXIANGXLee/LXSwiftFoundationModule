@@ -35,7 +35,7 @@ class TextViewViewController: UIViewController {
         textField.placeholder = "dsdsds"
         textField.textColor = UIColor.blue
         textField.backgroundColor = UIColor.white
-        textField.lx.set(withPlaceholder: "dsdsds", color: UIColor.red)
+        textField.lx.setPlaceholder("dsdsds", color: UIColor.red)
         textField.textHandler =  { (text) in
             SwiftLog.log("-=-=-=--------=\(text)")
         }

@@ -31,17 +31,17 @@ extension SwiftBasics where Base: NotificationCenter {
     /// - Parameters:
     ///   - observer: 关联生命周期的对象（通常传入 self）
     ///   - queue: 回调执行队列（默认主队列）
-    ///   - handler: 通知触发回调
+    ///   - completionHandler: 通知触发回调
     public func observeDidBecomeActive(
         observer: AnyObject,
         queue: OperationQueue? = .main,
-        execute: @escaping (Notification) -> Void
+        completionHandler: @escaping (Notification) -> Void
     ) {
         registerNotification(
             name: UIApplication.didBecomeActiveNotification,
             observer: observer,
             queue: queue,
-            execute: execute
+            completionHandler: completionHandler
         )
     }
     
@@ -54,13 +54,13 @@ extension SwiftBasics where Base: NotificationCenter {
     public func observeWillResignActive(
         observer: AnyObject,
         queue: OperationQueue? = .main,
-        execute: @escaping (Notification) -> Void
+        completionHandler: @escaping (Notification) -> Void
     ) {
         registerNotification(
             name: UIApplication.willResignActiveNotification,
             observer: observer,
             queue: queue,
-            execute: execute
+            completionHandler: completionHandler
         )
     }
     
@@ -70,13 +70,13 @@ extension SwiftBasics where Base: NotificationCenter {
     public func observeKeyboardWillShow(
         observer: AnyObject,
         queue: OperationQueue? = .main,
-        execute: @escaping (Notification) -> Void
+        completionHandler: @escaping (Notification) -> Void
     ) {
         registerNotification(
             name: UIResponder.keyboardWillShowNotification,
             observer: observer,
             queue: queue,
-            execute: execute
+            completionHandler: completionHandler
         )
     }
     
@@ -84,13 +84,13 @@ extension SwiftBasics where Base: NotificationCenter {
     public func observeKeyboardDidShow(
         observer: AnyObject,
         queue: OperationQueue? = .main,
-        execute: @escaping (Notification) -> Void
+        completionHandler: @escaping (Notification) -> Void
     ) {
         registerNotification(
             name: UIResponder.keyboardDidShowNotification,  // 修正了错误的常量名
             observer: observer,
             queue: queue,
-            execute: execute
+            completionHandler: completionHandler
         )
     }
     
@@ -98,13 +98,13 @@ extension SwiftBasics where Base: NotificationCenter {
     public func observeKeyboardWillHide(
         observer: AnyObject,
         queue: OperationQueue? = .main,
-        execute: @escaping (Notification) -> Void
+        completionHandler: @escaping (Notification) -> Void
     ) {
         registerNotification(
             name: UIResponder.keyboardWillHideNotification,  // 修正了错误的常量名
             observer: observer,
             queue: queue,
-            execute: execute
+            completionHandler: completionHandler
         )
     }
     
@@ -112,13 +112,13 @@ extension SwiftBasics where Base: NotificationCenter {
     public func observeKeyboardDidHide(
         observer: AnyObject,
         queue: OperationQueue? = .main,
-        execute: @escaping (Notification) -> Void
+        completionHandler: @escaping (Notification) -> Void
     ) {
         registerNotification(
             name: UIResponder.keyboardDidHideNotification,  // 修正了错误的常量名
             observer: observer,
             queue: queue,
-            execute: execute
+            completionHandler: completionHandler
         )
     }
     
@@ -129,13 +129,13 @@ extension SwiftBasics where Base: NotificationCenter {
         name: Notification.Name,
         observer: AnyObject,
         queue: OperationQueue?,
-        execute: @escaping (Notification) -> Void
+        completionHandler: @escaping (Notification) -> Void
     ) {
         let token = base.addObserver(
             forName: name,
             object: nil,
             queue: queue,
-            using: execute
+            using: completionHandler
         )
         storeToken(token, for: observer)
     }

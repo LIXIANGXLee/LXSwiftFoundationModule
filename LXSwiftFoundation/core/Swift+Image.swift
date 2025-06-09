@@ -968,7 +968,7 @@ extension SwiftBasics where Base: UIImage {
                                   complete: @escaping (UIImage?) -> Void) {
         DispatchQueue.lx.asyncOperation {
             self.image(with: color, size: size)
-        } completion: { image in
+        } completionHandler: { image in
             complete(image)
         }
     }
@@ -978,7 +978,7 @@ extension SwiftBasics where Base: UIImage {
        
         DispatchQueue.lx.asyncOperation {
             self.imageWithCircle
-        } completion: { image in
+        } completionHandler: { image in
             complete(image)
         }
     }

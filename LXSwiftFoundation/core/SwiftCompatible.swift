@@ -60,7 +60,6 @@ extension Date: SwiftCompatible { }
 extension Dictionary: SwiftCompatible { }
 extension UIEdgeInsets: SwiftCompatible { }
 
-
 extension NSObject: SwiftCompatible { }
 //extension UIView: SwiftCompatible { }
 //extension UIBezierPath: SwiftCompatible { }

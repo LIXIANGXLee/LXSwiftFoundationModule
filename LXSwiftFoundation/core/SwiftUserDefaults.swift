@@ -38,9 +38,11 @@ public extension SwiftUserDefaultsProtocol where Self: RawRepresentable, Self.Ra
     /// 格式：[命名空间].[原始值]
     var uniqueKey: String {
         // 获取命名空间（优先使用自定义命名空间，次选BundleID）
-        let namespace = Bundle.lx.namespace ?? Bundle.lx.bundleID ?? "lx"
+        let namespace = Bundle.lx.namespace ?? "lx"
+        let bundleID = Bundle.lx.bundleID ?? "lx"
+
         // 组合成唯一键
-        return namespace + "." + "\(rawValue)"
+        return (namespace + bundleID).lx.md5 + "." + "\(rawValue.lx.md5)"
     }
 }
 

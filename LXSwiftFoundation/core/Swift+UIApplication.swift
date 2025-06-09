@@ -153,7 +153,7 @@ extension SwiftBasics where Base: UIApplication {
     /// 调用系统拨号功能
     /// - Parameters:
     ///   - number: 电话号码字符串 (自动过滤无效字符)
-    ///   - tellCallBack: 拨号操作结果回调 (布尔值表示是否成功)
+    ///   - completionHandler: 拨号操作结果回调 (布尔值表示是否成功)
     ///
     /// 注意: 在模拟器上始终返回失败
     public static func openTel(with number: String?, _ completionHandler: ((Bool) -> Void)? = nil) {
@@ -169,13 +169,12 @@ extension SwiftBasics where Base: UIApplication {
         UIApplication.lx.openUrl(url, completionHandler: completionHandler)
     }
     
-    
     // MARK: - 音频处理
     
     /// 播放短音频文件 (系统声音)
     /// - Parameters:
     ///   - filepath: 音频文件绝对路径
-    ///   - completion: 播放完成回调
+    ///   - completionHandler: 播放完成回调
     ///
     /// 要求: iOS 9.0+，支持常见音频格式(caf, wav, aiff)
     @available(iOS 9.0, *)
@@ -271,7 +270,7 @@ extension SwiftBasics where Base: UIApplication {
     
     /// 检查系统通知权限是否可用（iOS 10+）
     /// - 说明: 返回true表示用户未明确拒绝通知权限（包括未决定状态）
-    /// - Parameter callback: 异步回调检查结果（主线程执行）
+    /// - Parameter completionHandler: 异步回调检查结果（主线程执行）
     @available(iOS 10.0, *)
     public static func checkNotificationSupport(_ completionHandler: @escaping (Bool) -> Void) {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
@@ -283,7 +282,7 @@ extension SwiftBasics where Base: UIApplication {
     
     /// 请求远程通知权限（iOS 10+）
     /// - 说明: 自动注册远程通知并触发系统权限弹窗
-    /// - Parameter completion: 异步回调授权结果（主线程执行）
+    /// - Parameter completionHandler: 异步回调授权结果（主线程执行）
     @available(iOS 10.0, *)
     public static func registerRemoteNotifications(_ completionHandler: @escaping (Bool) -> Void) {
         let center = UNUserNotificationCenter.current()

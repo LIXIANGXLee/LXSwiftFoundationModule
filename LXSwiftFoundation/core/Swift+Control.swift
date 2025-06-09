@@ -33,8 +33,8 @@ extension SwiftBasics where Base: UIControl {
     ///   1. 使用闭包替代传统的 target-action 模式
     ///   2. 支持同时监听多种事件类型
     ///   3. 自动管理内存，无需手动移除
-    public func addTarget(forControlEvents events: UIControl.Event = .touchUpInside, execute: @escaping ((Any) -> ())) {
-        base.swiftAddTarget(forControlEvents: events, execute: execute)
+    public func addTarget(forControlEvents events: UIControl.Event = .touchUpInside, completionHandler: @escaping ((Any) -> ())) {
+        base.swiftAddTarget(forControlEvents: events, completionHandler: completionHandler)
     }
     
     /// 设置按钮点击回调（已废弃）
@@ -91,9 +91,9 @@ extension UIControl {
     
     // MARK: 事件回调管理
     /// 内部方法：添加闭包形式的事件回调
-    fileprivate func swiftAddTarget(forControlEvents events: UIControl.Event = .touchUpInside, execute: @escaping ((Any) -> ())) {
+    fileprivate func swiftAddTarget(forControlEvents events: UIControl.Event = .touchUpInside, completionHandler: @escaping ((Any) -> ())) {
         // 创建目标对象（封装闭包）
-        let target = SwiftControlTarget(execute: execute, forControlEvents: events)
+        let target = SwiftControlTarget(completionHandler: completionHandler, forControlEvents: events)
         
         // 注册目标-动作方法
         self.addTarget(target, action: #selector(target.invokeTarget(_:)), for: events)
@@ -136,19 +136,19 @@ extension UIControl {
 /// 闭包回调包装器（私有类）
 fileprivate final class SwiftControlTarget {
     /// 存储事件触发的回调闭包
-    let execute: (Any) -> Void
+    let completionHandler: (Any) -> Void
     
     /// 关联的事件类型
     let events: UIControl.Event
     
     /// 初始化方法
-    init(execute: @escaping (Any) -> Void, forControlEvents events: UIControl.Event) {
-        self.execute = execute
+    init(completionHandler: @escaping (Any) -> Void, forControlEvents events: UIControl.Event) {
+        self.completionHandler = completionHandler
         self.events = events
     }
     
     /// 事件触发时调用的方法
     @objc func invokeTarget(_ sender: Any) {
-        execute(sender)
+        completionHandler(sender)
     }
 }

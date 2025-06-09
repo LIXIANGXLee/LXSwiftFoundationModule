@@ -27,17 +27,17 @@ import UIKit
     ///   - interval: 执行间隔时间（秒），默认1
     ///   - repeats: 是否重复执行，默认true
     ///   - identifier: 定时器唯一标识符
-    ///   - task: 要执行的任务闭包
+    ///   - completionHandler: 要执行的任务闭包
     public static func startTimer(with delaySeconds: TimeInterval = 0,
                                   interval: TimeInterval = 1,
                                   repeats: Bool = true,
                                   identifier: String?,
-                                  handler: (() -> Void)?) {
+                                  completionHandler: (() -> Void)?) {
         // 参数有效性检查
         guard let iden = identifier,
               delaySeconds >= 0,
               interval >= 0,
-              handler != nil else {
+              completionHandler != nil else {
             return
         }
         
@@ -73,7 +73,7 @@ import UIKit
         // 设置事件处理器
         timer.setEventHandler {
             // 主线程执行任务
-            DispatchQueue.lx.asyncMain { handler?() }
+            DispatchQueue.lx.asyncMain { completionHandler?() }
             
             // 单次任务执行后自动移除
             if !repeats { cancel(with: iden) }
@@ -92,7 +92,7 @@ import UIKit
     public static func startCountDown(maxInterval: TimeInterval = 60,
                                      interval: TimeInterval = 1,
                                      identifier: String?,
-                                     task: ((Int) -> Void)?) {
+                                      completionHandler: ((Int) -> Void)?) {
         // 参数有效性检查
         guard maxInterval >= 0,
               interval >= 0 else {
@@ -106,15 +106,13 @@ import UIKit
             interval: interval,
             repeats: true,
             identifier: identifier) {
-            remainingTime -= interval
-            let current = Int(max(remainingTime, 0))
-            
-            // 倒计时结束处理
-            if remainingTime <= 0 {
-                cancel(with: identifier)
-            }
-            
-            task?(current)
+                remainingTime -= interval
+                let current = Int(max(remainingTime, 0))
+                // 倒计时结束处理
+                if remainingTime <= 0 {
+                    cancel(with: identifier)
+                }
+                completionHandler?(current)
         }
     }
     

@@ -19,12 +19,12 @@ extension SwiftBasics where Base: UIView {
     
     /// 添加点击手势回调
     /// - Parameters:
-    ///   - handler: 点击事件回调闭包（接收手势对象）
+    ///   - completionHandler: 点击事件回调闭包（接收手势对象）
     ///   - numberOfTaps: 需要点击的次数（默认为1，表示单击）
     ///   - numberOfTouches: 需要的手指数量（默认为1，表示单指点击）
     /// - Note: 多次调用会移除之前添加的手势和回调
     public func addTapGesture(
-        execute: @escaping (UITapGestureRecognizer) -> Void,
+        completionHandler: @escaping (UITapGestureRecognizer) -> Void,
         numberOfTaps: Int = 1,
         numberOfTouches: Int = 1
     ) {
@@ -51,7 +51,7 @@ extension SwiftBasics where Base: UIView {
         objc_setAssociatedObject(
             base,
             &AssociatedKeys.tapGestureHandler,
-            execute,
+            completionHandler,
             .OBJC_ASSOCIATION_RETAIN_NONATOMIC
         )
         
@@ -83,8 +83,8 @@ extension UIView {
     /// 处理点击手势事件（私有方法）
     @objc fileprivate func handleTapGesture(_ sender: UITapGestureRecognizer) {
         // 从关联对象中获取闭包并执行，传递手势对象
-        if let handler = objc_getAssociatedObject(self, &AssociatedKeys.tapGestureHandler) as? (UITapGestureRecognizer) -> Void {
-            handler(sender)
+        if let completionHandler = objc_getAssociatedObject(self, &AssociatedKeys.tapGestureHandler) as? (UITapGestureRecognizer) -> Void {
+            completionHandler(sender)
         }
     }
 }

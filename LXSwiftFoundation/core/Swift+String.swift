@@ -188,12 +188,12 @@ extension SwiftBasics where Base == String {
     /// 使用正则表达式枚举字符串中的所有匹配结果
     /// - 参数:
     ///   - regex: 正则表达式字符串（自动去除首尾空格）
-    ///   - usingBlock: 处理每个匹配结果的回调闭包
+    ///   - completionHandler: 处理每个匹配结果的回调闭包
     ///     - 参数1 captureCount: 捕获组的数量（不包含完整匹配组）
     ///     - 参数2 matchedString: 匹配到的完整字符串
     ///     - 参数3 range: 匹配结果在原始字符串中的范围(NSRange)
     public func enumerateMatches(regex: String,
-                                usingBlock: (_ captureCount: Int,
+                                 completionHandler: (_ captureCount: Int,
                                              _ matchedString: String,
                                              _ range: NSRange) -> Void) {
         
@@ -237,7 +237,7 @@ extension SwiftBasics where Base == String {
             let captureGroupCount = match.numberOfRanges - 1
             
             // 传递匹配信息给调用方
-            usingBlock(captureGroupCount, matchedString, matchRange)
+            completionHandler(captureGroupCount, matchedString, matchRange)
         }
     }
     

@@ -12,7 +12,7 @@ import UIKit
 extension SwiftBasics where Base: UIScrollView {
  
     /// 截取滚动视图的全部内容（长截图）
-    /// - Parameter callBack: 截图完成后的回调，返回生成的UIImage对象
+    /// - Parameter completionHandler: 截图完成后的回调，返回生成的UIImage对象
     public func captureScrollContentShot(completionHandler: @escaping (UIImage?) -> ()) {
         base.captureScrollContentShot(completionHandler)
     }
@@ -48,7 +48,7 @@ extension UIScrollView {
         UIGraphicsBeginImageContextWithOptions(self.contentSize, false, UIScreen.main.scale)
         
         // 6. 开始分页截图（递归方法）
-        self.snapShotContentScrollPage(index: 0, maxIndex: Int(page), callback: { [weak self] in
+        self.snapShotContentScrollPage(index: 0, maxIndex: Int(page), completionHandler: { [weak self] in
             guard let self = self else { return }
 
             // 7. 从上下文中获取最终合成的图片
@@ -75,7 +75,7 @@ extension UIScrollView {
     ///   - index: 当前页码
     ///   - maxIndex: 最大页码
     ///   - callback: 所有页截图完成后的回调
-    private func snapShotContentScrollPage(index: Int, maxIndex: Int, callback: @escaping () -> Void) {
+    private func snapShotContentScrollPage(index: Int, maxIndex: Int, completionHandler: @escaping () -> Void) {
         
         // 1. 滚动到当前页起始位置
         let yOffset = CGFloat(index) * self.bounds.height
@@ -103,10 +103,10 @@ extension UIScrollView {
             // 6. 判断是否还有下一页需要截图
             if index < maxIndex - 1 {
                 // 递归调用，处理下一页
-                self.snapShotContentScrollPage(index: index + 1, maxIndex: maxIndex, callback: callback)
+                self.snapShotContentScrollPage(index: index + 1, maxIndex: maxIndex, completionHandler: completionHandler)
             } else {
                 // 所有页截图完成，执行回调
-                callback()
+                completionHandler()
             }
         }
     }
