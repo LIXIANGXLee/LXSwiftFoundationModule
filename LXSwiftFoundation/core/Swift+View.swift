@@ -44,7 +44,7 @@ extension SwiftBasics where Base: UIView {
         UIGraphicsBeginImageContextWithOptions(base.bounds.size, base.isOpaque, 0)
         defer { UIGraphicsEndImageContext() } // 确保结束后释放上下文
         
-        if isContainsWKWebView() {
+        if isContainsWKWebView {
             // 使用层级绘制（适用于 WKWebView）
             base.drawHierarchy(in: base.bounds, afterScreenUpdates: true)
         } else {
@@ -56,14 +56,14 @@ extension SwiftBasics where Base: UIView {
     
     /// 检查当前视图或其子视图是否包含 WKWebView
     /// - 用于快照时选择正确的渲染方式
-    private func isContainsWKWebView() -> Bool {
+    private var isContainsWKWebView: Bool {
         // 当前视图是 WKWebView
         if base.isKind(of: WKWebView.self) {
             return true
         }
         // 递归检查子视图
         for subView in base.subviews {
-            if subView.lx.isContainsWKWebView() {
+            if subView.lx.isContainsWKWebView {
                 return true
             }
         }

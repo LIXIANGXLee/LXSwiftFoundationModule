@@ -463,6 +463,61 @@ extension SwiftBasics where Base == String {
 // MARK: - 字符串转换功能扩展
 extension SwiftBasics where Base == String {
     
+    /// 对手机号中间四位进行脱敏处理（替换为星号）
+    /// - Parameter phoneNumber: 原始手机号码字符串
+    /// - mark: 分隔符（默认为****）
+    /// - Returns: 脱敏后的手机号字符串（格式：前3位 + **** + 后4位）
+    ///
+    /// 处理规则：
+    /// 1. 移除输入字符串中的所有非数字字符
+    /// 2. 当纯数字长度为11位时，进行脱敏处理
+    /// 3. 不符合11位时返回原始字符串
+    ///     // 测试用例
+    /// maskPhoneNumber("13800138000")) // 138****8000
+    /// maskPhoneNumber("138 0013 8000") // 138****8000
+    /// maskPhoneNumber("+86 138-0013-8000") // 138****8000
+    /// maskPhoneNumber("12345")) // 12345（不符合规则返回原始值）
+    func maskPhoneNumber(_ phoneNumber: String, mark: String = "****") -> String {
+        // 过滤非数字字符
+        let digits = phoneNumber.filter { $0.isNumber }
+        
+        // 验证是否为11位手机号
+        guard digits.count == 11 else {
+            return phoneNumber // 返回原始输入
+        }
+        
+        // 提取手机号各段
+        let prefix = digits.prefix(3)      // 前3位
+        let suffix = digits.suffix(4)      // 后4位
+        
+        // 拼接脱敏字符串
+        return "\(prefix)\(mark)\(suffix)"
+    }
+    
+    /// 格式化手机号码为 3-4-4 的分段格式
+    /// - Parameters:
+    ///   - phoneNumber: 原始手机号码字符串
+    ///   - mark: 分隔符（默认为空格）
+    /// - Returns: 格式化后的手机号码，长度非11位时返回原始输入
+    func formatPhoneNumber(_ phoneNumber: String, mark: String = " ") -> String {
+        // 预处理：移除所有空格和非数字字符（增强鲁棒性）
+        let cleanedNumber = phoneNumber.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+        
+        // 验证有效性：仅处理11位纯数字
+        guard cleanedNumber.count == 11,
+                cleanedNumber.allSatisfy({ $0.isNumber }) else {
+            return phoneNumber
+        }
+        
+        // 分割三段式结构 (使用Substring避免额外内存分配)
+        let prefix = cleanedNumber.prefix(3)
+        let middle = cleanedNumber.dropFirst(3).prefix(4)
+        let suffix = cleanedNumber.dropFirst(7)
+        
+        // 高效拼接结果
+        return "\(prefix)\(mark)\(middle)\(mark)\(suffix)"
+    }
+    
     /// 判断路径文件是否为GIF图片
     /// - 返回值: Bool类型，true表示是GIF文件，false表示不是
     public var isGIFFile: Bool {
@@ -1007,85 +1062,85 @@ extension SwiftBasics where Base == String {
     
     /// 验证是否为合法的车牌号
     /// - 返回值: 如果是合法车牌号返回true，否则返回false
-    public func isValidCarid() -> Bool {
+    public var isValidCarid: Bool {
         base.verification(pattern: "^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4,5}[A-Z0-9挂学警港澳]{1}$")
     }
     
     /// 检查字符串是否包含特殊字符
     /// - 返回值: 如果包含特殊字符返回true，否则返回false
-    public func isContainSpecialChar() -> Bool {
+    public var isContainSpecialChar: Bool {
         base.verification(pattern: "[\\$\\(\\)\\*\\+\\[\\]\\?\\^\\{\\|]")
     }
     
     /// 验证是否为合法的电子邮件地址
     /// - 返回值: 如果是合法邮箱返回true，否则返回false
-    public func isValidEmail() -> Bool {
+    public var isValidEmail: Bool {
         base.verification(pattern: "^(\\w)+(\\.\\w+)*@(\\w)+((\\.\\w{1,}){1,3})$")
     }
     
     /// 验证是否为合法的HTTP/HTTPS URL
     /// - 返回值: 如果是合法URL返回true，否则返回false
-    public func isValidUrl() -> Bool {
+    public var isValidUrl: Bool {
         base.verification(pattern: "^http(s)?://")
     }
     
     /// 验证是否为合法的手机号码 (中国)
     /// - 返回值: 如果是合法手机号返回true，否则返回false
-    public func isValidPhoneNumber() -> Bool {
+    public var isValidPhoneNumber: Bool {
         base.verification(pattern: "^1\\d{10}$")
     }
     
     /// 验证是否为合法的身份证号码 (中国)
     /// - 返回值: 如果是合法身份证号返回true，否则返回false
-    public func isValidIDCard() -> Bool {
+    public var isValidIDCard: Bool {
         base.verification(pattern: "(^[1-9]\\d{5}(18|19|([23]\\d))\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx]$)|(^[1-9]\\d{5}\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{2}$)")
     }
     
     /// 验证是否为合法的IP地址
     /// - 返回值: 如果是合法IP返回true，否则返回false
-    public func isValidIP() -> Bool {
+    public var isValidIP: Bool {
         base.verification(pattern: "^((2[0-4]\\d|25[0-5]|[01]?\\d\\d?).){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)$")
     }
     
     /// 验证字符串是否全部为中文字符
     /// - 返回值: 如果全部为中文返回true，否则返回false
-    public func isChinese() -> Bool {
+    public var isChinese: Bool {
         base.verification(pattern: "^[\\u0391-\\uFFE5]+$")
     }
     
     /// 验证字符串是否为纯数字 (可包含小数点)
     /// - 返回值: 如果是纯数字返回true，否则返回false
-    public func isNumber() -> Bool {
+    public var isNumber: Bool {
         base.verification(pattern: "^[0-9]+(.[0-9]+)?$")
     }
     
     /// 验证字符串是否为正整数
     /// - 返回值: 如果是正整数返回true，否则返回false
-    public func isInteger() -> Bool {
+    public var isInteger: Bool {
         base.verification(pattern: "^[0-9]+$")
     }
     
     /// 验证是否为标准小数 (保留两位小数)
     /// - 返回值: 如果是标准小数返回true，否则返回false
-    public func isStandardDecimal() -> Bool {
+    public var isStandardDecimal: Bool {
         base.verification(pattern: "^[0-9]+(\\.[0-9]{2})$")
     }
     
     /// 验证是否为合法密码 (6-18位字母数字组合)
     /// - 返回值: 如果是合法密码返回true，否则返回false
-    public func isValidPasswd() -> Bool {
+    public var isValidPasswd: Bool {
         base.verification(pattern: "^[a-zA-Z0-9]{6,18}$")
     }
     
     /// 检查字符串是否包含空格或空行
     /// - 返回值: 如果包含空格或空行返回true，否则返回false
-    public func isContainBlank() -> Bool {
+    public var isContainBlank: Bool {
         base.verification(pattern: "[\\s]")
     }
     
     /// 获取字符串中所有数字的范围
     /// - 返回值: 数字范围的数组，如果没有数字返回空数组
-    public func numberRanges() -> [NSRange] {
+    public var numberRanges: [NSRange] {
         if let results = base.lx.matching(pattern: "[0-9]+(.[0-9]+)?") {
             return results.map { $0.range }
         }
